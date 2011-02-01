@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-01 Tue 19:50 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 23:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -53,6 +53,7 @@
 ;; (require 'color-theme-autoloads)
 (xy/install-all-lisps (concat my-local-lisp-path "/dired"))
 (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
+(xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
 (xy/install-all-lisps (concat my-local-lisp-path "/yasnippet-0.6.1c"))
 ;; ELPA packages
 (require 'archive-downloader-autoloads)
@@ -287,21 +288,32 @@
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
 ;;       除非不在图形系统下，才用 Emacs 内置的输入法或 eim。
 
-;; eim
-;; (when (<= emacs-major-version 21)
-;;   (provide 'help-mode)
-;;   (defalias 'locate-file 'locate-library)
-;;   (defvar emacs-basic-display nil))
-;; (autoload 'eim-use-package "eim" "The eim input method" t)
-;; (register-input-method
-;;  "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
-;; (register-input-method
-;;  "eim-py" "utf-8" 'eim-use-package "eim-py" "eim-py" "py.txt")
-;; (setq default-input-method "eim-py")
-;; (setq eim-use-tooltip nil)
-;; (eval-after-load "eim"
-;;   `(when (require 'eim-extra nil 'noerror)
-;;      (global-set-key ";" 'eim-insert-ascii)))
+;; eim, another Emacs input-method
+;; REF: 
+;;   Basic usage:
+;;   - `M-x set-input-method': switch to a new input method.
+;;   - `C-h C-\' or `C-h I': describe the current input method.
+;;   - `C-\': toggle the input method on and off
+;;   To activate the input method on a per-buffer basis.
+;;   1. Put the following lines in the .emacs:
+;;      (set input-activate nil)
+;;      (add-hook 'find-file-hook
+;;        (lambda ()(if (eq input-activate t) (toggle-input-method))))
+;;   2. Then put the following line at the beginning of a file:
+;;       -*- input-activate: t -*-
+;;   3. The input method will be activated for this file as soon loaded.
+(autoload 'eim-use-package "eim" "The eim input method" t)
+(register-input-method
+ "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
+(register-input-method
+ "eim-py" "utf-8" 'eim-use-package "eim-py" "eim-py" "py.txt")
+(setq default-input-method "eim-py")
+(setq input-activate nil)
+(add-hook 'find-file-hook
+          (lambda ()(if (eq input-activate t) (toggle-input-method))))
+(eval-after-load "eim"
+  `(progn
+     (eim-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

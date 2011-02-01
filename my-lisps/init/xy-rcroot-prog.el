@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-01 Tue 20:47 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 23:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -231,6 +231,17 @@
      ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include/xstddef"
      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/yvals.h"
      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/crtdefs.h"
+     )
+   "Preprocessor symbol files for cedet"))
+
+(GNULinux
+ (defvar user-include-dirs
+   '(".." "../include" "../inc" "../common" "../public"
+     "../.." "../../include" "../../inc" "../../common" "../../public"
+     "/usr/include" "/usr/local/include")
+   "User include dirs for c/c++ mode")
+ (defvar c-preprocessor-symbol-files
+   '(
      )
    "Preprocessor symbol files for cedet"))
 
@@ -704,7 +715,7 @@
 ;; git gui
 (require 'git)
 (require 'git-blame)
-;; (global-set-key [f11] 'git-status)
+(global-set-key [f11] 'git-status)
 ;; Automatically refresh version control information
 (setq auto-revert-check-vc-info t)
 ;; egg git gui
@@ -714,8 +725,7 @@
   (setq egg-refresh-index-in-backround t)
   (setq egg-show-key-help-in-buffers 
         '((:status :log :file-log :reflog :diff :commit)))
-  ;; (global-set-key [S-f11] 'egg-status) 
-  )
+  (global-set-key [S-f11] 'egg-status))
 
 ;;---------------------------------------------------------------------
 
