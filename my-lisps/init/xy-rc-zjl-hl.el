@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-zjl-hl.el'
-;; Time-stamp:<2011-01-31 Mon 16:44 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 21:03 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,6 @@
 (defun zjl-hl-settings ()
   "Settings for `zjl-hl'."
   (setq zjl-hl-c++-mode-enable-flag t))
-  ;; (zjl-hl-enable-global-all))
 
 ;;;###autoload
 (defun zjl-hl-face-settings ()

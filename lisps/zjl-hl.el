@@ -1,348 +1,20 @@
-;;这package里的regions-list的成员和todo, 都是闭合包括两端的位置的. 所以在zjl-regions-delete开头那儿要特殊处理
-;;;###autoload
-(defun zjl-regions-add (regions-list todo)
-  (interactive)
-  (let (beg-node-to-insert beg-node-included-p end-node-to-insert end-node-included-p beg-have-find-p end-have-find-p temp-node temp-list temp-pre temp-next)
-    (dotimes (Num (length regions-list))
-      (cond ((and (not beg-have-find-p);;在Num个的包围中,包括Num的结束和开始
-                  (>= (car todo) (car (nth Num regions-list)))
-                  (<= (car todo) (cdr (nth Num regions-list))))
-             (setq beg-have-find-p t)
-             (setq beg-node-to-insert Num)
-             (setq beg-node-included-p t))
-
-            ((and (not beg-have-find-p);;在Num的前面--已经排除了上面的
-                  (< (car todo) (cdr (nth Num regions-list))))
-             (setq beg-have-find-p t)
-             (setq beg-node-to-insert Num)
-             (setq beg-node-included-p nil))
-            (t nil)))
-    (dotimes (Num (length regions-list));;必须2个dotimes,否则如果遇到都在同一个dotimes中可能beg end都符合的, end会被忽略
-      (cond ((and (not end-have-find-p);;在Num个的包围中
-                  (>= (cdr todo) (car (nth Num regions-list)))
-                  (<= (cdr todo) (cdr (nth Num regions-list))))
-             (setq end-have-find-p t)
-             (setq end-node-to-insert Num)
-             (setq end-node-included-p t))
-
-            ((and (not end-have-find-p);;在Num个的前面
-                  (< (cdr todo) (car (nth Num regions-list))))
-             (setq end-have-find-p t)
-             (setq end-node-to-insert Num)
-             (setq end-node-included-p nil))
-            
-            (t nil)))
-
-    (cond ((not beg-have-find-p);;都在最后
-           (setq temp-list (list todo))
-           (if regions-list ;;避免是regions-list 是 nil的情况
-               (setcdr (nthcdr (1- (length regions-list)) regions-list) temp-list)
-             (setq regions-list temp-list)))
-
-          ((and beg-have-find-p;;末尾在最后, 前在节点中
-                beg-node-included-p
-                (not end-have-find-p))
-           (setq temp-node (cons (car (nth beg-node-to-insert regions-list))(cdr todo)))
-           (setq temp-list (nthcdr beg-node-to-insert regions-list))
-           (setcar temp-list temp-node)
-           (setcdr temp-list nil))
-          
-          ((and beg-have-find-p;;末尾在最后, 前在当中,不在节点中
-                (not beg-node-included-p)
-                (> beg-node-to-insert 0)
-                (not end-have-find-p))
-           (setq temp-pre (nthcdr (1- beg-node-to-insert) regions-list))
-           (setcdr temp-pre (list todo)))
-
-          ((and beg-have-find-p;;末尾在最后, 前在最前,不在节点中
-                (not beg-node-included-p)
-                (= beg-node-to-insert 0)
-                (not end-have-find-p))
-           (setq regions-list (list todo)))
-
-          ((and beg-have-find-p ;;前后都在节点中, 即使后所在节点是0
-                beg-node-included-p
-                end-have-find-p
-                end-node-included-p)
-           (setq temp-node (cons (car (nth beg-node-to-insert regions-list)) (cdr (nth end-node-to-insert  regions-list))))
-           (setq temp-list (nthcdr beg-node-to-insert regions-list))
-           (setcar temp-list temp-node)
-           (setcdr temp-list (nthcdr (1+ end-node-to-insert) regions-list)))
-
-          ((and beg-have-find-p;;前在当中,不在节点中, 后在节点中, 即使后在最后一个节点中
-                (not beg-node-included-p)
-                (> beg-node-to-insert 0)
-                end-have-find-p
-                end-node-included-p)
-           (setq temp-node (cons (car todo) (cdr (nth end-node-to-insert regions-list))))
-           (setq temp-pre (nthcdr (1- beg-node-to-insert) regions-list))
-           (setq temp-next (nthcdr (1+ end-node-to-insert) regions-list))
-           (setcdr temp-pre (cons temp-node temp-next)))
-
-          ((and beg-have-find-p;;前在最前, 后在节点中,即使是最后一个节点
-                (not beg-node-included-p)
-                (= beg-node-to-insert 0)
-                end-have-find-p
-                end-node-included-p)
-           (setq temp-node (cons (car todo) (cdr (nth end-node-to-insert regions-list))))
-           (setq temp-next (nthcdr (1+ end-node-to-insert) regions-list))
-           (setq regions-list (cons temp-node temp-next)))
-
-          ((and beg-have-find-p ;;都在第一个节点之前
-                end-have-find-p
-                (not end-node-included-p)
-                (= end-node-to-insert 0))
-           (setq regions-list (cons todo regions-list)))
-
-          ((and beg-have-find-p;;前后都在当中,但都不在节点中
-                (not beg-node-included-p)
-                (> beg-node-to-insert 0)
-                end-have-find-p
-                (not end-node-included-p)
-                (> end-node-to-insert 0))
-           (setq temp-pre (nthcdr (1- beg-node-to-insert) regions-list))           
-           (setq temp-next (nthcdr end-node-to-insert regions-list))
-           (setcdr temp-pre (cons todo temp-next)))
-
-          ((and beg-have-find-p;;前在最前, 后在当中,但不在节点中
-                (not beg-node-included-p)
-                (= beg-node-to-insert 0)
-                end-have-find-p
-                (not end-node-included-p)
-                (> end-node-to-insert 0))
-           (setq temp-list (nthcdr end-node-to-insert regions-list))
-           (setq regions-list (cons todo temp-list))
-           )
-
-          ((and beg-have-find-p;;前在当中,在节点中,后在当中,不在节点中
-                beg-node-included-p
-                end-have-find-p
-                (not end-node-included-p)
-                (> end-node-to-insert 0))
-           (setq temp-node (cons (car (nth beg-node-to-insert regions-list)) (cdr todo)))
-           (setq temp-list (nthcdr beg-node-to-insert regions-list))
-           (setcar temp-list temp-node)
-           (setcdr temp-list (nthcdr end-node-to-insert regions-list)))
-          (t nil))
-  regions-list))
-;;(setq zjl-regions-example '((4 . 7) (11 . 15) (17 . 17) (20 . 25)))
-;;都在最后
-;;(zjl-regions-add zjl-regions-example '(26 . 27))
-;;末尾在最后, 前在节点中
-;;(zjl-regions-add zjl-regions-example '(25 . 27))
-;;(zjl-regions-add zjl-regions-example '(23 . 27))
-;;(zjl-regions-add zjl-regions-example '(4 . 27))
-;;末尾在最后, 前在当中,不在节点中
-;;(zjl-regions-add zjl-regions-example '(5 . 27))
-;;末尾在最后, 前在最前,不在节点中
-;;(zjl-regions-add zjl-regions-example '(3 . 27))
-
-;;前后都在节点中, 即使后所在节点是0----下面这几个是后在节点中的可能
-;;(zjl-regions-add zjl-regions-example '(4 . 17))
-;;(zjl-regions-add zjl-regions-example '(4 . 4))
-;;(zjl-regions-add zjl-regions-example '(4 . 25))
-;;前在当中,不在节点中, 后在节点中, 即使后在最后一个节点中
-;;(zjl-regions-add zjl-regions-example '(16 . 22))
-;;前在最前, 后在节点中,即使是最后一个节点
-;;(zjl-regions-add zjl-regions-example '(1 . 22))
-;;都在第一个节点之前
-;;(zjl-regions-add zjl-regions-example '(1 . 1))
-;;(zjl-regions-add zjl-regions-example '(2 . 3))
-
-;;前后都在当中,但都不在节点中----后在当中,不在节点中
-;;(zjl-regions-add zjl-regions-example '(10 . 19))
-;;前在最前, 后在当中,但不在节点中
-;;(zjl-regions-add zjl-regions-example '(1 . 19))
-;;前在当中,在节点中,后在当中,不在节点中
-;;(zjl-regions-add zjl-regions-example '(5 . 19))
-
-;;(setq zjl-regions-example nil)
-;;(setq zjl-regions-example (zjl-regions-add zjl-regions-example '(5 . 19)))
-;;(zjl-regions-delete zjl-regions-example '(5 . 19))
-
-;;(setq zjl-regions-example '((5 . 19)))
-;;(setq zjl-regions-example (zjl-regions-add zjl-regions-example '(5 . 19)))
-;;(zjl-regions-delete zjl-regions-example '(6 . 18))
-;;(zjl-regions-delete zjl-regions-example '(6 . 19))
-;;(zjl-regions-delete zjl-regions-example '(5 . 18))
-
-;;(setq zjl-regions-example nil)
-
-
-;;;###autoload
-(defun zjl-regions-delete (regions-list todo)
-  (interactive)
-  (setq todo  (cons (1- (car todo)) (1+ (cdr todo))));;注意,修正过后的,一定是不会出现 (5 . 5)或者(5 . 6)这种的, 至少也是(4 . 6)
-  (let (beg-node-to-insert beg-node-included-p end-node-to-insert end-node-included-p beg-have-find-p end-have-find-p temp-node temp-list temp-pre temp-next)
-    (dotimes (Num (length regions-list))
-      (cond ((and (not beg-have-find-p);;在Num个的包围中,包括Num的结束和开始
-                  (>= (car todo) (car (nth Num regions-list)))
-                  (<= (car todo) (cdr (nth Num regions-list))))
-             (setq beg-have-find-p t)
-             (setq beg-node-to-insert Num)
-             (setq beg-node-included-p t))
-
-            ((and (not beg-have-find-p);;在Num的前面--已经排除了上面的
-                  (< (car todo) (cdr (nth Num regions-list))))
-             (setq beg-have-find-p t)
-             (setq beg-node-to-insert Num)
-             (setq beg-node-included-p nil))
-            (t nil)))
-    
-    (dotimes (Num (length regions-list));;必须2个dotimes,否则如果遇到都在同一个dotimes中可能beg end都符合的, end会被忽略
-      (cond ((and (not end-have-find-p);;在Num个的包围中
-                  (>= (cdr todo) (car (nth Num regions-list)))
-                  (<= (cdr todo) (cdr (nth Num regions-list))))
-             (setq end-have-find-p t)
-             (setq end-node-to-insert Num)
-             (setq end-node-included-p t))
-
-            ((and (not end-have-find-p);;在Num个的前面
-                  (< (cdr todo) (car (nth Num regions-list))))
-             (setq end-have-find-p t)
-             (setq end-node-to-insert Num)
-             (setq end-node-included-p nil))
-            
-            (t nil)))
-
-    (cond ((not beg-have-find-p);;都在最后
-           (setq temp-list (list todo))
-           nil)
-
-          ((and beg-have-find-p;;末尾在最后, 前在节点中
-                beg-node-included-p
-                (not end-have-find-p))
-           (setq temp-node (cons (car (nth beg-node-to-insert regions-list))(car todo)))
-           (setq temp-list (nthcdr beg-node-to-insert regions-list))
-           (setcar temp-list temp-node)
-           (setcdr temp-list nil))
-          
-          ((and beg-have-find-p;;末尾在最后, 前在当中,不在节点中
-                (not beg-node-included-p)
-                (> beg-node-to-insert 0)
-                (not end-have-find-p))
-           (setq temp-pre (nthcdr (1- beg-node-to-insert) regions-list))
-           (setcdr temp-pre nil))
-
-          ((and beg-have-find-p;;末尾在最后, 前在最前,不在节点中
-                (not beg-node-included-p)
-                (= beg-node-to-insert 0)
-                (not end-have-find-p))
-           (setq regions-list nil))
-
-          ((and beg-have-find-p ;;前后都在节点中, 即使后所在节点是0  (4 . 6) - (4 . 6)
-                beg-node-included-p
-                end-have-find-p
-                end-node-included-p)
-           (setq temp-pre (cons (car (nth beg-node-to-insert regions-list)) (car todo)))
-           (setq temp-list (nthcdr beg-node-to-insert regions-list))
-           (setq temp-node (cons (cdr todo) (cdr (nth end-node-to-insert regions-list))))
-           (setq temp-next (nthcdr (1+ end-node-to-insert) regions-list))
-           (setq temp-next (cons temp-node temp-next))
-           (setcar temp-list temp-pre);;这个不能太早设,否则,可能会改变nth的结果, 比如((5 . 19)) - (6 . 18),就会
-           (setcdr temp-list temp-next))
-
-          ((and beg-have-find-p;;前在当中,不在节点中, 后在节点中, 即使后在最后一个节点中
-                (not beg-node-included-p)
-                (> beg-node-to-insert 0)
-                end-have-find-p
-                end-node-included-p)
-           (setq temp-node (cons (cdr todo) (cdr (nth end-node-to-insert regions-list))))
-           (setq temp-pre (nthcdr (1- beg-node-to-insert) regions-list))
-           (setq temp-next (nthcdr (1+ end-node-to-insert) regions-list))
-           (setcdr temp-pre (cons temp-node temp-next)))
-
-          ((and beg-have-find-p;;前在最前, 后在节点中,即使是最后一个节点
-                (not beg-node-included-p)
-                (= beg-node-to-insert 0)
-                end-have-find-p
-                end-node-included-p)
-           (setq temp-node (cons (cdr todo) (cdr (nth end-node-to-insert regions-list))))
-           (setq temp-next (nthcdr end-node-to-insert regions-list))
-           (setcar temp-next temp-node)
-           (setq regions-list temp-next))
-
-          ((and beg-have-find-p ;;都在第一个节点之前
-                end-have-find-p
-                (not end-node-included-p)
-                (= end-node-to-insert 0))
-           nil)
-
-          ((and beg-have-find-p;;前后都在当中,但都不在节点中
-                (not beg-node-included-p)
-                (> beg-node-to-insert 0)
-                end-have-find-p
-                (not end-node-included-p)
-                (> end-node-to-insert 0))
-           (setq temp-pre (nthcdr (1- beg-node-to-insert) regions-list))           
-           (setq temp-next (nthcdr end-node-to-insert regions-list))
-           (setcdr temp-pre temp-next))
-
-          ((and beg-have-find-p;;前在最前, 后在当中,但不在节点中
-                (not beg-node-included-p)
-                (= beg-node-to-insert 0)
-                end-have-find-p
-                (not end-node-included-p)
-                (> end-node-to-insert 0))
-           (setq regions-list (nthcdr end-node-to-insert regions-list))
-           )
-
-          ((and beg-have-find-p;;前在当中,在节点中,后在当中,不在节点中
-                beg-node-included-p
-                end-have-find-p
-                (not end-node-included-p)
-                (> end-node-to-insert 0))
-           (setq temp-node (cons (car (nth beg-node-to-insert regions-list)) (car todo)))
-           (setq temp-next (nthcdr end-node-to-insert regions-list))
-           (setq temp-pre (nthcdr beg-node-to-insert regions-list))
-           (setcar temp-pre temp-node)
-           (setcdr temp-pre temp-next))
-          (t nil))
-    regions-list))
-
-;;(setq zjl-regions-example '((4 . 7) (11 . 15) (17 . 17) (20 . 25)))
-;;都在最后
-;;(zjl-regions-delete zjl-regions-example '(27 . 28))
-;;末尾在最后, 前在节点中
-;;(zjl-regions-delete zjl-regions-example '(25 . 27))
-;;(zjl-regions-delete zjl-regions-example '(18 . 27))
-;;(zjl-regions-delete zjl-regions-example '(4 . 27))这个能够删除到没有!!!, 对的
-;;(zjl-regions-delete zjl-regions-example '(5 . 25))
-;;末尾在最后, 前在当中,不在节点中
-;;(zjl-regions-delete zjl-regions-example '(16 . 27))
-;;末尾在最后, 前在最前,不在节点中
-;;(zjl-regions-delete zjl-regions-example '(3 . 27))
-
-;;前后都在节点中, 即使后所在节点是0----下面这几个是后在节点中的可能
-;;(zjl-regions-delete zjl-regions-example '(6 . 17))
-;;(zjl-regions-delete zjl-regions-example '(4 . 4))
-;;(zjl-regions-delete zjl-regions-example '(4 . 25))
-
-;;前在当中,不在节点中, 后在节点中, 即使后在最后一个节点中
-;;(zjl-regions-delete zjl-regions-example '(9 . 22))
-;;前在最前, 后在节点中,即使是最后一个节点
-;;(zjl-regions-delete zjl-regions-example '(1 . 22))
-;;都在第一个节点之前
-;;(zjl-regions-delete zjl-regions-example '(1 . 4))
-;;(zjl-regions-delete zjl-regions-example '(2 . 3))
-
-;;前后都在当中,但都不在节点中----后在当中,不在节点中
-;;(zjl-regions-delete zjl-regions-example '(10 . 18))
-;;(zjl-regions-delete zjl-regions-example '(10 . 11))
-;;前在最前, 后在当中,但不在节点中
-;;(zjl-regions-delete zjl-regions-example '(1 . 14))
-;;前在当中,在节点中,后在当中,不在节点中
-;;(zjl-regions-delete zjl-regions-example '(5 . 19))
-
-;;极限下面的测试
-;;((1 . 1))
-;;()=nil时
-
+;;;  This package can highlight variable and function call and others in c/emacs, make life easy
+;; to enable this package, add this two lines into your .emacs:
+;; (require 'zjl-hl)
+;; (zjl-hl-enable-global-all-modes);(zjl-hl-disable-global-all-modes)
 
 ;;;###autoload
 ;;; begin lisp code
 (require 'highlight)
+(require 'region-list-edit)
 
+;;;###autoload
+(defcustom zjl-hl-make-fun-call-notable  t
+  "enlarge font of called function, so that become notable"
+  :type 'boolean :group 'zjl-hl)
+(defcustom zjl-hl-fun-call-notable-degree  1.2
+  "Control the font size of function call"
+  :type 'boolean :group 'zjl-hl)
 ;;;###autoload
 (defcustom zjl-hl-c-mode-enable-flag t
   "Enable c mode highlight when zjl-hl-enable-global-all is called"
@@ -390,13 +62,13 @@ this will cause delay that feel uncomfortable.Don't enable this unless your comp
 enough performance."
   :type 'boolean :group 'zjl-hl)
 
-
+;;variable that use to add/remove timer
 (setq zjl-hl-timer-obj nil)
 
 (defface zjl-hl-font-lock-bracket-face
   '((((class color)
       (background dark))
-     (:foreground "firebrick3"))
+     (:foreground "firebrick3" :weight bold))
     (((class color)
       (background light))
      (:foreground "firebrick3"))
@@ -411,7 +83,7 @@ enough performance."
 (defface zjl-hl-operators-face
   '((((class color)
       (background dark))
-     (:foreground "DarkGoldenrod4"))
+     (:foreground "PaleGreen"))
     (((class color)
       (background light))
      (:foreground "DarkGoldenrod4"))
@@ -424,7 +96,7 @@ enough performance."
 (defface zjl-hl-member-reference-face
   '((((class color)
       (background dark))
-     (:foreground "#008000"))
+     (:foreground "#f4a957"))
     (((class color)
       (background light))
      (:foreground "#008000"))
@@ -437,7 +109,7 @@ enough performance."
 (defface zjl-hl-function-call-face
   '((((class color)
       (background dark))
-     (:foreground "#008000" :bold t))
+     (:foreground "#e566d7" :weight normal))
     (((class color)
       (background light))
      (:foreground "#008000" :bold t))
@@ -451,7 +123,7 @@ enough performance."
 (defface zjl-hl-local-variable-reference-face
   '((((class color)
       (background dark))
-     (:foreground "#008080"))
+     (:foreground "LightGoldenrod"))
     (((class color)
       (background light))
      (:foreground "#008080"))
@@ -465,7 +137,7 @@ enough performance."
 (defface zjl-hl-parameters-reference-face
   '((((class color)
       (background dark))
-     (:foreground "#008080" :bold t))
+     (:foreground "LightGoldenrod" :weight bold))
     (((class color)
       (background light))
      (:foreground "#008080" :bold t))
@@ -478,7 +150,7 @@ enough performance."
 (defface zjl-hl-number-face
   '((((class color)
       (background dark))
-     (:foreground "red"))
+     (:foreground "#eeeeec"))
     (((class color)
       (background light))
      (:foreground "red"))
@@ -488,10 +160,11 @@ enough performance."
   :group 'zjl-hl-faces)
 (defvar zjl-hl-number-face 'zjl-hl-number-face)
 
+
 (defface zjl-hl-member-point-face
   '((((class color)
       (background dark))
-     (:foreground "SpringGreen4"))
+     (:foreground "PaleGreen"))
     (((class color)
       (background light))
      (:foreground "SpringGreen4"))
@@ -501,15 +174,17 @@ enough performance."
   :group 'zjl-hl-faces)
 (defvar zjl-hl-member-point-face 'zjl-hl-member-point-face)
 
-;;comment should be #ff00000
+;;comment should be #ff00000 for good look.
 
 (setq zjl-hl-operators-regexp
       (regexp-opt '("+" "-" "*" "/" "%" "!"
                     "&" "^" "~" "|"
                     "=" "<" ">"
                     "." "," ";" ":")))
+
 (setq zjl-hl-brackets-regexp
       (regexp-opt '("(" ")" "[" "]" "{" "}")))
+
 (setq zjl-hl-types-regexp
       (concat
        "\\_<[_a-zA-Z][_a-zA-Z0-9]*_t\\_>" "\\|"       
@@ -517,7 +192,6 @@ enough performance."
 
 (setq zjl-hl-warning-words-regexp
       (concat "\\_<" (regexp-opt '("FIXME" "TODO" "BUG" "XXX" "DEBUG")) "\\_>"))
-
 
 (setq zjl-hl-c-mode-keywords (list
        '("->"
@@ -534,19 +208,11 @@ enough performance."
          1  zjl-hl-function-call-face keep)
        ))
 
-
-
-
-
-
-
-
-
 ;;; begin lisp code
 ;;DarkGoldenrod4
 ;;SaddleBrown
 ;;RosyBrown
-(defface zjl-elisp-hl-function-call-face
+(defface zjl-hl-elisp-function-call-face
   '((((class color)
       (background dark))
      (:foreground "darkgreen"))
@@ -556,13 +222,13 @@ enough performance."
     (t
      ()))
   "*Face used for link privilege indicator (l) in dired buffers."
-  :group 'zjl-elisp-hl-faces)
-(defvar zjl-elisp-hl-function-call-face 'zjl-elisp-hl-function-call-face)
-;; (defvar zjl-elisp-hl-function-call-face 'font-lock-function-name-face)
-;;(setq zjl-elisp-hl-function-call-face 'zjl-elisp-hl-function-call-face9)
+  :group 'zjl-hl-faces)
+(defvar zjl-hl-elisp-function-call-face 'zjl-hl-elisp-function-call-face)
+;; (defvar zjl-hl-elisp-function-call-face 'font-lock-function-name-face)
+;;(setq zjl-hl-elisp-function-call-face 'zjl-hl-elisp-function-call-face9)
 
 
-(defface zjl-elisp-hl-setq-face
+(defface zjl-hl-elisp-setq-face
   '((((class color)
       (background dark))
      (:foreground "dark slate grey"))
@@ -572,11 +238,11 @@ enough performance."
     (t
      ()))
   "*Face used for link privilege indicator (l) in dired buffers."
-  :group 'zjl-elisp-hl-faces)
-(defvar zjl-elisp-hl-setq-face 'zjl-elisp-hl-setq-face)
-;(setq zjl-elisp-hl-setq-face 'zjl-elisp-hl-setq-face6)
+  :group 'zjl-hl-faces)
+(defvar zjl-hl-elisp-setq-face 'zjl-hl-elisp-setq-face)
+;(setq zjl-hl-elisp-setq-face 'zjl-hl-elisp-setq-face6)
 
-(defface zjl-elisp-hl-number-face
+(defface zjl-hl-elisp-number-face
   '((((class color)
       (background dark))
      (:foreground "red"))
@@ -586,30 +252,27 @@ enough performance."
     (t
      ()))
   "*Face used for link privilege indicator (l) in dired buffers."
-  :group 'zjl-elisp-hl-faces)
-(defvar zjl-elisp-hl-number-face 'zjl-elisp-hl-number-face)
-
+  :group 'zjl-hl-faces)
+(defvar zjl-hl-elisp-number-face 'zjl-hl-elisp-number-face)
 
 (setq zjl-hl-emacs-lisp-mode-keywords '(("\\(\\_<\\(?:\\(?:0x[0-9a-fA-F]*\\)\\|\\(?:[0-9]+\\(\\.[0-9]+\\)?\\)\\|\\(?:0[0-7]*\\)\\|\\(?:[01]+b\\)\\|nil\\|t\\)\\_>\\)"
-          0  zjl-elisp-hl-number-face keep)
-                             ("\\(\\_<setq\\_>\\)" 0  zjl-elisp-hl-setq-face keep)                             
-                             ("([ 	]*\\(\\_<\\(?:\\w\\|\\s_\\)+\\_>\\)" 1  zjl-elisp-hl-function-call-face keep)
+          0  zjl-hl-elisp-number-face keep)
+                             ("\\(\\_<setq\\_>\\)" 0  zjl-hl-elisp-setq-face keep)                             
+                             ("([ 	]*\\(\\_<\\(?:\\w\\|\\s_\\)+\\_>\\)" 1  zjl-hl-elisp-function-call-face keep)
                              ))
-
-
 
 
 ;;;###autoload
 (defun zjl-hl-local-variable-and-parameter-in-func-region (start end )
-  (let* ((local-variable-list '())
-         (parameter-list '())                
-         (func-body-begin (funcall zjl-hl-get-body-begin start end))
-         (case-fold-search nil)
-         items
-         item
-         successful)          
     (save-excursion
-      (condition-case nil         
+      (let* ((local-variable-list '())
+             (parameter-list '())                
+             (func-body-begin (funcall zjl-hl-get-body-begin start end))
+             (case-fold-search nil)
+             items
+             item
+             (successful t))
+        (condition-case nil         
           (when func-body-begin                               
             (goto-char func-body-begin)
             (setq items (semantic-get-local-variables))
@@ -627,22 +290,21 @@ enough performance."
               (dolist (item items)
                 (setq parameter-list (cons (car item) parameter-list))))
             (save-excursion
-              (when parameter-list
+              (when parameter-list ;; should before local-variale-list since some parameter will override by local-variable
                 (case major-mode
                   ('c-mode (zjl-hl-symbol-region func-body-begin end (concat "\\_<" (regexp-opt parameter-list) "\\_>") zjl-hl-parameters-reference-face t t t))
                   ('c++-mode (zjl-hl-symbol-region func-body-begin end (concat "\\_<" (regexp-opt parameter-list) "\\_>") zjl-hl-parameters-reference-face t t t))
-                  ('emacs-lisp-mode (zjl-hl-symbol-region start end (concat "\\_<" (regexp-opt parameter-list) "\\_>") zjl-hl-parameters-reference-face t t t)))                
-                
-                (setq successful t))
+                  ('emacs-lisp-mode (zjl-hl-symbol-region start end (concat "\\_<" (regexp-opt parameter-list) "\\_>") zjl-hl-parameters-reference-face t t t))))
               (when local-variable-list
                 (case major-mode
                   ('c-mode (zjl-hl-symbol-region func-body-begin end (concat "\\_<" (regexp-opt local-variable-list) "\\_>")  zjl-hl-local-variable-reference-face t t t))
                   ('c++-mode (zjl-hl-symbol-region func-body-begin end (concat "\\_<" (regexp-opt local-variable-list) "\\_>")  zjl-hl-local-variable-reference-face t t t))
-                  ('emacs-lisp-mode (zjl-hl-symbol-region start end (concat "\\_<" (regexp-opt local-variable-list) "\\_>")  zjl-hl-local-variable-reference-face t t t)))
-                (setq successful t)))
-              )
-        (error nil)))
-    successful))
+                  ('emacs-lisp-mode
+                   ;;(zjl-hl-symbol-region start end (concat "\\_<" (regexp-opt local-variable-list) "\\_>")  'default t t t)
+                   (zjl-hl-symbol-region start end (concat "\\_<" (regexp-opt local-variable-list) "\\_>")  zjl-hl-local-variable-reference-face t t t))))              
+              ))
+        (error (setq successful nil)))
+        successful)))
 
 ;;;###autoload
 (defun zjl-hl-symbol-region (start end symbol-exp symbol-face override-c-mode override-my override-nil)
@@ -658,8 +320,9 @@ enough performance."
           (setq target-this-end end)
           (setq target-next-start end))
         (if override-c-mode
-            (progn (hlt-highlight-regexp-region (point) target-this-end symbol-exp symbol-face)
-                   (goto-char target-next-start))
+            (progn
+              (hlt-highlight-regexp-region (point) target-this-end symbol-exp symbol-face)
+              (goto-char target-next-start))
           (while (and (re-search-forward symbol-exp target-this-end t)
                       (save-excursion
                         (re-search-backward symbol-exp)
@@ -736,69 +399,68 @@ enough performance."
         (when (buffer-live-p thisbuffer)
           (with-current-buffer thisbuffer
             (when (get-buffer-window)
-            (let(start end temp-regions temptime (all-regions-successful t))
-              ;;current-screen not include  window-end this point, but it is ok to include it from hl.
-              (if (and (window-end) (window-start))
+              (let(start end temp-regions temptime (all-regions-successful t) win-s win-e)
+                ;;current-screen not include  window-end this point, but it is ok to include it from hl.
+                (if (and (setq win-s (window-start))
+                         (setq win-e (window-end)))
+                    (progn
+                      (setq start (copy-marker (max (point-min);; hl eary around screen window
+                                                    (- win-s
+                                                       (* zjl-hl-numberofscreen-to-hl-each-time (- win-e win-s))))))
+                      (setq end (copy-marker (min (point-max)
+                                                  (+ win-e
+                                                     (* zjl-hl-numberofscreen-to-hl-each-time (- win-e win-s)))))))
                   (progn
-                    (setq start (copy-marker (max (point-min);; hl eary around screen window
-                                                  (- (window-start)
-                                                     (* zjl-hl-numberofscreen-to-hl-each-time (- (window-end) (window-start)))))))
-                    (setq end (copy-marker (min (point-max)
-                                                (+ (window-end)
-                                                   (* zjl-hl-numberofscreen-to-hl-each-time (- (window-end) (window-start))))))))
-                (progn
-                  (setq end (point-max-marker))
-                  (setq start (point-min-marker))))
+                    (setq end (point-max-marker))
+                    (setq start (point-min-marker))))
 
-              (setq start (save-excursion
-                            (goto-char start)
-                            (if (beginning-of-defun) 
-                                (point-marker)
-                              start)))
-              (setq end (save-excursion
+                (setq start (save-excursion
+                              (goto-char start)
+                              (if (beginning-of-defun) 
+                                  (point-marker)
+                                start)))
+                (setq end (save-excursion
                             (goto-char end)
                             (if (let ((orginal (point)));;for end-of-defun's bug,  it return nil whenever it is called
                                   (end-of-defun)
                                   (/= (point) orginal))
                                 (point-marker)
                               end)))
-              (when (and (< (- end start) zjl-hl-toobig-size)
-                         (or (< (- end start) zjl-hl-normal-size)
-                             (< zjl-hl-func-too-big-stop 2)))
-                (setq temp-regions (list (cons start end)))
-                (dolist (hl-region zjl-hl-regions-already-hl)
-                  (setq temp-regions (zjl-regions-delete temp-regions hl-region)))
-                (when temp-regions
-                  (dolist (each-region temp-regions)
-                    (if (zjl-hl-local-variable-and-parameter-region (car each-region) (cdr each-region))
-                    (setq zjl-hl-regions-already-hl (zjl-regions-add zjl-hl-regions-already-hl each-region t)) ;; t means merge hl-regions
-                    (setq all-regions-successful nil)))
+                (when (and (< (- end start) zjl-hl-toobig-size)
+                           (or (< (- end start) zjl-hl-normal-size)
+                               (< zjl-hl-func-too-big-stop 2)))
+                  (setq temp-regions (list (cons start end)))
+                  (dolist (hl-region zjl-hl-regions-already-hl)
+                    (setq temp-regions (region-list-edit-delete temp-regions hl-region)))
+                  (when temp-regions
+                    (dolist (each-region temp-regions)
+                      (if (zjl-hl-local-variable-and-parameter-region (car each-region) (cdr each-region))
+                          (setq zjl-hl-regions-already-hl (region-list-edit-add zjl-hl-regions-already-hl each-region t)) ;; t means merge hl-regions
+                        (setq all-regions-successful nil)))
 
-                  (when all-regions-successful
-                    (when (and (> (- end start) zjl-hl-normal-size)
-                               (< zjl-hl-func-too-big-stop 2))          
-                      (setq zjl-hl-func-too-big-stop (1+ zjl-hl-func-too-big-stop)))
+                    (when all-regions-successful
+                      (when (and (> (- end start) zjl-hl-normal-size)
+                                 (< zjl-hl-func-too-big-stop 2))          
+                        (setq zjl-hl-func-too-big-stop (1+ zjl-hl-func-too-big-stop)))
 
-                    (when (and (> (- end start) zjl-hl-normal-size)
-                               (<= zjl-hl-func-too-big-stop 2))
-                      (setq temptime  (/ (- end start) (/ zjl-hl-normal-size 8)))
-                      (setq zjl-hl-func-too-big-interval (max temptime zjl-hl-func-too-big-interval)))
-                    (when (and (equal zjl-hl-func-too-big-stop 2)
-                               (not zjl-hl-func-too-big-timer-registed))
-                      (run-with-idle-timer zjl-hl-func-too-big-interval nil 'zjl-hl-func-too-big-stop-reset (current-buffer))
-                      (setq zjl-hl-func-too-big-timer-registed t)))))))
-                    ))
+                      (when (and (> (- end start) zjl-hl-normal-size)
+                                 (<= zjl-hl-func-too-big-stop 2))
+                        (setq temptime  (/ (- end start) (/ zjl-hl-normal-size 8)))
+                        (setq zjl-hl-func-too-big-interval (max temptime zjl-hl-func-too-big-interval)))
+                      (when (and (equal zjl-hl-func-too-big-stop 2)
+                                 (not zjl-hl-func-too-big-timer-registed))
+                        (run-with-idle-timer zjl-hl-func-too-big-interval nil 'zjl-hl-func-too-big-stop-reset (current-buffer))
+                        (setq zjl-hl-func-too-big-timer-registed t)))))))
+            ))
         )        (error nil))
- )
+  )
 
 ;;;###autoload
 (defun zjl-hl-window-scroll-hook(par1 par2)
   (save-excursion
-    (when (and (get-buffer-window)
-               (or (equal major-mode 'c-mode)
-                   (equal major-mode 'c++-mode)
-                   (equal major-mode 'emacs-lisp-mode));;for sometimes maybe major-mode is change, and this hook still running, I guess this is need
-               )
+    (when (or (equal major-mode 'c-mode) ;;if major-mode changed,this hook may still running???
+              (equal major-mode 'c++-mode)
+              (equal major-mode 'emacs-lisp-mode))
       (when zjl-hl-firsttime
         (add-hook 'semantic-after-partial-cache-change-hook 'zjl-hl-semantic-after-partial-cache-change-hook t t)
         (setq zjl-hl-firsttime nil))
@@ -879,25 +541,34 @@ enough performance."
       (dolist (tags updated-tags)
         (setq overlay (semantic-tag-overlay tags))
         (setq todo (cons (overlay-start overlay) (overlay-end overlay)))
-        (setq zjl-hl-regions-already-hl (zjl-regions-delete zjl-hl-regions-already-hl todo))
+        (setq zjl-hl-regions-already-hl (region-list-edit-delete zjl-hl-regions-already-hl todo))
         )
       (when (< (- (overlay-end overlay) (overlay-start overlay)) zjl-hl-toobig-not-update-size)
         (zjl-hl-window-scroll-hook 1 1)))))
 
+(setq zjl-hl-fun-call-notable-degree-old-value nil)
 ;;;###autoload
-(defun zjl-hl-enable-global-all ()
+(defun zjl-hl-enable-global-all-modes ()
   (interactive)
-  (when zjl-hl-c-mode-enable-flag
+  (when zjl-hl-make-fun-call-notable
+    (setq zjl-hl-fun-call-notable-degree-old-value (face-attribute 'font-lock-function-name-face :height))
+    (set-face-attribute 'font-lock-function-name-face nil
+                    :height zjl-hl-fun-call-notable-degree))
+    (when zjl-hl-c-mode-enable-flag
     (zjl-hl-enable-global 'c-mode))
   (when zjl-hl-c++-mode-enable-flag
     (zjl-hl-enable-global 'c++-mode))
   (when zjl-hl-elisp-mode-enable-flag
     (zjl-hl-enable-global 'emacs-lisp-mode))
-  )
+)
 
 ;;;###autoload
-(defun zjl-hl-disable-global-all ()
+(defun zjl-hl-disable-global-all-modes ()
   (interactive)
+  (when (and zjl-hl-make-fun-call-notable
+             zjl-hl-fun-call-notable-degree-old-value)
+    (set-face-attribute 'font-lock-function-name-face nil
+                    :height zjl-hl-fun-call-notable-degree-old-value))
   (when zjl-hl-c-mode-enable-flag
     (zjl-hl-disable-global 'c-mode))
   (when zjl-hl-c++-mode-enable-flag
@@ -922,7 +593,6 @@ enough performance."
     (remove-hook hook 'zjl-hl-init)))
 
 
-
 ;;;###autoload
 (defun zjl-hl-get-body-begin-c (start end);;if has no begin, return nil, (zjl-hl-find-regexp-goto-end) may return nil
 (save-excursion
@@ -934,19 +604,22 @@ enough performance."
   (save-excursion
     (let (pos1 pos2 letfinded)
       (goto-char start)
-      (setq letfinded (re-search-forward "let" nil t))
-      (if (setq pos1 (and letfinded
-                          (zjl-hl-find-regexp-goto-end letfinded end "(")));; (zjl-hl-find-regexp-goto-end) may return nil
-          (progn
-            (setq pos1 (1- pos1))
-            (goto-char pos1)
-            (forward-sexp)
-            (setq pos2 (point))
-            (if (/= pos1 pos2)
-                pos2
-              nil))
-        nil)
-      )))
+      (if (looking-at-p "(let\\(\\*\\)?\\_>")
+          (progn (setq letfinded (re-search-forward "let\\(\\*\\)?\\_>" end t))
+                 (if (setq pos1 (and letfinded
+                                     (zjl-hl-find-regexp-goto-end letfinded end "(")));; (zjl-hl-find-regexp-goto-end) may return nil
+                     (progn
+                       (setq pos1 (1- pos1))
+                       (goto-char pos1)
+                       (forward-sexp)
+                       (setq pos2 (point))
+                       (if (/= pos1 pos2)
+                           pos2
+                         nil))
+                   nil))
+        (when (looking-at-p "(defun")
+          (forward-char)
+          (setq pos2 (point)))))))
 
 ;;;###autoload
 (defun zjl-hl-find-hl-var-arg-regions-c (start end)
@@ -976,17 +649,34 @@ enough performance."
   (save-excursion
     (goto-char start)
     (let (defun-start defun-end regions)
-      (while (and (re-search-forward  "(let\\*?[ 	
-]*" end t)
-                  (<= (match-beginning 0) end)
-                  )
-        (setq defun-start (match-beginning 0))
+      (while (and (setq defun-end 
+                        (if (let ((orginal (point)));;for end-of-defun's bug,  it return nil whenever it is called
+                              (end-of-defun)
+                              (/= (point) orginal))
+                            (point)
+                          nil))
+                  (setq defun-start
+                        (if (beginning-of-defun)
+                            (point)
+                          nil))
+                  (< defun-start end))
+        (setq regions  (cons (cons defun-start defun-end) regions))
         (goto-char defun-start)
-        (forward-sexp);;this function do not return t even if it forward successfully
-        (setq defun-end (point))
-        (when (/= defun-end defun-start)
-          (setq regions  (cons (cons defun-start defun-end) regions))
-          (goto-char (+ 2 defun-start))))
+        (let (let-start let-end)
+          (while (and (setq let-start (zjl-hl-find-regexp-goto-end (point) defun-end "(let\\(\\*\\)?\\_>"))
+                      (progn (goto-char let-start)
+                             (re-search-backward "(let" nil t)
+                             (setq let-start (point))
+                             )
+                        (<= let-start defun-end)
+                      )
+            (forward-sexp);;this function do not return t even if it forward successfully
+            (setq let-end (point))
+            (when (/= let-end let-start)
+              (setq regions  (cons (cons let-start let-end) regions))
+              (goto-char (+ 2 let-start)))))
+        (goto-char defun-end))
+      (setq regions (nreverse regions));;before reverse, the list is  let-in-b fun-b let-in-a fun-a,  so the global argument will override the local variable, which we dont wish.
       regions)))
 
 
@@ -1027,7 +717,7 @@ enough performance."
     (let (next-comment-start next-comment-exist comment-pos-1 comment-pos-2 min-pos pos-pair)
       (goto-char start)
       (save-excursion
-        (if (re-search-forward "\"" end t)
+        (if (re-search-forward "\\([^\\\\]\"\\)\\|\\(^\"\\)" end t);;?\"  or "weatherinfo\":{", in some package 
             (progn 
               (setq comment-pos-1 (point))
               (setq next-comment-exist t))
@@ -1052,6 +742,5 @@ enough performance."
         )
       pos-pair)))
 
-(zjl-hl-enable-global-all);(zjl-hl-disable-global-all)
 (provide 'zjl-hl)
 ;;; end lisp code 

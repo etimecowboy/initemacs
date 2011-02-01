@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-01-31 Mon 16:09 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 13:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,8 +23,8 @@
     ;; BUG: 这里引起语法高亮失效
     ;; 增加自定义关键字
     (dolist (mode '(c-mode c++-mode java-mode lisp-mode emacs-lisp-mode
-                           lisp-interaction-mode sh-mode sgml-mode sh-mode vhdl-mode
-                           verilog-mode))
+                           lisp-interaction-mode sh-mode sgml-mode
+                           sh-mode vhdl-mode verilog-mode))
       (font-lock-add-keywords
        mode
        '(("\\<\\(BUG\\|TODO\\|HACK\\|NOTE\\|REF\\):"

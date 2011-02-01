@@ -1,11 +1,11 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
-;; File name:    `xy-rc-highlight-parentheses.el'
-;; Time-stamp:<2011-02-01 Tue 18:33 xin on P6T>
+;; File name:    `xy-rc-color-theme.el'
+;; Time-stamp:<2011-02-01 Tue 13:24 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
-;; Description:  My `highlight-parentheses.el' settings
+;; Description:  My `color-theme.el' settings
 ;;    ___ _ __ ___   __ _  ___ ___
 ;;   / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;  |  __/ | | | | | (_| | (__\__ \
@@ -15,13 +15,12 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
-(require 'eval-after-load)
 
 ;;;###autoload
-(defun highlight-parentheses-settings ()
-  "Settings for `highlight-parentheses'."
-  ;; BUG: 最后一项不知道为啥不起作用
-  ;; Test: (((((((((((((())))))))))))))
-  (setq hl-paren-colors '("red" "yellow" "cyan" "magenta" "green" "blue")))
+(defun color-theme-settings ()
+  "Settings of `color-theme.el'."
 
-(provide 'xy-rc-highlight-parentheses.el)
+  (color-theme-initialize)
+  (color-theme-ahei))
+
+(provide 'xy-rc-color-theme.el)

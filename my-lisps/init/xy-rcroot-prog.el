@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-01 Tue 12:24 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 20:47 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -15,97 +15,23 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Align code listing
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; BUG: not working
-(eal-define-keys-commonly
- global-map
- `(("C-x a"   align)
-   ("C-x M-a" align-regexp)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Syntax highling
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Emacs basic
-(global-font-lock-mode 1)
-(eval-after-load "font-lock"
-  `(progn
-     (font-lock-face-settings)
-     (font-lock-settings)))
-
-;;--------------------------------------------------------------------
-
-;; zjl-hl,
-;; highlight variable and function call and others
-;; (require 'zjl-hl)
-(zjl-hl-enable-global-all)
-(eval-after-load "zjl-hl"
-  `(progn
-     (zjl-hl-face-settings)
-     (zjl-hl-settings)))
-
-;;-------------------------------------------------------------------
-
-;; smart-hl.el, 像Eclipse那样双击高亮当前字符串
-(require 'smart-hl)
-
-;;--------------------------------------------------------------------
-
-;; highlight-symbol.el, 像Eclipse那样高亮光标处单词
-(require 'highlight-symbol)
-
-(when window-system
-  (am-add-hooks
-   '(emacs-lisp-mode-hook
-     lisp-interaction-mode-hook java-mode-hook
-     c-mode-common-hook text-mode-hook ruby-mode-hook
-     html-mode-hook sh-mode-hook Info-mode-hook perl-mode-hook)
-   'highlight-symbol-mode-on))
-
-(eal-define-keys
- `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
-                       c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
- `(("C-c M-H" highlight-symbol-at-point)
-   ("C-c M-R" highlight-symbol-remove-all)
-   ("C-c M-N" highlight-symbol-next)
-   ("C-c M-P" highlight-symbol-prev)
-   ("C-c r"   highlight-symbol-query-replace)
-   ("C-c M-n" highlight-symbol-next-in-defun)
-   ("C-c M-p" highlight-symbol-prev-in-defun)))
-
-(eval-after-load "highlight-symbol"
-  `(progn
-     (highlight-symbol-face-settings)
-     (highlight-symbol-settings)))
-
-;;--------------------------------------------------------------------
-
-;; pulse.el, 实现Emacs的淡入淡出效果
-;; http://emacser.com/pulse.htm
-(require 'pulse)
-(eval-after-load "pulse"
-  `(progn
-     (pulse-face-settings)
-     (pulse-settings)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
 ;; Code formatting
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Auto indent
 (eal-define-keys
- `(lisp-mode-map emacs-lisp-mode-map lisp-interaction-mode-map sh-mode-map
-                 ,(if (not is-before-emacs-21) 'awk-mode-map) java-mode-map
-                 ruby-mode-map c-mode-base-map tcl-mode-map
-                 python-mode-map perl-mode-map)
+ `(lisp-mode-map emacs-lisp-mode-map lisp-interaction-mode-map 
+   sh-mode-map ,(if (not is-before-emacs-21) 'awk-mode-map) 
+   java-mode-map ruby-mode-map c-mode-base-map tcl-mode-map
+   python-mode-map perl-mode-map)
  `(("RET" newline-and-indent)))
+
+;; BUG: not working
+(eal-define-keys-commonly
+ global-map
+ `(("C-x a"   align)
+   ("C-x M-a" align-regexp)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -133,6 +59,10 @@
    svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
    apropos-mode-hook)
  'highlight-parentheses-mode)
+(eval-after-load "highlight-parentheses"
+  `(progn
+     ;; (mic-paren-face-settings)
+     (highlight-parentheses-settings)))
 
 ;; mic-paren
 (require 'mic-paren)
