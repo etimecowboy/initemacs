@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mic-paren.el'
-;; Time-stamp:<2011-01-31 Mon 13:08 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 11:50 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,7 @@
 
 ;;;###autoload
 (defun mic-paren-settings ()
-  "Face settings for `mic-paren'."
+  "Settings for `mic-paren'."
   (paren-activate)
   (setq paren-message-show-linenumber 'absolute))
 

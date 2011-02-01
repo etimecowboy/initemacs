@@ -48,7 +48,7 @@
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
 (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
-(xy/install-all-lisps (concat my-local-lisp-path "/bookmark+"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/bookmark+"))
 ;; (require 'cedet)
 (require 'color-theme-autoloads)
 (xy/install-all-lisps (concat my-local-lisp-path "/dired"))

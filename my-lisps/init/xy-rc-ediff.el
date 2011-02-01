@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-diff.el'
-;; Time-stamp:<2011-01-30 Sun 18:09 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 12:26 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,12 +33,11 @@
   (add-hook 'ediff-startup-hook 'ediff-startup-settings)
   (add-hook 'ediff-prepare-buffer-hook 'turn-off-hideshow)
   (add-hook 'ediff-mode-hook 'ediff-variable-settings)
- 
-  ;; 用ediff比较的时候在同一个frame中打开所有窗口
+   ;; 用ediff比较的时候在同一个frame中打开所有窗口
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-  (require 'ediff+)
-  (ediff+-set-actual-diff-options))
+  ;; (require 'ediff+)
+  ;; (ediff+-set-actual-diff-options))
+)
 
 ;;;###autoload
 (defun ediff-face-settings ()

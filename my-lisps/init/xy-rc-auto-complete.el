@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-01-30 Sun 17:24 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 02:46 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -73,11 +73,13 @@
 ;;;###autoload
 (defun ac-settings-4-lisp ()
   "Auto complete settings for lisp mode."
+
+  (require 'auto-complete+)
   (setq ac-omni-completion-sources 
         '(("\\<featurep\s+'" ac+-source-elisp-features)
           ("\\<require\s+'"  ac+-source-elisp-features)
           ("\\<load\s+\""    ac-source-emacs-lisp-features)))
-  (ac+-apply-source-elisp-faces)
+  ;; (ac+-apply-source-elisp-faces)
   (setq ac-sources
         '(ac-source-features
           ac-source-functions
@@ -208,7 +210,7 @@
                  ac-source-imenu
                  ac-source-files-in-current-dir
                  ac-source-filename))
-  (setq ac-modes ac+-modes)
+  ;; (setq ac-modes ac+-modes)
 )
 
 

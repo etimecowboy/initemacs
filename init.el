@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2011-01-31 Mon 16:05 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 02:34 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -70,8 +70,8 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; ;; Various abbrevations and auto-completions
-;; ;; (require 'xy-rcroot-complete)
+;; Various abbrevations and auto-completions
+;; (require 'xy-rcroot-complete)
 (load "xy-rcroot-complete")
 (message "* ---[ `xy-rcroot-complete.el' loaded at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)

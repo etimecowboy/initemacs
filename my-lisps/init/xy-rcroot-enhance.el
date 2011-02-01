@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-01-31 Mon 12:13 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 03:03 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -462,5 +462,166 @@
 (global-set-key [C-f9] 'eshell)
 
 ;;----------------------------------------------------------------------
+
+;; Save point places in buffers
+(setq save-place t)
+(setq save-place-file (concat my-var-path "/sav_plc"))
+(OfficePC
+ (setq save-place-file (concat my-var-path "/sav_plc-office")))
+(HomeDesktop
+ (setq save-place-file (concat my-var-path "/sav_plc-home-desktop")))
+(Laptop
+ (setq save-place-file (concat my-var-path "/sav_plc-laptop")))
+
+;;--------------------------------------------------------------------
+
+;; Bookmark
+;; * ‘C-x r m’ – set a bookmark at the current location (e.g. in a file)
+;; * ‘C-x r b’ – jump to a bookmark
+;; * ‘C-x r l’ – list all of your bookmarks
+;; * ‘M-x bookmark-delete’ – delete a bookmark by name
+;; Some keys in `*Bookmark List*’:
+;; * ‘a’ – show annotation for the current bookmark
+;; * ‘A’ – show all annotations for your bookmarks
+;; * ‘d’ – mark various entries for deletion 
+;;         (‘x’ – to delete them)
+;; * ‘e’ – edit the annotation for the current bookmark
+;; * ‘m’ – mark various entries for display and other operations, 
+;;         (‘v’ – to visit)
+;; * ‘o’ – visit the current bookmark in another window, 
+;;         keeping the bookmark list open
+;; * ‘C-o’ – switch to the current bookmark in another window
+;; * ‘r’ – rename the current bookmark
+
+(setq bookmark-default-file (concat my-var-path "/bookmark"))
+(OfficePC
+ (setq bookmark-default-file (concat my-var-path "/bookmark-officePC")))
+(HomeDesktop
+ (setq bookmark-default-file (concat my-var-path "/bookmark-home-desktop")))
+(Laptop
+ (setq bookmark-default-file (concat my-var-path "/bookmark-laptop")))
+
+(setq bookmark-save-flag 1)
+
+;; Bookmark+
+;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/bookmar+/")
+(autoload 'bookmark+ "bookmark+" "Enhanced Emacs bookmark" t)
+
+;;--------------------------------------------------------------------
+
+;; Recent files
+;; (recentf-mode 1)
+;; (setq recentf-save-file "~/emacs/recentf")
+;; (setq recentf-max-saved-items 100)
+;; (setq recentf-max-menu-items 20)
+;; (setq recentf-menu-filter 'recentf-sort-basenames-ascending)
+;; (setq recentf-save-file-modes 1000)
+
+;;--------------------------------------------------------------------
+
+;; Use session.el instead of recentf.el
+;; session.el can remember more information.
+;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
+;; Use the following:
+
+;; (when (try-require 'session)
+;;   (add-hook 'after-init-hook 'session-initialize)
+;;   (add-to-list 'session-globals-exclude 'org-mark-ring)
+;;   ;; (setq session-globals-max-size 100)
+;;   ;; (setq session-globals-max-string 40960)
+;;   ;; (setq session-registers-max-string 2048)
+;;   (setq session-save-file "~/emacs/session-others")
+;;   (OfficePC
+;;    (setq session-save-file "~/emacs/session-office"))
+;;   (HomeDesktop
+;;    (setq session-save-file "~/emacs/session-home-desktop"))
+;;   (Laptop
+;;    (setq session-save-file "~/emacs/session-laptop"))
+;;   )
+
+(try-require 'session)
+
+(autoload 'session-initialize "session"
+  "Initialize package session and read previous session file.
+Setup hooks and load `session-save-file', see `session-initialize'.  At
+best, this function is called at the end of the Emacs startup, i.e., add
+this function to `after-init-hook'." t)
+
+(add-hook 'after-init-hook 'session-initialize)
+
+;;;###autoload
+(defun session-settings ()
+  "Settings for `session'."
+  (setq session-initialize '(session menus))
+  (add-to-list 'session-globals-exclude 'org-mark-ring)
+  ;; (setq session-globals-max-size 100)
+  ;; (setq session-globals-max-string 40960)
+  ;; (setq session-registers-max-string 2048)
+  (setq session-save-file (concat my-var-path "/session"))
+  (OfficePC
+   (setq session-save-file (concat my-var-path "/session-office")))
+  (HomeDesktop
+   (setq session-save-file (concat my-var-path "/session-home-desktop")))
+  (Laptop
+   (setq session-save-file (concat my-var-path "/session-laptop")))
+  )
+
+(eval-after-load "session" `(session-settings))
+
+;;---------------------------------------------------------------------
+
+;; Workspace store and recover
+;; windows.el
+;; The default prefix is conflict with Org, so swith it.
+(setq win:switch-prefix "\C-c\C-v") 
+(define-key global-map win:switch-prefix nil)
+(define-key global-map "\C-c\C-vb" 'win-switch-to-window)
+(when (try-require 'windows)
+  (win:startup-with-window)
+  ;; set configuration file location.
+  (setq win:configuration-file (concat my-var-path "/windows"))
+  (OfficePC
+   (setq win:configuration-file (concat my-var-path "/windows-office")))
+  (HomeDesktop
+   (setq win:configuration-file (concat my-var-path "/windows-home-desktop")))
+  (Laptop
+   (setq win:configuration-file (concat my-var-path "/windows-laptop")))
+  (define-key ctl-x-map "C" 'see-you-again)
+
+  ;; revive.el
+  (autoload 'save-current-configuration "revive" "Save status" t)
+  (autoload 'resume "revive" "Resume Emacs" t)
+  (autoload 'wipe "revive" "Wipe Emacs" t)
+  ;; set configuration file location.
+  (setq revive:configuration-file (concat my-var-path "/revive"))
+  (OfficePC
+   (setq revive:configuration-file (concat my-var-path "/revive-office")))
+  (HomeDesktop
+   (setq revive:configuration-file (concat my-var-path "/revive-home-desktop")))
+  (Laptop
+   (setq revive:configuration-file (concat my-var-path "/revive-laptop")))
+
+  ;; And define favorite keys to those functions.  Here is a sample.
+  ;; (define-key ctl-x-map "S" 'save-current-configuration)
+  ;; (define-key ctl-x-map "F" 'resume)
+  ;; (define-key ctl-x-map "K" 'wipe)
+  ;; Automatically save window configuration when quit emacs
+  ;; (add-hook 'kill-emacs-hook 'save-current-configuration)
+
+  ;;; --- mode-line
+  ;; Remove frame number in `global-mode-string'
+  ;; (delete 'win:mode-string global-mode-string)
+  )
+
+;;-------------------------------------------------------------------------------
+
+;;; Winpoint, 记住每一个窗口 buffer 的位置
+(when (try-require 'winpoint)
+  (window-point-remember-mode 1)
+  (setq winpoint-non-restore-buffer-list
+        '("*Group*"))
+  )
+
+;;-------------------------------------------------------------------------------
 
 (provide 'xy-rcroot-enhance)

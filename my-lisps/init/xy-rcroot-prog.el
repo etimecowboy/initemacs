@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-01-31 Mon 20:59 xin on P6T>
+;; Time-stamp:<2011-02-01 Tue 12:24 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -13,15 +13,25 @@
 ;;
 ;;--------------------------------------------------------------------
 
-;; align code listing
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Align code listing
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; BUG: not working
 (eal-define-keys-commonly
  global-map
  `(("C-x a"   align)
    ("C-x M-a" align-regexp)))
 
-;;--------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Syntax highling
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; 语法高亮
+;; Emacs basic
 (global-font-lock-mode 1)
 (eval-after-load "font-lock"
   `(progn
@@ -39,36 +49,81 @@
      (zjl-hl-face-settings)
      (zjl-hl-settings)))
 
+;;-------------------------------------------------------------------
+
+;; smart-hl.el, 像Eclipse那样双击高亮当前字符串
+(require 'smart-hl)
+
 ;;--------------------------------------------------------------------
 
-;; 回车后indent
+;; highlight-symbol.el, 像Eclipse那样高亮光标处单词
+(require 'highlight-symbol)
+
+(when window-system
+  (am-add-hooks
+   '(emacs-lisp-mode-hook
+     lisp-interaction-mode-hook java-mode-hook
+     c-mode-common-hook text-mode-hook ruby-mode-hook
+     html-mode-hook sh-mode-hook Info-mode-hook perl-mode-hook)
+   'highlight-symbol-mode-on))
+
+(eal-define-keys
+ `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
+                       c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
+ `(("C-c M-H" highlight-symbol-at-point)
+   ("C-c M-R" highlight-symbol-remove-all)
+   ("C-c M-N" highlight-symbol-next)
+   ("C-c M-P" highlight-symbol-prev)
+   ("C-c r"   highlight-symbol-query-replace)
+   ("C-c M-n" highlight-symbol-next-in-defun)
+   ("C-c M-p" highlight-symbol-prev-in-defun)))
+
+(eval-after-load "highlight-symbol"
+  `(progn
+     (highlight-symbol-face-settings)
+     (highlight-symbol-settings)))
+
+;;--------------------------------------------------------------------
+
+;; pulse.el, 实现Emacs的淡入淡出效果
+;; http://emacser.com/pulse.htm
+(require 'pulse)
+(eval-after-load "pulse"
+  `(progn
+     (pulse-face-settings)
+     (pulse-settings)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Code formatting
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Auto indent
 (eal-define-keys
  `(lisp-mode-map emacs-lisp-mode-map lisp-interaction-mode-map sh-mode-map
                  ,(if (not is-before-emacs-21) 'awk-mode-map) java-mode-map
-                 ruby-mode-map c-mode-base-map tcl-mode-map org-mode-map
-                 python-mode-map perl-mode-map vhdl-mode-map verilog-mode-map)
+                 ruby-mode-map c-mode-base-map tcl-mode-map
+                 python-mode-map perl-mode-map)
  `(("RET" newline-and-indent)))
 
-;;--------------------------------------------------------------------
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; 所有关于括号的配置
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; paren-mode settings
 (show-paren-mode 1)
 (eval-after-load "paren"
   `(progn
      (paren-face-settings)
      (paren-settings)))
 
-;; 输入左大花扩号自动补齐右大花括号
-(eal-define-keys
- `(c-mode-base-map awk-mode-map)
- `(("{" skeleton-c-mode-left-brace)))
+;;--------------------------------------------------------------------
 
-;; highlight-parentheses 
+;; highlight-parentheses.el, 用颜色配对括号
 (require 'highlight-parentheses)
-;; BUG: 最后一项不知道为啥不起作用
-;; Test: (((((((((((((())))))))))))))
-(setq hl-paren-colors '("red" "yellow" "cyan" "magenta" "green" "blue"))
-
 (am-add-hooks
  `(find-file-hook
    help-mode-hook Man-mode-hook log-view-mode-hook
@@ -100,9 +155,20 @@
 
 ;;--------------------------------------------------------------------
 
+;; 输入左大花扩号自动补齐右大花括号
+(eal-define-keys
+ `(c-mode-base-map awk-mode-map)
+ `(("{" skeleton-c-mode-left-brace)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Code folding
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; hide-region
 ;; 代码区域折叠
-;; (require 'hide-region)
+(require 'hide-region)
 (eal-define-keys-commonly
  global-map
  `(("C-x M-r" hide-region-hide)
@@ -110,8 +176,9 @@
 (eval-after-load "hide-region"
   `(hide-region-settings))
 
-;; hs-minor-mode: HideShow 
-;; This is a minor mode similar to outline-mode. 
+;;-------------------------------------------------------------------
+
+;; hs-minor-mode: a minor mode similar to outline-mode. 
 ;; It hides and shows blocks of text. 
 ;; In particular, HideShow hides balanced-expression code blocks and 
 ;; multi-line comment blocks.
@@ -124,10 +191,13 @@
      (hs-minor-mode-face-settings)
      (hs-minor-mode-settings)))
 
-;;--------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Code exploration
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; describe-symbol, find-symbol
-
+;;describe-symbol, find-symbol
 (eal-define-keys
  `(emacs-lisp-mode-map lisp-interaction-mode-map
    completion-list-mode-map help-mode-map debugger-mode-map)
@@ -153,23 +223,9 @@
    ("C-x K"   find-symbol-fun-on-key-sb)
    (,(if window-system "C-x C-/" "C-x C-_") describe-symbol-sb)))
 
-;; (defun find-symbol-settings ()
-;;   "Settings for `find-symbol'.")
-
-;; (defun describe-symbol-settings ()
-;;   "Settings for `describe-symbol'.")
-
-;; (eval-after-load "find-symbol"
-;;   `(find-symbol-settings))
-
-;; (eval-after-load "describe-symbol"
-;;   `(describe-symbol-settings))
-
 ;;--------------------------------------------------------------------
 
-;; which-func.el
-;; 用来显示当前光标在哪个函数
-;; (require 'which-func-settings)
+;; which-func.el, 用来显示当前光标在哪个函数
 (which-func-mode 1)
 (eval-after-load "which-func"
   `(progn
@@ -178,53 +234,35 @@
 
 ;;--------------------------------------------------------------------
 
-;; 像Eclipse那样双击高亮当前字符串
-;; (require 'smart-hl)
+;; ;; imenu-tree: 
+;; (require 'imenu-tree)
+;; (eval-after-load "imenu-tree"
+;;   `(imenu-tree-settings))
 
-;;--------------------------------------------------------------------
-
-;; highlight-symbol
-;; 像Eclipse那样高亮光标处单词
-;; (require 'highlight-symbol-settings)
-(require 'highlight-symbol)
-
-(when window-system
-  (am-add-hooks
-   '(emacs-lisp-mode-hook
-     lisp-interaction-mode-hook java-mode-hook
-     c-mode-common-hook text-mode-hook ruby-mode-hook
-     html-mode-hook sh-mode-hook Info-mode-hook perl-mode-hook)
-   'highlight-symbol-mode-on))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Shell script development settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (eal-define-keys
- `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
-   c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
- `(("C-c M-H" highlight-symbol-at-point)
-   ("C-c M-R" highlight-symbol-remove-all)
-   ("C-c M-N" highlight-symbol-next)
-   ("C-c M-P" highlight-symbol-prev)
-   ("C-c r"   highlight-symbol-query-replace)
-   ("C-c M-n" highlight-symbol-next-in-defun)
-   ("C-c M-p" highlight-symbol-prev-in-defun)))
-
-(eval-after-load "highlight-symbol"
+ 'sh-mode-map
+ `(("<"       self-insert-command)
+   ("C-c M-c" sh-case)
+   ("C-c C-c" comment)
+   ("C-c g"   bashdb)))
+(eval-after-load "sh-script"
   `(progn
-     (highlight-symbol-face-settings)
-     (highlight-symbol-settings)))
+     (sh-mode-face-settings)
+     (sh-mode-settings)))
 
-;;--------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; c/c++ development settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; 用pulse实现Emacs的淡入淡出效果
-;; http://emacser.com/pulse.htm
-;; (require 'pulse-settings)
-;; (eval-after-load "pulse"
-;;   `(progn
-;;      (pulse-face-settings)
-;;      (pulse-settings)))
-
-;;--------------------------------------------------------------------
-
-;; codepilot
+;; codepilot, someone else's c/c++ development environment
 
 ;; (setq codepilot-dir (concat my-local-lisp-path "codepilot"))
 ;; (try-require 'mycutil)
@@ -238,30 +276,7 @@
 ;; (eval-after-load "emaci"
 ;;   `(codepilot-settings-4-emaci))
 
-;;---------------------------------------------------------------------
-
-;; imenu-tree: 
-(require 'imenu-tree)
-(eval-after-load "imenu-tree"
-  `(imenu-tree-settings))
-
-;;--------------------------------------------------------------------
-
-;; Shell script development settings
-(eal-define-keys
- 'sh-mode-map
- `(("<"       self-insert-command)
-   ("C-c M-c" sh-case)
-   ("C-c C-c" comment)
-   ("C-c g"   bashdb)))
-(eval-after-load "sh-script"
-  `(progn
-     (sh-mode-face-settings)
-     (sh-mode-settings)))
-
-;;------------------------------------------------------------------------------
-
-;; c/c++ development settings
+;;-------------------------------------------------------------------------
 
 ;; c/c++ include dir
 (Windows
@@ -293,55 +308,55 @@
 (eval-after-load "cc-mode"
   `(cc-mode-settings))
 
-;;-------------------------------------------------
+;;----------------------------------------------------------------------------
 
 ;; ifdef settings
 (eal-define-keys
  'c-mode-base-map
  `(("C-c I" mark-ifdef)))
 
-;;-------------------------------------------------
+;;----------------------------------------------------------------------------
 
-;; ;; hide-ifdef, c中隐藏ifdef
-(autoload 'hide-ifdef-block "hideif"
-  "Hide the ifdef block (true or false part) enclosing or before the cursor."
-  t)
+;; hide-ifdef, c中隐藏ifdef
+;; (autoload 'hide-ifdef-block "hideif"
+;;   "Hide the ifdef block (true or false part) enclosing or before the cursor."
+;;   t)
 
-(autoload 'hide-ifdefs "hideif"
-  "Hide the contents of some #ifdefs.
-Assume that defined symbols have been added to `hide-ifdef-env'.
-The text hidden is the text that would not be included by the C
-preprocessor if it were given the file with those symbols defined.
+;; (autoload 'hide-ifdefs "hideif"
+;;   "Hide the contents of some #ifdefs.
+;; Assume that defined symbols have been added to `hide-ifdef-env'.
+;; The text hidden is the text that would not be included by the C
+;; preprocessor if it were given the file with those symbols defined.
 
-;; Turn off hiding by calling `show-ifdefs'."
-  t)
+;; ;; Turn off hiding by calling `show-ifdefs'."
+;;   t)
 
-(autoload 'show-ifdef-block "hideif"
-  "Show the ifdef block (true or false part) enclosing or before the cursor."
-  t)
+;; (autoload 'show-ifdef-block "hideif"
+;;   "Show the ifdef block (true or false part) enclosing or before the cursor."
+;;   t)
 
-(autoload 'show-ifdefs "hideif"
-  "Cancel the effects of `hide-ifdef': show the contents of all #ifdefs."
-  t)
+;; (autoload 'show-ifdefs "hideif"
+;;   "Cancel the effects of `hide-ifdef': show the contents of all #ifdefs."
+;;   t)
 
-(eval-after-load "hideif"
-  '(progn
-     (setq hide-ifdef-env
-           '((GNU_LINUX . t)
-             (__GNUC__ . t)
-             (__cplusplus . t)))))
+;; (eval-after-load "hideif"
+;;   '(progn
+;;      (setq hide-ifdef-env
+;;            '((GNU_LINUX . t)
+;;              (__GNUC__ . t)
+;;              (__cplusplus . t)))))
 
-(eval-after-load "cc-mode"
-  '(progn
-     (dolist (hook '(c-mode-common-hook))
-       (add-hook hook 'hide-ifdef-mode))
-     (dolist (map (list c-mode-base-map))
-       (apply-define-key
-        map
-        `(("C-c w"   hide-ifdef-block)
-          ("C-c W"   hide-ifdefs)
-          ("C-c M-i" show-ifdef-block)
-          ("C-c M-I" show-ifdefs))))))
+;; (eval-after-load "cc-mode"
+;;   '(progn
+;;      (dolist (hook '(c-mode-common-hook))
+;;        (add-hook hook 'hide-ifdef-mode))
+;;      (dolist (map (list c-mode-base-map))
+;;        (eal-define-keys-commonly
+;;         map
+;;         `(("C-c w"   hide-ifdef-block)
+;;           ("C-c W"   hide-ifdefs)
+;;           ("C-c M-i" show-ifdef-block)
+;;           ("C-c M-I" show-ifdefs))))))
 
 ;;-------------------------------------------------
 
@@ -357,32 +372,32 @@ preprocessor if it were given the file with those symbols defined.
 ;;-------------------------------------------------
 
 ;; sourcepair,可以在cpp与h文件之间切换
-(eal-define-keys
- `(c-mode-base-map)
- `(("C-c s" sourcepair-load)))
+;; (eal-define-keys
+;;  `(c-mode-base-map)
+;;  `(("C-c s" sourcepair-load)))
 
-(autoload 'sourcepair-load "sourcepair"
-  "Load the corresponding C/C++ header or source file for the current buffer.
+;; (autoload 'sourcepair-load "sourcepair"
+;;   "Load the corresponding C/C++ header or source file for the current buffer.
 
-This function can be invoked by \\[sourcepair-load].  It will load the the
-corresponding header or source file for the current buffer.  For example, if
-you are looking at the file FooParser.cpp and press \\[sourcepair-load], the
-file FooParser.h will be loaded.  It also works the other way as well.
+;; This function can be invoked by \\[sourcepair-load].  It will load the the
+;; corresponding header or source file for the current buffer.  For example, if
+;; you are looking at the file FooParser.cpp and press \\[sourcepair-load], the
+;; file FooParser.h will be loaded.  It also works the other way as well.
 
-There are six global variables that can be used to adjust how the function
-works:
+;; There are six global variables that can be used to adjust how the function
+;; works:
 
- `sourcepair-source-extensions'
- `sourcepair-header-extensions'
- `sourcepair-source-path'
- `sourcepair-header-path'
- `sourcepair-recurse-ignore'
- `sourcepair-private-header-suffixes'
+;;  `sourcepair-source-extensions'
+;;  `sourcepair-header-extensions'
+;;  `sourcepair-source-path'
+;;  `sourcepair-header-path'
+;;  `sourcepair-recurse-ignore'
+;;  `sourcepair-private-header-suffixes'
 
-See the documentation for these variables for more info.
-" t)
+;; See the documentation for these variables for more info.
+;; " t)
 
-(eval-after-load "sourcepair" `(sourcepair-settings))
+;; (eval-after-load "sourcepair" `(sourcepair-settings))
 
 ;;-------------------------------------------------
 
@@ -447,15 +462,22 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "xref"
 ;;   `(xref-settings))
 
-;;------------------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; vhdl development settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; vhdl settings
 (eval-after-load "vhdl"
   `(progn
      ;; (vhdl-mode-face-settings)
      (vhdl-mode-settings)))
 
-;;------------------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; vhdl development settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; verilog settings
 (eval-after-load "verilog"
@@ -463,12 +485,15 @@ See the documentation for these variables for more info.
      ;; (verilog-mode-face-settings)
      (verilog-mode-settings)))
 
-;;----------------------------------------------------------------------
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Documentation settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; doxygen
-;; (require 'doxymacs-settings)
 
+;; (require 'doxymacs-settings)
 ;; (autoload 'doxymacs-mode "doxymacs"
 ;;   ;; All of the following text shows up in the "mode help" (C-h m)
 ;;   "Minor mode for using/creating Doxygen documentation.
@@ -484,11 +509,11 @@ See the documentation for these variables for more info.
 ;; Key bindings:
 ;; \\{doxymacs-mode-map}" t)
 
-(am-add-hooks
- `(c-mode-common-hook php-mode-hook)
- (lambda ()
-   (doxymacs-mode 1)
-   (doxymacs-font-lock)))
+;; (am-add-hooks
+;;  `(c-mode-common-hook php-mode-hook)
+;;  (lambda ()
+;;    (doxymacs-mode 1)
+;;    (doxymacs-font-lock)))
 
 ;; ;;;###autoload
 ;; (defun doxymacs-settings ()
@@ -497,9 +522,11 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "doxymacs"
 ;;   `(doxymacs-settings))
 
-;;------------------------------------------------------------------------------
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; CEDET settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; if want to use offical cedet
 ;; (let ((cedet-possible-dirs 
@@ -518,13 +545,16 @@ See the documentation for these variables for more info.
 ;;            (locate-library "semantic-ctxt") ; offical cedet
 ;;            (require 'cedet nil 'noerror))
 
-(require 'cedet nil 'noerror)
+(require 'cedet)
 (eval-after-load "cedet"
   `(cedet-settings))
 
-;;------------------------------------------------------------------------------
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; ecb 代码浏览器
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'ecb-autoloads)
 (eval-after-load "ecb"
   `(ecb-settings))
@@ -548,9 +578,220 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "autoconf-mode"
 ;;   `(autoconf-mode-settings))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Compile settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; flymake,
+;; 动态检查语法错误
+;; (defvar flymake-mode-map (make-sparse-keymap))
+;; (autoload 'flymake-find-file-hook "flymake" "" t)
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+;; (eval-after-load "flymake" `(flymake-settings))
+;; (eal-define-keys
+;;  'flymake-mode-map
+;;  `(("C-c N"   flymake-goto-next-error-disp)
+;;    ("C-c P"   flymake-goto-prev-error-disp)
+;;    ("C-c M-w" flymake-display-current-warning/error)))
+
+;;--------------------------------------------------------------------
+
+;; ahei 的智能编译
+;; (require 'my-smart-compile)
+
+;; (defalias 'cpl 'compile)
+
+;; (defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
+;; (if is-before-emacs-21
+;;     (setq makefile-mode-map-list '(makefile-mode-map))
+;;   (setq makefile-mode-map-list '(makefile-gmake-mode-map makefile-automake-mode-map)))
+
+;; (eal-define-keys
+;;  (append makefile-mode-map-list
+;;          '(c-mode-base-map svn-status-mode-map sh-mode-map
+;;                            compilation-mode-map ruby-mode-map))
+;;  `(("C-c C-m"  make-sb)
+;;    ("C-c m"    make-check-sb)
+;;    ("C-c M"    make-clean-sb)
+;;    ("C-c c"    compile-buffer-sb)
+;;    ("C-c r"    run-program-sb)
+;;    ("C-c C"    smart-compile-sb)))
+
+;; (eal-define-keys
+;;  'java-mode-map
+;;  `(("C-c C-m" ant-sb)
+;;    ("C-c M"	  ant-clean-sb)
+;;    ("C-c m"	  ant-test-sb)))
+
+
+;; (require 'compile-misc)
+
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("M-n" next-error)
+;;    ("M-p" previous-error)))
+
+;; ;;;###autoload
+;; (defun compile-settings ()
+;;   "Settings for `compile'."
+;;   ;; 设置编译命令
+;;   (setq compile-command "make -k")
+
+;;   (eal-define-keys
+;;    makefile-mode-map-list
+;;    `(("M-p"	  previous-error)
+;;      ("M-n"	  next-error)
+;;      ("C-c p" makefile-previous-dependency)
+;;      ("C-c n" makefile-next-dependency)))
+
+;;   (setq compilation-scroll-output t))
+
+;; (eal-define-keys
+;;  'compilation-mode-map
+;;  `(("n" compilation-next-error)
+;;    ("p" compilation-previous-error)
+;;    ("'" switch-to-other-buffer)
+;;    ("u" View-scroll-half-page-backward)
+;;    ("f" am-forward-word-or-to-word)
+;;    ("d" scroll-up)
+;;    ("w" scroll-down)))
+
+;; ;;;###autoload
+;; (defun compile-face-settings ()
+;;   "Face settings for `compile'."
+;;   (custom-set-faces '(compilation-info
+;;                       ((((type tty)) :bold t :foreground "green")
+;;                        (t :foreground "green"))))
+;;   (setq compilation-message-face nil)
+;;   (custom-set-faces '(compilation-warning
+;;                       ((((class color)) :foreground "red" :bold nil))))
+;;   (custom-set-faces '(compilation-info
+;;                       ((((type tty pc)) :foreground "magenta") (t (:foreground "magenta")))))
+;;   (setq compilation-enter-directory-face 'beautiful-blue-face)
+;;   (setq compilation-leave-directory-face 'magenta-face))
+
+;; (eval-after-load "compile"
+;;   `(progn
+;;      (compile-face-settings)
+;;      (compile-settings)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Debug settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; debug.el
+;; (eval-after-load "debug"
+;;   '(progn
+;;      ;; (require 'util)
+
+;;      (apply-define-key
+;;       debugger-mode-map
+;;       `(("'" switch-to-other-buffer)
+;;         ("o" other-window)))))
+
+;;-------------------------------------------
+
+;; edebug
+
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("C-x M-E" toggle-debug-on-error)
+;;    ("C-x Q"   toggle-debug-on-quit)))
+
+;; (eval-after-load "edebug"
+;;   '(progn
+;;      (define-key edebug-mode-map (kbd "C-c C-d") nil)))
+
+;; (defun edebug-clear-global-break-condition ()
+;;   "Clear `edebug-global-break-condition'."
+;;   (interactive)
+;;   (setq edebug-global-break-condition nil))
+
+;;-------------------------------------------
+
+;; `gdb'
+;; (require 'gud-settings)
+
+;; (require 'util)
+
+;; (eal-define-keys
+;;  'c-mode-base-map
+;;  `(("C-c g" gdb)
+;;    ("C-c b" gud-break)
+;;    ("C-c B" gud-remove)))
+
+;; ;;;###autoload
+;; (defun gud-settings ()
+;;   "Settings for `gud'."
+;;   (eal-define-keys
+;;    'gud-mode-map
+;;    `(("C-c B" gud-remove)
+;;      ("M-s"   view)
+;;      ("M-m"   comint-previous-matching-input)
+;;      ("M-M"   comint-next-matching-input)
+;;      ("C-c r" gud-run)
+;;      ("C-c f" gud-finish)
+;;      ("M-j"   gud-next)
+;;      ("M-k"   gud-step)
+;;      ("M-c"   gud-cont)
+;;      ("M-C"   capitalize-word)
+;;      ("C-c m" make)))
+
+;;   ;; 退出gdb的时候关闭gdb对应的buffer
+;;   (add-hook 'gdb-mode-hook 'kill-buffer-when-shell-command-exit)
+
+;;   ;; 显示gdb的鼠标提示
+;;   (gud-tooltip-mode 1))
+
+;; (eval-after-load "gdb-ui"
+;;   `(gud-settings))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Version control settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Emacs internal version control
+(setq version-control t)
+(setq kept-new-versions 3)
+(setq delete-old-versions t)
+(setq kept-old-versions 2)
+(setq dired-kept-versions 1)
+
+;; Autosaved files
+(setq auto-save-list-file-prefix 
+      (concat my-var-path "/auto-save-list/.saves-"))
+
+;;--------------------------------------------------------------------
+
+;; git gui
+(require 'git)
+(require 'git-blame)
+;; (global-set-key [f11] 'git-status)
+;; Automatically refresh version control information
+(setq auto-revert-check-vc-info t)
+;; egg git gui
+(when (try-require 'egg)
+  ;; egg-grep could be loaded later.
+  (setq egg-enable-tooltip t)
+  (setq egg-refresh-index-in-backround t)
+  (setq egg-show-key-help-in-buffers 
+        '((:status :log :file-log :reflog :diff :commit)))
+  ;; (global-set-key [S-f11] 'egg-status) 
+  )
+
 ;;---------------------------------------------------------------------
 
+;; subversion gui
+;; (require 'svn-settings)
 
-
+;;--------------------------------------------------------------------
 
 (provide 'xy-rcroot-prog)
