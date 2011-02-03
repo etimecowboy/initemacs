@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-shell.el'
-;; Time-stamp:<2011-01-31 Mon 11:46 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 12:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,8 +25,7 @@
 
   ;; Use ansi-color in shell and eshell mode
   (require 'ansi-color)
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
+  ;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
   ;; Press tab for completions
   (require 'shell-completion)

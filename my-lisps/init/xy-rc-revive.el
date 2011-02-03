@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-revive.el'
-;; Time-stamp:<2011-02-02 Wed 10:39 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 12:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,6 +19,7 @@
 ;;;###autoload
 (defun revive-settings ()
   "Settings of `revive.el'."
+  
   ;; set configuration file location.
   (setq revive:configuration-file (concat my-var-path "/revive"))
   (OfficePC
@@ -26,6 +27,9 @@
   (HomeDesktop
    (setq revive:configuration-file (concat my-var-path "/revive-home-desktop")))
   (Laptop
-   (setq revive:configuration-file (concat my-var-path "/revive-laptop"))))
+   (setq revive:configuration-file (concat my-var-path "/revive-laptop")))
+  ;; Automatically save window configuration when quit emacs
+  ;; (add-hook 'kill-emacs-hook 'save-current-configuration)
+)
 
 (provide 'xy-rc-revive.el)

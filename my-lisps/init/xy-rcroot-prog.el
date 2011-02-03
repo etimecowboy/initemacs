@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-03 Thu 10:34 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 11:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -672,13 +672,8 @@
 ;; Automatically refresh version control information
 (setq auto-revert-check-vc-info t)
 ;; egg git gui
-(when (try-require 'egg)
-  ;; egg-grep could be loaded later.
-  (setq egg-enable-tooltip t)
-  (setq egg-refresh-index-in-backround t)
-  (setq egg-show-key-help-in-buffers 
-        '((:status :log :file-log :reflog :diff :commit)))
-  (global-set-key [S-f11] 'egg-status))
+(require 'egg)
+(global-set-key [S-f11] 'egg-status)
 
 ;;---------------------------------------------------------------------
 

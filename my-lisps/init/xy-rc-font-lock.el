@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-02-01 Tue 13:17 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 11:22 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -46,8 +46,8 @@
      'font-lock-comment-face "red")
     (set-face-foreground 
      'font-lock-string-face "magenta"))
-  (set-face-foreground 
-   'font-lock-comment-face "darkgreen")
+  ;; (set-face-foreground 
+  ;;  'font-lock-comment-face "darkgreen")
   (set-face-foreground 
    'font-lock-string-face "blue") ;;)
   (custom-set-faces 

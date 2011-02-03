@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-03 Thu 09:17 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 12:40 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -104,9 +104,7 @@
   `(progn
      (browse-kill-ring-settings)
      (browse-kill-ring-face-settings)))
-
 (global-set-key (kbd "C-=") 'browse-kill-ring)
-
 (eal-define-keys
  'browse-kill-ring-mode-map
  `(("RET" browse-kill-ring-insert-and-quit)
@@ -326,7 +324,6 @@ from tradition chinese to simple chinese" t)
 ;; inkd: 在各种 text 文档间提供链接
 
 (require 'linkd)
-
 (am-add-hooks
  `(test-mode-hook org-mode-hook
    emacs-lisp-mode-hook lisp-interaction-mode-hook
@@ -397,10 +394,11 @@ from tradition chinese to simple chinese" t)
 
 ;; Pop up a window for shell
 (autoload 'shell-pop "shell-pop" "Pop-up a shell" t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 (eval-after-load "shell-pop"
   '(progn
-     (sell-pop-settings)))
+     (shell-pop-settings)))
 
 (global-set-key [f9] 'shell-pop)
 (global-set-key [S-f9] 'shell)
@@ -409,7 +407,7 @@ from tradition chinese to simple chinese" t)
 ;;----------------------------------------------------------------------
 
 ;; Save point places in buffers
-(setq save-place t)
+(setq save-place 1)
 (setq save-place-file (concat my-var-path "/sav_plc"))
 (OfficePC
  (setq save-place-file (concat my-var-path "/sav_plc-office")))
@@ -418,7 +416,19 @@ from tradition chinese to simple chinese" t)
 (Laptop
  (setq save-place-file (concat my-var-path "/sav_plc-laptop")))
 
-;;--------------------------------------------------------------------
+;;-----------------------------------------------------------------------
+
+;; Winpoint,
+;; When two windows view the same buffer at the same time, and one
+;; window is switched to another buffer and back, point is now the
+;; same as in the other window, not as it was before we switched away.
+;; This mode tries to work around this problem by storing and
+;; restoring per-window positions for each buffer.
+(require 'winpoint)
+(window-point-remember-mode 1)
+(setq winpoint-non-restore-buffer-list '("*Group*"))
+
+;;-----------------------------------------------------------------------
 
 ;; Bookmark
 ;; * ‘C-x r m’ – set a bookmark at the current location (e.g. in a file)
@@ -449,7 +459,6 @@ from tradition chinese to simple chinese" t)
 (setq bookmark-save-flag 1)
 
 ;; Bookmark+
-;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/bookmar+/")
 (autoload 'bookmark+ "bookmark+" "Enhanced Emacs bookmark" t)
 
 ;;--------------------------------------------------------------------
@@ -480,35 +489,17 @@ this function to `after-init-hook'." t)
 
 ;; Workspace store and recover
 ;; windows.el
-(win:startup-with-window)
-(define-key global-map "\C-c\C-vb" 'win-switch-to-window)
-(define-key ctl-x-map "C" 'see-you-again)
+(windows-start)
 (eval-after-load "windows" `(windows-settings))
-
+(define-key ctl-x-map "C" 'see-you-again)
 ;; revive.el
 ;; (autoload 'save-current-configuration "revive" "Save status" t)
 ;; (autoload 'resume "revive" "Resume Emacs" t)
 ;; (autoload 'wipe "revive" "Wipe Emacs" t)
 (eval-after-load "revive" `(revive-settings))
-;; Automatically save window configuration when quit emacs
-(add-hook 'kill-emacs-hook 'save-current-configuration)
 ;; And define favorite keys to those functions.
 (define-key ctl-x-map "S" 'save-current-configuration)
 (define-key ctl-x-map "F" 'resume)
 (define-key ctl-x-map "K" 'wipe)
-
-;;-------------------------------------------------------------------------------
-
-;; Winpoint,
-;; When two windows view the same buffer at the same time, and one
-;; window is switched to another buffer and back, point is now the
-;; same as in the other window, not as it was before we switched away.
-;; This mode tries to work around this problem by storing and
-;; restoring per-window positions for each buffer.
-(require 'winpoint)
-(window-point-remember-mode 1)
-(setq winpoint-non-restore-buffer-list '("*Group*"))
-
-;;-------------------------------------------------------------------------------
 
 (provide 'xy-rcroot-enhance)
