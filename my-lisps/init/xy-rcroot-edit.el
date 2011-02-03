@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-01-31 Mon 11:01 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 09:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -348,10 +348,10 @@
 (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 (global-set-key (kbd "M-k") 'qiang-copy-line)
 
-;;--------------------------------------------------------------------------------
+;;------------------------------------------------------------------
 
 ;; undo and redo
-;; (try-require 'redo)
+;; (require 'redo+ "redo+")
 (global-set-key (kbd "M-_") 'redo)
 ;; undo is C-_ or C-/
 

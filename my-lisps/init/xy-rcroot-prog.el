@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-01 Tue 23:44 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 10:34 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -33,62 +33,13 @@
  `(("C-x a"   align)
    ("C-x M-a" align-regexp)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; 所有关于括号的配置
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; paren-mode settings
-(show-paren-mode 1)
-(eval-after-load "paren"
+;; zjl-hl,
+;; highlight variable and function call and others
+(require 'zjl-hl)
+(eval-after-load "zjl-hl"
   `(progn
-     (paren-face-settings)
-     (paren-settings)))
-
-;;--------------------------------------------------------------------
-
-;; highlight-parentheses.el, 用颜色配对括号
-(require 'highlight-parentheses)
-(am-add-hooks
- `(find-file-hook
-   help-mode-hook Man-mode-hook log-view-mode-hook
-   compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
-   browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
-   inferior-ruby-mode-hook custom-mode-hook Info-mode-hook
-   svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
-   apropos-mode-hook)
- 'highlight-parentheses-mode)
-(eval-after-load "highlight-parentheses"
-  `(progn
-     ;; (mic-paren-face-settings)
-     (highlight-parentheses-settings)))
-
-;; mic-paren
-(require 'mic-paren)
-(eval-after-load "mic-paren"
-  `(progn
-     (mic-paren-face-settings)
-     (mic-paren-settings)))
-
-;; autopair
-;; 自动给你加上括号
-(require 'autopair)
-(autopair-global-mode 1)
-(eval-after-load "autopair"
-  '(autopair-settings))
-;; some keybindings
-(eal-define-keys-commonly
- global-map
- `(("C-M-]" ywb-indent-accoding-to-paren)
-   ("\C-]" goto-paren)))
-
-;;--------------------------------------------------------------------
-
-;; 输入左大花扩号自动补齐右大花括号
-(eal-define-keys
- `(c-mode-base-map awk-mode-map)
- `(("{" skeleton-c-mode-left-brace)))
+     (zjl-hl-face-settings)
+     (zjl-hl-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -700,6 +651,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Emacs internal version control
+;; Do not make backup files 
+(setq make-backup-files nil)
 (setq version-control t)
 (setq kept-new-versions 3)
 (setq delete-old-versions t)

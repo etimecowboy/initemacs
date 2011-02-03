@@ -19,7 +19,8 @@
 ;;;###autoload
 (defun zjl-hl-settings ()
   "Settings for `zjl-hl'."
-  (setq zjl-hl-c++-mode-enable-flag t))
+  (setq zjl-hl-c++-mode-enable-flag t)
+  (zjl-hl-enable-global-all-modes))
 
 ;;;###autoload
 (defun zjl-hl-face-settings ()

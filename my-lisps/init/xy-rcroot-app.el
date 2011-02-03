@@ -2,7 +2,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-01 Tue 21:03 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 10:35 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -121,98 +121,6 @@
 (setq scroll-margin 3
       scroll-conservatively 10000)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Beautiful apperance
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Transparent Emacs
-;; REF: http://www.emacswiki.org/emacs/TransparentEmacs
-(when (and is-after-emacs-23 window-system) ; actually after emacs-22
-
-  ;; User controls the frame opacity
-  ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) 
-  (set-frame-parameter (selected-frame) 'alpha '(100 100))
-  (add-to-list 'default-frame-alist '(alpha 100 100))
-  (global-set-key (kbd "C-c T") 'toggle-transparency)) 
-
-;; 可以把光标由方块变成一个小长条
-;; (require 'bar-cursor)
-
-;; Emacs才是世界上最强大的IDE － 智能的改变光标形状
-;; http://emacser.com/cursor-change.htm
-;; (when (try-require 'cursor-change)
-;;   (cursor-change-mode 1))
-(cursor-change-mode 1)
-
-;; Color-theme, fancy themes for emacs
-;; REF: http://emacser.com/color-theme.htm
-(require 'color-theme-autoloads)
-(eval-after-load "color-theme-autoloads"
-  '(progn
-     (color-theme-settings)))
-
-(eal-define-keys-commonly
- color-theme-mode-map
- `(("'"   switch-to-other-buffer)
-   ("u"   View-scroll-half-page-backward)
-   ("SPC" scroll-up)
-   ("1"   delete-other-windows)
-   ("."   find-symbol-at-point)))
-
-;; 增加更丰富的高亮
-;; (try-require 'generic-x)
-
-;; pulse.el, 实现Emacs的淡入淡出效果
-;; http://emacser.com/pulse.htm
-(require 'pulse)
-(eval-after-load "pulse"
-  `(progn
-     (pulse-face-settings)
-     (pulse-settings)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Syntax highling
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Emacs basic
-(global-font-lock-mode 1)
-(eval-after-load "font-lock"
-  `(progn
-     (font-lock-face-settings)
-     (font-lock-settings)))
-
-;; smart-hl.el, 像Eclipse那样双击高亮当前字符串
-(require 'smart-hl)
-
-;; highlight-symbol.el, 像Eclipse那样高亮光标处单词
-(require 'highlight-symbol)
-(eal-define-keys
- `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
-   c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
- `(("C-c M-H" highlight-symbol-at-point)
-   ("C-c M-R" highlight-symbol-remove-all)
-   ("C-c M-N" highlight-symbol-next)
-   ("C-c M-P" highlight-symbol-prev)
-   ("C-c r"   highlight-symbol-query-replace)
-   ("C-c M-n" highlight-symbol-next-in-defun)
-   ("C-c M-p" highlight-symbol-prev-in-defun)))
-(eval-after-load "highlight-symbol"
-  `(progn
-     (highlight-symbol-face-settings)
-     (highlight-symbol-settings)))
-
-;; zjl-hl,
-;; highlight variable and function call and others
-'(zjl-hl-enable-global-all-modes)
-(eval-after-load "zjl-hl"
-  `(progn
-     (zjl-hl-face-settings)
-     (zjl-hl-settings)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; mode-line settings
@@ -330,5 +238,142 @@ the mode-line."
 ;; (global-set-key (kbd "C--") 'tabbar-backward)
 ;; (setq tabbar-cycling-scope (quote tabs))
 ;; (setq tabbar-cycling-scope nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Beautiful apperance
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Transparent Emacs
+;; REF: http://www.emacswiki.org/emacs/TransparentEmacs
+(when (and is-after-emacs-23 window-system) ; actually after emacs-22
+
+  ;; User controls the frame opacity
+  ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) 
+  (set-frame-parameter (selected-frame) 'alpha '(100 100))
+  (add-to-list 'default-frame-alist '(alpha 100 100))
+  (global-set-key (kbd "C-c T") 'toggle-transparency)) 
+
+;; 可以把光标由方块变成一个小长条
+;; (require 'bar-cursor)
+
+;; Emacs才是世界上最强大的IDE － 智能的改变光标形状
+;; http://emacser.com/cursor-change.htm
+;; (when (try-require 'cursor-change)
+;;   (cursor-change-mode 1))
+(cursor-change-mode 1)
+
+;; Color-theme, fancy themes for emacs
+;; REF: http://emacser.com/color-theme.htm
+(require 'color-theme-autoloads)
+(eval-after-load "color-theme-autoloads"
+  '(progn
+     (color-theme-settings)))
+
+;; (eal-define-keys-commonly
+;;  color-theme-mode-map
+;;  `(("'"   switch-to-other-buffer)
+;;    ("u"   View-scroll-half-page-backward)
+;;    ("SPC" scroll-up)
+;;    ("1"   delete-other-windows)
+;;    ("."   find-symbol-at-point)))
+
+;; 增加更丰富的高亮
+;; (try-require 'generic-x)
+
+;; pulse.el, 实现Emacs的淡入淡出效果
+;; http://emacser.com/pulse.htm
+;; (require 'pulse)
+(eval-after-load "pulse"
+  `(progn
+     (pulse-face-settings)
+     (pulse-settings)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 所有关于括号的配置
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; paren-mode settings
+(show-paren-mode 1)
+(eval-after-load "paren"
+  `(progn
+     (paren-face-settings)
+     (paren-settings)))
+
+;; highlight-parentheses.el, 用颜色配对括号
+(require 'highlight-parentheses)
+(am-add-hooks
+ `(find-file-hook
+   help-mode-hook Man-mode-hook log-view-mode-hook
+   compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
+   browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
+   inferior-ruby-mode-hook custom-mode-hook Info-mode-hook
+   svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
+   apropos-mode-hook)
+ 'highlight-parentheses-mode)
+(eval-after-load "highlight-parentheses"
+  `(progn
+     ;; (mic-paren-face-settings)
+     (highlight-parentheses-settings)))
+
+;; mic-paren
+(require 'mic-paren)
+(eval-after-load "mic-paren"
+  `(progn
+     (mic-paren-face-settings)
+     (mic-paren-settings)))
+
+;; autopair
+;; 自动给你加上括号
+(require 'autopair)
+(autopair-global-mode 1)
+(eval-after-load "autopair"
+  '(autopair-settings))
+;; some keybindings
+(eal-define-keys-commonly
+ global-map
+ `(("C-M-]" ywb-indent-accoding-to-paren)
+   ("\C-]" goto-paren)))
+
+;; 输入左大花扩号自动补齐右大花括号
+(eal-define-keys
+ `(c-mode-base-map awk-mode-map)
+ `(("{" skeleton-c-mode-left-brace)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Syntax highling
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Emacs basic
+(global-font-lock-mode 1)
+(eval-after-load "font-lock"
+  `(progn
+     (font-lock-face-settings)
+     (font-lock-settings)))
+
+;; smart-hl.el, 像Eclipse那样双击高亮当前字符串
+(require 'smart-hl)
+
+;; highlight-symbol.el, 像Eclipse那样高亮光标处单词
+(require 'highlight-symbol)
+(eal-define-keys
+ `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
+                       c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
+ `(("C-c M-H" highlight-symbol-at-point)
+   ("C-c M-R" highlight-symbol-remove-all)
+   ("C-c M-N" highlight-symbol-next)
+   ("C-c M-P" highlight-symbol-prev)
+   ("C-c r"   highlight-symbol-query-replace)
+   ("C-c M-n" highlight-symbol-next-in-defun)
+   ("C-c M-p" highlight-symbol-prev-in-defun)))
+(eval-after-load "highlight-symbol"
+  `(progn
+     (highlight-symbol-face-settings)
+     (highlight-symbol-settings)))
 
 (provide 'xy-rcroot-app)

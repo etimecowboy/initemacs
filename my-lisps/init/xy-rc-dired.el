@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-01-31 Mon 00:16 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 09:56 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,7 @@
 
 ;;;###autoload
 (defun his-dired-sort ()
-  "dired-mode中让目录显示在文件前"
+  "List directories before files"
   (save-excursion
     (let (buffer-read-only)
       (forward-line 2) ;; beyond dir. header
@@ -242,6 +242,7 @@ which is options for `diff'."
   (setq truncate-lines t)
   (setq dired-recursive-deletes t)  ; 可以递归的删除目录
   (setq dired-recursive-copies t) ; 可以递归的进行拷贝
+  ;; (define-prefix-command 'dired-slash-map)
 
   (require 'wuxch-dired "my-wuxch-dired")
   (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
@@ -251,13 +252,12 @@ which is options for `diff'."
   (require 'dired+)
   (require 'dired-x)
   (require 'dired-lis)
-
   ;; dired中用T就把一个目录压缩为一个.tar.gz文件
   (require 'dired-tar)
-
   ;; wdired提供修改文件名的一种非常方便方法。它把dired-mode当作一般的
   ;; 文本处理，这样无论是修改一个文件，还是批量修改文件都不是一般的爽。
-  (if is-before-emacs-21 (require 'wdired "wdired-for-21"))
+  (if is-before-emacs-21 (require 'wdired "wdired-for-21")
+    (require 'wdired "wdired"))
 
   ;; 让你能够在dired-mode里面使用只对文件名部分执行i-search
   (require 'dired-isearch "my-dired-isearch")

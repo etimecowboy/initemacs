@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-01 Tue 23:26 xin on p6t>
+;; Time-stamp:<2011-02-02 Wed 11:24 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -244,6 +244,7 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; System encoding
 (set-language-environment 'UTF-8)
 (setq default-buffer-file-coding-system 'utf-8-unix)
 (setq default-keyboard-coding-system 'utf-8-unix)
@@ -284,12 +285,12 @@
    '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
      "黑体" "新宋体" "宋体") 16))
 
-;; Emacs 中文输入法
+;; 中文输入法
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
 ;;       除非不在图形系统下，才用 Emacs 内置的输入法或 eim。
 
 ;; eim, another Emacs input-method
-;; REF: 
+;; REF: http://www.emacswiki.org/emacs/InputMethods
 ;;   Basic usage:
 ;;   - `M-x set-input-method': switch to a new input method.
 ;;   - `C-h C-\' or `C-h I': describe the current input method.
@@ -302,9 +303,12 @@
 ;;   2. Then put the following line at the beginning of a file:
 ;;       -*- input-activate: t -*-
 ;;   3. The input method will be activated for this file as soon loaded.
+;;   如何輸入繁體:
+;;      把 py.txt, otherpy.txt,  pychr.txt 用軟件轉成了繁體，然後重新打開 emacs。
+;;      這樣使用軟件自動轉換肯定是不精確的，有些地方會出現錯誤。比如"碼表"被搞成了"碼錶"。
 (autoload 'eim-use-package "eim" "The eim input method" t)
-(register-input-method
- "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
+;; (register-input-method
+;;  "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
 (register-input-method
  "eim-py" "utf-8" 'eim-use-package "eim-py" "eim-py" "py.txt")
 (setq default-input-method "eim-py")
@@ -340,6 +344,29 @@
 (eval-after-load "auto-install"
   `(progn
     (auto-install-settings)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Start emacs server
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Emacs可以做为一个server, 然后用emacsclient连接这个server,
+;; 无需再打开两个Emacs
+(setq server-auth-dir (concat my-var-path "/server"))
+;; Emacs-21 以前的版本要用 gnuserv
+(if is-before-emacs-21
+    (progn
+      ;; gnuserv
+      (require 'gnuserv-compat)
+      (gnuserv-start)
+      ;; 在当前frame打开
+      (setq gnuserv-frame (selected-frame))
+      ;; 打开后让emacs跳到前面来
+      (setenv "GNUSERV_SHOW_EMACS" "1"))
+  (if is-after-emacs-23
+      (server-force-delete))
+  (server-start))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

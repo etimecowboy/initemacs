@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-01 Tue 03:03 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 09:17 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,33 +15,20 @@
 
 ;; Emacs找不到合适的模式时，缺省使用text-mode
 (setq default-major-mode 'text-mode)
-
 ;; emacs lock
 (autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
-
 ;; Enable some hidden functions
 (put 'narrow-to-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
-
-;; Do not make backup files 
-(setq make-backup-files nil)
-
 ;; Winner mode for window splits
 (winner-mode 1)
-
 ;; Add menu item for emacs-lisp mode
 (setq emacs-lisp-mode-hook 'imenu-add-menubar-index)
 
-;; uniquify, 可以为重名的 buffer 在前面加上其父目录的名字来让名字区分开来，
-;; 而不是单纯的加一个没有太多意义的序号
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-;; (setq uniquify-buffer-name-style 'uniquify))
-
-;;-----------------------------------------------------------------
+;;------------------------------------------------------------------
 
 ;; ffap, finding Files and URLs at Point
 ;; REF: 
@@ -97,19 +84,16 @@
 ;;-------------------------------------------------------------------
 
 ;; 查看Emacs内进程
-;; (autoload 'list-processes+ "list-processes+" 
-;;   "Enhanced `list-processes'" t)
+(autoload 'list-processes+ "list-processes+" 
+  "Enhanced `list-processes'" t)
 
 ;;-------------------------------------------------------------------
 
 ;; Kill ring
-
 ;; Do not save same cut
 (setq kill-do-not-save-duplicates t)
-
 ;; Set a large kill ring
 (setq kill-ring-max 200)
-
 ;; Save paster before kill emacs
 (setq save-interprogram-paste-before-kill t)
 
@@ -118,7 +102,6 @@
 ;;   "Check contents in the kill ring" t)
 (eval-after-load "browse-kill-ring"
   `(progn
-     (browse-kill-ring-default-keybindings)
      (browse-kill-ring-settings)
      (browse-kill-ring-face-settings)))
 
@@ -143,12 +126,9 @@
 ;;-------------------------------------------------------------------
 
 ;; linum-mode settings
-
 (unless is-after-emacs-23
   (require 'linum "linum-for-22"))
-
 (global-set-key [f7] 'linum-mode)
-
 ;; (am-add-hooks
 ;;  `(find-file-hook
 ;;    help-mode-hook Man-mode-hook log-view-mode-hook chart-mode-hook
@@ -162,33 +142,10 @@
 ;;  (lambda()
 ;;    (unless (eq major-mode 'image-mode)
 ;;      (linum-mode 1))))
-
 (eval-after-load 'linum
   `(progn 
      (linum-face-settings)
      (linum-settings)))
-
-;;-----------------------------------------------------------------------
-
-;; Start emacs server
-;; Emacs可以做为一个server, 然后用emacsclient连接这个server,
-;; 无需再打开两个Emacs
-
-(setq server-auth-dir (concat my-var-path "/server"))
-
-;; Emacs-21 以前的版本要用 gnuserv
-(if is-before-emacs-21
-    (progn
-      ;; gnuserv
-      (require 'gnuserv-compat)
-      (gnuserv-start)
-      ;; 在当前frame打开
-      (setq gnuserv-frame (selected-frame))
-      ;; 打开后让emacs跳到前面来
-      (setenv "GNUSERV_SHOW_EMACS" "1"))
-  (if is-after-emacs-23
-      (server-force-delete))
-  (server-start))
 
 ;;-----------------------------------------------------------------------
 
@@ -203,12 +160,9 @@
 ;;----------------------------------------------------------------------
 
 ;; Add time stamp to file
-
 ;; maintain last change time stamps (`Time-stamp: <>' occurring within the
 ;; first 8 lines) in files edited by Emacs
-
 (add-hook 'write-file-hooks 'time-stamp)
-
 (eval-after-load "time-stamp"
   '(progn
      (time-stamp-settings)))
@@ -216,20 +170,16 @@
 ;;----------------------------------------------------------------------
 
 ;; Add copyright statment
-
 ;; (GNUEmacs
 ;;  ;; update the copyright notice in current buffer
 ;;  (when (try-require 'copyright)
 ;; 	       ; XXX Check no other copyright.el gets in the way
 ;;    (add-hook 'write-file-hooks 'copyright-update)))
 
-
 ;;----------------------------------------------------------------------
 
 ;; Spelling: Use ASpell & flyspell
-
 (setq text-mode-hook 'flyspell-mode)
-
 (eval-after-load 'flyspell
   `(progn
      (flyspell-settings)))
@@ -238,9 +188,9 @@
 
 ;;; ### Hanconvert ###
 ;;; --- 自动在简体中文和繁体中文间转换.
-;; (autoload 'hanconvert-region "hanconvert"
-;;   "Convert a region from simple chinese to tradition chinese or
-;; from tradition chinese to simple chinese" t)
+(autoload 'hanconvert-region "hanconvert"
+  "Convert a region from simple chinese to tradition chinese or
+from tradition chinese to simple chinese" t)
 
 ;;---------------------------------------------------------------------
 
@@ -250,21 +200,16 @@
 ;; It can also do standard messages (in the minibuffer) and pop up a tooltip.
 
 ;; (when (try-require 'todochiku)
-
 ;; (setq todochiku-command
 ;;       (case system-type 
 ;;         (windows-nt "snarl_command.exe")
 ;;         (darwin "/usr/local/bin/growlnotify")
 ;;         (t "/usr/bin/notify-send")))
-
 ;; (let ((non-exist (not (file-exists-p todochiku-command))))
 ;;   (setq todochiku-tooltip-too (and non-exist window-system))
 ;;   (setq todochiku-message-too (and (or non-exist (not window-system)) (not todochiku-tooltip-too))))
-
 ;; (setq todochiku-icons-directory (concat my-local-image-path "/todochiku"))
-
 ;; (setq todochiku-timeout 10)
-
 ;; (defun todochiku-get-arguments (title message icon)
 ;;   "Gets todochiku arguments.
 ;; This would be better done through a customization probably."
@@ -523,104 +468,46 @@
 ;; session.el can remember more information.
 ;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
 ;; Use the following:
-
-;; (when (try-require 'session)
-;;   (add-hook 'after-init-hook 'session-initialize)
-;;   (add-to-list 'session-globals-exclude 'org-mark-ring)
-;;   ;; (setq session-globals-max-size 100)
-;;   ;; (setq session-globals-max-string 40960)
-;;   ;; (setq session-registers-max-string 2048)
-;;   (setq session-save-file "~/emacs/session-others")
-;;   (OfficePC
-;;    (setq session-save-file "~/emacs/session-office"))
-;;   (HomeDesktop
-;;    (setq session-save-file "~/emacs/session-home-desktop"))
-;;   (Laptop
-;;    (setq session-save-file "~/emacs/session-laptop"))
-;;   )
-
-(try-require 'session)
-
 (autoload 'session-initialize "session"
   "Initialize package session and read previous session file.
 Setup hooks and load `session-save-file', see `session-initialize'.  At
 best, this function is called at the end of the Emacs startup, i.e., add
 this function to `after-init-hook'." t)
-
 (add-hook 'after-init-hook 'session-initialize)
-
-;;;###autoload
-(defun session-settings ()
-  "Settings for `session'."
-  (setq session-initialize '(session menus))
-  (add-to-list 'session-globals-exclude 'org-mark-ring)
-  ;; (setq session-globals-max-size 100)
-  ;; (setq session-globals-max-string 40960)
-  ;; (setq session-registers-max-string 2048)
-  (setq session-save-file (concat my-var-path "/session"))
-  (OfficePC
-   (setq session-save-file (concat my-var-path "/session-office")))
-  (HomeDesktop
-   (setq session-save-file (concat my-var-path "/session-home-desktop")))
-  (Laptop
-   (setq session-save-file (concat my-var-path "/session-laptop")))
-  )
-
 (eval-after-load "session" `(session-settings))
 
 ;;---------------------------------------------------------------------
 
 ;; Workspace store and recover
 ;; windows.el
-;; The default prefix is conflict with Org, so swith it.
-(setq win:switch-prefix "\C-c\C-v") 
-(define-key global-map win:switch-prefix nil)
+(win:startup-with-window)
 (define-key global-map "\C-c\C-vb" 'win-switch-to-window)
-(when (try-require 'windows)
-  (win:startup-with-window)
-  ;; set configuration file location.
-  (setq win:configuration-file (concat my-var-path "/windows"))
-  (OfficePC
-   (setq win:configuration-file (concat my-var-path "/windows-office")))
-  (HomeDesktop
-   (setq win:configuration-file (concat my-var-path "/windows-home-desktop")))
-  (Laptop
-   (setq win:configuration-file (concat my-var-path "/windows-laptop")))
-  (define-key ctl-x-map "C" 'see-you-again)
+(define-key ctl-x-map "C" 'see-you-again)
+(eval-after-load "windows" `(windows-settings))
 
-  ;; revive.el
-  (autoload 'save-current-configuration "revive" "Save status" t)
-  (autoload 'resume "revive" "Resume Emacs" t)
-  (autoload 'wipe "revive" "Wipe Emacs" t)
-  ;; set configuration file location.
-  (setq revive:configuration-file (concat my-var-path "/revive"))
-  (OfficePC
-   (setq revive:configuration-file (concat my-var-path "/revive-office")))
-  (HomeDesktop
-   (setq revive:configuration-file (concat my-var-path "/revive-home-desktop")))
-  (Laptop
-   (setq revive:configuration-file (concat my-var-path "/revive-laptop")))
-
-  ;; And define favorite keys to those functions.  Here is a sample.
-  ;; (define-key ctl-x-map "S" 'save-current-configuration)
-  ;; (define-key ctl-x-map "F" 'resume)
-  ;; (define-key ctl-x-map "K" 'wipe)
-  ;; Automatically save window configuration when quit emacs
-  ;; (add-hook 'kill-emacs-hook 'save-current-configuration)
-
-  ;;; --- mode-line
-  ;; Remove frame number in `global-mode-string'
-  ;; (delete 'win:mode-string global-mode-string)
-  )
+;; revive.el
+;; (autoload 'save-current-configuration "revive" "Save status" t)
+;; (autoload 'resume "revive" "Resume Emacs" t)
+;; (autoload 'wipe "revive" "Wipe Emacs" t)
+(eval-after-load "revive" `(revive-settings))
+;; Automatically save window configuration when quit emacs
+(add-hook 'kill-emacs-hook 'save-current-configuration)
+;; And define favorite keys to those functions.
+(define-key ctl-x-map "S" 'save-current-configuration)
+(define-key ctl-x-map "F" 'resume)
+(define-key ctl-x-map "K" 'wipe)
 
 ;;-------------------------------------------------------------------------------
 
-;;; Winpoint, 记住每一个窗口 buffer 的位置
-(when (try-require 'winpoint)
-  (window-point-remember-mode 1)
-  (setq winpoint-non-restore-buffer-list
-        '("*Group*"))
-  )
+;; Winpoint,
+;; When two windows view the same buffer at the same time, and one
+;; window is switched to another buffer and back, point is now the
+;; same as in the other window, not as it was before we switched away.
+;; This mode tries to work around this problem by storing and
+;; restoring per-window positions for each buffer.
+(require 'winpoint)
+(window-point-remember-mode 1)
+(setq winpoint-non-restore-buffer-list '("*Group*"))
 
 ;;-------------------------------------------------------------------------------
 

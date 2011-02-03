@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-browse-kill-ring.el'
-;; Time-stamp:<2011-01-29 Sat 01:17 xin on P6T>
+;; Time-stamp:<2011-02-02 Wed 09:40 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,7 +30,8 @@
 ;;;###autoload
 (defun browse-kill-ring-settings ()
   "settings for `browse-kill-ring'."
-  
+
+  (browse-kill-ring-default-keybindings)
   (setq browse-kill-ring-maximum-display-length nil)
   (setq browse-kill-ring-highlight-current-entry t)
   (setq browse-kill-ring-highlight-inserted-item t)
