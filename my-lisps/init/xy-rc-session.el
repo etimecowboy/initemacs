@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-02-02 Wed 10:48 xin on p6t>
+;; Time-stamp:<2011-02-04 Fri 01:31 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,6 +16,19 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
+;;;###autoloads
+(defun session-start ()
+  "Start session."
+  (interactive)
+  ;; (setq session-initialize '(session menus))
+  ;; (setq session-save-file (concat my-var-path "/session"))
+  ;; (OfficePC
+  ;;  (setq session-save-file (concat my-var-path "/session-office")))
+  ;; (HomeDesktop
+  ;;  (setq session-save-file (concat my-var-path "/session-home-desktop")))
+  ;; (Laptop
+  ;;  (setq session-save-file (concat my-var-path "/session-laptop")))
+  (session-initialize))
 
 ;;;###autoload
 (defun session-settings ()

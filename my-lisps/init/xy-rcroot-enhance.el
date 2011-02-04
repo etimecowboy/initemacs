@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-04 Fri 00:19 xin on p6t>
+;; Time-stamp:<2011-02-04 Fri 01:32 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -470,7 +470,8 @@ from tradition chinese to simple chinese" t)
 Setup hooks and load `session-save-file', see `session-initialize'.  At
 best, this function is called at the end of the Emacs startup, i.e., add
 this function to `after-init-hook'." t)
-(add-hook 'after-init-hook 'session-initialize)
+;; (add-hook 'after-init-hook 'session-initialize)
+(session-start)
 (eval-after-load "session" `(session-settings))
 
 ;;---------------------------------------------------------------------
