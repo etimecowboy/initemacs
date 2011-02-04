@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-04 Fri 01:32 xin on P6T>
+;; Time-stamp:<2011-02-04 Fri 02:48 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -463,16 +463,13 @@ from tradition chinese to simple chinese" t)
 
 ;; Use session.el instead of recentf.el
 ;; session.el can remember more information.
-;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
-;; Use the following:
-(autoload 'session-initialize "session"
-  "Initialize package session and read previous session file.
-Setup hooks and load `session-save-file', see `session-initialize'.  At
-best, this function is called at the end of the Emacs startup, i.e., add
-this function to `after-init-hook'." t)
-;; (add-hook 'after-init-hook 'session-initialize)
-(session-start)
+;; (autoload 'session-initialize "session"
+;;   "Initialize package session and read previous session file.
+;; Setup hooks and load `session-save-file', see `session-initialize'.  At
+;; best, this function is called at the end of the Emacs startup, i.e., add
+;; this function to `after-init-hook'." t)
 (eval-after-load "session" `(session-settings))
+(add-hook 'after-init-hook 'session-initialize)
 
 ;;---------------------------------------------------------------------
 
