@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-zjl-hl.el'
-;; Time-stamp:<2011-02-03 Thu 11:47 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 15:43 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,14 +25,9 @@
 ;;;###autoload
 (defun zjl-hl-face-settings ()
   "Face settings for `zjl-hl'."
-  (setq zjl-hl-operators-face 'font-lock-type-face
-        zjl-hl-local-variable-reference-face 'font-lock-variable-name-face
-        zjl-hl-parameters-reference-face 'font-lock-variable-name-face
-        zjl-hl-member-reference-face 'font-lock-variable-name-face
-        zjl-elisp-hl-setq-face 'font-lock-keyword-face)
 
-  (custom-set-faces
-   '(zjl-hl-function-call-face
+    (custom-set-faces
+     '(zjl-hl-function-call-face
      ((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
       (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
       (((class color) (min-colors 88) (background light)) :foreground "Orchid")
@@ -51,6 +46,12 @@
       (((class color) (min-colors 16) (background light)) :foreground "Orchid")
       (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
       (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
-      (t (:weight bold))))))
+      (t (:weight bold)))))
+
+  (setq zjl-hl-operators-face 'font-lock-type-face
+        zjl-hl-local-variable-reference-face 'font-lock-variable-name-face
+        zjl-hl-parameters-reference-face 'font-lock-variable-name-face
+        zjl-hl-member-reference-face 'font-lock-variable-name-face
+        zjl-elisp-hl-setq-face 'font-lock-keyword-face))
 
 (provide 'xy-rc-zjl-hl.el)

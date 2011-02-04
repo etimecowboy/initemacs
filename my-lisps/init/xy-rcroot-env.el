@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-02 Wed 11:24 xin on p6t>
+;; Time-stamp:<2011-02-04 Fri 00:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -266,24 +266,12 @@
       "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 ;; Use scalable fonts
 (setq scalable-fonts-allowed t)
-;; 默认字体，term 下的字体
-(set-default-font "Monospace 11")
 ;; Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
-;; 设置字体 Emacs 会优先选用 Concolas + “雅黑”的组合。
-;; 如果“雅黑”没有装的话，就使用“文泉驿等宽正黑”，依此类推。
-;; 这份字体配置不用改动就能在不同的操作系统字体环境下面使用。
-;; 另注：中文要用大一点的字体，使中文字符的宽度正好等于两倍
-;;（整数倍）英文字符，才能配合 org mode 下的 table，不至于对不齐。
-;; 测试：
-;;       1234567890abcdefghijklmnopqr
-;;       中文字体宽度测试，这里对对齐
-(when window-system
-  (qiang-set-font
-   '("Consolas" "Courier" "Monaco" "DejaVu Sans Mono" "Monospace" 
-     "Courier New") ":pixelsize=14"
-   '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
-     "黑体" "新宋体" "宋体") 16))
+(global-set-key
+ (kbd "C-x F") 'xy/set-font)
+(Windows
+ (xy/set-font))
 
 ;; 中文输入法
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
@@ -353,7 +341,6 @@
 
 ;; Emacs可以做为一个server, 然后用emacsclient连接这个server,
 ;; 无需再打开两个Emacs
-(setq server-auth-dir (concat my-var-path "/server"))
 ;; Emacs-21 以前的版本要用 gnuserv
 (if is-before-emacs-21
     (progn
@@ -365,8 +352,12 @@
       ;; 打开后让emacs跳到前面来
       (setenv "GNUSERV_SHOW_EMACS" "1"))
   (if is-after-emacs-23
-      (server-force-delete))
-  (server-start))
+      (progn
+        (setq server-auth-dir (concat my-var-path "/server"))
+        (Windows
+         (server-force-delete)
+         (server-start)
+         (global-set-key (kbd "C-x C-c") 'xy/done)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

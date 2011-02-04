@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-moccur.el'
-;; Time-stamp:<2011-01-29 Sat 12:51 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 16:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,6 +15,20 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+;;###autoload
+(defun moccur-my-keys ()
+  (local-set-key (kbd "o") 'other-window)
+  (local-set-key (kbd "m") 'moccur-disp-cur-line)
+  (local-set-key (kbd "h") 'backward-char)
+  (local-set-key (kbd "l") 'forward-char)
+  (local-set-key (kbd "b") 'backward-word)
+  (local-set-key (kbd "w") 'forward-word-or-to-word)
+  (local-set-key (kbd "f") 'forward-word)
+  (local-set-key (kbd "y") 'copy-region-as-kill-nomark)
+  (local-set-key (kbd "c") 'copy-region-as-kill-nomark)
+  (local-set-key (kbd ".") 'set-mark-command)
+  (local-set-key (kbd "L") 'count-brf-lines))
 
 ;;;###autoload
 (defun occur-by-moccur-at-point ()

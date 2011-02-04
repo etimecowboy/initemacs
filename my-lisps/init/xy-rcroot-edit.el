@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-02-03 Thu 09:54 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 16:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -351,9 +351,17 @@
 ;;------------------------------------------------------------------
 
 ;; undo and redo
-;; (require 'redo+ "redo+")
+(autoload 'redo "redo+"
+  "Redo the the most recent undo.
+Prefix arg COUNT means redo the COUNT most recent undos.
+If you have modified the buffer since the last redo or undo,
+then you cannot redo any undos before then." t)
+(autoload 'undo "redo+"
+  "Undo some previous changes.
+Repeat this command to undo more changes.
+A numeric argument serves as a repeat count." t)
 (global-set-key (kbd "M-_") 'redo)
-;; undo is C-_ or C-/
+(global-set-key (kbd "C-_") 'undo) ;; or C-/
 
 ;;------------------------------------------------------------------
 

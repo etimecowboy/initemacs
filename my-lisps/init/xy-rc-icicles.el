@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-01-30 Sun 17:43 xin on P6T>
+;; Time-stamp:<2011-02-03 Thu 14:48 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,9 @@
   (setq icicle-anything-transform-candidates-flag t)
   (setq icicle-change-sort-order-completion-flag t)
   (setq icicle-file-sort (quote icicle-last-modified-first-p))
-  (setq icicle-files-ido-like-flag t)  
+  (setq icicle-files-ido-like-flag t)
+  (setq icicle-default-cycling-mode 'apropos)
+  ;; (setq icicle-apropos-complete-keys '([TAB]))
   ;;   (setq icicle-top-level-key-bindings
   ;;         `((,(kbd "<pause>") icicle-switch-to/from-minibuffer    t)   ; `pause'
   ;;           (,(kbd "C-c `")   icicle-search-generic               t)   ; `C-c `'

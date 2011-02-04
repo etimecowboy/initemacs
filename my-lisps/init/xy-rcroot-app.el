@@ -1,8 +1,7 @@
-
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-03 Thu 10:48 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 22:29 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -116,6 +115,10 @@
    ;; 使终端支持鼠标
    ("C-x T"            xterm-mouse-mode)))
 
+;; Mouse support in terminal
+(when (not window-system)
+  (xterm-mouse-mode 1))
+
 ;; 防止页面滚动时跳动,scroll-margin 3
 ;; 可以在靠近屏幕边沿3行时就开始滚动,可以很好的看到上下文
 (setq scroll-margin 3
@@ -199,13 +202,13 @@ the mode-line."
 ;; Set frame title display: filename @ process
 ;; (setq frame-title-format "%f @ %s")
 ;; 在标题栏显示登陆名称和文件名
-;; (setq frame-title-format
-;;       '((:eval
-;;          (let ((login-name (getenv-internal "LOGNAME")))
-;;            (if login-name (concat login-name "@") "")))
-;;         (:eval (system-name))
-;;         ":"
-;;         (:eval (or (buffer-file-name) (buffer-name)))))
+(setq frame-title-format
+      '((:eval
+         (let ((login-name (getenv-internal "LOGNAME")))
+           (if login-name (concat login-name "@") "")))
+        (:eval (system-name))
+        ":"
+        (:eval (or (buffer-file-name) (buffer-name)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -253,7 +256,7 @@ the mode-line."
   ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) 
   (set-frame-parameter (selected-frame) 'alpha '(100 100))
   (add-to-list 'default-frame-alist '(alpha 100 100))
-  (global-set-key (kbd "C-c T") 'toggle-transparency)) 
+  (global-set-key (kbd "C-x W") 'toggle-transparency)) 
 
 ;; 可以把光标由方块变成一个小长条
 ;; (require 'bar-cursor)

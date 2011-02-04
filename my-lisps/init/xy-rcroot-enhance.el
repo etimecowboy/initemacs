@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-03 Thu 12:40 xin on p6t>
+;; Time-stamp:<2011-02-04 Fri 00:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,8 +25,6 @@
 (put 'dired-find-alternate-file 'disabled nil)
 ;; Winner mode for window splits
 (winner-mode 1)
-;; Add menu item for emacs-lisp mode
-(setq emacs-lisp-mode-hook 'imenu-add-menubar-index)
 
 ;;------------------------------------------------------------------
 
@@ -93,7 +91,7 @@
 ;; Do not save same cut
 (setq kill-do-not-save-duplicates t)
 ;; Set a large kill ring
-(setq kill-ring-max 200)
+(setq kill-ring-max 500)
 ;; Save paster before kill emacs
 (setq save-interprogram-paste-before-kill t)
 
@@ -281,19 +279,6 @@ from tradition chinese to simple chinese" t)
 
 (require 'color-moccur)
 
-(defun moccur-my-keys ()
-  (local-set-key (kbd "o") 'other-window)
-  (local-set-key (kbd "m") 'moccur-disp-cur-line)
-  (local-set-key (kbd "h") 'backward-char)
-  (local-set-key (kbd "l") 'forward-char)
-  (local-set-key (kbd "b") 'backward-word)
-  (local-set-key (kbd "w") 'forward-word-or-to-word)
-  (local-set-key (kbd "f") 'forward-word)
-  (local-set-key (kbd "y") 'copy-region-as-kill-nomark)
-  (local-set-key (kbd "c") 'copy-region-as-kill-nomark)
-  (local-set-key (kbd ".") 'set-mark-command)
-  (local-set-key (kbd "L") 'count-brf-lines))
-
 ;; (eal-define-keys-commonly
 ;;  'global-map
 ;;  `(("C-x C-u" occur-by-moccur-displn)
@@ -318,6 +303,9 @@ from tradition chinese to simple chinese" t)
 ;;---------------------------------------------------------------------------------
 
 ;; Calendar
+(eval-after-load "calendar"
+  `(progn
+     (calendar-settings)))
 
 ;;----------------------------------------------------------------------------------
 
@@ -489,17 +477,19 @@ this function to `after-init-hook'." t)
 
 ;; Workspace store and recover
 ;; windows.el
-(windows-start)
+(add-hook 'after-init-hook 'windows-start)
 (eval-after-load "windows" `(windows-settings))
 (define-key ctl-x-map "C" 'see-you-again)
+(define-key ctl-x-map "S" 'win-save-all-configurations)
+(define-key ctl-x-map "V" 'resume-windows)
+
 ;; revive.el
 ;; (autoload 'save-current-configuration "revive" "Save status" t)
 ;; (autoload 'resume "revive" "Resume Emacs" t)
 ;; (autoload 'wipe "revive" "Wipe Emacs" t)
 (eval-after-load "revive" `(revive-settings))
 ;; And define favorite keys to those functions.
-(define-key ctl-x-map "S" 'save-current-configuration)
-(define-key ctl-x-map "F" 'resume)
-(define-key ctl-x-map "K" 'wipe)
+;; (define-key ctl-x-map "F" 'resume)
+;; (define-key ctl-x-map "K" 'wipe)
 
 (provide 'xy-rcroot-enhance)

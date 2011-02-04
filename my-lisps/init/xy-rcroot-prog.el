@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-03 Thu 11:55 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 22:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -34,7 +34,6 @@
    ("C-x M-a" align-regexp)))
 
 ;; zjl-hl,
-;; highlight variable and function call and others
 (require 'zjl-hl)
 (eval-after-load "zjl-hl"
   `(progn
@@ -95,14 +94,14 @@
 
 (eal-define-keys-commonly
  global-map
- `(("C-x C-k" describe-key-sb)
+ `(("C-x C-k" describe-key)
    ("C-x C-m" describe-mode)
    ("C-x / A" describe-face)
    ("C-x / a" apropos)
    ("C-x A"   apropos-command)
-   ("C-x C-d" find-symbol-sb)
-   ("C-x K"   find-symbol-fun-on-key-sb)
-   (,(if window-system "C-x C-/" "C-x C-_") describe-symbol-sb)))
+   ("C-x C-d" find-symbol)
+   ("C-x K"   find-symbol-fun-on-key)
+   (,(if window-system "C-x C-/" "C-x C-_") describe-symbol)))
 
 ;;--------------------------------------------------------------------
 
@@ -136,6 +135,38 @@
   `(progn
      (sh-mode-face-settings)
      (sh-mode-settings)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Emacs lisp development settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (eval-after-load "lisp-mode"
+;;   `(lisp-interaction-mode-settings))
+;; (eal-define-keys
+;;  'lisp-interaction-mode-map
+;;  `(("C-j" goto-line)
+;;    ("M-j" eval-print-last-sexp)))
+
+;; ;; emacs-lisp-mode settings
+;; (eal-define-keys
+;;  `emacs-lisp-mode-map
+;;  `(("C-c M-a" beginning-of-defun)
+;;    ("C-c M-e" end-of-defun)))
+
+(eval-after-load "emacs-lisp-mode"
+  `(emacs-lisp-mode-settings))
+
+;; ;; eldoc, 显示变量, 函数的声明
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook
+   lisp-interaction-mode-hook cperl-mode-hook)
+ 'turn-on-eldoc-mode)
+(eval-after-load "eldoc"
+  `(progn
+     (eldoc-face-settings)
+     (eldoc-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

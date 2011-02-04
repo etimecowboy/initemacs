@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-01-31 Mon 11:09 xin on P6T>
+;; Time-stamp:<2011-02-04 Fri 00:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,7 +17,7 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun ibuufer-settings ()
+(defun ibuffer-settings ()
   "Settings of `ibuffer'."
 
   ;; ibuffer, advanced replacement for the `buffer-menu

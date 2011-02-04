@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-windows.el'
-;; Time-stamp:<2011-02-03 Thu 12:39 xin on p6t>
+;; Time-stamp:<2011-02-03 Thu 16:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,14 +25,6 @@
   (setq win:switch-prefix "\C-c\C-v")
   (define-key global-map win:switch-prefix nil)
   (define-key global-map "\C-c\C-vb" 'win-switch-to-window)
-  ;; set configuration file location.
-  (setq win:configuration-file (concat my-var-path "/windows"))
-  (OfficePC
-   (setq win:configuration-file (concat my-var-path "/windows-office")))
-  (HomeDesktop
-   (setq win:configuration-file (concat my-var-path "/windows-home-desktop")))
-  (Laptop
-   (setq win:configuration-file (concat my-var-path "/windows-laptop")))
   (win:startup-with-window))
 
 ;;;###autoload
@@ -48,7 +40,6 @@
   (HomeDesktop
    (setq win:configuration-file (concat my-var-path "/windows-home-desktop")))
   (Laptop
-   (setq win:configuration-file (concat my-var-path "/windows-laptop")))
-)
+   (setq win:configuration-file (concat my-var-path "/windows-laptop"))))
   
 (provide 'xy-rc-windows.el)
