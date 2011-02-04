@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-02-02 Wed 10:48 xin on p6t>
+;; Time-stamp:<2011-02-04 Fri 02:33 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,6 +22,8 @@
   "Settings for `session'."
 
   (setq session-initialize '(session menus))
+  ;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
+  ;; Use the following:
   (add-to-list 'session-globals-exclude 'org-mark-ring)
   ;; (setq session-globals-max-size 100)
   ;; (setq session-globals-max-string 40960)
@@ -33,6 +35,5 @@
    (setq session-save-file (concat my-var-path "/session-home-desktop")))
   (Laptop
    (setq session-save-file (concat my-var-path "/session-laptop"))))
-  
 
 (provide 'xy-rc-session.el)
