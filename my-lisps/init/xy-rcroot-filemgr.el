@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-02-03 Thu 10:23 xin on p6t>
+;; Time-stamp:<2011-02-06 Sun 02:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -12,14 +12,21 @@
 ;;
 ;;--------------------------------------------------------------------
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Buffer management
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; 按下C-x k立即关闭掉当前的buffer
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
+
+;;-------------------------------------------------------------------
 
 ;; ibuffer
 (eval-after-load "ibuffer"
   `(progn
      (ibuffer-settings)))
-
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;;--------------------------------------------------------------------
@@ -30,7 +37,11 @@
 (setq uniquify-buffer-name-style 'forward)
 ;; (setq uniquify-buffer-name-style 'uniquify))
 
-;;--------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; File management
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; dired 文件管理
 (eal-define-keys-commonly
@@ -101,7 +112,7 @@
   `(progn
      (dired-settings)))
 
-;;-----------------------------------------------
+;;---------------------------------------------------------------
 
 ;; ;; dired-details+, 更多文件信息
 ;; ;;;###autoload
@@ -111,7 +122,7 @@
 ;; (eval-after-load "dired-details+"
 ;;   `(dired-details+-settings))
 
-;;----------------------------------------------------
+;;---------------------------------------------------------------
 
 ;; dired+, 增强的 dired
 (eval-after-load "dired+"
@@ -119,10 +130,9 @@
      (dired+-face-settings)
      (dired+-settings)))
 
-;;-----------------------------------------------------
+;;---------------------------------------------------------------
 
 ;; ;; dired-x, 忽略不感兴趣的文件
-
 ;; (autoload 'dired-omit-mode "dired-x"
 ;;   "Toggle Dired-Omit mode.
 ;; With numeric ARG, enable Dired-Omit mode if ARG is positive, disable
@@ -131,11 +141,9 @@
 ;; Uninteresting files are those whose filenames match regexp `dired-omit-files',
 ;; plus those ending with extensions in `dired-omit-extensions'."
 ;;   t)
-
 ;; (am-add-hooks
 ;;  `(dired-mode-hook)
 ;;  'dired-omit-mode)
-
 ;; ;;;###autoload
 ;; (defun dired-x-settings ()
 ;;   "Settings for `dired-x'."
@@ -145,37 +153,30 @@
 ;;   ;;       (setq dired-omit-files (concat dired-omit-files "\\|^_"))))
 ;;   ;; (setq dired-omit-size-limit 1000000)
 ;; )
-
 ;; (eval-after-load "dired-x" `(dired-x-settings))
 
-;;-------------------------------------------------------
+;;-----------------------------------------------------------------------------
 
 ;; dired-lis.el
-
 (eal-define-keys
  'isearch-mode-map
  `(("C-h" dired-lis-isearch-up-directory)))
-
 ;; ;;;###autoload
 ;; (defun dired-lis-settings ()
 ;;   "Settings for `dired-lis'.")
-
 ;; (eval-after-load "dired-lis"
 ;;   `(dired-lis-settings))
 
 ;;-----------------------------------------------------------------------------
 
 ;; image dired
-
 (eval-after-load "image-dired"
    `(image-dired-settings))
 
-;;-------------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------
 
 ;; Sunrise commander; file manager
 ;; Check http://www.emacswiki.org/emacs/Sunrise_Commander_Tips
-;; for tips and tricks
-
 ;; (autoload 'sunrise "sunrise-commander"
 ;;   "Two-pane file manager for Emacs based on Dired and inspired by MC." t)
 ;; (try-require 'sunrise-commander)
@@ -190,19 +191,48 @@
 ;;-----------------------------------------------------------------------------
 
 ;; open files in external applications
-;; Note: it need to be patched in order to run on windows
-;; (when (try-require 'openwith)
-;;   (openwith-mode 1)
-;;   (GNULinux
-;;    (setq openwith-associations 
-;;          '(
-;;            ("\\.pdf\\'" "acroread" (file)) 
-;;            ("\\.mp3\\'" "xmms" (file)) 
-;;            ("\\.\\(?:mpe?g\\|avi\\|wmv\\|mkv\\|rm\\|rmvb\\)\\'" "smplayer" (file)) 
-;;            ;; ("\\.\\(?:jp?g\\|png\\)\\'" "display" (file))
-;;            ("\\.jar\\'" "java -jar" (file))
-;;            ))))
+;; NOTE: it need to be patched in order to run on windows
+(eval-after-load "openwith"
+  `(openwith-settings))
+(GNULinux
+  (openwith-mode 1))
 
-;;---------------------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Version control settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Emacs internal version control
+;; Do not make backup files 
+(setq make-backup-files nil)
+(setq version-control t)
+(setq kept-new-versions 3)
+(setq delete-old-versions t)
+(setq kept-old-versions 2)
+(setq dired-kept-versions 1)
+
+;; Autosaved files
+(setq auto-save-list-file-prefix 
+      (concat my-var-path "/auto-save-list/.saves-"))
+
+;;--------------------------------------------------------------------
+
+;; git gui
+(require 'git)
+(require 'git-blame)
+(global-set-key [f11] 'git-status)
+;; Automatically refresh version control information
+(setq auto-revert-check-vc-info t)
+;; egg git gui
+(require 'egg)
+(global-set-key [S-f11] 'egg-status)
+
+;;---------------------------------------------------------------------
+
+;; subversion gui
+;; (require 'svn-settings)
+
+;;--------------------------------------------------------------------
 
 (provide 'xy-rcroot-filemgr)

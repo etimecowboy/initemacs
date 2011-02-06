@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-03 Thu 22:21 xin on p6t>
+;; Time-stamp:<2011-02-06 Sun 02:13 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -617,7 +617,7 @@
 ;;       `(("'" switch-to-other-buffer)
 ;;         ("o" other-window)))))
 
-;;-------------------------------------------
+;;----------------------------------------------------------------------
 
 ;; edebug
 
@@ -635,7 +635,7 @@
 ;;   (interactive)
 ;;   (setq edebug-global-break-condition nil))
 
-;;-------------------------------------------
+;;---------------------------------------------------------------------
 
 ;; `gdb'
 ;; (require 'gud-settings)
@@ -673,44 +673,5 @@
 
 ;; (eval-after-load "gdb-ui"
 ;;   `(gud-settings))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Version control settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Emacs internal version control
-;; Do not make backup files 
-(setq make-backup-files nil)
-(setq version-control t)
-(setq kept-new-versions 3)
-(setq delete-old-versions t)
-(setq kept-old-versions 2)
-(setq dired-kept-versions 1)
-
-;; Autosaved files
-(setq auto-save-list-file-prefix 
-      (concat my-var-path "/auto-save-list/.saves-"))
-
-;;--------------------------------------------------------------------
-
-;; git gui
-(require 'git)
-(require 'git-blame)
-(global-set-key [f11] 'git-status)
-;; Automatically refresh version control information
-(setq auto-revert-check-vc-info t)
-;; egg git gui
-(require 'egg)
-(global-set-key [S-f11] 'egg-status)
-
-;;---------------------------------------------------------------------
-
-;; subversion gui
-;; (require 'svn-settings)
-
-;;--------------------------------------------------------------------
 
 (provide 'xy-rcroot-prog)

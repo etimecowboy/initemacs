@@ -951,7 +951,7 @@ directories starting with a `.'."
 	    (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
 	(message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
       
-      (load generated-autoload-file)
+      (load-file generated-autoload-file)
       (message "* ---[ Loading `%s'... ]---" generated-autoload-file)
 	    
       (when with-subdirs

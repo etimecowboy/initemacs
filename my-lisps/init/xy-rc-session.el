@@ -16,9 +16,10 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;###autoloads
+;;;###autoload
 (defun session-start ()
   "Start session."
+
   (interactive)
   ;; (setq session-initialize '(session menus))
   ;; (setq session-save-file (concat my-var-path "/session"))

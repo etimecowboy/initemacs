@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-04 Fri 02:48 xin on P6T>
+;; Time-stamp:<2011-02-06 Sun 00:46 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -13,79 +13,82 @@
 ;;
 ;;--------------------------------------------------------------------
 
-;; Emacs找不到合适的模式时，缺省使用text-mode
-(setq default-major-mode 'text-mode)
-;; emacs lock
-(autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Enable some hidden functions
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (put 'narrow-to-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
-;; Winner mode for window splits
-(winner-mode 1)
 
-;;------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Emacs system improvement
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; ffap, finding Files and URLs at Point
 ;; REF: 
 ;;   http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860
-
-;; C-x C-f filename <RET>
-;; Find filename, guessing a default from text around point (find-file-at-point). 
-;; C-x C-r
-;; ffap-read-only, analogous to find-file-read-only. 
-;; C-x C-v
-;; ffap-alternate-file, analogous to find-alternate-file. 
-;; C-x d directory <RET>
-;; Start Dired on directory, defaulting to the directory name at point (dired-at-point). 
-;; C-x C-d
-;; ffap-list-directory, analogous to list-directory. 
-;; C-x 4 f
-;; ffap-other-window, analogous to find-file-other-window. 
-;; C-x 4 r
-;; ffap-read-only-other-window, analogous to find-file-read-only-other-window. 
-;; C-x 4 d
-;; ffap-dired-other-window, analogous to dired-other-window. 
-;; C-x 5 f
-;; ffap-other-frame, analogous to find-file-other-frame. 
-;; C-x 5 r
-;; ffap-read-only-other-frame, analogous to find-file-read-only-other-frame. 
-;; C-x 5 d
-;; ffap-dired-other-frame, analogous to dired-other-frame. 
-;; M-x ffap-next
-;; Search buffer for next file name or URL, then find that file or URL. 
-;; S-Mouse-3
-;; ffap-at-mouse finds the file guessed from text around the position of a mouse click. 
-;; C-S-Mouse-3
-;; Display a menu of files and URLs mentioned in current buffer, then find the one you select (ffap-menu).
-
 (ffap-bindings)
-
-;; ;;;###autoload
-;; (defun ffap-settings ()
-;;   "Settings for `ffap'."
-;;   (setq ffap-c-path 
-;; 	(append ffap-c-path 
-;; 		system-head-file-dir 
-;; 		user-head-file-dir)))
-
 ;; (eval-after-load "ffap" `(ffap-settings))
 
-;;--------------------------------------------------------------------
+;;------------------------------------------------------------------
 
-;; 打开压缩文件时自动解压缩
-;; 必须放在 session 前面
+;; undo and redo
+(autoload 'redo "redo+"
+  "Redo the the most recent undo.
+Prefix arg COUNT means redo the COUNT most recent undos.
+If you have modified the buffer since the last redo or undo,
+then you cannot redo any undos before then." t)
+(autoload 'undo "redo+"
+  "Undo some previous changes.
+Repeat this command to undo more changes.
+A numeric argument serves as a repeat count." t)
+(global-set-key (kbd "M-_") 'redo)
+(global-set-key (kbd "C-_") 'undo) ;; or C-/
+
+;;------------------------------------------------------------------
+
+;; 打开压缩文件时自动解压缩, 必须在 `session.el' 前面启用。
 (auto-compression-mode 1)
 
-;;-------------------------------------------------------------------
+;;------------------------------------------------------------------
 
 ;; 查看Emacs内进程
 (autoload 'list-processes+ "list-processes+" 
   "Enhanced `list-processes'" t)
 
-;;-------------------------------------------------------------------
+;;------------------------------------------------------------------
+
+;; 统计命令使用频率
+(autoload 'command-frequence "command-frequence"
+  "Emacs command frequence statistics" t)
+
+;;------------------------------------------------------------------
+
+;; Move deleted files to system trash
+;; It seems that this cause error when quiting emacs-23.1
+;; in Linux systems --- Org-babel temporary directories cannot
+;; be deleted. emacs-23.2 seems OK with this problem, but it works
+;; not as expected (move deleted files to system trash).
+;; Comment out for comparability. 
+(when is-after-emacs-23
+  (setq delete-by-moving-to-trash t))
+
+;;------------------------------------------------------------------
+
+;; todochiku:  notification tool,
+;; It started life interfacing with Growl (OS X, http://growl.info/), 
+;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix). 
+;; It can also do standard messages (in the minibuffer) and pop up a tooltip.
+
+;;------------------------------------------------------------------
 
 ;; Kill ring
 ;; Do not save same cut
@@ -143,17 +146,7 @@
      (linum-face-settings)
      (linum-settings)))
 
-;;-----------------------------------------------------------------------
-
-;; Move deleted files to system trash
-;; It seems that this cause error when quiting emacs-23.1
-;; in Linux systems --- Org-babel temporary directories cannot
-;; be deleted. emacs-23.2 seems OK with this problem, but it works
-;; not as expected (move deleted files to system trash).
-;; Comment out for comparability. 
-;; (setq delete-by-moving-to-trash t)
-
-;;----------------------------------------------------------------------
+;;------------------------------------------------------------------
 
 ;; Add time stamp to file
 ;; maintain last change time stamps (`Time-stamp: <>' occurring within the
@@ -163,7 +156,7 @@
   '(progn
      (time-stamp-settings)))
 
-;;----------------------------------------------------------------------
+;;------------------------------------------------------------------
 
 ;; Add copyright statment
 ;; (GNUEmacs
@@ -172,7 +165,7 @@
 ;; 	       ; XXX Check no other copyright.el gets in the way
 ;;    (add-hook 'write-file-hooks 'copyright-update)))
 
-;;----------------------------------------------------------------------
+;;-------------------------------------------------------------
 
 ;; Spelling: Use ASpell & flyspell
 (setq text-mode-hook 'flyspell-mode)
@@ -180,136 +173,28 @@
   `(progn
      (flyspell-settings)))
 
-;;----------------------------------------------------------------------
+;;-------------------------------------------------------------
 
-;;; ### Hanconvert ###
-;;; --- 自动在简体中文和繁体中文间转换.
+;; Hanconvert, 自动在简体中文和繁体中文间转换.
 (autoload 'hanconvert-region "hanconvert"
   "Convert a region from simple chinese to tradition chinese or
 from tradition chinese to simple chinese" t)
 
-;;---------------------------------------------------------------------
+;;-------------------------------------------------------------
 
-;; todochiku:  notification tool,
-;; It started life interfacing with Growl (OS X, http://growl.info/), 
-;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix). 
-;; It can also do standard messages (in the minibuffer) and pop up a tooltip.
+;; 把文件或buffer彩色输出成html
+;; (require 'htmlize)
 
-;; (when (try-require 'todochiku)
-;; (setq todochiku-command
-;;       (case system-type 
-;;         (windows-nt "snarl_command.exe")
-;;         (darwin "/usr/local/bin/growlnotify")
-;;         (t "/usr/bin/notify-send")))
-;; (let ((non-exist (not (file-exists-p todochiku-command))))
-;;   (setq todochiku-tooltip-too (and non-exist window-system))
-;;   (setq todochiku-message-too (and (or non-exist (not window-system)) (not todochiku-tooltip-too))))
-;; (setq todochiku-icons-directory (concat my-local-image-path "/todochiku"))
-;; (setq todochiku-timeout 10)
-;; (defun todochiku-get-arguments (title message icon)
-;;   "Gets todochiku arguments.
-;; This would be better done through a customization probably."
-;;   (case system-type
-;;     ('windows-nt (list "/M" title message icon "/T" (int-to-string todochiku-timeout)))
-;;     ('darwin (list title "-m" message "--image" icon ))
-;;     (t (list "-i" icon "-t" (int-to-string (* 1000 todochiku-timeout)) title message))))
-;;
-;; )
-;;---------------------------------------------------------------------------------
-
-;; Use grep in Emacs
-
-;; (unless is-before-emacs-21
-;;   (eal-define-keys-commonly
-;;    global-map
-;;    `(("C-x F"   find-grep-in-current-dir)
-;;      ("C-x f"   find-grep-in-dir)
-;;      ("C-x M-f" find-grep-current-word-in-current-dir)
-;;      ("C-x M-F" find-grep-current-word)))
-  
-;;   (eal-define-keys
-;;    'grep-mode-map
-;;    `(("q"     bury-buffer)
-;;      ("Q"     kill-this-buffer)
-;;      ("1"     delete-other-windows)
-;;      ("<"     beginning-of-buffer)
-;;      (">"     end-of-buffer)
-;;      ("'"     switch-to-other-buffer)
-;;      ("u"     scroll-down)
-;;      ("S-SPC" View-scroll-half-page-backward)
-;;      ("SPC"   View-scroll-half-page-forward)
-;;      ("/"     describe-symbol-at-point)
-;;      ("t"     sb-toggle-keep-buffer)
-;;      ("N"     select-buffer-forward)
-;;      ("P"     select-buffer-backward)
-;;      ("L"     count-brf-lines))))
-
-;; (eval-after-load "grep" `(grep-settings))
-
-;;---------------------------------------------------------------------------------
-
-;; full-ack, grep 纯 perl 代替
-
-;; (require 'full-ack)
-
-;; (eal-define-keys
-;;  'ack-mode-map
-;;  `(("j"   next-line)
-;;    ("k"   previous-line)
-;;    ("h"   backward-char)
-;;    ("l"   forward-char)
-;;    ("u"   View-scroll-half-page-backward)
-;;    ("SPC" View-scroll-page-forward)
-;;    ("o"   other-window)
-;;    ("g"   beginning-of-buffer)
-;;    ("G"   end-of-buffer)
-;;    (">"   end-of-buffer)
-;;    ("<"   beginning-of-buffer)
-;;    ("1"   delete-other-windows)
-;;    ("'"   switch-to-other-buffer)
-;;    ("Q"   kill-this-buffer)))
-
-;; (eval-after-load "full-ack" `(full-ack-settings))
-
-;;---------------------------------------------------------------------------------
-
-;; color-moccur,
-;; With color-moccur, you can search a regexp in all buffers. And you
-;; can search files like grep(-find) without grep (and find) command.
-
-(require 'color-moccur)
-
-;; (eal-define-keys-commonly
-;;  'global-map
-;;  `(("C-x C-u" occur-by-moccur-displn)
-;;    ("C-x M-U" occur-by-moccur-at-point-displn)))
-  
-(eal-define-keys
- 'isearch-mode-map
- `(("M-o" isearch-moccur-displn)))
-
-(eval-after-load "color-moccur"
-  `(progn 
-     (moccur-face-settings)
-     (moccur-settings)))
-
-;;-------------------------------------------------------------------
-
-;; ioccur, incremental occur, more convenient and faster than OccurMode,
-;; which lists all lines of the current buffer that match a regexp.
-
-;; (require 'ioccur)
-
-;;---------------------------------------------------------------------------------
+;;-------------------------------------------------------------
 
 ;; Calendar
 (eval-after-load "calendar"
   `(progn
      (calendar-settings)))
 
-;;----------------------------------------------------------------------------------
+;;-------------------------------------------------------------
 
-;; inkd: 在各种 text 文档间提供链接
+;; inkd, 在各种 text 文档间提供链接
 
 (require 'linkd)
 (am-add-hooks
@@ -338,7 +223,28 @@ from tradition chinese to simple chinese" t)
  `(("<mouse-4>" nil)
    ("C-c ," nil)))
 
-;;---------------------------------------------------------------------
+;;------------------------------------------------------------------
+
+;; ascii表查询
+;; (autoload 'ascii-on        "ascii"
+;;   "Turn on ASCII code display."   t)
+;; (autoload 'ascii-off       "ascii"
+;;   "Turn off ASCII code display."  t)
+;; (autoload 'ascii-display   "ascii"
+;;   "Toggle ASCII code display."    t)
+;; (autoload 'ascii-customize "ascii"
+;;   "Customize ASCII code display." t)
+
+;;------------------------------------------------------------------
+
+;; 以另一用户编辑文件, 或者编辑远程主机文件
+(eval-after-load "tramp" `(tramp-settings))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Use terminals in Emacs
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; term mode 
 ;; (eval-after-load "term" 
@@ -363,13 +269,12 @@ from tradition chinese to simple chinese" t)
 ;;   `(progn
 ;;      (multi-term-settings)))
 
-;;----------------------------------------------------------------------------
-
-;; My old settings
+;;----------------------------------------------------------------------
 
 ;; Shell/eshell mode
-
 ;;(define-key shell-mode-map "\M-m" 'shell-add-to-history)
+
+;;----------------------------------------------------------------------
 
 ;; Backgrounding a process in shell mode
 ;; You might find it difficult to background 
@@ -380,7 +285,9 @@ from tradition chinese to simple chinese" t)
 ;; And if you want to background Emacs, just go to a different buffer.
 ;; ‘C-q C-z’ doesn’t work? - No, but C-c C-z should.
 
-;; Pop up a window for shell
+;;----------------------------------------------------------------------
+
+;; Shell-pop, pop up a window for shell
 (autoload 'shell-pop "shell-pop" "Pop-up a shell" t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
@@ -392,7 +299,11 @@ from tradition chinese to simple chinese" t)
 (global-set-key [S-f9] 'shell)
 (global-set-key [C-f9] 'eshell)
 
-;;----------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Save editing information
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Save point places in buffers
 (setq save-place 1)
@@ -446,10 +357,17 @@ from tradition chinese to simple chinese" t)
 
 (setq bookmark-save-flag 1)
 
+;;---------------------------------------------------------------------
+
 ;; Bookmark+
 (autoload 'bookmark+ "bookmark+" "Enhanced Emacs bookmark" t)
 
-;;--------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Save Emacs session information 
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Recent files
 ;; (recentf-mode 1)
@@ -463,11 +381,6 @@ from tradition chinese to simple chinese" t)
 
 ;; Use session.el instead of recentf.el
 ;; session.el can remember more information.
-;; (autoload 'session-initialize "session"
-;;   "Initialize package session and read previous session file.
-;; Setup hooks and load `session-save-file', see `session-initialize'.  At
-;; best, this function is called at the end of the Emacs startup, i.e., add
-;; this function to `after-init-hook'." t)
 (eval-after-load "session" `(session-settings))
 (add-hook 'after-init-hook 'session-initialize)
 
@@ -475,16 +388,12 @@ from tradition chinese to simple chinese" t)
 
 ;; Workspace store and recover
 ;; windows.el
-(add-hook 'after-init-hook 'windows-start)
 (eval-after-load "windows" `(windows-settings))
+(add-hook 'after-init-hook 'windows-start)
 (define-key ctl-x-map "C" 'see-you-again)
 (define-key ctl-x-map "S" 'win-save-all-configurations)
 (define-key ctl-x-map "V" 'resume-windows)
-
 ;; revive.el
-;; (autoload 'save-current-configuration "revive" "Save status" t)
-;; (autoload 'resume "revive" "Resume Emacs" t)
-;; (autoload 'wipe "revive" "Wipe Emacs" t)
 (eval-after-load "revive" `(revive-settings))
 ;; And define favorite keys to those functions.
 ;; (define-key ctl-x-map "F" 'resume)

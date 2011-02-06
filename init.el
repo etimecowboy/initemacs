@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2011-02-01 Tue 20:52 xin on P6T>
+;; Time-stamp:<2011-02-06 Sun 01:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,14 +54,6 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; Viewing files settings
-;; (require 'xy-rcroot-view)
-(load "xy-rcroot-view")
-(message "* ---[ `xy-rcroot-view.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
-
 ;; Editing settings
 ;; (require 'xy-rcroot-edit)
 (load "xy-rcroot-edit")
@@ -78,18 +70,10 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; Comparing files
-;; (require 'xy-rcroot-diff)
-(load "xy-rcroot-diff")
-(message "* ---[ `xy-rcroot-diff.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
-
-;; Drawing settings
-;; (require 'xy-rcroot-draw)
-(load "xy-rcroot-draw")
-(message "* ---[ `xy-rcroot-draw.el' loaded at %ds ]---"
+;; Viewing/Comparing files
+;; (require 'xy-rcroot-view)
+(load "xy-rcroot-view")
+(message "* ---[ `xy-rcroot-view.el' loaded at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))

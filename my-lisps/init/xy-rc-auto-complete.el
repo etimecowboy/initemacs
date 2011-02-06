@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-02-01 Tue 02:46 xin on P6T>
+;; Time-stamp:<2011-02-06 Sun 01:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -211,6 +211,37 @@
                  ac-source-files-in-current-dir
                  ac-source-filename))
   ;; (setq ac-modes ac+-modes)
+
+  (eval-after-load "cc-mode"
+    '(ac-settings-4-cc))
+  (eval-after-load "autopair"
+    '(ac-settings-4-autopair))
+  (am-add-hooks
+   `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+                    svn-log-edit-mode-hook change-log-mode-hook)
+   'ac-settings-4-lisp)
+  (apply-args-list-to-fun
+   (lambda (hook fun)
+     (am-add-hooks hook fun))
+   `(('java-mode-hook   'ac-settings-4-java)
+     ('c-mode-hook      'ac-settings-4-c)
+     ('c++-mode-hook    'ac-settings-4-cpp)
+     ('text-mode-hook   'ac-settings-4-text)
+     ('org-mode-hook    'ac-settings-4-org)
+     ('eshell-mode-hook 'ac-settings-4-eshell)
+     ;; ('ruby-mode-hook   'ac-settings-4-ruby)
+     ;; ('html-mode-hook   'ac-settings-4-html)
+     ;; ('awk-mode-hook    'ac-settings-4-awk)
+     ;; ('tcl-mode-hook    'ac-settings-4-tcl)
+     ))
+  (eal-eval-by-modes
+   ac-modes
+   (lambda (mode)
+     (let ((mode-name (symbol-name mode)))
+       (when (and (intern-soft mode-name) 
+                  (intern-soft (concat mode-name "-map")))
+         (define-key (symbol-value (am-intern mode-name "-map")) 
+           (kbd "C-c A") 'ac-start)))))
 )
 
 

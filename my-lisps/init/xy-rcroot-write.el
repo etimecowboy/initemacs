@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-01-31 Mon 10:08 xin on P6T>
+;; Time-stamp:<2011-02-06 Sun 02:11 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,14 +29,12 @@
 ;; (eal-define-key
 ;;  'org-mode-map 
 ;;  `(("C-c )" reftex-citation)))
-
 (eval-after-load "org"
   `(org-settings))
 
 ;;------------------------------------------------------------------------
 
 ;; Auctex, TeX writing IDE
-
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
 
@@ -45,10 +43,8 @@
 ;; txt2tags mode 
 ;; convert plain text files to various formats
 ;; (require 't2t-mode)
-
 (setq auto-mode-alist 
       (append (list '("\\.t2t$" . t2t-mode))
               (if (boundp 'auto-mode-alist) auto-mode-alist)))
 (autoload  't2t-mode "txt2tags-mode" "Txt2tags Mode" t)
-
 (provide 'xy-rcroot-write)

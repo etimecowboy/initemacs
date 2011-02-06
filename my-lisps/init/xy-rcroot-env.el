@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-04 Fri 00:20 xin on p6t>
+;; Time-stamp:<2011-02-05 Sat 23:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -207,10 +207,7 @@
      (help-mode-face-settings)
      (help-mode-settings)))
 
-;;---------------------------------------------------------------------------
-
 ;; 非常方便的查看emacs帮助的插件
-
 ;; (eal-define-keys `(emacs-lisp-mode-map 
 ;; 		   lisp-interaction-mode-map 
 ;; 		   completion-list-mode-map 
@@ -293,7 +290,8 @@
 ;;   3. The input method will be activated for this file as soon loaded.
 ;;   如何輸入繁體:
 ;;      把 py.txt, otherpy.txt,  pychr.txt 用軟件轉成了繁體，然後重新打開 emacs。
-;;      這樣使用軟件自動轉換肯定是不精確的，有些地方會出現錯誤。比如"碼表"被搞成了"碼錶"。
+;;      這樣使用軟件自動轉換肯定是不精確的，有些地方會出現錯誤。比如"碼表"被搞成
+;;      了"碼錶"。
 (autoload 'eim-use-package "eim" "The eim input method" t)
 ;; (register-input-method
 ;;  "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
@@ -340,7 +338,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Emacs可以做为一个server, 然后用emacsclient连接这个server,
-;; 无需再打开两个Emacs
+;; 无需再打开两个Emacs。
+;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
+;; Windows 下使用我定义的 `xy/done' 函数也能达到类似的效果，
+;; 用 `C-x C-c' 隐藏 Emacs frame，但只能使用一个 frame。
 ;; Emacs-21 以前的版本要用 gnuserv
 (if is-before-emacs-21
     (progn
@@ -361,7 +362,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Global keybindings 
+;; Global keybindings for visit some files/directory 
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

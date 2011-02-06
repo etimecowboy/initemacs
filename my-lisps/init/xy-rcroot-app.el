@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-03 Thu 22:29 xin on p6t>
+;; Time-stamp:<2011-02-06 Sun 00:16 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -37,7 +37,7 @@
 ;; menu: one for the menu-bar Edit menu (`facemenu-menu') and one for
 ;; the mouse popup menu (`facemenu-mouse-menu').  In standard library
 ;; `facemenu.el', these two menus are the same.
-;; (try-require 'facemenu+)
+;; (require 'facemenu+)
 ;; No tool bar
 (tool-bar-mode -1)
 ;; No scroll bar
@@ -56,12 +56,6 @@
       kill-buffer-query-functions)
 ;; automatically display images
 (auto-image-file-mode 1)
-;; ;;;###autoload
-;; (defun image-mode-settings ()
-;;   "Settings for `image-mode'."
-;;   (define-key image-mode-map (kbd "'") 'switch-to-other-buffer))
-;; (eval-after-load "image-mode"
-;;   `(image-mode-settings))
 ;; automatically refresh buffer
 (global-auto-revert-mode 1)
 (global-set-key [f5] 'revert-buffer)
@@ -73,6 +67,11 @@
 ;; Use clipboard with x window system
 (setq x-select-enable-clipboard t)
 (setq x-stretch-cursor t)
+;; emacs lock
+;; (autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
+;; Winner mode for window splits
+(winner-mode 1)
+
 ;; Frame layout
 ;; (when window-system
 ;;   ;; Initial fram layout
@@ -172,9 +171,8 @@ the mode-line."
 ;; Display time and date
 (setq display-time-day-and-date t)
 (display-time-mode 1)
-;; Display battery infomation
-;; (when is-after-emacs-23                 ; actually after emacs-22
-;;   (display-battery-mode -1))
+;; Display battery infomation, after Emacs-22
+;; (when is-after-emacs-23 (display-battery-mode -1))
 ;; Display number of characters in a selected region
 (require 'modeline-posn)
 
@@ -186,10 +184,8 @@ the mode-line."
 
 (unless is-after-emacs-23
   (partial-completion-mode 1))
-
 ;; 可以递归的使用minibuffer
 (setq enable-recursive-minibuffers t)
-
 ;; 当你在shell、telnet、w3m等模式下时，加密显出你的密码
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
@@ -283,7 +279,7 @@ the mode-line."
 ;;    ("."   find-symbol-at-point)))
 
 ;; 增加更丰富的高亮
-;; (try-require 'generic-x)
+;; (require 'generic-x)
 
 ;; pulse.el, 实现Emacs的淡入淡出效果
 ;; http://emacser.com/pulse.htm
