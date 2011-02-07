@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-01-31 Mon 09:43 xin on P6T>
+;; Time-stamp:<2011-02-07 Mon 14:07 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -28,8 +28,8 @@
 ;; BibTeX related
 ;;;###autoload
 (defun org-mode-reftex-setup ()
-  (load-library "reftex")
-  (load-library "reftex-parse")
+  (require 'reftex)
+  (require 'reftex-parse)
   (and (buffer-file-name)
        (file-exists-p (buffer-file-name))
        (reftex-parse-all)))
@@ -41,7 +41,7 @@
   ;; Loaded modules
   (setq org-modules 
         '(org-bbdb org-bibtex org-crypt org-ctags org-docview org-id
-          org-info org-habit org-inlinetask org-w3m org-mew org-gnus
+          org-info org-habit org-inlinetask org-mew org-gnus
           org-annotate-file org-bookmark org-checklist org-choose
           org-collector org-depend org-elisp-symbol org-eval
           org-eval-light org-expiry org-exp-bibtex
@@ -230,7 +230,7 @@
   ;; )
 
   (add-hook 'org-mode-hook 'org-mode-reftex-setup)
-  ;; (require 'org-exp-bibtex)
+  (require 'org-exp-bibtex)
   ;; turn on cdlatex
   (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
 

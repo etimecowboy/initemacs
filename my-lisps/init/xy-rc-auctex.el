@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-01-31 Mon 10:07 xin on P6T>
+;; Time-stamp:<2011-02-07 Mon 14:00 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,8 +27,8 @@
   ;; Set current file as the master
   (setq-default TeX-master t) 
 
-  ;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  ;; (setq reftex-plug-into-AUCTeX t)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (setq reftex-plug-into-AUCTeX t)
 
   ;; (require 'tex-mik)
   ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
