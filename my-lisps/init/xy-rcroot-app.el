@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-06 Sun 00:16 xin on p6t>
+;; Time-stamp:<2011-02-06 Sun 21:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -73,19 +73,21 @@
 (winner-mode 1)
 
 ;; Frame layout
-;; (when window-system
-;;   ;; Initial fram layout
-;;   (setq initial-frame-alist 
-;; 	'((height . 40) 
-;; 	  (width  . 90))) 
-;;   ;; New frame layout
-;;   (setq pop-up-frame-alist 
-;; 	'((height . 40) 
-;; 	  (width  . 90)))
-;;   ;; Default frame layout
-;;   (setq default-frame-alist 
-;; 	'((height . 40) 
-;; 	  (width  . 90))))
+(when window-system
+  ;; Initial fram layout
+  ;; (setq initial-frame-alist 
+  ;; 	'((height . 40) 
+  ;; 	  (width  . 90))) 
+  ;; ;; New frame layout
+  ;; (setq pop-up-frame-alist 
+  ;; 	'((height . 40) 
+  ;; 	  (width  . 90)))
+  ;; Default frame layout
+  ;; (setq 'default-frame-alist 
+  ;; 	'((height . 40) 
+  ;; 	  (width  . 90)))
+  (add-to-list 'default-frame-alist '(height . 40))
+  (add-to-list 'default-frame-alist '(width . 90)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -169,8 +171,14 @@ the mode-line."
 (setq-default mode-line-buffer-identification 
 	      (propertized-buffer-identification "%b"))
 ;; Display time and date
-(setq display-time-day-and-date t)
-(display-time-mode 1)
+(if (not window-system)
+	(progn
+	  (setq display-time-day-and-date t)
+	  (display-time-mode 1))
+  (progn
+	(setq display-time-day-and-date nil)
+	(display-time-mode -1)))
+
 ;; Display battery infomation, after Emacs-22
 ;; (when is-after-emacs-23 (display-battery-mode -1))
 ;; Display number of characters in a selected region
@@ -197,14 +205,17 @@ the mode-line."
 
 ;; Set frame title display: filename @ process
 ;; (setq frame-title-format "%f @ %s")
-;; 在标题栏显示登陆名称和文件名
 (setq frame-title-format
-      '((:eval
-         (let ((login-name (getenv-internal "LOGNAME")))
-           (if login-name (concat login-name "@") "")))
-        (:eval (system-name))
-        ":"
-        (:eval (or (buffer-file-name) (buffer-name)))))
+	  `(,(user-login-name) "@" ,(system-name) "     "
+		global-mode-string "     %f" ))
+;; 在标题栏显示登陆名称和文件名
+;; (setq frame-title-format
+;;       '((:eval
+;;          (let ((login-name (getenv-internal "LOGNAME")))
+;;            (if login-name (concat login-name "@") "")))
+;;         (:eval (system-name))
+;;         ":"
+;;         (:eval (or (buffer-file-name) (buffer-name)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
