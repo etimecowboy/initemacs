@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-02-06 Sun 01:52 xin on p6t>
+;; Time-stamp:<2011-02-08 Tue 16:36 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -72,8 +72,8 @@
 ;;---------------------------------------------------------------
 
 ;; Incremental search
-(define-key-list
-  isearch-mode-map
+(eal-define-keys
+  'isearch-mode-map
   `(("M-i" isearch-query-replace-current)
     ("M-k" isearch-clean)
     ("M-g" isearch-cancel)
