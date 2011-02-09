@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-01-31 Mon 01:13 xin on P6T>
+;; Time-stamp:<2011-02-09 Wed 21:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -152,6 +152,7 @@
          ("proto"                . "%")
          ("name"                 . "Xin Yang")
          ("user"                 . "xin2.yang")
+		 ("reply-to"             . "xin2.yang@uwe.ac.uk")
          ("mail-domain"          . "uwe.ac.uk")
          ("signature-file"       . "~/emacs/mew/sig/siguwe")
          ("imap-server"          . "ses-imap.uwe.ac.uk")
@@ -177,6 +178,7 @@
          ("proto"                . "%")
          ("name"                 . "Xin Yang")
          ("user"                 . "xin2.yang")
+		 ("reply-to"             . "xin2.yang@gmail.com")
          ("signature-file"       . "~/emacs/mew/sig/grad")
          ("mail-domain"          . "gmail.com")
          ("imap-server"          . "imap.gmail.com")
@@ -198,6 +200,7 @@
          ("proto"                . "%")
          ("name"                 . "etimecowboy")
          ("user"                 . "etimecowboy")
+		 ("reply-to"             . "etimecowboy@gmail.com")
          ("signature-file"       . "~/emacs/mew/sig/bulb")
          ("mail-domain"          . "gmail.com")
          ("imap-server"          . "imap.gmail.com")
