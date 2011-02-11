@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-06 Sun 21:54 xin on p6t>
+;; Time-stamp:<2011-02-11 Fri 14:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -363,8 +363,8 @@ the mode-line."
 (global-font-lock-mode 1)
 (eval-after-load "font-lock"
   `(progn
-     (font-lock-face-settings)
-     (font-lock-settings)))
+     (font-lock-settings)
+	 (font-lock-face-settings)))
 
 ;; smart-hl.el, 像Eclipse那样双击高亮当前字符串
 (require 'smart-hl)

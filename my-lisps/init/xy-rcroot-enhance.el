@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-06 Sun 00:46 xin on p6t>
+;; Time-stamp:<2011-02-11 Fri 17:23 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -125,22 +125,20 @@ A numeric argument serves as a repeat count." t)
 ;;-------------------------------------------------------------------
 
 ;; linum-mode settings
-(unless is-after-emacs-23
-  (require 'linum "linum-for-22"))
+(am-add-hooks
+ `(find-file-hook
+   help-mode-hook Man-mode-hook log-view-mode-hook chart-mode-hook
+   compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
+   browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
+   inferior-ruby-mode-hook custom-mode-hook Info-mode-hook svn-log-edit-mode-hook
+   package-menu-mode-hook dired-mode-hook apropos-mode-hook svn-log-view-mode-hook
+   diff-mode-hook emacs-lisp-mode-hook ibuffer-mode-hook html-mode-hook
+   w3m-mode-hook data-debug-hook debugger-mode-hook text-mode-hook color-theme-mode-hook
+   semantic-symref-results-mode-hook sh-mode-hook groovy-mode-hook)
+ (lambda()
+   (unless (eq major-mode 'image-mode)
+	 (linum-mode 1))))
 (global-set-key [f7] 'linum-mode)
-;; (am-add-hooks
-;;  `(find-file-hook
-;;    help-mode-hook Man-mode-hook log-view-mode-hook chart-mode-hook
-;;    compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
-;;    browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
-;;    inferior-ruby-mode-hook custom-mode-hook Info-mode-hook svn-log-edit-mode-hook
-;;    package-menu-mode-hook dired-mode-hook apropos-mode-hook svn-log-view-mode-hook
-;;    diff-mode-hook emacs-lisp-mode-hook ibuffer-mode-hook html-mode-hook
-;;    w3m-mode-hook data-debug-hook debugger-mode-hook text-mode-hook color-theme-mode-hook
-;;    semantic-symref-results-mode-hook sh-mode-hook groovy-mode-hook)
-;;  (lambda()
-;;    (unless (eq major-mode 'image-mode)
-;;      (linum-mode 1))))
 (eval-after-load 'linum
   `(progn 
      (linum-face-settings)
@@ -197,27 +195,15 @@ from tradition chinese to simple chinese" t)
 ;; inkd, 在各种 text 文档间提供链接
 
 (require 'linkd)
-(am-add-hooks
- `(test-mode-hook org-mode-hook
-   emacs-lisp-mode-hook lisp-interaction-mode-hook
-   c-mode-hook c++-mode-hook sh-mode-hook
-   vhdl-mode-hook verilog-mode-hook)
- (lambda ()
-   (linkd-mode 1)
-   (linkd-enable)
-   ))
-
 (eval-after-load "linkd"
   `(progn
      (linkd-settings)
      (linkd-face-settings)))
-
 (eal-define-keys
  'linkd-overlay-map
  `(("n"        linkd-next-link)
    ("p"        linkd-previous-link)
    ("<return>" linkd-follow-at-point)))
-
 (eal-define-keys
  'linkd-map
  `(("<mouse-4>" nil)
