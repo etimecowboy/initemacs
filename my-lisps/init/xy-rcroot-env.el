@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-09 Wed 21:27 xin on p6t>
+;; Time-stamp:<2011-02-11 Fri 22:50 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -352,14 +352,14 @@
       ;; 在当前frame打开
       (setq gnuserv-frame (selected-frame))
       ;; 打开后让emacs跳到前面来
-      (setenv "GNUSERV_SHOW_EMACS" "1"))
-  (if is-after-emacs-23
-      (progn
-        (setq server-auth-dir (concat my-var-path "/server"))
-        (Windows
-		 (server-force-delete)
-		 (server-start)
-         (global-set-key (kbd "C-x C-c") 'xy/done)))))
+      (setenv "GNUSERV_SHOW_EMACS" "1")))
+(if is-after-emacs-23
+	(progn
+	  (setq server-auth-dir (concat my-var-path "/server"))
+	  (server-force-delete)
+	  (server-start)
+	  ;; (global-set-key (kbd "C-x C-c") 'xy/done)
+	  ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

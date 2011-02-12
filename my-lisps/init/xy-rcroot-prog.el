@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-11 Fri 14:07 xin on p6t>
+;; Time-stamp:<2011-02-11 Fri 18:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -417,7 +417,8 @@
 (eval-after-load "matlab"
   `(progn
      ;; (matlab-face-settings)
-     (matlab-settings)))
+     (matlab-settings)
+	 (matlab-face-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

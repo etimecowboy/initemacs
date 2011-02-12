@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-11 Fri 17:23 xin on p6t>
+;; Time-stamp:<2011-02-11 Fri 18:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -134,7 +134,8 @@ A numeric argument serves as a repeat count." t)
    package-menu-mode-hook dired-mode-hook apropos-mode-hook svn-log-view-mode-hook
    diff-mode-hook emacs-lisp-mode-hook ibuffer-mode-hook html-mode-hook
    w3m-mode-hook data-debug-hook debugger-mode-hook text-mode-hook color-theme-mode-hook
-   semantic-symref-results-mode-hook sh-mode-hook groovy-mode-hook)
+   semantic-symref-results-mode-hook sh-mode-hook groovy-mode-hook
+   matlab-mode-hook matlab-shell-mode-hook)
  (lambda()
    (unless (eq major-mode 'image-mode)
 	 (linum-mode 1))))

@@ -7840,7 +7840,7 @@ fa-zhan-zhong-guo-jia 发展中国家
 fa-zhi 法制 法治
 fa-zi 法子
 fa-zuo 发作
-fan 返 反 饭 翻 繁 烦 番 泛 犯 贩 范 凡 鷭 蠜 蹯 畈 燔 鐇 膰 梵 氾 繙 籵 籓 幡 旛 蘩 範 笵 笲 蕃 钒 矾 樊 帆 墦 璠 藩
+fan 烦 返 反 饭 翻 繁 番 泛 犯 贩 范 凡 鷭 蠜 蹯 畈 燔 鐇 膰 梵 氾 繙 籵 籓 幡 旛 蘩 範 笵 笲 蕃 钒 矾 樊 帆 墦 璠 藩
 fan-ban 翻版
 fan-bing 犯病
 fan-bo 反驳
