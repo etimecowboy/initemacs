@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-02-03 Thu 22:52 xin on p6t>
+;; Time-stamp:<2011-02-13 Sun 22:46 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -852,10 +852,12 @@ directories starting with a `.'."
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
 	(while files
 	  (let ((srcfile (car files))
-		(dstfile generated-autoload-file))
-	    (if (or (not (file-exists-p dstfile)) 
-		    (file-newer-than-file-p srcfile dstfile))
-		  (setq update-flag t)
+			(dstfile (concat (car files) "c")))
+	    (if (or (not (file-exists-p generated-autoload-file))
+				(not (file-exists-p dstfile))
+				(file-newer-than-file-p srcfile generated-autoload-file)
+				(file-newer-than-file-p dstfile generated-autoload-file))
+			(setq update-flag t)
 	      (setq update-flag nil)))
 	  (setq files (cdr files))))
      
@@ -915,44 +917,38 @@ directories starting with a `.'."
 		    (subst-char-in-string ?/ ?! 
 			(subst-char-in-string ?: ?! this-directory)) ".el"))
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
-	(while files
-	  (let ((srcfile (car files))
-		(dstfile (concat (car files) "c")))
-	    (if (or (not (file-exists-p dstfile)) 
-		    (file-newer-than-file-p srcfile dstfile))
-		(progn 
-		  (byte-compile-file srcfile)
-		  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
-	      (message "* ---[ `%s' exists and is newer. ]---" dstfile))
-	    (if (or (not (file-exists-p generated-autoload-file)) 
-		    (file-newer-than-file-p srcfile generated-autoload-file))
-		(setq update-flag t)
-	      (setq update-flag nil)))
-	  (setq files (cdr files))))
+		(while files
+		  (let ((srcfile (car files))
+				(dstfile (concat (car files) "c")))
 
-      (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
-	(while files
-	  (let ((srcfile (car files))
-		(dstfile generated-autoload-file))
-	    (if (or (not (file-exists-p dstfile)) 
-		    (file-newer-than-file-p srcfile dstfile))
-		  (setq update-flag t)
-	      (setq update-flag nil)))
-	  (setq files (cdr files))))
-     
-      (if update-flag
-	  (progn
-	    (cond ((fboundp 'update-autoloads-from-directory)
-		   (update-autoloads-from-directory this-directory))
-		  ((fboundp 'update-autoloads-from-directories)
-		   (update-autoloads-from-directories this-directory))
-		  ((fboundp 'update-directory-autoloads)
-		   (update-directory-autoloads this-directory)))
-	    (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
-	(message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
+			(if (or (not (file-exists-p dstfile)) 
+					(file-newer-than-file-p srcfile dstfile))
+				(progn 
+				  (byte-compile-file srcfile)
+				  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
+			  (message "* ---[ `%s' exists and is newer. ]---" dstfile))
+
+			(if (or (not (file-exists-p generated-autoload-file))
+					(not (file-exists-p dstfile))
+					(file-newer-than-file-p srcfile generated-autoload-file)
+					(file-newer-than-file-p dstfile generated-autoload-file))
+				(setq update-flag t)
+			  (setq update-flag nil)))
+		  (setq files (cdr files)))
+
+		(if update-flag
+			(progn
+			  (cond ((fboundp 'update-autoloads-from-directory)
+					 (update-autoloads-from-directory this-directory))
+					((fboundp 'update-autoloads-from-directories)
+					 (update-autoloads-from-directories this-directory))
+					((fboundp 'update-directory-autoloads)
+					 (update-directory-autoloads this-directory)))
+			  (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
+		  (message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
       
-      (load-file generated-autoload-file)
-      (message "* ---[ Loading `%s'... ]---" generated-autoload-file)
+		(load-file generated-autoload-file)
+		(message "* ---[ Loading `%s'... ]---" generated-autoload-file))
 	    
       (when with-subdirs
         (while files

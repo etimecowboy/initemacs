@@ -1,11 +1,11 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
-;; File name:    `xy-rc-replace.el'
-;; Time-stamp:<2011-02-05 Sat 22:12 xin on p6t>
+;; File name:    `xy-rc-tramp.el'
+;; Time-stamp:<2011-02-13 Sun 22:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
-;; Description:  My `replace' settings
+;; Description:  My `tramp' settings
 ;;    ___ _ __ ___   __ _  ___ ___
 ;;   / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;  |  __/ | | | | | (_| | (__\__ \
@@ -17,21 +17,11 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun replace-face-settings ()
-  "Face settings for `replace'."
+(defun tramp-settings ()
+  "Settings of `tramp'."
   
-  (custom-set-faces
-   '(match
-     ((((class color) (min-colors 88) (background light))
-       :background "yellow1")
-      (((class color) (min-colors 88) (background dark))
-       :background "RoyalBlue3" :foreground "cyan")
-      (((class color) (min-colors 8) (background light))
-       :background "yellow" :foreground "black")
-      (((class color) (min-colors 8) (background dark))
-       :background "blue" :foreground "white")
-      (((type tty) (class mono))
-       :inverse-video t)
-      (t :background "gray")))))  
+;; (setq tramp-default-method "sudo")
+  (setq tramp-persistency-file-name
+		(concat my-var-path "/tramp")))
 
-(provide 'xy-rc-replace.el)
+(provide 'xy-rc-tramp.el)
