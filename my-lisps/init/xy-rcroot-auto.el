@@ -10,6 +10,7 @@
   ;; If there is more than one, they won't work right.
  '(semantic-c-dependency-system-include-path (quote ("/usr/include" "E:/program/MinGW/include")))
 )
+
  
 
 (custom-set-faces

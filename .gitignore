@@ -20,8 +20,9 @@
 *.brf
 ctextemp_*
 *.backup
-*history
+*history*
 ac-comphist.dat
+anything-c-adaptive-history
 _region_*
 *.orgx
 *.cache
@@ -30,4 +31,5 @@ _region_*
 /server
 *.ADAPT
 *.asv
+session*
 loaddefs@*
