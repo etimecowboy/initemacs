@@ -4,7 +4,6 @@
 
 ;; Author: ahei <ahei0802@126.com>
 ;; Keywords: color theme ahei
-;; Time-stamp: <2010-04-05 15:56:28 Monday by ahei>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,8 +26,7 @@
 
 ;;; Installation:
 ;;
-;; Copy dired-lis.el to your load-path and add following statement
-;; to your .emacs:
+;; Copy dired-lis.el to your load-path and add to your .emacs:
 ;;
 ;; (require 'color-theme-ahei)
 ;;
@@ -48,39 +46,38 @@
 
 (setq hl-line-face 'ahei-hl-line-face)
 
-(if window-system
-    (progn
-      (setq hl-line-face-delta #X30FF)
-      
-      (defun color-theme-adjust-hl-line-face()
-        "Auto adjust `hl-line-face' by background color."
-        (interactive)
-        (let* ((color (x-color-values (face-attribute 'default :background))))
-          (if (null color)
-              (error (format "Not support on system %s" system-type))
-            (let ((my-color
-                   (mapcar
-                    (lambda (x)
-                      (let ((y (/ #XFFFF 4))
-                            (delta hl-line-face-delta))
-                        (cond
-                         ((< x (* y 1))
-                          (+ x delta))
-                         ((< x (* y 2))
-                          (+ x delta))
-                         ((< x (* y 3))
-                          (- x delta))
-                         (t
-                          (- x delta)))))
-                    color)))
-              (set-face-attribute
-               hl-line-face
-               nil
-               :background
-               (concat "#" (mapconcat (lambda (c) (format "%04X" c)) my-color ""))))))))
-  (defun color-theme-adjust-hl-line-face()))
+(when window-system
+  (setq hl-line-face-delta #X30FF)
+  ;; (setq hl-line-face-delta #X0100)
+  
+  (defun color-theme-adjust-hl-line-face()
+    "Auto adjust `hl-line-face' by background color."
+    (interactive)
+    (let* ((color (x-color-values (face-attribute 'default :background))))
+      (if (null color)
+          (error (format "Not support on system %s" system-type))
+        (let ((my-color
+               (mapcar
+                (lambda (x)
+                  (let ((y (/ #XFFFF 4))
+                        (delta hl-line-face-delta))
+                    (cond
+                     ((< x (* y 1))
+                      (+ x delta))
+                     ((< x (* y 2))
+                      (+ x delta))
+                     ((< x (* y 3))
+                      (- x delta))
+                     (t
+                      (- x delta)))))
+                color)))
+          (set-face-attribute
+           'ahei-hl-line-face
+           nil
+           :background
+           (concat "#" (mapconcat (lambda (c) (format "%04X" c)) my-color ""))))))))
 
-(eval-when-compile (require 'color-theme-autoloads))
+(eval-when-compile (require 'color-theme))
 (defun color-theme-ahei ()
   "Color theme by ahei, created 2009-11-20."
   (interactive)
@@ -625,8 +622,7 @@
   (if window-system
       (color-theme-adjust-hl-line-face)))
 
-(eval-after-load "color-theme"
-  `(add-to-list 'color-themes '(color-theme-ahei "color-theme-ahei" "ahei")))
+(add-to-list 'color-themes '(color-theme-ahei "color-theme-ahei" "ahei"))
 
 (provide 'color-theme-ahei)
 
