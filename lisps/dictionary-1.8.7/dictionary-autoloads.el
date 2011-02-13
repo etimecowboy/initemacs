@@ -6,7 +6,7 @@
 ;;;### (autoloads (dictionary-popup-matching-words dictionary-mouse-popup-matching-words
 ;;;;;;  dictionary-match-words dictionary-lookup-definition dictionary-search
 ;;;;;;  dictionary dictionary-mode) "dictionary" "dictionary.el"
-;;;;;;  (19723 58734))
+;;;;;;  (19800 970))
 ;;; Generated autoloads from dictionary.el
 
 (autoload 'dictionary-mode "dictionary" "\
@@ -66,7 +66,7 @@ Display entries matching the word at the point
 ;;;***
 
 ;;;### (autoloads nil nil ("connection.el" "dictionary-init.el" "dictionary-pkg.el"
-;;;;;;  "link.el") (19723 58734 272678))
+;;;;;;  "link.el") (19800 971 39632))
 
 ;;;***
 

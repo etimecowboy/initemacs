@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-11 Fri 22:50 xin on p6t>
+;; Time-stamp:<2011-02-13 Sun 16:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -43,7 +43,6 @@
 (xy/install-all-lisps my-local-lisp-path)
 ;; Manually installed packages
 (xy/install-all-lisps (concat my-local-lisp-path "/dea")) ;; load first
-(xy/install-all-lisps (concat my-local-lisp-path "/anything-1.287"))
 (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete-1.3.1"))
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
@@ -268,8 +267,6 @@
 ;; REF: http://emacser.com/torture-emacs.htm
 (global-set-key
  (kbd "C-x F") 'xy/set-font)
-(Windows
- (xy/set-font))
 
 ;; 中文输入法
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
@@ -322,12 +319,18 @@
 ;; Another solution: 
 ;;    Change auctex's `style/url.el' to another name.
 ;;    (No bug found yet)
+;; (autoload 'package-list-packages "package"
+;;   "Display a list of packages.
+;; Fetches the updated list of packages before displaying.
+;; The list is displayed in a buffer named `*Packages*'." nil t)
+(require 'package)
 (eval-after-load "package"
   `(progn
     (package-settings)))
 
 ;; auto-install:
 ;; BUG: Conflict with auctex's `style/url.el'
+(require 'auto-install)
 (eval-after-load "auto-install"
   `(progn
     (auto-install-settings)))

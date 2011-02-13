@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-02-06 Sun 01:42 xin on p6t>
+;; Time-stamp:<2011-02-13 Sun 17:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -78,7 +78,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'icicles)
-(icy-mode 1)
+;; (icy-mode 1)
+(add-hook 'after-init-hook 'icy-start)
 (defun icicle-keys ()
   "icicle-mode的按键设置."
   (define-key minibuffer-local-completion-map 
@@ -87,7 +88,6 @@
     (kbd "C-w") 'backward-kill-word-or-kill-region))
 (add-hook 'icicle-mode-hook 'icicle-keys t)
 (eval-after-load "icicles" `(icicles-settings))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -112,8 +112,8 @@
 
 ;; (try-require 'anything)
 ;; (try-require 'anything-config)
-;; (eval-after-load 'anything
-;;   `(anything-settings))
+(eval-after-load 'anything
+  `(anything-settings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
