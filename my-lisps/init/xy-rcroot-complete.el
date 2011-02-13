@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-02-13 Sun 17:42 xin on p6t>
+;; Time-stamp:<2011-02-13 Sun 18:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -110,8 +110,6 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (try-require 'anything)
-;; (try-require 'anything-config)
 (eval-after-load 'anything
   `(anything-settings))
 
