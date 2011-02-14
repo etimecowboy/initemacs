@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-02-07 Mon 14:07 xin on p6t>
+;; Time-stamp:<2011-02-13 Sun 23:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -69,6 +69,8 @@
               "~/emacs/org/gtd/DSP.org"
               "~/emacs/org/gtd/CProgramming.org"
               "~/emacs/org/gtd/Electronics.org"))
+  ;; Donot recursively display gtd files in session list
+  (add-to-list 'session-globals-exclude 'org-mark-ring)
   (setq org-tag-persistent-alist 
         '((:startgroup) ("@uwe" . 85) ("@home" . 72) ("@shop" . 83) (:endgroup) 
           (:startgroup) ("appt" . 84) ("proj" . 80) (:endgroup) 
