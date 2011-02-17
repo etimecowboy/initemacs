@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gud.el'
-;; Time-stamp:<2011-02-17 Thu 15:00 xin on P6T>
+;; Time-stamp:<2011-02-17 Thu 15:52 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,6 +38,8 @@
   ;; 显示工具栏方便调试
   (when window-system
 	(tool-bar-mode 1))
+  ;; 在一个新的 Frame 中调试
+  (setq gdb-same-frame -1)
   ;; 多窗口的布局
   (setq gdb-many-windows t)
   ;; 输入输出单独用一个 Window
