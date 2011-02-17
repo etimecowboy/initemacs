@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-14 Mon 08:46 xin on P6T>
+;; Time-stamp:<2011-02-17 Thu 13:50 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,7 +36,7 @@
 ;; REF: 
 ;;   http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860
 (ffap-bindings)
-;; (eval-after-load "ffap" `(ffap-settings))
+(eval-after-load "ffap" `(ffap-settings))
 
 ;;------------------------------------------------------------------
 

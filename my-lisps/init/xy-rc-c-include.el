@@ -1,11 +1,11 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
-;; File name:    `xy-rc-ffap.el'
-;; Time-stamp:<2011-02-17 Thu 13:54 xin on P6T>
+;; File name:    `xy-rc-c-includes.el'
+;; Time-stamp:<2011-02-17 Thu 13:57 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
-;; Description:  My `ffap.el' settings
+;; Description:  My `c-includes.el' settings
 ;;    ___ _ __ ___   __ _  ___ ___
 ;;   / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;  |  __/ | | | | | (_| | (__\__ \
@@ -17,13 +17,10 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun ffap-settings ()
-  "Settings of `ffap.el'."
+(defun c-includes-settings ()
+  "Settings of `c-includes.el'."
 
-  (setq ffap-c-path (append
-                     ffap-c-path
-                     ;;system-head-file-dir 
-                     ;;user-head-file-dir)))
-		     user-include-dirs)))
+	(setq c-includes-binding t)
+	(setq c-includes-path ffap-c-path))
 
-(provide 'xy-rc-ffap.el)
+(provide 'xy-rc-c-includes.el)

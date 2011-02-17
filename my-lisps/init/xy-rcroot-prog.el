@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-11 Fri 18:12 xin on p6t>
+;; Time-stamp:<2011-02-17 Thu 15:10 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -78,30 +78,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;describe-symbol, find-symbol
-(eal-define-keys
- `(emacs-lisp-mode-map lisp-interaction-mode-map
-   completion-list-mode-map help-mode-map debugger-mode-map)
- `(("C-c /"   describe-symbol-at-point)
-   ("C-c M-v" describe-variable-at-point)
-   ("C-c M-f" describe-function-at-point)
-   ("C-c M-s" describe-face-at-point)
-   ("C-c C-j" find-symbol-at-point)
-   ("C-c C-h" find-symbol-go-back)
-   ("C-c M-V" find-symbol-var-at-point)
-   ("C-c M-F" find-symbol-fun-at-point)
-   ("C-c M-S" find-symbol-face-at-point)
-   ("C-c w"   where-is-at-point)))
+;; (eal-define-keys
+;;  `(emacs-lisp-mode-map lisp-interaction-mode-map
+;;    completion-list-mode-map help-mode-map debugger-mode-map)
+;;  `(("C-c /"   describe-symbol-at-point)
+;;    ("C-c M-v" describe-variable-at-point)
+;;    ("C-c M-f" describe-function-at-point)
+;;    ("C-c M-s" describe-face-at-point)
+;;    ("C-c C-j" find-symbol-at-point)
+;;    ("C-c C-h" find-symbol-go-back)
+;;    ("C-c M-V" find-symbol-var-at-point)
+;;    ("C-c M-F" find-symbol-fun-at-point)
+;;    ("C-c M-S" find-symbol-face-at-point)
+;;    ("C-c w"   where-is-at-point)))
 
-(eal-define-keys-commonly
- global-map
- `(("C-x C-k" describe-key)
-   ("C-x C-m" describe-mode)
-   ("C-x / A" describe-face)
-   ("C-x / a" apropos)
-   ("C-x A"   apropos-command)
-   ("C-x C-d" find-symbol)
-   ("C-x K"   find-symbol-fun-on-key)
-   (,(if window-system "C-x C-/" "C-x C-_") describe-symbol)))
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("C-x C-k" describe-key)
+;;    ("C-x C-m" describe-mode)
+;;    ("C-x / A" describe-face)
+;;    ("C-x / a" apropos)
+;;    ("C-x A"   apropos-command)
+;;    ("C-x C-d" find-symbol)
+;;    ("C-x K"   find-symbol-fun-on-key)
+;;    (,(if window-system "C-x C-/" "C-x C-_") describe-symbol)))
 
 ;;--------------------------------------------------------------------
 
@@ -125,12 +125,12 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(eal-define-keys
- 'sh-mode-map
- `(("<"       self-insert-command)
-   ("C-c M-c" sh-case)
-   ("C-c C-c" comment)
-   ("C-c g"   bashdb)))
+;; (eal-define-keys
+;;  'sh-mode-map
+;;  `(("<"       self-insert-command)
+;;    ("C-c M-c" sh-case)
+;;    ("C-c C-c" comment)
+;;    ("C-c g"   bashdb)))
 (eval-after-load "sh-script"
   `(progn
      (sh-mode-face-settings)
@@ -157,8 +157,10 @@
 
 (eval-after-load "emacs-lisp-mode"
   `(emacs-lisp-mode-settings))
+(eval-after-load "lisp-mode"
+  `(emacs-lisp-mode-settings))
 
-;; ;; eldoc, 显示变量, 函数的声明
+;; eldoc, 显示变量, 函数的声明，可用在很多语言中(c)
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
    lisp-interaction-mode-hook cperl-mode-hook)
@@ -174,58 +176,42 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; codepilot, someone else's c/c++ development environment
+;; c/c++ include dir (Moved to `xy-rc-util.el')
+;; (Windows
+;;  (defvar user-include-dirs
+;;    '(".." "../include" "../inc" "../common" "../public"
+;;      "../.." "../../include" "../../inc" "../../common" "../../public"
+;;      ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include"
+;;      ;; "C:/Program Files/Microsoft Visual Studio/VC98/MFC/Include"
+;;      ;; "D:/Microsoft Visual Studio 9.0/VC/include"
+;;      ;; "D:/Microsoft Visual Studio 9.0/VC/atlmfc/include"
+;;      "E:/program/MinGW/include"
+;;      "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include"
+;;      "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include-fixed"
+;;      "D:/WpdPack/Include"
+;;      ;; "E:/program/MinGW/msys/1.0/include"
+;;      ;; "E:/program/MinGW/msys/1.0/include/w32api"
+;;      )
+;;    "User include dirs for c/c++ mode")
+;;  (defvar c-preprocessor-symbol-files
+;;    '(
+;;      ;; "C:/MinGW/include/c++/3.4.5/mingw32/bits/c++config.h"
+;;      ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include/xstddef"
+;;      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/yvals.h"
+;;      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/crtdefs.h"
+;;      )
+;;    "Preprocessor symbol files for cedet"))
 
-;; (setq codepilot-dir (concat my-local-lisp-path "codepilot"))
-;; (try-require 'mycutil)
-;; ;;;###autoload
-;; (defun codepilot-settings-4-emaci ()
-;;   "`codepilot' settings for `emaci'."
-;;   (emaci-add-key-definition
-;;    "[" 'cp-pb-where-we-are
-;;    '(memq major-mode dev-modes)))
-
-;; (eval-after-load "emaci"
-;;   `(codepilot-settings-4-emaci))
-
-;;-------------------------------------------------------------------------
-
-;; c/c++ include dir
-(Windows
- (defvar user-include-dirs
-   '(".." "../include" "../inc" "../common" "../public"
-     "../.." "../../include" "../../inc" "../../common" "../../public"
-     ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include"
-     ;; "C:/Program Files/Microsoft Visual Studio/VC98/MFC/Include"
-     ;; "D:/Microsoft Visual Studio 9.0/VC/include"
-     ;; "D:/Microsoft Visual Studio 9.0/VC/atlmfc/include"
-     "E:/program/MinGW/include"
-     "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include"
-     "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include-fixed"
-     "D:/WpdPack/Include"
-     ;; "E:/program/MinGW/msys/1.0/include"
-     ;; "E:/program/MinGW/msys/1.0/include/w32api"
-     )
-   "User include dirs for c/c++ mode")
- (defvar c-preprocessor-symbol-files
-   '(
-     ;; "C:/MinGW/include/c++/3.4.5/mingw32/bits/c++config.h"
-     ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include/xstddef"
-     ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/yvals.h"
-     ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/crtdefs.h"
-     )
-   "Preprocessor symbol files for cedet"))
-
-(GNULinux
- (defvar user-include-dirs
-   '(".." "../include" "../inc" "../common" "../public"
-     "../.." "../../include" "../../inc" "../../common" "../../public"
-     "/usr/include" "/usr/local/include")
-   "User include dirs for c/c++ mode")
- (defvar c-preprocessor-symbol-files
-   '(
-     )
-   "Preprocessor symbol files for cedet"))
+;; (GNULinux
+;;  (defvar user-include-dirs
+;;    '(".." "../include" "../inc" "../common" "../public"
+;;      "../.." "../../include" "../../inc" "../../common" "../../public"
+;;      "/usr/include" "/usr/local/include")
+;;    "User include dirs for c/c++ mode")
+;;  (defvar c-preprocessor-symbol-files
+;;    '(
+;;      )
+;;    "Preprocessor symbol files for cedet"))
 
 ;; cc-mode settings
 (eval-after-load "cc-mode"
@@ -237,6 +223,8 @@
 (eal-define-keys
  'c-mode-base-map
  `(("C-c I" mark-ifdef)))
+;; (eval-after-load "ifdef"
+;;   `(ifdef-settings))
 
 ;;----------------------------------------------------------------------------
 
@@ -284,13 +272,9 @@
 ;;-------------------------------------------------
 
 ;; c-includes settings
-;; (defun c-includes-settings ()
-;;   "Settings for `c-includes'."
-;;   (setq c-includes-binding t)
-;;   (setq c-includes-path ffap-c-path))
-
-;; (eval-after-load "c-includes"
-;;   `(c-includes-settings))
+(require 'c-includes)
+(eval-after-load "c-includes"
+  `(c-includes-settings))
 
 ;;-------------------------------------------------
 
@@ -323,6 +307,22 @@
 ;; (eval-after-load "sourcepair" `(sourcepair-settings))
 
 ;;-------------------------------------------------
+
+;; codepilot, someone else's c/c++ development environment
+
+;; (setq codepilot-dir (concat my-local-lisp-path "codepilot"))
+;; (try-require 'mycutil)
+;; ;;;###autoload
+;; (defun codepilot-settings-4-emaci ()
+;;   "`codepilot' settings for `emaci'."
+;;   (emaci-add-key-definition
+;;    "[" 'cp-pb-where-we-are
+;;    '(memq major-mode dev-modes)))
+
+;; (eval-after-load "emaci"
+;;   `(codepilot-settings-4-emaci))
+
+;;------------------------------------------------------------
 
 ;; kde-emacs 一个方便开发c的工具
 ;; 改包中定义了C-j 为goto-line, 还设置了c-style
@@ -521,15 +521,15 @@
 
 ;; flymake,
 ;; 动态检查语法错误
-;; (defvar flymake-mode-map (make-sparse-keymap))
-;; (autoload 'flymake-find-file-hook "flymake" "" t)
-;; (add-hook 'find-file-hook 'flymake-find-file-hook)
-;; (eval-after-load "flymake" `(flymake-settings))
-;; (eal-define-keys
-;;  'flymake-mode-map
-;;  `(("C-c N"   flymake-goto-next-error-disp)
-;;    ("C-c P"   flymake-goto-prev-error-disp)
-;;    ("C-c M-w" flymake-display-current-warning/error)))
+(defvar flymake-mode-map (make-sparse-keymap))
+(autoload 'flymake-find-file-hook "flymake" "" t)
+(add-hook 'find-file-hook 'flymake-find-file-hook)
+(eval-after-load "flymake" `(flymake-settings))
+(eal-define-keys
+ 'flymake-mode-map
+ `(("C-c N"   flymake-goto-next-error-disp)
+   ("C-c P"   flymake-goto-prev-error-disp)
+   ("C-c M-w" flymake-display-current-warning/error)))
 
 ;;--------------------------------------------------------------------
 
@@ -618,7 +618,6 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 ;; debug.el
 ;; (eval-after-load "debug"
 ;;   '(progn
@@ -650,40 +649,25 @@
 ;;---------------------------------------------------------------------
 
 ;; `gdb'
-;; (require 'gud-settings)
-
-;; (require 'util)
-
 ;; (eal-define-keys
 ;;  'c-mode-base-map
 ;;  `(("C-c g" gdb)
 ;;    ("C-c b" gud-break)
 ;;    ("C-c B" gud-remove)))
-
-;; ;;;###autoload
-;; (defun gud-settings ()
-;;   "Settings for `gud'."
-;;   (eal-define-keys
-;;    'gud-mode-map
-;;    `(("C-c B" gud-remove)
-;;      ("M-s"   view)
-;;      ("M-m"   comint-previous-matching-input)
-;;      ("M-M"   comint-next-matching-input)
-;;      ("C-c r" gud-run)
-;;      ("C-c f" gud-finish)
-;;      ("M-j"   gud-next)
-;;      ("M-k"   gud-step)
-;;      ("M-c"   gud-cont)
-;;      ("M-C"   capitalize-word)
-;;      ("C-c m" make)))
-
-;;   ;; 退出gdb的时候关闭gdb对应的buffer
-;;   (add-hook 'gdb-mode-hook 'kill-buffer-when-shell-command-exit)
-
-;;   ;; 显示gdb的鼠标提示
-;;   (gud-tooltip-mode 1))
-
-;; (eval-after-load "gdb-ui"
-;;   `(gud-settings))
+;; (eal-define-keys
+;;  'gud-mode-map
+;;  `(("C-c B" gud-remove)
+;;    ("M-s"   view)
+;;    ("M-m"   comint-previous-matching-input)
+;;    ("M-M"   comint-next-matching-input)
+;;    ("C-c r" gud-run)
+;;    ("C-c f" gud-finish)
+;;    ("M-j"   gud-next)
+;;    ("M-k"   gud-step)
+;;    ("M-c"   gud-cont)
+;;    ("M-C"   capitalize-word)
+;;    ("C-c m" make)))
+(eval-after-load "gdb-ui"
+  `(gud-settings))
 
 (provide 'xy-rcroot-prog)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-02-07 Mon 14:00 xin on p6t>
+;; Time-stamp:<2011-02-17 Thu 14:34 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,18 +37,18 @@
   ;;autoload minor modes
   ;;-------------------------------------------------------------------
   (add-hook 'LaTeX-mode-hook
-            (function (lambda ()
-                      ;; (setq auto-fill-mode 1)
-                      (outline-minor-mode 1)
-                      (cdlatex-mode 1)
-                      (reftex-mode 1)
-                      (flyspell-mode 1)
-                      (tex-source-specials-mode 1)
-                      (LaTeX-math-mode 1)
-                      (TeX-fold-mode 1)
-                      (TeX-PDF-mode 1)
-                      ;; (setq TeX-master t)
-                      )))
+            '(lambda ()
+			   ;; (setq auto-fill-mode 1)
+			   (outline-minor-mode 1)
+			   (cdlatex-mode 1)
+			   (reftex-mode 1)
+			   (flyspell-mode 1)
+			   (tex-source-specials-mode 1)
+			   (LaTeX-math-mode 1)
+			   (TeX-fold-mode 1)
+			   (TeX-PDF-mode 1)
+			   ;; (setq TeX-master t)
+			   ))
 
   ;; load cd-latex
   (require 'cdlatex)

@@ -106,6 +106,43 @@
        window-system
        (when (boundp 'aquamacs-version) aquamacs-version)))
 
+;; c/c++ include dir
+(Windows
+ (defvar user-include-dirs
+   '(".." "../include" "../inc" "../common" "../public"
+     "../.." "../../include" "../../inc" "../../common" "../../public"
+     ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include"
+     ;; "C:/Program Files/Microsoft Visual Studio/VC98/MFC/Include"
+     ;; "D:/Microsoft Visual Studio 9.0/VC/include"
+     ;; "D:/Microsoft Visual Studio 9.0/VC/atlmfc/include"
+     "E:/program/MinGW/include"
+     "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include"
+     "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include-fixed"
+     "D:/WpdPack/Include"
+     ;; "E:/program/MinGW/msys/1.0/include"
+     ;; "E:/program/MinGW/msys/1.0/include/w32api"
+     )
+   "User include dirs for c/c++ mode")
+ (defvar c-preprocessor-symbol-files
+   '(
+     ;; "C:/MinGW/include/c++/3.4.5/mingw32/bits/c++config.h"
+     ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include/xstddef"
+     ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/yvals.h"
+     ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/crtdefs.h"
+     )
+   "Preprocessor symbol files for cedet"))
+
+(GNULinux
+ (defvar user-include-dirs
+   '(".." "../include" "../inc" "../common" "../public"
+     "../.." "../../include" "../../inc" "../../common" "../../public"
+     "/usr/include" "/usr/local/include")
+   "User include dirs for c/c++ mode")
+ (defvar c-preprocessor-symbol-files
+   '(
+     )
+   "Preprocessor symbol files for cedet"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Jump to some directory, open some config files

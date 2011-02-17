@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-01-30 Sun 23:38 xin on P6T>
+;; Time-stamp:<2011-02-17 Thu 12:06 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,6 +20,21 @@
 ;;;###autoload
 (defun lisp-interaction-mode-settings ()
   "Settings for `lisp-interaction-mode'."
+  ;;Turn on documentation in elisp mode
+  (add-hook 'emacs-lisp-mode-hook
+			'(lambda ()
+			   (turn-on-eldoc-mode)))
 )
+
+;;;###autoload
+(defun emacs-lisp-mode-settings ()
+  "Settings for `emacs-lisp-mode'."
+
+  (defun elisp-mode-hook-settings ()
+    "Settings for `emacs-lisp-mode-hook'."
+    (setq mode-name "Elisp"))
+
+  (add-hook 'emacs-lisp-mode-hook 'elisp-mode-hook-settings))
+
 
 (provide 'xy-rc-lisp.el)
