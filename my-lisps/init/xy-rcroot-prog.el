@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-17 Thu 15:10 xin on P6T>
+;; Time-stamp:<2011-02-17 Thu 23:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -12,6 +12,9 @@
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
 ;;--------------------------------------------------------------------
+
+(require 'cl)
+(require 'xy-rc-utils)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -63,9 +66,15 @@
 ;; In particular, HideShow hides balanced-expression code blocks and 
 ;; multi-line comment blocks.
 (am-add-hooks
- `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook java-mode-hook)
- 'hs-minor-mode)
-
+ `(c-mode-common-hook java-mode-hook
+   lisp-mode-hook emacs-lisp-mode-hook)
+   'hs-minor-mode)
+;; (eal-define-keys-commonly
+;;  'hs-minor-mode-map
+;;  `(("C-c h" hs-hide-block)
+;;    ("C-c H" hs-hide-all)
+;;    ("C-c e" hs-show-block)
+;;    ("C-c E" hs-show-all)))
 (eval-after-load "hideshow"
   `(progn
      (hs-minor-mode-face-settings)
@@ -176,46 +185,16 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; c/c++ include dir (Moved to `xy-rc-util.el')
-;; (Windows
-;;  (defvar user-include-dirs
-;;    '(".." "../include" "../inc" "../common" "../public"
-;;      "../.." "../../include" "../../inc" "../../common" "../../public"
-;;      ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include"
-;;      ;; "C:/Program Files/Microsoft Visual Studio/VC98/MFC/Include"
-;;      ;; "D:/Microsoft Visual Studio 9.0/VC/include"
-;;      ;; "D:/Microsoft Visual Studio 9.0/VC/atlmfc/include"
-;;      "E:/program/MinGW/include"
-;;      "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include"
-;;      "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include-fixed"
-;;      "D:/WpdPack/Include"
-;;      ;; "E:/program/MinGW/msys/1.0/include"
-;;      ;; "E:/program/MinGW/msys/1.0/include/w32api"
-;;      )
-;;    "User include dirs for c/c++ mode")
-;;  (defvar c-preprocessor-symbol-files
-;;    '(
-;;      ;; "C:/MinGW/include/c++/3.4.5/mingw32/bits/c++config.h"
-;;      ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include/xstddef"
-;;      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/yvals.h"
-;;      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/crtdefs.h"
-;;      )
-;;    "Preprocessor symbol files for cedet"))
-
-;; (GNULinux
-;;  (defvar user-include-dirs
-;;    '(".." "../include" "../inc" "../common" "../public"
-;;      "../.." "../../include" "../../inc" "../../common" "../../public"
-;;      "/usr/include" "/usr/local/include")
-;;    "User include dirs for c/c++ mode")
-;;  (defvar c-preprocessor-symbol-files
-;;    '(
-;;      )
-;;    "Preprocessor symbol files for cedet"))
-
+;; NOTE: C include directories' list are defined in `xy-util.el'
 ;; cc-mode settings
 (eval-after-load "cc-mode"
   `(cc-mode-settings))
+(eal-define-keys
+ `(c-mode-base-map)
+ `(("C-c H"     c-electric-backspace)
+   ("C-c M-a" beginning-of-defun)
+   ("C-c M-e" end-of-defun)
+   ("C-c M-F" copy-current-fun-name)))
 
 ;;----------------------------------------------------------------------------
 
@@ -229,82 +208,80 @@
 ;;----------------------------------------------------------------------------
 
 ;; hide-ifdef, c中隐藏ifdef
-;; (autoload 'hide-ifdef-block "hideif"
-;;   "Hide the ifdef block (true or false part) enclosing or before the cursor."
-;;   t)
+(autoload 'hide-ifdef-block "hideif"
+  "Hide the ifdef block (true or false part) enclosing or before the cursor."
+  t)
 
-;; (autoload 'hide-ifdefs "hideif"
-;;   "Hide the contents of some #ifdefs.
-;; Assume that defined symbols have been added to `hide-ifdef-env'.
-;; The text hidden is the text that would not be included by the C
-;; preprocessor if it were given the file with those symbols defined.
+(autoload 'hide-ifdefs "hideif"
+  "Hide the contents of some #ifdefs.
+Assume that defined symbols have been added to `hide-ifdef-env'.
+The text hidden is the text that would not be included by the C
+preprocessor if it were given the file with those symbols defined.
 
-;; ;; Turn off hiding by calling `show-ifdefs'."
-;;   t)
+;; Turn off hiding by calling `show-ifdefs'."
+  t)
 
-;; (autoload 'show-ifdef-block "hideif"
-;;   "Show the ifdef block (true or false part) enclosing or before the cursor."
-;;   t)
+(autoload 'show-ifdef-block "hideif"
+  "Show the ifdef block (true or false part) enclosing or before the cursor."
+  t)
 
-;; (autoload 'show-ifdefs "hideif"
-;;   "Cancel the effects of `hide-ifdef': show the contents of all #ifdefs."
-;;   t)
+(autoload 'show-ifdefs "hideif"
+  "Cancel the effects of `hide-ifdef': show the contents of all #ifdefs."
+  t)
 
-;; (eval-after-load "hideif"
-;;   '(progn
-;;      (setq hide-ifdef-env
-;;            '((GNU_LINUX . t)
-;;              (__GNUC__ . t)
-;;              (__cplusplus . t)))))
+(eval-after-load "hideif"
+  '(progn
+	 (hideif-settings)))
 
-;; (eval-after-load "cc-mode"
-;;   '(progn
-;;      (dolist (hook '(c-mode-common-hook))
-;;        (add-hook hook 'hide-ifdef-mode))
-;;      (dolist (map (list c-mode-base-map))
-;;        (eal-define-keys-commonly
-;;         map
-;;         `(("C-c w"   hide-ifdef-block)
-;;           ("C-c W"   hide-ifdefs)
-;;           ("C-c M-i" show-ifdef-block)
-;;           ("C-c M-I" show-ifdefs))))))
+(eval-after-load "cc-mode"
+  '(progn
+     (dolist (hook '(c-mode-common-hook))
+       (add-hook hook 'hide-ifdef-mode))
+     ;; (dolist (map (list c-mode-base-map))
+     ;;   (eal-define-keys-commonly
+     ;;    map
+     ;;    `(("C-c w"   hide-ifdef-block)
+     ;;      ("C-c W"   hide-ifdefs)
+     ;;      ("C-c M-i" show-ifdef-block)
+     ;;      ("C-c M-I" show-ifdefs))))))
+	 ))
 
 ;;-------------------------------------------------
 
 ;; c-includes settings
-(require 'c-includes)
+;; (require 'c-includes)
 (eval-after-load "c-includes"
   `(c-includes-settings))
 
 ;;-------------------------------------------------
 
 ;; sourcepair,可以在cpp与h文件之间切换
-;; (eal-define-keys
-;;  `(c-mode-base-map)
-;;  `(("C-c s" sourcepair-load)))
+(eal-define-keys
+ `(c-mode-base-map)
+ `(("C-c s" sourcepair-load)))
 
-;; (autoload 'sourcepair-load "sourcepair"
-;;   "Load the corresponding C/C++ header or source file for the current buffer.
+(autoload 'sourcepair-load "sourcepair"
+  "Load the corresponding C/C++ header or source file for the current buffer.
 
-;; This function can be invoked by \\[sourcepair-load].  It will load the the
-;; corresponding header or source file for the current buffer.  For example, if
-;; you are looking at the file FooParser.cpp and press \\[sourcepair-load], the
-;; file FooParser.h will be loaded.  It also works the other way as well.
+This function can be invoked by \\[sourcepair-load].  It will load the the
+corresponding header or source file for the current buffer.  For example, if
+you are looking at the file FooParser.cpp and press \\[sourcepair-load], the
+file FooParser.h will be loaded.  It also works the other way as well.
 
-;; There are six global variables that can be used to adjust how the function
-;; works:
+There are six global variables that can be used to adjust how the function
+works:
 
-;;  `sourcepair-source-extensions'
-;;  `sourcepair-header-extensions'
-;;  `sourcepair-source-path'
-;;  `sourcepair-header-path'
-;;  `sourcepair-recurse-ignore'
-;;  `sourcepair-private-header-suffixes'
+ `sourcepair-source-extensions'
+ `sourcepair-header-extensions'
+ `sourcepair-source-path'
+ `sourcepair-header-path'
+ `sourcepair-recurse-ignore'
+ `sourcepair-private-header-suffixes'
 
-;; See the documentation for these variables for more info.
-;; " t)
+See the documentation for these variables for more info.
+" t)
 
-;; (eval-after-load "sourcepair" `(sourcepair-settings))
+(eval-after-load "sourcepair" `(sourcepair-settings))
 
 ;;-------------------------------------------------
 
@@ -534,25 +511,25 @@
 ;;--------------------------------------------------------------------
 
 ;; ahei 的智能编译
-;; (require 'my-smart-compile)
+(require 'my-smart-compile)
 
-;; (defalias 'cpl 'compile)
+(defalias 'cpl 'compile)
 
-;; (defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
-;; (if is-before-emacs-21
-;;     (setq makefile-mode-map-list '(makefile-mode-map))
-;;   (setq makefile-mode-map-list '(makefile-gmake-mode-map makefile-automake-mode-map)))
+(defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
+(if is-before-emacs-21
+    (setq makefile-mode-map-list '(makefile-mode-map))
+  (setq makefile-mode-map-list '(makefile-gmake-mode-map makefile-automake-mode-map)))
 
-;; (eal-define-keys
-;;  (append makefile-mode-map-list
-;;          '(c-mode-base-map svn-status-mode-map sh-mode-map
-;;                            compilation-mode-map ruby-mode-map))
-;;  `(("C-c C-m"  make-sb)
-;;    ("C-c m"    make-check-sb)
-;;    ("C-c M"    make-clean-sb)
-;;    ("C-c c"    compile-buffer-sb)
-;;    ("C-c r"    run-program-sb)
-;;    ("C-c C"    smart-compile-sb)))
+(eal-define-keys
+ (append makefile-mode-map-list
+         '(c-mode-base-map svn-status-mode-map sh-mode-map
+                           compilation-mode-map ruby-mode-map))
+ `(("C-c C-m"  make-sb)
+   ("C-c m"    make-check-sb)
+   ("C-c M"    make-clean-sb)
+   ("C-c c"    compile-buffer-sb)
+   ("C-c r"    run-program-sb)
+   ("C-c C"    smart-compile-sb)))
 
 ;; (eal-define-keys
 ;;  'java-mode-map
@@ -560,57 +537,32 @@
 ;;    ("C-c M"	  ant-clean-sb)
 ;;    ("C-c m"	  ant-test-sb)))
 
-
-;; (require 'compile-misc)
-
 ;; (eal-define-keys-commonly
 ;;  global-map
 ;;  `(("M-n" next-error)
 ;;    ("M-p" previous-error)))
 
-;; ;;;###autoload
-;; (defun compile-settings ()
-;;   "Settings for `compile'."
-;;   ;; 设置编译命令
-;;   (setq compile-command "make -k")
+(eal-define-keys
+ makefile-mode-map-list
+ `(("M-p"	  previous-error)
+   ("M-n"	  next-error)
+   ("C-c p" makefile-previous-dependency)
+   ("C-c n" makefile-next-dependency)))
 
-;;   (eal-define-keys
-;;    makefile-mode-map-list
-;;    `(("M-p"	  previous-error)
-;;      ("M-n"	  next-error)
-;;      ("C-c p" makefile-previous-dependency)
-;;      ("C-c n" makefile-next-dependency)))
+(eal-define-keys
+ 'compilation-mode-map
+ `(("n" compilation-next-error)
+   ("p" compilation-previous-error)
+   ("'" switch-to-other-buffer)
+   ("u" View-scroll-half-page-backward)
+   ("f" am-forward-word-or-to-word)
+   ("d" scroll-up)
+   ("w" scroll-down)))
 
-;;   (setq compilation-scroll-output t))
-
-;; (eal-define-keys
-;;  'compilation-mode-map
-;;  `(("n" compilation-next-error)
-;;    ("p" compilation-previous-error)
-;;    ("'" switch-to-other-buffer)
-;;    ("u" View-scroll-half-page-backward)
-;;    ("f" am-forward-word-or-to-word)
-;;    ("d" scroll-up)
-;;    ("w" scroll-down)))
-
-;; ;;;###autoload
-;; (defun compile-face-settings ()
-;;   "Face settings for `compile'."
-;;   (custom-set-faces '(compilation-info
-;;                       ((((type tty)) :bold t :foreground "green")
-;;                        (t :foreground "green"))))
-;;   (setq compilation-message-face nil)
-;;   (custom-set-faces '(compilation-warning
-;;                       ((((class color)) :foreground "red" :bold nil))))
-;;   (custom-set-faces '(compilation-info
-;;                       ((((type tty pc)) :foreground "magenta") (t (:foreground "magenta")))))
-;;   (setq compilation-enter-directory-face 'beautiful-blue-face)
-;;   (setq compilation-leave-directory-face 'magenta-face))
-
-;; (eval-after-load "compile"
-;;   `(progn
-;;      (compile-face-settings)
-;;      (compile-settings)))
+(eval-after-load "compile"
+  `(progn
+     (compile-face-settings)
+     (compile-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

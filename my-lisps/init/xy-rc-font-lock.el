@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-02-11 Fri 17:07 xin on p6t>
+;; Time-stamp:<2011-02-17 Thu 21:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,6 @@
 (defun font-lock-settings ()
   "Settings for `font-lock'."
   (progn
-    ;; BUG: 这里引起语法高亮失效
     ;; 增加自定义关键字
     (dolist (mode '(c-mode c++-mode java-mode lisp-mode emacs-lisp-mode
                            lisp-interaction-mode sh-mode sgml-mode
@@ -29,7 +28,8 @@
        mode
        '(("\\<\\(BUG\\|TODO\\|HACK\\|NOTE\\|REF\\):"
           1 font-lock-warning-face prepend)
-         ("\\<\\(and\\|or\\|not\\)\\>" . font-lock-keyword-face)
+		 ;; BUG: 这里引起语法高亮失效
+         ;; ("\\<\\(and\\|or\\|not\\)\\>" . font-lock-keyword-face)
          ;; ("(\\|)" . beautiful-blue-face)
          ;; ("\\[\\|]" . yellow-face)
          ;; ("<\\|>" . cyan-face)

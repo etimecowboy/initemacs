@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hide-region.el'
-;; Time-stamp:<2011-01-31 Mon 13:47 xin on P6T>
+;; Time-stamp:<2011-02-17 Thu 21:14 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,7 @@
 ;;;###autoload
 (defun hide-region-settings ()
   "Settings for `hide-region'."
-  (setq hide-region-before-string "[======================Region has")
-  (setq hide-region-after-string  "been hidden=====================]\n"))
+  (setq hide-region-before-string "[==========Region has been")
+  (setq hide-region-after-string  "hidden by Emacs==========]\n"))
 
 (provide 'xy-rc-hide-region.el)

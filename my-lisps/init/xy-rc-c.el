@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-02-17 Thu 12:21 xin on P6T>
+;; Time-stamp:<2011-02-17 Thu 22:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,6 +19,8 @@
 ;;;###autoload
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."
+
+  (defalias 'cpp-mode 'c++-mode)
   
   (defun c-mode-common-hook-settings ()
     "Settings for `c-mode-common-hook'."
@@ -61,77 +63,55 @@
   ;;                            (apply 'append (mapcar #'(lambda (dir) (directory-files dir))
   ;;                                                   user-head-file-dir)))) "\"\n")
 
-  ;; (defvar c/c++-hightligh-included-files-key-map nil)
-  ;; (unless c/c++-hightligh-included-files-key-map
-  ;;   (setq c/c++-hightligh-included-files-key-map (make-sparse-keymap))
-  ;;   (define-key-list
-  ;;     c/c++-hightligh-included-files-key-map
-  ;;     `(("<RET>"    find-file-at-point)
-  ;;       ("<return>" find-file-at-point))))
+  (mapc
+   (lambda (mode)
+   (define-abbrev-table mode '(("incd" "" skeleton-include 1))))
+   '(c-mode-abbrev-table c++-mode-abbrev-table))
+  
+  (define-skeleton skeleton-include
+    "产生#include\"\"" "" > "#include \""
+    (completing-read "包含用户头文件: "
+                     (mapcar #'(lambda (f) (list f ))
+                             (apply 'append (mapcar #'(lambda (dir) (directory-files dir))
+                                                    user-includ-dirs)))) "\"\n")
 
-  ;; (defun c/c++-hightligh-included-files ()
-  ;;   (interactive)
-  ;;   (when (or (eq major-mode 'c-mode)
-  ;;             (eq major-mode 'c++-mode))
-  ;;     (save-excursion
-  ;;       (goto-char (point-min))
-  ;;       ;; remove all overlay first
-  ;;       (mapc (lambda (ov) (if (overlay-get ov 'c/c++-hightligh-included-files)
-  ;;                              (delete-overlay ov)))
-  ;;             (overlays-in (point-min) (point-max)))
-  ;;       (while (re-search-forward "^[ \t]*#include[ \t]+[\"<]\\(.*\\)[\">]" nil t nil)
-  ;;         (let* ((begin  (match-beginning 1))
-  ;;                (end (match-end 1))
-  ;;                (ov (make-overlay begin end)))
-  ;;           (overlay-put ov 'c/c++-hightligh-included-files t)
-  ;;           (overlay-put ov 'keymap c/c++-hightligh-included-files-key-map)
-  ;;           (overlay-put ov 'face 'underline))))))
-  ;; ;; 这不是一个好办法，也可以把它加载到c-mode-hook or c++-mode-hook中
-  ;; (setq c/c++-hightligh-included-files-timer (run-with-idle-timer 0.5 t 'c/c++-hightligh-included-files))
+  (defvar c/c++-hightligh-included-files-key-map nil)
+  (unless c/c++-hightligh-included-files-key-map
+    (setq c/c++-hightligh-included-files-key-map (make-sparse-keymap))
+    (define-key-list
+      c/c++-hightligh-included-files-key-map
+      `(("<RET>"    find-file-at-point)
+        ("<return>" find-file-at-point))))
+
+  (defun c/c++-hightligh-included-files ()
+    (interactive)
+    (when (or (eq major-mode 'c-mode)
+              (eq major-mode 'c++-mode))
+      (save-excursion
+        (goto-char (point-min))
+        ;; remove all overlay first
+        (mapc (lambda (ov) (if (overlay-get ov 'c/c++-hightligh-included-files)
+                               (delete-overlay ov)))
+              (overlays-in (point-min) (point-max)))
+        (while (re-search-forward "^[ \t]*#include[ \t]+[\"<]\\(.*\\)[\">]" nil t nil)
+          (let* ((begin  (match-beginning 1))
+                 (end (match-end 1))
+                 (ov (make-overlay begin end)))
+            (overlay-put ov 'c/c++-hightligh-included-files t)
+            (overlay-put ov 'keymap c/c++-hightligh-included-files-key-map)
+            (overlay-put ov 'face 'underline))))))
+  ;; 这不是一个好办法，也可以把它加载到c-mode-hook or c++-mode-hook中
+  (setq c/c++-hightligh-included-files-timer (run-with-idle-timer 0.5 t 'c/c++-hightligh-included-files))
 
   ;; c中隐藏ifdef
-  ;; (require 'hide-ifdef-settings)
+  ;; (require 'hideif)
 
   ;; 为不同层次的ifdef着色
   (require 'ifdef)
-  (defalias 'cpp-mode 'c++-mode)
+
+  ;; 快速include
+  (require 'c-includes)
+  
   )
-
-;;;###autoload
-(defun hif-goto-endif ()
-  "Goto #endif."
-  (interactive)
-  (unless (or (hif-looking-at-endif)
-              (save-excursion)
-              (hif-ifdef-to-endif))))
-
-;;;###autoload
-(defun hif-goto-if ()
-  "Goto #if."
-  (interactive)
-  (hif-endif-to-ifdef))
-
-;;;###autoload
-(defun hif-gototo-else ()
-  "Goto #else."
-  (hif-find-next-relevant)
-  (cond ((hif-looking-at-else)
-         'done)
-        (hif-ifdef-to-endif) ; find endif of nested if
-        (hif-ifdef-to-endif)) ; find outer endif or else
-  ((hif-looking-at-else)
-   (hif-ifdef-to-endif)) ; find endif following else
-  ((hif-looking-at-endif)
-   'done)
-  (t
-   (error "Mismatched #ifdef #endif pair")))
-
-;;;###autoload
-(defun hif-find-next-relevant ()
-  "Move to next #if..., #else, or #endif, after the current line."
-  ;; (message "hif-find-next-relevant at %d" (point))
-  (end-of-line)
-  ;; avoid infinite recursion by only going to beginning of line if match found
-  (re-search-forward hif-ifx-else-endif-regexp (point-max) t))
 
 (provide 'xy-rc-c.el)

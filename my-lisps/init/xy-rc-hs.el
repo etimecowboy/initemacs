@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hs.el'
-;; Time-stamp:<2011-01-31 Mon 16:29 xin on P6T>
+;; Time-stamp:<2011-02-17 Thu 21:29 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -89,13 +89,7 @@
 
   (eval-after-load "emaci"
     '(hs-minor-mode-4-emaci-settings))
-  
-  (eal-define-keys
-   'hs-minor-mode-map
-    `(("C-c h" hs-hide-block)
-      ("C-c H" hs-hide-all)
-      ("C-c e" hs-show-block)
-      ("C-c E" hs-show-all))))
+  )
 
 ;;;###autoload
 (defun hs-minor-mode-face-settings ()

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-02-06 Sun 02:11 xin on p6t>
+;; Time-stamp:<2011-02-17 Thu 21:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -12,6 +12,11 @@
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
 ;;--------------------------------------------------------------------
+
+(require 'cl)
+(require 'xy-rc-utils)
+
+;;-------------------------------------------------------------------------
 
 ;; Muse, Emacs publishing tool
 ;; (eval-after-load "muse-mode"
