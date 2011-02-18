@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-01-30 Sun 17:35 xin on P6T>
+;; Time-stamp:<2011-02-18 Fri 17:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,7 +54,7 @@
                 (and yas/active-field-overlay
                      (overlay-buffer yas/active-field-overlay))))
   
-  (yasnippet-unbind-trigger-key)
+  ;; (yasnippet-unbind-trigger-key)
   (add-hook 'after-save-hook 'yasnippet-reload-after-save)
   (yas/load-directory yas/root-directory))  
 
