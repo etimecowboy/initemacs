@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-17 Thu 21:40 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 17:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -56,20 +56,23 @@
   "Use a web translation service to translate MSG, returning a string." t)
 (autoload 'babel-buffer "babel"
   "Use a web translation service to translate the current buffer." t)
+(eval-after-load "babel"
+  '(progn
+	 (babel-settings)))
 
 ;; Key binds
-(global-set-key [f12] 'babel)
-(global-set-key [C-f12] 'babel-region)
+;; (global-set-key [f12] 'babel)
+;; (global-set-key [C-f12] 'babel-region)
 (global-set-key [S-f12] 'babel-buffer)
-
-(eval-after-load "babel" `(babel-settings))
 
 ;;---------------------------------------------------------------------
 
 ;; Web dictionary via dictd
 (require 'dictionary-autoloads)
-(global-set-key "\C-cS" 'dictionary-search)
-(global-set-key "\C-cM" 'dictionary-match-words)
+;; (global-set-key "\C-cS" 'dictionary-search)
+;; (global-set-key "\C-cM" 'dictionary-match-words)
+(global-set-key [f12] 'dictionary-search)
+(global-set-key [C-f12] 'dictionary-match-words)
 
 ;;---------------------------------------------------------------------
 

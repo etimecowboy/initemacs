@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-02-13 Sun 17:38 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 17:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,14 +18,15 @@
 
 ;;;###autoload
 (defun anything-settings ()
-  "settings for `ido'."
+  "settings for `anything'."
 
+  ;; (require 'anything-config)
   (require 'anything-auto-install)
   (setq anything-c-adaptive-history-file 
         (concat my-var-path "/anything-c-adaptive-history"))
   (setq anything-sources
         (list
-          ;; ;; Buffer:
+          ;; Buffer:
           ;; anything-c-source-buffers
           ;; anything-c-source-buffer-not-found
           ;; anything-c-source-buffers+
