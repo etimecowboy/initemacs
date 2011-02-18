@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-02-18 Fri 17:22 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 22:52 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -89,6 +89,8 @@
     (kbd "SPC") 'minibuffer-complete-word)
   (define-key minibuffer-local-completion-map 
     (kbd "C-w") 'backward-kill-word-or-kill-region))
+  ;; (define-key minibuffer-local-completion-map
+  ;; 	[Tab] 'icicle-apropos))
 (add-hook 'icicle-mode-hook 'icicle-keys t)
 (eval-after-load "icicles" `(icicles-settings))
 

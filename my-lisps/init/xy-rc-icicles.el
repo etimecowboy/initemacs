@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-02-13 Sun 17:42 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 23:07 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,6 +36,7 @@
   (setq icicle-file-sort (quote icicle-last-modified-first-p))
   (setq icicle-files-ido-like-flag t)
   (setq icicle-default-cycling-mode 'apropos)
+  ;; (setq icicle-prefix-complete-keys (quote ([S-tab] [(control 105)])))
   ;; (setq icicle-apropos-complete-keys '([TAB]))
   ;;   (setq icicle-top-level-key-bindings
   ;;         `((,(kbd "<pause>") icicle-switch-to/from-minibuffer    t)   ; `pause'
