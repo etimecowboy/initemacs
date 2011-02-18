@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-13 Sun 18:13 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 21:57 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -371,8 +371,8 @@
 
 (eal-define-keys-commonly
  global-map
- `(("C-x R" load-dot-emacs-file)
-   ("C-x E" open-init-dot-el-file)))
+ `(("C-x G r" load-dot-emacs-file)
+   ("C-x G i" open-init-dot-el-file)))
 
 (eal-define-keys-commonly
  global-map

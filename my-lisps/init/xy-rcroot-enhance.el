@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-18 Fri 16:26 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 17:52 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -131,7 +131,7 @@ A numeric argument serves as a repeat count." t)
 (am-add-hooks
  `(find-file-hook
    log-view-mode-hook chart-mode-hook
-   completion-list-mode-hook hs-hide-hook
+   hs-hide-hook
    svn-log-edit-mode-hook package-menu-mode-hook
    apropos-mode-hook svn-log-view-mode-hook
    diff-mode-hook emacs-lisp-mode-hook html-mode-hook
