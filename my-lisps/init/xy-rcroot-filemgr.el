@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-02-17 Thu 21:40 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 16:13 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -37,8 +37,9 @@
 ;; uniquify, 可以为重名的 buffer 在前面加上其父目录的名字来让名字区分开来，
 ;; 而不是单纯的加一个没有太多意义的序号
 (require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-;; (setq uniquify-buffer-name-style 'uniquify))
+(eval-after-load "uniquify"
+  `(progn
+     (uniquify-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

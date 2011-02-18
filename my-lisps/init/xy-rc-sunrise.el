@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sunrise.el'
-;; Time-stamp:<2011-02-13 Sun 21:30 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 16:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,6 +24,7 @@
   (setq sr-start-hook
    (quote (sr-tree-menu-init
 		   sr-tabs-start-once
-		   sr-modeline-start-once))))
+		   sr-modeline-start-once)))
+  (require 'sunrise-x-tree))
 
 (provide 'xy-rc-sunrise.el)
