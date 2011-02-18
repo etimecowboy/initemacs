@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-17 Thu 22:06 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 16:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -130,19 +130,19 @@ A numeric argument serves as a repeat count." t)
 ;; linum-mode settings
 (am-add-hooks
  `(find-file-hook
-   help-mode-hook Man-mode-hook log-view-mode-hook chart-mode-hook
-   compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
-   browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
-   inferior-ruby-mode-hook custom-mode-hook Info-mode-hook svn-log-edit-mode-hook
-   package-menu-mode-hook dired-mode-hook apropos-mode-hook svn-log-view-mode-hook
-   diff-mode-hook emacs-lisp-mode-hook ibuffer-mode-hook html-mode-hook
-   w3m-mode-hook data-debug-hook debugger-mode-hook text-mode-hook color-theme-mode-hook
-   semantic-symref-results-mode-hook sh-mode-hook groovy-mode-hook
+   log-view-mode-hook chart-mode-hook
+   completion-list-mode-hook hs-hide-hook
+   svn-log-edit-mode-hook package-menu-mode-hook
+   apropos-mode-hook svn-log-view-mode-hook
+   diff-mode-hook emacs-lisp-mode-hook html-mode-hook
+   data-debug-hook debugger-mode-hook
+   semantic-symref-results-mode-hook sh-mode-hook
    matlab-mode-hook matlab-shell-mode-hook)
  '(lambda()
    (unless (or (eq major-mode 'image-mode)
 	       (eq major-mode 'org-mode)
-		   (eq major-mode 'custom-mode))
+		   (eq major-mode 'custom-mode)
+		   (eq major-mode 'lisp-interaction-mode))
      (linum-mode 1))))
 (global-set-key [f7] 'linum-mode)
 (eval-after-load 'linum
