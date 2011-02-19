@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-18 Fri 22:29 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 03:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -124,6 +124,8 @@
 
 ;; emms: Emacs 音乐播放器
 ;; (autoload 'emms "emms-playlist-mode" nil t)
+;; (autoload 'emms-browser "emms-browser" nil t)
+(emms-start)
 (eval-after-load "emms-playlist-mode"
   '(progn
 	 (emms-settings)))
@@ -131,8 +133,14 @@
 ;;  emms-playlist-mode-map
 ;;  `(("<SPC>" emms-pause)
 ;;    ("<RET>" emms-playlist-mode-play-current-track)))
-(global-set-key (kbd "C-x E d") 'emms-dir-tree)
+(global-set-key (kbd "C-x E b") 'emms-browser)
+(global-set-key (kbd "C-x E f") 'emms-play-file)
+(global-set-key (kbd "C-x E l") 'emms-play-playlist)
+(global-set-key (kbd "C-x E d") 'emms-play-directory)
+(global-set-key (kbd "C-x E m") 'emms-playlist-mode-go)
 (global-set-key (kbd "C-x E p") 'emms-playlist-mode-go-popup)
+(global-set-key (kbd "C-x E a") 'emms-add-directory)
+(global-set-key (kbd "C-x E t") 'emms-add-directory-tree)
 (global-set-key (kbd "C-x E <up>") 'emms-start)
 (global-set-key (kbd "C-x E <down>") 'emms-pause)
 (global-set-key (kbd "C-x E S-<left>") 'emms-previous)

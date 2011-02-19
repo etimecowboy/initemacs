@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-02-18 Fri 16:13 xin on p6t>
+;; Time-stamp:<2011-02-18 Fri 23:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -51,6 +51,10 @@
 (eal-define-keys-commonly
  global-map
  `(("C-x d" dired-jump)))
+
+(eal-define-keys-commonly
+ dired-mode-map
+ `(("C-e"         emms-add-dired)))
 
 ;; (eal-define-keys-commonly
 ;;  dired-mode-map

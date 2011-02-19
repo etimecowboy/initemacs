@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-18 Fri 21:57 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 03:18 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -264,8 +264,10 @@
 (setq scalable-fonts-allowed t)
 ;; Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
-(global-set-key
- (kbd "C-x F") 'xy/set-font)
+;; (global-set-key
+;;  (kbd "C-x F") 'xy/set-font)
+(when window-system
+  (xy/set-font))
 
 ;; 中文输入法
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
