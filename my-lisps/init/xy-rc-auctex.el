@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-02-17 Thu 14:34 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 22:35 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,36 +27,6 @@
   ;; Set current file as the master
   (setq-default TeX-master t) 
 
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (setq reftex-plug-into-AUCTeX t)
-
-  ;; (require 'tex-mik)
-  ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
-
-  ;;-------------------------------------------------------------------
-  ;;autoload minor modes
-  ;;-------------------------------------------------------------------
-  (add-hook 'LaTeX-mode-hook
-            '(lambda ()
-			   ;; (setq auto-fill-mode 1)
-			   (outline-minor-mode 1)
-			   (cdlatex-mode 1)
-			   (reftex-mode 1)
-			   (flyspell-mode 1)
-			   (tex-source-specials-mode 1)
-			   (LaTeX-math-mode 1)
-			   (TeX-fold-mode 1)
-			   (TeX-PDF-mode 1)
-			   ;; (setq TeX-master t)
-			   ))
-
-  ;; load cd-latex
-  (require 'cdlatex)
-  ;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-  ;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
-  ;;(add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
-  ;;(add-hook 'latex-mode-hook 'turn-on-cdlatex) ; with Emacs latex mode
-
   ;; load reftex
   (require 'reftex)
   ;;(autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
@@ -65,11 +35,53 @@
   (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
   ;;(add-hook 'latex-mode-hook 'turn-on-reftex) ; with Emacs latex mode
   (setq reftex-default-bibliography 
-      (list "~/emacs/org/source/phd/bib/bio" 
-            "~/emacs/org/source/phd/bib/lyon" 
-            "~/emacs/org/source/phd/bib/meddis"
-            "~/emacs/org/source/phd/bib/patterson"
-            "~/emacs/org/source/phd/bib/manuals")))
+		(list "~/emacs/org/source/phd/bib/bio" 
+			  "~/emacs/org/source/phd/bib/lyon" 
+			  "~/emacs/org/source/phd/bib/meddis"
+			  "~/emacs/org/source/phd/bib/patterson"
+			  "~/emacs/org/source/phd/bib/manuals"))
+  (setq reftex-plug-into-AUCTeX t)
+
+  ;; load cd-latex
+  (require 'cdlatex)
+  ;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
+  ;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
+  ;;(add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
+  ;;(add-hook 'latex-mode-hook 'turn-on-cdlatex) ; with Emacs latex mode
+
+  ;; (require 'tex-mik)
+  ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
+
+  (add-hook 'LaTeX-mode-hook
+            '(lambda ()
+			   (turn-on-auto-fill)
+			   (outline-minor-mode 1)
+			   (cdlatex-mode 1)
+			   (reftex-mode 1)
+			   (flyspell-mode 1)
+			   (tex-source-specials-mode 1)
+			   (LaTeX-math-mode 1)
+			   (TeX-fold-mode 1)
+			   (TeX-PDF-mode 1)
+			   (turn-on-reftex)
+			   (yas-start)
+			   ;; (setq TeX-master t)
+			   ))
+  (add-hook 'latex-mode-hook
+            '(lambda ()
+			   (turn-on-auto-fill)
+			   (outline-minor-mode 1)
+			   (cdlatex-mode 1)
+			   (reftex-mode 1)
+			   (flyspell-mode 1)
+			   (tex-source-specials-mode 1)
+			   (LaTeX-math-mode 1)
+			   (TeX-fold-mode 1)
+			   (TeX-PDF-mode 1)
+			   (turn-on-reftex)
+			   (yas-start)
+			   ;; (setq TeX-master t)
+			   ))
 
 ;;-------------------------------------------------------------------
 ;; 为AUCTeX添加自定义命令，注意命令中用了很多引号，这是为了适应文件名中含有空格的情况
@@ -95,6 +107,8 @@
 ;; (defvar BIBINPUTS
 ;;   '("\\.bib$" "$BSTINPUTS" "$BIBINPUTS")) ; bibtex files.
 ;; (setenv "BIBINPUTS" "jabref")
+
+  )
 
 ;;-----------------------------------------------------------------------------
 

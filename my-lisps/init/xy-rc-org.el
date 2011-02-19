@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-02-13 Sun 23:17 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 21:30 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -235,7 +235,9 @@
   (require 'org-exp-bibtex)
   ;; turn on cdlatex
   (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
-
+  ;; turn on yasnappet
+  (add-hook 'org-mode-hook 'yas-start)
+ 
   ;; contrib modules
   ;; (add-to-list 'load-path  
   ;;       "~/.emacs.d/site-lisp/org/contrib/babel/lisp") 

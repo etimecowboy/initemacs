@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-19 Sat 18:13 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 21:23 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -389,7 +389,7 @@ the mode-line."
 		("C-c M-n" highlight-symbol-next-in-defun)
 		("C-c M-p" highlight-symbol-prev-in-defun)))))
 
-;; zjl-hl, use CEDET semantic to highlight funtion calls
+;; zjl-hl, use CEDET semantic to highlight function calls
 (eval-after-load "zjl-hl"
   '(progn
 	 (zjl-hl-face-settings)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-git.el'
-;; Time-stamp:<2011-02-19 Sat 17:18 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 22:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,7 @@
   (interactive)
   (require 'git)
   (require 'git-blame)
-  (git-status))
+  (call-interactively 'git-status))
 
 ;;;###autoload
 (defun git-settings ()

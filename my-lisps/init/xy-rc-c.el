@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-02-19 Sat 18:35 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 22:38 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -32,8 +32,11 @@
     (subword-mode 1))
 
   (require 'c-eldoc)
-  (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-  (add-hook 'c-mode-hook 'yas-start)
+  (add-hook 'c-mode-hook
+			'(lambda ()
+			   (c-turn-on-eldoc-mode)
+			   (turn-on-auto-fill)
+			   (yas-start)))
   (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
   (add-to-list 'auto-mode-alist '("\\.hch" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.hcc" . c-mode))

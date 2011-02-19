@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-19 Sat 18:48 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 22:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -37,6 +37,9 @@
 ;;    ("C-x A r" align-regexp)))
 (global-set-key (kbd "C-x A a") 'align)
 (global-set-key (kbd "C-x A r") 'align-regexp)
+
+;; Auto fill
+;; Use default setting (70 column)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
