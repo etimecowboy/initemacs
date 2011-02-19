@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-01-31 Mon 00:56 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 15:19 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,6 +15,15 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+
+;;;###autoload
+(defun gnus-start ()
+  "Start gnus news reader."
+
+  (interactive)
+  (gnus-agentize))
+
 
 ;;;###autoload
 (defun gnus-settings ()

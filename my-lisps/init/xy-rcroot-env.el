@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-19 Sat 03:18 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 17:13 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -105,33 +105,32 @@
 (eval-after-load "info"
   `(progn
      (info-face-settings)
-     (info-settings)))
-
-(eal-define-keys
- 'Info-mode-map
- `(("j"         next-line)
-   ("k"         previous-line)
-   ("h"         backward-char)
-   ("l"         forward-char)
-   ("J"         emaci-roll-down)
-   ("K"         emaci-roll-up)
-   ("f"         am-forward-word-or-to-word)
-   ("/"         describe-symbol-at-point)
-   ("U"         Info-up)
-   ("u"         View-scroll-half-page-backward)
-   ("Q"         kill-this-buffer)
-   ("o"         other-window)
-   ("S-SPC"     View-scroll-half-page-backward)
-   ("SPC"       View-scroll-half-page-forward)
-   ("C-h"       Info-up)
-   ("N"         Info-next-reference)
-   ("P"         Info-prev-reference)
-   ("'"         switch-to-other-buffer)
-   ("."         find-symbol-at-point)
-   ("<mouse-4>" mwheel-scroll)
-   ("<mouse-5>" mwheel-scroll)
-   ("C-c ,"     Info-history-back)
-   ("C-c ."     Info-history-forward)))
+     (info-settings)
+	 (eal-define-keys
+	  'Info-mode-map
+	  `(("j"         next-line)
+		("k"         previous-line)
+		("h"         backward-char)
+		("l"         forward-char)
+		("J"         emaci-roll-down)
+		("K"         emaci-roll-up)
+		("f"         am-forward-word-or-to-word)
+		("/"         describe-symbol-at-point)
+		("U"         Info-up)
+		("u"         View-scroll-half-page-backward)
+		("Q"         kill-this-buffer)
+		("o"         other-window)
+		("S-SPC"     View-scroll-half-page-backward)
+		("SPC"       View-scroll-half-page-forward)
+		("C-h"       Info-up)
+		("N"         Info-next-reference)
+		("P"         Info-prev-reference)
+		("'"         switch-to-other-buffer)
+		("."         find-symbol-at-point)
+		("<mouse-4>" mwheel-scroll)
+		("<mouse-5>" mwheel-scroll)
+		("C-c ,"     Info-history-back)
+		("C-c ."     Info-history-forward)))))
 
 (eval-after-load "info+"
   `(progn
@@ -141,36 +140,35 @@
 (global-set-key [S-f1] 'man-follow)
 
 (eal-define-keys
- 'Man-mode-map
- `(("Q"     Man-kill)
-   ("1"     delete-other-windows)
-   ("2"     split-window-vertically)
-   ("3"     split-window-horizontally)
-   ("u"     View-scroll-half-page-backward)
-   ("S-SPC" View-scroll-half-page-backward)
-   ("SPC"   View-scroll-half-page-forward)
-   ("w"     scroll-down)
-   ("d"     scroll-up)
-   ("f"     am-forward-word-or-to-word)
-   ("b"     emaci-b)
-   ("n"     emaci-n)
-   ("p"     emaci-p)
-   ("N"     Man-next-section)
-   ("P"     Man-previous-section)
-   ("m"     back-to-indentation)
-   ("M-j"   Man-goto-section)
-   ("."     set-mark-command)
-   ("g"     emaci-g)
-   ("'"     switch-to-other-buffer)))
-
-(eal-define-keys
  `(c-mode-base-map sh-mode-map)
  `(("C-c /" man-current-word)))
 
 (eval-after-load "man"
   `(progn
      (man-face-settings)
-     (man-settings)))
+     (man-settings)
+	 (eal-define-keys
+	  'Man-mode-map
+	  `(("Q"     Man-kill)
+		("1"     delete-other-windows)
+		("2"     split-window-vertically)
+		("3"     split-window-horizontally)
+		("u"     View-scroll-half-page-backward)
+		("S-SPC" View-scroll-half-page-backward)
+		("SPC"   View-scroll-half-page-forward)
+		("w"     scroll-down)
+		("d"     scroll-up)
+		("f"     am-forward-word-or-to-word)
+		("b"     emaci-b)
+		("n"     emaci-n)
+		("p"     emaci-p)
+		("N"     Man-next-section)
+		("P"     Man-previous-section)
+		("m"     back-to-indentation)
+		("M-j"   Man-goto-section)
+		("."     set-mark-command)
+		("g"     emaci-g)
+		("'"     switch-to-other-buffer)))))
 
 ;; woman settings
 (global-set-key [M-f1] 'woman)
@@ -183,28 +181,27 @@
 ;; help-mode settings
 (global-set-key (kbd "C-x H") 'goto-help-buffer)
 
-(eal-define-keys
- 'help-mode-map
- `(("B"   help-go-back)
-   ("F"   help-go-forward)
-   ("f"   am-forward-word-or-to-word)
-   ("d"   scroll-up)
-   ("w"   scroll-down)
-   ("C-h" help-go-back)
-   ("C-;" help-go-forward)
-   ("n"   forward-button)
-   ("p"   backward-button)
-   ("q"   delete-current-window)
-   ("'"   switch-to-other-buffer)
-   ("u"   View-scroll-half-page-backward)
-   ("SPC" scroll-up)
-   ("."   find-symbol-at-point)
-   ("/"   describe-symbol-at-point)))
-
 (eval-after-load "help-mode"
   `(progn
      (help-mode-face-settings)
-     (help-mode-settings)))
+     (help-mode-settings)
+	 (eal-define-keys
+	  'help-mode-map
+	  `(("B"   help-go-back)
+		("F"   help-go-forward)
+		("f"   am-forward-word-or-to-word)
+		("d"   scroll-up)
+		("w"   scroll-down)
+		("C-h" help-go-back)
+		("C-;" help-go-forward)
+		("n"   forward-button)
+		("p"   backward-button)
+		("q"   delete-current-window)
+		("'"   switch-to-other-buffer)
+		("u"   View-scroll-half-page-backward)
+		("SPC" scroll-up)
+		("."   find-symbol-at-point)
+		("/"   describe-symbol-at-point)))))
 
 ;; 非常方便的查看emacs帮助的插件
 ;; (eal-define-keys `(emacs-lisp-mode-map 
@@ -382,6 +379,15 @@
    ("C-x G m" goto-my-own-lisp-dir)
    ("C-x G e" goto-my-emacs-dir)
    ("C-x G h" goto-my-home-dir)))
+
+;; try to improve slow performance on windows.
+(Windows
+ (setq w32-get-true-file-attributes nil))
+
+;; Change default major mode of *scratch* buffer
+(setq initial-major-mode 'text-mode)
+;; Change default text in the *scratch* buffer
+(setq initial-scratch-message "")
 
 ;;------------------------------------------------------------------------------
 

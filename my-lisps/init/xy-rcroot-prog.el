@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-17 Thu 23:33 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 18:48 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -31,17 +31,12 @@
  `(("RET" newline-and-indent)))
 
 ;; BUG: not working
-(eal-define-keys-commonly
- global-map
- `(("C-x a"   align)
-   ("C-x M-a" align-regexp)))
-
-;; zjl-hl,
-(require 'zjl-hl)
-(eval-after-load "zjl-hl"
-  `(progn
-     (zjl-hl-face-settings)
-     (zjl-hl-settings)))
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("C-x A"   align)
+;;    ("C-x A r" align-regexp)))
+(global-set-key (kbd "C-x A a") 'align)
+(global-set-key (kbd "C-x A r") 'align-regexp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -208,26 +203,26 @@
 ;;----------------------------------------------------------------------------
 
 ;; hide-ifdef, c中隐藏ifdef
-(autoload 'hide-ifdef-block "hideif"
-  "Hide the ifdef block (true or false part) enclosing or before the cursor."
-  t)
+;; (autoload 'hide-ifdef-block "hideif"
+;;   "Hide the ifdef block (true or false part) enclosing or before the cursor."
+;;   t)
 
-(autoload 'hide-ifdefs "hideif"
-  "Hide the contents of some #ifdefs.
-Assume that defined symbols have been added to `hide-ifdef-env'.
-The text hidden is the text that would not be included by the C
-preprocessor if it were given the file with those symbols defined.
+;; (autoload 'hide-ifdefs "hideif"
+;;   "Hide the contents of some #ifdefs.
+;; Assume that defined symbols have been added to `hide-ifdef-env'.
+;; The text hidden is the text that would not be included by the C
+;; preprocessor if it were given the file with those symbols defined.
 
-;; Turn off hiding by calling `show-ifdefs'."
-  t)
+;; ;; Turn off hiding by calling `show-ifdefs'."
+;;   t)
 
-(autoload 'show-ifdef-block "hideif"
-  "Show the ifdef block (true or false part) enclosing or before the cursor."
-  t)
+;; (autoload 'show-ifdef-block "hideif"
+;;   "Show the ifdef block (true or false part) enclosing or before the cursor."
+;;   t)
 
-(autoload 'show-ifdefs "hideif"
-  "Cancel the effects of `hide-ifdef': show the contents of all #ifdefs."
-  t)
+;; (autoload 'show-ifdefs "hideif"
+;;   "Cancel the effects of `hide-ifdef': show the contents of all #ifdefs."
+;;   t)
 
 (eval-after-load "hideif"
   '(progn
@@ -258,7 +253,7 @@ preprocessor if it were given the file with those symbols defined.
 ;; sourcepair,可以在cpp与h文件之间切换
 (eal-define-keys
  `(c-mode-base-map)
- `(("C-c s" sourcepair-load)))
+ `(("C-c S" sourcepair-load)))
 
 (autoload 'sourcepair-load "sourcepair"
   "Load the corresponding C/C++ header or source file for the current buffer.
@@ -457,9 +452,9 @@ See the documentation for these variables for more info.
 ;;            (locate-library "semantic-ctxt") ; offical cedet
 ;;            (require 'cedet nil 'noerror))
 
-(require 'cedet)
 (eval-after-load "cedet"
-  `(cedet-settings))
+  '(progn
+	 (cedet-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -467,7 +462,6 @@ See the documentation for these variables for more info.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'ecb-autoloads)
 (eval-after-load "ecb"
   `(ecb-settings))
 
@@ -501,35 +495,38 @@ See the documentation for these variables for more info.
 (defvar flymake-mode-map (make-sparse-keymap))
 (autoload 'flymake-find-file-hook "flymake" "" t)
 (add-hook 'find-file-hook 'flymake-find-file-hook)
-(eval-after-load "flymake" `(flymake-settings))
-(eal-define-keys
- 'flymake-mode-map
- `(("C-c N"   flymake-goto-next-error-disp)
-   ("C-c P"   flymake-goto-prev-error-disp)
-   ("C-c M-w" flymake-display-current-warning/error)))
+(eval-after-load "flymake"
+  '(progn
+	 (flymake-settings)
+	 (eal-define-keys
+	  'flymake-mode-map
+	  `(("C-c N"   flymake-goto-next-error-disp)
+		("C-c P"   flymake-goto-prev-error-disp)
+		("C-c M-w" flymake-display-current-warning/error)))))
+
 
 ;;--------------------------------------------------------------------
 
 ;; ahei 的智能编译
-(require 'my-smart-compile)
+;; (require 'my-smart-compile)
 
-(defalias 'cpl 'compile)
+;; (defalias 'cpl 'compile)
 
-(defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
-(if is-before-emacs-21
-    (setq makefile-mode-map-list '(makefile-mode-map))
-  (setq makefile-mode-map-list '(makefile-gmake-mode-map makefile-automake-mode-map)))
+;; (defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
+;; (if is-before-emacs-21
+;;     (setq makefile-mode-map-list '(makefile-mode-map))
+;;   (setq makefile-mode-map-list '(makefile-gmake-mode-map makefile-automake-mode-map)))
 
-(eal-define-keys
- (append makefile-mode-map-list
-         '(c-mode-base-map svn-status-mode-map sh-mode-map
-                           compilation-mode-map ruby-mode-map))
- `(("C-c C-m"  make-sb)
-   ("C-c m"    make-check-sb)
-   ("C-c M"    make-clean-sb)
-   ("C-c c"    compile-buffer-sb)
-   ("C-c r"    run-program-sb)
-   ("C-c C"    smart-compile-sb)))
+;; (eal-define-keys
+;;  (append makefile-mode-map-list
+;;          '(c-mode-base-map svn-status-mode-map sh-mode-map
+;;                            compilation-mode-map ruby-mode-map))
+;;  `(("C-c C-m"  make-sb)
+;;    ("C-c m"    make-check-sb)
+;;    ("C-c M"    make-clean-sb)
+;;    ("C-c c"    compile-buffer-sb)
+;;    ("C-c r"    run-program-sb)
+;;    ("C-c C"    smart-compile-sb)))
 
 ;; (eal-define-keys
 ;;  'java-mode-map
@@ -542,27 +539,27 @@ See the documentation for these variables for more info.
 ;;  `(("M-n" next-error)
 ;;    ("M-p" previous-error)))
 
-(eal-define-keys
- makefile-mode-map-list
- `(("M-p"	  previous-error)
-   ("M-n"	  next-error)
-   ("C-c p" makefile-previous-dependency)
-   ("C-c n" makefile-next-dependency)))
+;; (eal-define-keys
+;;  makefile-mode-map-list
+;;  `(("M-p"	  previous-error)
+;;    ("M-n"	  next-error)
+;;    ("C-c p" makefile-previous-dependency)
+;;    ("C-c n" makefile-next-dependency)))
 
-(eal-define-keys
- 'compilation-mode-map
- `(("n" compilation-next-error)
-   ("p" compilation-previous-error)
-   ("'" switch-to-other-buffer)
-   ("u" View-scroll-half-page-backward)
-   ("f" am-forward-word-or-to-word)
-   ("d" scroll-up)
-   ("w" scroll-down)))
+;; (eal-define-keys
+;;  'compilation-mode-map
+;;  `(("n" compilation-next-error)
+;;    ("p" compilation-previous-error)
+;;    ("'" switch-to-other-buffer)
+;;    ("u" View-scroll-half-page-backward)
+;;    ("f" am-forward-word-or-to-word)
+;;    ("d" scroll-up)
+;;    ("w" scroll-down)))
 
-(eval-after-load "compile"
-  `(progn
-     (compile-face-settings)
-     (compile-settings)))
+;; (eval-after-load "compile"
+;;   `(progn
+;;      (compile-face-settings)
+;;      (compile-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

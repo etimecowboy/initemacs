@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-zjl-hl.el'
-;; Time-stamp:<2011-02-11 Fri 16:56 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 18:10 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,6 +26,60 @@
 (defun zjl-hl-face-settings ()
   "Face settings for `zjl-hl'."
 
+  (custom-set-faces
+   '(zjl-elisp-hl-function-call-face
+	 ((((class grayscale) (background light))
+	   :foreground "LightGray" :weight bold)
+	  (((class grayscale) (background dark))
+	   :foreground "DimGray" :weight bold)
+	  (((class color) (min-colors 88) (background light))
+	   :foreground "Orchid")
+	  (((class color) (min-colors 88) (background dark))
+	   :foreground "cornflower blue")
+	  (((class color) (min-colors 16) (background light))
+	   :foreground "Orchid")
+	  (((class color) (min-colors 16) (background dark))
+	   :foreground "LightSteelBlue")
+	  (((class color) (min-colors 8))
+	   (:foreground "blue" :weight bold)) (t (:weight bold))))
+   '(zjl-elisp-hl-setq-face
+	 ((((class grayscale) (background light))
+	   :foreground "LightGray" :weight bold)
+	  (((class grayscale) (background dark))
+	   :foreground "DimGray" :weight bold)
+	  (((class color) (min-colors 88) (background light))
+	   :foreground "Orchid")
+	  (((class color) (min-colors 88) (background dark))
+	   :foreground "cornflower blue")
+	  (((class color) (min-colors 16) (background light))
+	   :foreground "Orchid")
+	  (((class color) (min-colors 16) (background dark))
+	   :foreground "LightSteelBlue")
+	  (((class color) (min-colors 8))
+	   (:foreground "blue" :weight bold)) (t (:weight bold))))
+   '(zjl-hl-elisp-function-call-face
+	 ((((class color) (background dark))
+	   (:foreground "cornflower blue" :height 1.15))))
+   '(zjl-hl-elisp-setq-face
+	 ((((class color) (background dark)) (:foreground "cyan"))))
+   '(zjl-hl-font-lock-bracket-face
+	 ((((class color) (background dark))
+	   (:foreground "firebrick3" :weight bold :height 1.2))))
+   '(zjl-hl-function-call-face
+	 ((t (:foreground "cornflower blue" :height 1.15))))
+   '(zjl-hl-local-variable-reference-face
+	 ((((class color) (background dark)) nil)))
+   '(zjl-hl-number-face
+	 ((((class color) (background dark)) (:foreground "red"))))
+   '(zjl-hl-operators-face
+	 ((((class color) (background dark))
+	   (:foreground "Green" :weight bold))))
+   '(zjl-hl-parameters-reference-face
+	 ((((class color) (background dark))
+	   (:foreground "Yellow" :weight bold))))))
+  
+
+  
   ;; (custom-set-faces
   ;;  '(zjl-hl-function-call-face
   ;;    ((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
@@ -94,6 +148,5 @@
   ;;       zjl-hl-parameters-reference-face 'font-lock-variable-name-face
   ;;       zjl-hl-member-reference-face 'font-lock-variable-name-face
   ;;       zjl-elisp-hl-setq-face 'font-lock-keyword-face))
-  )
 
 (provide 'xy-rc-zjl-hl.el)

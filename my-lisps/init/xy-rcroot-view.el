@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-02-18 Fri 16:58 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 17:50 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -69,15 +69,16 @@
  `(("C-x q" switch-major-mode-with-emaci)
    ("M-s" emaci-mode-on)
    ("M-S" emaci-mode-off)))
-(eal-define-keys
- 'emaci-mode-map
- `(("/" describe-symbol-at-point)
-   ("'" switch-to-other-buffer)
-   ("L" count-brf-lines)
-   ;; ("t" sb-toggle-keep-buffer)
-   ("]" goto-paren)))
-(eval-after-load "emaci" 
-  `(emaci-settings))
+(eval-after-load "emaci"
+  '(progn
+	 (emaci-settings)
+	 (eal-define-keys
+	  'emaci-mode-map
+	  `(("/" describe-symbol-at-point)
+		("'" switch-to-other-buffer)
+		("L" count-brf-lines)
+		;; ("t" sb-toggle-keep-buffer)
+		("]" goto-paren)))))
 
 ;;---------------------------------------------------------------
 
@@ -104,7 +105,7 @@
 ;;  `(("k" previous-line)
 ;;    ("K" roll-up)))
 (eval-after-load "diff-mode"
-  `(progn
+  '(progn
      (diff-face-settings)
      (diff-settings)))
 
@@ -133,7 +134,7 @@
 ;;       ("B"   ediff+-goto-buffer-b))))
 ;; (add-hook 'ediff-keymap-setup-hook 'ediff-keys)
 (eval-after-load "ediff"
-  `(progn
+  '(progn
      (ediff-face-settings)
      (ediff-settings)))
 
@@ -203,12 +204,12 @@
 ;;  `(("C-x C-u" occur-by-moccur-displn)
 ;;    ("C-x M-U" occur-by-moccur-at-point-displn)))
 
-(eal-define-keys
- 'isearch-mode-map
- `(("M-o" isearch-moccur-displn)))
+;; (eal-define-keys
+;;  'isearch-mode-map
+;;  `(("C-x P" isearch-moccur-displn)))
 
 (eval-after-load "color-moccur"
-  `(progn 
+  '(progn 
      (moccur-face-settings)
      (moccur-settings)))
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-02-17 Thu 22:42 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 18:35 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,7 +24,8 @@
   
   (defun c-mode-common-hook-settings ()
     "Settings for `c-mode-common-hook'."
-    (c-set-style "awk")
+
+    (c-set-style "linux")
     ;; 饥饿的删除键
     (c-toggle-hungry-state)
     ;; 对subword进行操作，而不是整个word
@@ -32,6 +33,7 @@
 
   (require 'c-eldoc)
   (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+  (add-hook 'c-mode-hook 'yas-start)
   (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
   (add-to-list 'auto-mode-alist '("\\.hch" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.hcc" . c-mode))
@@ -104,14 +106,15 @@
   (setq c/c++-hightligh-included-files-timer (run-with-idle-timer 0.5 t 'c/c++-hightligh-included-files))
 
   ;; c中隐藏ifdef
-  ;; (require 'hideif)
+  (require 'hideif)
 
   ;; 为不同层次的ifdef着色
   (require 'ifdef)
 
   ;; 快速include
   (require 'c-includes)
-  
-  )
+
+  ;; 在 C 源代码中快速跳转，查找变量，函数
+  (require 'xcscope))
 
 (provide 'xy-rc-c.el)

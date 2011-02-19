@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-02-18 Fri 16:51 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 17:38 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -75,24 +75,23 @@
 ;;---------------------------------------------------------------
 
 ;; Incremental search
-(eal-define-keys
-  'isearch-mode-map
-  `(("M-i" isearch-query-replace-current)
-    ("M-k" isearch-clean)
-    ("M-g" isearch-cancel)
-    ("M-u" isearch-toggle-word)
-    ("M-y" isearch-yank-line)
-    ("C-y" isearch-yank-kill)
-    ("M-h" isearch-del-char)
-    ("M-H" ,(if is-after-emacs-23 isearch-help-map 
-              'isearch-mode-help))))
-;; (define-key-list
-;;   global-map `(("C-x M-s" isearch-forward-cur-word)))
-
 (eval-after-load "isearch"
-  `(progn
+  '(progn
      (isearch-face-settings)
-     (isearch-settings)))
+     (isearch-settings)
+	 (eal-define-keys
+	  'isearch-mode-map
+	  `(("M-i" isearch-query-replace-current)
+		("M-k" isearch-clean)
+		("M-g" isearch-cancel)
+		("M-u" isearch-toggle-word)
+		("M-y" isearch-yank-line)
+		("C-y" isearch-yank-kill)
+		("M-h" isearch-del-char)
+		("M-H" ,(if is-after-emacs-23 isearch-help-map 
+				  'isearch-mode-help))))))
+(define-key-list
+  global-map `(("C-x M-s" isearch-forward-cur-word)))
 
 ;;-------------------------------------------------------------
 
@@ -166,14 +165,16 @@
 
 ;; artist, 非常强大的文本画图的工具
 ;; (global-set-kbd "C-x M-A" 'artist-mode)
-(eal-define-keys
- 'artist-mode-map
- `(("C-c l"   artist-select-op-line)
-   ("C-c r"   artist-select-op-rectangle)
-   ("C-c M-c" artist-select-op-copy-rectangle)
-   ("C-c M-w" artist-select-op-cut-rectangle)
-   ("C-c M-p" artist-select-op-paste)))
-(eval-after-load "artist" `(artist-settings))
+(eval-after-load "artist"
+  '(progn
+	 (artist-settings)
+	 (eal-define-keys
+	  'artist-mode-map
+	  `(("C-c l"   artist-select-op-line)
+		("C-c r"   artist-select-op-rectangle)
+		("C-c M-c" artist-select-op-copy-rectangle)
+		("C-c M-w" artist-select-op-cut-rectangle)
+		("C-c M-p" artist-select-op-paste)))))
 
 ;;------------------------------------------------------------------
 
@@ -185,8 +186,6 @@
 ;;------------------------------------------------------------------
 
 ;; ahei 的按键设置
-
-(define-key minibuffer-local-completion-map (kbd "C-k") 'kill-line)
 
 ;; (apply-args-list-to-fun
 ;;  'def-action-on-area-command

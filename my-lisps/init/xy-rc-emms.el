@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emms.el'
-;; Time-stamp:<2011-02-19 Sat 03:34 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 15:16 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -186,24 +186,24 @@
   (setq emms-stream-bookmarks-file (concat emms-directory "/emms-streams")) ;网络电台保存文件
   (setq emms-score-file (concat emms-directory "/emms-scores"))             ;分数文件
   (setq emms-source-file-default-directory emms-directory)                   ;设定默认的播放目录
-  (HomeDesktop
-     (GNULinux
-	     (setq emms-history-file (concat emms-directory "/emms-history-dl"))   ;播放列表历史记录
-		 (setq emms-cache-file (concat my-var-path "/emms-cache-dl"))          ;缓存文件
-		 (setq emms-score-file (concat emms-directory "/emms-scores-dl"))      ;分数文件
-	 )
-	 (Windows
-	     (setq emms-history-file (concat emms-directory "/emms-history-dw"))   ;播放列表历史记录
-		 (setq emms-cache-file (concat my-var-path "/emms-cache-dw"))          ;缓存文件
-		 (setq emms-score-file (concat emms-directory "/emms-scores-dw"))      ;分数文件
-	  ))
+  ;; (HomeDesktop
+  ;;    (GNULinux
+  ;; 	     (setq emms-history-file (concat emms-directory "/emms-history-dl"))   ;播放列表历史记录
+  ;; 		 (setq emms-cache-file (concat my-var-path "/emms-cache-dl"))          ;缓存文件
+  ;; 		 (setq emms-score-file (concat emms-directory "/emms-scores-dl"))      ;分数文件
+  ;; 	 )
+  ;; 	 (Windows
+  ;; 	     (setq emms-history-file (concat emms-directory "/emms-history-dw"))   ;播放列表历史记录
+  ;; 		 (setq emms-cache-file (concat my-var-path "/emms-cache-dw"))          ;缓存文件
+  ;; 		 (setq emms-score-file (concat emms-directory "/emms-scores-dw"))      ;分数文件
+  ;; 	  ))
 
-  (OfficePC
-      (Windows
-	     (setq emms-history-file (concat emms-directory "/emms-history-ww"))   ;播放列表历史记录
-	     (setq emms-cache-file (concat my-var-path "/emms-cache-ww"))          ;缓存文件
-	     (setq emms-score-file (concat emms-directory "/emms-scores-ww"))      ;分数文件
-	  ))
+  ;; (OfficePC
+  ;;     (Windows
+  ;; 	     (setq emms-history-file (concat emms-directory "/emms-history-ww"))   ;播放列表历史记录
+  ;; 	     (setq emms-cache-file (concat my-var-path "/emms-cache-ww"))          ;缓存文件
+  ;; 	     (setq emms-score-file (concat emms-directory "/emms-scores-ww"))      ;分数文件
+  ;; 	  ))
   
   ;; 播放设置
   ;; (add-hook 'emms-player-finished-hook 'emms-random)         ;当播放完当前的歌曲时随机选择下一首歌曲

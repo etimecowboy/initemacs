@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-17 Thu 21:39 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 18:13 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -279,7 +279,7 @@ the mode-line."
 
 ;; Color-theme, fancy themes for emacs
 ;; REF: http://emacser.com/color-theme.htm
-(require 'color-theme-autoloads)
+;; (require 'color-theme-autoloads)
 (eval-after-load "color-theme-autoloads"
   '(progn
      (color-theme-settings)))
@@ -374,19 +374,25 @@ the mode-line."
 
 ;; highlight-symbol.el, 像Eclipse那样高亮光标处单词
 (require 'highlight-symbol)
-(eal-define-keys
- `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
-                       c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
- `(("C-c M-H" highlight-symbol-at-point)
-   ("C-c M-R" highlight-symbol-remove-all)
-   ("C-c M-N" highlight-symbol-next)
-   ("C-c M-P" highlight-symbol-prev)
-   ("C-c r"   highlight-symbol-query-replace)
-   ("C-c M-n" highlight-symbol-next-in-defun)
-   ("C-c M-p" highlight-symbol-prev-in-defun)))
 (eval-after-load "highlight-symbol"
   `(progn
      (highlight-symbol-face-settings)
-     (highlight-symbol-settings)))
+     (highlight-symbol-settings)
+	 (eal-define-keys
+	  `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
+		c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
+	  `(("C-c M-H" highlight-symbol-at-point)
+		("C-c M-R" highlight-symbol-remove-all)
+		("C-c M-N" highlight-symbol-next)
+		("C-c M-P" highlight-symbol-prev)
+		("C-c r"   highlight-symbol-query-replace)
+		("C-c M-n" highlight-symbol-next-in-defun)
+		("C-c M-p" highlight-symbol-prev-in-defun)))))
+
+;; zjl-hl, use CEDET semantic to highlight funtion calls
+(eval-after-load "zjl-hl"
+  '(progn
+	 (zjl-hl-face-settings)
+	 (zjl-hl-settings)))
 
 (provide 'xy-rcroot-app)

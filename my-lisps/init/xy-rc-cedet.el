@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-01-31 Mon 16:03 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 18:38 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,6 +16,13 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
+;;;###autoload
+(defun cedet-start ()
+  "Start CEDET programming environment"
+
+  (interactive)
+  (require 'cedet)
+  (revert-buffer))
 
 ;;;###autoload
 (defun cedet-settings ()
@@ -150,6 +157,11 @@
             ("C" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
             ("c" . ("h"))
             ("m" . ("h"))
-            ("mm" . ("h"))))))
+            ("mm" . ("h")))))
+
+  ;; zjl-hl, use semantic to highlight functions 
+  (require 'zjl-hl)
+  ;; (zjl-hl-enable-global-all-modes)
+ )
 
 (provide 'xy-rc-cedet.el)

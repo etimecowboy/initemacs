@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-02-18 Fri 22:52 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 17:41 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -80,15 +80,15 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'icicles)
-;; (icy-mode 1)
 (add-hook 'after-init-hook 'icy-start)
 (defun icicle-keys ()
   "icicle-mode的按键设置."
   (define-key minibuffer-local-completion-map 
     (kbd "SPC") 'minibuffer-complete-word)
   (define-key minibuffer-local-completion-map 
-    (kbd "C-w") 'backward-kill-word-or-kill-region))
+    (kbd "C-w") 'backward-kill-word-or-kill-region)
+  (define-key minibuffer-local-completion-map
+	(kbd "C-k") 'kill-line))
   ;; (define-key minibuffer-local-completion-map
   ;; 	[Tab] 'icicle-apropos))
 (add-hook 'icicle-mode-hook 'icicle-keys t)
@@ -147,23 +147,20 @@
 ;;----------------------------------------------------------
 
 ;; auto-complete settings
-(require 'auto-complete-config)
-(require 'auto-complete+)
-(global-auto-complete-mode 1)
-;; 不让回车的时候执行`ac-complete', 因为当你输入完一个
-;; 单词的时候, 很有可能补全菜单还在, 这时候你要回车的话,
-;; 必须要干掉补全菜单, 很麻烦, 用M-j来执行`ac-complete'
-(eal-define-keys
- 'ac-complete-mode-map
- `(("<return>"   nil)
-   ("RET"        nil)
-   ("M-j"        ac-complete)
-   ;; ("<C-return>" ac-complete)
-   ("M-n"        ac-next)
-   ("M-p"        ac-previous)
-   ))
 (eval-after-load "auto-complete"
-  '(auto-complete-settings))
+  '(progn
+	 (auto-complete-settings)
+	 ;; 不让回车的时候执行`ac-complete', 因为当你输入完一个
+	 ;; 单词的时候, 很有可能补全菜单还在, 这时候你要回车的话,
+	 ;; 必须要干掉补全菜单, 很麻烦, 用M-j来执行`ac-complete'
+	 (eal-define-keys-commonly
+	  'ac-complete-mode-map
+	  `(("<return>"   nil)
+		("RET"        nil)
+		("M-j"        ac-complete)
+		;; ("<C-return>" ac-complete)
+		("M-n"        ac-next)
+		("M-p"        ac-previous)))))
 
 ;;--------------------------------------------------------
 
@@ -197,18 +194,16 @@
 ;;---------------------------------------------------------
 
 ;; 超强的snippet
-(require 'yasnippet)
-(yas/global-mode 1)
-
-;; (eal-define-keys
-;;  'yas/keymap
-;;  `(("M-j"     yas/next-field-or-maybe-expand)
-;;    ("M-k"     yas/prev-field)))
-;; (eal-define-keys
-;;  'yas/minor-mode-map
-;;  `(("C-c C-f" yas/find-snippets)))
 (eval-after-load "yasnippet"
-  `(yasnippet-settings))
+  '(progn
+	 (yasnippet-settings)
+	 (eal-define-keys
+	  'yas/keymap
+	  `(("M-j"     yas/next-field-or-maybe-expand)
+		("M-k"     yas/prev-field)))
+	 (eal-define-keys
+	  'yas/minor-mode-map
+	  `(("C-c C-f" yas/find-snippets)))))
 
 ;;-------------------------------------------------------------
 

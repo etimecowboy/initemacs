@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-multi-term.el'
-;; Time-stamp:<2011-01-31 Mon 11:36 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 16:56 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,6 +16,15 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
+;;;###autoload
+(defun multi-term-start ()
+  "Start multi-term."
+
+  (interactive)
+  (require 'multi-term)
+  (multi-term))
+
+;;;###autoload
 (defun multi-term-settings ()
   "Settings for `term'."
   

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-18 Fri 17:52 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 17:10 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -44,6 +44,7 @@
 ;;------------------------------------------------------------------
 
 ;; undo and redo
+;; BUG: redo does not work
 (autoload 'redo "redo+"
   "Redo the the most recent undo.
 Prefix arg COUNT means redo the COUNT most recent undos.
@@ -107,23 +108,24 @@ A numeric argument serves as a repeat count." t)
 (eval-after-load "browse-kill-ring"
   `(progn
      (browse-kill-ring-settings)
-     (browse-kill-ring-face-settings)))
+     (browse-kill-ring-face-settings)
+	 (eal-define-keys
+	  'browse-kill-ring-mode-map
+	  `(("RET" browse-kill-ring-insert-and-quit)
+		("<"   beginning-of-buffer)
+		(">"   end-of-buffer)
+		("j"   next-line)
+		("k"   previous-line)
+		("h"   backward-char)
+		("l"   forward-char)
+		("n"   browse-kill-ring-forward-without-linum-mode)
+		("p"   browse-kill-ring-previous-without-linum-mode)
+		("SPC" scroll-up)
+		("U"   scroll-down)
+		("u"   View-scroll-half-page-backward)
+		("o"   other-window)))))
+
 (global-set-key (kbd "C-=") 'browse-kill-ring)
-(eal-define-keys
- 'browse-kill-ring-mode-map
- `(("RET" browse-kill-ring-insert-and-quit)
-   ("<"   beginning-of-buffer)
-   (">"   end-of-buffer)
-   ("j"   next-line)
-   ("k"   previous-line)
-   ("h"   backward-char)
-   ("l"   forward-char)
-   ("n"   browse-kill-ring-forward-without-linum-mode)
-   ("p"   browse-kill-ring-previous-without-linum-mode)
-   ("SPC" scroll-up)
-   ("U"   scroll-down)
-   ("u"   View-scroll-half-page-backward)
-   ("o"   other-window)))
 
 ;;-------------------------------------------------------------------
 
@@ -199,21 +201,19 @@ from tradition chinese to simple chinese" t)
 ;;-------------------------------------------------------------
 
 ;; inkd, 在各种 text 文档间提供链接
-
-(require 'linkd)
 (eval-after-load "linkd"
   `(progn
      (linkd-settings)
-     (linkd-face-settings)))
-(eal-define-keys
- 'linkd-overlay-map
- `(("n"        linkd-next-link)
-   ("p"        linkd-previous-link)
-   ("<return>" linkd-follow-at-point)))
-(eal-define-keys
- 'linkd-map
- `(("<mouse-4>" nil)
-   ("C-c ," nil)))
+     (linkd-face-settings)
+	 (eal-define-keys
+	  'linkd-overlay-map
+	  `(("n"        linkd-next-link)
+	    ("p"        linkd-previous-link)
+	    ("<return>" linkd-follow-at-point)))
+	 (eal-define-keys
+	  'linkd-map
+	  `(("<mouse-4>" nil)
+	    ("C-c ," nil)))))
 
 ;;------------------------------------------------------------------
 
@@ -247,19 +247,18 @@ from tradition chinese to simple chinese" t)
 
 ;; multi-term: a mode based on term.el, 
 ;; for managing multiple terminal buffers in Emacs.
-;; (require 'multi-term)
-;; (define-key global-map (kbd "C-x e") 'multi-term)
-;; ;; (eal-define-keys-commonly
-;; ;;  'global-map
-;; ;;  `(("C-x n" multi-term-next)
-;; ;;    ("C-x p" multi-term-prev)))
-;; (eal-define-keys
-;;  'text-mode-map
-;;  `(("M-J"   switch-term-and-text)
-;;    ("M-L"   enter-term-mode)))
-;; (eval-after-load "multi-term" 
-;;   `(progn
-;;      (multi-term-settings)))
+(define-key global-map (kbd "C-x T") 'multi-term-start)
+(eval-after-load "multi-term" 
+  `(progn
+     (multi-term-settings)
+	 (eal-define-keys-commonly
+	  'global-map
+	  `(("C-x T n" multi-term-next)
+	    ("C-x T p" multi-term-prev)))))
+	 ;; (eal-define-keys
+	 ;;  'text-mode-map
+	 ;;  `(("M-J"   switch-term-and-text)
+	 ;;    ("M-L"   enter-term-mode)))))
 
 ;;----------------------------------------------------------------------
 

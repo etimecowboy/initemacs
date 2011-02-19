@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-02-06 Sun 01:15 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 16:30 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,6 +15,17 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+;;;###autoload
+(defun auto-complete-start ()
+  "Start auto-complete"
+
+  (interactive)
+  (require 'auto-complete)
+  (require 'auto-complete-config)
+  (require 'auto-complete+)
+  (global-auto-complete-mode 1)
+  )
 
 ;;;###autoload
 (defun ac-settings-4-cc ()

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-02-17 Thu 21:21 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 16:15 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,6 +42,15 @@
   ;; 语法着色
   ;; (if use-black-background
   ;; (progn
+  (set-background-color "black")
+  (set-foreground-color "white")
+  (set-face-background 'default "black")
+  (set-face-foreground 'default "white")
+  (set-face-background 'region "lightgreen")
+  (set-face-foreground 'region "darkred")
+ 
+  ;; (set-cursor-color "red")
+  
   (set-face-foreground 
    'font-lock-comment-face "darkred")
   (set-face-foreground 
@@ -82,5 +91,5 @@
      ((((type tty)) :foreground "yellow")
       (t (:foreground "yellow")))))
   )
-  
+
 (provide 'xy-rc-font-lock.el)

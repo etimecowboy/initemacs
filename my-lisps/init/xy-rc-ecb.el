@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ecb.el'
-;; Time-stamp:<2011-01-31 Mon 14:05 xin on P6T>
+;; Time-stamp:<2011-02-19 Sat 15:40 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,6 +20,7 @@
 (defun ecb ()
   "启动ecb"
   (interactive)
+  (require 'ecb-autoloads)
   (ecb-activate)
   (ecb-layout-switch "leftright-analyse"))
 
