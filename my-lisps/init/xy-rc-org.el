@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-02-20 Sun 00:59 xin on p6t>
+;; Time-stamp:<2011-02-20 Sun 17:00 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -239,7 +239,8 @@
 			'(lambda ()
 			   (org-mode-reftex-setup)
 			   (turn-on-org-cdlatex)
-			   (yas-start)))
+			   (yas-start)
+			   (linkd-start)))
  
   ;; contrib modules
   ;; (add-to-list 'load-path  

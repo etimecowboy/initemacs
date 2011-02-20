@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-02-20 Sun 00:53 xin on p6t>
+;; Time-stamp:<2011-02-20 Sun 18:23 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -44,6 +44,24 @@
 ;; Auctex, TeX writing IDE
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
+;; (add-hook 'LaTeX-mode-hook 'auctex-start)
+(add-to-list 'auto-mode-alist '("\\.tex$" . LaTeX-mode))
+(eval-after-load "latex"
+  `(auctex-settings))
+
+;; reftex, reference
+;; (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
+;; (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" nil)
+;; (autoload 'reftex-citation "reftex-cite" "Make citation" nil)
+;; (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
+(eval-after-load "reftex"
+  `(reftex-settings))
+
+;; cdlatex, tex writing tools
+;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
+;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
+;; (eval-after-load "cdlatex"
+;;   `(cdlatex-settings))
 
 ;;------------------------------------------------------------------------
 
