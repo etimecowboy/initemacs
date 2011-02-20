@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-02-19 Sat 17:50 xin on P6T>
+;; Time-stamp:<2011-02-20 Sun 00:17 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,11 +64,6 @@
 ;; Emacs才是世界上最强大的IDE － 用Emaci阅读文件
 ;; http://emacser.com/emaci.htm
 ;; (require 'emaci)
-(eal-define-keys-commonly
- global-map
- `(("C-x q" switch-major-mode-with-emaci)
-   ("M-s" emaci-mode-on)
-   ("M-S" emaci-mode-off)))
 (eval-after-load "emaci"
   '(progn
 	 (emaci-settings)
@@ -79,6 +74,24 @@
 		("L" count-brf-lines)
 		;; ("t" sb-toggle-keep-buffer)
 		("]" goto-paren)))))
+(defun read-only ()
+  "Read-only mode."
+  (interactive)
+  (view-mode t)
+  (emaci-mode-on))
+(defun normal-edit ()
+  "Normal edit mode."
+  (interactive)
+  (emaci-mode-off)
+  (View-quit))
+(add-hook 'find-file-hook 'read-only)
+(eal-define-keys-commonly
+ global-map
+ ;; `(("C-x q" switch-major-mode-with-emaci)
+ ;; ("M-s" emaci-mode-on)
+ ;; ("M-S" emaci-mode-off)))
+ `(("M-s" read-only)
+   ("M-S" normal-edit)))
 
 ;;---------------------------------------------------------------
 
@@ -214,12 +227,16 @@
      (moccur-settings)))
 
 (global-set-key [C-f7] 'moccur-grep-find)
+(global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
+(global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
 
 ;;-------------------------------------------------------------------
 
 ;; ioccur, incremental occur, more convenient and faster than OccurMode,
 ;; which lists all lines of the current buffer that match a regexp.
-(require 'ioccur)
+;; This is ahei's ioccur which uses anything, not the emacswiki one. 
+(autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
+(global-set-key (kbd "C-x O i") 'ioccur)
 
 ;;------------------------------------------------------------------
 

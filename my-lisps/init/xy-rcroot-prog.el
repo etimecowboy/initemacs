@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-19 Sat 22:44 xin on p6t>
+;; Time-stamp:<2011-02-19 Sat 23:46 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -35,8 +35,8 @@
 ;;  global-map
 ;;  `(("C-x A"   align)
 ;;    ("C-x A r" align-regexp)))
-(global-set-key (kbd "C-x A a") 'align)
-(global-set-key (kbd "C-x A r") 'align-regexp)
+;; (global-set-key (kbd "C-x A a") 'align)
+;; (global-set-key (kbd "C-x A r") 'align-regexp)
 
 ;; Auto fill
 ;; Use default setting (70 column)
@@ -186,20 +186,25 @@
 ;; NOTE: C include directories' list are defined in `xy-util.el'
 ;; cc-mode settings
 (eval-after-load "cc-mode"
-  `(cc-mode-settings))
-(eal-define-keys
- `(c-mode-base-map)
- `(("C-c H"     c-electric-backspace)
-   ("C-c M-a" beginning-of-defun)
-   ("C-c M-e" end-of-defun)
-   ("C-c M-F" copy-current-fun-name)))
+  '(progn
+	 (cc-mode-settings)
+	 (eal-define-keys
+	  `(c-mode-base-map)
+	  `(("C-c H"     c-electric-backspace)
+		("C-c M-a" beginning-of-defun)
+		("C-c M-e" end-of-defun)
+		("C-c M-F" copy-current-fun-name)
+		;; ifdef settings
+		("C-c I" mark-ifdef)
+		;; sourcepair,可以在cpp与h文件之间切换
+		("C-c S" sourcepair-load)))))
 
 ;;----------------------------------------------------------------------------
 
 ;; ifdef settings
-(eal-define-keys
- 'c-mode-base-map
- `(("C-c I" mark-ifdef)))
+;; (eal-define-keys
+;;  'c-mode-base-map
+;;  `(("C-c I" mark-ifdef)))
 ;; (eval-after-load "ifdef"
 ;;   `(ifdef-settings))
 
@@ -254,9 +259,9 @@
 ;;-------------------------------------------------
 
 ;; sourcepair,可以在cpp与h文件之间切换
-(eal-define-keys
- `(c-mode-base-map)
- `(("C-c S" sourcepair-load)))
+;; (eal-define-keys
+;;  `(c-mode-base-map)
+;;  `(("C-c S" sourcepair-load)))
 
 (autoload 'sourcepair-load "sourcepair"
   "Load the corresponding C/C++ header or source file for the current buffer.
