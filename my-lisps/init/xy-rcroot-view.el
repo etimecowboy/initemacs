@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-02-20 Sun 00:17 xin on p6t>
+;; Time-stamp:<2011-02-20 Sun 13:35 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -77,13 +77,13 @@
 (defun read-only ()
   "Read-only mode."
   (interactive)
-  (view-mode t)
-  (emaci-mode-on))
+  (emaci-mode-on)
+  (view-mode t))
 (defun normal-edit ()
   "Normal edit mode."
   (interactive)
-  (emaci-mode-off)
-  (View-quit))
+  (View-quit)
+  (emaci-mode-off))
 (add-hook 'find-file-hook 'read-only)
 (eal-define-keys-commonly
  global-map
@@ -210,22 +210,21 @@
 ;; color-moccur,
 ;; With color-moccur, you can search a regexp in all buffers. And you
 ;; can search files like grep(-find) without grep (and find) command.
-(require 'color-moccur)
-
+;; (require 'color-moccur)
 ;; (eal-define-keys-commonly
 ;;  'global-map
 ;;  `(("C-x C-u" occur-by-moccur-displn)
 ;;    ("C-x M-U" occur-by-moccur-at-point-displn)))
-
 ;; (eal-define-keys
 ;;  'isearch-mode-map
 ;;  `(("C-x P" isearch-moccur-displn)))
-
+(autoload 'moccur-grep-find "color-moccur" nil t)
+(autoload 'occur-by-moccur-displn "color-moccur" nil t)
+(autoload 'occur-by-moccur-at-point-displn "color-moccur" nil t)
 (eval-after-load "color-moccur"
   '(progn 
      (moccur-face-settings)
      (moccur-settings)))
-
 (global-set-key [C-f7] 'moccur-grep-find)
 (global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
 (global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
@@ -236,7 +235,7 @@
 ;; which lists all lines of the current buffer that match a regexp.
 ;; This is ahei's ioccur which uses anything, not the emacswiki one. 
 (autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
-(global-set-key (kbd "C-x O i") 'ioccur)
+(global-set-key [M-f7] 'ioccur)
 
 ;;------------------------------------------------------------------
 
