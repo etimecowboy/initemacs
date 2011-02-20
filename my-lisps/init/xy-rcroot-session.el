@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-02-20 Sun 01:50 xin on p6t>
+;; Time-stamp:<2011-02-20 Sun 14:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -96,18 +96,18 @@
 
 ;;---------------------------------------------------------------------
 
-;; ;; Workspace store and recover
-;; ;; windows.el
-;; (eval-after-load "windows" `(windows-settings))
-;; (add-hook 'after-init-hook 'windows-start)
-;; (define-key ctl-x-map "C" 'see-you-again)
-;; (define-key ctl-x-map "S" 'win-save-all-configurations)
-;; (define-key ctl-x-map "V" 'resume-windows)
-;; ;; revive.el
-;; (eval-after-load "revive" `(revive-settings))
-;; ;; And define favorite keys to those functions.
-;; ;; (define-key ctl-x-map "F" 'resume)
-;; ;; (define-key ctl-x-map "K" 'wipe)
+;; Workspace store and recover
+;; windows.el
+(eval-after-load "windows" `(windows-settings))
+(add-hook 'after-init-hook 'windows-start)
+(define-key ctl-x-map "C" 'see-you-again)
+(define-key ctl-x-map "S" 'win-save-all-configurations)
+(define-key ctl-x-map "V" 'resume-windows)
+;; revive.el
+(eval-after-load "revive" `(revive-settings))
+;; And define favorite keys to those functions.
+;; (define-key ctl-x-map "F" 'resume)
+;; (define-key ctl-x-map "K" 'wipe)
 
 ;;--------------------------------------------------------------------
 

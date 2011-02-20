@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-02-20 Sun 13:35 xin on P6T>
+;; Time-stamp:<2011-02-20 Sun 14:40 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -84,7 +84,7 @@
   (interactive)
   (View-quit)
   (emaci-mode-off))
-(add-hook 'find-file-hook 'read-only)
+;; (add-hook 'find-file-hook 'read-only)
 (eal-define-keys-commonly
  global-map
  ;; `(("C-x q" switch-major-mode-with-emaci)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-19 Sat 15:20 xin on P6T>
+;; Time-stamp:<2011-02-20 Sun 14:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -130,6 +130,10 @@
  (eval-after-load "emms-playlist-mode"
    '(progn
 	  (emms-settings)))
+ (eal-define-keys-commonly
+  dired-mode-map
+  `(("¬"    emms-add-dired)
+	("`"    emms-play-dired)))
  (global-set-key (kbd "C-x E b") 'emms-browser)
  (global-set-key (kbd "C-x E f") 'emms-play-file)
  (global-set-key (kbd "C-x E l") 'emms-play-playlist)
