@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-02-04 Fri 02:33 xin on P6T>
+;; Time-stamp:<2011-02-20 Sun 01:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,33 +21,35 @@
   "Start session."
 
   (interactive)
-  ;; (setq session-initialize '(session menus))
-  ;; (setq session-save-file (concat my-var-path "/session"))
-  ;; (OfficePC
-  ;;  (setq session-save-file (concat my-var-path "/session-office")))
-  ;; (HomeDesktop
-  ;;  (setq session-save-file (concat my-var-path "/session-home-desktop")))
-  ;; (Laptop
-  ;;  (setq session-save-file (concat my-var-path "/session-laptop")))
+  (require 'session)
   (session-initialize))
 
 ;;;###autoload
 (defun session-settings ()
   "Settings for `session'."
 
-  (setq session-initialize '(session menus))
-  ;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
-  ;; Use the following:
-  (add-to-list 'session-globals-exclude 'org-mark-ring)
-  ;; (setq session-globals-max-size 100)
-  ;; (setq session-globals-max-string 40960)
-  ;; (setq session-registers-max-string 2048)
+  ;; BUG: this setq seems to cause problem when recovering last point
+  ;;      position.
+  ;; (setq session-initialize '(session menus))
   (setq session-save-file (concat my-var-path "/session"))
   (OfficePC
-   (setq session-save-file (concat my-var-path "/session-office")))
+   (Windows
+	(setq session-save-file (concat my-var-path "/session-o"))))
   (HomeDesktop
-   (setq session-save-file (concat my-var-path "/session-home-desktop")))
+   (GNULinux
+	(setq session-save-file (concat my-var-path "/session-dl")))
+   (Windows
+	(setq session-save-file (concat my-var-path "/session-dw"))))
   (Laptop
-   (setq session-save-file (concat my-var-path "/session-laptop"))))
+   (setq session-save-file (concat my-var-path "/session-n")))
+  ;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
+  ;; Use the following:
+  ;; Don't recursively display gtd files in session list
+  (add-to-list 'session-globals-exclude 'org-mark-ring)
+  ;; Don't display org agenda files
+  (add-to-list 'session-globals-exclude 'org-agenda-files)
+  (setq session-globals-max-size 100)
+   (setq session-globals-max-string 40960)
+   (setq session-registers-max-string 2048))
 
 (provide 'xy-rc-session.el)

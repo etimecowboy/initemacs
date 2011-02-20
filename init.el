@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2011-02-06 Sun 01:53 xin on p6t>
+;; Time-stamp:<2011-02-20 Sun 01:57 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -102,10 +102,19 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; 各种语言开发方面的总体设置
+;; Various programming settings
 ;; (require 'xy-rcroot-prog)
 (load "xy-rcroot-prog")
 (message "* ---[ `xy-rcroot-prog.el' loaded at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; Save editor information between emacs sessions
+;; Must be put at last to avoid failing
+;; (require 'xy-rcroot-session)
+(load "xy-rcroot-session")
+(message "* ---[ `xy-rcroot-session.el' loaded at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
@@ -114,3 +123,5 @@
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
+
+;; this is the place I used to be

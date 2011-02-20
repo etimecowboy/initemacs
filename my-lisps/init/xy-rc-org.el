@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-02-19 Sat 21:30 xin on p6t>
+;; Time-stamp:<2011-02-20 Sun 00:59 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -37,7 +37,8 @@
 ;;;###autoload
 (defun org-settings ()
   "Settings of `org'."
-  
+
+  (require 'org-install)
   ;; Loaded modules
   (setq org-modules 
         '(org-bbdb org-bibtex org-crypt org-ctags org-docview org-id
@@ -69,8 +70,10 @@
               "~/emacs/org/gtd/DSP.org"
               "~/emacs/org/gtd/CProgramming.org"
               "~/emacs/org/gtd/Electronics.org"))
-  ;; Donot recursively display gtd files in session list
+  ;; Don't recursively display gtd files in session list
   (add-to-list 'session-globals-exclude 'org-mark-ring)
+  ;; Don't display org agenda files
+  (add-to-list 'session-globals-exclude 'org-agenda-files)
   (setq org-tag-persistent-alist 
         '((:startgroup) ("@uwe" . 85) ("@home" . 72) ("@shop" . 83) (:endgroup) 
           (:startgroup) ("appt" . 84) ("proj" . 80) (:endgroup) 
@@ -231,12 +234,12 @@
   ;;    )
   ;; )
 
-  (add-hook 'org-mode-hook 'org-mode-reftex-setup)
   (require 'org-exp-bibtex)
-  ;; turn on cdlatex
-  (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
-  ;; turn on yasnappet
-  (add-hook 'org-mode-hook 'yas-start)
+  (add-hook 'org-mode-hook
+			'(lambda ()
+			   (org-mode-reftex-setup)
+			   (turn-on-org-cdlatex)
+			   (yas-start)))
  
   ;; contrib modules
   ;; (add-to-list 'load-path  

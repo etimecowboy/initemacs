@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-02-17 Thu 21:41 xin on p6t>
+;; Time-stamp:<2011-02-20 Sun 00:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,7 @@
 ;;--------------------------------------------------------------------------
 
 ;; Org, Emacs note taking and GTD system
-(require 'org-install)
+;; (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -35,6 +35,8 @@
 ;;  'org-mode-map 
 ;;  `(("C-c )" reftex-citation)))
 (eval-after-load "org"
+  `(org-settings))
+(eval-after-load "org-agenda"
   `(org-settings))
 
 ;;------------------------------------------------------------------------
