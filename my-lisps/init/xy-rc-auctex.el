@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-02-20 Sun 18:20 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 04:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -58,6 +58,7 @@
 			   (turn-on-reftex)
 			   (turn-on-cdlatex)
 			   (yas-start)
+			   (linkd-start)
 			   ;; (setq TeX-master t)
 			   ))
   ;; (add-hook 'latex-mode-hook

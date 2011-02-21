@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-19 Sat 23:46 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 04:09 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -40,6 +40,11 @@
 
 ;; Auto fill
 ;; Use default setting (70 column)
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook
+   cperl-mode-hook cc-mode-hook
+   LaTeX-mode-hook)
+ 'turn-on-auto-fill)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -165,7 +170,9 @@
 (eval-after-load "emacs-lisp-mode"
   `(emacs-lisp-mode-settings))
 (eval-after-load "lisp-mode"
-  `(emacs-lisp-mode-settings))
+  `(lisp-mode-settings))
+(eval-after-load "lisp-interaction-mode"
+  `(lisp-mode-settings))
 
 ;; eldoc, 显示变量, 函数的声明，可用在很多语言中(c)
 (am-add-hooks

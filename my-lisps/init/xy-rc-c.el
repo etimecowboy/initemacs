@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-02-19 Sat 22:38 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 04:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,7 @@
   (defun c-mode-common-hook-settings ()
     "Settings for `c-mode-common-hook'."
 
-    (c-set-style "linux")
+    (c-set-style "awk")
     ;; 饥饿的删除键
     (c-toggle-hungry-state)
     ;; 对subword进行操作，而不是整个word
@@ -34,10 +34,13 @@
   (require 'c-eldoc)
   (add-hook 'c-mode-hook
 			'(lambda ()
-			   (c-turn-on-eldoc-mode)
-			   (turn-on-auto-fill)
-			   (yas-start)))
-  (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
+			   (progn
+				 (c-mode-common-hook-settings)
+				 (turn-on-auto-fill)
+				 (c-turn-on-eldoc-mode)
+				 (yas-start)
+				 (linkd-start))))
+  ;; (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
   (add-to-list 'auto-mode-alist '("\\.hch" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.hcc" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))

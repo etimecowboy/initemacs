@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-02-19 Sat 17:41 xin on P6T>
+;; Time-stamp:<2011-02-21 Mon 04:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -204,6 +204,12 @@
 	 (eal-define-keys
 	  'yas/minor-mode-map
 	  `(("C-c C-f" yas/find-snippets)))))
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook
+   c-mode-hook sh-mode-hook vhdl-mode-hook
+   verilog-mode-hook org-mode-hook
+   LaTeX-mode-hook latex-mode-hook)
+ `yas-start)
 
 ;;-------------------------------------------------------------
 
