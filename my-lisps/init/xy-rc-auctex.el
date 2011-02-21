@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-02-21 Mon 04:26 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 06:50 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,7 +37,11 @@
   (setq TeX-parse-self t)
   ;; Set current file as the master
   (setq-default TeX-master t)
-
+  (setq tex-source-specials-mode t)
+  (setq-default LaTeX-math-mode t)
+  (setq-default TeX-fold-mode t)
+  (setq-default TeX-PDF-mode t)
+  
   ;; load reftex
   (require 'reftex)
 
@@ -46,37 +50,30 @@
 
   (add-hook 'LaTeX-mode-hook
 			'(lambda ()
+			   (progn
+				 (turn-on-auto-fill)
+				 (outline-minor-mode 1)
+				 (cdlatex-mode 1)
+				 (reftex-mode 1)
+				 (flyspell-mode 1)
+				 (turn-on-reftex)
+				 (turn-on-cdlatex)
+				 (yas-start)
+				 (linkd-start)
+				 )))
+  (add-hook 'latex-mode-hook
+  		  '(lambda ()
+			 (progn
 			   (turn-on-auto-fill)
 			   (outline-minor-mode 1)
 			   (cdlatex-mode 1)
 			   (reftex-mode 1)
 			   (flyspell-mode 1)
-			   (tex-source-specials-mode 1)
-			   (LaTeX-math-mode 1)
-			   (TeX-fold-mode 1)
-			   (TeX-PDF-mode 1)
 			   (turn-on-reftex)
 			   (turn-on-cdlatex)
 			   (yas-start)
 			   (linkd-start)
-			   ;; (setq TeX-master t)
-			   ))
-  ;; (add-hook 'latex-mode-hook
-  ;; 		  '(lambda ()
-  ;; 			 (turn-on-auto-fill)
-  ;; 			 (outline-minor-mode 1)
-  ;; 			 (cdlatex-mode 1)
-  ;; 			 (reftex-mode 1)
-  ;; 			 (flyspell-mode 1)
-  ;; 			 (tex-source-specials-mode 1)
-  ;; 			 (LaTeX-math-mode 1)
-  ;; 			 (TeX-fold-mode 1)
-  ;; 			 (TeX-PDF-mode 1)
-  ;; 			 (turn-on-reftex)
-  ;; 			 (turn-on-cdlatex)
-  ;; 			 (yas-start)
-  ;; 			 ;; (setq TeX-master t)
-  ;; 			 ))
+  			 )))
   
   ;; (require 'tex-mik)
   ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
@@ -108,5 +105,8 @@
 
   ;; preview-latex, preview latex output in Emacs
   (LaTeX-preview-setup))
+
+  ;; (yas-start)
+  ;; (linkd-start))
 
 (provide 'xy-rc-auctex)

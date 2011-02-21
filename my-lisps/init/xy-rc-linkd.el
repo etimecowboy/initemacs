@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-linkd.el'
-;; Time-stamp:<2011-02-21 Mon 04:27 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 06:09 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,7 @@
   (interactive)
   (require 'linkd)
   (linkd-mode 1)
-  (linkd-enable)
+  ;; (linkd-enable)
   )
 
 ;;;###autoload

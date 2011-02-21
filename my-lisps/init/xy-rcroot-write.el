@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-02-20 Sun 18:23 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 06:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -45,7 +45,7 @@
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
 ;; (add-hook 'LaTeX-mode-hook 'auctex-start)
-(add-to-list 'auto-mode-alist '("\\.tex$" . LaTeX-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (eval-after-load "latex"
   `(auctex-settings))
 

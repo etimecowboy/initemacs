@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-21 Mon 05:42 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 06:51 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -144,7 +144,13 @@ A numeric argument serves as a repeat count." t)
    (unless (or (eq major-mode 'image-mode)
 	       (eq major-mode 'org-mode)
 		   (eq major-mode 'custom-mode)
-		   (eq major-mode 'lisp-interaction-mode))
+		   (eq major-mode 'lisp-interaction-mode)
+		   (eq major-mode 'fundamental-mode)
+		   (eq major-mode 'text-mode)
+		   (eq major-mode 'LaTeX-mode)
+		   (eq major-mode 'latex-mode)
+		   (eq major-mode 'TeX-mode)
+		   (eq major-mode 'tex-mode))
      (linum-mode 1))))
 (global-set-key [f7] 'linum-mode)
 (eval-after-load 'linum
