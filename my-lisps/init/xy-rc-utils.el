@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-02-19 Sat 21:57 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 10:50 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -893,29 +893,30 @@ directories starting with a `.'."
 	    (concat this-directory "/loaddefs@" 
 		    (subst-char-in-string ?/ ?! 
 			(subst-char-in-string ?: ?! this-directory)) ".el"))
+	  (setq update-flag nil)
 
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
-	(while files
-	  (let ((srcfile (car files))
-			(dstfile (concat (car files) "c")))
-	    (if (or (not (file-exists-p generated-autoload-file))
-				(not (file-exists-p dstfile))
-				(file-newer-than-file-p srcfile generated-autoload-file)
-				(file-newer-than-file-p dstfile generated-autoload-file))
-			(setq update-flag t)
-	      (setq update-flag nil)))
-	  (setq files (cdr files))))
+		(while files
+		  (let ((srcfile (car files))
+				(dstfile (concat (car files) "c")))
+			(if (or (not (file-exists-p generated-autoload-file))
+					(not (file-exists-p dstfile))
+					(file-newer-than-file-p srcfile dstfile)
+					(file-newer-than-file-p srcfile generated-autoload-file)
+					(file-newer-than-file-p dstfile generated-autoload-file))
+				(setq update-flag t))
+			(setq files (cdr files)))))
      
-      (if update-flag
-	  (progn
-	    (cond ((fboundp 'update-autoloads-from-directory)
-		   (update-autoloads-from-directory this-directory))
-		  ((fboundp 'update-autoloads-from-directories)
-		   (update-autoloads-from-directories this-directory))
-		  ((fboundp 'update-directory-autoloads)
-		   (update-directory-autoloads this-directory)))
-	    (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
-	(message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
+	  (if update-flag
+		  (progn
+			(cond ((fboundp 'update-autoloads-from-directory)
+				   (update-autoloads-from-directory this-directory))
+				  ((fboundp 'update-autoloads-from-directories)
+				   (update-autoloads-from-directories this-directory))
+				  ((fboundp 'update-directory-autoloads)
+				   (update-directory-autoloads this-directory)))
+			(message "* ---[ Updating `%s'... ]---" generated-autoload-file))
+		(message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
 	    
       (when with-subdirs
         (while files
@@ -961,6 +962,7 @@ directories starting with a `.'."
 	    (concat this-directory "/loaddefs@" 
 		    (subst-char-in-string ?/ ?! 
 			(subst-char-in-string ?: ?! this-directory)) ".el"))
+	  (setq update-flag nil)
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
 		(while files
 		  (let ((srcfile (car files))
@@ -975,11 +977,11 @@ directories starting with a `.'."
 
 			(if (or (not (file-exists-p generated-autoload-file))
 					(not (file-exists-p dstfile))
+					(file-newer-than-file-p srcfile dstfile)
 					(file-newer-than-file-p srcfile generated-autoload-file)
 					(file-newer-than-file-p dstfile generated-autoload-file))
-				(setq update-flag t)
-			  (setq update-flag nil)))
-		  (setq files (cdr files)))
+				(setq update-flag t))
+		  (setq files (cdr files)))))
 
 		(if update-flag
 			(progn
@@ -1003,7 +1005,7 @@ directories starting with a `.'."
                 (xy/install-all-lisps dir-or-file 
 					 'with-subdirs 'recursive)
               (xy/install-all-lisps dir-or-file)))
-          (setq files (cdr files)))))))
+          (setq files (cdr files))))))
 
 ;;;###autoload
 (defun xy/done ()
