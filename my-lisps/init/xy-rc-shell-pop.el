@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-shell-pop.el'
-;; Time-stamp:<2011-01-31 Mon 11:54 xin on P6T>
+;; Time-stamp:<2011-02-21 Mon 05:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,11 +20,11 @@
 (defun shell-pop-settings ()
   "Settings for `shell-pop.el'."
 
-  (shell-pop-set-internal-mode "term")
+  (shell-pop-set-internal-mode "eshell")
   ;; (shell-pop-set-internal-mode-shell "/bin/bash")
   ;; the number for the percentage of the selected window. 
   ;; If 100, shell-pop use the whole of selected window, not spliting.
-  (shell-pop-set-window-height 30) 
+  (shell-pop-set-window-height 35) 
   ;; shell-pop-up position. You can choose "top" or "bottom".
   (shell-pop-set-window-position "bottom"))
 

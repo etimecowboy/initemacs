@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-21 Mon 04:29 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 05:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -254,14 +254,14 @@ from tradition chinese to simple chinese" t)
 
 ;; multi-term: a mode based on term.el, 
 ;; for managing multiple terminal buffers in Emacs.
-(define-key global-map (kbd "C-x T") 'multi-term-start)
+(global-set-key (kbd "C-x T") 'multi-term-start)
 (eval-after-load "multi-term" 
   `(progn
      (multi-term-settings)
 	 (eal-define-keys-commonly
-	  'global-map
-	  `(("C-x T n" multi-term-next)
-	    ("C-x T p" multi-term-prev)))))
+	  global-map
+	  `(("C-c T n" multi-term-next)
+	    ("C-c T p" multi-term-prev)))))
 	 ;; (eal-define-keys
 	 ;;  'text-mode-map
 	 ;;  `(("M-J"   switch-term-and-text)

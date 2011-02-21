@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-20 Sun 14:49 xin on p6t>
+;; Time-stamp:<2011-02-21 Mon 05:17 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,9 +19,15 @@
 ;;--------------------------------------------------------------------
 
 ;; Use system default web browser, w3m is too old
-;; (when window-system
+;; (Windows
 ;;   (setq browse-url-browser-function 
 ;;         'browse-url-default-windows-browser))
+;; (GNULinux
+;;   (setq browse-url-browser-function
+;; 		'chromium-browser))
+(Windows
+ (setq browse-url-browser-function
+	   'browse-url-default-browser))
 
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file "~/emacs/quickurls")

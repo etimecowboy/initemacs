@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-02-19 Sat 16:32 xin on P6T>
+;; Time-stamp:<2011-02-21 Mon 05:14 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,7 +21,7 @@
   "Start yasnippet."
   (interactive)
   (require 'yasnippet)
-  (yas/global-mode 1))
+  (yas/minor-mode-on))
 
 ;;;###autoload
 (defun yasnippet-unbind-trigger-key ()
