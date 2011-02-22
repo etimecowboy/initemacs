@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-02-22 Tue 20:39 xin on P6T>
+;; Time-stamp:<2011-02-22 Tue 23:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -679,7 +679,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (interactive)
   (if window-system
       (qiang-set-font
-       '("Monaco" "DejaVu Sans Mono" "Consolas"
+       '("DejaVu Sans Mono" "Monaco" "Consolas"
 		 "Monospace" "Courier") ":pixelsize=12"
          '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
            "黑体") 14)
@@ -690,11 +690,13 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (defun xy/set-font-write ()
   "My Emacs font setting for writing articles."
   (interactive)
-  (qiang-set-font
-   '("Monaco" "DejaVu Sans Mono" "Consolas"
-	 "Monospace" "Courier") ":pixelsize=14"
-	 '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
-	   "黑体") 16))
+  (if window-system
+	  (qiang-set-font
+	   '("Monaco" "DejaVu Sans Mono" "Consolas"
+		 "Monospace" "Courier") ":pixelsize=12"
+		 '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
+		   "黑体") 14)
+	(set-default-font "Monospace 12")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

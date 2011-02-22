@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-22 Tue 20:39 xin on P6T>
+;; Time-stamp:<2011-02-22 Tue 23:09 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -261,9 +261,19 @@
 (setq scalable-fonts-allowed t)
 ;; Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
-;; (global-set-key
-;;  (kbd "C-x F") 'xy/set-font)
+;; BUG: 似乎使用 find-file-hook 更好。以下的设置在访问多个同一 major
+;; mode 文件中见如果访问了另一 major mode 的文件不能切换回原来的字体。
 (xy/set-font-default)
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
+   c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook)
+ 'xy/set-font-default)
+(am-add-hooks
+ `(org-mode-hook LaTeX-mode-hook latex-mode-hook tex-mode-hook
+   muse-mode-hook)
+ 'xy/set-font-write)
+(global-set-key (kbd "C-x F d") 'xy/set-font-default)
+(global-set-key (kbd "C-x F w") 'xy/set-font-write)
 
 ;; 中文输入法
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
