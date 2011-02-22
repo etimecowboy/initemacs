@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-22 Tue 13:24 xin on P6T>
+;; Time-stamp:<2011-02-22 Tue 13:59 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -151,10 +151,10 @@
    ("C-x E t" emms-add-directory-tree)
    ("C-x E <up>"      emms-start)
    ("C-x E <down>"    emms-pause)
-   ("C-x E S-<left>"  emms-previous)
-   ("C-x E S-<right>" emms-next)
-   ("C-x E <right>"   emms-seek-forward)
-   ("C-x E <left>"    emms-seek-backward)
+   ;; ("C-x E S-<left>"  emms-previous)
+   ;; ("C-x E S-<right>" emms-next)
+   ;; ("C-x E <right>"   emms-seek-forward)
+   ;; ("C-x E <left>"    emms-seek-backward)
    ("C-x E +"         emms-volume-raise)
    ("C-x E -"         emms-volume-lower)))
 
