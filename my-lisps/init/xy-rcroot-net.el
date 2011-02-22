@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-21 Mon 05:17 xin on p6t>
+;; Time-stamp:<2011-02-22 Tue 13:24 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,7 +30,7 @@
 	   'browse-url-default-browser))
 
 ;; Abbrev quickurl
-;; (setq quickurl-url-file "~/emacs/quickurls")
+;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
 ;;----------------------------------------------------------------------
 
@@ -131,31 +131,32 @@
 ;; emms: Emacs 音乐播放器
 ;; (autoload 'emms "emms-playlist-mode" nil t)
 ;; (autoload 'emms-browser "emms-browser" nil t)
-(GNULinux
- (emms-start)
- (eval-after-load "emms-playlist-mode"
-   '(progn
-	  (emms-settings)))
- (eal-define-keys-commonly
-  dired-mode-map
-  `(("¬"    emms-add-dired)
-	("`"    emms-play-dired)))
- (global-set-key (kbd "C-x E b") 'emms-browser)
- (global-set-key (kbd "C-x E f") 'emms-play-file)
- (global-set-key (kbd "C-x E l") 'emms-play-playlist)
- (global-set-key (kbd "C-x E d") 'emms-play-directory)
- (global-set-key (kbd "C-x E m") 'emms-playlist-mode-go)
- (global-set-key (kbd "C-x E p") 'emms-playlist-mode-go-popup)
- (global-set-key (kbd "C-x E a") 'emms-add-directory)
- (global-set-key (kbd "C-x E t") 'emms-add-directory-tree)
- (global-set-key (kbd "C-x E <up>") 'emms-start)
- (global-set-key (kbd "C-x E <down>") 'emms-pause)
- (global-set-key (kbd "C-x E S-<left>") 'emms-previous)
- (global-set-key (kbd "C-x E S-<right>") 'emms-next)
- (global-set-key (kbd "C-x E <right>") 'emms-seek-forward)
- (global-set-key (kbd "C-x E <left>") 'emms-seek-backward)
- (global-set-key (kbd "C-x E +") 'emms-volume-raise)
- (global-set-key (kbd "C-x E -") 'emms-volume-lower))
+(emms-start)
+(eval-after-load "emms-playlist-mode"
+  '(progn
+	 (emms-settings)))
+(eal-define-keys-commonly
+ dired-mode-map
+ `(("¬"    emms-add-dired)
+   ("`"    emms-play-dired)))
+(eal-define-keys-commonly
+ global-map
+ `(("C-x E b" emms-browser)
+   ("C-x E f" emms-play-file)
+   ("C-x E l" emms-play-playlist)
+   ("C-x E d" emms-play-directory)
+   ("C-x E m" emms-playlist-mode-go)
+   ("C-x E p" emms-playlist-mode-go-popup)
+   ("C-x E a" emms-add-directory)
+   ("C-x E t" emms-add-directory-tree)
+   ("C-x E <up>"      emms-start)
+   ("C-x E <down>"    emms-pause)
+   ("C-x E S-<left>"  emms-previous)
+   ("C-x E S-<right>" emms-next)
+   ("C-x E <right>"   emms-seek-forward)
+   ("C-x E <left>"    emms-seek-backward)
+   ("C-x E +"         emms-volume-raise)
+   ("C-x E -"         emms-volume-lower)))
 
 ;;------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2011-01-29 Sat 08:25 xin on P6T>
+;; Time-stamp:<2011-02-22 Tue 11:54 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,15 +30,13 @@
 (defun package-settings ()
   "settings of `package.el'."
 
-  (setq package-user-dir 
+  (setq-default package-user-dir 
   	(expand-file-name (convert-standard-filename
   			   my-local-lisp-path)))
-  (setq package-archives 
+  (setq-default package-archives 
     '(("ELPA" . "http://tromey.com/elpa/") 
       ("gnu"  . "http://elpa.gnu.org/packages/")
       ("SC"   . "http://joseito.republika.pl/sunrise-commander/")))
- 
-  (package-initialize)
 )
 
 (provide 'xy-rc-package)

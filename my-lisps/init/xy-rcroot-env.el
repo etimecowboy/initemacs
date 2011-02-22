@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-19 Sat 22:09 xin on p6t>
+;; Time-stamp:<2011-02-22 Tue 11:54 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -322,6 +322,7 @@
 ;; Fetches the updated list of packages before displaying.
 ;; The list is displayed in a buffer named `*Packages*'." nil t)
 (require 'package)
+(package-initialize)
 (eval-after-load "package"
   `(progn
     (package-settings)))
