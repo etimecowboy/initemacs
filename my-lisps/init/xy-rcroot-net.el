@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-22 Tue 20:45 xin on P6T>
+;; Time-stamp:<2011-02-22 Tue 22:07 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -128,6 +128,7 @@
 ;; emms: Emacs 音乐播放器
 ;; (autoload 'emms "emms-playlist-mode" nil t)
 ;; (autoload 'emms-browser "emms-browser" nil t)
+(emms-startit)
 (eval-after-load "emms-playlist-mode"
   '(progn
 	 (emms-settings)))
@@ -151,8 +152,8 @@
    ;; ("C-x E S-<right>" emms-next)
    ;; ("C-x E <right>"   emms-seek-forward)
    ;; ("C-x E <left>"    emms-seek-backward)
-   ("C-x E +"         emms-volume-raise)
-   ("C-x E -"         emms-volume-lower)))
+   ("C-x E +"  emms-volume-raise)
+   ("C-x E -"  emms-volume-lower)))
 
 ;;------------------------------------------------------------------------
 
