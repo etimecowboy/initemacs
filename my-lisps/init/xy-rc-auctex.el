@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-02-21 Mon 06:50 xin on p6t>
+;; Time-stamp:<2011-02-22 Tue 20:39 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -60,7 +60,7 @@
 				 (turn-on-cdlatex)
 				 (yas-start)
 				 (linkd-start)
-				 )))
+				 (xy/set-font-write))))
   (add-hook 'latex-mode-hook
   		  '(lambda ()
 			 (progn
@@ -73,7 +73,7 @@
 			   (turn-on-cdlatex)
 			   (yas-start)
 			   (linkd-start)
-  			 )))
+			   (xy/set-font-write))))
   
   ;; (require 'tex-mik)
   ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")

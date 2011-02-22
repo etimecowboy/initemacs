@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-22 Tue 13:59 xin on P6T>
+;; Time-stamp:<2011-02-22 Tue 20:45 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,15 +19,12 @@
 ;;--------------------------------------------------------------------
 
 ;; Use system default web browser, w3m is too old
-;; (Windows
-;;   (setq browse-url-browser-function 
-;;         'browse-url-default-windows-browser))
-;; (GNULinux
-;;   (setq browse-url-browser-function
-;; 		'chromium-browser))
 (Windows
- (setq browse-url-browser-function
-	   'browse-url-default-browser))
+  (setq browse-url-browser-function 
+        'browse-url-default-windows-browser))
+(GNULinux
+  (setq browse-url-browser-function
+		'browse-url-default-browser))
 
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
@@ -131,7 +128,6 @@
 ;; emms: Emacs 音乐播放器
 ;; (autoload 'emms "emms-playlist-mode" nil t)
 ;; (autoload 'emms-browser "emms-browser" nil t)
-(emms-start)
 (eval-after-load "emms-playlist-mode"
   '(progn
 	 (emms-settings)))

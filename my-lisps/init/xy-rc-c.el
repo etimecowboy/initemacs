@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-02-21 Mon 04:33 xin on p6t>
+;; Time-stamp:<2011-02-22 Tue 20:53 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,6 +20,7 @@
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."
 
+  (xy/set-font-default)
   (defalias 'cpp-mode 'c++-mode)
   
   (defun c-mode-common-hook-settings ()
