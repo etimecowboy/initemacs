@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-22 Tue 22:08 xin on P6T>
+;; Time-stamp:<2011-02-23 Wed 00:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -89,7 +89,7 @@
   ;; (setq 'default-frame-alist 
   ;; 	'((height . 40) 
   ;; 	  (width  . 90)))
-  (add-to-list 'default-frame-alist '(height . 35))
+  (add-to-list 'default-frame-alist '(height . 45))
   (add-to-list 'default-frame-alist '(width . 90)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
