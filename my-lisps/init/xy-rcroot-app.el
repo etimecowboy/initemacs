@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-23 Wed 00:17 xin on P6T>
+;; Time-stamp:<2011-02-23 Wed 10:50 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -89,8 +89,8 @@
   ;; (setq 'default-frame-alist 
   ;; 	'((height . 40) 
   ;; 	  (width  . 90)))
-  (add-to-list 'default-frame-alist '(height . 45))
-  (add-to-list 'default-frame-alist '(width . 90)))
+  (add-to-list 'default-frame-alist '(height . 50))
+  (add-to-list 'default-frame-alist '(width . 100)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -266,7 +266,7 @@ the mode-line."
   ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) 
   (set-frame-parameter (selected-frame) 'alpha '(100 100))
   (add-to-list 'default-frame-alist '(alpha 100 100))
-  (global-set-key (kbd "C-x W") 'toggle-transparency)) 
+  (global-set-key (kbd "C-x W t") 'toggle-transparency)) 
 
 ;; 可以把光标由方块变成一个小长条
 ;; (require 'bar-cursor)

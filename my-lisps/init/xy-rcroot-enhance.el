@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-21 Mon 06:51 xin on p6t>
+;; Time-stamp:<2011-02-23 Wed 10:44 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,8 +54,8 @@ then you cannot redo any undos before then." t)
   "Undo some previous changes.
 Repeat this command to undo more changes.
 A numeric argument serves as a repeat count." t)
-(global-set-key (kbd "M-_") 'redo)
-(global-set-key (kbd "C-_") 'undo) ;; or C-/
+(global-set-key (kbd "C-?") 'redo)
+(global-set-key (kbd "C-/") 'undo) ;; or C-/
 
 ;;------------------------------------------------------------------
 
