@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-02-23 Wed 17:47 xin on p6t>
+;; Time-stamp:<2011-02-24 Thu 16:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -237,19 +237,29 @@
 
   (require 'smtpmail)
   (require 'starttls)
-
-  (setq send-mail-function 'smtpmail-send-it
-		message-send-mail-function 'smtpmail-send-it
-		smtpmail-auth-credentials (expand-file-name
-								   "~/emacs/gnus/authinfo")
-		smtpmail-debug-info t)
   
   (GNULinux
    (setq
+	send-mail-function 'smtpmail-send-it
+	message-send-mail-function 'smtpmail-send-it
+	smtpmail-auth-credentials (expand-file-name
+							   "~/emacs/gnus/authinfo")
+	smtpmail-debug-info t
 	smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
 	smtpmail-default-smtp-server "smtp.gmail.com"
 	smtpmail-smtp-server "smtp.gmail.com"
 	smtpmail-smtp-service 587))
+
+  ;; REF: http://www.emacswiki.org/emacs/GnusMSMTP
+  (Windows
+   (setq
+	message-send-mail-function 'message-send-mail-with-sendmail
+	;; we substitute sendmail with msmtp
+	sendmail-program (expand-file-name "~/.emacs.d/bin/msmtp.exe")
+	;;need to tell msmtp which account we're using
+	message-sendmail-extra-arguments '("-a" "gx2")
+    ;; you might want to set the following too
+	mail-host-address "gmail.com"))
 
   ;; ;; non-tls smtp server
   ;; (Windows
