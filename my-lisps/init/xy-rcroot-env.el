@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-22 Tue 23:09 xin on p6t>
+;; Time-stamp:<2011-02-25 Fri 15:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -275,6 +275,14 @@
 (global-set-key (kbd "C-x F d") 'xy/set-font-default)
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
 
+;; Ctrl+滚轮，字体放大缩小
+(GNULinux
+ (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+ (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease))
+(Windows
+ (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+ (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease))
+
 ;; 中文输入法
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
 ;;       除非不在图形系统下，才用 Emacs 内置的输入法或 eim。
@@ -301,7 +309,9 @@
 ;; (register-input-method
 ;;  "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
 (register-input-method
- "eim-py" "utf-8" 'eim-use-package "eim-py" "eim-py" "py.txt")
+ "eim-py" "utf-8" 'eim-use-package "eim-py" "eim-py" (concat
+													  my-emacs-path
+													  "/eim/py.txt")) 
 (setq default-input-method "eim-py")
 (setq input-activate nil)
 (add-hook 'find-file-hook
