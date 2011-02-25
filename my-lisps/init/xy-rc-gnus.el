@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-02-24 Thu 16:42 xin on P6T>
+;; Time-stamp:<2011-02-25 Fri 17:03 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -238,46 +238,49 @@
   (require 'smtpmail)
   (require 'starttls)
   
-  (GNULinux
+  ;; (GNULinux
+  ;;  (setq
+  ;; 	send-mail-function 'smtpmail-send-it
+  ;; 	message-send-mail-function 'smtpmail-send-it
+  ;; 	smtpmail-auth-credentials (expand-file-name
+  ;; 							   "~/emacs/gnus/authinfo")
+  ;; 	smtpmail-debug-info t
+  ;; 	smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+  ;; 	smtpmail-default-smtp-server "smtp.gmail.com"
+  ;; 	smtpmail-smtp-server "smtp.gmail.com"
+  ;; 	smtpmail-smtp-service 587))
+
+  ;; REF: http://www.emacswiki.org/emacs/GnusMSMTP
+  ;; (Windows
+  ;;  (setq
+  ;; 	message-send-mail-function 'message-send-mail-with-sendmail
+  ;; 	;; we substitute sendmail with msmtp
+  ;; 	sendmail-program (expand-file-name "~/.emacs.d/bin/win32/msmtp.exe")
+  ;; 	;;need to tell msmtp which account we're using
+  ;; 	message-sendmail-extra-arguments '("-a" "gx2")
+  ;;   ;; you might want to set the following too
+  ;; 	mail-host-address "gmail.com"))
+
+  ;; non-tls smtp server
+  ;; (Windows
    (setq
 	send-mail-function 'smtpmail-send-it
 	message-send-mail-function 'smtpmail-send-it
-	smtpmail-auth-credentials (expand-file-name
-							   "~/emacs/gnus/authinfo")
-	smtpmail-debug-info t
-	smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-	smtpmail-default-smtp-server "smtp.gmail.com"
-	smtpmail-smtp-server "smtp.gmail.com"
-	smtpmail-smtp-service 587))
-
-  ;; REF: http://www.emacswiki.org/emacs/GnusMSMTP
-  (Windows
-   (setq
-	message-send-mail-function 'message-send-mail-with-sendmail
-	;; we substitute sendmail with msmtp
-	sendmail-program (expand-file-name "~/.emacs.d/bin/win32/msmtp.exe")
-	;;need to tell msmtp which account we're using
-	message-sendmail-extra-arguments '("-a" "gx2")
-    ;; you might want to set the following too
-	mail-host-address "gmail.com"))
-
-  ;; ;; non-tls smtp server
-  ;; (Windows
-  ;; 	;; @home
-  ;; 	(HomeDesktop
-  ;; 	 (setq
-  ;; 	  smtpmail-default-smtp-server "smtp.blueyonder.co.uk"
-  ;; 	  smtpmail-smtp-server "smtp.blueyonder.co.uk"))
-  ;; 	  ;; user-mail-address "etimecowboy@gmail.com")) ; make sure to change this
-  ;;   ;; @brl
-  ;; 	(OfficePC
-  ;; 	 (setq
-  ;; 	  smtpmail-default-smtp-server "staf-smtp.uwe.ac.uk"
-  ;; 	  smtpmail-smtp-server "staf-smtp.uwe.ac.uk"))
-  ;; 	  ;; user-mail-address "xin2.yang@uwe.ac.uk")) ; make sure to change this
-  ;; 	(setq
-  ;; 	 smtpmail-smtp-service 25
-  ;; 	 smtpmail-debug-info t))
+	smtpmail-smtp-service 25
+	smtpmail-debug-info t)
+   ;; @home
+   (HomeDesktop
+	(setq
+	 smtpmail-default-smtp-server "smtp.blueyonder.co.uk"
+	 smtpmail-smtp-server "smtp.blueyonder.co.uk"))
+   ;; user-mail-address "etimecowboy@gmail.com")) ; make sure to change this
+    ;; @brl
+   (OfficePC
+	(setq
+	 smtpmail-default-smtp-server "staf-smtp.uwe.ac.uk"
+	 smtpmail-smtp-server "staf-smtp.uwe.ac.uk"))
+   ;; user-mail-address "xin2.yang@uwe.ac.uk")) ; make sure to change this
+   ;; )
 
 ;; Windows 下 gnus 收发 gmail 邮件
 ;; [[http://hi.baidu.com/kton/blog/item/4fb26159f8ae312c2934f047.html]]
