@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-02-24 Thu 16:02 xin on p6t>
+;; Time-stamp:<2011-02-24 Thu 16:42 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,13 +17,13 @@
 (require 'xy-rc-utils)
 
 
-;;;###autoload
-(defun gnus-start ()
-  "Start gnus news reader."
+;; ;;;###autoload
+;; (defun gnus-start ()
+;;   "Start gnus news reader."
 
-  (interactive)
-  (gnus-agentize)
-  (gnus))
+;;   (interactive)
+;;   (gnus-agentize)
+;;   (gnus))
 
 
 ;;;###autoload
@@ -255,7 +255,7 @@
    (setq
 	message-send-mail-function 'message-send-mail-with-sendmail
 	;; we substitute sendmail with msmtp
-	sendmail-program (expand-file-name "~/.emacs.d/bin/msmtp.exe")
+	sendmail-program (expand-file-name "~/.emacs.d/bin/win32/msmtp.exe")
 	;;need to tell msmtp which account we're using
 	message-sendmail-extra-arguments '("-a" "gx2")
     ;; you might want to set the following too

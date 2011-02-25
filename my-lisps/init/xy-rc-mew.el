@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-02-09 Wed 21:19 xin on p6t>
+;; Time-stamp:<2011-02-25 Fri 09:27 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -218,24 +218,20 @@
         
         ;; newsgroup 
         ;; ("news"
-        ;; ;; ("mailbox-type"         . nntp)
-        ;; ;; ("proto"                . "-")
-        ;; ("nntp-server"          . "freenews.netfront.net")
-        ;; ("nntp-user"            . "etimecowboy")
-        ;; ("signature-file"       . "~/emacs/mew/sig/bulb")
-        ;; ("name"                 . "etimecowboy")
-        ;; ("mew-nntp-msgid-user"  . "etimecowboy")
-        ;; ("mew-nntp-msgid-domain" . "gmail.com")
-        ;; ("nntp-size"            . 0)
-        ;; ("nntp-header-only"     . t)
-        ;; ("nntp-newsgroup"       . "cn.bbs.comp.emacs"))
-        ;; ;; ("smtp-server"          . "smtp.gmail.com")
-        ;; ;; ("smtp-auth-list"       . ("PLAIN" "LOGIN" "CRAM-MD5")) 
-        ;; ;; ("smtp-ssl"             . t)
-        ;; ;; ("smtp-ssl-port"        . "465")
-        ;; ;; ("smtp-user"            . "etimecowboy"))
-        )
-      )
+		;;  ("mailbox-type"          . nntp)
+		;;  ("proto"                 . "-")
+		;;  ("nntp-server"           . "freenews.netfront.net")
+		;;  ("nntp-user"             . "etimecowboy")
+		;;  ("signature-file"        . "~/emacs/mew/sig/bulb")
+		;;  ("name"                  . "etimecowboy")
+		;;  ("mew-nntp-msgid-user"   . "etimecowboy")
+		;;  ("mew-nntp-msgid-domain" . "gmail.com")
+		;;  ("nntp-ssl"              . t)
+		;;  ("nntp-ssl-port"         . 119)
+		;;  ("nntp-size"             . 0)
+		;;  ("nntp-header-only"      . t)
+		;;  ("nntp-newsgroup"        . "cn.bbs.comp.emacs"))
+		))
 
   (when (boundp 'utf-translate-cjk)
     (setq utf-translate-cjk t)
