@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-02-23 Wed 00:13 xin on P6T>
+;; Time-stamp:<2011-02-27 Sun 21:43 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,8 +54,8 @@
 (defvar using-laptop
   (string-match "t42" (prin1-to-string system-name)))
 ;; OS type --- are we running Microsoft Windows?
-(defvar running-ms-windows
-  (eq system-type 'windows-nt))
+;; (defvar running-ms-windows
+;;   (eq system-type 'windows-nt))
 (defvar running-ms-windows
   (string-match "windows" (prin1-to-string system-type)))
 (defvar running-gnu-linux

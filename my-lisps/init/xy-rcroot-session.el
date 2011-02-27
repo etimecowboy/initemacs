@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-02-27 Sun 18:53 xin on P6T>
+;; Time-stamp:<2011-02-27 Sun 22:05 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,13 +24,7 @@
 
 ;; Save point places in buffers
 (setq save-place 1)
-(setq save-place-file (concat my-var-path "/sav_plc"))
-(OfficePC
- (setq save-place-file (concat my-var-path "/sav_plc-office")))
-(HomeDesktop
- (setq save-place-file (concat my-var-path "/sav_plc-home-desktop")))
-(Laptop
- (setq save-place-file (concat my-var-path "/sav_plc-laptop")))
+(eval-after-load "saveplace" `(saveplace-settings))
 
 ;;-----------------------------------------------------------------------
 
@@ -42,7 +36,7 @@
 ;; restoring per-window positions for each buffer.
 (require 'winpoint)
 (window-point-remember-mode 1)
-(setq winpoint-non-restore-buffer-list '("*Group*"))
+(eval-after-load "winpoint" `(winpoint-settings))
 
 ;;-----------------------------------------------------------------------
 
@@ -65,18 +59,7 @@
 ;; * ‘r’ – rename the current bookmark
 
 (setq bookmark-save-flag 1)
-(setq bookmark-default-file (concat my-var-path "/bookmark"))
-(OfficePC
- (Windows
-  (setq bookmark-default-file (concat my-var-path "/bookmark-ow"))))
-(HomeDesktop
- (GNULinux
-  (setq bookmark-default-file (concat my-var-path "/bookmark-dl")))
- (Windows
-  (setq bookmark-default-file (concat my-var-path "/bookmark-dw"))))
-(Laptop
- (Windows
-  (setq bookmark-default-file (concat my-var-path "/bookmark-nw"))))
+(eval-after-load "bookmark" `(bookmark-settings))
 
 ;;---------------------------------------------------------------------
 
@@ -91,11 +74,7 @@
 
 ;; Recent files
 ;; (recentf-mode 1)
-;; (setq recentf-save-file "~/emacs/recentf")
-;; (setq recentf-max-saved-items 100)
-;; (setq recentf-max-menu-items 20)
-;; (setq recentf-menu-filter 'recentf-sort-basenames-ascending)
-;; (setq recentf-save-file-modes 1000)
+;; (eval-after-load "recentf" `(recentf-settings))
 
 ;;---------------------------------------------------------------------
 
