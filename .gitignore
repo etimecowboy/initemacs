@@ -31,5 +31,5 @@ _region_*
 /server
 *.ADAPT
 *.asv
-session*
+.session*
 loaddefs@*

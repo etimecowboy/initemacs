@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-windows.el'
-;; Time-stamp:<2011-02-20 Sun 14:39 xin on p6t>
+;; Time-stamp:<2011-02-27 Sun 12:27 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,7 +37,7 @@
   (setq win:configuration-file (concat my-var-path "/windows"))
   (OfficePC
    (Windows
-	(setq win:configuration-file (concat my-var-path "/windows-o"))))
+	(setq win:configuration-file (concat my-var-path "/windows-ow"))))
   (HomeDesktop
    (GNULinux
 	(setq win:configuration-file (concat my-var-path "/windows-dl")))

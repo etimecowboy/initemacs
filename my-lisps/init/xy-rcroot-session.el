@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-02-20 Sun 14:15 xin on p6t>
+;; Time-stamp:<2011-02-27 Sun 18:53 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,21 +64,24 @@
 ;; * ‘C-o’ – switch to the current bookmark in another window
 ;; * ‘r’ – rename the current bookmark
 
+(setq bookmark-save-flag 1)
 (setq bookmark-default-file (concat my-var-path "/bookmark"))
 (OfficePC
- (setq bookmark-default-file (concat my-var-path "/bookmark-officePC")))
+ (Windows
+  (setq bookmark-default-file (concat my-var-path "/bookmark-ow"))))
 (HomeDesktop
- (setq bookmark-default-file (concat my-var-path "/bookmark-home-desktop")))
+ (GNULinux
+  (setq bookmark-default-file (concat my-var-path "/bookmark-dl")))
+ (Windows
+  (setq bookmark-default-file (concat my-var-path "/bookmark-dw"))))
 (Laptop
- (setq bookmark-default-file (concat my-var-path "/bookmark-laptop")))
-
-(setq bookmark-save-flag 1)
+ (Windows
+  (setq bookmark-default-file (concat my-var-path "/bookmark-nw"))))
 
 ;;---------------------------------------------------------------------
 
 ;; Bookmark+
 (autoload 'bookmark+ "bookmark+" "Enhanced Emacs bookmark" t)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
