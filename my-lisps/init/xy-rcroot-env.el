@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-28 Mon 00:17 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 13:00 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -266,7 +266,8 @@
 (xy/set-font-write)
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
-   c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook)
+   c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
+   matlab-mode-hook)
  'xy/set-font-default)
 (am-add-hooks
  `(org-mode-hook LaTeX-mode-hook latex-mode-hook tex-mode-hook
