@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-02-25 Fri 17:03 xin on p6t>
+;; Time-stamp:<2011-02-28 Mon 08:36 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,8 +49,8 @@
 		gnus-use-cache 'passive
 		gnus-large-newsgroup 2000
 		canlock-password "7a4a2fd70bf79c29088dbd76df1a2029301428ed"
-		nntp-authinfo-file "~/emacs/gnus/authinfo"
-		nnimap-authinfo-file "~/emacs/gnus/authinfo"
+		nntp-authinfo-file "~/emacs/gnus/authinfo.pgp"
+		nnimap-authinfo-file "~/emacs/gnus/authinfo.pgp"
 		mail-source-crash-box "~/emacs/gnus/.emacs-mail-crash-box"
 		mail-source-directory "~/emacs/gnus/mail")
 
@@ -72,8 +72,11 @@
 
   ;; nntp server
   (setq gnus-select-method
-        '(nntp "freenews.netfront.net"
-               (nntp-port-number 119)))
+		'(nntp "freenews.netfront.net"))
+  (HomeDesktop
+   (setq gnus-select-method
+		 '(nntp "news.virginmedia.com"
+               (nntp-port-number 119))))
   ;;(setq gnus-secondary-select-methods '((nnml "")))
   ;;(add-to-list 'gnus-secondary-select-methods '(nntp "freenews.netfront.net"))
   ;;(add-to-list 'gnus-secondary-select-methods '(nntp "news.yaako.com"))
@@ -179,9 +182,9 @@
   
   (add-to-list 'gnus-secondary-select-methods 
                '(nnimap "gmail"
-						 (nnimap-address "imap.gmail.com")
-						 (nnimap-server-port 993)
-						 (nnimap-stream ssl)))
+  						 (nnimap-address "imap.gmail.com")
+  						 (nnimap-server-port 993)
+  						 (nnimap-stream ssl)))
 				         ;; "uwe"
 						 ;; (nnimap-address "ses-imap.uwe.ac.uk")
 						 ;; (nnimap-server-port 993)
@@ -208,13 +211,13 @@
   ;; (setq mail-sources 
   ;; 		'((imap :server "imap.gmail.com"
   ;; 				  :user "xin2.yang"
-  ;; 				  :password ""
+  ;; 				  :password "13971167383"
   ;; 				  :port 993
   ;; 				  :connection ssl
   ;; 				  :leave t)
   ;; 		  (imap :server "ses-imap.uwe.ac.uk"
   ;; 				  :user "x4-yang"
-  ;; 				  :password ""
+  ;; 				  :password "2bh25E"
   ;; 				  :port 993
   ;; 				  :connection ssl
   ;; 				  :leave t)))
@@ -237,7 +240,8 @@
 
   (require 'smtpmail)
   (require 'starttls)
-  
+
+  ;; tls smtp server
   ;; (GNULinux
   ;;  (setq
   ;; 	send-mail-function 'smtpmail-send-it

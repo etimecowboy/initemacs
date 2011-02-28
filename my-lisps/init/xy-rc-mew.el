@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-02-25 Fri 09:27 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 07:44 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,7 +33,7 @@
   (setq mew-mail-path
       (concat my-emacs-path "/mew"))
   (setq mew-rc-file
-      (concat my-own-lisp-path "/xy-mew.el"))
+      (concat my-own-lisp-path "/xy-rc-mew.el"))
   (setq mew-save-dir
       (concat my-emacs-path "/mew"))
 
@@ -122,24 +122,35 @@
   ;; (setq mew-trash-folder-list '("%Deleted Items" "%已删除邮件" "%Trash" "%trash"))
   
   ;; smtp server setting
-  (setq mew-smtp-server "staf-smtp.uwe.ac.uk")
+  ;; gmail smtp as default but need tls
+  (setq mew-smtp-server "smtp.gmail.com"
+  		mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")
+  		mew-smtp-ssl       t
+  		mew-smtp-ssl-port  465
+  		mew-smtp-user      "xin2.yang")
 
+  ;; UWE smtp
   (OfficePC
-   (setq mew-smtp-server "staf-smtp.uwe.ac.uk"))
+   (setq mew-smtp-server "staf-smtp.uwe.ac.uk"
+		 mew-smtp-port      25
+		 mew-use-smtp-auth  nil
+		 mew-smtp-auth-list nil
+		 mew-smtp-ssl       nil))
 
+  ;; Virgin Media smtp
   (HomeDesktop
-   (setq mew-smtp-server    "smtp.gmail.com") 
-   (setq mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")) 
-   (setq mew-smtp-ssl       t)
-   (setq mew-smtp-ssl-port  465)
-   (setq mew-smtp-user      "xin2.yang"))
+   (setq mew-smtp-server "smtp.blueyonder.co.uk"
+		 mew-smtp-port      25
+		 mew-use-smtp-auth  nil
+		 mew-smtp-auth-list nil
+		 mew-smtp-ssl       nil))
 
-  (Laptop
-   (setq mew-smtp-server    "smtp.gmail.com") 
-   (setq mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")) 
-   (setq mew-smtp-ssl       t)
-   (setq mew-smtp-ssl-port  465)
-   (setq mew-smtp-user      "xin2.yang"))
+  ;; (Laptop
+  ;;  (setq mew-smtp-server "smtp.gmail.com"
+  ;; 		 mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")
+  ;; 		 mew-smtp-ssl       t
+  ;; 		 mew-smtp-ssl-port  465
+  ;; 		 mew-smtp-user      "xin2.yang"))
 
   ;;------------------------------------------------------------
   ;; Switch account command --- capital `C'
@@ -166,11 +177,6 @@
          ("imap-trash-folder"    . "%Deleted Items")
          ("imap-queue-folder"    . "%Outbox")
          ("imap-spam-folder"     . "%Junk E-mail"))
-        ;; ("smtp-server"          . "smtp.gmail.com")
-        ;; ("smtp-auth-list"       . ("PLAIN" "LOGIN" "CRAM-MD5")) 
-        ;; ("smtp-ssl"             . t)
-        ;; ("smtp-ssl-port"        . "465")
-        ;; ("smtp-user"            . "xin2.yang"))
         
         ;; Gmail xin2.yang@gmail.com
         ("gx2"
@@ -188,11 +194,6 @@
          ("imap-user"            . "xin2.yang")
          ("imap-size"            . 0)
          ("imap-delete"          . t))
-        ;; ("smtp-server"          . "smtp.gmail.com")
-        ;; ("smtp-auth-list"       . ("PLAIN" "LOGIN" "CRAM-MD5")) 
-        ;; ("smtp-ssl"             . t)
-        ;; ("smtp-ssl-port"        . "465")
-        ;; ("smtp-user"            . "xin2.yang"))
         
         ;; Gmail etimecowboy@gmail.com
         ("ge"
@@ -210,23 +211,18 @@
          ("imap-user"            . "etimecowboy")
          ("imap-size"            . 0)
          ("imap-delete"          . t))
-        ;; ("smtp-server"          . "smtp.gmail.com")
-        ;; ("smtp-auth-list"       . ("PLAIN" "LOGIN" "CRAM-MD5")) 
-        ;; ("smtp-ssl"             . t)
-        ;; ("smtp-ssl-port"        . "465")
-        ;; ("smtp-user"            . "etimecowboy"))
         
         ;; newsgroup 
         ;; ("news"
 		;;  ("mailbox-type"          . nntp)
 		;;  ("proto"                 . "-")
-		;;  ("nntp-server"           . "freenews.netfront.net")
+		;;  ("nntp-server"           . "news.virginmedia.com")
 		;;  ("nntp-user"             . "etimecowboy")
 		;;  ("signature-file"        . "~/emacs/mew/sig/bulb")
 		;;  ("name"                  . "etimecowboy")
 		;;  ("mew-nntp-msgid-user"   . "etimecowboy")
 		;;  ("mew-nntp-msgid-domain" . "gmail.com")
-		;;  ("nntp-ssl"              . t)
+		;;  ("nntp-ssl"              . nil)
 		;;  ("nntp-ssl-port"         . 119)
 		;;  ("nntp-size"             . 0)
 		;;  ("nntp-header-only"      . t)
@@ -272,5 +268,16 @@
       ("Resent-To:" . mew-complete-address)
       ("Resent-Cc:" . mew-complete-address)
       ("Config:"    . mew-complete-config))))
+
+;; news groups
+(setq mew-nntp-header-only t
+	  mew-nntp-port "119"
+	  mew-nntp-ssl nil
+	  mew-nntp-server "news.virginmedia.com"
+	  mew-nntp-newsgroup "-cn.bbs.comp.emacs"
+	  mew-nntp-size 1000
+	  ;; mew-nntp-user "Allen Yang"
+	  mew-nntp-msgid-user "etimecowboy"
+	  mew-nntp-msgid-domain "gmail.com")
 
 (provide 'xy-rc-mew)

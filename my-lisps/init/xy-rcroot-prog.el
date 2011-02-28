@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-21 Mon 04:09 xin on p6t>
+;; Time-stamp:<2011-02-28 Mon 05:03 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -39,12 +39,12 @@
 ;; (global-set-key (kbd "C-x A r") 'align-regexp)
 
 ;; Auto fill
-;; Use default setting (70 column)
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
    cperl-mode-hook cc-mode-hook
    LaTeX-mode-hook)
  'turn-on-auto-fill)
+(eval-after-load "simple" `(simple-settings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

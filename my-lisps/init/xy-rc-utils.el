@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-02-27 Sun 21:43 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 06:03 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -48,11 +48,11 @@
   "Name of directory where my various Emacs log/record files reside.")
 ;; Machine name --- which machine are we using?
 (defvar using-office-pc
-  (string-match "brl" (prin1-to-string system-name)))
+  (string-match "brl" (prin1-to-string (downcase system-name))))
 (defvar using-home-desktop
-  (string-match "p6t" (prin1-to-string system-name)))
+  (string-match "p6t" (prin1-to-string (downcase system-name))))
 (defvar using-laptop
-  (string-match "t42" (prin1-to-string system-name)))
+  (string-match "t42" (prin1-to-string (downcase system-name))))
 ;; OS type --- are we running Microsoft Windows?
 ;; (defvar running-ms-windows
 ;;   (eq system-type 'windows-nt))
@@ -67,21 +67,31 @@
 
 ;; Machine name --- which machine are we using?
 (defmacro OfficePC (&rest body)
-  (list 'if (string-match "brl" (prin1-to-string system-name))
-        (cons 'progn body)))
+  (list
+   'if (string-match
+		"brl" (prin1-to-string (downcase system-name)))
+   (cons 'progn body)))
 (defmacro HomeDesktop (&rest body)
-  (list 'if (string-match "p6t" (prin1-to-string system-name))
-        (cons 'progn body)))
+  (list
+   'if (string-match
+		"p6t" (prin1-to-string (downcase system-name)))
+   (cons 'progn body)))
 (defmacro Laptop (&rest body)
-  (list 'if (string-match "t42" (prin1-to-string system-name))
-        (cons 'progn body)))
+  (list
+   'if (string-match
+		"t42" (prin1-to-string (downcase system-name)))
+   (cons 'progn body)))
 ;; OS type --- are we running GNU Linux?
 (defmacro GNULinux (&rest body)
-  (list 'if (string-match "linux" (prin1-to-string system-type))
-        (cons 'progn body)))
+  (list
+   'if (string-match
+		"linux" (prin1-to-string system-type))
+   (cons 'progn body)))
 (defmacro Windows (&rest body)
-  (list 'if (string-match "windows" (prin1-to-string system-type))
-        (cons 'progn body)))
+  (list
+   'if (string-match
+		"windows" (prin1-to-string system-type))
+   (cons 'progn body)))
 ;; Graphic mode --- are we running any window system ? 
 (defmacro XLaunch (&rest body)
   (list 'if (eq window-system 'x)(cons 'progn body)))

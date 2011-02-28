@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-23 Wed 11:11 xin on p6t>
+;; Time-stamp:<2011-02-28 Mon 09:31 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -61,8 +61,13 @@
 (auto-image-file-mode 1)
 ;; automatically refresh buffer
 (global-auto-revert-mode 1)
+(defun gbk-revert ()
+  "Revert current buffer with gbk-dos encoding."
+  (interactive)
+  (revert-buffer-with-coding-system 'gbk-dos))
 (global-set-key [f5] 'revert-buffer)
-(global-set-key [C-f5] 'revert-buffer-with-coding-system)
+(global-set-key [C-f5] 'gbk-revert)
+
 ;; Delete extra white spaces at the end of a sentence
 (setq sentence-end-double-space nil)
 ;; Do not redraw on reenter
