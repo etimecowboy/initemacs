@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-02-28 Mon 08:36 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 23:44 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -90,21 +90,21 @@
   ;; ;;   语言环境设定
   ;; ;;;;;;;;;;;;;;;;;;;;
   ;; (set-language-environment 'Chinese-GB)
-  ;; (setq gnus-default-charset 'chinese-iso-8bit
-  ;;       gnus-group-name-charset-group-alist '((".*" . cn-gb-2312))
-  ;;       gnus-summary-show-article-charset-alist
-  ;; 		'((1 . cn-gb-2312)
-  ;; 		  (2 . gb18030)
-  ;; 		  (3 . chinese-iso-8bit)
-  ;; 		  (4 . gbk)
-  ;; 		  (5 . big5)
-  ;; 		  (6 . utf-8))
-  ;;       gnus-newsgroup-ignored-charsets
-  ;;       '(unknown-8bit x-unknown iso-8859-1))
+  (setq gnus-default-charset 'chinese-iso-8bit
+        gnus-group-name-charset-group-alist '((".*" . cn-gb-2312))
+        gnus-summary-show-article-charset-alist
+  		'((1 . cn-gb-2312)
+  		  (2 . gb18030)
+  		  (3 . chinese-iso-8bit)
+  		  (4 . gbk)
+  		  (5 . big5)
+  		  (6 . utf-8))
+        gnus-newsgroup-ignored-charsets
+        '(unknown-8bit x-unknown iso-8859-1 gb18030 x-gbk))
 
-  ;; ;;;;;;;;;;;;;;;;;;;;
-  ;; ;;解决gb18030乱码
-  ;; ;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;
+  ;;解决gb18030乱码
+  ;;;;;;;;;;;;;;;;;;;;
   ;; (setq gnus-newsgroup-ignored-charsets 
   ;; 		'(unknown-8bit x-unknown gb18030))
 
