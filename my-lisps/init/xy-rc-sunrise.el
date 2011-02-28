@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sunrise.el'
-;; Time-stamp:<2011-02-18 Fri 16:15 xin on p6t>
+;; Time-stamp:<2011-02-27 Sun 23:47 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,6 +21,7 @@
   "Settings of `sunrise.el'."
 
   (setq sr-show-hidden-files t)
+  (setq sr-window-split-style 'vertical)
   (setq sr-start-hook
    (quote (sr-tree-menu-init
 		   sr-tabs-start-once
