@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sh.el'
-;; Time-stamp:<2011-02-22 Tue 20:59 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 00:18 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,8 @@
   (font-lock-add-keywords
    'sh-mode
    '(("\\<\\(local\\|let\\)\\>" . font-lock-keyword-face)))
-  (xy/set-font-default))
+  ;; (xy/set-font-default)
+  )
 
 ;;;###autoload
   (defun sh-mode-face-settings ()

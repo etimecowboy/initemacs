@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-02-22 Tue 20:58 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 00:14 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,7 @@
   (am-add-hooks
    `(lisp-mode-hook lisp-interaction-mode-hook)
    '(progn
-	  (xy/set-font-default)
+	  ;; (xy/set-font-default)
 	  (turn-on-auto-fill)
 	  (turn-on-eldoc-mode))))
 
@@ -43,11 +43,12 @@
   (add-hook 'emacs-lisp-mode-hook
   			'(lambda ()
 			   (progn
-				 (xy/set-font-default)
+				 ;; (xy/set-font-default)
 				 (elisp-mode-hook-settings)
 				 (turn-on-auto-fill)
 				 (turn-on-eldoc-mode)
-				 (yas-start)
-				 (linkd-start)))))
+				 ;; (yas-start)
+				 ;; (linkd-start)
+				 ))))
 
 (provide 'xy-rc-lisp.el)

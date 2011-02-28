@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-02-22 Tue 20:53 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 00:18 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,7 @@
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."
 
-  (xy/set-font-default)
+  ;; (xy/set-font-default)
   (defalias 'cpp-mode 'c++-mode)
   
   (defun c-mode-common-hook-settings ()
@@ -39,8 +39,9 @@
 				 (c-mode-common-hook-settings)
 				 (turn-on-auto-fill)
 				 (c-turn-on-eldoc-mode)
-				 (yas-start)
-				 (linkd-start))))
+				 ;; (yas-start)
+				 ;; (linkd-start)
+				 )))
   ;; (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
   (add-to-list 'auto-mode-alist '("\\.hch" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.hcc" . c-mode))

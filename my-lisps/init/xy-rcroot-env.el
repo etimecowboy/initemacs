@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-02-25 Fri 15:21 xin on p6t>
+;; Time-stamp:<2011-02-28 Mon 00:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -263,7 +263,7 @@
 ;; REF: http://emacser.com/torture-emacs.htm
 ;; BUG: 似乎使用 find-file-hook 更好。以下的设置在访问多个同一 major
 ;; mode 文件中见如果访问了另一 major mode 的文件不能切换回原来的字体。
-(xy/set-font-default)
+(xy/set-font-write)
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
    c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook)
