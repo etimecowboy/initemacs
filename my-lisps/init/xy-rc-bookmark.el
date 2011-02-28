@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-bookmark.el'
-;; Time-stamp:<2011-02-27 Sun 22:00 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 11:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,17 +21,9 @@
 (defun bookmark-settings ()
   "Settings of `bookmark.el'."
 
-  (setq bookmark-default-file (concat my-var-path "/bookmark"))
-  (OfficePC
-   (Windows
-	(setq bookmark-default-file (concat my-var-path "/bookmark-ow"))))
-  (HomeDesktop
-   (GNULinux
-	(setq bookmark-default-file (concat my-var-path "/bookmark-dl")))
-   (Windows
-	(setq bookmark-default-file (concat my-var-path "/bookmark-dw"))))
-  (Laptop
-   (Windows
-	(setq bookmark-default-file (concat my-var-path "/bookmark-nw")))))
+  (setq bookmark-default-file (concat my-var-path "/bookmark-"
+									  user-login-name "@"
+									  system-name "@"
+									  system-configuration)))
 
 (provide 'xy-rc-bookmark.el)

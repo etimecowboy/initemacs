@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-02-27 Sun 18:12 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 11:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,18 +22,10 @@
 
   (interactive)
   ;; (require 'session)
-  (setq session-save-file (concat my-var-path "/session"))
-  (OfficePC
-   (Windows
-  	(setq session-save-file (concat my-var-path "/session-ow"))))
-  (HomeDesktop
-   (GNULinux
-   	(setq session-save-file (concat my-var-path "/session-dl")))
-   (Windows
-	(setq session-save-file (concat my-var-path "/session-dw"))))
-  (Laptop
-   (Windows
-  	(setq session-save-file (concat my-var-path "/session-nw"))))
+  (setq session-save-file (concat my-var-path "/session-"
+								  user-login-name "@"
+								  system-name "@"
+								  system-configuration))
   (session-initialize))
 
 ;;;###autoload
@@ -43,18 +35,10 @@
   ;; BUG: this setq seems to cause problem when recovering last point
   ;;      position.
   ;; (setq session-initialize '(session menus))
-  (setq session-save-file (concat my-var-path "/session"))
-  (OfficePC
-   (Windows
-  	(setq session-save-file (concat my-var-path "/session-ow"))))
-  (HomeDesktop
-   (GNULinux
-  	(setq session-save-file (concat my-var-path "/session-dl")))
-   (Windows
-  	(setq session-save-file (concat my-var-path "/session-dw"))))
-  (Laptop
-   (Windows
-  	(setq session-save-file (concat my-var-path "/session-nw"))))
+  (setq session-save-file (concat my-var-path "/session-"
+								  user-login-name "@"
+								  system-name "@"
+								  system-configuration))
   ;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
   ;; Use the following:
   ;; Don't recursively display gtd files in session list

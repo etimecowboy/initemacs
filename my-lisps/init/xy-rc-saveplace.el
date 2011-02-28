@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-saveplace.el'
-;; Time-stamp:<2011-02-27 Sun 21:53 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 11:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,17 +20,9 @@
 ;;;###autoload
 (defun saveplace-settings ()
   "Settings of `saveplace.el'."
-  (setq save-place-file (concat my-var-path "/sav_plc"))
-  (OfficePC
-   (Windows
-	(setq save-place-file (concat my-var-path "/sav_plc-ow"))))
-  (HomeDesktop
-   (GNULinux
-	(setq save-place-file (concat my-var-path "/sav_plc-dl")))
-   (Windows
-	(setq save-place-file (concat my-var-path "/sav_plc-dw"))))
-  (Laptop
-   (Windows
-	(setq save-place-file (concat my-var-path "/sav_plc-nw")))))
+  (setq save-place-file (concat my-var-path "/saveplace-"
+								user-login-name "@"
+								system-name "@"
+								system-configuration)))
 
 (provide 'xy-rc-saveplace.el)

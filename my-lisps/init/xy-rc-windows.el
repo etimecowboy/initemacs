@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-windows.el'
-;; Time-stamp:<2011-02-27 Sun 12:27 xin on P6T>
+;; Time-stamp:<2011-02-28 Mon 11:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,17 +34,10 @@
   ;; Remove frame number in `global-mode-string'
   (delete 'win:mode-string global-mode-string)
   ;; set configuration file location.
-  (setq win:configuration-file (concat my-var-path "/windows"))
-  (OfficePC
-   (Windows
-	(setq win:configuration-file (concat my-var-path "/windows-ow"))))
-  (HomeDesktop
-   (GNULinux
-	(setq win:configuration-file (concat my-var-path "/windows-dl")))
-   (Windows
-	(setq win:configuration-file (concat my-var-path "/windows-dw"))))
-  (Laptop
-   (Windows
-	(setq win:configuration-file (concat my-var-path "/windows-nw")))))
-  
+  (setq win:configuration-file (concat my-var-path "/windows-"
+									   user-login-name "@"
+									   system-name "@"
+									   system-configuration))
+  )
+
 (provide 'xy-rc-windows.el)
