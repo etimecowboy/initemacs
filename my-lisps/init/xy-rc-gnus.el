@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-03-03 Thu 02:44 xin on p6t>
+;; Time-stamp:<2011-03-03 Thu 16:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,7 +52,7 @@
 		gnus-cache-directory "~/emacs/gnus/cache"    ;缓存目录
 		gnus-cache-active-file "~/emacs/gnus/cache/active" ;缓存激活文件
         message-directory "~/emacs/gnus/mail"   ;邮件的存储目录
-		message-auto-save-directory "~/emacs/gnus/mail/drafts" ;自动保存的目录
+		message-auto-save-directory "~/emacs/gnus/mail" ;自动保存的目录
 		mail-source-directory "~/emacs/gnus/mail/inbox" ;邮件的源目录
 		mail-source-crash-box "~/emacs/gnus/.emacs-mail-crash-box" ;邮件源崩溃目录
 		nnmail-message-id-cache-file "~/emacs/gnus/nnmail-cache" ;nnmail的消息ID缓存
@@ -114,7 +114,7 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
   (setq gnus-select-method
-		'(nntp "freenews.netfront.net"))
+		'(nntp "news.aioe.org"))
   (HomeDesktop
    (setq gnus-select-method
 		 '(nntp "news.virginmedia.com"
@@ -216,7 +216,7 @@
 		   ;;(body "")
 		   )
 		  ;;cn.bbs.com        
-		  ("^cn\\.bbs\\.comp"
+		  ("^cn\\.bbs"
 		   (name "日积月累")
 		   (address "etimecowboy@gmail.com")
 ;; 		   (face (gnus-convert-png-to-face (concat emacsHome
