@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-03-04 Fri 16:44 xin on P6T>
+;; Time-stamp:<2011-03-04 Fri 23:29 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -46,7 +46,7 @@
 		gnus-dribble-directory "~/emacs/gnus"   ;恢复目录
 		gnus-startup-file "~/emacs/gnus/newsrc" ;初始文件
         gnus-directory "~/emacs/gnus/news"      ;新闻组的存储目录
-		gnus-article-save-directory "~/emacs/gnus/news"  ;文章保存目录
+		gnus-article-save-directory "~/emacs/gnus/news/reserved"  ;文章保存目录
 		gnus-kill-files-directory "~/emacs/gnus/news/trash" ;文件删除目录
 		gnus-agent-directory "~/emacs/gnus/agent"    ;代理目录
 		gnus-cache-directory "~/emacs/gnus/cache"    ;缓存目录
