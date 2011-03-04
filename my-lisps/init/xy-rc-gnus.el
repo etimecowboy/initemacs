@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-03-03 Thu 16:33 xin on p6t>
+;; Time-stamp:<2011-03-04 Fri 16:44 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -337,8 +337,8 @@
 		  (not gnus-thread-sort-by-number))) ;跟踪的数量的逆序
 
   ;; 自动跳到第一个没有阅读的组
-  (add-hook 'gnus-switch-on-after-hook 'gnus-group-first-unread-group)	; gnus切换时					
-  (add-hook 'gnus-summary-exit-hook 'gnus-group-first-unread-group) ;退出Summary时
+  ;; (add-hook 'gnus-switch-on-after-hook 'gnus-group-first-unread-group)	; gnus切换时					
+  ;; (add-hook 'gnus-summary-exit-hook 'gnus-group-first-unread-group) ;退出Summary时
 
   ;; 自动更新新消息，功能不错，但在我的机器上会很慢...
   ;; (add-hook 'gnus-summary-exit-hook 'gnus-notify+) ;退出summary模式后
@@ -405,9 +405,6 @@
 \\|^X-Newsreader:\\|^User-Agent:\\|^X-Mailer:
 \\|Line:\\|Lines:\\|Content-Type:\\|NNTP-Posting-Host\\)")
 
-  ;;如果开启了主题视图，只看未读邮件是令人讨厌的，在 ~/.gnus 里面加如这行：
-  (setq gnus-fetch-old-headers 'some)
-  
   ;; topic mode 参考这里：(info "(gnus)Group Topics")
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
