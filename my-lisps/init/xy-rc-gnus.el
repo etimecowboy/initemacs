@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-03-04 Fri 23:29 xin on p6t>
+;; Time-stamp:<2011-03-05 Sat 17:01 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -205,8 +205,8 @@
 		  (".*"
 		   (name "Allen Yang")
 		   (address "etimecowboy@gmail.com")
-		   ;; (face (gnus-convert-png-to-face (concat emacsHome
-		   ;; 										   "/Gnus/xface.png")))
+		   ;; (face (gnus-convert-png-to-face (concat gnus-home-directory 
+		   ;;  									   "/cock32.png")))
 		   ;; (organization "your-pc-name")
 ;; 		   (signature "
 ;; oooOOOOoo...
@@ -219,8 +219,8 @@
 		  ("^cn\\.bbs"
 		   (name "日积月累")
 		   (address "etimecowboy@gmail.com")
-;; 		   (face (gnus-convert-png-to-face (concat emacsHome
-;; 												   "/Gnus/xface.png")))
+		   ;; (face (gnus-convert-png-to-face (concat gnus-home-directory 
+		   ;;  									   "/cock32.png")))
 ;; 		   (organization "your-pc-name")
  		   (signature "
 ;; 
@@ -233,8 +233,8 @@
 		  ("^tw\\.comp"
 		   (name "日積月累")
 		   (address "etimecowboy@gmail.com")
-;; 		   (face (gnus-convert-png-to-face (concat emacsHome
-;; 												   "/Gnus/xface.png")))
+		   ;; (face (gnus-convert-png-to-face (concat gnus-home-directory 
+		   ;;  									   "/cock32.png")))
 ;; 		   (organization "your-pc-name")
  		   (signature "
 ;; 
