@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-02-28 Mon 09:31 xin on P6T>
+;; Time-stamp:<2011-03-06 Sun 22:26 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -34,7 +34,7 @@
 ;; User visible bell instead of bell sound
 (setq visible-bell t)
 ;; menu bar
-(menu-bar-mode 1)
+(menu-bar-mode -1)
 ;; This library enhances the "Text Properties" menu.  It adds menu
 ;; items to the menu, and provides two different versions of the
 ;; menu: one for the menu-bar Edit menu (`facemenu-menu') and one for
@@ -234,7 +234,7 @@ the mode-line."
 ;; menua-bar+，improved menu
 ;; (try-require 'menu-bar+)
 ;; toggle menua display
-(global-set-key [f10] 'menu-bar-mode)
+(global-set-key [M-f10] 'menu-bar-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -245,7 +245,7 @@ the mode-line."
 ;; tool-bar+, improved tool bar; broken
 ;; (try-require 'tool-bar+)
 ;; toggle toolbar display
-(global-set-key [S-f10] 'tool-bar-mode)
+(global-set-key [C-f10] 'tool-bar-mode)
 
 ;; tabbar，tab style buffer switch
 ;; (require 'tabbar)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-03-05 Sat 17:01 xin on P6T>
+;; Time-stamp:<2011-03-06 Sun 23:47 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -318,7 +318,7 @@
   ;; 主题设置
   (setq gnus-use-trees t ;联系老的标题
 		gnus-tree-minimize-window nil ;用最小窗口显示
-		gnus-fetch-old-headers 'some ;抓取老的标题以联系线程
+		gnus-fetch-old-headers 'off  ;'some ;抓取老的标题以联系线程
 		gnus-generate-tree-function 'gnus-generate-horizontal-tree ;生成水平树
 		gnus-summary-thread-gathering-function
 		  'gnus-gather-threads-by-subject) ;聚集函数根据标题聚集
