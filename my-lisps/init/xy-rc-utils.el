@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-02-28 Mon 06:03 xin on P6T>
+;; Time-stamp:<2011-03-08 Tue 16:40 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -695,6 +695,19 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
            "黑体") 14)
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 11")))
+
+;;;###autoload
+(defun xy/set-font-prog ()
+  "My default Emacs font setting."
+  (interactive)
+  (if window-system
+      (qiang-set-font
+       '("DejaVu Sans Mono" "Monaco" "Consolas"
+		 "Monospace" "Courier") ":pixelsize=10"
+         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
+           "黑体") 12)
+    ;; 默认字体，term 下的字体
+    (set-default-font "Monospace 9")))
 
 ;;;###autoload
 (defun xy/set-font-write ()

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-03-06 Sun 22:26 xin on P6T>
+;; Time-stamp:<2011-03-08 Tue 12:27 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -150,8 +150,12 @@ numbers with the C-x C-j prefix.  Another mode,
 windows, use `window-number-mode' to display the window numbers in
 the mode-line."
   t)
-(global-set-key [f6] 'window-number-mode)
-(global-set-key [M-f6] 'window-number-meta-mode)
+(defun window-number-toggle ()
+  "Toggle window number display and quick switch."
+  (interactive1)
+  (window-number-mode)
+  (window-number-meta-mode))
+(global-set-key [f6] 'window-number-toggle)
 
 ;; Removing or abbreviating minor mode indicators
 (eval-after-load "filladapt" '(diminish 'filladapt-mode))

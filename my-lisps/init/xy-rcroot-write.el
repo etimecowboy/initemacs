@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-02-21 Mon 06:41 xin on p6t>
+;; Time-stamp:<2011-03-08 Tue 15:11 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -47,7 +47,11 @@
 ;; (add-hook 'LaTeX-mode-hook 'auctex-start)
 ;; (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (eval-after-load "latex"
-  `(auctex-settings))
+  '(progn
+	 (auctex-settings)
+	 (eal-define-keys
+	  'LaTeX-mode-map
+	  `(("M-c `" TeX-next-error))))) ;; C-c ` conflict with icy-mode 
 
 ;; reftex, reference
 ;; (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
