@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-03-08 Tue 16:41 xin on P6T>
+;; Time-stamp:<2011-03-10 Thu 15:08 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -48,7 +48,7 @@
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
 (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/bookmark+"))
-(xy/install-all-lisps (concat my-local-lisp-path "/org-7.4"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/org-7.5"))
 ;; (require 'cedet)
 ;; (require 'color-theme-autoloads)
 (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
