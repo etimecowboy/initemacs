@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-03-06 Sun 23:47 xin on P6T>
+;; Time-stamp:<2011-03-11 Fri 16:35 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -59,8 +59,8 @@
 		nnml-newsgroups-file "~/emacs/gnus/newsgroup"      ;邮件新闻组解释文件
 		nntp-marks-directory "~/emacs/gnus/marks"          ;nntp组存储目录
 		mml-default-directory "~/emacs/gnus/attachement"   ;附件的存储位置
-		nntp-authinfo-file "~/emacs/gnus/authinfo.pgp" ;nntp用户身分认证文件
-		nnimap-authinfo-file "~/emacs/gnus/authinfo.pgp" ;imap 用户身分认证文件
+		nntp-authinfo-file "~/emacs/gnus/authinfo" ;nntp用户身分认证文件
+		nnimap-authinfo-file "~/emacs/gnus/authinfo" ;imap 用户身分认证文件
 	)
 
   ;; 关闭默认的archive 这个方法不好控制
