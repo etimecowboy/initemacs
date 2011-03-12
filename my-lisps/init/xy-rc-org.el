@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-02-28 Mon 03:27 xin on P6T>
+;; Time-stamp:<2011-03-12 Sat 16:21 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -54,6 +54,11 @@
   (when (and (fboundp 'daemonp) (daemonp))
     (add-hook 'org-mode-hook 
               'wl-org-column-view-uses-fixed-width-face))
+
+  ;; org-crypt security issue about auto-save
+  (add-hook 'org-mode-hook
+			'(lambda ()
+			   (auto-save-mode -1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
