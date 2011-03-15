@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-03-15 Tue 11:29 xin on P6T>
+;; Time-stamp:<2011-03-15 Tue 21:39 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,8 +35,7 @@
 
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
-  ;; Set current file as the master
-  (setq-default TeX-master nil)
+  (setq-default TeX-master nil) ;; project support
   (setq tex-source-specials-mode t)
   (setq-default LaTeX-math-mode t)
   (setq-default TeX-fold-mode t)
