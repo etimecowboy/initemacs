@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-03-15 Tue 21:27 xin on P6T>
+;; Time-stamp:<2011-03-18 Fri 14:44 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -261,20 +261,20 @@
 (setq scalable-fonts-allowed t)
 ;; Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
-;; BUG: 似乎使用 find-file-hook 更好。以下的设置在访问多个同一 major
-;; mode 文件中见如果访问了另一 major mode 的文件不能切换回原来的字体。
-(xy/set-font-write)
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
-   c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
-   matlab-mode-hook)
- 'xy/set-font-prog)
-(am-add-hooks
- `(LaTeX-mode-hook latex-mode-hook tex-mode-hook
-   muse-mode-hook org-mode-hook)
- 'xy/set-font-write)
+;; TODO: set font for each frame seperately
+(xy/set-font-default)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
+;;    c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
+;;    matlab-mode-hook)
+;;  'xy/set-font-prog)
+;; (am-add-hooks
+;;  `(LaTeX-mode-hook latex-mode-hook tex-mode-hook
+;;    muse-mode-hook org-mode-hook)
+;;  'xy/set-font-write)
 (global-set-key (kbd "C-x F d") 'xy/set-font-default)
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
+(global-set-key (kbd "C-x F p") xy/set-font-prog)
 
 ;; Ctrl+滚轮，字体放大缩小
 (GNULinux
