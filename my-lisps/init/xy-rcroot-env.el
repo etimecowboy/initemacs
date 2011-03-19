@@ -274,7 +274,7 @@
 ;;  'xy/set-font-write)
 (global-set-key (kbd "C-x F d") 'xy/set-font-default)
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
-(global-set-key (kbd "C-x F p") xy/set-font-prog)
+(global-set-key (kbd "C-x F p") 'xy/set-font-prog)
 
 ;; Ctrl+滚轮，字体放大缩小
 (GNULinux
