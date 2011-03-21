@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-03-15 Tue 21:39 xin on P6T>
+;; Time-stamp:<2011-03-21 Mon 15:55 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,28 +42,13 @@
   (setq-default TeX-PDF-mode t)
   
   ;; load reftex
-  (require 'reftex)
+  ;; (require 'reftex)
 
   ;; load cd-latex
-  (require 'cdlatex)
+  ;; (require 'cdlatex)
 
   (add-hook 'LaTeX-mode-hook
 			'(lambda ()
-			   (progn
-				 (turn-on-auto-fill)
-				 (outline-minor-mode 1)
-				 (cdlatex-mode 1)
-				 (reftex-mode 1)
-				 (flyspell-mode 1)
-				 (turn-on-reftex)
-				 (turn-on-cdlatex)
-				 ;; (yas-start)
-				 ;; (linkd-start)
-				 ;; (xy/set-font-write)
-				 )))
-  (add-hook 'latex-mode-hook
-  		  '(lambda ()
-			 (progn
 			   (turn-on-auto-fill)
 			   (outline-minor-mode 1)
 			   (cdlatex-mode 1)
@@ -74,7 +59,20 @@
 			   ;; (yas-start)
 			   ;; (linkd-start)
 			   ;; (xy/set-font-write)
-			   )))
+			   ))
+  (add-hook 'latex-mode-hook
+  		  '(lambda ()
+			 (turn-on-auto-fill)
+			 (outline-minor-mode 1)
+			 (cdlatex-mode 1)
+			 (reftex-mode 1)
+			 (flyspell-mode 1)
+			 (turn-on-reftex)
+			 (turn-on-cdlatex)
+			 ;; (yas-start)
+			 ;; (linkd-start)
+			 ;; (xy/set-font-write)
+			 ))
   
   ;; (require 'tex-mik)
   ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
