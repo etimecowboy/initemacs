@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-02-28 Mon 13:02 xin on P6T>
+;; Time-stamp:<2011-03-21 Mon 15:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -519,7 +519,6 @@ See the documentation for these variables for more info.
 	  `(("C-c N"   flymake-goto-next-error-disp)
 		("C-c P"   flymake-goto-prev-error-disp)
 		("C-c M-w" flymake-display-current-warning/error)))))
-
 
 ;;--------------------------------------------------------------------
 

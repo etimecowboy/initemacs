@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-flymake.el'
-;; Time-stamp:<2011-02-01 Tue 02:56 xin on P6T>
+;; Time-stamp:<2011-03-21 Mon 15:16 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -71,8 +71,8 @@ Use CREATE-TEMP-F for creating temp copy."
           ("\\.php[345]?\\'" flymake-php-init)
           ("\\.h\\'" flymake-master-make-header-init flymake-master-cleanup)
           ("\\.java\\'" flymake-simple-make-java-init flymake-simple-java-cleanup)
-          ("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
-          ("\\.tex\\'" flymake-simple-tex-init)
+          ;; ("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
+          ;; ("\\.tex\\'" flymake-simple-tex-init)
           ("\\.idl\\'" flymake-simple-make-init)))
 
   (defun flymake-display-current-warning/error ()
