@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-03-21 Mon 15:10 xin on P6T>
+;; Time-stamp:<2011-03-21 Mon 16:46 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -27,12 +27,19 @@
 
 ;; BibTeX related
 ;;;###autoload
+;; (defun org-mode-reftex-setup ()
+;;   (require 'reftex)
+;;   (require 'reftex-parse)
+;;   (and (buffer-file-name)
+;;        (file-exists-p (buffer-file-name))
+;;        (reftex-parse-all)))
 (defun org-mode-reftex-setup ()
-  (require 'reftex)
-  (require 'reftex-parse)
+  (load-library "reftex")
   (and (buffer-file-name)
        (file-exists-p (buffer-file-name))
-       (reftex-parse-all)))
+       (reftex-parse-all))
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+  (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
 
 ;;;###autoload
 (defun org-settings ()

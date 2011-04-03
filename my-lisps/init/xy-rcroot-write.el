@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-03-08 Tue 15:11 xin on P6T>
+;; Time-stamp:<2011-03-21 Mon 16:28 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,12 +54,14 @@
 	  `(("M-c `" TeX-next-error))))) ;; C-c ` conflict with icy-mode 
 
 ;; reftex, reference
-;; (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
-;; (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" nil)
-;; (autoload 'reftex-citation "reftex-cite" "Make citation" nil)
-;; (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
+(autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
+(autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" t)
+(autoload 'reftex-citation "reftex-cite" "Make citation" t)
+(autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
 (eval-after-load "reftex"
   `(reftex-settings))
+;; (eval-after-load "reftex-mode"
+;;   `(reftex-settings))
 
 ;; cdlatex, tex writing tools
 ;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
