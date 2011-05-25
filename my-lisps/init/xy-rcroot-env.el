@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-03-18 Fri 14:44 xin on P6T>
+;; Time-stamp:<2011-04-21 Thu 20:50 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -400,7 +400,8 @@
    ("C-x G m" goto-my-own-lisp-dir)
    ("C-x G e" goto-my-emacs-dir)
    ("C-x G h" goto-my-home-dir)
-   ("C-x G o" goto-my-org-source-dir)))
+   ("C-x G o" goto-my-org-source-dir)
+   ("C-x G t" goto-my-org-latex-dir)))
 
 ;; try to improve slow performance on windows.
 (Windows

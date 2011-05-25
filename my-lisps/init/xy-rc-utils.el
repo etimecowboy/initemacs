@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-03-08 Tue 16:40 xin on P6T>
+;; Time-stamp:<2011-04-21 Thu 20:49 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,8 +42,9 @@
   "Name of diretory where my local info files reside.")
 (defvar my-emacs-path "~/emacs"
   "Name of directory where my working files reside.")
-(defvar my-org-source-path "~/emacs/org/source"
+(defvar my-org-source-path "~/emacs/org/source/phd"
   "Name of directory where my org source files reside.")
+(defvar my-org-latex-path "~/emacs/org/latex/phd")
 (defvar my-var-path "~/emacs/var"
   "Name of directory where my various Emacs log/record files reside.")
 ;; Machine name --- which machine are we using?
@@ -191,6 +192,12 @@
   "Goto my org source file directory."
   (interactive)
   (dired my-org-source-path))
+
+;;;###autoload
+(defun goto-my-org-latex-dir ()
+  "Goto my org source file directory."
+  (interactive)
+  (dired my-org-latex-path))
 
 ;; Reload init file
 ;; Note: when using `require' in the init.el to load other setting files,
