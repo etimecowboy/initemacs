@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-03-21 Mon 16:46 xin on P6T>
+;; Time-stamp:<2011-06-08 Wed 17:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -222,13 +222,19 @@
         '((emacs-lisp . t) 
           (ditaa      . t) 
           (dot        . t)
-          (octave     . t) 
+          ;; (octave     . t) 
           (matlab     . t)
           (latex      . t)
           (sh         . t)
           ;; (c          . t)
           ;; (c++        . t)
           ))
+  (require 'ob-emacs-lisp)
+  (require 'ob-ditaa)
+  (require 'ob-dot)
+  (require 'ob-matlab)
+  (require 'ob-latex)
+  (require 'ob-sh)
   ;; default latex package list
   (setq org-export-latex-default-packages-alist 
         '(("AUTO" "inputenc" t) ("T1" "fontenc" t) ("" "fixltx2e" nil) 
