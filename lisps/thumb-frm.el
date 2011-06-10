@@ -4,12 +4,12 @@
 ;; Description: Commands for thumbnail frames.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 2004-2010, Drew Adams, all rights reserved.
+;; Copyright (C) 2004-2011, Drew Adams, all rights reserved.
 ;; Created: Fri Dec 10 16:44:55 2004
 ;; Version: 21.0
-;; Last-Updated: Fri Jan 15 13:48:46 2010 (-0800)
+;; Last-Updated: Sat Apr 16 09:54:06 2011 (-0700)
 ;;           By: dradams
-;;     Update #: 1360
+;;     Update #: 1371
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/thumb-frm.el
 ;; Keywords: frame, icon
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -243,8 +243,12 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Change log:
+;;; Change Log:
 ;;
+;; 2011/04/16 dadams
+;;     iconify-frame: Fix for lexbind Emacs 24: replace named arg FRAME by (ad-get-arg 0).
+;; 2011/01/04 dadams
+;;     Added autoload cookies for defgroup, defcustom, and cmd thumfr-stack-thumbnail-frames.
 ;; 2009/11/07 dadams
 ;;     Renamed: thumfr-doremi-thumbnail-frames to thumfr-doremi-thumbnail-frames+.
 ;; 2009/05/17 dadams
@@ -353,6 +357,7 @@
 
 ;;; USER OPTIONS ;;;;;;;;;;;;;;;;
 
+;;;###autoload
 (defgroup Thumbnail-Frames nil
   "Commands for thumbnail frames"
   :prefix "thumfr-" :group 'frames :group 'convenience
@@ -368,6 +373,7 @@ Don't forget to mention your Emacs and library versions."))
           "http://www.emacswiki.org/cgi-bin/wiki/FisheyeWithThumbs")
   :link '(emacs-commentary-link :tag "Commentary" "thumb-frm"))
 
+;;;###autoload
 (defcustom thumfr-font-difference 8
   "*Number of points for `thumfr-thumbify-frame' to decrease frame font.
 This must be less than the current font size, since the new font size
@@ -381,15 +387,18 @@ thumbifying actually increases the font and frame size, instead of
 decreasing them."
   :type 'integer :group 'Thumbnail-Frames)
 
+;;;###autoload
 (defcustom thumfr-thumbify-dont-iconify-flag t
   "*Non-nil means thumbify frames instead of iconifying them."
   :type 'boolean :group 'Thumbnail-Frames)
 
+;;;###autoload
 (defcustom thumfr-rename-when-thumbify-flag t
   "*Non-nil means frames are renamed when thumbified.
 The new name is the name of the current buffer."
   :type 'boolean :group 'Thumbnail-Frames)
 
+;;;###autoload
 (defcustom thumfr-stack-display-edge 'right+down
   "*Display edge to stack thumbnail frames along.
 Possible values are symbols named EDGE+DIRECTION,
@@ -418,12 +427,13 @@ along the right edge from top to bottom."
      :tag "Arrange thumbnail frames along display bottom, toward the left" bottom+to-left))
   :group 'Thumbnail-Frames)
 
+;;;###autoload
 (defcustom thumfr-frame-parameters
   '((menu-bar-lines . 0) (tool-bar-lines . 0))
   ;; Emacs 21+ does not shrink scroll bars when the font shrinks.
   ;; '((menu-bar-lines . 0) (tool-bar-lines . 0)
   ;;   (vertical-scroll-bars) (horizontal-scroll-bars))
-  "Frame parameters of thumbnail frames.
+  "*Frame parameters of thumbnail frames.
 Use this to show or hide things like the menu bar, tool bar, tab bar,
 and scroll bars for thumbnail frames.
 
@@ -434,6 +444,7 @@ shrink along with the font - it retains the same width.)"
   :type '(repeat (cons symbol sexp))
   :group 'Thumbnail-Frames)
 
+;;;###autoload
 (defcustom thumfr-sort-function 'thumfr-sort-by-name
   "*Function to use for sorting the stacked thumbnail frames.
 If nil, then no sorting is done.
@@ -505,7 +516,7 @@ A smaller value uses display real estate better.")
 To iconify a frame in spite of this flag, use
 `\\[thumfr-really-iconify-frame]'."
   (if thumfr-thumbify-dont-iconify-flag
-      (thumfr-thumbify-frame frame)
+      (thumfr-thumbify-frame (ad-get-arg 0))
     ad-do-it))
 
 
@@ -703,6 +714,7 @@ restoring them to their states before they were thumbified."
 ;; easier to do, and works OK most of the time.  It is not ideal if
 ;; frame sizes vary a great deal.
 ;;
+;;;###autoload
 (defun thumfr-stack-thumbnail-frames ()
   "Stack thumbnail frames along edge of display
 according to the direction of `thumfr-stack-display-edge'."

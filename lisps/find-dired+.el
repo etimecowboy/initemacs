@@ -6,13 +6,12 @@
 ;;      Sebastian Kremer <sk@thp.uni-koeln.de>,
 ;;      Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2009, Drew Adams, all rights reserved.
-;; Copyright (C) 1992, 1994 Free Software Foundation, Inc.
+;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
 ;; Created: Wed Jan 10 14:31:50 1996
 ;; Version: 20.0
-;; Last-Updated: Sat Dec 27 10:09:31 2008 (-0800)
+;; Last-Updated: Tue Jan  4 09:24:31 2011 (-0800)
 ;;           By: dradams
-;;     Update #: 555
+;;     Update #: 571
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/find-dired+.el
 ;; Keywords: internal, unix, tools, matching, local
 ;; Compatibility: GNU Emacs 20.x
@@ -24,7 +23,7 @@
 ;;   `ediff-merg', `ediff-mult', `ediff-util', `ediff-wind',
 ;;   `find-dired', `find-dired-', `fit-frame', `info', `info+',
 ;;   `misc-fns', `mkhtml', `mkhtml-htmlize', `strings', `thingatpt',
-;;   `thingatpt+', `w32-browser'.
+;;   `thingatpt+', `w32-browser', `widget'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -76,6 +75,13 @@
 ;;
 ;;; Change log:
 ;;
+;; 2011/01/04 dadams
+;;     Removed autoloads for defvar, defconst, and non-interactive functions.
+;; 2010/03/24 dadams
+;;     find-grep-dired:
+;;       Added missing DEFAULT arg for read-from-minibuffer.
+;;       Thx to Sascha Friedmann.
+;;     find(-name)-dired: Use nil as INITIAL-CONTENTS arg to read-from-minibuffer.
 ;; 2006/03/20 dadams
 ;;     menu-bar-dired-subdir-menu -> diredp-menu-bar-subdir-menu.
 ;; 2000/09/27 dadams
@@ -153,11 +159,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;###autoload
 (defvar find-dired-hook nil
   "*Hook to be run at the end of each `find-dired' execution.")
 
-;;;###autoload
 (defvar find-dired-default-fn (and (fboundp 'symbol-name-nearest-point)
                                     'symbol-name-nearest-point)
   "*Function of 0 args called to provide default input for \\[find-dired],
@@ -174,7 +178,6 @@ If this is nil, then no default input is provided.")
 ;; Note: `defconst' is necessary here because this is preloaded by basic emacs:
 ;; it is not sufficient to do a defvar before loading `find-dired.el'.  Too bad.
 ;; Otherwise, this could be just a `defvar' in `find-dired-.el'.
-;;;###autoload
 (defconst find-ls-option
   (cond ((eq system-type 'berkeley-unix)
          '("-ls" . "-gilsb"))
@@ -205,7 +208,7 @@ The `find' command run (after changing into DIR) is:
    (let ((default (and find-dired-default-fn
                        (funcall find-dired-default-fn))))
      (list (read-file-name "Run `find' in directory: " nil "" t)
-           (read-from-minibuffer "Run `find' (with args): " default
+           (read-from-minibuffer "Run `find' (with args): " nil
                                  nil nil 'find-args-history default t))))
   (let ((dired-buffers dired-buffers))
     ;; Expand DIR ("" means default-directory), and make sure it has a
@@ -268,7 +271,7 @@ The command run (after changing into DIR) is: find . -name 'PATTERN' -ls"
    (let ((default (and find-dired-default-fn
                        (funcall find-dired-default-fn))))
    (list (read-file-name "Find-name (directory): " nil "" t)
-         (read-from-minibuffer "Find-name (filename wildcard): " default
+         (read-from-minibuffer "Find-name (filename wildcard): " nil
                                nil nil 'dired-regexp-history default t))))
   (find-dired dir (concat "-name '" pattern "'")))
 
@@ -289,7 +292,7 @@ Thus REGEXP can also contain additional grep options."
    (let ((default (and find-dired-default-fn
                        (funcall find-dired-default-fn))))
      (list (read-file-name "Find-grep (directory): " nil "" t)
-           (read-from-minibuffer "Find-grep (grep regexp): "
+           (read-from-minibuffer "Find-grep (grep regexp): " nil
                                  nil nil 'dired-regexp-history default t))))
   ;; find -exec doesn't allow shell i/o redirections in the command,
   ;; or we could use `grep -l >/dev/null'
@@ -303,7 +306,6 @@ Thus REGEXP can also contain additional grep options."
 
 ;; REPLACES ORIGINAL in `find-dired.el':
 ;; Removes lines that just list a file.
-;;;###autoload
 (defun find-dired-filter (proc string)
   "Filter for \\[find-dired] processes.
 PROC is the process.
@@ -349,7 +351,6 @@ STRING is the string to insert."
 ;; REPLACES ORIGINAL in `find-dired.el':
 ;; 1. Highlights file lines.
 ;; 2. Puts `find' in mode-line.
-;;;###autoload
 (defun find-dired-sentinel (proc state)
   "Sentinel for \\[find-dired] processes.
 PROC is the process.

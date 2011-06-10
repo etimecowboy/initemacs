@@ -4,12 +4,12 @@
 ;; Description: Enhancements of standard library `files.el'.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2009, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
 ;; Created: Fri Aug 11 14:24:13 1995
 ;; Version: 21.0
-;; Last-Updated: Sat Aug  1 15:24:45 2009 (-0700)
+;; Last-Updated: Mon Apr 25 10:34:37 2011 (-0700)
 ;;           By: dradams
-;;     Update #: 545
+;;     Update #: 582
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/files+.el
 ;; Keywords: internal, extensions, local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -24,19 +24,24 @@
 ;;
 ;;    Enhancements of standard library `files.el'.
 ;;
+;;  Commands defined here:
+;;
+;;    `dired-describe-listed-directory',
+;;    `dired-mouse-describe-listed-directory',
+;;
 ;;
 ;;  ***** NOTE: The following functions defined in `files.el' have been
 ;;              REDEFINED HERE:
 ;;
+;;  `display-buffer-other-frame' - Use `read-buffer'.
+;;                                 Do not select the buffer.
 ;;  `find-file-read-args' - In Dired, use file at cursor as default.
 ;;  `insert-directory' - Add file count in Dired for each dir listed.
+;;  `switch-to-buffer-other-frame'  - Use `read-buffer'.
+;;                                    Return the buffer switched to.
 ;;  `switch-to-buffer-other-window' -
 ;;     Use `read-buffer'.
 ;;     Raise frame of selected window (for non-nil `pop-up-frames').
-;;  `switch-to-buffer-other-frame'  - Use `read-buffer'.
-;;                                    Return the buffer switched to.
-;;  `display-buffer-other-frame' - Use `read-buffer'.
-;;                                 Do not select the buffer.
 ;;
 ;;  Load this library after loading the standard library `files.el'.
 ;;  However, if you use MS Windows, MS-DOS, or MacOS, then you will
@@ -54,6 +59,16 @@
 ;;
 ;;; Change log:
 ;;
+;; 2011/04/25 dadams
+;;     Removed: describe-file, dired(-mouse)-describe-file.
+;;     dired-list-directory: raise error if describe-file not defined.
+;; 2011/01/04 dadams
+;;     Added autoload cookies for defmacro and commands.
+;; 2010/09/29 dadams
+;;     insert-directory: Updated per Emacs 24: Add -d switch if not full-directory-p.
+;; 2009/10/23 dadams
+;;     count-dired-files: Return 0 if search finds no file.
+;;     update-dired-files-count: DTRT if count-dired-files returns 0.
 ;; 2008/12/17 dadams
 ;;     Added defvar of directory-listing-before-filename-regexp, for Emacs 22.
 ;; 2008/03/04 dadams
@@ -186,6 +201,7 @@ regardless of the language.")
 
 
 ;; Copied here from `files.el', for use by `find-file-read-args'.
+;;;###autoload
 (defmacro minibuffer-with-setup-hook (fun &rest body)
   "Add FUN to `minibuffer-setup-hook' while executing BODY.
 BODY should use the minibuffer at most once.
@@ -229,6 +245,7 @@ Recursive uses of the minibuffer will not be affected."
 ;; Use `read-buffer' (not "B...") in the interactive spec.
 ;; Raise frame of selected window. This has an effect for non-nil `pop-up-frames'.
 ;;
+;;;###autoload
 (defun switch-to-buffer-other-window (buffer &optional norecord)
   "Select buffer BUFFER in another window.
 If BUFFER does not identify an existing buffer, then this function
@@ -263,6 +280,7 @@ documentation for additional customization information."
 ;; Use `read-buffer' (not "B...") in the interactive spec.
 ;; Return the buffer switched to.
 ;;
+;;;###autoload
 (defun switch-to-buffer-other-frame (buffer &optional norecord)
   "Switch to buffer BUFFER in another frame.
 Optional second arg NORECORD non-nil means
@@ -289,6 +307,7 @@ documentation for additional customization information."
 ;; Rewrote, using `switch-to-buffer-other-frame' and `select-frame-set-input-focus'.
 ;; Return the window displaying the buffer.
 ;;
+;;;###autoload
 (defun display-buffer-other-frame (buffer)
   "Show BUFFER in another frame, but don't select it.
 See documentation of `display-buffer' for more information."
@@ -306,6 +325,7 @@ See documentation of `display-buffer' for more information."
 
 
 ;; REPLACES ORIGINAL in `files.el':
+;;
 ;; Add number of files in directory to `total' header entry.
 ;;
 (defun insert-directory (file switches &optional wildcard full-directory-p)
@@ -398,6 +418,14 @@ normally equivalent short `-D' option is just passed on to
 				 (shell-quote-wildcard-pattern pattern))))
 		    ;; SunOS 4.1.3, SVr4 and others need the "." to list the
 		    ;; directory if FILE is a symbolic link.
+ 		    (unless full-directory-p
+ 		      (setq switches
+ 			    (if (stringp switches)
+ 				(concat switches " -d")
+                              ;; Vanilla Emacs uses this here, but no good for older
+                              ;; Emacs since uses 3rd arg:
+ 			      ;; (add-to-list 'switches "-d" 'append))))
+                              (setq switches  (append switches (list "-d"))))))
 		    (apply 'call-process
 			   insert-directory-program nil t nil
 			   (append
@@ -611,23 +639,25 @@ and `..'."
   ;; $$$$ Should we skip `#' files also, as in `dired-trivial-filenames'?
   (save-excursion
     (re-search-backward "^$" nil 'to-bob)
-    (re-search-forward dired-move-to-filename-regexp nil t)
-    (let* ((beg (line-beginning-position))
-           (end (save-excursion (re-search-forward "^$" nil t)))
-           (dots-p (save-excursion      ; Is `..' present?
-                     (goto-char beg)
-                     (re-search-forward
-                      (concat directory-listing-before-filename-regexp
-                              "\\.\\./?$")
-                      end t))))
-      (if dots-p (- (count-lines beg end) 2) (count-lines beg end)))))
+    (if (not (re-search-forward dired-move-to-filename-regexp nil t))
+        0
+      (let* ((beg (line-beginning-position))
+             (end (save-excursion (re-search-forward "^$" nil t)))
+             (dots-p (save-excursion    ; Is `..' present?
+                       (goto-char beg)
+                       (re-search-forward
+                        (concat directory-listing-before-filename-regexp
+                                "\\.\\./?$")
+                        end t))))
+        (if dots-p (- (count-lines beg end) 2) (count-lines beg end))))))
 
 (add-hook 'dired-after-readin-hook 'update-dired-files-count)
 (defun update-dired-files-count ()
   "Update file count in Dired header for each directory listed."
   (save-restriction
     (widen)
-    (let ((num-files (number-to-string (count-dired-files))))
+    (let* ((num-files      (count-dired-files))
+           (str-num-files  (number-to-string num-files)))
       (save-excursion
         (goto-char (point-min))
         (while (re-search-forward "^  files \\([0-9]+\\)/\\([0-9]+\\)" nil t)
@@ -635,11 +665,12 @@ and `..'."
                 (map (make-sparse-keymap)))
             (define-key map [mouse-2] 'dired-mouse-describe-listed-directory)
             (define-key map "\r" 'dired-describe-listed-directory)
-            (replace-match (number-to-string (save-match-data (count-dired-files)))
-                           nil nil nil 1)
-            (replace-match (number-to-string
-                            (- (length (directory-files default-directory
-                                                        nil nil t)) 2))
+            (replace-match str-num-files nil nil nil 1)
+            (replace-match (if (zerop num-files)
+                               str-num-files
+                             (number-to-string
+                              (- (length (directory-files default-directory
+                                                          nil nil t)) 2)))
                            nil nil nil 2)
             (add-text-properties
              (save-excursion (beginning-of-line) (+ 2 (point))) (match-end 2)
@@ -648,18 +679,21 @@ and `..'."
 \[RET, mouse-2: more info]")))
           (set-buffer-modified-p nil))))))
 
+;;;###autoload
 (defun dired-describe-listed-directory ()
   "In Dired, describe the current listed directory."
   (interactive)
+  (unless (fboundp 'describe-file)
+    (error "This command needs `describe-file' from library `help-fns+.el'"))
   (let ((dirname (save-excursion
                    (forward-line -1)
                    (skip-syntax-forward " ")
                    (buffer-substring
                     (point)
-                    (save-excursion (end-of-line) (1- (point))))))) ; Up to colon.
-    
+                    (save-excursion (end-of-line) (1- (point))))))) ; Up to colon.    
     (describe-file dirname)))
 
+;;;###autoload
 (defun dired-mouse-describe-listed-directory (event)
   "Describe the current listed directory."
   (interactive "e")
@@ -668,65 +702,8 @@ and `..'."
     (goto-char (posn-point (event-end event)))
     (dired-describe-listed-directory)))
 
-(defun dired-describe-file ()
-  "In Dired, describe this file or directory."
-  (interactive)
-  (describe-file (dired-get-filename nil t)))
 
-(defun dired-mouse-describe-file (event)
-  "Describe the clicked file."
-  (interactive "e")
-  (let (file)
-    (save-excursion
-      (set-buffer (window-buffer (posn-window (event-end event))))
-      (goto-char (posn-point (event-end event)))
-      (setq file (dired-get-filename nil t)))
-    (describe-file file)))
 
-;; This is the same definition as in `help-fns+.el' and `help+20.el'.
-(defun describe-file (filename)
-  "Describe the file named FILENAME.
-If FILENAME is nil, describe the current directory."
-  (interactive "FDescribe file: ")
-  (unless filename (setq filename default-directory))
-  (help-setup-xref (list #'describe-file filename) (interactive-p))
-  (let ((attrs (file-attributes filename)))
-    (unless attrs (error(format "Cannot open file `%s'" filename)))
-    (let* ((type            (nth 0 attrs))
-           (numlinks        (nth 1 attrs))
-           (uid             (nth 2 attrs))
-           (gid             (nth 3 attrs))
-           (last-access     (nth 4 attrs))
-           (last-mod        (nth 5 attrs))
-           (last-status-chg (nth 6 attrs))
-           (size            (nth 7 attrs))
-           (permissions     (nth 8 attrs))
-           ;; Skip 9: t iff file's gid would change if file were deleted
-           ;; and recreated.
-           (inode           (nth 10 attrs))
-           (device          (nth 11 attrs))
-           (help-text
-            (concat
-             (format "Properties of `%s':\n\n" filename)
-             (format "Type:                       %s\n"
-                     (cond ((eq t type) "Directory")
-                           ((stringp type) (format "Symbolic link to `%s'" type))
-                           (t "Normal file")))
-             (format "Permissions:                %s\n" permissions)
-             (and (not (eq t type)) (format "Size in bytes:              %g\n" size))
-             (format-time-string
-              "Time of last access:        %a %b %e %T %Y (%Z)\n" last-access)
-             (format-time-string
-              "Time of last modification:  %a %b %e %T %Y (%Z)\n" last-mod)
-             (format-time-string
-              "Time of last status change: %a %b %e %T %Y (%Z)\n" last-status-chg)
-             (format "Number of links:            %d\n" numlinks)
-             (format "User ID (UID):              %s\n" uid)
-             (format "Group ID (GID):             %s\n" gid)
-             (format "Inode:                      %S\n" inode)
-             (format "Device number:              %s\n" device))))
-      (with-output-to-temp-buffer "*Help*" (princ help-text))
-      help-text)))                      ; Return displayed text.
 
 
 

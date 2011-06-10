@@ -6,7 +6,7 @@
 ;; Maintainer: José Alfredo Romero L. <escherdragon@gmail.com>
 ;; Created: 24 Sep 2007
 ;; Version: 5
-;; RCS Version: $Rev: 357 $
+;; RCS Version: $Rev: 373 $
 ;; Keywords: Sunrise Commander Emacs File Manager Midnight Norton Orthodox
 ;; URL: http://www.emacswiki.org/emacs/sunrise-commander.el
 ;; Compatibility: GNU Emacs 22+
@@ -155,8 +155,6 @@
 ;; emacs, so you know your bindings, right?), though if you really  miss it just
 ;; get and install the sunrise-x-buttons extension.
 
-;; This is version 4 $Rev: 357 $ of the Sunrise Commander.
-
 ;; It  was  written  on GNU Emacs 23 on Linux, and tested on GNU Emacs 22 and 23
 ;; for Linux and on EmacsW32 (version 23) for  Windows.  I  have  also  received
 ;; feedback  from a user reporting it works OK on the Mac (GNU Emacs 22.2 on Mac
@@ -198,11 +196,13 @@
 
 (require 'dired)
 (require 'dired-x)
+(require 'enriched)
 (require 'find-dired)
 (require 'font-lock)
 (require 'sort)
 (eval-when-compile (require 'cl)
                    (require 'desktop)
+                   (require 'dired-aux)
                    (require 'esh-mode)
                    (require 'recentf)
                    (require 'term))
@@ -245,7 +245,7 @@
   :group 'sunrise
   :type 'string)
 
-(defcustom sr-virtual-listing-switches "-al"
+(defcustom sr-virtual-listing-switches "-ald"
   "Listing switches for building buffers in Sunrise VIRTUAL mode based on find
   and locate results. Should not contain the -D option."
   :group 'sunrise
@@ -483,6 +483,8 @@ substitution may be about to happen."
         C-u F ......... visit all marked files in the background
         o,v ........... quick visit selected file (scroll with C-M-v, C-M-S-v)
         C-u o, C-u v .. kill quick-visited buffer (restores normal scrolling)
+        X ............. execute selected file
+        C-u X.......... execute selected file with arguments
 
         + ............. create new directory
         M-+ ........... create new empty file(s)
@@ -512,6 +514,7 @@ substitution may be about to happen."
 
         g, C-c C-c .... refresh pane
         s ............. sort entries (by name, number, size, time or extension)
+        r ............. reverse the order of entries in the active pane (sticky)
         C-o ........... show/hide hidden files (requires dired-omit-mode)
         C-Backspace ... hide/show file attributes in pane
         C-c Backspace . hide/show file attributes in pane (console compatible)
@@ -647,6 +650,7 @@ automatically:
   (set-keymap-parent sr-virtual-mode-map sr-mode-map)
   (sr-highlight)
   (dired-omit-mode dired-omit-mode)
+  (enriched-mode -1)
 
   (make-local-variable 'truncate-partial-width-windows)
   (setq truncate-partial-width-windows (sr-truncate-v t))
@@ -677,6 +681,7 @@ automatically:
   transition."
   `(let ((inhibit-read-only t)
          (omit (or dired-omit-mode -1))
+         (hidden-attrs (not (null (get sr-selected-window 'hidden-attrs))))
          (path-face sr-current-path-face))
      (hl-line-mode 0)
      ,@body
@@ -685,6 +690,9 @@ automatically:
          (set (make-local-variable 'sr-current-path-face) path-face))
      (if (string= "NUMBER" (get sr-selected-window 'sorting-order))
          (sr-sort-by-operation 'sr-numerical-sort-op))
+     (if (get sr-selected-window 'sorting-reverse)
+         (sr-reverse-pane))
+     (if hidden-attrs (sr-hide-attributes))
      (sr-restore-point-if-same-buffer)))
 
 (defmacro sr-alternate-buffer (form)
@@ -696,7 +704,6 @@ automatically:
      ,form
      (setq sr-this-directory default-directory)
      (sr-keep-buffer)
-     (if (get sr-selected-window 'hidden-attrs) (sr-hide-attributes))
      (sr-highlight)
      (if (buffer-live-p dispose)
          (with-current-buffer dispose
@@ -727,9 +734,11 @@ automatically:
   (if (and sr-running
            (sr-equal-dirs dired-directory default-directory)
            (not (equal major-mode 'sr-mode)))
-      (let ((dired-listing-switches dired-listing-switches))
+      (let ((dired-listing-switches dired-listing-switches)
+            (sorting-options (or (get sr-selected-window 'sorting-options) "")))
         (if (null (string-match "^/ftp:" default-directory))
-            (setq dired-listing-switches sr-listing-switches))
+            (setq dired-listing-switches
+                  (concat sr-listing-switches sorting-options)))
         (sr-mode)
         (dired-unadvertise dired-directory))))
 (add-hook 'dired-before-readin-hook 'sr-dired-mode)
@@ -821,7 +830,18 @@ automatically:
 (defun sr-insert-directory (file switches &optional wildcard full-directory-p)
   (let ((beg (point)))
     (insert-directory file switches wildcard full-directory-p)
-    (dired-align-file beg (point))))
+    (dired-align-file beg (point))
+    (save-excursion
+      (search-backward file)
+      (add-text-properties (point) (point-at-eol) '(dired-filename t)))))
+
+(add-to-list 'enriched-translations '(dired-filename (t "x-dired-filename")))
+(defun sr-enrich-buffer ()
+  "Activates enriched-mode before saving a Sunrise  buffer to a file, so all its
+  dired-filename attributes are kept in the file."
+  (if (memq major-mode '(sr-mode sr-virtual-mode))
+      (enriched-mode 1)))
+(add-hook 'before-save-hook 'sr-enrich-buffer)
 
 ;; This is a hack to avoid some dired mode quirks:
 (defadvice dired-find-buffer-nocreate
@@ -836,16 +856,6 @@ automatically:
       (setq ad-return-value sr-other-directory)
     ad-do-it))
 (ad-activate 'dired-dwim-target-directory)
-
-;; Fixes dired-goto-file and all functions that depend on it in *nix systems
-;; in which directory names end with a slash.
-(defadvice dired-get-filename
-  (around sr-advice-dired-get-filename (&optional localp no-error-if-not-filep))
-  ad-do-it
-  (if ad-return-value
-      (setq ad-return-value
-            (replace-regexp-in-string "/$" "" ad-return-value))))
-(ad-activate 'dired-get-filename)
 
 ;; selects the correct (selected) pane when switching from other windows:
 (defadvice other-window
@@ -865,11 +875,22 @@ automatically:
     ad-do-it))
 (ad-activate 'delete-directory)
 
+;; stop pestering me with questions whether I want hard lines, just guess:
+(defadvice use-hard-newlines
+  (around sr-advice-use-hard-newlines (&optional arg insert))
+  (if (memq major-mode '(sr-mode sr-virtual-mode))
+      (let ((inhibit-read-only t))
+        (setq insert 'guess)
+        ad-do-it)
+    ad-do-it))
+(ad-activate 'use-hard-newlines)
+
 ;;; ============================================================================
 ;;; Sunrise Commander keybindings:
 
 (define-key sr-mode-map "\C-m"        'sr-advertised-find-file)
 (define-key sr-mode-map "f"           'sr-advertised-find-file)
+(define-key sr-mode-map "X"           'sr-advertised-execute-file)
 (define-key sr-mode-map "o"           'sr-quick-view)
 (define-key sr-mode-map "v"           'sr-quick-view)
 (define-key sr-mode-map "/"           'sr-goto-dir)
@@ -905,6 +926,7 @@ automatically:
 (define-key sr-mode-map "\C-c\d"      'sr-toggle-attributes)
 (define-key sr-mode-map "\M-l"        'sr-toggle-truncate-lines)
 (define-key sr-mode-map "s"           'sr-interactive-sort)
+(define-key sr-mode-map "r"           'sr-reverse-pane)
 (define-key sr-mode-map "\C-e"        'sr-scroll-up)
 (define-key sr-mode-map "\C-y"        'sr-scroll-down)
 (define-key sr-mode-map " "           'sr-scroll-quick-view)
@@ -971,6 +993,7 @@ automatically:
 (define-key sr-mode-map "\C-ct"       'sr-term)
 (define-key sr-mode-map "\C-cT"       'sr-term-cd)
 (define-key sr-mode-map "\C-c\C-t"    'sr-term-cd-newterm)
+(define-key sr-mode-map "\C-c;"       'sr-follow-viewer)
 (define-key sr-mode-map "q"           'sr-quit)
 (define-key sr-mode-map "\C-xk"       'sr-quit)
 (define-key sr-mode-map "\M-q"        'sunrise-cd)
@@ -1461,6 +1484,24 @@ automatically:
           (sr-find-file filename)
         (error "Sunrise: ERROR - nonexistent target"))))
 
+(defun sr-advertised-execute-file (&optional prefix)
+  "Executes the currently selected file in a new subprocess."
+  (interactive "P")
+  (let ((path (dired-get-filename nil t)) (label) (args))
+    (if path
+        (setq label  (file-name-nondirectory path))
+      (error "Sunrise: no executable file on this line"))
+    (unless (and (not (file-directory-p path)) (file-executable-p path))
+      (error "Sunrise: \"%s\" is not an executable file" label))
+    (when prefix
+      (setq args (read-string (format "arguments for \"%s\": " label))
+            label (format "%s %s" label args)))
+    (message "Sunrise: executing \"%s\" in new process" label)
+    (if args
+        (apply #'start-process (append (list "Sunrise Subprocess" nil path)
+                                       (split-string args)))
+      (start-process "Sunrise Subprocess" nil path))))
+
 (defun sr-find-file (filename &optional wildcards)
   "Determines the proper way of handling an object in the file system, which can
   be either a regular file, a regular directory, a Sunrise VIRTUAL directory, or
@@ -1490,9 +1531,11 @@ automatically:
 (defun sr-find-regular-directory (directory)
   "Visit the given regular directory in the active pane."
   (setq directory (file-name-as-directory directory))
-  (if (string= directory (expand-file-name "../"))
-      (sr-dired-prev-subdir)
-    (sr-goto-dir directory)))
+  (let ((parent (expand-file-name "../")))
+    (if (and (not (sr-equal-dirs parent default-directory))
+             (sr-equal-dirs directory parent))
+        (sr-dired-prev-subdir)
+      (sr-goto-dir directory))))
 
 (defun sr-find-virtual-directory (sr-virtual-dir)
   "Visit the given Sunrise VIRTUAL directory in the active pane."
@@ -1579,24 +1622,45 @@ automatically:
       (sr-goto-dir target-dir))
     (sr-focus-filename target-file)))
 
-(defun sr-project-path (&optional order)
+(defun sr-follow-viewer ()
+  "Go to the same directory as the file displayed in the viewer window is."
+  (interactive)
+  (when sr-running
+    (let* ((viewer (sr-viewer-window))
+           (viewer-buffer (if viewer (window-buffer viewer)))
+           (target-dir) (target-file))
+      (when viewer-buffer
+        (with-current-buffer viewer-buffer
+          (setq target-dir default-directory
+                target-file (sr-directory-name-proper (buffer-file-name)))))
+      (sr-select-window sr-selected-window)
+      (if target-dir (sr-goto-dir target-dir))
+      (if target-file (sr-focus-filename target-file)))))
+
+(defun sr-project-path ()
   "Tries  to find a directory with a path similar to the one in the active pane,
-  but under the directory currently displayed in the passive  pane.  On  success
-  displays the contents of that directory in the passive pane."
-  (interactive "p")
-  (let ((order (or order 0))
-        (path (expand-file-name (dired-default-directory)))
-        (pos 0) (projections (list)) candidate)
-    (setq path (replace-regexp-in-string "^/\\|/$" "" path))
-    (if (< 0 (length path))
-        (while (and pos (< (length projections) order))
-          (setq candidate (concat sr-other-directory (substring path (1+ pos))))
-          (if (file-directory-p candidate)
-              (setq projections (cons candidate projections)))
-          (setq pos (string-match "/" path (1+ pos)))))
-    (if projections
-        (sr-in-other (sr-goto-dir (car projections)))
-      (message "Sunrise: sorry, no suitable projection found."))))
+  but under the  directory currently displayed in the passive  pane.  On success
+  displays the contents of that directory in the passive pane.  When alternative
+  projections of the directory exist, repeated invocations of this command allow
+  to visit all matches consecutively."
+  (interactive)
+  (let* ((path (expand-file-name (dired-current-directory)))
+         (path (replace-regexp-in-string "/*$" "" path))
+         (pos (if (< 0 (length path)) 1)) (candidate) (next-key))
+    (while pos
+      (setq candidate (concat sr-other-directory (substring path pos))
+            pos (string-match "/" path (1+ pos))
+            pos (if pos (1+ pos)))
+      (when (and (file-directory-p candidate)
+                 (not (sr-equal-dirs sr-this-directory candidate)))
+        (sr-goto-dir-other candidate)
+        (setq next-key (read-key-sequence "(press C-M-o again for more)"))
+        (if (eq (lookup-key sr-mode-map next-key) 'sr-project-path)
+            (sr-history-prev-other)
+          (setq unread-command-events (listify-key-sequence next-key)
+                pos nil))))
+    (unless next-key
+      (message "Sunrise: sorry, no suitable projections found."))))
 
 (defun sr-history-push (element)
   "Pushes a new path into the history ring of the current pane."
@@ -1859,7 +1923,9 @@ automatically:
                 (local-variable-p 'sr-virtual-buffer))
       (dired-revert)
       (if (string= "NUMBER" (get sr-selected-window 'sorting-order))
-          (sr-sort-by-number t))))
+          (sr-sort-by-number t)
+        (if (get sr-selected-window 'sorting-reverse)
+            (sr-reverse-pane)))))
   (if (get sr-selected-window 'hidden-attrs) (sr-hide-attributes))
   (sr-highlight))
 
@@ -1900,13 +1966,15 @@ automatically:
   "Opens  the selected file on the viewer window without selecting it. Kills any
   other buffer opened previously the same way. With optional argument kills  the
   last quick view buffer without opening a new one."
-  (let ((split-width-threshold (* 10 (window-width))))
-    (if (buffer-live-p other-window-scroll-buffer)
-        (kill-buffer other-window-scroll-buffer))
+  (let ((split-width-threshold (* 10 (window-width)))
+        (filename (expand-file-name (dired-get-filename nil t))))
     (save-selected-window
       (condition-case description
           (progn
-            (dired-find-file-other-window)
+            (sr-select-viewer-window)
+            (if (buffer-live-p other-window-scroll-buffer)
+                (kill-buffer other-window-scroll-buffer))
+            (find-file filename)
             (sr-scrollable-viewer (current-buffer)))
         (error (message "%s" (cadr description)))))))
 
@@ -1929,7 +1997,7 @@ automatically:
           (overlay nil))
       (while next
         (beginning-of-line)
-        (setq overlay (make-overlay (+ 2 (point)) (- next 1)))
+        (setq overlay (make-overlay (+ 2 (point)) next))
         (setq attr-list (cons overlay attr-list))
         (overlay-put overlay 'invisible t)
         (overlay-put overlay 'intangible t)
@@ -1952,10 +2020,12 @@ automatically:
   (if (null (get sr-selected-window 'hidden-attrs))
       (progn
         (sr-hide-attributes)
-        (message "Sunrise: hiding attributes in %s pane" (symbol-name sr-selected-window)))
+        (message "Sunrise: hiding attributes in %s pane"
+                 (symbol-name sr-selected-window)))
     (progn
       (sr-unhide-attributes)
-      (message "Sunrise: displaying attributes in %s pane" (symbol-name sr-selected-window)))))
+      (message "Sunrise: displaying attributes in %s pane"
+               (symbol-name sr-selected-window)))))
 
 (defun sr-toggle-truncate-lines ()
   "Enables/Disables truncation of long lines in the active pane."
@@ -1966,7 +2036,8 @@ automatically:
         (message "Sunrise: continuing long lines"))
     (progn
       (setq truncate-partial-width-windows (sr-truncate-v t))
-      (message "Sunrise: truncating long lines"))))
+      (message "Sunrise: truncating long lines")))
+  (dired-do-redisplay))
 
 (defun sr-truncate-p nil
   "Returns  whether  truncate-partial-width-widows  is  set to truncate the long
@@ -1978,7 +2049,7 @@ automatically:
 (defun sr-truncate-v (active)
   "Returns the right value to set for truncate-partial-width-widows depending on
   the emacs version being used. Used by sr-toggle-truncate-lines."
-  (or (and (equal "23" (substring emacs-version 0 2))
+  (or (and (<= 23 (string-to-number (substring emacs-version 0 2)))
            (or (and active 3000) 0))
       active))
 
@@ -1989,6 +2060,7 @@ automatically:
       (sr-sort-virtual option)
     (progn
       (put sr-selected-window 'sorting-order label)
+      (put sr-selected-window 'sorting-options option)
       (let ((dired-listing-switches dired-listing-switches))
         (unless (string-match "^/ftp:" default-directory)
           (setq dired-listing-switches sr-listing-switches))
@@ -2012,7 +2084,9 @@ automatically:
   entries containing unpadded numbers in a more logical order than the presented
   when sorted alphabetically by name."
   (interactive)
-  (sr-sort-by-operation 'sr-numerical-sort-op (unless inhibit-label "NUMBER")))
+  (sr-sort-by-operation 'sr-numerical-sort-op (unless inhibit-label "NUMBER"))
+  (if (get sr-selected-window 'sorting-reverse) (sr-reverse-pane))
+  (if (get sr-selected-window 'hidden-attrs) (sr-hide-attributes)))
 
 (defun sr-interactive-sort (order)
   "Prompts for a new sorting order for the active pane and applies it."
@@ -2024,6 +2098,18 @@ automatically:
         ((eq order ?S) (sr-sort-by-size))
         ((eq order ?X) (sr-sort-by-extension))
         (t             (sr-sort-by-name))))
+
+(defun sr-reverse-pane (&optional interactively)
+  "Reverses the contents of the active pane."
+  (interactive "p")
+  (let ((line (line-number-at-pos))
+        (reverse (get sr-selected-window 'sorting-reverse)))
+    (sr-sort-by-operation 'identity)
+    (when interactively
+      (if (get sr-selected-window 'hidden-attrs) (sr-hide-attributes))
+      (put sr-selected-window 'sorting-reverse (not reverse))
+      (goto-char (point-min)) (forward-line (1- line))
+      (re-search-forward directory-listing-before-filename-regexp nil t))))
 
 (defun sr-sort-virtual (option)
   "Manages  sorting of buffers in Sunrise VIRTUAL mode."
@@ -2254,10 +2340,11 @@ automatically:
   (sr-mouse-change-window e)
   (sr-advertised-find-file))
 
-(defun sr-prev-subdir-other ()
+(defun sr-prev-subdir-other (&optional count)
   "Go to the previous subdirectory in the other pane."
-  (interactive)
-  (sr-in-other (sr-dired-prev-subdir)))
+  (interactive "P")
+  (let ((count (or count 1)))
+    (sr-in-other (sr-dired-prev-subdir count))))
 
 (defun sr-follow-file-other ()
   "Go to the same directory where the selected file is, but in the other pane."
@@ -2540,7 +2627,8 @@ automatically:
       (sr-progress-reporter-update progress (nth 7 (file-attributes f)))
       (let* ((name (file-name-nondirectory f))
              (target-file (concat target-dir name))
-             (symlink-to (file-symlink-p (replace-regexp-in-string "/*$" "" f))))
+             (symlink-to (file-symlink-p (replace-regexp-in-string "/*$" "" f)))
+             (clone-args (list f target-file t)))
         (cond
          (symlink-to
           (progn
@@ -2556,11 +2644,14 @@ automatically:
 
          (clone-op
           ;; (message "[[Cloning: %s => %s]]" f target-file)
+          (if (eq clone-op 'copy-file)
+              (setq clone-args
+                    (append clone-args (list dired-copy-preserve-time))))
           (if (file-exists-p target-file)
               (if (or (eq do-overwrite 'ALWAYS)
                       (setq do-overwrite (sr-ask-overwrite target-file)))
-                  (apply clone-op (list f target-file t)))
-            (apply clone-op (list f target-file t))))))))
+                  (apply clone-op clone-args))
+            (apply clone-op clone-args)))))))
    file-paths))
 
 (defun sr-clone-directory (in-dir d to-dir clone-op progress do-overwrite)
@@ -2864,7 +2955,7 @@ or (c)ontents? ")
         (sr-change-window)
         (setq other (sr-pop-mark))
         (sr-change-window)
-        (setq other (or other this))))
+        (setq other (or other (file-name-nondirectory this)))))
     (setq this (concat default-directory this)
           other (concat sr-other-directory other))
     (list fun this other)))
@@ -3011,9 +3102,11 @@ or (c)ontents? ")
   pane match the given regular expression"
   (interactive "sPrune paths matching: ")
   (dired-unmark-all-marks)
-  (condition-case description
-      (dired-mark-sexp `(string-match ,regexp name))
-    (error (ignore)))
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward-regexp regexp nil t)
+      (dired-mark 1)
+      (beginning-of-line)))
   (dired-do-kill-lines))
 
 (eval-and-compile
@@ -3150,6 +3243,7 @@ or (c)ontents? ")
    (let ((hist (cdr (assoc sr-selected-window sr-history-registry)))
          (dired-actual-switches dired-listing-switches)
          (pane-name (capitalize (symbol-name sr-selected-window)))
+         (switches (concat sr-virtual-listing-switches " -d"))
          (beg))
      (sr-switch-to-clean-buffer (format "*%s Pane History*" pane-name))
      (insert (concat "Recent Directories in " pane-name " Pane: \n"))
@@ -3158,8 +3252,7 @@ or (c)ontents? ")
            (when dir
              (setq dir (replace-regexp-in-string "\\(.\\)/?$" "\\1" dir))
              (setq beg (point))
-             (sr-insert-directory dir sr-virtual-listing-switches nil nil)
-             (dired-align-file beg (point)))
+             (sr-insert-directory dir switches nil nil))
          (error (ignore))))
      (sr-virtual-mode))))
 
@@ -3420,10 +3513,11 @@ or (c)ontents? ")
   (interactive)
   (sr-ti (dired-unmark-backward 1)))
 
-(defun sr-ti-prev-subdir ()
+(defun sr-ti-prev-subdir (&optional count)
   "Runs dired-prev-subdir on active pane from the terminal window."
-  (interactive)
-  (sr-ti (sr-dired-prev-subdir)))
+  (interactive "P")
+  (let ((count (or count 1)))
+    (sr-ti (sr-dired-prev-subdir count))))
 
 (defun sr-ti-unmark-all-marks ()
   "Removes all marks on active pane from the terminal window."
@@ -3574,6 +3668,7 @@ or (c)ontents? ")
                        ("\C-c\t"      . sr-ti-change-window)
                        ("\M-\t"       . sr-ti-change-pane)
                        ("\C-ct"       . sr-term-cd-newterm)
+                       ("\C-c;"       . sr-follow-viewer)
                        ("\M-\S-g"     . sr-ti-revert-buffer)
                        ("%"           . sr-clex-start)
                        ("\t"          . term-dynamic-complete)
@@ -3727,7 +3822,8 @@ or (c)ontents? ")
   "Summarize basic Sunrise commands and show recent dired errors."
   (interactive)
   (dired-why)
-  (message "C-opy, R-ename, K-lone, D-elete, v-iew, q-uit, U-p, m-ark, u-nmark, h-elp"))
+  (message "C-opy, R-ename, K-lone, D-elete, v-iew, e-X-ecute, Ff-ollow, \
+Jj-ump, q-uit, m-ark, u-nmark, h-elp"))
 
 (defun sr-restore-point-if-same-buffer ()
   "Puts  the point in the same place of the same buffer, if it's being displayed

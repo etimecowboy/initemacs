@@ -4,7 +4,7 @@
 ;; Copyright (C) 2006, 2007, 2008, 2010 Qichen Huang
 ;; $Id$
 ;; Author: Qichen Huang <unicad.el@gmail.com>
-;; Time-stamp: <2010-04-09 12:53:15>
+;; Time-stamp:<2011-06-10 Fri 20:32 xin on p6t>
 ;; Version: v1.1.5
 ;; Keywords: coding-system, auto-coding-functions
 ;; URL: http://code.google.com/p/unicad/
