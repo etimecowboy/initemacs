@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-06-11 Sat 03:02 xin on p6t>
+;; Time-stamp:<2011-06-11 Sat 16:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -52,8 +52,16 @@
  global-map
  `(("C-x d" dired-jump)))
 
-;; (eal-define-keys-commonly
-;;  dired-mode-map;;  `(;; ("C-h"         dired-up-directory-same-buffer)
+;; (define-key dired-mode-map (kbd "C-x 2") 'dired-two-columns)
+(eal-define-keys-commonly
+ dired-mode-map
+    `(("C-x 2" dired-two-columns)
+	  ("C-t"   dired-omit-mode)
+	  ("C-q s" dired-sort-by-size)
+	  ("C-q x" dired-sort-by-extension)
+	  ("C-q t" dired-sort-by-time)
+	  ("C-q n" dired-sort-by-name)))
+;;  `(;; ("C-h"         dired-up-directory-same-buffer)
 ;;    ;; ("<backspace>" dired-up-directory-same-buffer)
 ;;    ;; ("'"           switch-to-other-buffer)
 ;;    ;; ("/"           dired-slash-map)

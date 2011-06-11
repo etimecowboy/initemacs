@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-06-11 Sat 03:23 xin on p6t>
+;; Time-stamp:<2011-06-11 Sat 16:11 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -172,6 +172,13 @@ which is options for `diff'."
       (error "Attempt to compare the file to itself"))
     (ediff-files file current)))
 
+;;;###autoload
+(defun dired-two-columns ()
+  "Display dired buffers in two columns to save spaces."
+  (interactive)
+  (split-window-horizontally)
+  (follow-mode t))
+
 ;; (defun dired-keys ()
 ;;   "dired-mode中的快捷键定义"
 ;;   (define-prefix-command 'dired-slash-map)
@@ -270,6 +277,7 @@ which is options for `diff'."
 
   ;; dired中用T就把一个目录压缩为一个.tar.gz文件
   (require 'dired-tar)
+  
   ;; wdired提供修改文件名的一种非常方便方法。它把dired-mode当作一般的
   ;; 文本处理，这样无论是修改一个文件，还是批量修改文件都不是一般的爽。
   (if is-before-emacs-21 (require 'wdired "wdired-for-21")
@@ -281,7 +289,8 @@ which is options for `diff'."
   (defun dired-mode-hook-settings ()
     "Settings for `dired-mode-hook'."
     ;; (dired-keys)
-    (setq mode-line-buffer-identification (propertized-buffer-identification "%b")))
+    (setq mode-line-buffer-identification
+		  (propertized-buffer-identification "%b")))
 
   (add-hook 'dired-mode-hook 'dired-mode-hook-settings)
   (add-hook 'dired-mode-hook 'dired-omit-mode)
