@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-02-20 Sun 14:40 xin on p6t>
+;; Time-stamp:<2011-06-11 Sat 03:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -161,9 +161,9 @@
 ;;-----------------------------------------------------------------------------
 
 ;; dired-lis.el
-(eal-define-keys
- 'isearch-mode-map
- `(("C-h" dired-lis-isearch-up-directory)))
+;; (eal-define-keys
+;;  'isearch-mode-map
+;;  `(("C-h" dired-lis-isearch-up-directory)))
 ;; ;;;###autoload
 ;; (defun dired-lis-settings ()
 ;;   "Settings for `dired-lis'.")

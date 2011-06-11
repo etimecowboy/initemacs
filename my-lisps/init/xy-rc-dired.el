@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-02-03 Thu 09:56 xin on p6t>
+;; Time-stamp:<2011-06-11 Sat 03:23 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -244,14 +244,30 @@ which is options for `diff'."
   (setq dired-recursive-copies t) ; 可以递归的进行拷贝
   ;; (define-prefix-command 'dired-slash-map)
 
+  ;; (require 'dired-x)
   (require 'wuxch-dired "my-wuxch-dired")
   (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
+
+  (require 'dired-details)
   (require 'dired-details+)
-  (setq dired-details-initially-hide nil)
 
   (require 'dired+)
-  (require 'dired-x)
-  (require 'dired-lis)
+
+  ;; (require 'dired-isearch)
+  ;; (define-key dired-mode-map (kbd "C-s") 'dired-isearch-forward)
+  ;; (define-key dired-mode-map (kbd "C-r") 'dired-isearch-backward)
+  ;; (define-key dired-mode-map (kbd "ESC C-s") 'dired-isearch-forward-regexp)
+  ;; (define-key dired-mode-map (kbd "ESC C-r") 'dired-isearch-backward-regexp)
+
+  ;; Emacs 23 has builtin Isearch of filenames in Dired:
+  ;; M-s f C-s   – ‘dired-isearch-filenames’: Isearch only among filenames.
+  ;; M-s f C-M-s – ‘dired-isearch-filenames-regexp’: Same, but regexp search.
+  ;; M-s a C-M-s – ‘dired-do-isearch-regexp’: Isearch the marked files.
+  ;; (require 'dired-lis)
+
+  ;; Use a single frame for visiting a sub-directory
+  ;; (require 'dired-single)
+
   ;; dired中用T就把一个目录压缩为一个.tar.gz文件
   (require 'dired-tar)
   ;; wdired提供修改文件名的一种非常方便方法。它把dired-mode当作一般的
@@ -260,8 +276,7 @@ which is options for `diff'."
     (require 'wdired "wdired"))
 
   ;; 让你能够在dired-mode里面使用只对文件名部分执行i-search
-  (require 'dired-isearch "my-dired-isearch")
-
+  ;; (require 'dired-isearch "my-dired-isearch")
 
   (defun dired-mode-hook-settings ()
     "Settings for `dired-mode-hook'."
