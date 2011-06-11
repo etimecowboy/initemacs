@@ -29,7 +29,7 @@
 ;; names.
 
 ;;-------------------------------------------------------
-
+;; HACK:
 ;; Xin Yang's hack:
 
 ;; - Change my-user-dir to my-local-lisp-path. <2010-12-16>

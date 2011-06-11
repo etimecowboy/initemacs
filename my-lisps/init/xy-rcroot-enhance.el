@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-02-28 Mon 13:00 xin on P6T>
+;; Time-stamp:<2011-06-11 Sat 01:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -126,6 +126,12 @@ A numeric argument serves as a repeat count." t)
 		("o"   other-window)))))
 
 (global-set-key (kbd "C-=") 'browse-kill-ring)
+
+;; kill-ring-search: search the kill ring in the minibuffer.
+;; (autoload 'kill-ring-search "kill-ring-search"
+;;  "Search the kill ring in the minibuffer."
+;;  (interactive))
+(global-set-key "\M-\C-y" 'kill-ring-search)
 
 ;;-------------------------------------------------------------------
 

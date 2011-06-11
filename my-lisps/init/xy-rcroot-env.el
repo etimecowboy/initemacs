@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-06-10 Fri 19:58 xin on p6t>
+;; Time-stamp:<2011-06-11 Sat 01:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,13 +54,23 @@
 (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
 (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
 (xy/install-all-lisps (concat my-local-lisp-path "/yasnippet-0.6.1c"))
+(xy/install-all-lisps (concat my-local-exec-path "/session-2.3/lisp"))
 ;; ELPA packages
-(require 'archive-downloader-autoloads)
+;; (require 'archive-downloader-autoloads)
 (require 'blank-mode-autoloads)
-(require 'chess-autoloads)
+;; (require 'chess-autoloads)
 ;; (require 'company-autoloads)
 (require 'dictionary-autoloads)
 (require 'emms-autoloads)
+(require 'highlight-parentheses-autoloads)
+(require 'highlight-symbol-autoloads)
+(require 'highline-autoloads)
+(require 'htmlize-autoloads)
+(require 'hungry-delete-autoloads)
+(require 'kill-ring-search-autoloads)
+(require 'light-symbol-autoloads)
+(require 'xml-rpc-autoloads)
+
 ;; My own lisps, loaded at last
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
 
