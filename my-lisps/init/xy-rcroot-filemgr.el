@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-06-11 Sat 16:47 xin on p6t>
+;; Time-stamp:<2011-06-13 Mon 16:16 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -122,6 +122,7 @@
 (eval-after-load "dired" 
   `(progn
      (dired-settings)))
+
 
 ;;---------------------------------------------------------------
 

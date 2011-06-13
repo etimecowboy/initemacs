@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-06-11 Sat 16:11 xin on p6t>
+;; Time-stamp:<2011-06-13 Mon 15:55 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -255,7 +255,9 @@ which is options for `diff'."
   (require 'wuxch-dired "my-wuxch-dired")
   (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
 
+  (require 'thumb-frm)
   (require 'dired-details)
+  (dired-details-install)
   (require 'dired-details+)
 
   (require 'dired+)

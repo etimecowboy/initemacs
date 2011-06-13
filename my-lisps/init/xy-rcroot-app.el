@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-03-08 Tue 12:27 xin on P6T>
+;; Time-stamp:<2011-06-13 Mon 16:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -96,6 +96,43 @@
   ;; 	  (width  . 90)))
   (add-to-list 'default-frame-alist '(height . 40))
   (add-to-list 'default-frame-alist '(width . 95)))
+
+;; `fit-frame.el' and `autofit-frame.el'
+;; Auto-resize a frame.  In particular, fit a frame to its buffers.
+(require 'autofit-frame)
+;; (add-hook 'after-make-frame-functions 'fit-frame)
+;; (add-hook 'temp-buffer-show-hook
+;;           'fit-frame-if-one-window 'append)
+
+;; (global-set-key [(control ?x) (control ?_)] 'fit-frame)
+;; (global-set-key [vertical-line down-mouse-1]
+;;                 'fit-frame-or-mouse-drag-vertical-line)
+
+;;  Customize the menu-bar.  Uncomment this to try it out.
+(defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
+(define-key global-map [menu-bar frames]
+  (cons "Frames" menu-bar-frames-menu))
+(define-key menu-bar-frames-menu [fit-frame]
+  '("Fit This Frame" . fit-frame))
+
+;; `thumb-frm.el'
+;;  Shrink frames to a thumbnail size and restore them again.
+(require 'thumb-frm)
+;; (define-key special-event-map [iconify-frame]
+;;             'thumfr-thumbify-frame-upon-event)
+;; (global-set-key [(shift mouse-3)]
+;;                 'thumfr-toggle-thumbnail-frame)
+;; (global-set-key [(shift control mouse-3)]
+;;                 'thumfr-thumbify-other-frames)
+;; (global-set-key [(shift control ?z)]
+;; 				'thumfr-thumbify-other-frames)
+;; (global-set-key [(shift control ?p)]
+;; 				'thumfr-fisheye-previous-frame)
+;; (global-set-key [(shift control ?n)]
+;; 				'thumfr-fisheye-next-frame)
+;; (global-set-key [(control meta ?z)]
+;; 				'thumfr-really-iconify-or-deiconify-frame)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
