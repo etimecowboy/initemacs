@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-06-13 Mon 16:30 xin on P6T-WIN7>
+;; Time-stamp:<2011-06-13 Mon 17:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -99,7 +99,8 @@
 
 ;; `fit-frame.el' and `autofit-frame.el'
 ;; Auto-resize a frame.  In particular, fit a frame to its buffers.
-(require 'autofit-frame)
+;; (require 'fit-frame)
+;; (require 'autofit-frame)
 ;; (add-hook 'after-make-frame-functions 'fit-frame)
 ;; (add-hook 'temp-buffer-show-hook
 ;;           'fit-frame-if-one-window 'append)

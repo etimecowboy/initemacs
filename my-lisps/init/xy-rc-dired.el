@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-06-13 Mon 15:55 xin on P6T-WIN7>
+;; Time-stamp:<2011-06-13 Mon 18:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -109,7 +109,7 @@ See also `dired-scroll-down'."
   "类似TC的一个命令,可以使用同一个buffer浏览多个文件，每次打开新文件就把前一个buffer关了"
   (interactive)
   (defvar ywb-dired-quickview-buffer nil)
-  (make-variable-buffer-local ywb-dired-quickview-buffer)
+  ;; (make-variable-buffer-local ywb-dired-quickview-buffer)
   (if (buffer-live-p ywb-dired-quickview-buffer)
       (kill-buffer ywb-dired-quickview-buffer))
   (setq ywb-dired-quickview-buffer
@@ -255,7 +255,7 @@ which is options for `diff'."
   (require 'wuxch-dired "my-wuxch-dired")
   (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
 
-  (require 'thumb-frm)
+  ;; (require 'thumb-frm)
   (require 'dired-details)
   (dired-details-install)
   (require 'dired-details+)
