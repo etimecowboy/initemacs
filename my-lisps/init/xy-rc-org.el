@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-06-08 Wed 17:36 xin on p6t>
+;; Time-stamp:<2011-07-20 Wed 15:59 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -52,7 +52,7 @@
           org-info org-habit org-inlinetask org-mew org-gnus
           org-annotate-file org-bookmark org-checklist org-choose
           org-collector org-depend org-elisp-symbol org-eval
-          org-eval-light org-expiry org-exp-bibtex
+          org-eval-light org-expiry ;; org-exp-bibtex
           org-interactive-query org-invoice org-learn org-mairix
           org-man org-mtags org-panel org-registry org2rem
           org-screen org-secretary org-special-blocks
