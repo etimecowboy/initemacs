@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-06-13 Mon 18:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-07-21 Thu 07:16 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -179,69 +179,6 @@ which is options for `diff'."
   (split-window-horizontally)
   (follow-mode t))
 
-;; (defun dired-keys ()
-;;   "dired-mode中的快捷键定义"
-;;   (define-prefix-command 'dired-slash-map)
-;;   (eal-define-keys-commonly
-;;    dired-mode-map
-;;    `(("C-h"         dired-up-directory-same-buffer)
-;;      ("<backspace>" dired-up-directory-same-buffer)
-;;      ("'"           switch-to-other-buffer)
-;;      ("/"           dired-slash-map)
-;;      ("/m"          ywb-dired-filter-regexp)
-;;      ("/."          ywb-dired-filter-extension)
-;;      ("C-q"         ywb-dired-quickview)
-;;      ("r"           wdired-change-to-wdired-mode)
-;;      ("C-s"         dired-lis-isearch-forward-always?)
-;;      ("C-r"         dired-lis-isearch-backward-always?)
-;;      ("ESC C-s"     dired-lis-isearch-forward-regexp-always?)
-;;      ("ESC C-r"     dired-lis-isearch-backward-regexp-always?)
-;;      ;; 让dired只使用一个buffer
-;;      ("RET"         dired-lis-find-file-reuse-dir-buffer)
-;;      ("<return>"    dired-lis-find-file-reuse-dir-buffer)
-;;      ("M"           wuxch-mark-all-files-directories)
-;;      ("g"           revert-buffer)
-;;      ("M-o"         dired-omit-mode)
-;;      ("M-Y"         dired-redo)
-;;      ("C-k"         dired-do-delete)
-;;      ("M-s"         dired-lis-off)
-;;      ("q"           dired-lis-on)
-;;      ("M"           dired-unmark)
-
-;;      ("1"           delete-other-windows)
-;;      ("2"           split-window-vertically)
-;;      ("3"           split-window-horizontally)
-;;      ("o"           other-window)
-
-;;      ("j"           wuxch-dired-next-line)
-;;      ("k"           wuxch-dired-previous-line)
-;;      ("SPC"         dired-scroll-half-page-forward)
-;;      ("u"           dired-scroll-half-page-backward)
-;;      ("d"           dired-scroll-up)
-;;      ("w"           dired-scroll-down)
-;;      ("M->"         wuxch-dired-goto-last-line)
-;;      ("M-<"         wuxch-dired-goto-first-line)
-
-;;      ("M-w"         wuxch-dired-copy)
-;;      ("C-y"         wuxch-dired-paste)
-;;      ("M-k"         wuxch-dired-cut)
-
-;;      ("c"           dired-do-copy)
-;;      ("E"           dired-ediff)
-;;      ("t"           sb-toggle-keep-buffer)
-;;      ("M-m"         dired-unmark-backward)
-;;      ("C-c M-m"     dired-create-directory)
-
-;;      ("C-c C-m"     make-sb)
-;;      ("C-c m"       make-check-sb)
-;;      ("C-c M"       make-clean-sb)
-;;      ("C-c c"       compile-buffer-sb)
-;;      ("C-c r"       run-program-sb)
-;;      ("C-c C"       smart-compile-sb)
-;;      ("C-c g"       gdb)
-;;      ("C-c b"       gud-break)
-;;      ("C-c B"       gud-remove))))
-
 ;;;###autoload
 (defun dired-settings ()
   "Settings for `dired'."
@@ -252,15 +189,15 @@ which is options for `diff'."
   ;; (define-prefix-command 'dired-slash-map)
 
   ;; (require 'dired-x)
-  (require 'wuxch-dired "my-wuxch-dired")
-  (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
+  ;; (require 'wuxch-dired "my-wuxch-dired")
+  ;; (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
 
   ;; (require 'thumb-frm)
   (require 'dired-details)
   (dired-details-install)
   (require 'dired-details+)
 
-  (require 'dired+)
+  ;; (require 'dired+)
 
   ;; (require 'dired-isearch)
   ;; (define-key dired-mode-map (kbd "C-s") 'dired-isearch-forward)
@@ -282,8 +219,9 @@ which is options for `diff'."
   
   ;; wdired提供修改文件名的一种非常方便方法。它把dired-mode当作一般的
   ;; 文本处理，这样无论是修改一个文件，还是批量修改文件都不是一般的爽。
-  (if is-before-emacs-21 (require 'wdired "wdired-for-21")
-    (require 'wdired "wdired"))
+  ;; wdired has been a part of GNU Emacs since Emacs 23
+  (if is-before-emacs-21 (require 'wdired "wdired-for-21"))
+    ;; (require 'wdired "wdired"))
 
   ;; 让你能够在dired-mode里面使用只对文件名部分执行i-search
   ;; (require 'dired-isearch "my-dired-isearch")

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2011-02-20 Sun 01:57 xin on p6t>
+;; Time-stamp:<2011-07-22 Fri 13:09 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,12 +18,15 @@
 ;; Set max depth of dirctory
 ;; (setq max-specpdl-size 5)  ; default is 1000, reduce the backtrace level
 
+(message "* ---[ Loading my Emacs init file ]---")
+
 ;; Startup time
 (defvar *emacs-load-start* (current-time))
 ;; Set a large message log file for checking
 (setq message-log-max 10000)
 
-(message "* ---[ Loading my Emacs init file ]---")
+;; Debug errors
+(setq debug-on-error t)
 
 ;; Add ~/.emacs.d/my-lisp to Emacs lisp load path 
 (add-to-list 'load-path "~/.emacs.d/my-lisps")

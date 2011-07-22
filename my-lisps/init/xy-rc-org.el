@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-07-20 Wed 15:59 xin on p6t>
+;; Time-stamp:<2011-07-22 Fri 14:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -15,31 +15,31 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; 为了column view能够在daemon模式下正常显示
-;;;###autoload
-(defun wl-org-column-view-uses-fixed-width-face ()
-  ;; copy from org-faces.el
-  (when (fboundp 'set-face-attribute)
-    ;; Make sure that a fixed-width face is used when we have a column table.
-    (set-face-attribute 'org-column nil
-                        :height (face-attribute 'default :height)
-                        :family (face-attribute 'default :family))))
+;; ;; 为了column view能够在daemon模式下正常显示
+;; ;;;###autoload
+;; (defun wl-org-column-view-uses-fixed-width-face ()
+;;   ;; copy from org-faces.el
+;;   (when (fboundp 'set-face-attribute)
+;;     ;; Make sure that a fixed-width face is used when we have a column table.
+;;     (set-face-attribute 'org-column nil
+;;                         :height (face-attribute 'default :height)
+;;                         :family (face-attribute 'default :family))))
 
-;; BibTeX related
-;;;###autoload
+;; ;; BibTeX related
+;; ;;;###autoload
+;; ;; (defun org-mode-reftex-setup ()
+;; ;;   (require 'reftex)
+;; ;;   (require 'reftex-parse)
+;; ;;   (and (buffer-file-name)
+;; ;;        (file-exists-p (buffer-file-name))
+;; ;;        (reftex-parse-all)))
 ;; (defun org-mode-reftex-setup ()
-;;   (require 'reftex)
-;;   (require 'reftex-parse)
+;;   (load-library "reftex")
 ;;   (and (buffer-file-name)
 ;;        (file-exists-p (buffer-file-name))
-;;        (reftex-parse-all)))
-(defun org-mode-reftex-setup ()
-  (load-library "reftex")
-  (and (buffer-file-name)
-       (file-exists-p (buffer-file-name))
-       (reftex-parse-all))
-  (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
-  (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
+;;        (reftex-parse-all))
+;;   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+;;   (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
 
 ;;;###autoload
 (defun org-settings ()
@@ -48,7 +48,8 @@
   (require 'org-install)
   ;; Loaded modules
   (setq org-modules 
-        '(org-bbdb org-bibtex org-crypt org-ctags org-docview org-id
+        '(org-bbdb org-bibtex org-crypt
+		  org-ctags org-docview org-id
           org-info org-habit org-inlinetask org-mew org-gnus
           org-annotate-file org-bookmark org-checklist org-choose
           org-collector org-depend org-elisp-symbol org-eval
@@ -62,10 +63,12 @@
     (add-hook 'org-mode-hook 
               'wl-org-column-view-uses-fixed-width-face))
 
-  ;; org-crypt security issue about auto-save
+  ;; ;; org-crypt security issue about auto-save
   ;; (add-hook 'org-mode-hook
   ;; 			'(lambda ()
   ;; 			   (auto-save-mode -1)))
+
+  (setq org-directory "~/emacs/org")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -78,10 +81,12 @@
         (list "~/emacs/org/gtd/PhdWork.org"
               "~/emacs/org/gtd/DailyLife.org"
               "~/emacs/org/gtd/GeekInterests.org"
+			  "~/emacs/org/gtd/Learn.org"
               "~/emacs/org/gtd/Notes.org"
-              "~/emacs/org/gtd/DSP.org"
-              "~/emacs/org/gtd/CProgramming.org"
-              "~/emacs/org/gtd/Electronics.org"))
+              ;; "~/emacs/org/gtd/DSP.org"
+              ;; "~/emacs/org/gtd/CProgramming.org"
+              ;; "~/emacs/org/gtd/Electronics.org"
+		 ))
   ;; Don't recursively display gtd files in session list
   (add-to-list 'session-globals-exclude 'org-mark-ring)
   ;; Don't display org agenda files
@@ -99,16 +104,17 @@
         '((daily today require-timed) "----------------" 
           (800 1000 1200 1400 1600 1800 2000 2200)))
   (setq org-default-notes-file
-        (concat my-emacs-path "/org/source/gtd/Notes.org"))
+        (concat my-emacs-path "/org/gtd/Notes.org"))
   (setq org-combined-agenda-icalendar-file
         (concat my-emacs-path "/org/org.ics"))
   (setq org-mobile-encryption-tempfile "~/emacs/org/orgtmpcrypt")
   ;; custom commands
-  (setq org-agenda-custom-commands 
-        '(("x" "Agenda today" 
-           ((agenda "") (org-agenda-ndays 1) (org-agenda-deadline-warning-days 30) 
-            (org-agenda-sorting-strategy 
-              '(time-up category-keep todo-state-up effort-down))))))
+  ;; BUG: org-mobile
+  ;; (setq org-agenda-custom-commands 
+  ;;       '(("x" "Agenda today" 
+  ;;          ((agenda "") (org-agenda-ndays 1) (org-agenda-deadline-warning-days 30) 
+  ;;           (org-agenda-sorting-strategy 
+  ;;             '(time-up category-keep todo-state-up effort-down))))))
   ;; global propoerties
   (setq org-global-properties 
     '(("Effort_ALL" . 
@@ -179,6 +185,12 @@
   (org-agenda-to-appt)
   (ad-activate 'org-agenda-redo)
 
+  ;; MobileOrg settings
+  ;; I use Dropbox serveice
+  (setq org-mobile-directory "~/emacs/org/gtd/mobile")
+  (setq org-mobile-files org-agenda-files)
+  (setq org-mobile-inbox-for-pull "~/emacs/org/gtd/from-mobile.org")
+  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; org note taking settings
@@ -255,11 +267,12 @@
   (require 'org-exp-bibtex)
   (add-hook 'org-mode-hook
 			'(lambda ()
-			   (org-mode-reftex-setup)
+			   ;; BUG: org-mobile
+			   ;; (org-mode-reftex-setup)
 			   (turn-on-org-cdlatex)
 			   (auto-fill-mode -1)
-			   ;; (yas-start)
-			   ;; (linkd-start)
+			   (yas-start)
+			   (linkd-start)
 			   ;; (xy/set-font-write)
 			   ))
  
@@ -524,8 +537,8 @@ save -ascii %s ans")
               :components ("phd-org" "phd-img" "phd-src" "phd-bib")
               )
              ;;------------------------------------------------------------------------------  
-             )))
-
+              ))
+)
 ;;------------------------------------------------------------------------------ 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
