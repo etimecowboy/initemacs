@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-07-27 Wed 15:32 xin on p6t>
+;; Time-stamp:<2011-07-27 Wed 15:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -340,26 +340,22 @@
 					 (org-agenda-todo-list-sublevel t)
 					 (org-agenda-timeline-show-empty-dates nil)))
 
-			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY=\"A\"+
-                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
 				       ((org-agenda-overriding-header
 					     "1. Urgent & Important Tasks Today (Finsh Them First!)") 
 						(org-tags-match-list-sublevels t)))
 			
-			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY=\"A\"+
-                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
 					   ((org-agenda-overriding-header
 						 "2. Urgent & NOT Important Tasks Today")
 						(org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY<>\"A\"+
-                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
 					   ((org-agenda-overriding-header
 						 "3. NOT Urgent & Important Tasks Today")
 						(org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY<>\"A\"+
-                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\"" 
+			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\"" 
 					   ((org-agenda-overriding-header
 						 "4. NOT Urgent & NOT Important Tasks Today")
 						(org-tags-match-list-sublevels t)))
@@ -391,7 +387,7 @@
 			(org-tags-match-list-sublevels nil)))
 			
 		  ("i" "Recent Ideas NOT Refiled" tags
-		     "+idea+TIMESTAMP_IA<\"<tomorrow>\""
+		   "+idea+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
 		   ((org-agenda-overriding-header "Recent Ideas (Refile Them ASAP)")
 			(org-tags-match-list-sublevels nil)))
 
@@ -423,10 +419,7 @@
 					  (org-agenda-skip-timestamp-if-done nil)
 					  (org-agenda-skip-archived-trees nil)))
 
-		   (tags-todo "TODO=\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\" 
-                       |TODO=\"STARTED\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"
-                       |TODO=\"WAITING\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"
-                       |TODO=\"SOMEDAY\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
+		   (tags-todo "TODO=\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"|TODO=\"STARTED\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"|TODO=\"WAITING\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"|TODO=\"SOMEDAY\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
 					   ((org-agenda-overriding-header
 						 "Un-Finished Tasks in This Week (Re-Schedule Them after Reviewing)")
 						(org-tags-match-list-sublevels t)))))
