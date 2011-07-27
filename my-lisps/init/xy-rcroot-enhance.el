@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-06-11 Sat 01:54 xin on p6t>
+;; Time-stamp:<2011-07-24 Sun 16:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -250,6 +250,7 @@ from tradition chinese to simple chinese" t)
 ;;------------------------------------------------------------------
 
 ;; 以另一用户编辑文件, 或者编辑远程主机文件
+(global-set-key (kbd "C-c C-R") 'sudo-edit-current-file)
 (eval-after-load "tramp" `(tramp-settings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -7,9 +7,9 @@
 ;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
 ;; Created: Mon Feb 27 09:25:04 2006
 ;; Version: 22.0
-;; Last-Updated: Fri Jun  3 15:48:04 2011 (-0700)
+;; Last-Updated: Thu Jul 21 17:50:04 2011 (-0700)
 ;;           By: dradams
-;;     Update #: 16968
+;;     Update #: 16980
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/icicles-mcmd.el
 ;; Keywords: internal, extensions, help, abbrev, local, minibuffer,
 ;;           keys, apropos, completion, matching, regexp, command
@@ -250,7 +250,7 @@
 ;;    `icicle-markers-to-readable',
 ;;    `icicle-maybe-multi-completion-completing-p',
 ;;    `icicle-mouse-candidate-action-1', `icicle-nb-Completions-cols',
-;;    `icicle-nb-of-candidate-in-Completions',
+;;    `icicle-nb-of-cand-at-Completions-pos',
 ;;    `icicle-nb-of-cand-in-Completions-horiz',
 ;;    `icicle-prefix-complete-1', `icicle-raise-Completions-frame',
 ;;    `icicle-remove-cand-from-lists',
@@ -342,7 +342,7 @@
      (require 'icicles-mac)))           ; Require, so can load separately if not on `load-path'.
   ;; icicle-assoc-delete-all, icicle-define-sort-command
 (require 'icicles-opt)                  ; (This is required anyway by `icicles-var.el'.)
-  ;; icicle-alternative-sort-comparer, icicle-Completions-frame-at-right-flag,
+  ;; icicle-alternative-sort-comparer, icicle-move-Completions-frame,
   ;; icicle-Completions-mouse-3-menu-entries, icicle-default-cycling-mode,
   ;; icicle-default-thing-insertion, icicle-expand-input-to-common-match-flag,
   ;; icicle-ignore-space-prefix-flag, icicle-incremental-completion-flag, icicle-input-string,
@@ -371,6 +371,8 @@
 (require 'pp+ nil t) ;; (no error if not found): pp-eval-expression
 (require 'doremi nil t) ;; (no error if not found):
                         ;; doremi, doremi(-boost)-(up|down)-keys, doremi-limit, doremi-wrap
+(when (> emacs-major-version 22) (require 'help-fns+ nil t)) ;; (no error if not found):
+                                                             ;; help-commands-to-key-buttons
 
 (eval-when-compile (require 'fit-frame nil t)) ;; (no error if not found): fit-frame
 (eval-when-compile
@@ -636,7 +638,7 @@ Return the number of the candidate: 0 for first, 1 for second, ..."
     ;; $$$$$ (if (eq icicle-orig-buff (get-buffer "*Completions*"))
     ;;    (icicle-remove-Completions-window)
     ;;    (save-selected-window (icicle-remove-Completions-window)))
-    (setq icicle-candidate-nb  (icicle-nb-of-candidate-in-Completions (posn-point (event-start event))))
+    (setq icicle-candidate-nb  (icicle-nb-of-cand-at-Completions-pos (posn-point (event-start event))))
     (when (and (icicle-file-name-input-p) insert-default-directory
                (or (not (member choice icicle-extra-candidates))
                    icicle-extra-candidates-dir-insert-p))
@@ -649,7 +651,7 @@ Return the number of the candidate: 0 for first, 1 for second, ..."
     (choose-completion-string choice buffer base-size))
   icicle-candidate-nb)
 
-(defun icicle-nb-of-candidate-in-Completions (position)
+(defun icicle-nb-of-cand-at-Completions-pos (position)
   "Return number of candidate at POSITION in `*Completions*'.
 POSITION is a buffer position."
   (let ((hor-nb  (icicle-nb-of-cand-in-Completions-horiz position)))
@@ -1752,7 +1754,8 @@ If ALTERNATIVEP is non-nil, the alternative sort order is returned."
           (princ "\nFor alt action, use `C-S-' instead of `C-', but use `C-|' or `M-|',\n\
      instead of `C-!' or `M-!', to act on all.\n")))
       (if icicle-completing-p
-          (princ (concat "\n" (icicle-help-string-completion)))
+          (with-current-buffer standard-output
+            (insert (concat "\n" (icicle-help-string-completion))))
         (princ (icicle-help-string-non-completion))))
     ;; Don't bother to do this for Emacs 21.3.  Its `help-insert-xref-button' signature is different.
     (when (and (> emacs-major-version 21)
@@ -1770,7 +1773,10 @@ If ALTERNATIVEP is non-nil, the alternative sort order is returned."
             (help-insert-xref-button "[Icicles Doc, Part 2]" 'icicle-commentary2-button)
             (insert "\n\n")
             (goto-char (point-max))
-            (insert (substitute-command-keys
+            (insert (funcall
+                     (if (fboundp 'help-commands-to-key-buttons) ; In `help-fns.el'.
+                         #'help-commands-to-key-buttons
+                       #'substitute-command-keys)
                      "\n\nSend an Icicles bug report: `\\[icicle-send-bug-report]'.\n\n"))
             (help-insert-xref-button "[Icicles Help on the Web]" 'icicle-help-button)
             (insert "                        ")
@@ -1788,7 +1794,10 @@ If ALTERNATIVEP is non-nil, the alternative sort order is returned."
 (defun icicle-help-string-completion ()
   "Update the bindings within the Icicles completion help string."
   (icicle-S-iso-lefttab-to-S-TAB
-   (substitute-command-keys
+   (funcall
+    (if (fboundp 'help-commands-to-key-buttons) ; In `help-fns+.el'.
+        #'help-commands-to-key-buttons
+      #'substitute-command-keys)
     (concat
      (format "\\<minibuffer-local-completion-map> 
 
@@ -4376,7 +4385,7 @@ performed: display help on the candidate - see
       (select-window (active-minibuffer-window))
       (delete-region (icicle-minibuffer-prompt-end) (point-max))
       (insert choice))
-    (setq icicle-candidate-nb               (icicle-nb-of-candidate-in-Completions posn-pt)
+    (setq icicle-candidate-nb               (icicle-nb-of-cand-at-Completions-pos posn-pt)
           icicle-last-completion-candidate  choice)
     (if (not fn-var)
         (icicle-help-on-candidate)      ; Doesn't `icicle-raise-Completions-frame'.
@@ -4444,7 +4453,7 @@ See `icicle-remove-candidate' for more information."
         ;; being just part of the display in columns.
         (when (and (eq ?\n (char-after end)) (get-text-property end 'icicle-keep-newline))
           (setq end  (1+ end)))
-        (setq icicle-candidate-nb               (icicle-nb-of-candidate-in-Completions posn-pt)
+        (setq icicle-candidate-nb               (icicle-nb-of-cand-at-Completions-pos posn-pt)
               icicle-last-completion-candidate  (buffer-substring beg end)))))
   (icicle-remove-candidate-display-others))
 
@@ -4978,7 +4987,7 @@ You can use this command only from the minibuffer (`\\<minibuffer-local-completi
           (setq beg     (previous-single-property-change beg 'mouse-face)
                 end     (or (next-single-property-change end 'mouse-face)(point-max))
                 choice  (buffer-substring-no-properties beg end)))))
-    (setq icicle-candidate-nb               (icicle-nb-of-candidate-in-Completions
+    (setq icicle-candidate-nb               (icicle-nb-of-cand-at-Completions-pos
                                              (posn-point (event-start event)))
           icicle-last-completion-candidate  choice)
     (let ((icicle-whole-candidate-as-text-prop-p  nil)
@@ -5026,9 +5035,9 @@ Optional arg TYPE is the type of object that FUNCTION applies to."
   "Raise `*Completions*' frame, if displayed.
 This helps keep `*Completions*' on top.
 
-If `icicle-Completions-frame-at-right-flag' is non-nil and
-`*Completions*' is in its own frame, then move that frame to the
-right, out of the way.
+If `icicle-move-Completions-frame' is non-nil and `*Completions*' is
+in its own frame, then move that frame to the display edge, out of the
+way.
 
 Non-nil optional args MOUSE-COL and MOUSE-ROW move the mouse pointer
 to column MOUSE-COL and row MOUSE-ROW.  Do this because
@@ -5040,10 +5049,12 @@ which can position mouse pointer on a standalone minibuffer frame."
       (save-window-excursion
         (select-window compl-win)
         ;; Move frame to the right, out of the way.
-        (when (and (one-window-p t) icicle-Completions-frame-at-right-flag)
+        (when (and (one-window-p t) icicle-move-Completions-frame)
           (modify-frame-parameters
            (selected-frame)             ; Hard-code 7 here - what does it depend on?
-           `((left . ,(- (x-display-pixel-width) (+ (frame-pixel-width) 7)))))
+           (if (eq icicle-move-Completions-frame 'left)
+               '((left . 0))
+             `((left . ,(- (x-display-pixel-width) (+ (frame-pixel-width) 7))))))
           (raise-frame)
           (when (and (integerp mouse-col) (integerp mouse-row))
             (set-mouse-position (selected-frame) mouse-col mouse-row)))))))
@@ -5072,7 +5083,7 @@ which can position mouse pointer on a standalone minibuffer frame."
           (setq beg       (previous-single-property-change beg 'mouse-face)
                 end       (or (next-single-property-change end 'mouse-face)(point-max))
                 candidate (buffer-substring-no-properties beg end)))))
-    (setq icicle-candidate-nb               (icicle-nb-of-candidate-in-Completions
+    (setq icicle-candidate-nb               (icicle-nb-of-cand-at-Completions-pos
                                              (posn-point (event-start event)))
           icicle-last-completion-candidate  candidate)
     (let* ((menus   `((keymap "Completion" ,@(icicle-substitute-keymap-vars
@@ -5797,7 +5808,7 @@ If the candidate is already saved, then unsave it; otherwise, save it."
           (setq beg     (previous-single-property-change beg 'mouse-face)
                 end     (or (next-single-property-change end 'mouse-face)(point-max))
                 choice  (buffer-substring-no-properties beg end)))))
-    (setq icicle-candidate-nb               (icicle-nb-of-candidate-in-Completions
+    (setq icicle-candidate-nb               (icicle-nb-of-cand-at-Completions-pos
                                              (posn-point (event-start event)))
           icicle-last-completion-candidate  choice)
     (cond ((member icicle-last-completion-candidate icicle-saved-completion-candidates)
@@ -6015,8 +6026,8 @@ You can use this command only from the minibuffer (`\\<minibuffer-local-completi
               (while (and (<= end eob) (get-text-property end 'mouse-face)) (setq end  (1+ end)))
               (setq beg          (1+ beg)
                     end          (1- end)
-                    beg-cand-nb  (icicle-nb-of-candidate-in-Completions beg)
-                    end-cand-nb  (icicle-nb-of-candidate-in-Completions end))
+                    beg-cand-nb  (icicle-nb-of-cand-at-Completions-pos beg)
+                    end-cand-nb  (icicle-nb-of-cand-at-Completions-pos end))
               (when (> beg-cand-nb end-cand-nb) ; Swap them
                 (setq beg-cand-nb  (prog1 end-cand-nb (setq end-cand-nb  beg-cand-nb))))
               (while (<= beg-cand-nb end-cand-nb)

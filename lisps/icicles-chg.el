@@ -7,9 +7,9 @@
 ;; Copyright (C) 2007-2011, Drew Adams, all rights reserved.
 ;; Created: Tue Nov 27 07:47:53 2007
 ;; Version: 22.0
-;; Last-Updated: Sun Jun  5 09:25:07 2011 (-0700)
+;; Last-Updated: Thu Jul 21 17:52:49 2011 (-0700)
 ;;           By: dradams
-;;     Update #: 6606
+;;     Update #: 6647
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/icicles-chg.el
 ;; Keywords: extensions, help, abbrev, local, minibuffer,
 ;;           keys, apropos, completion, matching, regexp, command
@@ -406,6 +406,17 @@
  
 ;;;(@* "CHANGE LOG FOR `icicles-cmd2.el'")
 ;;
+;; 2011/07/18 dadams
+;;     icicle-search-thing, icicle-search-thing-scan:
+;;       Moved normalizing BEG, END to *-scan, for multiple buffers case.  Thx to M. Heerdegen.
+;; 2011/07/13 dadams
+;;     icicle-search-replace-cand-in-mct: Changed <= to < for len-rep.  Thx to M. Heerdegen.
+;; 2011/07/04 dadams
+;;     icicle-search-in-context-default-fn:
+;;       Bound icicle-last-completion-candidate, icicle-completion-candidates.  Thx to M. Heerdegen.
+;; 2011/07/02 dadams
+;;     Added: icicle-defined-thing-p.
+;;     icicle-things-alist: Use icicle-defined-thing-p.  Thx to Michael Heerdegen.
 ;; 2011/06/03 dadams
 ;;     Replace icicle-help-in-mode-line-flag by icicle-help-in-mode-line-delay everywhere.
 ;; 2011/05/25 dadams
@@ -808,6 +819,14 @@
  
 ;;;(@* "CHANGE LOG FOR `icicles-fn.el'")
 ;;
+;; 2011/07/20 dadams
+;;     icicle-mctized-full-candidate: Don't change icicle-completions-format-internal to horizontal.
+;;     icicle-insert-candidates: If any candidate is multiline then use only one column.
+;;     Thx to Michael Heerdegen.
+;; 2011/07/06 dadams
+;;     icicle-fit-completions-window:
+;;       Emacs 22/23 fix: do not call fit-window-to-buffer.  Thx to Michael Heerdegen.
+;;     icicle-read-face-name: Added version for Emacs 24+.
 ;; 2011/06/05 dadams
 ;;     icicle-unsorted(-file-name)-prefix-candidates, icicle-prefix-any(-file-name)-candidates-p:
 ;;       Add METADATA arg to icicle-completion-(try|all)-completion(s) calls.
@@ -2418,6 +2437,16 @@
  
 ;;;(@* "CHANGE LOG FOR `icicles-mcmd.el'")
 ;;
+;; 2011/07/21 dadams
+;;     Renamed: icicle-nb-of-candidate-in-Completions to icicle-nb-of-cand-at-Completions-pos.
+;; 2011/07/06 dadams
+;;     Applied renaming of icicle-Completions-frame-at-right-flag to icicle-move-Completions-frame.
+;;     icicle-raise-Completions-frame: Handle left value of icicle-move-Completions-frame also.
+;; 2011/06/26 dadams
+;;     icicle-minibuffer-help: Use insert, not princ, with icicle-help-string-completion.
+;;     icicle-minibuffer-help, icicle-help-string-completion:
+;;       Use help-commands-to-key-buttons, not substitute-command-keys, if available.
+;;     Soft-require help-fns+.el for help-commands-to-key-buttons.
 ;; 2011/06/03 dadams
 ;;     icicle-next-candidate-per-mode:
 ;;       Set this-command according to direction, per NTH.  If NTH is nil set it to 1.  For Icomplete+.
@@ -4624,6 +4653,9 @@
  
 ;;;(@* "CHANGE LOG FOR `icicles-opt.el'")
 ;;
+;; 2011/07/06 dadams
+;;     Renamed icicle-Completions-frame-at-right-flag to icicle-move-Completions-frame.
+;;     icicle-move-Completions-frame: Allow for moving frame to the left also.
 ;; 2011/06/03 dadams
 ;;     Renamed icicle-help-in-mode-line-flag to icicle-help-in-mode-line-delay and changed to 5 secs.
 ;; 2011/05/24 dadams
@@ -5208,6 +5240,8 @@
  
 ;;;(@* "CHANGE LOG FOR `icicles-var.el'")
 ;;
+;; 2011/07/06 dadams
+;;     Applied renaming of icicle-Completions-frame-at-right-flag to icicle-move-Completions-frame.
 ;; 2011/05/03 dadams
 ;;     icicle-general-help-string: Mention icicle-toggle-highlight-saved-candidates.
 ;; 2011/04/29 dadams
@@ -5536,6 +5570,8 @@
  
 ;;;(@* "CHANGE LOG FOR `icicles.el'")
 ;;
+;; 2011/06-24 dadams
+;;     Updated load order: mac, face, opt, var, fn, mcmd, cmd1, cmd2, mode.
 ;; 2010/12/26 dadams
 ;;     Removed autoload cookies except simple ones & ones with sexp on same line.  Thx to Richard Kim.
 ;; 2009/05/22 dadams

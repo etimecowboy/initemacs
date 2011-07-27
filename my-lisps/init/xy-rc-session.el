@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-06-11 Sat 01:03 xin on p6t>
+;; Time-stamp:<2011-07-26 Tue 17:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,12 +40,13 @@
 								  user-login-name "@"
 								  system-name "@"
 								  system-configuration))
-  ;; Sometimes, I use OrgMode. But org-mark-ring is a circular object,
-  ;; Use the following:
+  
+  ;; OrgMode org-mark-ring is a circular object.
   ;; Don't recursively display gtd files in session list
   (add-to-list 'session-globals-exclude 'org-mark-ring)
   ;; Don't display org agenda files
   (add-to-list 'session-globals-exclude 'org-agenda-files)
+  
   (setq session-globals-max-size 100)
   (setq session-globals-max-string 40960)
   (setq session-registers-max-string 2048))

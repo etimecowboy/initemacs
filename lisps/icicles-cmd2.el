@@ -7,9 +7,9 @@
 ;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
 ;; Created: Thu May 21 13:31:43 2009 (-0700)
 ;; Version: 22.0
-;; Last-Updated: Fri Jun  3 15:50:53 2011 (-0700)
+;; Last-Updated: Mon Jul 18 11:41:12 2011 (-0700)
 ;;           By: dradams
-;;     Update #: 3328
+;;     Update #: 3337
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/icicles-cmd2.el
 ;; Keywords: extensions, help, abbrev, local, minibuffer,
 ;;           keys, apropos, completion, matching, regexp, command
@@ -137,7 +137,7 @@
 ;;    `icicle-comint-search-send-input', `icicle-compilation-hook-fn',
 ;;    `icicle-compilation-search-in-context-fn',
 ;;    `icicle-complete-keys-1', `icicle-complete-keys-action',
-;;    `icicle-describe-opt-action',
+;;    `icicle-defined-thing-p', `icicle-describe-opt-action',
 ;;    `icicle-describe-opt-of-type-complete', `icicle-doc-action',
 ;;    `icicle-edmacro-parse-keys', `icicle-flat-list',
 ;;    `icicle-fn-doc-minus-sig', `icicle-font-w-orig-size',
@@ -2752,7 +2752,9 @@ display string as in `icicle-search-action'."
             (setq icicle-nb-of-other-cycle-candidates  (length icicle-completion-candidates))
             (icicle-insert-cand-in-minibuffer icicle-last-completion-candidate t)
             (icicle-show-help-in-mode-line icicle-last-completion-candidate))))))
-  (let ((icicle-candidate-nb  icicle-candidate-nb))
+  (let ((icicle-candidate-nb               icicle-candidate-nb)
+        (icicle-last-completion-candidate  icicle-last-completion-candidate)
+        (icicle-completion-candidates      icicle-completion-candidates))
     (icicle-complete-again-update)))
 
 ;; Free var here: `icicle-search-ecm' is bound in `icicle-search'.
@@ -2976,7 +2978,7 @@ Use this only with a `minibuffer-completion-table' derived from an alist."
                   props)
               (while (< ii len-old)
                 (setq props  (text-properties-at ii old-cand))
-                (when (<= ii len-rep) (add-text-properties ii (1+ ii) props rep-cand))
+                (when (< ii len-rep) (add-text-properties ii (1+ ii) props rep-cand))
                 (setq ii  (1+ ii)))
               (let ((last-props  (text-properties-at (1- len-old) old-cand)))
                 (when (> len-rep len-old)
@@ -3456,9 +3458,6 @@ NOTE:
    behaves incorrectly in such cases, for Emacs prior to version 23.
 6. Prior to Emacs 21 there is no possibility of ignoring comments."
   (interactive (icicle-search-thing-args))
-  (unless beg (setq beg  (point-min)))
-  (unless end (setq end  (point-max)))
-  (unless (< beg end) (setq beg  (prog1 end (setq end  beg)))) ; Ensure BEG is before END.
   (setq icicle-search-context-level  0)
   (icicle-search beg end 'icicle-search-thing-scan require-match where thing predicate))
 
@@ -3481,16 +3480,29 @@ Each is a cons (STRING), where STRING names a type of text entity for
 which there is a either a corresponding `forward-'thing operation, or
 corresponding `beginning-of-'thing and `end-of-'thing operations.  The
 list includes the names of the symbols that satisfy
-`thgcmd-defined-thing-p', but with these excluded: `thing', `buffer',
+`icicle-defined-thing-p', but with these excluded: `thing', `buffer',
 `point'."
   (let ((types  ()))
     (mapatoms
      (lambda (tt)
-       (when (thgcmd-defined-thing-p tt) (push (symbol-name tt) types))))
+       (when (icicle-defined-thing-p tt) (push (symbol-name tt) types))))
     (dolist (typ  '("thing" "buffer" "point")) ; Remove types that do not make sense.
       (setq types (delete typ types)))
     (setq types  (sort types #'string-lessp))
     (mapcar #'list types)))
+
+;;; Same as `thgcmd-defined-thing-p' in `thing-cmds.el'.
+(defun icicle-defined-thing-p (thing)
+  "Return non-nil if THING (type) is defined for `thing-at-point'."
+  (let ((forward-op    (or (get thing 'forward-op)  (intern-soft (format "forward-%s" thing))))
+        (beginning-op  (get thing 'beginning-op))
+        (end-op        (get thing 'end-op))
+        (bounds-fn     (get thing 'bounds-of-thing-at-point))
+        (thing-fn      (get thing 'thing-at-point)))
+    (or (functionp forward-op)
+        (and (functionp beginning-op) (functionp end-op))
+        (functionp bounds-fn)
+        (functionp thing-fn))))
 
 ;;; Same as `hide/show-comments' in `hide-comnt.el'.
 ;;;###autoload
@@ -3573,6 +3585,9 @@ by `icicle-next-visible-thing-and-bounds'."
     (unless buffer (setq buffer  (current-buffer)))
     (when (bufferp buffer)              ; Do nothing if BUFFER is not a buffer.
       (with-current-buffer buffer
+        (unless beg (setq beg  (point-min)))
+        (unless end (setq end  (point-max)))
+        (unless (< beg end) (setq beg  (prog1 end (setq end  beg)))) ; Ensure BEG is before END.
         (icicle-with-comments-hidden
          beg end
          (condition-case icicle-search-thing-scan

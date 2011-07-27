@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-07-22 Fri 14:41 xin on p6t>
+;; Time-stamp:<2011-07-27 Wed 15:32 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -15,15 +15,15 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; ;; 为了column view能够在daemon模式下正常显示
-;; ;;;###autoload
-;; (defun wl-org-column-view-uses-fixed-width-face ()
-;;   ;; copy from org-faces.el
-;;   (when (fboundp 'set-face-attribute)
-;;     ;; Make sure that a fixed-width face is used when we have a column table.
-;;     (set-face-attribute 'org-column nil
-;;                         :height (face-attribute 'default :height)
-;;                         :family (face-attribute 'default :family))))
+;; 为了column view能够在emacs daemon模式下正常显示
+;;;###autoload
+(defun wl-org-column-view-uses-fixed-width-face ()
+  ;; copy from org-faces.el
+  (when (fboundp 'set-face-attribute)
+    ;; Make sure that a fixed-width face is used when we have a column table.
+    (set-face-attribute 'org-column nil
+                        :height (face-attribute 'default :height)
+                        :family (face-attribute 'default :family))))
 
 ;; ;; BibTeX related
 ;; ;;;###autoload
@@ -46,6 +46,13 @@
   "Settings of `org'."
 
   (require 'org-install)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Some basic settings and some confliction fixes
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
   ;; Loaded modules
   (setq org-modules 
         '(org-bbdb org-bibtex org-crypt
@@ -63,90 +70,177 @@
     (add-hook 'org-mode-hook 
               'wl-org-column-view-uses-fixed-width-face))
 
+  ;; Locate some files
+  (setq org-directory "~/emacs/org")
+  (setq org-default-notes-file
+        (concat my-emacs-path "/org/gtd/Notes.org"))
+  (setq org-combined-agenda-icalendar-file
+        (concat my-emacs-path "/org/org.ics")) 
+  (setq org-id-locations-file
+        (concat my-emacs-path "/org/org-id-locations"))
+  
   ;; ;; org-crypt security issue about auto-save
   ;; (add-hook 'org-mode-hook
   ;; 			'(lambda ()
   ;; 			   (auto-save-mode -1)))
 
-  (setq org-directory "~/emacs/org")
+  ;; NOTE: Use icicles instead
+  ;; (setq org-completion-use-iswitchb t)
+  ;; (setq org-completion-use-ido t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; org GTD settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Disable ENT to follow links --- avoid annoying jumps
+  (setq org-return-follows-link nil)
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; GTD system settings
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; agenda files
-  (setq org-agenda-files 
-        (list "~/emacs/org/gtd/PhdWork.org"
-              "~/emacs/org/gtd/DailyLife.org"
-              "~/emacs/org/gtd/GeekInterests.org"
-			  "~/emacs/org/gtd/Learn.org"
-              "~/emacs/org/gtd/Notes.org"
-              ;; "~/emacs/org/gtd/DSP.org"
-              ;; "~/emacs/org/gtd/CProgramming.org"
-              ;; "~/emacs/org/gtd/Electronics.org"
+  (setq org-agenda-files
+        (list
+		 "~/emacs/org/gtd/PhdWork.org"
+		 "~/emacs/org/gtd/DailyLife.org"
+		 "~/emacs/org/gtd/GeekInterests.org"
+		 "~/emacs/org/gtd/Learn.org"
+		 "~/emacs/org/gtd/Notes.org"
+		 ;; "~/emacs/org/gtd/DSP.org"
+		 ;; "~/emacs/org/gtd/CProgramming.org"
+		 ;; "~/emacs/org/gtd/Electronics.org"
 		 ))
+
   ;; Don't recursively display gtd files in session list
   (add-to-list 'session-globals-exclude 'org-mark-ring)
   ;; Don't display org agenda files
   (add-to-list 'session-globals-exclude 'org-agenda-files)
-  (setq org-tag-persistent-alist 
-        '((:startgroup) ("@uwe" . 85) ("@home" . 72) ("@shop" . 83) (:endgroup) 
-          (:startgroup) ("appt" . 84) ("proj" . 80) (:endgroup) 
-          (:startgroup) ("sched" . 67) ("asap" . 65) ("dlgd" . 68) (:endgroup)))
-  (setq org-todo-keywords 
-        '((sequence "TODO(t!)" "STARTED(s!)" "WAITING(w@)" "SOMEDAY(m!)" "|"
-                    "DONE(d!)" "CANCELED(c@)")))
-  (setq org-stuck-projects 
-        '(("+proj" ("TODO" "DONE" "CANCELED") nil "")))
-  (setq org-agenda-time-grid 
-        '((daily today require-timed) "----------------" 
-          (800 1000 1200 1400 1600 1800 2000 2200)))
-  (setq org-default-notes-file
-        (concat my-emacs-path "/org/gtd/Notes.org"))
-  (setq org-combined-agenda-icalendar-file
-        (concat my-emacs-path "/org/org.ics"))
-  (setq org-mobile-encryption-tempfile "~/emacs/org/orgtmpcrypt")
-  ;; custom commands
-  ;; BUG: org-mobile
-  ;; (setq org-agenda-custom-commands 
-  ;;       '(("x" "Agenda today" 
-  ;;          ((agenda "") (org-agenda-ndays 1) (org-agenda-deadline-warning-days 30) 
-  ;;           (org-agenda-sorting-strategy 
-  ;;             '(time-up category-keep todo-state-up effort-down))))))
-  ;; global propoerties
-  (setq org-global-properties 
-    '(("Effort_ALL" . 
-         "0:10 0:20 0:30 1:00 1:30 2:00 2:30 3:00 4:00 6:00 8:00 12:00 16:00 24:00")))
-  (setq org-id-locations-file
-        (concat my-emacs-path "/org/org-id-locations"))
-  (setq org-agenda-include-deadlines t)
-  (setq org-agenda-restore-windows-after-quit t)
-  (setq org-agenda-sorting-strategy 
-        '((agenda habit-down time-up category-keep priority-down todo-state-up) 
-          (todo category-keep priority-down todo-state-up)
-          (tags category-keep priority-down) 
-          (search category-keep)))
-  (setq org-agenda-todo-ignore-scheduled t)
-  (setq org-archive-save-context-info 
-            '(time file category todo priority itags olpath ltags))
-  ;; (setq org-completion-use-iswitchb t)
-  (setq org-enforce-todo-checkbox-dependencies t)
-  (setq org-enforce-todo-dependencies t)
-  (setq org-refile-targets 
-        '((org-agenda-files :maxlevel . 3)))
-  (setq org-return-follows-link t)
-  (setq org-reverse-note-order t)
+
+  ;;-------------------------------------------------------
+  ;; GTD contexts & tags
+  
+  (setq org-tag-persistent-alist ;; contexts
+        '((:startgroup)
+		  ("@campus" . ?C) ("@BRL" . ?B) ("@library" . ?L)
+		  ("@home" . ?H) ("@street" . ?S)
+		  (:endgroup) 
+
+		  (:startgroup)
+		  ("appt" . ?A) ("proj" . ?P)
+		  ("note" . ?W) ("idea" . ?I)
+		  (:endgroup)
+
+		  ;; (:startgroup)
+		  ;; ("new" . ?N)
+		  ;; ("old" . ?O)
+		  ;; (:endgroup)
+
+		  ;; (:startgroup)
+		  ;; ("important" . ?V)
+		  ;; ("no-good" . ?X)
+		  ;; (:endgroup)
+		  
+          ("delegated" . ?D)))
+  
+  ;; Inherit tags in most of cases
+  (setq org-use-tag-inheritance t)
+  ;; Exclusions of tag inheritance
+  (setq org-tags-exclude-from-inheritance '("proj"))
+  
+  ;;-------------------------------------------------------
+  ;; Properties
+  
+  (setq org-use-property-inheritance
+		nil)  ;; Don't inheritant property for sub-items, 
+              ;; since it slows down property searchings.
+
+  ;; NOTE: a task should not takes more than 4 hours, otherwise it
+  ;; MUST be a project and can be broken into smaller tasks. 
+  (setq org-global-properties   ;; Additional properties
+		'(("Effort_ALL" . 
+		   "0:10 0:20 0:30 1:00 1:30 2:00 2:30 3:00 4:00")
+		  ("Importance_ALL" .
+		   "A B C")
+		  ))
+
+  ;;--------------------------------------------------------
+  ;; Priority
+
+  (setq org-enable-priority-commands t)
+  (setq org-highest-priority ?A)
+  (setq org-lowest-priority ?C)
+  (setq org-default-priority ?B)
+  (setq org-priority-start-cycle-with-default t)
+
+  ;;--------------------------------------------------------
+  ;; TODO item keywords
+
+  (setq org-use-fast-todo-selection t) ;; C-c C-t key
+  (setq org-todo-keywords
+  		'((sequence "MAYBE(m)" "TODO(t!)" "NEXT(n)" "STARTED(s!)" "|"
+                    "DONE(d!)") 
+  		  (sequence "WAITING(w@/!)" "SOMEDAY(x!)" "|"
+                    "CANCELLED(c@/!)"))) 
+ 
+  ;; (setq org-todo-keyword-faces 
+  ;; 		(quote (("TODO" :foreground "red" :weight bold)
+  ;; 				("NEXT" :foreground "blue" :weight bold)
+  ;; 				("STARTED" :foreground "blue" :weight bold)
+  ;; 				("DONE" :foreground "forest green" :weight bold)
+  ;; 				("WAITING" :foreground "orange" :weight bold)
+  ;; 				("SOMEDAY" :foreground "magenta" :weight bold)
+  ;; 				("CANCELLED" :foreground "forest green" :weight bold)
+  ;; 				("OPEN" :foreground "blue" :weight bold)
+  ;; 				("CLOSED" :foreground "forest green" :weight bold)
+  ;; 				("PHONE" :foreground "forest green" :weight bold))))
+
+  ;; Tag change triggers
+  ;; (setq org-todo-state-tags-triggers
+  ;; 		'(("TODO"      ("new"))
+  ;; 		  ("NEXT"      ("new"))
+  ;; 		  ("STARTED"   ("new"))
+  ;; 		  ("DONE"      ("new") ("old" . t))
+  ;; 		  ("WAITING"   ("new"))
+  ;; 		  ("SOMEDAY"   ("new"))
+  ;; 		  ("CANCELLED" ("new") ("important") ("old" . t))))
+
+  ;; Treat adding item as state change
   (setq org-treat-insert-todo-heading-as-state-change t)
+  
+  (setq org-enforce-todo-checkbox-dependencies
+		t) ;; Block checkbox entries from CHECKED while they have
+           ;; children that are not CHECKED  
 
-  (defadvice  org-agenda-redo (after org-agenda-redo-add-appts)
-    "Pressing `r' on the agenda will also add appointments."
-    (progn 
-      (setq appt-time-msg-list nil)
-      (org-agenda-to-appt)))
+  (setq org-enforce-todo-dependencies
+		t)   ;; Block TODO items from changing state to DONE while
+             ;; they have children that are not DONE
 
-  ;; org clock settings
+  (setq org-stuck-projects ;; Define stuck projects
+        '("+proj/!-MAYBE-SOMEDAY-DONE-CANCELLED"
+		  ("\\<NEXT\\>" "\\<STARTED\\>")))
+
+  ;; TODO entry automatically changes to DONE 
+  ;; when all children are done
+  ;; (defun org-summary-todo (n-done n-not-done)
+  ;;   "Switch entry to DONE when all subentries are done, to TODO
+  ;; otherwise." 
+  ;;   (let (org-log-done org-log-states)   ; turn off logging
+  ;;     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  ;; (add-hook ('org-after-todo-statistics-hook 'org-summary-todo)
+  
+  ;;--------------------------------------------------------------------------
+  ;; Log settings
+  
+  (setq org-log-done        'time)
+  (setq org-log-done-with-time t)
+  (setq org-log-into-drawer 'time)
+  (setq org-log-redeadline  'note)
+  (setq org-log-reschedule  'time)
+  (setq org-log-refile      'time)
+  (setq org-log-state-notes-insert-after-drawers t)
+
+  ;;--------------------------------------------------------------------------
+  ;; Clock settings
+
   (setq org-clock-idle-time 15)
   (setq org-clock-in-resume t)
   (setq org-clock-in-switch-to-state "STARTED")
@@ -156,78 +250,269 @@
         (concat my-emacs-path "/org/org-clock-save"))
   (setq org-clock-persist-query-save t)
   (setq org-clock-sound t)
-  (setq org-log-done (quote note))
-  ;; (setq org-log-done t)
-  (setq org-log-into-drawer t)
-  (setq org-log-redeadline (quote note))
-  (setq org-log-reschedule (quote note))
-  (setq org-log-state-notes-insert-after-drawers t)
   (org-clock-persistence-insinuate)
+
+  ;;---------------------------------------------------------------------------
+  ;; Alarm  using appt
+  
+  (require 'appt)
+  (setq org-agenda-include-diary t)
+  (setq appt-time-msg-list nil)
+  (org-agenda-to-appt)
+  
+  (defadvice  org-agenda-redo (after org-agenda-redo-add-appts)
+    "Pressing `r' on the agenda will also add appointments."
+    (progn 
+      (setq appt-time-msg-list nil)
+      (org-agenda-to-appt)))
+
+  (ad-activate 'org-agenda-redo)
+  
   ;; (progn
   ;;   (appt-activate 1)
   ;;   (setq appt-display-format 'window)
   ;;   (setq appt-disp-window-function (function my-appt-disp-window))
   ;;   (defun my-appt-disp-window (min-to-app new-time msg)
-  ;;     (call-process "~/script/popup.py" nil 0 nil min-to-app msg new-time)))
+  ;;     (call-process "~/script/popup.py" nil 0 nil min-to-app msg
+  ;;   new-time)))
+  
+  ;;--------------------------------------------------------------------------
+  ;; Custom ageda views
 
-  ;; TODO entry to automatically change to DONE 
-  ;; when all children are done
-  ;; (defun org-summary-todo (n-done n-not-done)
-  ;;   "Switch entry to DONE when all subentries are done, to TODO otherwise."
-  ;;   (let (org-log-done org-log-states)   ; turn off logging
-  ;;     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-  ;; (add-hook ('org-after-todo-statistics-hook 'org-summary-todo)
+  ;; Do not dim blocked tasks
+  (setq org-agenda-dim-blocked-tasks nil)
 
-  ;; automatic reminder
-  (require 'appt)
-  (setq org-agenda-include-diary t)
-  (setq appt-time-msg-list nil)
-  (org-agenda-to-appt)
-  (ad-activate 'org-agenda-redo)
+  ;; Display two windows in the current frame
+  (setq org-agenda-window-setup 'reorganize-frame)
 
+  ;; Agenda window frame fractions
+  (setq org-agenda-window-frame-fractions (quote (0.20 . 0.80)))
+
+  ;; Restore window setup after quite
+  (setq org-agenda-restore-windows-after-quit t)
+
+  ;; Set the default number of days displayed in the agenda (C-c a a)
+  (setq org-agenda-span 'week)
+
+  ;; Include/exclude some special items globally
+  (setq org-agenda-todo-ignore-scheduled t)
+  (setq org-agenda-todo-ignore-deadlines nil)
+  (setq org-agenda-todo-ignore-timestamp nil)
+  (setq org-agenda-todo-ignore-with-date nil)
+
+  ;; Show all items when do a tag-todo search (C-c a M) 
+  ;; (org-agenda-tags-todo-honor-ignore-options nil)
+
+  ;; Do not display sublevels
+  (setq org-agenda-todo-list-sublevels nil)
+
+  ;; Display items within their dealine periods 
+  (setq org-agenda-include-deadlines t)
+
+  ;; Use grid style timeline
+  (setq org-agenda-use-time-grid t)
+  (setq org-agenda-time-grid 
+        '((daily today require-timed) "----------------" 
+          (800 1000 1200 1400 1600 1800 2000 22:00)))
+  
+  ;; Agenda view presentation and sorting
+  ;; org-agenda-tags-column
+  ;; org-agenda-prefix-format
+  (setq org-agenda-sorting-strategy 
+        '((agenda time-up category-keep priority-down todo-state-up) 
+          (todo time-up category-keep priority-down todo-state-up)
+          (tags time-up category-keep priority-down todo-state-up) 
+          (search time-up category-keep priority-down todo-state-up)))
+  
+  ;; custom agenda commands
+  ;; Custom agenda command definitions
+  (setq org-agenda-custom-commands
+  		'((" " "Day Planner"
+		   ((agenda ""
+					((org-agenda-ndays 1)
+					 (org-agenda-deadline-warning-days 30)
+					 (org-agenda-use-time-grid t)
+					 (org-agenda-skip-scheduled-if-done t)
+					 (org-agenda-skip-deadline-if-done t)
+					 (org-agenda-skip-timestamp-if-done t)
+					 (org-agenda-skip-archived-trees t)
+					 (org-agenda-skip-comment-trees t)
+					 (org-agenda-todo-list-sublevel t)
+					 (org-agenda-timeline-show-empty-dates nil)))
+
+			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY=\"A\"+
+                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+				       ((org-agenda-overriding-header
+					     "1. Urgent & Important Tasks Today (Finsh Them First!)") 
+						(org-tags-match-list-sublevels t)))
+			
+			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY=\"A\"+
+                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+					   ((org-agenda-overriding-header
+						 "2. Urgent & NOT Important Tasks Today")
+						(org-tags-match-list-sublevels t)))
+
+			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY<>\"A\"+
+                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+					   ((org-agenda-overriding-header
+						 "3. NOT Urgent & Important Tasks Today")
+						(org-tags-match-list-sublevels t)))
+
+			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY<>\"A\"+
+                        SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\"" 
+					   ((org-agenda-overriding-header
+						 "4. NOT Urgent & NOT Important Tasks Today")
+						(org-tags-match-list-sublevels t)))
+ 
+			(tags      "CLOSED<\"<tomorrow>\"+CLOSED>=\"<today>\""
+					   ((org-agenda-overriding-header
+						 "Finished Tasks Today (Refile them at End of this Week)") 
+						(org-tags-match-list-sublevels nil)
+						(org-agenda-skip-scheduled-if-done nil)
+						(org-agenda-skip-deadline-if-done nil)
+						(org-agenda-skip-timestamp-if-done nil)
+						(org-agenda-skip-archived-trees nil)
+						))
+			
+			(tags-todo "TODO=\"MAYBE\"+TIMESTAMP_IA<\"<tomorrow>\""
+				       ((org-agenda-overriding-header
+					      "New-Task Inbox (Empty at the End of the Day)") 
+						(org-tags-match-list-sublevels t)))
+
+			(tags-todo "TODO=\"SOMEDAY\"+TIMESTAMP_IA<\"<tomorrow>\""
+					   ((org-agenda-overriding-header
+						 "Future-Task Pool (Consider to Schedule Them to Today)")
+						(org-tags-match-list-sublevels t)))))
+	  
+		  ("n" "Recent Notes NOT Refiled" tags
+		     "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\"" 
+		   ((org-agenda-overriding-header
+			 "Recent Notes (Refile Them ASAP)")
+			(org-tags-match-list-sublevels nil)))
+			
+		  ("i" "Recent Ideas NOT Refiled" tags
+		     "+idea+TIMESTAMP_IA<\"<tomorrow>\""
+		   ((org-agenda-overriding-header "Recent Ideas (Refile Them ASAP)")
+			(org-tags-match-list-sublevels nil)))
+
+		  ("w" "Weekly Review"
+		   ((tags-todo "TODO=\"MAYBE\""
+					   ((org-agenda-overriding-header
+						 "Not Processed New Tasks (Empty before The Weekly Review)") 
+						(org-tags-match-list-sublevels t)))
+
+			(agenda ""
+					 ((org-agenda-span 'week)
+					 (org-agenda-ndays 7)
+					 (org-agenda-deadline-warning-days 60)
+					 (org-agenda-use-time-grid nil)
+					 (org-agenda-skip-scheduled-if-done nil)
+					 (org-agenda-skip-deadline-if-done nil)
+					 (org-agenda-skip-timestamp-if-done nil)
+					 (org-agenda-skip-archived-trees nil)
+					 (org-agenda-skip-comment-trees t)
+					 (org-agenda-todo-list-sublevel t)
+					 (org-agenda-timeline-show-empty-dates t)))
+
+			(tags	 "CLOSED<\"<tomorrow>\"+CLOSED>=\"<-1w>\""
+			         ((org-agenda-overriding-header
+					   "Finished Tasks in This Week (Refile Them after Reviewing)") 
+					  (org-tags-match-list-sublevels t)
+					  (org-agenda-skip-scheduled-if-done nil)
+					  (org-agenda-skip-deadline-if-done nil)
+					  (org-agenda-skip-timestamp-if-done nil)
+					  (org-agenda-skip-archived-trees nil)))
+
+		   (tags-todo "TODO=\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\" 
+                       |TODO=\"STARTED\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"
+                       |TODO=\"WAITING\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"
+                       |TODO=\"SOMEDAY\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
+					   ((org-agenda-overriding-header
+						 "Un-Finished Tasks in This Week (Re-Schedule Them after Reviewing)")
+						(org-tags-match-list-sublevels t)))))
+		  ))
+
+  ;;------------------------------------------------------------------------------------
   ;; MobileOrg settings
+
   ;; I use Dropbox serveice
   (setq org-mobile-directory "~/emacs/org/gtd/mobile")
+  (setq org-mobile-encryption-tempfile "~/emacs/org/orgtmpcrypt")
   (setq org-mobile-files org-agenda-files)
   (setq org-mobile-inbox-for-pull "~/emacs/org/gtd/from-mobile.org")
-  
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; org note taking settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; cpature templates
-  (setq org-capture-templates 
-    '(("p" "PhdTask" 
-       entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool") 
-       "** TODO %?\n - Add time: %U\n - Source: \" %i \" in %a") 
-      ("l" "LifeTask" 
-       entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")  
-       "** SOMEDAY %?\n - Add time: %U\n - Source: \" %i \" in %a") 
-      ("g" "GeekTask" 
-       entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool") 
-       "** SOMEDAY %?\n - Add time: %U\n - Source: \" %i \" in %a") 
-      ("m" "MiscTask" 
-       entry (file+headline "~/emacs/org/gtd/Notes.org" "Tasks") 
-       "** SOMEDAY %?\n - Add time: %U\n - Source: \" %i \" in %a") 
-      ("n" "Notes" 
-       entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes") 
-       "** %U %?") 
-      ("i" "Ideas" 
-       entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas") 
-       "** %^{Title}\n - Details: %?\n - Add time: %U\n - Source: \" %i \" in %a")))
-  (setq org-remember-default-headline "Tasks")
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Capture, refile & archive settings
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; NOTE: Swithed from 'remember' to 'org-capture' 
+  ;; (setq org-remember-default-headline "Tasks")
   ;; (org-remember-insinuate)
   ;; (define-key global-map "\C-cr" 'org-remember)
   ;; New capture system org-capture since version 7.01g
   ;; (define-key global-map "\C-cc" 'org-capture)
+  
+  ;; cpature templates
+  (setq org-capture-templates 
+  		'(("p" "Add a PhD Task----->Day Planner"
+  		   entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
+  		   "** MAYBE [#A] %?    :@home:\n   :LOGBOOK:\n   - State \"MAYBE\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :END:"
+  		   :empty-lines 1)
+  		  ("l" "Add a Life Task---->Day Planner"
+  		   entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
+  		   "** MAYBE [#B] %?    :@street:\n   :LOGBOOK:\n   - State \"MAYBE\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       0:30\n   :END:"
+  		   :empty-lines 1)
+  		  ("g" "Add a Geek Task---->Day Planner"
+  		   entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
+  		   "** MAYBE [#C] %?    :@home:\n   :LOGBOOK:\n   - State \"MAYBE\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :END:"
+  		   :empty-lines 1)
+  		  ("s" "Add a Learn Task--->Day Planner"
+  		   entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
+  		   "** MAYBE [#B] %?    :@home:\n   :LOGBOOK:\n   - State \"MAYBE\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :END:"
+  		   :empty-lines 1)
+		  ("m" "Add a Misc Task---->Day Planner"
+  		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
+  		   "** MAYBE [#B] %?    :@street:\n   :LOGBOOK:\n   - State \"MAYBE\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       C\n   :Effort:       1:00\n   :END:"
+  		   :empty-lines 1)
+  		  ("n" "Write a Notes"
+  		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
+  		   "** %?\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+  		   :empty-lines 1)
+  		  ("i" "Record an Idea"
+  		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
+  		   "** %?\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+  		   :empty-lines 1)
+  		   ))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; org babel settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; Targets include this file and any file contributing to the agenda
+  ; - up to 3 levels deep 
+  (setq org-refile-targets '((nil :maxlevel . 3)
+							 (org-agenda-files :maxlevel . 3)))
+
+  ;; Put the newest item on the top
+  (setq org-reverse-note-order t)
+
+  ; Stop using paths for refile targets - we file directly with Icicles
+  (setq org-refile-use-outline-path t)
+
+  ; Targets complete directly with Icicles
+  (setq org-outline-path-complete-in-steps t)
+
+  ; Allow refile to create parent tasks with confirmation
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+  ;; Infomation saved in archives
+  (setq org-archive-save-context-info 
+		'(time file category todo priority itags olpath ltags))
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Babel settings
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; babel evaluation languages
   (setq org-babel-load-languages 
@@ -241,12 +526,14 @@
           ;; (c          . t)
           ;; (c++        . t)
           ))
+
   (require 'ob-emacs-lisp)
   (require 'ob-ditaa)
   (require 'ob-dot)
   (require 'ob-matlab)
   (require 'ob-latex)
   (require 'ob-sh)
+
   ;; default latex package list
   (setq org-export-latex-default-packages-alist 
         '(("AUTO" "inputenc" t) ("T1" "fontenc" t) ("" "fixltx2e" nil) 
@@ -255,6 +542,7 @@
           ("" "wrapfig" nil) ("" "soul" t) ("" "t1enc" t) ("" "textcomp" t) 
           ("" "marvosym" t) ("" "wasysym" t) ("" "latexsym" t) 
           ("" "amssymb" t) ("" "hyperref" nil) "\\tolerance=1000"))
+
   ;; latex to pdf command list
   ;; (setq org-latex-to-pdf-process 
   ;;   '(("pdflatex -interaction nonstopmode %b" 
@@ -333,12 +621,12 @@ save -ascii %s ans")
 
   ;; org v7.3 new features
   ;; Fontify code in code blocks
-  (setq org-src-fontify-natively t))
+  (setq org-src-fontify-natively t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; org publish project settings
+;; Publishing settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -536,10 +824,7 @@ save -ascii %s ans")
              ("phd-all"
               :components ("phd-org" "phd-img" "phd-src" "phd-bib")
               )
-             ;;------------------------------------------------------------------------------  
-              ))
-)
-;;------------------------------------------------------------------------------ 
+			 ))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

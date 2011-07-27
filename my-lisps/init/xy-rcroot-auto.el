@@ -8,11 +8,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- ;; '(mew-nntp-header-only t)
- ;; '(mew-nntp-port "119")
- ;; '(mew-nntp-server "news.virginmedia.com")
 )
-
 
 
 (custom-set-faces
@@ -50,4 +46,5 @@
  '(match ((((class color) (min-colors 88) (background light)) :background "yellow1") (((class color) (min-colors 88) (background dark)) :background "RoyalBlue3" :foreground "cyan") (((class color) (min-colors 8) (background light)) :background "yellow" :foreground "black") (((class color) (min-colors 8) (background dark)) :background "blue" :foreground "white") (((type tty) (class mono)) :inverse-video t) (t :background "gray")))
  '(moccur-face ((((type tty)) :bold t :foreground "red") (t :bold nil :foreground "red")))
  '(pulse-highlight-start-face ((((class color) (min-colors 88) (background dark)) :background "#AAAA33") (((class color) (min-colors 88) (background light)) :background "#FFFFAA") (((class color) (min-colors 8)) :background "blue" :foreground "red")))
+ '(sh-heredoc ((((min-colors 88) (class color) (background dark)) (:foreground "deeppink")) (((class color) (background dark)) (:foreground "deeppink")) (((class color) (background light)) (:foreground "tan1")) (t (:weight bold))))
  '(woman-bold ((((class color)) :foreground "red" :bold nil))))
