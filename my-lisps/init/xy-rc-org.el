@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-07-29 Fri 16:10 xin on p6t>
+;; Time-stamp:<2011-07-30 Sat 22:43 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -79,6 +79,7 @@
   (setq org-id-locations-file
         (concat my-emacs-path "/org/org-id-locations"))
   
+  ;; NOTE: Has been soved from org 7.6
   ;; ;; org-crypt security issue about auto-save
   ;; (add-hook 'org-mode-hook
   ;; 			'(lambda ()
@@ -88,7 +89,7 @@
   ;; (setq org-completion-use-iswitchb t)
   ;; (setq org-completion-use-ido t)
 
-  ;; Disable ENT to follow links --- avoid annoying jumps
+  ;; Disable ENT to follow links --- avoid annoying jumping during writing
   (setq org-return-follows-link nil)
 
   ;; Enable inline image display.
@@ -109,9 +110,6 @@
 		 "~/emacs/org/gtd/GeekInterests.org"
 		 "~/emacs/org/gtd/Learn.org"
 		 "~/emacs/org/gtd/Notes.org"
-		 ;; "~/emacs/org/gtd/DSP.org"
-		 ;; "~/emacs/org/gtd/CProgramming.org"
-		 ;; "~/emacs/org/gtd/Electronics.org"
 		 ))
 
   ;; Don't recursively display gtd files in session list
@@ -152,7 +150,7 @@
   (setq org-global-properties   ;; Additional properties
 		'(("Effort_ALL" . 
 		   "0:10 0:20 0:30 1:00 1:30 2:00 2:30 3:00 4:00")
-		  ("Importance_ALL" .
+		  ("Importance_ALL" . 
 		   "A B C")
 		  ("Score_ALL" .
 		   "0 1 2 3 4 5 6 7 8 9 10")
@@ -166,6 +164,14 @@
   (setq org-lowest-priority ?C)
   (setq org-default-priority ?B)
   (setq org-priority-start-cycle-with-default t)
+
+  ;;--------------------------------------------------------
+  ;; Column view
+
+  ; Set default column view headings: Task Effort Clock_Summary
+  (setq org-columns-default-format
+		"%CATEGORY(Cat.) %PRIORITY(Pri.) %Importance(Imp.) %6TODO(State) %35ITEM(Details) %ALLTAGS(Tags) %5Effort(Plan){:} %6CLOCKSUM(Clock){Total} %Score(Score)")
+
 
   ;;--------------------------------------------------------
   ;; TODO item keywords
@@ -233,17 +239,25 @@
   (setq org-log-reschedule  'time)
   (setq org-log-refile      'time)
   (setq org-log-state-notes-insert-after-drawers t)
+  (setq org-agenda-log-mode-items '(closed state))
 
   ;;--------------------------------------------------------------------------
   ;; Clock settings
 
+  (setq org-clock-history-length 10)
   (setq org-clock-idle-time 15)
   (setq org-clock-in-resume t)
   (setq org-clock-in-switch-to-state "STARTED")
   (setq org-clock-out-switch-to-state "WAITING")
-  (setq org-clock-persist t)
+  ;; (setq org-drawers '("LOGBOOK" "PROPERTIES")) ;; Separate drawers for clocking and logs
+  (setq org-clock-into-drawer t)
+  (setq org-clock-out-remove-zero-time-clocks t)
+  (setq org-clock-out-when-done t)
+  (setq org-clock-persist 'history)
   (setq org-clock-persist-file
         (concat my-emacs-path "/org/org-clock-save"))
+  (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
+  (setq org-clock-report-include-clocking-task t)
   (setq org-clock-persist-query-save t)
   (setq org-clock-sound t)
   (org-clock-persistence-insinuate)
@@ -379,17 +393,17 @@
 			(tags-todo "TODO=\"NEXT\"+SCHEDULED>=\"<tomorrow>\"+SCHEDULED<=\"<+3d>\""
 				       ((org-agenda-overriding-header
 						 "Scheduled Tasks for the Next 3 days") 
-						(org-tags-match-list-sublevels t)))
+						(org-tags-match-list-sublevels nil)))
 
 			(tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\""
 					   ((org-agenda-overriding-header
-						 "Old Un-Processed Tasks (Process them ASAP)") 
+						 "Old Un-Processed Tasks (Process Them ASAP)") 
 						(org-tags-match-list-sublevels t)))
 
 			(tags-todo "TODO=\"SOMEDAY\""
 					   ((org-agenda-overriding-header
-						 "Un-Scheduled Tasks")
-						(org-tags-match-list-sublevels t)))
+						 "Un-Scheduled Tasks (Schedule Them if Possible)")
+						(org-tags-match-list-sublevels nil)))
 			))
 	  
 		  ("n" "Recent Notes NOT Refiled" tags
@@ -469,32 +483,32 @@
   (setq org-capture-templates 
   		'(("p" "Add a PhD Task----->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
-  		   "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :END:"
-  		   :empty-lines 1)
+  		   "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :Score:       0\n   :END:"
+  		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("l" "Add a Life Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
-  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       0:30\n   :END:"
-  		   :empty-lines 1)
+  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       0:30\n   :Score:       0\n   :END:"
+  		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("g" "Add a Geek Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
-  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :END:"
-  		   :empty-lines 1)
+  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :Score:       0\n   :END:"
+  		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("s" "Add a Learn Task--->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
-  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :END:"
-  		   :empty-lines 1)
+  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :Score:       0\n   :END:"
+  		   :empty-lines 1 :prepend t :clock-keep t)
 		  ("m" "Add a Misc Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
-  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       C\n   :Effort:       1:00\n   :END:"
-  		   :empty-lines 1)
+  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       C\n   :Effort:       1:00\n   :Score:       0\n   :END:"
+  		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("n" "Write a Notes"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
-  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
-  		   :empty-lines 1)
+  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+  		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("i" "Record an Idea"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
-  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
-  		   :empty-lines 1)
+  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+  		   :empty-lines 1 :prepend t :clock-keep t)
   		   ))
 
   ; Targets include this file and any file contributing to the agenda
