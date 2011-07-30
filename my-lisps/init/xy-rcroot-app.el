@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-07-24 Sun 14:52 xin on p6t>
+;; Time-stamp:<2011-07-28 Thu 13:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -105,9 +105,9 @@
 ;; (add-hook 'temp-buffer-show-hook
 ;;           'fit-frame-if-one-window 'append)
 
-;; (global-set-key [(control ?x) (control ?_)] 'fit-frame)
-;; (global-set-key [vertical-line down-mouse-1]
-;;                 'fit-frame-or-mouse-drag-vertical-line)
+(global-set-key [(control ?x) (control ?_)] 'fit-frame)
+(global-set-key [vertical-line down-mouse-1]
+                'fit-frame-or-mouse-drag-vertical-line)
 
 ;;  Customize the menu-bar.  Uncomment this to try it out.
 (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))

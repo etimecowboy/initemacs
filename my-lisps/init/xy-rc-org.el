@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-07-27 Wed 15:49 xin on P6T-WIN7>
+;; Time-stamp:<2011-07-29 Fri 16:10 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -90,6 +90,10 @@
 
   ;; Disable ENT to follow links --- avoid annoying jumps
   (setq org-return-follows-link nil)
+
+  ;; Enable inline image display.
+  ;; But may breaks access to emacs from an Android phone
+  (setq org-startup-with-inline-images t)
   
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
@@ -124,21 +128,11 @@
 		  ("@home" . ?H) ("@street" . ?S)
 		  (:endgroup) 
 
-		  (:startgroup)
-		  ("appt" . ?A) ("proj" . ?P)
-		  ("note" . ?W) ("idea" . ?I)
-		  (:endgroup)
-
-		  ;; (:startgroup)
-		  ;; ("new" . ?N)
-		  ;; ("old" . ?O)
-		  ;; (:endgroup)
-
-		  ;; (:startgroup)
-		  ;; ("important" . ?V)
-		  ;; ("no-good" . ?X)
-		  ;; (:endgroup)
+		  ("online" . ?O) ("post" . ?M) ("email" . ?E)
+		  ("phone" . ?F) ("people" . ?Z)
 		  
+		  ("appt" . ?A) ("proj" . ?P)
+		  ("repeat" . ?R)		  
           ("delegated" . ?D)))
   
   ;; Inherit tags in most of cases
@@ -160,6 +154,8 @@
 		   "0:10 0:20 0:30 1:00 1:30 2:00 2:30 3:00 4:00")
 		  ("Importance_ALL" .
 		   "A B C")
+		  ("Score_ALL" .
+		   "0 1 2 3 4 5 6 7 8 9 10")
 		  ))
 
   ;;--------------------------------------------------------
@@ -176,11 +172,11 @@
 
   (setq org-use-fast-todo-selection t) ;; C-c C-t key
   (setq org-todo-keywords
-  		'((sequence "MAYBE(m)" "TODO(t!)" "NEXT(n)" "STARTED(s!)" "|"
+  		'((sequence "TODO(t!)" "NEXT(n)" "STARTED(s!)" "|"
                     "DONE(d!)") 
-  		  (sequence "WAITING(w@/!)" "SOMEDAY(x!)" "|"
-                    "CANCELLED(c@/!)"))) 
- 
+  		  (sequence "SOMEDAY(x!)" "WAITING(w@/!)" "|"
+                    "CANCELLED(c@/!)")))
+  
   ;; (setq org-todo-keyword-faces 
   ;; 		(quote (("TODO" :foreground "red" :weight bold)
   ;; 				("NEXT" :foreground "blue" :weight bold)
@@ -215,7 +211,7 @@
              ;; they have children that are not DONE
 
   (setq org-stuck-projects ;; Define stuck projects
-        '("+proj/!-MAYBE-SOMEDAY-DONE-CANCELLED"
+        '("+proj/!-TODO-SOMEDAY"
 		  ("\\<NEXT\\>" "\\<STARTED\\>")))
 
   ;; TODO entry automatically changes to DONE 
@@ -283,7 +279,8 @@
   (setq org-agenda-dim-blocked-tasks nil)
 
   ;; Display two windows in the current frame
-  (setq org-agenda-window-setup 'reorganize-frame)
+  (setq org-agenda-window-setup ;; 'other-frame)
+		'reorganize-frame)
 
   ;; Agenda window frame fractions
   (setq org-agenda-window-frame-fractions (quote (0.20 . 0.80)))
@@ -328,7 +325,12 @@
   ;; Custom agenda command definitions
   (setq org-agenda-custom-commands
   		'((" " "Day Planner"
-		   ((agenda ""
+		   ((tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+SCHEDULED<\"<today>\""
+					   ((org-agenda-overriding-header
+						 "Un-finished Tasks of Yesterday or Earlier (Re-Schedule them first!)") 
+						(org-tags-match-list-sublevels t)))
+
+			(agenda ""
 					((org-agenda-ndays 1)
 					 (org-agenda-deadline-warning-days 30)
 					 (org-agenda-use-time-grid t)
@@ -340,24 +342,29 @@
 					 (org-agenda-todo-list-sublevel t)
 					 (org-agenda-timeline-show-empty-dates nil)))
 
-			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+		    (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
 				       ((org-agenda-overriding-header
-					     "1. Urgent & Important Tasks Today (Finsh Them First!)") 
+					     "1. Urgent & Important Tasks Scheduled for Today") 
 						(org-tags-match-list-sublevels t)))
 			
-			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+			(tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
 					   ((org-agenda-overriding-header
-						 "2. Urgent & NOT Important Tasks Today")
+						 "2. Urgent & NOT Important Tasks Scheduled for Today")
 						(org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO<>\"MAYBE\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+			(tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
 					   ((org-agenda-overriding-header
-						 "3. NOT Urgent & Important Tasks Today")
+						 "3. NOT Urgent & Important Tasks Scheduled for Today")
 						(org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO<>\"MAYBE\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\"" 
+			(tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\"" 
 					   ((org-agenda-overriding-header
-						 "4. NOT Urgent & NOT Important Tasks Today")
+						 "4. NOT Urgent & NOT Important Tasks Scheduled for Today")
+						(org-tags-match-list-sublevels t)))
+
+			(tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\""
+				       ((org-agenda-overriding-header
+						 "New Task Today (Un-Processed, Make Sure it is Empty at the end of today)") 
 						(org-tags-match-list-sublevels t)))
  
 			(tags      "CLOSED<\"<tomorrow>\"+CLOSED>=\"<today>\""
@@ -367,18 +374,23 @@
 						(org-agenda-skip-scheduled-if-done nil)
 						(org-agenda-skip-deadline-if-done nil)
 						(org-agenda-skip-timestamp-if-done nil)
-						(org-agenda-skip-archived-trees nil)
-						))
-			
-			(tags-todo "TODO=\"MAYBE\"+TIMESTAMP_IA<\"<tomorrow>\""
+						(org-agenda-skip-archived-trees nil)))
+
+			(tags-todo "TODO=\"NEXT\"+SCHEDULED>=\"<tomorrow>\"+SCHEDULED<=\"<+3d>\""
 				       ((org-agenda-overriding-header
-					      "New-Task Inbox (Empty at the End of the Day)") 
+						 "Scheduled Tasks for the Next 3 days") 
 						(org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO=\"SOMEDAY\"+TIMESTAMP_IA<\"<tomorrow>\""
+			(tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\""
 					   ((org-agenda-overriding-header
-						 "Future-Task Pool (Consider to Schedule Them to Today)")
-						(org-tags-match-list-sublevels t)))))
+						 "Old Un-Processed Tasks (Process them ASAP)") 
+						(org-tags-match-list-sublevels t)))
+
+			(tags-todo "TODO=\"SOMEDAY\""
+					   ((org-agenda-overriding-header
+						 "Un-Scheduled Tasks")
+						(org-tags-match-list-sublevels t)))
+			))
 	  
 		  ("n" "Recent Notes NOT Refiled" tags
 		     "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\"" 
@@ -392,9 +404,9 @@
 			(org-tags-match-list-sublevels nil)))
 
 		  ("w" "Weekly Review"
-		   ((tags-todo "TODO=\"MAYBE\""
+		   ((tags-todo "TODO=\"TODO\""
 					   ((org-agenda-overriding-header
-						 "Not Processed New Tasks (Empty before The Weekly Review)") 
+						 "Un-Processed New Tasks (Empty before Weekly Review)") 
 						(org-tags-match-list-sublevels t)))
 
 			(agenda ""
@@ -407,22 +419,27 @@
 					 (org-agenda-skip-timestamp-if-done nil)
 					 (org-agenda-skip-archived-trees nil)
 					 (org-agenda-skip-comment-trees t)
-					 (org-agenda-todo-list-sublevel t)
+					 (org-agenda-todo-list-sublevel nil)
 					 (org-agenda-timeline-show-empty-dates t)))
 
 			(tags	 "CLOSED<\"<tomorrow>\"+CLOSED>=\"<-1w>\""
 			         ((org-agenda-overriding-header
-					   "Finished Tasks in This Week (Refile Them after Reviewing)") 
+					   "Finished Tasks in This Week (Archive now)") 
 					  (org-tags-match-list-sublevels t)
 					  (org-agenda-skip-scheduled-if-done nil)
 					  (org-agenda-skip-deadline-if-done nil)
 					  (org-agenda-skip-timestamp-if-done nil)
 					  (org-agenda-skip-archived-trees nil)))
 
-		   (tags-todo "TODO=\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"|TODO=\"STARTED\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"|TODO=\"WAITING\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\"|TODO=\"SOMEDAY\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
+		   (tags-todo "TODO<>\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
 					   ((org-agenda-overriding-header
-						 "Un-Finished Tasks in This Week (Re-Schedule Them after Reviewing)")
-						(org-tags-match-list-sublevels t)))))
+						 "Un-Finished Tasks in This Week (Re-Schedule now)")
+						(org-tags-match-list-sublevels t)))
+
+		   (tags      "proj/!-TODO-SOMEDAY"
+					  ((org-agenda-overriding-header
+						"Projects Review (Make Sure NOT Stuck)")
+					   (org-tags-match-list-sublevels t)))))
 		  ))
 
   ;;------------------------------------------------------------------------------------
@@ -452,31 +469,31 @@
   (setq org-capture-templates 
   		'(("p" "Add a PhD Task----->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
-  		   "** MAYBE [#A] %?    :@home:\n   :LOGBOOK:\n   - State \"MAYBE\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :END:"
+  		   "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :END:"
   		   :empty-lines 1)
   		  ("l" "Add a Life Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
-  		   "** MAYBE [#B] %?    :@street:\n   :LOGBOOK:\n   - State \"MAYBE\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       0:30\n   :END:"
+  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       0:30\n   :END:"
   		   :empty-lines 1)
   		  ("g" "Add a Geek Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
-  		   "** MAYBE [#C] %?    :@home:\n   :LOGBOOK:\n   - State \"MAYBE\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :END:"
+  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :END:"
   		   :empty-lines 1)
   		  ("s" "Add a Learn Task--->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
-  		   "** MAYBE [#B] %?    :@home:\n   :LOGBOOK:\n   - State \"MAYBE\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :END:"
+  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :END:"
   		   :empty-lines 1)
 		  ("m" "Add a Misc Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
-  		   "** MAYBE [#B] %?    :@street:\n   :LOGBOOK:\n   - State \"MAYBE\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       C\n   :Effort:       1:00\n   :END:"
+  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       C\n   :Effort:       1:00\n   :END:"
   		   :empty-lines 1)
   		  ("n" "Write a Notes"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
-  		   "** %?\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
   		   :empty-lines 1)
   		  ("i" "Record an Idea"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
-  		   "** %?\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
   		   :empty-lines 1)
   		   ))
 
@@ -500,6 +517,9 @@
   ;; Infomation saved in archives
   (setq org-archive-save-context-info 
 		'(time file category todo priority itags olpath ltags))
+
+  ;; makes it possible to archive tasks that are not marked DONE
+  (setq org-archive-mark-done nil)
   
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
