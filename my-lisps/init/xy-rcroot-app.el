@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-07-28 Thu 13:44 xin on p6t>
+;; Time-stamp:<2011-08-01 Mon 00:13 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -119,20 +119,20 @@
 ;; `thumb-frm.el'
 ;;  Shrink frames to a thumbnail size and restore them again.
 (require 'thumb-frm)
-;; (define-key special-event-map [iconify-frame]
-;;             'thumfr-thumbify-frame-upon-event)
-;; (global-set-key [(shift mouse-3)]
-;;                 'thumfr-toggle-thumbnail-frame)
-;; (global-set-key [(shift control mouse-3)]
-;;                 'thumfr-thumbify-other-frames)
-;; (global-set-key [(shift control ?z)]
-;; 				'thumfr-thumbify-other-frames)
-;; (global-set-key [(shift control ?p)]
-;; 				'thumfr-fisheye-previous-frame)
-;; (global-set-key [(shift control ?n)]
-;; 				'thumfr-fisheye-next-frame)
-;; (global-set-key [(control meta ?z)]
-;; 				'thumfr-really-iconify-or-deiconify-frame)
+(define-key special-event-map [iconify-frame]
+            'thumfr-thumbify-frame-upon-event)
+(global-set-key [(shift mouse-3)]
+                'thumfr-toggle-thumbnail-frame)
+(global-set-key [(shift control mouse-3)]
+                'thumfr-thumbify-other-frames)
+(global-set-key [(shift control ?z)]
+				'thumfr-thumbify-other-frames)
+(global-set-key [(shift control ?p)]
+				'thumfr-fisheye-previous-frame)
+(global-set-key [(shift control ?n)]
+				'thumfr-fisheye-next-frame)
+(global-set-key [(control meta ?z)]
+				'thumfr-really-iconify-or-deiconify-frame)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
