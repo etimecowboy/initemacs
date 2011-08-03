@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-02 Tue 11:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-03 Wed 07:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -417,24 +417,27 @@ the mode-line."
 	 (font-lock-face-settings)))
 
 ;; smart-hl.el, 像Eclipse那样双击高亮当前字符串
-(require 'smart-hl)
+;; NOTE: A part of codepilot which is removed.
+;;       Use highlight-symbol-mode instead.
+;; (require 'smart-hl)
 
 ;; highlight-symbol.el, 像Eclipse那样高亮光标处单词
-(require 'highlight-symbol)
+;; (require 'highlight-symbol)
 (eval-after-load "highlight-symbol"
   `(progn
      (highlight-symbol-face-settings)
-     (highlight-symbol-settings)
-	 (eal-define-keys
-	  `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
-		c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
-	  `(("C-c M-H" highlight-symbol-at-point)
-		("C-c M-R" highlight-symbol-remove-all)
-		("C-c M-N" highlight-symbol-next)
-		("C-c M-P" highlight-symbol-prev)
-		("C-c r"   highlight-symbol-query-replace)
-		("C-c M-n" highlight-symbol-next-in-defun)
-		("C-c M-p" highlight-symbol-prev-in-defun)))))
+     (highlight-symbol-settings)))
+
+(eal-define-keys
+ `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
+   c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
+ `(("C-c M-H" highlight-symbol-at-point)
+   ("C-c M-R" highlight-symbol-remove-all)
+   ("C-c M-N" highlight-symbol-next)
+   ("C-c M-P" highlight-symbol-prev)
+   ("C-c r"   highlight-symbol-query-replace)
+   ("C-c M-n" highlight-symbol-next-in-defun)
+   ("C-c M-p" highlight-symbol-prev-in-defun)))
 
 ;; zjl-hl, use CEDET semantic to highlight function calls
 (eval-after-load "zjl-hl"

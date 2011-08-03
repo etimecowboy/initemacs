@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-07-20 Wed 15:54 xin on p6t>
+;; Time-stamp:<2011-08-03 Wed 06:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,38 +38,69 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Add all to load-path
+;; NOTE: very slow
 (fni/add-to-load-path my-local-lisp-path 'with-subdirs 'recursive)
 ;; Single downloaded lisps
 (xy/install-all-lisps my-local-lisp-path)
+;; (require 'loaddefs@e!!xin!.emacs.d!my-lisps!init)
 ;; Manually installed packages
 (xy/install-all-lisps (concat my-local-lisp-path "/dea")) ;; load first
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!dea)
 (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete-1.3.1"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!auto-complete-1.3.1)
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
-(xy/install-all-lisps (concat my-local-lisp-path "/babel"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!babel)
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/bookmark+"))
- (xy/install-all-lisps (concat my-local-lisp-path "/org-7.6"))
-;; (require 'cedet)
+(xy/install-all-lisps (concat my-local-lisp-path "/org-7.6"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!org-7.6)
 ;; (require 'color-theme-autoloads)
 (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!egg)
 (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!eim-2.4)
 (xy/install-all-lisps (concat my-local-lisp-path "/yasnippet-0.6.1c"))
-(xy/install-all-lisps (concat my-local-exec-path "/session-2.3/lisp"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!yasnippet-0.6.1c)
+(xy/install-all-lisps (concat my-local-lisp-path "/session-2.3/lisp"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!session-2.3!lisp)
+;; CEDET
+;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/cogre"))
+;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/common"))
+;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/ede"))
+;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/semantic"))
+;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/speedbar"))
+;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/srecode"))
+;; (require 'cedet)
+;; ECB
+;; (add-to-list 'load-path (concat my-local-lisp-path "/ecb-2.4"))
+
 ;; ELPA packages
 ;; (require 'archive-downloader-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/blank-mode-6.6"))
 (require 'blank-mode-autoloads)
 ;; (require 'chess-autoloads)
 ;; (require 'company-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/dictionary-1.8.7"))
 (require 'dictionary-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/emms-3.0"))
 (require 'emms-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/highlight-parentheses-1.0.1"))
 (require 'highlight-parentheses-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/highlight-symbol-1.1"))
 (require 'highlight-symbol-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/highline-4.2"))
 (require 'highline-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/htmlize-1.37"))
 (require 'htmlize-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/hungry-delete-1.0"))
 (require 'hungry-delete-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/kill-ring-search-1.1"))
 (require 'kill-ring-search-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/light-symbol-0.1"))
 (require 'light-symbol-autoloads)
-(require 'xml-rpc-autoloads)
+;; (add-to-list 'load-path (concat my-local-lisp-path "/xml-rpc-1.6.7"))
+;; (require 'xml-rpc-autoloads)
 
 ;; My own lisps, loaded at last
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)

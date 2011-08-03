@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-06-11 Sat 01:04 xin on p6t>
+;; Time-stamp:<2011-08-03 Wed 06:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -95,7 +95,8 @@
 
 ;; Use session.el instead of recentf.el
 ;; session.el can remember more information.
-(add-hook 'after-init-hook 'session-start)
+(add-hook 'after-init-hook ;; 'session-start)
+		  'session-initialize)
 (eval-after-load "session" `(session-settings))
 
 (provide 'xy-rcroot-session)
