@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-03 Wed 06:50 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-03 Wed 08:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -78,27 +78,37 @@
 ;; ELPA packages
 ;; (require 'archive-downloader-autoloads)
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/blank-mode-6.6"))
-(require 'blank-mode-autoloads)
+;; (require 'blank-mode-autoloads)
+(load "blank-mode-autoloads.el")
 ;; (require 'chess-autoloads)
 ;; (require 'company-autoloads)
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/dictionary-1.8.7"))
-(require 'dictionary-autoloads)
+;; (require 'dictionary-autoloads)
+(load "dictionary-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/emms-3.0"))
-(require 'emms-autoloads)
+;; (require 'emms-autoloads)
+(load "emms-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/highlight-parentheses-1.0.1"))
-(require 'highlight-parentheses-autoloads)
+;; (require 'highlight-parentheses-autoloads)
+(load "highlight-parentheses-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/highlight-symbol-1.1"))
-(require 'highlight-symbol-autoloads)
+;; (require 'highlight-symbol-autoloads)
+(load "highlight-symbol-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/highline-4.2"))
-(require 'highline-autoloads)
+;; (require 'highline-autoloads)
+(load "highline-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/htmlize-1.37"))
-(require 'htmlize-autoloads)
+;; (require 'htmlize-autoloads)
+(load "htmlize-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/hungry-delete-1.0"))
-(require 'hungry-delete-autoloads)
+;; (require 'hungry-delete-autoloads)
+(load "hungry-delete-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/kill-ring-search-1.1"))
-(require 'kill-ring-search-autoloads)
+;; (require 'kill-ring-search-autoloads)
+(load "kill-ring-search-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/light-symbol-0.1"))
-(require 'light-symbol-autoloads)
+;; (require 'light-symbol-autoloads)
+(load "light-symbol-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/xml-rpc-1.6.7"))
 ;; (require 'xml-rpc-autoloads)
 
