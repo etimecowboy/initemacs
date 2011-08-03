@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-07-30 Sat 22:43 xin on p6t>
+;; Time-stamp:<2011-08-02 Tue 14:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -253,7 +253,7 @@
   (setq org-clock-into-drawer t)
   (setq org-clock-out-remove-zero-time-clocks t)
   (setq org-clock-out-when-done t)
-  (setq org-clock-persist 'history)
+  (setq org-clock-persist t)
   (setq org-clock-persist-file
         (concat my-emacs-path "/org/org-clock-save"))
   (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
@@ -465,6 +465,18 @@
   (setq org-mobile-files org-agenda-files)
   (setq org-mobile-inbox-for-pull "~/emacs/org/gtd/from-mobile.org")
 
+  ;;------------------------------------------------------------------------------------
+  ;; Agenda view export C-x C-w
+
+  (setq org-agenda-exporter-settings
+		'((ps-number-of-columns 2)
+		  (ps-landscape-mode t)
+		  ;; (org-agenda-prefix-format " [ ] ")
+		  ;; (org-agenda-with-colors nil)
+		  ;; (org-agenda-remove-tags t)
+		  (org-agenda-add-entry-text-maxlines 5)
+		  (htmlize-output-type 'css)))
+  
   
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
