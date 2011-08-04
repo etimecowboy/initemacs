@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-03 Wed 08:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-04 Thu 17:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -406,7 +406,7 @@
     (auto-install-settings)))
 (eal-define-keys-commonly
  dired-mode-map
- `(("C-b"    auto-install-from-dired)))
+ `(("C-i"    auto-install-from-dired)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

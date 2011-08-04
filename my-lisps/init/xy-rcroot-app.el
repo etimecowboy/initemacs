@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-03 Wed 12:32 xin on p6t>
+;; Time-stamp:<2011-08-04 Thu 17:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -98,7 +98,11 @@
   (add-to-list 'default-frame-alist '(width . 95)))
 
 ;; `fit-frame.el' and `autofit-frame.el'
-;; Auto-resize a frame.  In particular, fit a frame to its buffers.
+;; NOTE:
+;;      - `fit-frame.el':     resizes a frame in order to  fit a frame
+;;                            to its buffers.
+;;      - `autofit-frame.el': do it automatically. May be annoying. I
+;;                            don't like it.
 ;; (require 'fit-frame)
 ;; (require 'autofit-frame)
 ;; (add-hook 'after-make-frame-functions 'fit-frame)
@@ -106,15 +110,15 @@
 ;;           'fit-frame-if-one-window 'append)
 
 (global-set-key [(control ?x) (control ?_)] 'fit-frame)
-(global-set-key [vertical-line down-mouse-1]
-                'fit-frame-or-mouse-drag-vertical-line)
+;; (global-set-key [vertical-line down-mouse-1]
+;;                 'fit-frame-or-mouse-drag-vertical-line)
 
-;;  Customize the menu-bar.  Uncomment this to try it out.
-(defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
-(define-key global-map [menu-bar frames]
-  (cons "Frames" menu-bar-frames-menu))
-(define-key menu-bar-frames-menu [fit-frame]
-  '("Fit This Frame" . fit-frame))
+;; ;;  Customize the menu-bar.  Uncomment this to try it out.
+;; (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
+;; (define-key global-map [menu-bar frames]
+;;   (cons "Frames" menu-bar-frames-menu))
+;; (define-key menu-bar-frames-menu [fit-frame]
+;;   '("Fit This Frame" . fit-frame))
 
 ;; `thumb-frm.el'
 ;;  Shrink frames to a thumbnail size and restore them again.
