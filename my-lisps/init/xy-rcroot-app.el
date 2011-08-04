@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-03 Wed 07:17 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-03 Wed 12:32 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -119,12 +119,12 @@
 ;; `thumb-frm.el'
 ;;  Shrink frames to a thumbnail size and restore them again.
 (require 'thumb-frm)
-(define-key special-event-map [iconify-frame]
-            'thumfr-thumbify-frame-upon-event)
-(global-set-key [(shift mouse-3)]
-                'thumfr-toggle-thumbnail-frame)
-(global-set-key [(shift control mouse-3)]
-                'thumfr-thumbify-other-frames)
+;; (define-key special-event-map [iconify-frame]
+;;             'thumfr-thumbify-frame-upon-event)
+;; (global-set-key [(shift mouse-3)]
+;;                 'thumfr-toggle-thumbnail-frame)
+;; (global-set-key [(shift control mouse-3)]
+;;                 'thumfr-thumbify-other-frames)
 (global-set-key [(shift control ?z)]
 				'thumfr-thumbify-other-frames)
 (global-set-key [(shift control ?p)]

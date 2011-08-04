@@ -1001,6 +1001,38 @@ that, execute `" command "'.")
 ;;      ;; looks better.
 ;;      (message (concat "Wrote " (buffer-file-name))))))
 
+;;---------------------------------------------------------------------------
+
+;; Remove any extra spaces caused by indentation when killing the
+;; newline between.
+;; REF: http://www.emacswiki.org/emacs/AutoIndentation
+;;;###autoload
+(defun kill-and-join-forward (&optional arg)
+  "If at end of line, join with following; otherwise kill line.
+     Deletes whitespace at join."
+  (interactive "P")
+  (if (and (eolp) (not (bolp)))
+	  (progn
+     	(delete-indentation t)
+     	(if (looking-at " $")
+     	    (delete-char 1)))
+	(kill-line arg)))
+
+;;-----------------------------------------------------------------------------
+
+;; merge a line with the line before it.
+;; REF:
+;; http://blog.jdhuntington.com/2011/01/emacs-elisp-snipped-jlhjoinlin.html
+;;;###autoload
+(defun jlh-join-lines (arg)
+  "Join this line to the line above n times
+Running this command with an argument of 1 is equivalent
+to running 'delete-indentation (aka 'join-line)."
+  (interactive "NHow many lines to join?: ")
+  (while (> arg 0)
+    (join-line)
+    (setq arg (- arg 1))))
+
 (provide 'xy-edit-tools)
 
 ;;; xy-edit-tools.el ends here

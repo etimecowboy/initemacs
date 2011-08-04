@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-02-19 Sat 17:38 xin on P6T>
+;; Time-stamp:<2011-08-03 Wed 10:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -242,6 +242,9 @@
    ("C-a" smart-home)
    ("C-M-a" mark-whole-buffer)
    ("M-#" set-mark-command)
+
+   ("C-k" kill-and-join-forward)
+   ("C-x ^" jlh-join-lines)
    ))
 
 ;; (eal-define-keys
