@@ -7,9 +7,9 @@
 ;; Copyright (C) 1995-2011, Drew Adams, all rights reserved.
 ;; Created: Wed Oct 11 15:07:46 1995
 ;; Version: 21.0
-;; Last-Updated: Thu May  5 17:50:32 2011 (-0700)
+;; Last-Updated: Sun Jul 24 17:49:53 2011 (-0700)
 ;;           By: dradams
-;;     Update #: 2624
+;;     Update #: 3041
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/highlight.el
 ;; Keywords: faces, help, local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -44,23 +44,24 @@
 ;;
 ;;  (@> "Things Defined Here")
 ;;  (@> "Documentation")
-;;    (@* "Library `facemenu+.el' Puts Highlight on the Menu")
-;;    (@* "User Option `hlt-use-overlays-flag'")
-;;    (@* "Commands")
-;;    (@* "User Option `hlt-act-on-any-face-flag'")
-;;    (@* "Hiding and Showing Text")
-;;    (@* "What Gets Highlighted: Region, Buffer, New Text You Type")
-;;    (@* "Interference by Font Lock")
-;;    (@* "Suggested Bindings")
-;;    (@* "Relation to Hi-Lock Mode")
-;;    (@* "Commands That Won't Work in Emacs 20")
-;;    (@* "To Do")
+;;    (@> "Library `facemenu+.el' Puts Highlight on the Menu")
+;;    (@> "User Option `hlt-use-overlays-flag'")
+;;    (@> "Temporary or Permanent Highlighting")
+;;    (@> "Commands")
+;;    (@> "User Option `hlt-act-on-any-face-flag'")
+;;    (@> "Hiding and Showing Text")
+;;      (@> "Hiding and Showing Text - Icicles Multi-Commands")
+;;    (@> "What Gets Highlighted: Region, Buffer, New Text You Type")
+;;    (@> "Interference by Font Lock")
+;;    (@> "Suggested Bindings")
+;;    (@> "Relation to Hi-Lock Mode")
+;;    (@> "Commands That Won't Work in Emacs 20")
+;;    (@> "To Do")
 ;;  (@> "Change log")
-;;  (@> "Menu-Bar Region Menu")
+;;  (@> "Menus")
 ;;  (@> "Variables and Faces")
 ;;  (@> "Misc Functions - Emacs 20+")
 ;;  (@> "Misc Functions - Emacs 21+")
-;;  (@> "Functions for Use with Icicles - Emacs 21+")
 ;;  (@> "Functions for Highlighting Propertized Text - Emacs 21+")
 ;;  (@> "General functions")
  
@@ -71,27 +72,26 @@
 ;;
 ;;  Commands defined here:
 ;;
-;;    `hlt-choose-default-face', `hlt-choose-faces',
-;;    `hlt-choose-invisible-faces', `hlt-choose-visible-faces',
-;;    `hlt-eraser', `hlt-eraser-mouse', `hlt-hide',
-;;    `hlt-hide-default-face', `hlt-hide-only', `hlt-highlight',
+;;    `hlt-choose-default-face', `hlt-copy-props', `hlt-eraser',
+;;    `hlt-eraser-mouse', `hlt-hide-default-face', `hlt-highlight',
 ;;    `hlt-highlight-all-prop', `hlt-highlighter',
 ;;    `hlt-highlighter-mouse', `hlt-highlight-property-with-value',
 ;;    `hlt-highlight-regexp-region', `hlt-highlight-regexp-to-end',
 ;;    `hlt-highlight-region', `hlt-highlight-single-quotations',
-;;    `hlt-mouse-face-each-line', `hlt-next-highlight',
+;;    `hlt-mouse-copy-props', `hlt-mouse-face-each-line',
+;;    `hlt-next-highlight', `hlt-paste-props',
 ;;    `hlt-previous-highlight', `hlt-replace-highlight-face',
-;;    `hlt-show', `hlt-show-default-face', `hlt-show-only',
-;;    `hlt-toggle-act-on-any-face-flag',
+;;    `hlt-show-default-face', `hlt-toggle-act-on-any-face-flag',
 ;;    `hlt-toggle-link-highlighting',
 ;;    `hlt-toggle-property-highlighting',
 ;;    `hlt-toggle-use-overlays-flag', `hlt-unhighlight-all-prop',
-;;    `hlt-unhighlight-region', `hlt-unhighlight-region-for-face'.
+;;    `hlt-unhighlight-region', `hlt-unhighlight-region-for-face',
+;;    `hlt-yank-props'.
 ;;
 ;;  User options (variables) defined here:
 ;;
-;;    `hlt-act-on-any-face-flag', `hlt-max-region-no-warning',
-;;    `hlt-use-overlays-flag'.
+;;    `hlt-act-on-any-face-flag', `hlt-default-copy/yank-props',
+;;    `hlt-max-region-no-warning', `hlt-use-overlays-flag'.
 ;;
 ;;  Faces defined here:
 ;;
@@ -105,12 +105,13 @@
 ;;    `hlt-listify-invisibility-spec',
 ;;    `hlt-mouse-toggle-link-highlighting',
 ;;    `hlt-mouse-toggle-property-highlighting',
+;;    `hlt-props-to-copy/yank', `hlt-read-props-completing',
 ;;    `hlt-region-or-buffer-limits', `hlt-set-intersection',
-;;    `hlt-set-union', `hlt-unhighlight-for-overlay'.
+;;    `hlt-set-union', `hlt-subplist', `hlt-unhighlight-for-overlay'.
 ;;
 ;;  Internal variables defined here:
 ;;
-;;    `hlt-last-face', `hlt-last-regexp',
+;;    `hlt-copied-props', `hlt-last-face', `hlt-last-regexp',
 ;;    `hlt-previous-use-overlays-flag-value',
 ;;    `hlt-prop-highlighting-state'.
  
@@ -120,7 +121,7 @@
 ;;  -------------
 ;;
 ;;(@* "Library `facemenu+.el' Puts Highlight on the Menu")
-;;  ** Library `facemenu+.el'  Puts Highlight on the Menu **
+;;  ** Library `facemenu+.el' Puts Highlight on the Menu **
 ;;
 ;;  If you load library `facemenu+.el' after you load library
 ;;  `highlight.el', then the commands defined here will also be
@@ -160,6 +161,46 @@
 ;;  You can toggle the value of `hlt-use-overlays-flag' at any time
 ;;  between nil and its previous non-nil value, using command
 ;;  `hlt-toggle-use-overlays-flag'.
+;;
+;;(@* "Temporary or Permanent Highlighting")
+;; ** "Temporary or Permanent Highlighting" **
+;;
+;;  Generally, highlighting you add is temporary: it is not saved when
+;;  you write your buffer todisk.  However, Emacs has a curious and
+;;  unfamiliar feature called "formatted" or "enriched" text mode,
+;;  which does record highlighting permanently.  See the Emacs manual,
+;;  node `Requesting Formatted Text'.
+;;
+;;  To save highlighting permanently, do the following:
+;;
+;;  1. `M-x enriched-mode', to put your file buffer in minor mode
+;;     `enriched-mode'.  You will see `Enriched' in the mode line.
+;;
+;;  2. Choose text-property highlighting, not overlay highlighting, by
+;;     setting option `hlt-use-overlays-flag' to `nil'.  To do this
+;;     using Customize, choose menu item `Highlight using text
+;;     properties, not overlays'.
+;;
+;;  3. Choose the highlight face to use:
+;;     `M-x hlt-choose-default-face'.
+;;
+;;  4. Highlight in any way provided by library `highlight.el'.  For
+;;     example, use `hlt-highlighter' (I bind it to `C-x mouse-2') to
+;;     drag-highlight as if using a marker pen.
+;;
+;;  5. Save your file.
+;;
+;;     Note that, although highlighting in enriched-text mode modifies
+;;     the buffer, it does not appear modified (check the beginning of
+;;     the mode line), so if you make no other changes then using `C-x
+;;     C-s' will not save your highlighting changes.  To remedy this,
+;;     just do something besides highlighting - e.g., add a space and
+;;     delete it - so that `C-x C-s' will save to disk.
+;;
+;;  When you reopen your file later, it will automatically be in
+;;  enriched mode, and your highlighting will show.  However, be aware
+;;  that font-locking interferes with enriched mode, so you will
+;;  probably want to use it on files where you don't use font-locking.
 ;;
 ;;(@* "Commands")
 ;;  ** Commands **
@@ -238,6 +279,41 @@
 ;;  mouse.  However, its behavior is different for overlays and text
 ;;  properties - see the `hlt-eraser' doc string.
 ;;
+;;(@* "Copy and Yank (Paste) Text Properties")
+;;  ** Copy and Yank (Paste) Text Properties **
+;;
+;;  You can highlight or unhighlight text by simply copying existing
+;;  highlighting (or lack of any highlighting) from anywhere in Emacs
+;;  and yanking (pasting) it anywhere else.
+;;
+;;  Put differently, you can copy and yank a set of text properties.
+;;  You can use these commands to copy and yank any text properties,
+;;  not just `face' or `mouse-face'.
+;;
+;;  To copy the text properties at a given position, use command
+;;  `hlt-copy-props'.  You can then use command `hlt-yank-props' to
+;;  yank those properties to the active region anywhere.  If the set
+;;  of properties that you copy is empty, then yanking means
+;;  effectively removing all text properties.
+;;
+;;  User option `hlt-default-copy/yank-props' controls which text
+;;  properties to copy and yank, by default.  The default value of the
+;;  option includes only `face', which means that only property `face'
+;;  is copied and pasted.  That is typically what you want, for
+;;  highlighting purposes.
+;;
+;;  You can further control which text properties are copied or yanked
+;;  when you use the commands, by using a prefix argument.  A plain or
+;;  non-negative prefix arg means copy or yank all available text
+;;  properties.  A negative prefix arg (e.g. `C--') means you are
+;;  prompted for which text properties to use, among those available.
+;;
+;;  For copying, the available properties are those among
+;;  `hlt-default-copy/yank-props' that are present at the copy
+;;  position.  For yanking, the available properties are those among
+;;  `hlt-default-copy/yank-props' that have previously (last) been
+;;  copied.
+;;
 ;;(@* "User Option `hlt-act-on-any-face-flag'")
 ;;  ** User Option `hlt-act-on-any-face-flag' **
 ;;
@@ -283,7 +359,7 @@
 ;;  1. The `invisible' property of the text or overlay at that
 ;;     position is updated to include `foo'.  If there are no other
 ;;     faces that have been applied to this text and then hidden, the
-;;     `invisible' property is just (`foo').
+;;     `invisible' property is just `(foo)'.
 ;;
 ;;  2. `buffer-invisibility-spec' is also updated to include `foo'.
 ;;     This hides all text properties and overlay properties with
@@ -304,35 +380,43 @@
 ;;  change the default highlighting face at any time using command
 ;;  `hlt-choose-default-face'.
 ;;
+;;(@* "Hiding and Showing Text - Icicles Multi-Commands")
+;;  *** Hiding and Showing Text - Icicles Multi-Commands ***
+;;
 ;;  The other hide and show commands depend on your also using
 ;;  Icicles, which is a set of libraries that offer enhanced
-;;  completion.  The Icicles-dependent commands are the following:
+;;  completion.  Complete information about Icicles is here:
+;;  `http://www.emacswiki.org/emacs/Icicles'.  You can obtain Icicles
+;;  here: `http://www.emacswiki.org/emacs/Icicles_-_Libraries'.
 ;;
-;;  `hlt-choose-faces', `hlt-choose-invisible-faces',
-;;  `hlt-choose-visible-faces', `hlt-hide', `hlt-hide-only',
-;;  `hlt-show', `hlt-show-only'.
+;;  The Icicles commands defined for `highlight.el' are the following:
+;;
+;;  `icicle-choose-faces', `icicle-choose-invisible-faces',
+;;  `icicle-choose-visible-faces', `icicle-hide-faces',
+;;  `icicle-hide-only-faces', `icicle-show-faces',
+;;  `icicle-show-only-faces'.
 ;;
 ;;  These are all Icicles multi-commands, which means that they each
 ;;  let you choose multiple completion candidates or all candidates
 ;;  that match your current input (a regexp).  To use them you must
-;;  also use Icicles.  You can use command `hlt-hide' to hide any
-;;  number of visible faces.  Any text is hidden that has that face as
-;;  a text property or an overlay property, depending on the value of
-;;  `hlt-use-overlays-flag'.
+;;  also use Icicles.  You can use command `icicle-hide-faces' to hide
+;;  any number of visible faces.  Any text is hidden that has that
+;;  face as a text property or an overlay property, depending on the
+;;  value of `hlt-use-overlays-flag'.
 ;;
-;;  Command `hlt-show' is the opposite of `hlt-hide': it shows
-;;  invisible text that has the faces you choose.  Neither `hlt-hide'
-;;  nor `hlt-show' has any effect on other faces, besides those you
-;;  choose to hide or show, respectively; they each do only one thing,
-;;  hide or show.
+;;  Command `icicle-show-faces' is the opposite of
+;;  `icicle-hide-faces': it shows invisible text that has the faces
+;;  you choose.  Neither `icicle-hide-faces' nor `icicle-show-faces'
+;;  has any effect on other faces, besides those you choose to hide or
+;;  show, respectively; they each do only one thing, hide or show.
 ;;
-;;  Command `hlt-hide-only' hides the faces you choose, and shows all
-;;  other faces, and command `hlt-show-only' does the opposite.  You
-;;  can thus use these commands to specify exactly what faces should
-;;  be invisible and visible.  Empty input means none: If you choose
-;;  no faces to hide (that is, hit `RET' with an empty minibuffer),
-;;  then all faces will be made visible; if you choose no faces to
-;;  show, then all will be hidden.
+;;  Command `icicle-hide-only-faces' hides the faces you choose, and
+;;  shows all other faces, and command `icicle-show-only-faces' does
+;;  the opposite.  You can thus use these commands to specify exactly
+;;  what faces should be invisible and visible.  Empty input means
+;;  none: If you choose no faces to hide (that is, hit `RET' with an
+;;  empty minibuffer), then all faces will be made visible; if you
+;;  choose no faces to show, then all will be hidden.
 ;;
 ;;  Currently, face attributes for highlighting are combined when
 ;;  overlays overlap, but the same is not true for text properties.
@@ -353,8 +437,8 @@
 ;;
 ;;  Hiding and showing faces also provides a "conditional text"
 ;;  feature similar to that available in desktop publishing
-;;  applications such as Adobe's Framemaker.  Publishers often use
-;;  such a feature to produce different output documents from the same
+;;  applications such as Adobe Framemaker.  Publishers often use such
+;;  a feature to produce different output documents from the same
 ;;  source document ("single sourcing").  You can use this feature
 ;;  similarly, if you have an application (printing is one example)
 ;;  that is sensitive to whether text is visible or invisible.  One
@@ -426,12 +510,10 @@
 ;;  The following commands and options work only for Emacs versions
 ;;  more recent than Emacs 20:
 ;;
-;;  `hlt-act-on-any-face-flag', `hlt-choose-faces',
-;;  `hlt-choose-invisible-faces', `hlt-choose-visible-faces',
-;;  `hlt-hide', `hlt-hide-default-face', `hlt-hide-only',
+;;  `hlt-act-on-any-face-flag', `hlt-hide-default-face',
 ;;  `hlt-highlight-property-with-value', `hlt-next-highlight',
-;;  `hlt-previous-highlight', `hlt-show', `hlt-show-default-face',
-;;  `hlt-show-only', `hlt-toggle-act-on-any-face-flag'.
+;;  `hlt-previous-highlight', `hlt-show-default-face',
+;;  `hlt-toggle-act-on-any-face-flag'.
 ;;
 ;;(@* "To Do")
 ;;  ** To Do **
@@ -457,6 +539,16 @@
 ;;
 ;;(@* "Change log")
 ;;
+;; 2011/07/24 dadams
+;;     Moved to icicles-cmd2.el, renamed with prefix icicle- from hlt-, and corrected them:
+;;       hlt-(hide|show)(-only)-faces, hlt-choose(-(in)visible)-faces.
+;;     menu-bar-edit-menu, facemenu(-mouse)-menu: Added hlt-(copy|yank)-props.
+;; 2011/07/23 dadams
+;;     Added: hlt-((mouse-)copy|yank|paste)-props, hlt-copied-props, hlt-subplist,
+;;            hlt-default-copy/yank-props, hlt-read-props-completing, hlt-props-to-copy/yank.
+;;     Added defgroup.  Updated defcustom/defface to use :group highlight.
+;;     menu-bar-edit-region-menu: Added hlt-yank-props, hlt-unhighlight-region-for-face.
+;;                                Removed needing region for highlighting enablement.
 ;; 2011/05/05 dadams
 ;;     icicle-delete-if(-not) -> icicle-remove-if(-not).  Former are obsolete.
 ;;     hlt-hide-default-face, hlt-next-highlight: Use also memq, not just eq, to test for face.
@@ -633,8 +725,6 @@
 ;;
 ;;; Code:
 
-(and (< emacs-major-version 20) (eval-when-compile (require 'cl))) ;; when, unless
-
 (require 'frame-fns nil t) ;; (no error if not found): flash-ding
 (when (< emacs-major-version 21) (require 'faces+ nil t)) ;; (no error if not found):
                                                           ;; read-face-name
@@ -649,27 +739,68 @@
 (defvar hlt-act-on-any-face-flag)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  
-;;(@* "Menu-Bar Region Menu")
+;;(@* "Menus")
 
-;;; Menu-Bar Region Menu --------------------------------
+;;; Menu-Bar `Edit' Menu ---------------------------------------------
+
+(define-key-after menu-bar-edit-menu [hlt-copy-props]
+  '(menu-item "Copy Text Properties" hlt-copy-props
+    :help "Copy text properties at point, for subsequent pasting") 'paste)
+(define-key-after menu-bar-edit-menu [hlt-yank-props]
+    '(menu-item "Paste Text Properties" hlt-yank-props
+      :help "Paste previously copied text properties to text in region"
+      :enable (and mark-active (not buffer-read-only)))
+    'hlt-copy-props)
+
+;;; Menu-Bar `Edit' > `Region' Menu ----------------------------------
 
 (when (boundp 'menu-bar-edit-region-menu) ; Defined in `menu-bar+.el'.
   (define-key menu-bar-edit-region-menu [separator-highlight] '("--"))
+  (define-key menu-bar-edit-region-menu [hlt-yank-props]
+    '(menu-item "Paste Text Properties" hlt-yank-props
+      :help "Paste previously copied text properties to text in region"
+      :enable (and mark-active (not buffer-read-only))))
+  (define-key menu-bar-edit-region-menu [hlt-unhighlight-region-for-face]
+    '(menu-item "Unhighlight for Face..." hlt-unhighlight-region-for-face
+      :help "Remove highlighting for a given face in the region"))
   (define-key menu-bar-edit-region-menu [hlt-unhighlight-region]
     '(menu-item "Unhighlight" hlt-unhighlight-region
-      :help "Remove highlighting (faces) in region"
-      :enable (and mark-active (not buffer-read-only))))
+      :help "Remove highlighting (faces) in the region"))
   (define-key menu-bar-edit-region-menu [hlt-highlight-regexp-region]
     '(menu-item "Highlight Regexp..." hlt-highlight-regexp-region
-      :help "Highlight parts of selection that match a regular expression"
-      :enable (and mark-active (not buffer-read-only))))
+      :help "Highlight parts of region that match a regexp"))
   (define-key menu-bar-edit-region-menu [hlt-highlight-region]
-    '(menu-item "Highlight..." hlt-highlight-region :help "Highlight all text in the selection"
-      :enable (and mark-active (not buffer-read-only)))))
+    '(menu-item "Highlight" hlt-highlight-region
+      :help "Highlight all text in the region")))
+
+;;; Facemenu `Text Properties' Menu ----------------------------------
+(when (boundp 'facemenu-mouse-menu)
+  (easy-menu-add-item facemenu-mouse-menu ()
+                      ["Paste Text Properties" hlt-yank-props
+                                               (and mark-active (not buffer-read-only))] 'dp)
+  (easy-menu-add-item facemenu-mouse-menu ()
+                      ["Copy Text Properties" hlt-copy-props t] 'dp))
+(easy-menu-add-item facemenu-menu ()
+                    ["Paste Text Properties" hlt-yank-props
+                                             (and mark-active (not buffer-read-only))] 'dp)
+(easy-menu-add-item facemenu-menu () ["Copy Text Properties" hlt-copy-props t] 'dp)
+
  
 ;;(@* "Variables and Faces")
 
-;;; Variables and Faces --------------------------------
+;;; Variables and Faces ----------------------------------------------
+
+(defgroup highlight nil
+  "Highlighting."
+  :prefix "hlt-" :group 'editing :group 'convenience :group 'wp :group 'faces
+  :link `(url-link :tag "Send Bug Report"
+          ,(concat "mailto:" "drew.adams" "@" "oracle" ".com?subject=\
+highlight.el bug: \
+&body=Describe bug here, starting with `emacs -q'.  \
+Don't forget to mention your Emacs and library versions."))
+  :link '(url-link :tag "Download" "http://www.emacswiki.org/highlight.el")
+  :link '(url-link :tag "Description" "http://www.emacswiki.org/HighLight")
+  :link '(emacs-commentary-link :tag "Commentary" "highlight"))
 
 ;; This is defined in `faces.el', Emacs 22.  This definition is adapted to Emacs 20.
 (unless (facep 'minibuffer-prompt)
@@ -682,13 +813,13 @@
   (defface hlt-property-highlight '((((background dark)) (:background "Navy"))
                                     (t (:background "Wheat")))
     "*Face used to highlight all links."
-    :group 'faces)
+    :group 'highlight :group 'faces)
   (defcustom hlt-act-on-any-face-flag nil
     "*Non-nil means highlight actions apply to all text with a face.
 nil means that they apply only to text that has been highlighted.
 Consult the doc for particular actions, to see if they are affected by
 this option."
-    :type 'boolean :group 'editing :group 'convenience :group 'wp :group 'faces)
+    :type 'boolean :group 'highlight)
 
   (defvar hlt-prop-highlighting-state '(nil . nil)
     "Cons indicating state of property highlighting.
@@ -700,7 +831,7 @@ a marker."))
 (defcustom hlt-max-region-no-warning 100000
   "*Max size (chars) of region to highlight without confirmation.
 This is used only for highlighting of a regexp, which can be slow."
-  :type 'integer :group 'editing :group 'convenience :group 'wp)
+  :type 'integer :group 'highlight)
 
 ;;;###autoload
 (defcustom hlt-use-overlays-flag 'only
@@ -714,11 +845,21 @@ affect both kinds of highlighting."
           (const :tag "Highlight using overlays, not text properties" only)
           (sexp  :tag
            "Highlight using overlays, but act also on highlight text properties" t))
-  :group 'editing :group 'convenience :group 'wp :group 'faces)
+  :group 'highlight)
+
+;;;###autoload
+(defcustom hlt-default-copy/yank-props '(face)
+  "*Properties that `hlt-copy-props' and `hlt-yank-props' use by default.
+You can use a prefix argument with those commands to override the
+default behavior."
+  :type '(repeat symbol) :group 'highlight)
 
 (defvar hlt-last-regexp nil "The last regexp highlighted.")
 (defvar hlt-last-face 'highlight "The last face used by highlight commands.")
 (defvar hlt-previous-use-overlays-flag-value nil "Previous value of `hlt-use-overlays-flag'.")
+
+(defvar hlt-copied-props ()
+  "Plist of text properties last copied using `hlt-copy-props'.")
  
 ;;(@* "Misc Functions - Emacs 20+")
 
@@ -1249,6 +1390,149 @@ If the current value is nil, it is set to the last non-nil value."
          (hlt-use-overlays-flag
           "Highlighting with overlays now, but actions affect also text properties")
          (t "Highlight actions now use only text properties, not overlay properties"))))
+
+
+;;; Copying and yanking text properties
+
+;;;###autoload
+(defalias 'hlt-paste-props 'hlt-yank-props)
+;;;###autoload
+(defun hlt-yank-props (start end &optional arg msgp)
+  "Yank (paste) copied text properties over the active region.
+Do nothing if there is no nonempty active region.
+By default, yank only the copied properties that are in
+ `hlt-default-copy/yank-props'.
+With a plain or non-negative prefix arg, yank all copied properties.
+With a negative prefix arg, you are prompted for the copied properties
+ to yank.  To finish entering properties, hit `RET RET' (i.e., twice).
+
+NOTE: If the list of copied text properties is empty, then yanking
+      REMOVES ALL PROPERTIES from the text in the region.  This
+      provides an easy way to unpropertize text."
+  (interactive "r\nP\np")
+  ;; Do nothing if no active region.
+  (unless (or (and transient-mark-mode mark-active (not (eq (mark) (point))))
+              (not msgp))
+    (error "No region to paste properties to"))
+  (let ((read-only                           buffer-read-only)
+        (modified-p                          (buffer-modified-p))
+        (inhibit-modification-hooks          t)
+        ;; Otherwise, `put-text-property' calls this, which removes highlight.
+        (font-lock-fontify-region-function   'ignore)
+        (props-to-yank                       (hlt-props-to-copy/yank hlt-copied-props arg)))
+    (undo-boundary)
+    (setq buffer-read-only  nil)
+    (set-text-properties start end props-to-yank)
+    ;; Set/reset props `hlt-highlight' and `font-lock-ignore', if `face' is one of the props.
+    ;; (The Emacs 20 code here is fudged: it just uses `member' instead of `plist-member'.)
+    (cond ((fboundp 'plist-member)
+           (put-text-property
+            start end 'hlt-highlight    (and (plist-member props-to-yank 'face)  t))
+           (put-text-property
+            start end 'font-lock-ignore (and (plist-member props-to-yank 'face)  t)))
+          (t                            ; Emacs 20 - no `plist-member'.
+           (put-text-property
+            start end 'hlt-highlight    (and (member 'face props-to-yank)  t))
+           (put-text-property
+            start end 'font-lock-ignore (and (member 'face props-to-yank)  t))))
+    (setq buffer-read-only  read-only)
+    (set-buffer-modified-p modified-p)
+    (when msgp
+      (if props-to-yank
+          (message "Yanked propert%s `%s'" (if (car (cddr props-to-yank)) "ies" "y")
+                   (let ((pprops  ()))
+                     (while props-to-yank
+                       (push (pop props-to-yank) pprops)
+                       (pop props-to-yank))
+                     (mapconcat #'symbol-name (nreverse pprops) "', `")))
+        (message "ALL PROPERTIES REMOVED (yanked empty list of properties)")))))
+
+;;;###autoload
+(defun hlt-mouse-copy-props (&optional event arg msgp)
+  "Same as `hlt-copy-props', but copy at mouse pointer, not at point."
+  (interactive "e\nP\np")
+  (with-current-buffer (window-buffer (posn-window (event-end event)))
+    (save-excursion (goto-char (posn-point (event-end event)))
+                    (hlt-copy-props (point) arg msgp))))
+
+;; For testing
+;; (global-set-key [C-S-down-mouse-2] 'hlt-mouse-copy-props)
+;; (global-set-key [C-S-mouse-2]      'ignore)
+
+;;;###autoload
+(defun hlt-copy-props (&optional position arg msgp)
+  "Copy text properties at point for use by `hlt-yank-props'.
+Properties are copied to `hlt-copied-props'.
+By default, copy the `hlt-default-copy/yank-props' properties.
+With a plain or non-negative prefix arg, copy all properties.
+With a negative prefix arg, you are prompted for the properties to
+ copy.  To finish entering properties, hit `RET RET' (i.e., twice)."
+  (interactive "d\nP\np")
+  (unless position  (setq position  (point)))
+  (let ((props-to-copy  (hlt-props-to-copy/yank (text-properties-at position) arg)))
+    (setq hlt-copied-props  props-to-copy)
+    (when msgp
+      (if props-to-copy
+          (message "Copied propert%s `%s'" (if (car (cddr props-to-copy)) "ies" "y")
+                   (let ((pprops  ()))
+                     (while props-to-copy
+                       (push (pop props-to-copy) pprops)
+                       (pop props-to-copy))
+                     (mapconcat #'symbol-name (nreverse pprops) "', `")))
+        (message "Emptied copied properties list - yanking will REMOVE ALL")))))
+
+(defun hlt-props-to-copy/yank (avail-props arg)
+  "Return a plist of properties to copy or yank.
+AVAIL-PROPS is a plist of available properties.
+ARG is from a raw prefix argument.
+ If nil, then use the properties from AVAIL-PROPS that are also in
+  `hlt-default-copy/yank-props'.
+ If a plain or non-negative prefix arg, then use all properties in
+  AVAIL-PROPS.
+ If a negative prefix arg, then prompt for the properties
+  to use using completion with candidates in AVAIL-PROPS."
+  (cond ((and arg (natnump (prefix-numeric-value arg)))
+         (copy-sequence avail-props))   ; Copy/yank all props available.
+        (arg                            ; Prompt for props, from among those available.
+         (let ((props-avail  avail-props)
+               (props-alist  ()))
+           (while props-avail
+             (push (cons (symbol-name (pop props-avail)) (pop props-avail)) props-alist))
+           (if (not (cdr props-alist))
+               avail-props
+             (hlt-subplist (hlt-read-props-completing props-alist) avail-props))))
+        (t                              ; Copy/yank the available default props.
+         (hlt-subplist hlt-default-copy/yank-props avail-props))))
+
+(defun hlt-subplist (properties available)
+  "Return a plist with entries from plist AVAILABLE for PROPERTIES.
+PROPERTIES is a list of properties without their values."
+  (let ((plist     ())
+        (prop+val  nil))
+    (dolist (prop  properties)
+      (when (setq prop+val  (if (fboundp 'plist-member)
+                                (plist-member available prop)
+                              (member prop available))) ; Emacs 20 fudge.
+        (push prop plist)
+        (push (cadr prop+val) plist)))
+    (nreverse plist)))
+
+(defun hlt-read-props-completing (props)
+  "Read text properties from among those in PROPS.
+PROPS is an alist whose cars are text property names (strings)."
+  (let ((prompt1        "Property (RET for each, empty input to finish): ")
+        (prompt2        "Property: ")
+        (props-to-copy  ())
+        prop)
+    (setq prop   (completing-read prompt1 props nil t)
+          props  (delete (assoc prop props) props))
+    (unless (string= "" prop)
+      (push (intern prop) props-to-copy)
+      (while (and props (not (string= "" prop)))
+        (setq prop   (completing-read prompt2 props nil t)
+              props  (delete (assoc prop props) props))
+        (unless (string= "" prop) (push (intern prop) props-to-copy)))
+      (nreverse props-to-copy))))
  
 ;;(@* "Misc Functions - Emacs 21+")
 
@@ -1526,169 +1810,6 @@ Only highlighting faces are included, that is, faces associated with a
                  "Highlight actions now apply to any face, not just a highlighting face"
                "Highlight actions now apply only to a highlighting face")))
   )
- 
-;;(@* "Functions for Use with Icicles - Emacs 21+")
-
-;;; Functions for Use with Icicles - Emacs 21+ -----------------------
-
-(when (and (featurep 'icicles)          ; These are Icicles multi-commands.
-           (fboundp 'next-single-char-property-change)) ; Don't bother, for Emacs 20.
-
-  (icicle-define-command hlt-choose-faces
-    "Choose a list of face names.
-Option `hlt-act-on-any-face-flag' determines whether only highlighting
-faces in the buffer are candidates.  The list of names (strings) is
-returned."
-    (lambda (name) (push name face-names)) ; Action function
-    "Choose face (`RET' when done): "   ; `completing-read' args
-    (mapcar #'icicle-make-face-candidate
-            (if hlt-act-on-any-face-flag
-                (face-list)
-              (hlt-highlight-faces-in-buffer (point-min) (point-max))))
-    nil t nil (cond ((boundp 'face-name-history) 'face-name-history)
-                    ((boundp 'icicle-face-name-history) 'icicle-face-name-history)
-                    (t 'face-name-history))
-    nil nil
-    ((face-names nil))                  ; Additional bindings
-    nil nil                             ; First sexp and undo sexp
-    (prog1 (setq face-names  (delete "" face-names)) ; Return the list of faces.
-      (when (interactive-p) (message "Faces: %S" face-names))))
-
-  (icicle-define-command hlt-choose-invisible-faces
-    "Choose a list of face names from those currently invisible.
-Option `hlt-act-on-any-face-flag' determines whether only highlighting
-faces in the buffer are candidates.  The list of names (strings) is
-returned."
-    (lambda (name) (push name face-names)) ; Action function
-    "Choose face (`RET' when done): "   ; `completing-read' args
-    (mapcar #'icicle-make-face-candidate
-            (icicle-remove-if-not (lambda (x) (memq x buffer-invisibility-spec))
-                                  (if hlt-act-on-any-face-flag
-                                      (face-list)
-                                    (hlt-highlight-faces-in-buffer (point-min) (point-max)))))
-    nil t nil (cond ((boundp 'face-name-history) 'face-name-history)
-                    ((boundp 'icicle-face-name-history) 'icicle-face-name-history)
-                    (t 'face-name-history))
-    nil nil
-    ((face-names nil))                  ; Additional bindings
-    nil nil                             ; First sexp and undo sexp
-    (prog1 (setq face-names  (delete "" face-names)) ; Return the list of faces.
-      (when (interactive-p) (message "Faces: %S" face-names))))
-
-  (icicle-define-command hlt-choose-visible-faces
-    "Choose a list of face names from those currently visible.
-Option `hlt-act-on-any-face-flag' determines whether only highlighting
-faces in the buffer are candidates.  The list of names (strings) is
-returned."
-    (lambda (name) (push name face-names)) ; Action function
-    "Choose face (`RET' when done): "   ; `completing-read' args
-    (mapcar #'icicle-make-face-candidate
-            (icicle-remove-if (lambda (x) (memq x buffer-invisibility-spec))
-                              (if hlt-act-on-any-face-flag
-                                  (face-list)
-                                (hlt-highlight-faces-in-buffer (point-min) (point-max)))))
-    nil t nil (cond ((boundp 'face-name-history) 'face-name-history)
-                    ((boundp 'icicle-face-name-history) 'icicle-face-name-history)
-                    (t 'face-name-history))
-    nil nil
-    ((face-names nil))                  ; Additional bindings
-    nil nil                             ; First sexp and undo sexp
-    (prog1 (setq face-names  (delete "" face-names)) ; Return the list of faces.
-      (when (interactive-p) (message "Faces: %S" face-names))))
-  
-  (defun hlt-show-only (&optional start end faces)
-    "Show only the faces you choose, hiding all others.
-Non-nil `hlt-act-on-any-face-flag' means choose from among all
-faces.  Nil means choose only from among faces used to highlight.
-
-When choosing faces, completion and cycling are available. During
-cycling, these keys with prefix `C-' act on the current face name:
-
-`C-mouse-2', `C-RET' - Choose current face candidate only
-`C-down'  - Choose, then move to next prefix-completion candidate
-`C-up'    - Choose, then move to previous prefix-completion candidate
-`C-next'  - Choose, then move to next apropos-completion candidate
-`C-prior' - Choose, then move to previous apropos-completion candidate
-`C-!'     - Choose *all* matching face names"
-    (interactive `(,@(hlt-region-or-buffer-limits)
-                   ,(mapcar #'intern (hlt-choose-faces))))
-    (dolist (face (if hlt-act-on-any-face-flag
-                      (face-list)
-                    (hlt-highlight-faces-in-buffer start end)))
-      (if (memq face faces)
-          (hlt-show-default-face face)
-        (hlt-hide-default-face start end face))))
-  
-  (defun hlt-hide-only (&optional start end faces)
-    "hide only the faces you choose, showing all others.
-Non-nil `hlt-act-on-any-face-flag' means choose from among all
-faces.  Nil means choose only from among faces used to highlight.
-
-When choosing faces, completion and cycling are available. During
-cycling, these keys with prefix `C-' act on the current face name:
-
-`C-mouse-2', `C-RET' - Choose current face candidate only
-`C-down'  - Choose, then move to next prefix-completion candidate
-`C-up'    - Choose, then move to previous prefix-completion candidate
-`C-next'  - Choose, then move to next apropos-completion candidate
-`C-prior' - Choose, then move to previous apropos-completion candidate
-`C-!'     - Choose *all* matching face names"
-    (interactive `(,@(hlt-region-or-buffer-limits)
-                   ,(mapcar #'intern (hlt-choose-faces))))
-    (dolist (face (if hlt-act-on-any-face-flag
-                      (face-list)
-                    (hlt-highlight-faces-in-buffer start end)))
-      (if (memq face faces)
-          (hlt-hide-default-face start end face)
-        (hlt-show-default-face face))))
-
-  (defun hlt-show (faces)
-    "Show invisible faces that you choose.  Do nothing to other faces.
-Non-nil `hlt-act-on-any-face-flag' means choose from among all
-invisible faces.  Nil means choose only from among invisible faces
-used to highlight.
-
-When choosing faces, completion and cycling are available. During
-cycling, these keys with prefix `C-' act on the current face name:
-
-`C-mouse-2', `C-RET' - Choose current face candidate only
-`C-down'  - Choose, then move to next prefix-completion candidate
-`C-up'    - Choose, then move to previous prefix-completion candidate
-`C-next'  - Choose, then move to next apropos-completion candidate
-`C-prior' - Choose, then move to previous apropos-completion candidate
-`C-!'     - Choose *all* matching face names"
-    (interactive
-     (list (let ((fs  (icicle-remove-if-not
-                       (lambda (x) (memq x buffer-invisibility-spec))
-                       (if hlt-act-on-any-face-flag
-                           (face-list)
-                         (hlt-highlight-faces-in-buffer (point-min) (point-max))))))
-             (if fs
-                 (mapcar #'intern (hlt-choose-invisible-faces))
-               (error "No%s faces are invisible"
-                      (if hlt-act-on-any-face-flag "" " highlight"))))))
-    (dolist (face faces) (hlt-show-default-face face)))
-  
-  (defun hlt-hide (&optional start end faces)
-    "Hide visible faces that you choose.  Do nothing to other faces.
-Non-nil `hlt-act-on-any-face-flag' means choose from among all
-visible faces.  Nil means choose only from among visible faces used to
-highlight.
-
-When choosing faces, completion and cycling are available. During
-cycling, these keys with prefix `C-' act on the current face name:
-
-`C-mouse-2', `C-RET' - Choose current face candidate only
-`C-down'  - Choose, then move to next prefix-completion candidate
-`C-up'    - Choose, then move to previous prefix-completion candidate
-`C-next'  - Choose, then move to next apropos-completion candidate
-`C-prior' - Choose, then move to previous apropos-completion candidate
-`C-!'     - Choose *all* matching face names"
-    (interactive `(,@(hlt-region-or-buffer-limits)
-                   ,(mapcar #'intern (hlt-choose-faces))))
-    (dolist (face faces) (hlt-hide-default-face start end face)))
-  )
-
  
 ;;(@* "Functions for Highlighting Propertized Text - Emacs 21+")
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-04 Thu 17:17 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-08 Mon 17:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -448,5 +448,44 @@ the mode-line."
   '(progn
 	 (zjl-hl-face-settings)
 	 (zjl-hl-settings)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Color settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; `palette.el' emacs 的调色板
+
+(defvar facemenup-palette-change-face-bg nil "Face background be changed or not.")
+(defvar facemenup-last-face-color nil "Last face color used.")
+
+(eval-after-load "palette"
+  `(progn
+     (palette-settings)
+     (eal-define-keys
+      'palette-mode-map
+      `(("j"     palette-down)
+		("k"     palette-up)
+		("h"     palette-left)
+		("l"     palette-right)
+		("J"     palette-down-quickly)
+		("K"     palette-up-quickly)
+		("H"     palette-left-quickly)
+		("L"     palette-right-quickly)
+		("r"     palette-face-restore-bg-fg)
+		("f"     palette-set-face-changed-to-foreground)
+		("b"     palette-set-face-changed-to-background)
+		("B"     facemenup-face-bg-restore)
+		("F"     facemenup-face-fg-restore)
+		("d"     palette-disply-which-in-changine)
+		("m"     palette-pick-background-at-point)
+		("C"     palette-copy-current-color)
+		("C-x k" palette-quit-restore-bg-fg)))))
+
+(eal-define-keys-commonly
+ global-map
+ `(("C-x M-F" facemenup-palette-face-fg-at-point)
+   ("C-x M-B" facemenup-palette-face-bg-at-point)))
 
 (provide 'xy-rcroot-app)
