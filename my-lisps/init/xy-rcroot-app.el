@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-08 Mon 18:36 xin on p6t>
+;; Time-stamp:<2011-08-08 Mon 18:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -194,7 +194,7 @@ the mode-line."
   t)
 (defun window-number-toggle ()
   "Toggle window number display and quick switch."
-  (interactive1)
+  (interactive)
   (window-number-mode)
   (window-number-meta-mode))
 (global-set-key [f6] 'window-number-toggle)

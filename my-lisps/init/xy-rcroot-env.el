@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-04 Thu 17:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-08 Mon 18:31 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -290,7 +290,11 @@
 
 ;; System encoding
 (set-language-environment 'UTF-8)
-(setq default-buffer-file-coding-system 'utf-8-unix)
+;; NOTE: `default-buffer-file-coding-system' is an obsolete variable
+;; (as of Emacs 23.2); use `buffer-file-coding-system' 
+;; instead.
+;; (setq default-buffer-file-coding-system 'utf-8-unix)
+(setq-default buffer-file-coding-system 'utf-8-unix)
 (setq default-keyboard-coding-system 'utf-8-unix)
 (setq default-sendmail-coding-system 'utf-8-unix)
 (Windows
@@ -365,9 +369,9 @@
 													  my-emacs-path
 													  "/eim/py.txt")) 
 (setq default-input-method "eim-py")
-(setq input-activate nil)
-(add-hook 'find-file-hook
-          (lambda ()(if (eq input-activate t) (toggle-input-method))))
+;; (setq input-activate nil)
+;; (add-hook 'find-file-hook
+;;           (lambda ()(if (eq input-activate t) (toggle-input-method))))
 (eval-after-load "eim"
   `(progn
      (eim-settings)))
@@ -419,23 +423,25 @@
 ;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
 ;; Windows 下使用我定义的 `xy/done' 函数也能达到类似的效果，
 ;; 用 `C-x C-c' 隐藏 Emacs frame，但只能使用一个 frame。
+
 ;; Emacs-21 以前的版本要用 gnuserv
-(if is-before-emacs-21
-    (progn
-      ;; gnuserv
-      (require 'gnuserv-compat)
-      (gnuserv-start)
-      ;; 在当前frame打开
-      (setq gnuserv-frame (selected-frame))
-      ;; 打开后让emacs跳到前面来
-      (setenv "GNUSERV_SHOW_EMACS" "1")))
-(if is-after-emacs-23
-	(progn
-	  (setq server-auth-dir (concat my-var-path "/server"))
-	  (server-force-delete)
-	  (server-start)
+;; (if is-before-emacs-21
+;;     (progn
+;;       ;; gnuserv
+;;       (require 'gnuserv-compat)
+;;       (gnuserv-start)
+;;       ;; 在当前frame打开
+;;       (setq gnuserv-frame (selected-frame))
+;;       ;; 打开后让emacs跳到前面来
+;;       (setenv "GNUSERV_SHOW_EMACS" "1")))
+
+;; (if is-after-emacs-23
+;; 	(progn
+(server-force-delete)
+(server-start)
+;; (setq server-auth-dir (concat my-var-path "/server"))
 	  ;; (global-set-key (kbd "C-x C-c") 'xy/done)
-	  ))
+	  ;; ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
