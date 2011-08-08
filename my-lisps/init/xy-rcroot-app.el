@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-08 Mon 17:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-08 Mon 18:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -485,7 +485,8 @@ the mode-line."
 
 (eal-define-keys-commonly
  global-map
- `(("C-x M-F" facemenup-palette-face-fg-at-point)
+ `(("C-x P" palette)
+   ("C-x M-F" facemenup-palette-face-fg-at-point)
    ("C-x M-B" facemenup-palette-face-bg-at-point)))
 
 (provide 'xy-rcroot-app)

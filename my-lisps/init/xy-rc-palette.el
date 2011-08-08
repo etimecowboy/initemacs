@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-palette.el'
-;; Time-stamp:<2011-08-08 Mon 16:57 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-08 Mon 18:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -78,11 +78,11 @@
   (kill-new palette-current-color)
   (message "Color %s copied." palette-current-color))
 
-;;;###autoload
-(defun blink-cursor-mode-disable ()
-  "Disable `blink-cursor-mode'."
-  (interactive)
-  (blink-cursor-mode -1))
+;; ;; ###autoload
+;; (defun blink-cursor-mode-disable ()
+;;   "Disable `blink-cursor-mode'."
+;;   (interactive)
+;;   (blink-cursor-mode -1))
 
 ;;;###autoload
 (defun kill-palette-buffers (frame)
@@ -96,7 +96,7 @@
 
   (require 'facemenu+)
   
-  (add-hook 'palette-mode-hook 'blink-cursor-mode-disable)
+  ;; (add-hook 'palette-mode-hook 'blink-cursor-mode-disable)
 
   (defmacro def-palette-move-command (move-command speed)
     "Make definition of command which palette move quickly."
