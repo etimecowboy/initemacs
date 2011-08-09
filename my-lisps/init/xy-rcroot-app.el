@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-08 Mon 18:20 xin on p6t>
+;; Time-stamp:<2011-08-08 Mon 23:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -334,14 +334,15 @@ the mode-line."
 (eval-after-load "color-theme-autoloads"
   '(progn
      (color-theme-settings)))
+(color-theme-start)
 
-;; (eal-define-keys-commonly
-;;  color-theme-mode-map
-;;  `(("'"   switch-to-other-buffer)
-;;    ("u"   View-scroll-half-page-backward)
-;;    ("SPC" scroll-up)
-;;    ("1"   delete-other-windows)
-;;    ("."   find-symbol-at-point)))
+(eal-define-keys-commonly
+ color-theme-mode-map
+ `(("'"   switch-to-other-buffer)
+   ("u"   View-scroll-half-page-backward)
+   ("SPC" scroll-up)
+   ("1"   delete-other-windows)
+   ("."   find-symbol-at-point)))
 
 ;; 增加更丰富的高亮
 ;; (require 'generic-x)
@@ -418,7 +419,8 @@ the mode-line."
 (eval-after-load "font-lock"
   `(progn
      (font-lock-settings)
-	 (font-lock-face-settings)))
+	 ;; (font-lock-face-settings)
+	 ))
 
 ;; smart-hl.el, 像Eclipse那样双击高亮当前字符串
 ;; NOTE: A part of codepilot which is removed.
