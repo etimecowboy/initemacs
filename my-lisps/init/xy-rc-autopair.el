@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-autopair.el'
-;; Time-stamp:<2011-01-31 Mon 13:39 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:11 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -50,4 +50,4 @@
    (lambda (mode)
      (change-autopair-insert-opening))))
 
-(provide 'xy-rc-autopair.el)
+(provide 'xy-rc-autopair)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-babel.el'
-;; Time-stamp:<2011-01-30 Sun 23:38 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:11 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,4 +23,4 @@
   (setq babel-preferred-to-language "Chinese") ;首选的目标语言
 )
 
-(provide 'xy-babel.el)
+(provide 'xy-babel)

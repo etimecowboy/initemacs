@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-doremi.el'
-;; Time-stamp:<2011-02-06 Sun 01:03 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,4 +24,4 @@
   (setq doremi-down-keys '(?\M-n ?n ?j ?\ ))
   (setq doremi-RGB-increment-factor 256))
   
-(provide 'xy-rc-doremi.el)
+(provide 'xy-rc-doremi)

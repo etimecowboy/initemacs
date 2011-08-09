@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-doc-view.el'
-;; Time-stamp:<2011-02-05 Sat 22:12 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,4 +23,4 @@
   (setq doc-view-conversion-refresh-interval 3)
   (setq doc-view-continuous t))
 
-(provide 'xy-rc-doc-view.el)
+(provide 'xy-rc-doc-view)

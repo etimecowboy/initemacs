@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-replace.el'
-;; Time-stamp:<2011-02-05 Sat 22:12 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:28 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,4 +34,4 @@
        :inverse-video t)
       (t :background "gray")))))
 
-(provide 'xy-rc-replace.el)
+(provide 'xy-rc-replace)

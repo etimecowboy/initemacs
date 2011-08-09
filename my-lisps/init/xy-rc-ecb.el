@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ecb.el'
-;; Time-stamp:<2011-02-19 Sat 15:40 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:17 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,4 +31,4 @@
   (setq-default ecb-options-version "2.40")
   (setq-default ecb-auto-compatibility-check nil))
 
-(provide 'xy-rc-ecb.el)
+(provide 'xy-rc-ecb)

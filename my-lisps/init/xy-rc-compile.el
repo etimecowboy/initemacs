@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-compile.el'
-;; Time-stamp:<2011-02-17 Thu 23:32 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:13 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,4 +40,4 @@
   (setq compilation-enter-directory-face 'beautiful-blue-face)
   (setq compilation-leave-directory-face 'magenta-face))
 
-(provide 'xy-rc-compile.el)
+(provide 'xy-rc-compile)

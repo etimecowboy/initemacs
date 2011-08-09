@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-diff.el'
-;; Time-stamp:<2011-01-30 Sun 18:02 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:08 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -72,4 +72,4 @@
       (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
       (t (:weight bold))))))
 
-(provide 'xy-rc-diff.el)
+(provide 'xy-rc-diff)

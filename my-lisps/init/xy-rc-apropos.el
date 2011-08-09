@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-apropos.el'
-;; Time-stamp:<2011-02-06 Sun 01:02 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:10 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,4 +26,4 @@
   (setq apropos-label-face 'underline-green-face)
   (setq apropos-property-face 'font-yellow-face))
   
-(provide 'xy-rc-apropos.el)
+(provide 'xy-rc-apropos)

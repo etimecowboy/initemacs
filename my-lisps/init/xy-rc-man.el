@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-man.el'
-;; Time-stamp:<2011-02-01 Tue 18:20 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:25 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,4 +34,4 @@
   (setq Man-underline-face 'underline-green-face)
   (setq Man-reverse-face 'red-face))
 
-(provide 'xy-rc-man.el)
+(provide 'xy-rc-man)

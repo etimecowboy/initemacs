@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired+.el'
-;; Time-stamp:<2011-02-20 Sun 14:23 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:16 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -50,4 +50,4 @@
   ;; (setq diredp-compressed-file-suffix 'darkyellow-face))
 )
 
-(provide 'xy-rc-dired+.el)
+(provide 'xy-rc-dired+)

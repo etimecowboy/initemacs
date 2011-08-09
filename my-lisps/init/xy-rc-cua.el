@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cua.el'
-;; Time-stamp:<2011-02-05 Sat 22:12 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:16 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -57,4 +57,4 @@
 ;;      ("<down"   cua-resize-rectangle-down)
 ;;      ("<up>"    cua-resize-rectangle-up))))
 
-(provide 'xy-rc-cua.el)
+(provide 'xy-rc-cua)

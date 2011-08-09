@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-image-dired+.el'
-;; Time-stamp:<2011-02-28 Mon 11:22 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:23 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -43,4 +43,4 @@
           "ppm"  "PPM"  "pnm"  "PNM" 
           "svg"  "SVG"  "eps"  "EPS")))
 
-(provide 'xy-image-dired+.el)
+(provide 'xy-image-dired+)

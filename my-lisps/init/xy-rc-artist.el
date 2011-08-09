@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-artist.el'
-;; Time-stamp:<2011-01-30 Sun 22:33 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:55 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,6 +19,7 @@
 ;;;###autoload
 (defun artist-mode-init-hook-settings ()
   "Settings for `artist-mode-init-hook'."
+  
   (artist-select-op-rectangle)
   (setq hl-line-mode-active (hl-line-mode-active))
   (setq highlight-symbol-mode-active (highlight-symbol-mode-active))
@@ -30,6 +31,7 @@
 ;;;###autoload
 (defun artist-mode-exit-hook-settings ()
   "Settings for `artist-mode-exit-hook'."
+
   (when hl-line-mode-active
     (hl-line-mode 1))
   (when highlight-symbol-mode-active
@@ -38,6 +40,7 @@
 ;;;###autoload
 (defun artist-settings ()
   "Settings for `artist-mode'."
+
   (defvar hl-line-mode-active          nil "`hl-line-mode' active or not.")
   (defvar highlight-symbol-mode-active nil "`hlghlight-symbol-mode' active or not.")
 

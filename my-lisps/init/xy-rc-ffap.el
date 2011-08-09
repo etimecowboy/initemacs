@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ffap.el'
-;; Time-stamp:<2011-02-17 Thu 13:54 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:19 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,4 +26,4 @@
                      ;;user-head-file-dir)))
 		     user-include-dirs)))
 
-(provide 'xy-rc-ffap.el)
+(provide 'xy-rc-ffap)

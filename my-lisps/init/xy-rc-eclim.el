@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-eclim.el'
-;; Time-stamp:<2011-01-31 Mon 14:05 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:18 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,4 +23,4 @@
 
   (setq eclim-auto-save t))
 
-(provide 'xy-rc-eclim.el)
+(provide 'xy-rc-eclim)

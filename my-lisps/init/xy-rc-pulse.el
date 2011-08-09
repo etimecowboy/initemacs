@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-pulse.el'
-;; Time-stamp:<2011-01-31 Mon 13:17 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:27 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -57,4 +57,4 @@
                        (((class color) (min-colors 88) (background light)) :background "#FFFFAA")
                        (((class color) (min-colors 8)) :background "blue" :foreground "red")))))
 
-(provide 'xy-rc-pulse.el)
+(provide 'xy-rc-pulse)

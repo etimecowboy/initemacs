@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hs.el'
-;; Time-stamp:<2011-02-17 Thu 21:29 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:21 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -99,4 +99,4 @@
       (t :foreground "#AF210000AF21" :background "lightgreen" :box (:line-width -1 :style released-button)))
     "Face of hs minor mode block flag."))
 
-(provide 'xy-rc-hs.el)
+(provide 'xy-rc-hs)

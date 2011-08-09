@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-windows.el'
-;; Time-stamp:<2011-02-28 Mon 11:26 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:32 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,4 +40,4 @@
 									   system-configuration))
   )
 
-(provide 'xy-rc-windows.el)
+(provide 'xy-rc-windows)

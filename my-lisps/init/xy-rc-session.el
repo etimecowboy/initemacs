@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-08-03 Wed 07:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-09 Tue 08:28 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,4 +38,4 @@
   (setq session-globals-max-string 40960)
   (setq session-registers-max-string 2048))
 
-(provide 'xy-rc-session.el)
+(provide 'xy-rc-session)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-uniquify.el'
-;; Time-stamp:<2011-02-18 Fri 16:14 xin on p6t>
+;; Time-stamp:<2011-08-09 Tue 08:30 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,4 +22,4 @@
 
   (setq uniquify-buffer-name-style 'forward))
 
-(provide 'xy-rc-uniquify.el)
+(provide 'xy-rc-uniquify)

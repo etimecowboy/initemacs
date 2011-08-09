@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gud.el'
-;; Time-stamp:<2011-02-17 Thu 15:52 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:20 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,4 +49,4 @@
   ;; 显示gdb的鼠标提示
   (gud-tooltip-mode 1))
     
-(provide 'xy-rc-gud.el)
+(provide 'xy-rc-gud)

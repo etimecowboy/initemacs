@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-simple.el'
-;; Time-stamp:<2011-03-05 Sat 16:56 xin on P6T>
+;; Time-stamp:<2011-08-09 Tue 08:29 xin on P6T>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,4 +23,4 @@
 
   (setq fill-column 70))
 
-(provide 'xy-rc-simple.el)
+(provide 'xy-rc-simple)
