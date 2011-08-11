@@ -4,7 +4,7 @@
 
 ;; Author: ahei <ahei0802@126.com>
 ;; Keywords: color theme ahei
-;; Time-stamp:<2011-08-09 Tue 09:37 xin on P6T>
+;; Time-stamp:<2011-08-11 Thu 18:11 xin on p6t>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -41,46 +41,46 @@
 
 ;;; Code:
 
-(defface ahei-hl-line-face
-  '((((type tty)) :underline t)
-    (t :background "AntiqueWhite4" :underline t :inverse-video nil))
-  "ahei's `hl-line-face'.")
+;; (defface ahei-hl-line-face
+;;   '((((type tty)) :underline t)
+;;     (t :background "AntiqueWhite4" :underline t :inverse-video nil))
+;;   "ahei's `hl-line-face'.")
 
-(setq hl-line-face 'ahei-hl-line-face)
+;; (setq hl-line-face 'ahei-hl-line-face)
 
-(if window-system
-    (progn
-      (setq hl-line-face-delta #X30FF)
+;; (if window-system
+;;     (progn
+;;       (setq hl-line-face-delta #X30FF)
       
-      (defun color-theme-adjust-hl-line-face()
-        "Auto adjust `hl-line-face' by background color."
-        (interactive)
-        (let* ((color (x-color-values (face-attribute 'default :background))))
-          (if (null color)
-              (error (format "Not support on system %s" system-type))
-            (let ((my-color
-                   (mapcar
-                    (lambda (x)
-                      (let ((y (/ #XFFFF 4))
-                            (delta hl-line-face-delta))
-                        (cond
-                         ((< x (* y 1))
-                          (+ x delta))
-                         ((< x (* y 2))
-                          (+ x delta))
-                         ((< x (* y 3))
-                          (- x delta))
-                         (t
-                          (- x delta)))))
-                    color)))
-              (set-face-attribute
-               hl-line-face
-               nil
-               :background
-               (concat "#" (mapconcat (lambda (c) (format "%04X" c)) my-color ""))))))))
-  (defun color-theme-adjust-hl-line-face()))
+;;       (defun color-theme-adjust-hl-line-face()
+;;         "Auto adjust `hl-line-face' by background color."
+;;         (interactive)
+;;         (let* ((color (x-color-values (face-attribute 'default :background))))
+;;           (if (null color)
+;;               (error (format "Not support on system %s" system-type))
+;;             (let ((my-color
+;;                    (mapcar
+;;                     (lambda (x)
+;;                       (let ((y (/ #XFFFF 4))
+;;                             (delta hl-line-face-delta))
+;;                         (cond
+;;                          ((< x (* y 1))
+;;                           (+ x delta))
+;;                          ((< x (* y 2))
+;;                           (+ x delta))
+;;                          ((< x (* y 3))
+;;                           (- x delta))
+;;                          (t
+;;                           (- x delta)))))
+;;                     color)))
+;;               (set-face-attribute
+;;                hl-line-face
+;;                nil
+;;                :background
+;;                (concat "#" (mapconcat (lambda (c) (format "%04X" c)) my-color ""))))))))
+;;   (defun color-theme-adjust-hl-line-face()))
 
-(eval-when-compile (require 'color-theme-autoloads))
+(eval-when-compile (require 'color-theme))
 (defun color-theme-ahei-xy ()
   "Color theme by ahei, created 2009-11-20."
   (interactive)
@@ -622,8 +622,9 @@
      (xref-list-symbol-face ((t (:foreground "Sienna"))))
      (yas/field-debug-face ((t (nil))))
      (yas/field-highlight-face ((t (:background "DimGrey"))))))
-  (if window-system
-      (color-theme-adjust-hl-line-face)))
+  ;; (if window-system
+  ;;     (color-theme-adjust-hl-line-face))
+  )
 
 ;; (eval-after-load "color-theme"
 ;;   `(add-to-list 'color-themes '(color-theme-ahei "color-theme-ahei" "ahei")))

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-02-22 Tue 22:07 xin on P6T>
+;; Time-stamp:<2011-08-11 Thu 21:22 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -134,7 +134,7 @@
 	 (emms-settings)))
 (eal-define-keys-commonly
  dired-mode-map
- `(("¬"    emms-add-dired)
+ `(("|"    emms-add-dired)
    ("`"    emms-play-dired)))
 (eal-define-keys-commonly
  global-map

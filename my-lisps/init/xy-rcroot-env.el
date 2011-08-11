@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-11 Thu 17:56 xin on p6t>
+;; Time-stamp:<2011-08-11 Thu 19:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -129,11 +129,12 @@
 (add-to-list 'exec-path my-local-exec-path)
 (Windows
  (add-to-list 'exec-path (concat my-local-exec-path "/win32")))
-(HomeDesktop
- (GNULinux
-  (add-to-list 'exec-path (concat my-local-exec-path "/lin64"))))
-(Laptop
- (add-to-list 'exec-path (concat my-local-exec-path "/lin32")))
+;; NOTE: Linux don't need it
+;; (HomeDesktop
+;;  (GNULinux
+;;   (add-to-list 'exec-path (concat my-local-exec-path "/lin64"))))
+;; (Laptop
+;;  (add-to-list 'exec-path (concat my-local-exec-path "/lin32")))
 
 ;; Info search path
 ;; NOTE: auto-customised by setting `Info-additional-directory-list'
