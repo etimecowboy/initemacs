@@ -226,8 +226,7 @@
   (let* ((name (process-name process))
 	 (regex (concat "^" (regexp-quote mew-passwd-encryption-name)))
 	 (encrypt-p (string-match regex name)))
-    (save-excursion
-      (set-buffer (process-buffer process))
+    (with-current-buffer (process-buffer process)
       (cond
        ((string-match "invalid passphrase" string)
 	(mew-warn "Master password mismatch!")
@@ -266,7 +265,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

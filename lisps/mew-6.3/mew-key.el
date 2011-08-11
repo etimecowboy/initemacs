@@ -71,6 +71,7 @@
   (define-key mew-summary-mode-map "*"    'mew-summary-review)
   (define-key mew-summary-mode-map "\eu"  'mew-summary-unread)
   (define-key mew-summary-mode-map "y"    'mew-summary-save)
+  (define-key mew-summary-mode-map "b"    'mew-summary-store)
   (define-key mew-summary-mode-map "Y"    'mew-summary-cite)
   (define-key mew-summary-mode-map "u"    'mew-summary-undo)
   (define-key mew-summary-mode-map "U"    'mew-summary-undo-all)
@@ -175,6 +176,7 @@
   (define-key mew-summary-mode-map "zw"   'mew-summary-toggle-warning)
   (define-key mew-summary-mode-map "zi"   'mew-summary-toggle-invisible)
   (define-key mew-summary-mode-map "z "   'mew-summary-toggle-mark-regex)
+  (define-key mew-summary-mode-map "zz"   'mew-summary-unzip)
   (define-key mew-summary-mode-map "l"	  (make-sparse-keymap))
   (define-key mew-summary-mode-map "lc"   'mew-summary-local-copy)
   (define-key mew-summary-mode-map "li"   'mew-summary-imap-copy)
@@ -337,7 +339,9 @@
   (define-key (symbol-value symmap) "\C-c\C-p\C-e"
     'mew-draft-toggle-privacy-encrypted)
   (define-key (symbol-value symmap) "\C-c\C-p\C-d"
-    'mew-draft-set-privacy-type))
+    'mew-draft-set-privacy-type)
+  (define-key (symbol-value symmap) "\C-c\C-p\C-f"
+    'mew-draft-use-format-flowed))
 
 (unless mew-draft-header-map
   (setq mew-draft-header-map (make-sparse-keymap))
@@ -427,6 +431,8 @@
    "Mew"
    ["Cite"                mew-draft-cite t]
    ["Cite without Label"  mew-draft-yank t]
+   ["Flowed"              mew-draft-use-format-flowed :style toggle
+    :selected mew-use-format-flowed]
    mew-draft-mode-toolbar-menu
    ["Queue Message"       mew-draft-make-message        t]
    ["Send Message"        mew-draft-send-message        t]
@@ -443,7 +449,7 @@
    '("Privacy"
      ["All messages"               mew-draft-toggle-privacy-always    t]
      ["Msgs replying to encrypted" mew-draft-toggle-privacy-encrypted t]
-     ["This message"   		   mew-draft-set-privacy-type         t])
+     ["This message"		   mew-draft-set-privacy-type         t])
    '("FIB"
      ["FIB next item"     mew-fib-next-item     (not (mew-attach-p))]
      ["FIB previous item" mew-fib-previous-item (not (mew-attach-p))]
@@ -504,6 +510,7 @@
   (define-key mew-draft-attach-map "G"      'mew-attach-gzip64)
   (define-key mew-draft-attach-map "B"      'mew-attach-base64)
   (define-key mew-draft-attach-map "Q"      'mew-attach-quoted-printable)
+  (define-key mew-draft-attach-map "Z"      'mew-attach-zip)
   (define-key mew-draft-attach-map "S"      'mew-attach-pgp-sign)
   (define-key mew-draft-attach-map "E"      'mew-attach-pgp-enc)
   (define-key mew-draft-attach-map "\es"    'mew-attach-smime-sign)
@@ -652,7 +659,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2000-2009 Mew developing team.
+;; Copyright (C) 2000-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

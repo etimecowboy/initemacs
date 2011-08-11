@@ -47,7 +47,7 @@
   (mew-summary-setup-mode-line)
   (mew-summary-setup-decoration)
   (mew-highlight-cursor-line)
-  (run-hooks 'mew-virtual-mode-hook))
+  (mew-run-mode-hooks 'mew-virtual-mode-hook))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -191,8 +191,7 @@ If called with '\\[universal-argument]', you can specify a target mark."
 	(forward-line)
 	;; This must be buffer-substring
 	(setq line (buffer-substring beg (point)))
-	(save-excursion
-	  (set-buffer vfolder)
+	(with-current-buffer vfolder
 	  (mew-elet
 	   (insert line)
 	   (save-excursion
@@ -213,7 +212,7 @@ If called with '\\[universal-argument]', you can specify a target mark."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

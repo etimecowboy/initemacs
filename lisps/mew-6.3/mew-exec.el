@@ -293,8 +293,7 @@ destination is the same as that of the current message are processed."
 
 (defun mew-exec-refile-log (buf)
   (when (get-buffer buf)
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (mew-frwlet mew-cs-dummy mew-cs-m17n
 	(write-region (point-min) (point-max)
 		      (expand-file-name mew-refile-log-file mew-conf-path)
@@ -662,7 +661,7 @@ the queue, type '\\[mew-summary-send-message]' in the queue online."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

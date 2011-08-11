@@ -447,8 +447,7 @@ a decrypted/verified body is displayed."
 		   (mew-cache-dinfo-get-use-alt cbuf)
 		 mew-use-alternative))
 	  syntax ct begin end)
-     (save-excursion
-       (set-buffer buf)
+     (with-current-buffer buf
        (mew-erase-buffer)
        (mew-insert-message fld msg mew-cs-text-for-read nil)
        (mew-dinfo-set nil t nil alt)
@@ -787,7 +786,7 @@ over the window. Type '\\[mew-summary-prev-page]' to see them when a message is 
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

@@ -74,21 +74,21 @@
 	       (setq sargs (mw32script-argument-editing-function (list prog))))
 	  (cons (car sargs) (cons prog args))
 	(cons program args))))
-  (defadvice call-process 
-    (before mew-w32-call-process 
+  (defadvice call-process
+    (before mew-w32-call-process
 	    (program &optional infile buffer display &rest args)
 	    activate)
     (let ((sargs (mew-w32-argument-editing-function program args)))
       (setq program (car sargs)
 	    args (cdr sargs))))
   (defadvice call-process-region
-    (before mew-w32-call-process-region 
+    (before mew-w32-call-process-region
 	    (start end program &optional infile buffer display &rest args)
 	    activate)
     (let ((sargs (mew-w32-argument-editing-function program args)))
       (setq program (car sargs)
 	    args (cdr sargs))))
-  (defadvice start-process 
+  (defadvice start-process
     (before mew-w32-start-process
 	    (name buffer program &rest program-args)
 	    activate)
@@ -132,7 +132,9 @@
 (defvar mew-prog-delivery-status 'mew-mime-text/plain)
 (defvar mew-prog-postscript      mew-w32-exec)
 (defvar mew-prog-pgp-keys        '(mew-mime-pgp-keys mew-mime-pgp-keys-ext))
-(defvar mew-prog-pdf             mew-w32-exec)
+(defvar mew-prog-application/pdf "pdftotext")
+(defvar mew-prog-pdf-ext         mew-w32-exec)
+(defvar mew-prog-pdf             `(mew-mime-application/pdf ,mew-prog-pdf-ext))
 (defvar mew-prog-xml2            '(mew-mime-application/xml
 				   mew-mime-application/xml-ext))
 (defvar mew-prog-oasys           mew-w32-exec)
@@ -143,7 +145,7 @@
 (defvar mew-prog-visio           mew-w32-exec)
 (defvar mew-prog-ooffice         mew-w32-exec)
 (defvar mew-prog-rtf             mew-w32-exec)
-(defvar mew-prog-zip             mew-w32-exec)
+(defvar mew-prog-unzip           mew-w32-exec)
 
 ;;;
 ;;; Text/Html, Application/Xml, Image
@@ -199,18 +201,11 @@
 	   (t
 	    (mew-attach-copy from to))))))))
 
-(defun mew-set-file-type (file) ())
-
-(defvar mew-cs-est 'shift_jis)
-
-(defun mew-focus-frame (frame)
-  (if (fboundp 'w32-focus-frame) (w32-focus-frame frame)))
-
 (provide 'mew-win32)
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

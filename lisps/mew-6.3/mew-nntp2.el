@@ -76,7 +76,7 @@
 (defun mew-nntp2-command-next (pro pnm)
   (let ((msgs (mew-nntp2-get-messages pnm))
 	(qfld (mew-nntp2-get-qfld pnm))
- 	(case (mew-nntp2-get-case pnm))
+	(case (mew-nntp2-get-case pnm))
 	msg)
     (if msgs
 	(progn
@@ -85,7 +85,7 @@
 	  (mew-queue-insert-file pnm mew-nntp2-info-list-save-length qfld msg)
 	  (mew-set-buffer-multibyte nil)
 	  (mew-info-clean-up pnm mew-nntp2-info-list-clean-length)
- 	  (mew-nntp2-set-case pnm case) ;; override
+	  (mew-nntp2-set-case pnm case) ;; override
 	  (mew-nntp2-set-messages pnm msgs)
 	  (set-process-buffer pro (current-buffer))
 	  (mew-nntp2-set-status pnm "post")
@@ -277,8 +277,7 @@
 
 (defun mew-nntp2-debug (label string)
   (when (mew-debug 'net)
-    (save-excursion
-      (set-buffer (get-buffer-create mew-buffer-debug))
+    (with-current-buffer (get-buffer-create mew-buffer-debug)
       (goto-char (point-max))
       (insert (format "\n<%s>\n%s\n" label string)))))
 
@@ -329,13 +328,13 @@
       (mew-nntp2-debug "NNTP SENTINEL" event)
       (cond
        (error
-	(message "%s  This mail has been queued to %s" error qfld)
 	(when buf
 	  ;; A message file is not inserted at the beginning of the NNTP
 	  ;; session.
 	  (set-buffer buf)
 	  (mew-nntp2-queue case error))
-	(mew-nntp2-log pnm error))
+	(mew-nntp2-log pnm error)
+	(message-box (format "%s  This mail has been queued to %s" error qfld)))
        (done
 	(message "Posting in background...done"))
        (t
@@ -416,7 +415,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1999-2009 Mew developing team.
+;; Copyright (C) 1999-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

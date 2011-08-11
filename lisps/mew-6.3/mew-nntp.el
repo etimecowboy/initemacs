@@ -124,18 +124,18 @@
 	    (setq last (string-to-number (mew-match-string 2)))
 	    (cond
 	     ((stringp max)
-	      (setq max (1+ (string-to-number max))))
+	      (setq max (string-to-number max)))
 	     (max ;; backward compatibility
 	      ;; reversed
 	      (setq max (car max))
-	      (setq max (1+ (string-to-number max))))
+	      (setq max (string-to-number max)))
 	     ((and (eq directive 'scan) (integerp range))
-	      (setq max (1+ (- last range)))
-	      (if (< max first) (setq max first)))
+	      (setq max (- last range))
+	      (if (< max first) (setq max (1- first))))
 	     (t
-	      (setq max first)))
+	      (setq max (1- first))))
 	    (mew-nntp-set-max pnm max)
-	    (mew-nntp-process-send-string pro "XOVER %d-" max))
+	    (mew-nntp-process-send-string pro "XOVER %d-" (1+ max)))
 	(mew-nntp-set-status pnm "quit")
 	(mew-nntp-command-quit pro pnm)))))
 
@@ -487,8 +487,7 @@
 	  (setq virtual (mew-net-virtual-info-get-virtual virtual-info))
 	  (when virtual
 	    (mew-nntp-set-status-buf pnm virtual)
-	    (save-excursion
-	      (set-buffer virtual)
+	    (with-current-buffer virtual
 	      (mew-summary-lock process "NNTPing" (or sshpro sslpro)))))
 	 ((eq directive 'scan)
 	  (mew-nntp-set-range pnm (nth 0 args))
@@ -512,8 +511,7 @@
 
 (defun mew-nntp-debug (label string)
   (when (mew-debug 'net)
-    (save-excursion
-      (set-buffer (get-buffer-create mew-buffer-debug))
+    (with-current-buffer (get-buffer-create mew-buffer-debug)
       (goto-char (point-max))
       (insert (format "\n<%s>\n%s\n" label string)))))
 
@@ -715,7 +713,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1999-2009 Mew developing team.
+;; Copyright (C) 1999-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

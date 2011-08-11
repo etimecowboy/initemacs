@@ -196,7 +196,7 @@
 	  (setq params (cdr value))
 	  (setq value (car value)))
 	(insert key)
-  	(insert " ")
+	(insert " ")
 	(setq med (point))
 	(if (string-match "^[\t -~]*$" value)
 	    (insert value)
@@ -516,7 +516,7 @@ Remove anonymous addresses."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

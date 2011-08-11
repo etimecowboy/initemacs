@@ -1458,8 +1458,8 @@ the 'D' mark onto different messages."
   :type 'integer)
 
 (defcustom mew-flowed-fold-threshold 78
-  "*A threshold length of lines in a draft body. 
-if `mew-use-format-flowed' is `t' and any lines are over this 
+  "*A threshold length of lines in a draft body.
+if `mew-use-format-flowed' is `t' and any lines are over this
 threshold, the format=flowed encoding is used."
   :group 'mew-draft
   :type 'integer)
@@ -1730,7 +1730,7 @@ according to 'mew-mime-multipart-alternative-list'."
 (defcustom mew-disable-alternative-regex-list nil
   "*A list of regular expression to match the value of X-Mailer:.
 If one of them matches, Multiprat/Alternative is treated as
-Multipart/Mixed. 
+Multipart/Mixed.
 
 An example:
   (setq mew-disable-alternative-regex-list '(\"Apple Mail\"))"
@@ -1847,7 +1847,7 @@ asynchronous write for each message and fsync in their sentinel."
   :type 'boolean)
 
 (defcustom mew-use-format-flowed nil
-  "*If non-nil, Text/Plain; format=flowed is used when composing. 
+  "*If non-nil, Text/Plain; format=flowed is used when composing.
 If you cite a message, the citation style of format=flowed is used. "
   :group 'mew-draft
   :type 'boolean)
@@ -3094,6 +3094,7 @@ your public key as well as receivers' one."
 (defvar mew-prog-tar         "tar")
 (defvar mew-prog-compress    "compress")
 (defvar mew-prog-gzip        "gzip")
+(defvar mew-prog-zip         "zip")
 (defcustom mew-prog-pgp      "gpg"
   "*PGP name for version check."
   :group 'mew-privacy
@@ -3284,7 +3285,7 @@ Level 2: syntax error."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

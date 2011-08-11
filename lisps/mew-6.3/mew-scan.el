@@ -336,6 +336,12 @@ Address is converted by 'mew-summary-form-extract-addr'. See also
 		str) ;; width may exceed.
 	    (mew-substring str width nil nopad)))))))
 
+(defun mew-sumsym-encode-folder (fld)
+  (mew-replace-character fld ?  ?\t))
+
+(defun mew-sumsym-decode-folder (fld)
+  (mew-replace-character fld ?\t ? ))
+
 (defun mew-scan-get-line (mew-vec mew-inherit-width)
   (let* ((mew-inherit-total 0) (fld "")
 	 (line (mapconcat 'mew-scan-get-piece (mew-sinfo-get-summary-form) ""))
@@ -362,10 +368,11 @@ Address is converted by 'mew-summary-form-extract-addr'. See also
 			 (car irt-list)
 			 ""))))
     (when (mew-virtual-p)
-      (setq fld (or (cdr (assoc (mew-scan-get-folder mew-vec)
-				(mew-vinfo-get-lra)))
-		    ;; Spotlight
-		    (MEW-FLD)))) ;; xxx
+      (setq fld (mew-sumsym-encode-folder
+		 (or (cdr (assoc (mew-scan-get-folder mew-vec)
+				 (mew-vinfo-get-lra)))
+		     ;; Spotlight
+		     (MEW-FLD))))) ;; xxx
     (setq msg (mew-scan-get-message mew-vec))
     (setq uid (or (mew-scan-uid-uid (MEW-UID)) ""))
     (setq siz (or (mew-scan-uid-size (MEW-UID)) ""))
@@ -375,8 +382,7 @@ Address is converted by 'mew-summary-form-extract-addr'. See also
 ;; See also mew-summary-cook-region
 (defun mew-scan-insert-line (folder vec width lmsg &optional mark-or-dst)
   (when (get-buffer folder)
-    (save-excursion
-      (set-buffer folder)
+    (with-current-buffer folder
       (let* ((line (mew-scan-get-line vec width))
 	     (opos (point))
 	     (omax (point-max))
@@ -573,6 +579,7 @@ Address is converted by 'mew-summary-form-extract-addr'. See also
 	  (setq textp t)
 	  (setq cs (mew-charset-to-cs charset))
 	  (if (null cs) (setq cs mew-cs-autoconv)))))) ;; end of 'break
+    (set-buffer-multibyte nil)
     (when (and textp (mew-coding-system-p cs))
       (setq i 0)
       (while (and (not (eobp)) (< i I) (< j J))
@@ -591,6 +598,7 @@ Address is converted by 'mew-summary-form-extract-addr'. See also
 	  (setq body (concat body (mew-buffer-substring beg (1- (point))) " "))
 	  (setq j (1+ j)))
 	(setq i (1+ i)))
+      (set-buffer-multibyte t)
       (setq body (mew-replace-white-space body))
       (setq body (condition-case nil
 		     (mew-cs-decode-string body cs)
@@ -825,8 +833,7 @@ non-nil, only headers of messages are cached. If executed with
 (defun mew-summary-folder-cache-clean (folder)
   "Erase Summary mode then remove and touch the cache file."
   (if (get-buffer folder)
-      (save-excursion
-	(set-buffer folder)
+      (with-current-buffer folder
 	(mew-erase-buffer)
 	(set-buffer-modified-p nil)))
   (let ((cfile (mew-expand-file folder mew-summary-cache-file)))
@@ -843,7 +850,7 @@ non-nil, only headers of messages are cached. If executed with
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

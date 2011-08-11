@@ -55,8 +55,7 @@ This function can be used to check validity of 'case'.")
 (defun mew-input-clear ()
   "A function to clean up side effects of window configuration
 at completions."
-  (save-excursion
-    (set-buffer (window-buffer (minibuffer-window)))
+  (with-current-buffer (window-buffer (minibuffer-window))
     ;; (mew-ainfo-get-win-cfg) is shared by many functions
     ;; because minibuffer is just one!
     (mew-ainfo-set-win-cfg nil)))
@@ -93,8 +92,7 @@ at completions."
     (when (and win
 	       mew-input-folder-search-key
 	       mew-input-folder-search-match)
-      (save-excursion
-	(set-buffer mew-buffer-completions)
+      (with-current-buffer mew-buffer-completions
 	(mew-elet
 	 (goto-char (point-min))
 	 (when (looking-at "^Key: ")
@@ -127,8 +125,7 @@ at completions."
     (mew-input-folder-search-setup1 min)))
 
 (defun mew-input-folder-search-setup-buffer (alist min)
-  (save-excursion
-    (set-buffer (get-buffer-create mew-input-folder-search-buf))
+  (with-current-buffer (get-buffer-create mew-input-folder-search-buf)
     (setq buffer-read-only t)
     (mew-elet
      (mew-erase-buffer)
@@ -201,8 +198,7 @@ at completions."
 
 (defun mew-input-folder-search-forward-1 (&optional again)
   (let (no-match pos)
-    (save-excursion
-      (set-buffer mew-input-folder-search-buf)
+    (with-current-buffer mew-input-folder-search-buf
       (setq pos (point))
       (if again
 	  (forward-line)
@@ -242,8 +238,7 @@ at completions."
 
 (defun mew-input-folder-search-backward-1 (&optional again)
   (let (no-match pos)
-    (save-excursion
-      (set-buffer mew-input-folder-search-buf)
+    (with-current-buffer mew-input-folder-search-buf
       (setq pos (point))
       (if again
 	  (progn (forward-line -1) (end-of-line))
@@ -358,8 +353,7 @@ folder and displays it in addition to its bound key."
 	    (when (string= mew-input-folder-search-key "")
 	      (setq mew-input-folder-search-key nil)
 	      (setq mew-input-folder-search-match nil)
-	      (save-excursion
-		(set-buffer mew-input-folder-search-buf)
+	      (with-current-buffer mew-input-folder-search-buf
 		(cond
 		 ((eq mew-input-folder-search-direction 'forward)
 		  (goto-char (point-min)))
@@ -517,7 +511,7 @@ it is deleted automatically."
 	 (new-folder))
     (when (or (string= ret "") (string= ret init))
       (setq ret default))
-    ;; mew-input-folder-check requires an IMAP separator, 
+    ;; mew-input-folder-check requires an IMAP separator,
     ;; which requires C-uZ. C-uZ needs "g". So, chicken and egg.
     ;; Skip the check for inbox to avoid the problem.
     (setq new-folder (mew-case:folder-folder ret))
@@ -741,8 +735,7 @@ it is deleted automatically."
 
 (defun mew-range-update (folder)
   (when (get-buffer folder)
-    (save-excursion
-      (set-buffer folder)
+    (with-current-buffer folder
       (goto-char (point-max))
       (if (bobp)
 	  mew-range-all ;; buffer is empty.
@@ -827,11 +820,11 @@ it is deleted automatically."
 	file)
     (cond
      ((null default)
-      (setq file mew-home))
+      (setq file mew-save-dir))
      ((mew-folder-absolutep default)
       (setq file default))
      (t
-      (setq file (concat mew-home default))))
+      (setq file (concat mew-save-dir default))))
     (expand-file-name (read-file-name msg file file))))
 
 (defun mew-input-directory-name (&optional default)
@@ -1037,7 +1030,7 @@ it is deleted automatically."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

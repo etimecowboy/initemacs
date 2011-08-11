@@ -1262,12 +1262,12 @@
 	    (setq process (mew-imap-open pnm "localhost" lport no-msg)))))
        (sslp
 	(if (mew-port-equal port sslport) (setq tls mew-tls-imap))
- 	(setq sslpro (mew-open-ssl-stream case server sslport tls))
- 	(when sslpro
- 	  (setq sslname (process-name sslpro))
+	(setq sslpro (mew-open-ssl-stream case server sslport tls))
+	(when sslpro
+	  (setq sslname (process-name sslpro))
 	  (setq lport (mew-ssl-pnm-to-lport sslname))
- 	  (when lport
- 	    (setq process (mew-imap-open pnm mew-ssl-localhost lport no-msg)))))
+	  (when lport
+	    (setq process (mew-imap-open pnm mew-ssl-localhost lport no-msg)))))
        (proxysrv
 	(setq process (mew-imap-open pnm proxysrv proxyport no-msg)))
        (t
@@ -1325,8 +1325,7 @@
 	  (setq virtual (mew-net-virtual-info-get-virtual virtual-info))
 	  (when virtual
 	    (mew-imap-set-status-buf pnm virtual)
-	    (save-excursion
-	      (set-buffer virtual)
+	    (with-current-buffer virtual
 	      (mew-summary-lock process "IMAPing" (or sshpro sslpro)))))
 	 ((eq directive 'scan)
 	  (mew-imap-set-range pnm (nth 0 args))
@@ -1384,8 +1383,7 @@
 
 (defun mew-imap-debug (label string)
   (when (mew-debug 'net)
-    (save-excursion
-      (set-buffer (get-buffer-create mew-buffer-debug))
+    (with-current-buffer (get-buffer-create mew-buffer-debug)
       (goto-char (point-max))
       (let ((start (point)))
 	(insert (format "\n<%s>\n%s\n" label string))
@@ -1552,7 +1550,7 @@
 	      (when leftp
 		(mew-imap-message
 		 pnm
-		 "%d message retrieved. %d messages are left due to an error"
+		 "%d messages retrieved. %d messages are left due to an error"
 		 (- rttl lefts) lefts)
 		(mew-summary-folder-cache-save))))
 	(if virtual-info (mew-summary-retrieve-message-for-virtual virtual-info))
@@ -1661,8 +1659,7 @@
 	 (tag (mew-imap-passtag2 case))
 	 passwd)
     (when (get-buffer case:inbox)
-      (save-excursion
-	(set-buffer case:inbox)
+      (with-current-buffer case:inbox
 	(when (and (mew-summary-exclusive-p 'no-msg)
 		   (and (or mew-use-cached-passwd mew-use-master-passwd)
 			(setq passwd (mew-passwd-get-passwd tag))))
@@ -1675,8 +1672,7 @@
 	 (inbox (mew-proto-inbox-folder nil case))
 	 (case:inbox (mew-case-folder case inbox)))
     (when (get-buffer case:inbox)
-      (save-excursion
-	(set-buffer case:inbox)
+      (with-current-buffer case:inbox
 	(when (mew-summary-exclusive-p)
 	  (mew-imap-retrieve case 'biff case:inbox))))))
 
@@ -1853,7 +1849,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2002-2009 Mew developing team.
+;; Copyright (C) 2002-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

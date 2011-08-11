@@ -20,7 +20,7 @@ Mew -- Messaging in the Emacs World
 
 %s
 
-Copyright (C) 1994-2009 Kazu Yamamoto
+Copyright (C) 1994-2011 Kazu Yamamoto
 
 Please send comments to Kazu@Mew.org.
 
@@ -66,7 +66,7 @@ Please send comments to Kazu@Mew.org.
 	     (fboundp 'image-type-available-p)
 	     (image-type-available-p 'png))
 	(goto-char (point-max))
-	(setq mew-logo (create-image
+	(setq mew-logo (mew-create-image
 			(expand-file-name mew-icon-mew mew-icon-directory)))
 	(setq indent (/ (- (window-width)
 			   (truncate (car (image-size mew-logo)))) 2))
@@ -114,7 +114,7 @@ Please send comments to Kazu@Mew.org.
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

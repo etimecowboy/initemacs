@@ -301,6 +301,7 @@ You may want to set 'mew-reply-all-alist' to:
     (let ((owin (selected-window))
 	  (fld (mew-summary-folder-name))
 	  (msg (mew-summary-message-number2))
+	  (split-width-threshold nil)
 	  cwin cbuf draft case
 	  subject to cc newsgroups in-reply-to references
 	  encrypted fromme ret)
@@ -458,7 +459,7 @@ attached."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

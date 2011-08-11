@@ -90,15 +90,13 @@
 
 (defun mew-net-status-clear (buf)
   (when (and mew-use-net-status buf (get-buffer buf))
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (setq mew-summary-buffer-process-status nil)
       (setq mew-summary-buffer-secure-process nil))))
 
 (defun mew-net-status (buf status &optional substatus secure)
   (when mew-use-net-status
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (if substatus
 	  (setq mew-summary-buffer-process-status
 		(format " %s:%s" status substatus))
@@ -145,8 +143,7 @@
       (mew-net-status buf "Scanning" (format "%d" rcnt)))))
 
 (defun mew-summary-visible-buffer (buf)
-  (save-excursion
-    (set-buffer buf)
+  (with-current-buffer buf
     (mew-elet (put-text-property (point-min) (point-max) 'invisible nil))
     (setq mew-summary-buffer-raw t)
     (if (eq (get-buffer-window buf) (selected-window))
@@ -190,7 +187,7 @@
     (unless (member ent global-mode-string)
       (if global-mode-string
 	  (setq global-mode-string
-		(append global-mode-string (list " " ent)))
+		(append global-mode-string (list "" ent)))
 	(setq global-mode-string (list ent))))))
 
 (defun mew-biff-clean-up ()
@@ -546,11 +543,14 @@ In remote folders, visit an inbox folder and scan with 'update."
 	 ((eq mailbox 'mbox)
 	  (mew-mbox-retrieve case 'inc inbox))))
        ((mew-folder-popp inbox)
-	(mew-pop-retrieve case 'scan case:inbox nil 'get-body))
+	(let ((get-body (if (mew-pop-header-only case) nil t)))
+	  (mew-pop-retrieve case 'scan case:inbox nil get-body)))
        ((mew-folder-imapp inbox)
-	(mew-imap-retrieve case 'scan case:inbox nil 'get-body))
+	(let ((get-body (if (mew-imap-header-only case) nil t)))
+	  (mew-imap-retrieve case 'scan case:inbox nil get-body)))
        ((mew-folder-nntpp inbox)
-	(mew-nntp-retrieve case 'scan case:inbox nil 'get-body))))))
+	(let ((get-body (if (mew-nntp-header-only case) nil t)))
+	  (mew-nntp-retrieve case 'scan case:inbox nil get-body)))))))
 
 (defun mew-mbox-retrieve (case directive inbox &optional flush)
   ;; directive is 'inc
@@ -581,8 +581,7 @@ In remote folders, visit an inbox folder and scan with 'update."
   (let ((buf (mew-cache-hit fld msg))
 	uid)
     (if buf
-	(save-excursion
-	  (set-buffer buf)
+	(with-current-buffer buf
 	  (setq uid (mew-header-get-value mew-x-mew-uidl:)))
       (with-temp-buffer
 	(mew-insert-message fld msg mew-cs-text-for-read mew-header-reasonable-size)
@@ -617,8 +616,7 @@ In remote folders, visit an inbox folder and scan with 'update."
 	  m)
       (when (and (equal fid nfid)
 		 (equal fld (mew-current-get-fld nfid)))
-	(save-excursion
-	  (set-buffer buf)
+	(with-current-buffer buf
 	  (setq m (point-marker))
 	  (set-marker-insertion-type m t)
 	  (when (and (mew-sinfo-get-disp-msg)
@@ -651,8 +649,7 @@ The message in the server side is always retained."
 	     (virtual-info (if (mew-virtual-for-one-summary)
 			       (mew-net-virtual-info (list msg))))
 	     folder case del rtr rtrs mailbox)
-	(save-excursion
-	  (set-buffer bnm)
+	(with-current-buffer bnm
 	  (when (mew-summary-exclusive-p)
 	    (setq folder (mew-sinfo-get-folder))
 	    (setq case (mew-sinfo-get-case))
@@ -883,7 +880,7 @@ The messages in the server side is always retained."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2002-2009 Mew developing team.
+;; Copyright (C) 2002-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

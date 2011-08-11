@@ -86,8 +86,7 @@
   (if (and (get-buffer-window mew-buffer-completions)
 	   (equal mew-complete-candidates all))
       (let ((win (get-buffer-window mew-buffer-completions)))
-	(save-excursion
-	  (set-buffer mew-buffer-completions)
+	(with-current-buffer mew-buffer-completions
 	  (if (pos-visible-in-window-p (point-max) win)
 	      (set-window-start win 1)
 	    (scroll-other-window))))
@@ -167,7 +166,7 @@ is inserted before the cursor, the short name is expanded to its address."
   (interactive)
   (mew-draft-set-completion-ignore-case mew-complete-address-ignore-case)
   (let ((word (mew-delete-backward-char))
-    	(completion-ignore-case mew-complete-address-ignore-case))
+	(completion-ignore-case mew-complete-address-ignore-case))
     (if (null word)
 	(tab-to-tab-stop)
       (if mew-use-full-alias
@@ -186,7 +185,7 @@ is inserted before the cursor, the short name is expanded to its address."
   (interactive)
   (mew-draft-set-completion-ignore-case mew-complete-address-ignore-case)
   (let ((word (mew-delete-backward-char))
-    	(completion-ignore-case mew-complete-address-ignore-case)
+	(completion-ignore-case mew-complete-address-ignore-case)
 	try)
     (if (null word)
 	(message "No expand key")
@@ -267,8 +266,7 @@ is inserted before the cursor, the short name is expanded to its address."
 (defun mew-input-folder-search-complete ()
   (let ((mew-inherit-complete-folder t)
 	keys)
-    (save-excursion
-      (set-buffer mew-input-folder-search-buf)
+    (with-current-buffer mew-input-folder-search-buf
       (save-excursion
 	(goto-char (point-min))
 	(while (search-forward (or mew-input-folder-search-key "\n") nil t)
@@ -336,7 +334,7 @@ is inserted before the cursor, the short name is expanded to its address."
   "Complete function for cases."
   (interactive)
   (let ((word (or (mew-delete-backward-char) ""))
-    	(completion-ignore-case mew-complete-case-ignore-case))
+	(completion-ignore-case mew-complete-case-ignore-case))
     (mew-complete
      word
      (mapcar 'list mew-config-cases)
@@ -621,7 +619,7 @@ the name exists."
 	  (message
 	   "To expand '%s', type '%c' then '%s'"
 	   cmp EXPAND-CHAR
- 	   (substitute-command-keys
+	   (substitute-command-keys
 	    "\\<mew-draft-header-map>\\[mew-draft-header-comp]"))))
      ;; no candidate
      (t
@@ -783,7 +781,7 @@ the name exists."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

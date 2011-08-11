@@ -185,7 +185,7 @@ requires PTY.")
   (defalias 'mew-match-string 'match-string))
 
 (defun mew-insert-buffer-substring (buf beg end)
-  (insert (save-excursion (set-buffer buf) (mew-buffer-substring beg end))))
+  (insert (with-current-buffer buf (mew-buffer-substring beg end))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -229,6 +229,33 @@ requires PTY.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Face
+;;;
+
+(cond
+ ((fboundp 'face-all-attributes) ;; Emacs 23
+  (defalias 'mew-face-spec-func 'cons)
+  (defun mew-face-spec-primitive (col bold)
+    (if col
+	(if bold
+	    (list :foreground col :weight 'bold)
+	  (list :foreground col :weight 'normal))
+      (if bold
+	  (list :weight 'bold)
+	(list :weight 'normal)))))
+ (t
+  (defalias 'mew-face-spec-func 'list)
+  (defun mew-face-spec-primitive (col bold)
+    (if col
+	(if bold
+	    (list :foreground col :bold t)
+	  (list :foreground col))
+      (if bold
+	  (list :bold t)
+	nil)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Misc
 ;;;
 
@@ -245,11 +272,49 @@ requires PTY.")
 	  nil
 	str))))
 
+(if (fboundp 'create-animated-image)
+    (defalias 'mew-create-image 'create-animated-image)
+  (defalias 'mew-create-image 'create-image))
+
+(if (fboundp 'run-mode-hooks)
+    (defun mew-run-mode-hooks (&rest funcs)
+      (apply 'run-mode-hooks funcs))
+  (defun mew-run-mode-hooks (&rest funcs)
+    (apply 'run-hooks funcs)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Unix/Mac/Win
+;;;
+
+(cond
+ ((memq system-type '(windows-nt cygwin))
+  (defun mew-set-file-type (file) ())
+  (defvar mew-cs-est 'shift_jis)
+  (defun mew-focus-frame (frame)
+    (if (fboundp 'w32-focus-frame) (w32-focus-frame frame))))
+ ((eq system-type 'darwin)
+  (defun mew-set-file-type (file)
+    (unless mew-use-suffix
+      (mew-mac-set-file-type file mew-file-type)))
+  (defvar mew-cs-est 'utf-8)
+  (defun mew-focus-frame (frame)
+    (when focus-follows-mouse
+      (set-mouse-position
+       (selected-frame) (1- (frame-width)) 0))))
+ (t
+  (defun mew-set-file-type (file) ())
+  (defvar mew-cs-est 'utf-8)
+  (defun mew-focus-frame (frame)
+    (when focus-follows-mouse
+      (set-mouse-position
+       (selected-frame) (1- (frame-width)) 0)))))
+
 (provide 'mew-env)
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

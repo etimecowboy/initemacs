@@ -90,7 +90,7 @@ A file name of a certificate should be 'cert-hash.0'.
 		"-d" ,(format "%s:%d" mew-ssl-localhost localport)
 		"-v" ,(number-to-string (mew-ssl-verify-level case))
 		"-D" "debug"
-		"-P" "none"
+		"-P" ""
 		"-r" ,(format "%s:%d" server remoteport)
 		,@mew-prog-ssl-arg))
 	(if tls (setq args (cons "-n" (cons tls args))))
@@ -202,8 +202,7 @@ A local port number can be obtained the process name after ':'. "
 
 (defun mew-ssl-debug (label string)
   (when (mew-debug 'net)
-    (save-excursion
-      (set-buffer (get-buffer-create mew-buffer-debug))
+    (with-current-buffer (get-buffer-create mew-buffer-debug)
       (goto-char (point-max))
       (insert (format "\n<%s>\n%s\n" label string)))))
 
@@ -270,7 +269,7 @@ A local port number can be obtained the process name after ':'. "
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2002-2009 Mew developing team.
+;; Copyright (C) 2002-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

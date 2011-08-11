@@ -602,7 +602,7 @@ with a search method."
       (message "\"%s\" does not exist" mew-prog-est-update)
     (message "Hyper Estraier indexing for %s..." folder)
     (let* ((path (file-truename (mew-expand-folder folder)))
-	   (pro (start-process "*Mew EST*" nil mew-prog-est-update "-s" mew-suffix path)))
+	   (pro (start-process "*Mew EST*" nil mew-prog-est-update "-s" mew-suffix "-b" (mew-expand-folder mew-mail-path) path)))
       (set-process-filter pro 'mew-est-index-filter)
       (set-process-sentinel pro 'mew-est-index-sentinel))))
 
@@ -612,7 +612,7 @@ with a search method."
   (if (not (mew-which-exec mew-prog-est-update))
       (message "'%s' does not exist" mew-prog-est-update)
     (message "Hyper Estraier indexing...")
-    (let ((pro (start-process "*Mew EST*" nil mew-prog-est-update "-s" mew-suffix)))
+    (let ((pro (start-process "*Mew EST*" nil mew-prog-est-update "-s" mew-suffix "-b" (mew-expand-folder mew-mail-path))))
       (set-process-filter pro 'mew-est-index-filter)
       (set-process-sentinel pro 'mew-est-index-sentinel))))
 
@@ -712,8 +712,7 @@ with a search method."
 	 (cache (mew-cache-hit fld msg))
 	 subj)
     (if (and cache (get-buffer cache))
-	(save-excursion
-	  (set-buffer cache)
+	(with-current-buffer cache
 	  (setq subj (mew-header-get-value mew-subj:)))
       (with-temp-buffer
 	(mew-insert-message
@@ -748,7 +747,7 @@ with a search method."
 
 (defun mew-summary-make-id-index-all (&optional full-update)
   "Make ID database for all folders.
-If called with '\\[universal-argument]', the database is created 
+If called with '\\[universal-argument]', the database is created
 from scratch."
   (interactive "P")
   (if (not (mew-which-exec mew-prog-cmew))
@@ -772,8 +771,7 @@ from scratch."
 
 (defun mew-summary-make-id-index-sentinel (process event)
   (let ((buf (process-buffer process)))
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (goto-char (point-max))
       (forward-line -1)
       (let ((str (mew-buffer-substring (line-beginning-position)
@@ -785,7 +783,7 @@ from scratch."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2005-2009 Mew developing team.
+;; Copyright (C) 2005-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

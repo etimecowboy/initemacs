@@ -122,7 +122,7 @@
 
 (defun mew-addrbook-clean-up ()
   (remove-hook 'kill-emacs-hook 'mew-addrbook-clean-up)
-  (when mew-alias-auto-alist
+  (when (and mew-alias-auto-file mew-alias-auto-alist)
     (mew-lisp-save mew-alias-auto-file mew-alias-auto-alist))
   (setq mew-alias-auto-alist nil))
 
@@ -287,7 +287,7 @@ returned."
     (while (re-search-forward ",$" nil t)
       (end-of-line)
       (forward-char 1)
-      (delete-backward-char 1))
+      (delete-char -1))
     ;; replace ", " to "\0" inside/outside quote.
     (goto-char (point-min))
     (while (re-search-forward ",[ \t]+" nil t)
@@ -422,7 +422,7 @@ it will add an alias."
   (setq mode-name mname)
   (setq mode-line-buffer-identification (mew-mode-line-id))
   (use-local-map mew-addrbook-mode-map)
-  (run-hooks 'mew-addrbook-mode-hook)
+  (mew-run-mode-hooks 'mew-addrbook-mode-hook)
   (setq buffer-undo-list nil))
 
 (defun mew-addrbook-nconc (ent)
@@ -545,7 +545,7 @@ reflected."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1999-2009 Mew developing team.
+;; Copyright (C) 1999-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

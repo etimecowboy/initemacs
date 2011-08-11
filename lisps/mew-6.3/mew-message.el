@@ -35,10 +35,10 @@
   (setq page-delimiter mew-page-delimiter)
   (mew-message-setup-decoration)
   (mew-message-toolbar-update)
-  (run-hooks 'mew-message-mode-hook))
+  (mew-run-mode-hooks 'mew-message-mode-hook))
 
 (defun mew-message-mode-line (fld message)
-  (let* ((msg (or message 
+  (let* ((msg (or message
 		  (mew-current-get-msg (mew-frame-id))))
 	 (status (mew-message-line-status))
 	 (flag (nth status '("N" "W" "L"))))
@@ -308,7 +308,7 @@ confused. Please use '\\[mew-message-forward]' instead."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

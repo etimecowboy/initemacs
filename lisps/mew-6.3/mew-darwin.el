@@ -31,7 +31,11 @@
 (defvar mew-prog-delivery-status 'mew-mime-text/plain)
 (defvar mew-prog-postscript      mew-darwin-exec)
 (defvar mew-prog-pgp-keys        '(mew-mime-pgp-keys mew-mime-pgp-keys-ext))
-(defvar mew-prog-pdf             mew-darwin-exec)
+
+(defvar mew-prog-application/pdf "pdftotext")
+(defvar mew-prog-pdf-ext         mew-darwin-exec)
+(defvar mew-prog-pdf             `(mew-mime-application/pdf ,mew-prog-pdf-ext))
+
 (defvar mew-prog-xml2            '(mew-mime-application/xml
 				   mew-mime-application/xml-ext))
 (defvar mew-prog-oasys           mew-darwin-exec)
@@ -42,7 +46,7 @@
 (defvar mew-prog-visio           mew-darwin-exec)
 (defvar mew-prog-ooffice         mew-darwin-exec)
 (defvar mew-prog-rtf             mew-darwin-exec)
-(defvar mew-prog-zip             mew-darwin-exec)
+(defvar mew-prog-unzip           mew-darwin-exec)
 
 ;;;
 ;;; Text/Html, Application/Xml, Image
@@ -73,24 +77,11 @@
 (setq mew-delete-temp-file nil)
 (defvar mew-dir-list-function 'mew-dir-list-with-link-count)
 
-;;
-
-(defun mew-set-file-type (file)
-  (unless mew-use-suffix
-    (mew-mac-set-file-type file mew-file-type)))
-
-(defvar mew-cs-est 'utf-8)
-
-(defun mew-focus-frame (frame)
-  (when focus-follows-mouse
-    (set-mouse-position
-     (selected-frame) (1- (frame-width)) 0)))
-
 (provide 'mew-darwin)
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2002-2009 Mew developing team.
+;; Copyright (C) 2002-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

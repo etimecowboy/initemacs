@@ -259,7 +259,7 @@ If you want to change the stored keyword, execute this command with '\\[universa
      ((or (null mwin)
 	  (not (or virtualp (equal mew-mark-review mark))) ;; MUST be equal
 	  (or (not (string= fld ofld)) (not (string= msg omsg)))
-	  (save-excursion (set-buffer mbuf) (eobp)))
+	  (with-current-buffer mbuf (eobp)))
       (cond
        (virtualp
 	(forward-line)
@@ -321,7 +321,7 @@ If you want to change the stored keyword, execute this command with '\\[universa
      ((or (null mwin)
 	  (not (or virtualp (equal mew-mark-review mark))) ;; MUST be equal
 	  (or (not (string= fld ofld)) (not (string= msg omsg)))
-	  (save-excursion (set-buffer mbuf) (bobp)))
+	  (with-current-buffer mbuf (bobp)))
       (cond
        (virtualp
 	(forward-line -1)
@@ -671,7 +671,7 @@ If you want to change the stored keyword, execute this command with '\\[universa
   (unless (and (listp kyvl) (= (length kyvl) 3))
     (error "Filter %s is invalid" kyvl))
   (let ((op (nth 0 kyvl))
- 	(ky (nth 1 kyvl))
+	(ky (nth 1 kyvl))
 	(vl (nth 2 kyvl)))
     (if (string= ky "head")
 	(setq ky mew-pick-filter-est-head-fields))
@@ -822,7 +822,7 @@ If you want to change the stored keyword, execute this command with '\\[universa
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

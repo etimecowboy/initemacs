@@ -514,8 +514,7 @@ If case is \"default\", it is not prepended."
   (string-match "^\\*" folder))
 
 (defun mew-virtual-thread-p (vfolder)
-  (save-excursion
-    (set-buffer vfolder)
+  (with-current-buffer vfolder
     (mew-thread-p)))
 
 ;;
@@ -1104,8 +1103,7 @@ and sets buffer-file-coding-system."
   ;; string-bytes() acts differently on each Emacs.
   ;; set-buffer-multibyte is also buggy.
   ;; So, use this way.
-  (save-excursion
-    (set-buffer buf)
+  (with-current-buffer buf
     (if (fboundp 'string-as-unibyte)
 	(length (string-as-unibyte (mew-buffer-substring beg end)))
       (- end beg))))
@@ -1150,8 +1148,7 @@ and sets buffer-file-coding-system."
       (when (and (string-match regex buf)
 		 (or (not mode)
 		     (and mode (get-buffer buf)
-			  (save-excursion
-			    (set-buffer buf)
+			  (with-current-buffer buf
 			    (eq major-mode mode)))))
 	(if listp
 	    (setq ret (cons (list buf) ret))
@@ -1311,23 +1308,17 @@ from (mew-user), (mew-mail-address), and 'mew-mail-address-list'."
 
 (defun mew-lisp-load (filename)
   "Load lisp from FILENAME"
-  (let* ((fullname (if (file-name-absolute-p filename)
-		       filename
-		     (expand-file-name filename mew-conf-path)))
-	 (tmp-buf (create-file-buffer fullname))
-	 lisp)
+  (let ((fullname (if (file-name-absolute-p filename)
+		      filename
+		    (expand-file-name filename mew-conf-path))))
     (if (file-readable-p fullname)
-	(save-excursion
-	  (set-buffer tmp-buf)
-	  (mew-erase-buffer)
+	(with-temp-buffer
 	  (mew-frwlet mew-cs-m17n mew-cs-dummy
 	    (mew-insert-file-contents fullname))
-	  (setq lisp
-		(condition-case nil
-		    (read (current-buffer))
-		  (error ())))))
-    (mew-remove-buffer tmp-buf)
-    lisp))
+	  (goto-char (point-min))
+	  (condition-case nil
+	      (read (current-buffer))
+	    (error ()))))))
 
 (defun mew-lisp-save (filename lisp &optional nobackup unlimit)
   "Save LISP to FILENAME. LISP is truncated to mew-lisp-max-length
@@ -1336,26 +1327,22 @@ by side-effect."
 		       filename
 		     (expand-file-name filename mew-conf-path)))
 	 (backname (concat fullname mew-backup-suffix))
-	 (tmp-buf (create-file-buffer fullname))
 	 print-length print-level) ;; for Emacs 21
-    (if (file-writable-p fullname)
-	(save-excursion
-	  (if nobackup
-	      (mew-delete-file fullname)
-	    (if (file-exists-p fullname)
-		(rename-file fullname backname 'override)))
-	  (set-buffer tmp-buf)
-	  (mew-erase-buffer)
-	  (when (and (not unlimit) (> (length lisp) mew-lisp-max-length))
-	    (setq lisp (copy-sequence lisp)) ;; no side effect
-	    (mew-ntake mew-lisp-max-length lisp))
-	  (if (> (length lisp) mew-lisp-max-length)
-	      (print lisp tmp-buf)
-	    (pp lisp tmp-buf))
-	  (mew-frwlet mew-cs-dummy mew-cs-m17n
-	    (write-region (point-min) (point-max) fullname nil 'no-msg))
-	  (mew-set-file-modes fullname)))
-    (mew-remove-buffer tmp-buf)))
+    (when (file-writable-p fullname)
+      (if nobackup
+	  (mew-delete-file fullname)
+	(if (file-exists-p fullname)
+	    (rename-file fullname backname 'override)))
+      (when (and (not unlimit) (> (length lisp) mew-lisp-max-length))
+	(setq lisp (copy-sequence lisp)) ;; no side effect
+	(mew-ntake mew-lisp-max-length lisp))
+      (with-temp-buffer
+	(if (> (length lisp) mew-lisp-max-length)
+	    (print lisp (current-buffer))
+	  (pp lisp (current-buffer)))
+	(mew-frwlet mew-cs-dummy mew-cs-m17n
+	  (write-region (point-min) (point-max) fullname nil 'no-msg)))
+      (mew-set-file-modes fullname))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -1393,7 +1380,7 @@ by side-effect."
 ;;;
 
 (defvar mew-time-rfc-regex
-  "\\([0-9]+\\)[ \t]+\\([a-zA-Z]+\\)[ \t]+\\([0-9]+\\)[ \t]+\\([0-9]+\\):\\([0-9]+\\)\\(:\\([0-9]+\\)\\)?\\([ \t]+\\([-+0-9a-zA-Z]+\\)\\)?")
+  "\\([0-9]+\\)[ \t\n\r]+\\([a-zA-Z]+\\)[ \t\n\r]+\\([0-9]+\\)[ \t\n\r]+\\([0-9]+\\):\\([0-9]+\\)\\(:\\([0-9]+\\)\\)?\\([ \t\n\r]+\\([-+0-9a-zA-Z]+\\)\\)?")
 
 (defmacro mew-time-rfc-day  ()
   '(string-to-number (substring s (match-beginning 1) (match-end 1))))
@@ -1455,7 +1442,7 @@ by side-effect."
 	(cond
 	 ((< year 50)
 	  (setq year (+ year 2000)))
-	 ((< year 100)
+	 ((< year 150)
 	  (setq year (+ year 1900))))
 	(if (or (< year 1970) (>= year 2038))
 	    ;; invalid data
@@ -1649,7 +1636,7 @@ by side-effect."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

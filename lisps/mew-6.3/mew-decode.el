@@ -42,8 +42,7 @@
 
 (defun mew-cache-dinfo-get-use-alt (buf)
   (when buf
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (mew-dinfo-get-use-alt))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -94,6 +93,9 @@
   (mew-xinfo-set-decode-err error-msg)
   (error error-msg))
 
+(defun mew-decode-error2 (error-msg)
+  (mew-xinfo-set-decode-err error-msg))
+
 ;;;
 ;;; Decoding a header
 ;;;
@@ -122,8 +124,7 @@ This commands toggles visibility of these lines."
   (interactive)
   (when (and mew-use-header-veil (get-buffer (mew-buffer-message)))
     (mew-summary-msg-or-part
-     (save-excursion
-       (set-buffer (mew-buffer-message))
+     (with-current-buffer (mew-buffer-message)
        (when (mew-msghdr-p)
 	 (let* ((win (get-buffer-window (current-buffer)))
 		(pos (window-start win)))
@@ -545,7 +546,10 @@ Return a part syntax after moving the beginning of the content body."
 	    ;; Never reach here when decoding.
 	    (mew-decode-error (concat "Unknown CTE: " cte))
 	  (setq file (mew-make-temp-name))
-	  (mew-frwlet mew-cs-dummy mew-cs-text-for-write
+	  (mew-frwlet mew-cs-dummy (if linebasep
+				       mew-cs-text-for-write
+				     mew-cs-text-for-net)
+	    ;; Due to broken MUAs, we need to write CRLF.
 	    ;; NEVER use call-process-region for privacy reasons
 	    (write-region beg (point-max) file nil 'no-msg))
 	  (delete-region beg (point-max))
@@ -665,7 +669,7 @@ Return a part syntax after moving the beginning of the content body."
      (t
       (if (and (eq parent 'message)
 	       (or (not (mew-xinfo-get-text-body))
-		   (if (mew-dinfo-get-encap-html) 
+		   (if (mew-dinfo-get-encap-html)
 		       (not (string= ct mew-ct-txt))
 		     (not textp))))
 	  (setq encap t))
@@ -742,7 +746,7 @@ Return a part syntax after moving the beginning of the content body."
 	(cond
 	 ((and (= prev-level level) softbreak)
 	  (mew-decode-flowed-remove-quoted-stuffed softbreak))
-	 (t 
+	 (t
 	  (if (= level 0) (mew-decode-flowed-remove-stuffed))))
 	(setq softbreak (mew-decode-flowed-soft-breakp delsp))))))
 
@@ -767,7 +771,7 @@ Return a part syntax after moving the beginning of the content body."
 	(if (and (char-before) (char-equal (char-before) mew-flowed-break))
 	    (if delsp (1- (point)) (point))
 	  nil)))))
-    
+
 ;;;
 ;;; Decoding multipart
 ;;;
@@ -785,7 +789,7 @@ Return a part syntax after moving the beginning of the content body."
     (concat "^--" (regexp-quote mboundary) "\\(--\\|\\)[ \t]*$")))
 
 (defun mew-decode-multipart-end-boundary-regex (boundary)
-  (let ((mboundary (mew-set-string-multibyte boundary)))  
+  (let ((mboundary (mew-set-string-multibyte boundary)))
     (concat "^--" (regexp-quote mboundary) "--[ \t]*$")))
 
 (defun mew-decode-multipart-boundary-cont ()
@@ -1028,14 +1032,14 @@ Return a part syntax after moving the beginning of the content body."
     ;;
     (unless (and (re-search-forward bregex nil t)
 		 (mew-decode-multipart-boundary-cont))
-      (mew-decode-error "No first boundary for Multipart/Signed"))
+      (mew-decode-error2 "No first boundary for Multipart/Signed"))
     (forward-line) ;; the beginning of the signed part
     (delete-region (point-min) (point)) ;; deleting content-header
     (goto-char (point-min)) ;; just in case
     ;;
     (unless (and (re-search-forward bregex nil t)
 		 (mew-decode-multipart-boundary-cont))
-      (mew-decode-error "No second boundary for Multipart/Signed"))
+      (mew-decode-error2 "No second boundary for Multipart/Signed"))
     (beginning-of-line)
     (setq end1 (1- (point))) ;; the end of the signed part
     (forward-line) ;; the beginning of the key part
@@ -1043,7 +1047,7 @@ Return a part syntax after moving the beginning of the content body."
     ;;
     (unless (and (re-search-forward bregex nil t)
 		 (mew-decode-multipart-boundary-end))
-      (mew-decode-error "No third boundary for Multipart/Signed"))
+      (mew-decode-error2 "No third boundary for Multipart/Signed"))
     (beginning-of-line) ;; the end of the encrypted part + 1
     (setq syntax2 (mew-decode-security-singlepart start2 (1- (point))))
     (setq proto (mew-syntax-get-value (mew-syntax-get-ct syntax2) 'cap))
@@ -1106,7 +1110,7 @@ Return a part syntax after moving the beginning of the content body."
 	  (setq start (match-end 0))
 	  (when (string-match "^\r?$" key)
 	    (save-restriction
-	      (if (string-match cte mew-bin)
+	      (if (string-match mew-bin cte) ;; cte may include \r
 		  (narrow-to-region (point-min) (1+ start))
 		(narrow-to-region (point-min) (point-max)))
 	      (goto-char (point-min))
@@ -1121,7 +1125,7 @@ Return a part syntax after moving the beginning of the content body."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

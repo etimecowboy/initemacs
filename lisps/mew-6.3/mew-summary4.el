@@ -30,6 +30,7 @@
       nil) ;; existing folder
      (t
       (funcall (or func 'switch-to-buffer) (get-buffer-create case:folder))
+      (kill-all-local-variables)
       (mew-set-buffer-cs mew-cs-m17n)
       (mew-buffers-setup case:folder)
       (let* ((case (mew-case:folder-case case:folder))
@@ -148,7 +149,7 @@ the message is then displayed."
 	      (mew-summary-display))))
     (let ((line (string-to-number (read-string "Line No.: " ""))))
       (when (/= line 0)
-	(goto-line line)
+	(goto-char (point-min)) (forward-line (1- line))
 	(if mew-summary-goto-line-then-display
 	    (mew-summary-display))))))
 
@@ -176,8 +177,7 @@ the message is then displayed."
   "Go to Header mode."
   (interactive)
   (let (msgp)
-    (save-excursion
-      (set-buffer (window-buffer (next-window)))
+    (with-current-buffer (window-buffer (next-window))
       (if (mew-message-p) (setq msgp t)))
     (if msgp
 	(other-window 1)
@@ -302,8 +302,7 @@ If called with '\\[universal-argument]', the body of the message
   (mew-summary-display 'redisplay)
   (when (or (not mew-ask-pipe)
             (y-or-n-p "Send this message to pipe? "))
-    (save-excursion
-      (set-buffer (mew-buffer-message))
+    (with-current-buffer (mew-buffer-message)
       (save-restriction
 	(widen)
 	(if (string= command "") (setq command mew-last-shell-command))
@@ -327,8 +326,7 @@ If called with '\\[universal-argument]', you can specify a printer name."
 			  (read-string "Printer name: ")
 			printer-name))
 	have-header str)
-    (save-excursion
-      (set-buffer (mew-buffer-message))
+    (with-current-buffer (mew-buffer-message)
       (save-restriction
 	(widen)
 	(setq have-header (mew-msghdr-p))
@@ -342,6 +340,32 @@ If called with '\\[universal-argument]', you can specify a printer name."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Saving a message to a file with header decoded
+;;;
+
+(defun mew-summary-store (&optional askcs)
+  "Saving a buffer of Message mode to a file.
+If executed with '\\[universal-argument]', coding-system is asked."
+  (interactive "P")
+  (mew-summary-display 'redisplay)
+  (let* ((file (mew-summary-input-file-name))
+	 (doit (if (file-exists-p file)
+		   (if (y-or-n-p (format "File exists. Override it? "))
+		       t
+		     nil)
+		 t)))
+    (if (not doit)
+	(message "Not saved")
+      (let ((writecs (if askcs
+			 (read-coding-system "Coding-system: ")
+		       (default-value 'buffer-file-coding-system))))
+	(with-current-buffer (mew-buffer-message)
+	  (mew-frwlet mew-cs-dummy writecs
+	    ;; do not specify 'no-msg
+	    (write-region (point-min) (point-max) file)))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; X-Face:
 ;;;
 
@@ -350,8 +374,7 @@ If called with '\\[universal-argument]', you can specify a printer name."
   (interactive)
   (mew-summary-msg
    (let ((file (mew-make-temp-name)) xface)
-     (save-excursion
-       (set-buffer (mew-buffer-message))
+     (with-current-buffer (mew-buffer-message)
        (setq xface (mew-header-get-value mew-x-face:)))
      (when xface
        (with-temp-buffer
@@ -406,8 +429,7 @@ marked with '*' as arguments."
 	(message "No draft buffer exists!")
       (setq buf (mew-input-draft-buffer draft))
       (if (get-buffer buf)
-	  (save-excursion
-	    (set-buffer buf)
+	  (with-current-buffer buf
 	    (mew-draft-cite arg))
 	(message "No such draft buffer!")))))
 
@@ -451,6 +473,16 @@ If executed with '\\[universal-argument]', you can set the sending case."
 ;;;
 ;;; Unlocking
 ;;;
+
+(defun mew-subprocess-init ()
+  (add-hook 'kill-emacs-hook 'mew-subprocess-kill))
+
+(defun mew-subprocess-clean-up ()
+  (mew-summary-kill-subprocess t)
+  (remove-hook 'kill-emacs-hook 'mew-subprocess-kil))
+
+(defun mew-subprocess-kill ()
+  (mew-summary-kill-subprocess t))
 
 (defun mew-summary-kill-subprocess (&optional kill-ssx)
   "\\<mew-summary-mode-map>
@@ -725,8 +757,7 @@ message."
 	  (if (string= folder trash) (mew-summary-reset))
 	  (message "Removing all messages in %s..." case:trash)
 	  (when (get-buffer case:trash)
-	    (save-excursion
-	      (set-buffer case:trash)
+	    (with-current-buffer case:trash
 	      (mew-summary-kill-subprocess)))
 	  (mew-summary-unlink-msgs case:trash msgs)
 	  (mew-summary-folder-cache-clean case:trash)
@@ -799,8 +830,7 @@ the region are handled."
 	 (setq dstmsg (mew-folder-new-message dstfld 'numonly)))
        (setq msgs (mew-summary-mark-collect mew-mark-review beg end))
        (when (get-buffer dstfld)
-	 (save-excursion
-	   (set-buffer dstfld)
+	 (with-current-buffer dstfld
 	   (setq exclusivep (mew-summary-exclusive-p))))
        (cond
 	((null msgs)
@@ -1073,7 +1103,7 @@ See also 'mew-spam-prog' and 'mew-spam-prog-args."
 	 (if (= (point) beg)
 	     (message "Learning as spam...done")
 	   (setq end (1- (point)))
-	   (message (concat "Learned as spam: " (mew-buffer-substring beg end)))))))))
+	   (message "%s" (concat "Learned as spam: " (mew-buffer-substring beg end)))))))))
 
 (defun mew-summary-learn-ham ()
   "Learn that this message is a ham.
@@ -1097,7 +1127,7 @@ See also 'mew-ham-prog' and 'mew-ham-prog-args."
 	 (if (= (point) beg)
 	     (message "Learning as ham...done")
 	   (setq end (1- (point)))
-	   (message (concat "Learned as ham: " (mew-buffer-substring beg end)))))))))
+	   (message "%s" (concat "Learned as ham: " (mew-buffer-substring beg end)))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -1168,7 +1198,7 @@ Executing this command enables searching such information."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

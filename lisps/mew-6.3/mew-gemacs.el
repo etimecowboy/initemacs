@@ -277,36 +277,37 @@
       (mew-plet
        (insert-buffer-substring cache begin end)
        (mew-set-buffer-multibyte nil)
-       (goto-char (point-min))
-       (setq image-size (funcall func-size))
-       (setq image-width (car image-size))
-       (setq image-height (cdr image-size))
-       (when (and image-width image-height
-		  (or (< width image-width)
-		      (and mew-image-display-resize-care-height (< height image-height)))
-		  (mew-which-exec prog))
-	 (message "Resizing image...")
-	 (call-process-region (point-min) (point-max) prog
-			      t '(t nil) nil)
-	 (if mew-image-display-resize-care-height
+       (when (and prog prog2 func-size)
+	 (goto-char (point-min))
+	 (setq image-size (funcall func-size))
+	 (setq image-width (car image-size))
+	 (setq image-height (cdr image-size))
+	 (when (and image-width image-height
+		    (or (< width image-width)
+			(and mew-image-display-resize-care-height (< height image-height)))
+		    (mew-which-exec prog))
+	   (message "Resizing image...")
+	   (call-process-region (point-min) (point-max) prog
+				t '(t nil) nil)
+	   (if mew-image-display-resize-care-height
+	       (call-process-region (point-min) (point-max) "pnmscale"
+				    t '(t nil) nil
+				    "-xysize"
+				    (format "%d" width)
+				    (format "%d" height))
 	     (call-process-region (point-min) (point-max) "pnmscale"
 				  t '(t nil) nil
-				  "-xysize"
-				  (format "%d" width)
-				  (format "%d" height))
-	   (call-process-region (point-min) (point-max) "pnmscale"
-				t '(t nil) nil
-				"-xsize" (format "%d" width)))
-	 (if (and (string< emacs-version "22") ;; xxx
-		  (mew-which-exec prog2))
-	     (call-process-region (point-min) (point-max) prog2
-				  t '(t nil) nil)
-	   (setq format 'pbm))
-	 (message "Resizing image...done"))
+				  "-xsize" (format "%d" width)))
+	   (if (and (string< emacs-version "22") ;; xxx
+		    (mew-which-exec prog2))
+	       (call-process-region (point-min) (point-max) prog2
+				    t '(t nil) nil)
+	     (setq format 'pbm))
+	   (message "Resizing image...done")))
        (setq image (mew-buffer-substring (point-min) (point-max)))))
     (mew-elet
      (condition-case nil
-	 (insert-image (create-image image format t))
+	 (insert-image (mew-create-image image format t))
        (error ()))))
   (goto-char (point-min))
   (message "Loading image...done"))
@@ -325,7 +326,7 @@
 ;;;
 
 (defun mew-x-face-create ()
-  (create-image
+  (mew-create-image
    (string-as-unibyte (mew-buffer-substring (point-min) (point-max)))
    nil t))
 
@@ -369,7 +370,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

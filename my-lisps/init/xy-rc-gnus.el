@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-03-11 Fri 16:35 xin on p6t>
+;; Time-stamp:<2011-08-11 Thu 16:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -621,16 +621,28 @@ archive
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; Recieving
+
+  (setq gnus-secondary-select-methods
+		'((nnimap "Gmail-etimecowboy"
+		  		  (nnimap-address "imap.gmail.com")
+		  		  (nnimap-server-port 993)
+		  		  (nnimap-stream ssl))
+		  ;; (nnimap "UWE-staff"
+		  ;; 		  (nnimap-address "ses-smtp.uwe.ac.uk")
+		  ;; 		  (nnimap-server-port 993)
+		  ;; 		  (nnimap-stream ssl))
+		  ))
+
+  ;; (add-to-list 'gnus-secondary-select-methods 
+  ;;              '(nnimap "gmail"
+  ;; 						 (nnimap-address "imap.gmail.com")
+  ;; 						 (nnimap-server-port 993)
+  ;; 						 (nnimap-stream ssl)))
+  ;; 				         ;; "uwe"
+  ;; 						 ;; (nnimap-address "ses-imap.uwe.ac.uk")
+  ;; 						 ;; (nnimap-server-port 993)
+  ;; 						 ;; (nnimap-stream ssl)))
   
-  (add-to-list 'gnus-secondary-select-methods 
-               '(nnimap "gmail"
-  						 (nnimap-address "imap.gmail.com")
-  						 (nnimap-server-port 993)
-  						 (nnimap-stream ssl)))
-				         ;; "uwe"
-						 ;; (nnimap-address "ses-imap.uwe.ac.uk")
-						 ;; (nnimap-server-port 993)
-						 ;; (nnimap-stream ssl))) 
   ;; uwe staff
   ;; (add-to-list 'gnus-secondary-select-methods 
   ;;              '(nnimap "uwestaff"
@@ -640,6 +652,7 @@ archive
   ;;                 (nnimap-authinfo-file 
   ;;                   "~/.emacs.d/var/gnus/authinfo"))
   ;; )
+
   ;; windows settings
   ;; (add-to-list 'gnus-secondary-select-methods 
   ;;              '(nnimap "gmail"

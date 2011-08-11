@@ -75,14 +75,14 @@
 ;;     (let ((efs-tmp-name-template mew-temp-file) exp)
 ;;       (setq exp (efs-expand-file-name (format "/%s@%s:%s" user host dir)))
 ;;       (if (string-match ".*:\\(.*\\)$" exp)
-;; 	  (match-string 1 exp))))
+;;	 (match-string 1 exp))))
 ;;   (defun mew-ext-copy-file-internal (remote local passwd)
 ;;     (require 'efs)
 ;;     (let ((efs-tmp-name-template mew-temp-file)
-;; 	  (efs-generate-anonymous-password passwd)
-;; 	  (parsed (efs-ftp-path remote)))
+;;	  (efs-generate-anonymous-password passwd)
+;;	  (parsed (efs-ftp-path remote)))
 ;;       (efs-copy-file-internal remote parsed local nil
-;; 			      nil nil nil nil t 'image))))
+;;			      nil nil nil nil t 'image))))
  ((mew-which-el "ange-ftp")
   (defun mew-ext-file-name-completion (file path)
     (require 'ange-ftp)
@@ -428,8 +428,7 @@
 
 (defun mew-ext-decode-message-header (cache begin end)
   (let (syntax start)
-    (save-excursion
-      (set-buffer cache)
+    (with-current-buffer cache
       (save-restriction
 	(narrow-to-region begin end)
 	(goto-char (point-min))
@@ -493,7 +492,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

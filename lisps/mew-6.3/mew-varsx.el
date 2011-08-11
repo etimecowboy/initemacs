@@ -62,28 +62,6 @@
  (format  "\\([0-9]+\\)\\(%s\\)?$" (regexp-quote mew-suffix)))
 
 ;;
-;; Office
-;;
-
-(defvar mew-prog-msword-ext nil)
-(mew-defvar 'mew-prog-msword-ext "ooffice")
-(mew-defvar
- 'mew-prog-msword
- (list 'mew-mime-application/msword mew-prog-msword-ext))
-
-(defvar mew-prog-msexcel-ext nil)
-(mew-defvar 'mew-prog-msexcel-ext "ooffice")
-(mew-defvar
- 'mew-prog-msexcel
- (list 'mew-mime-application/msexcel mew-prog-msexcel-ext))
-
-(defvar mew-prog-mspowerpoint-ext nil)
-(mew-defvar 'mew-prog-mspowerpoint-ext "ooffice")
-(mew-defvar
- 'mew-prog-mspowerpoint
- (list 'mew-mime-application/mspowerpoint mew-prog-mspowerpoint-ext))
-
-;;
 ;; MIME
 ;;
 
@@ -132,6 +110,15 @@
     mew-prog-postscript             mew-icon-application/postscript)
    ("application/pdf"               "\\.pdf$"  mew-b64
     mew-prog-pdf                    mew-icon-application/postscript)
+   ;; Thunderbird/3.1.7 only, not registered in IANA
+   ("text/pdf"                      "\\.pdf$"  mew-b64
+    mew-prog-pdf                    mew-icon-application/postscript)
+   ("application/octet-stream"      "\\.pages$"  mew-b64
+    mew-default-external-program    mew-icon-application/octet-stream)
+   ("application/octet-stream"      "\\.key$"  mew-b64
+    mew-default-external-program    mew-icon-application/octet-stream)
+   ("application/octet-stream"      "\\.numbers$"  mew-b64
+    mew-default-external-program    mew-icon-application/octet-stream)
    ("application/msword"            "\\.doc$"  mew-b64
     mew-prog-msword                 mew-icon-text)
    ("application/vnd.ms-excel"      "\\.xl[st]$" mew-b64
@@ -171,11 +158,11 @@
    ("application/vnd.fujitsu.oasys3" "\\.oa3$" mew-b64
     mew-prog-oasys                  mew-icon-text)
    ("application/zip"               "\\.zip$" mew-b64
-    mew-prog-zip                    mew-icon-application/octet-stream)
+    mew-prog-unzip                  mew-icon-application/octet-stream)
    ("application/x-zip-compressed"  "\\.zip$" mew-b64
-    mew-prog-zip                    mew-icon-application/octet-stream)
+    mew-prog-unzip                  mew-icon-application/octet-stream)
    ("application/octet-stream"
-    "\\.tar$\\|\\.tar\\.\\|\\.gz$\\|\\.Z$\\|\\.taz$\\|\\.tgz$\\|\\.tbz$\\|\\.bz2?$\\|\\.lzh$\\|\\.zip$\\|\\.bin$\\|\\.pgp$\\|\\.gpg$\\|\\.exe$\\|\\.dll$"
+    "\\.tar$\\|\\.tar\\.\\|\\.gz$\\|\\.Z$\\|\\.taz$\\|\\.tgz$\\|\\.tbz$\\|\\.bz2?$\\|\\.lzh$\\|\\.bin$\\|\\.pgp$\\|\\.gpg$\\|\\.exe$\\|\\.dll$"
     mew-b64 mew-prog-octet-stream mew-icon-application/octet-stream)
    ;;
    ("text/html"     "\\.html?$" nil     mew-prog-html      mew-icon-text)
@@ -241,7 +228,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

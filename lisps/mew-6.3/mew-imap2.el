@@ -524,8 +524,7 @@ with '*' in the region are handled."
 
 (defun mew-imap2-debug (label string)
   (when (mew-debug 'net)
-    (save-excursion
-      (set-buffer (get-buffer-create mew-buffer-debug))
+    (with-current-buffer (get-buffer-create mew-buffer-debug)
       (goto-char (point-max))
       (insert (format "\n<%s>\n%s\n" label string)))))
 
@@ -629,7 +628,7 @@ with '*' in the region are handled."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2003-2009 Mew developing team.
+;; Copyright (C) 2003-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

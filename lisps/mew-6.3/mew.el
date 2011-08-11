@@ -2,7 +2,7 @@
 
 ;; Author:  Kazu Yamamoto <Kazu@Mew.org>
 ;; Created: Mar 23, 1994
-;; Revised: Nov 20, 2009
+;; Revised: Jun 29, 2011
 
 ;;; Commentary:
 
@@ -18,7 +18,7 @@
 ;;; Mew version
 ;;;
 
-(defconst mew-version-number "6.3"
+(defconst mew-version-number "6.3.51"
   "Version number for this version of Mew.")
 (defconst mew-version (format "Mew version %s" mew-version-number)
   "Version string for this version of Mew.")
@@ -29,13 +29,6 @@
 (require 'mew-vars) ;; mew-env && mew-key
 (require 'mew-vars2)
 (require 'mew-vars3)
-(cond
- ((memq system-type '(windows-nt cygwin))
-  (require 'mew-win32))
- ((eq system-type 'darwin)
-  (require 'mew-darwin))
- (t
-  (require 'mew-unix)))
 
 (defun mew-version-show ()
   "Show mew-version in minibuffer."
@@ -105,8 +98,9 @@ function."
 
 ;;;###autoload
 (defun mew-user-agent-compose (&optional to subject other-headers continue
-                                             switch-function yank-action
-                                             send-actions)
+					 switch-function yank-action
+					 send-actions
+					 &rest dummy)
   "Set up message composition draft with Mew.
 This is 'mail-user-agent' entry point to Mew.
 
@@ -148,6 +142,13 @@ CONTINUE, YANK-ACTION and SEND-ACTIONS are ignored."
   (let ((buf (get-buffer-create "*Mew hello*")))
     (run-hooks 'mew-env-hook)
     (load mew-rc-file 'no-err 'no-msg)
+    (cond
+     ((memq system-type '(windows-nt cygwin))
+      (require 'mew-win32))
+     ((eq system-type 'darwin)
+      (require 'mew-darwin))
+     (t
+      (require 'mew-unix)))
     (require 'mew-varsx)
     (if mew-theme-file (load mew-theme-file 'no-err 'no-msg))
     (switch-to-buffer buf)
@@ -181,6 +182,7 @@ CONTINUE, YANK-ACTION and SEND-ACTIONS are ignored."
 	  (or no-dir (mew-temp-dir-init))
 	  (mew-mark-init)
 	  (mew-config-init)
+	  (mew-subprocess-init)
 	  (mew-rotate-log-files mew-smtp-log-file)
 	  (mew-rotate-log-files mew-nntp-log-file)
 	  (mew-rotate-log-files mew-refile-log-file))
@@ -215,7 +217,7 @@ CONTINUE, YANK-ACTION and SEND-ACTIONS are ignored."
 
 (defun mew-status-update (&optional arg)
   "Read Addrbook and update its information.
-If executed with '\\[universal-argument]', information about folders 
+If executed with '\\[universal-argument]', information about folders
 of the current world is also updated."
   (interactive "P")
   (cond
@@ -388,8 +390,8 @@ the lower window is not zero, switch to the buffer."
     ;;
     (if (get-buffer msgbuf)
 	(delete-windows-on msgbuf)
-      (save-excursion
-	(set-buffer (get-buffer-create msgbuf))
+      (with-current-buffer (get-buffer-create msgbuf)
+	(kill-all-local-variables)
 	;; "truncate?" is asked in Message mode.
 	;; so set the same toolbar as Summary mode
 	(mew-summary-toolbar-update)
@@ -421,8 +423,7 @@ the lower window is not zero, switch to the buffer."
 	(i 1))
     (walk-windows
      (lambda (win)
-       (when (save-excursion
-	       (set-buffer (window-buffer win))
+       (when (with-current-buffer (window-buffer win)
 	       (mew-summary-or-virtual-p))
 	 (if (< (car (window-edges win)) x)
 	     (setq i (1+ i)))))
@@ -591,8 +592,7 @@ It is typically called by kill-emacs-hook."
 	 (folder (if (bufferp buf) (buffer-name buf) buf))
 	 obuf)
     (if (get-buffer buf)
-	(save-excursion
-	  (set-buffer buf)
+	(with-current-buffer buf
 	  (when (mew-summary-or-virtual-p)
 	    (mew-summary-kill-subprocess)
 	    (setq obuf (mew-local-buffer-name folder))
@@ -638,6 +638,7 @@ Mew remain, so you can resume with buffer operations."
     ;;
     (mew-passwd-clean-up) ;; should be before dir clean up
     (mew-temp-dir-clean-up)
+    (mew-subprocess-clean-up)
     ;;
     (run-hooks 'mew-quit-hook)
     ;;
@@ -743,7 +744,7 @@ Mew remain, so you can resume with buffer operations."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1994-2009 Mew developing team.
+;; Copyright (C) 1994-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

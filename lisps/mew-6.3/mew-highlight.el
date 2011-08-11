@@ -278,8 +278,7 @@
 	 (beg (or BEG (window-start win)))
 	 (end (window-end win t))
 	 (buf (window-buffer win)))
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (funcall mew-summary-cook-function beg end))))
 
 ;; See also mew-scan-insert-line
@@ -355,7 +354,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

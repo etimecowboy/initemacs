@@ -151,8 +151,7 @@ after ':'."
 
 (defun mew-ssh-debug (label string)
   (when (mew-debug 'net)
-    (save-excursion
-      (set-buffer (get-buffer-create mew-buffer-debug))
+    (with-current-buffer (get-buffer-create mew-buffer-debug)
       (goto-char (point-max))
       (insert (format "\n<%s>\n%s\n" label string)))))
 
@@ -228,7 +227,7 @@ after ':'."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1999-2009 Mew developing team.
+;; Copyright (C) 1999-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

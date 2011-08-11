@@ -609,27 +609,29 @@ present, mew-face-header-marginal is used."
 (mew-defstruct header-color field key val)
 (defvar mew-header-color-alist nil)
 
+;; See also mew-face-make-spec.
+
 (defun mew-header-color-base (field key-color val-color bold)
   (unless val-color (setq val-color key-color))
   (let ((face-key (intern (concat "mew-face-color-" key-color (if bold "-bold"))))
 	(face-val (intern (concat "mew-face-color-" val-color (if bold "-bold")))))
     (unless (facep face-key)
       (make-empty-face face-key)
-      (face-spec-set face-key `((t (:foreground ,key-color :bold ,bold)))))
+      (face-spec-set face-key (list (mew-face-spec-func t (mew-face-spec-primitive key-color bold)))))
     (unless (facep face-val)
       (make-empty-face face-val)
-      (face-spec-set face-val `((t (:foreground ,val-color :bold ,bold)))))
+      (face-spec-set face-val (list (mew-face-spec-func t (mew-face-spec-primitive val-color bold)))))
     (setq mew-header-color-alist
 	  (cons (list (capitalize field) face-key face-val) mew-header-color-alist))))
 
 (defun mew-header-color (field key-color &optional val-color)
-  "Set the color of FIELD key to KEY-COLOR. 
+  "Set the color of FIELD key to KEY-COLOR.
 And set the color of FIELD value to VAL-COLOR.
 If VAL-COLOR is omitted, set the color of FIELD value to KEY-COLOR."
   (mew-header-color-base field key-color val-color nil))
 
 (defun mew-header-color-bold (field key-color &optional val-color)
-  "Set the color of FIELD key to KEY-COLOR. 
+  "Set the color of FIELD key to KEY-COLOR.
 And set the color of FIELD value to VAL-COLOR.
 If VAL-COLOR is omitted, set the color of FIELD value to KEY-COLOR.
 The style becomes bold."
@@ -918,31 +920,31 @@ to messages and puts them to your mailbox, configure as follows:
   - <value> is a string.
 
 Currently, the following keys are supported:
-name, user, mail-domain, 
-cc, fcc, dcc, reply-to, organization, header-alist, proto, 
-smtp-server, smtp-port, smtp-ssh-server, smtp-ssl, smtp-ssl-port, 
-smtp-user, smtp-auth-list, 
-smtp-msgid-user, smtp-msgid-domain, smtp-helo-domain, smtp-mail-from, 
-pop-server, pop-port, pop-ssh-server, pop-ssl, pop-ssl-port, 
-pop-user, pop-auth, pop-auth-list, 
+name, user, mail-domain,
+cc, fcc, dcc, reply-to, organization, header-alist, proto,
+smtp-server, smtp-port, smtp-ssh-server, smtp-ssl, smtp-ssl-port,
+smtp-user, smtp-auth-list,
+smtp-msgid-user, smtp-msgid-domain, smtp-helo-domain, smtp-mail-from,
+pop-server, pop-port, pop-ssh-server, pop-ssl, pop-ssl-port,
+pop-user, pop-auth, pop-auth-list,
 pop-size, pop-header-only, pop-delete, pop-body-lines,
 pop-proxy-server, pop-proxy-port,
-imap-server, imap-port, imap-ssh-server, imap-ssl, imap-ssl-port, 
-imap-user, imap-auth, imap-auth-list, 
-imap-size, imap-header-only, imap-delete, 
+imap-server, imap-port, imap-ssh-server, imap-ssl, imap-ssl-port,
+imap-user, imap-auth, imap-auth-list,
+imap-size, imap-header-only, imap-delete,
 imap-trash-folder, imap-queue-folder, imap-spam-field, imap-spam-word,
 imap-proxy-server, imap-proxy-port,
-nntp-server, nntp-port, nntp-ssh-server, nntp-ssl, nntp-ssl-port, 
-nntp-user, nntp-size, nntp-header-only, 
-nntp-msgid-user, nntp-msgid-domain, 
-ssl-cert-directory, ssl-verify-level, 
-inbox-folder, queue-folder, postq-folder, 
+nntp-server, nntp-port, nntp-ssh-server, nntp-ssl, nntp-ssl-port,
+nntp-user, nntp-size, nntp-header-only,
+nntp-msgid-user, nntp-msgid-domain,
+ssl-cert-directory, ssl-verify-level,
+inbox-folder, queue-folder, postq-folder,
 mailbox-type, mbox-command, mbox-command-arg,
-signature-file, content-type, refile-guess-alist, 
-spam-prog, spam-prog-args, ham-prog, ham-prog-args, 
-use-old-pgp, pgp-signer, smime-signer, privacy-method, 
-protect-privacy-always, protect-privacy-always-type, 
-protect-privacy-encrypted, protect-privacy-encrypted-type, 
+signature-file, content-type, refile-guess-alist,
+spam-prog, spam-prog-args, ham-prog, ham-prog-args,
+use-old-pgp, pgp-signer, smime-signer, privacy-method,
+protect-privacy-always, protect-privacy-always-type,
+protect-privacy-encrypted, protect-privacy-encrypted-type,
 protect-privacy-with-old-pgp-signature
 
 from = name <user@mail-domain>
@@ -963,6 +965,7 @@ An example is as follows:
 	 (name         \"Kazu Yamamoto\")
 	 (mail-domain  \"example.jp\"))))
 "
+;; bcc can be used but not recommended
   :group 'mew-env
   :type '(alist :key-type string
                 :value-type (repeat (cons string string))))
@@ -978,7 +981,7 @@ An example is as follows:
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2000-2009 Mew developing team.
+;; Copyright (C) 2000-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

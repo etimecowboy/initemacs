@@ -399,7 +399,7 @@ or the region. "
 	  (progn
 	    (mew-erase-buffer)
 	    (mew-elet
-	     (insert (save-excursion (set-buffer buf) (buffer-substring beg end)))
+	     (insert (with-current-buffer buf (buffer-substring beg end)))
 	     (mew-sort-files ofolder files idx 'mew-summary-sort-move-for-selection)
 	     (mew-summary-set-count-line)
 	     (goto-char (point-min))
@@ -496,7 +496,7 @@ local cache messages are packed."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

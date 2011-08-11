@@ -447,7 +447,7 @@ on '.' in attachments."
 	(with-temp-buffer
 	  (condition-case nil
 	      (progn
-		(if (not (y-or-n-p "Are you ready? "))
+		(if (not (y-or-n-p "Are you ready to record audio? "))
 		    (message "Nothing is recoded")
 		  (mew-message-for-attach
 		   "Type '\\[keyboard-quit]' to finish recording...")
@@ -631,6 +631,45 @@ is not effective other objects. For example, JPEG is already compressed."
 	(mew-syntax-set-cte syntax mew-xg)
 	(mew-encode-syntax-print mew-encode-syntax)))))
 
+(defun mew-attach-zip ()
+  "Put the 'Z' mark and encrypt it with \"zip\" in attachments."
+  (interactive)
+  (if (not (mew-attach-not-line02-1-dot))
+      (message "Cannot encrypt with zip here")
+    (let* ((nums (mew-syntax-nums))
+	   (syntax (mew-syntax-get-entry mew-encode-syntax nums))
+	   (ctl (mew-syntax-get-ct syntax))
+	   (ct (mew-syntax-get-value ctl 'cap)))
+      (if (or (mew-ct-messagep ct) (mew-ct-multipartp ct))
+	  (message "Cannot encrypt with zip here")
+	(if (not (mew-which-exec mew-prog-zip))
+	    (message "\"zip\" not found")
+	  (let ((password (mew-read-passwd "Zip password: "))
+		(password1 (mew-read-passwd "Zip password again: ")))
+	    (if (not (string= password password1))
+		(message "Password mismatch!")
+	      (let* ((subdir (mew-attach-expand-path mew-encode-syntax nums))
+		     (attachdir (mew-attachdir))
+		     (name (mew-syntax-get-file syntax))
+		     (ename (if (string= subdir "") name (concat subdir name)))
+		     (fullname (expand-file-name ename attachdir))
+		     (zname (concat name ".zip"))
+		     (zfullname (concat fullname ".zip"))
+		     (zct "application/zip")
+		     (default-directory (file-name-directory fullname)))
+		;; must not specify the "-e" option due to
+		;; variety of zip versions.
+		(call-process mew-prog-zip nil nil nil "-P" password zname name)
+		(if (not (file-exists-p zfullname))
+                    (if (string= password "")
+                        (message "\"zip\" does not allow zero length password")
+                      (message "\"zip\" does not support encryption"))
+		  (mew-syntax-set-ct syntax (list zct))
+		  (mew-syntax-set-cte syntax mew-b64)
+		  (mew-syntax-set-file syntax zname)
+		  (mew-syntax-set-cdp syntax (mew-syntax-cdp-format zct zname))
+		  (mew-encode-syntax-print mew-encode-syntax))))))))))
+
 (defun mew-attach-pgp-sign ()
   "Put the 'PS' mark to sign with PGP in attachments."
   (interactive)
@@ -797,7 +836,7 @@ Input decrypters' addresses."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

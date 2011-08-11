@@ -174,7 +174,7 @@
 	    (setq start (match-end 0))
 	    (forward-line)
 	    (while (looking-at mew-lwsp)
-	      (delete-backward-char 1)
+	      (delete-char -1)
 	      (forward-line))
 	    (setq val (mew-buffer-substring start (1- (point))))
 	    (delete-region start (1- (point)))
@@ -559,8 +559,8 @@
 (defun mew-encode-mime-body (ctl cte file no-encoding)
   ;; If file is 't', target is buffered.
   ;; text should be buffered
-  ;; 	- specified charset is a rare case
-  ;; 	- copy overhead may be small
+  ;;	- specified charset is a rare case
+  ;;	- copy overhead may be small
   (let* ((ct (mew-syntax-get-value ctl 'cap))
          (textp (mew-ct-textp ct))
 	 (charset (if textp (mew-syntax-get-param ctl "charset")))
@@ -574,8 +574,7 @@
     (if (and (stringp file)
 	     (setq buffer (get-file-buffer file))
 	     (buffer-modified-p buffer))
-	(save-excursion
-	  (set-buffer buffer)
+	(with-current-buffer buffer
 	  (save-buffer)))
     (when textp
       (when (and (stringp file) (file-readable-p file))
@@ -738,7 +737,7 @@
 
 (defun mew-encode-flowed-remove-trailing-sp ()
   (while (and (not (bobp)) (= (char-before) mew-sp))
-    (delete-backward-char 1)))
+    (delete-char -1)))
 
 (defun mew-encode-flowed-line (column delsp)
   (let (prefix beg)
@@ -1348,7 +1347,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

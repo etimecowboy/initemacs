@@ -113,6 +113,7 @@
     ((ascii latin-jisx0201 japanese-jisx0208 japanese-jisx0208-1978)
                                iso-2022-jp "7bit"             "B" t)
     ((ascii korean-ksc5601)     euc-kr     "8bit"             "B" t)
+    ((ascii chinese-gbk)        gbk        "base64"           "B" t)
     ((ascii chinese-gb2312)     cn-gb-2312 "base64"           "B" t)
     ((ascii chinese-big5-1 chinese-big5-2)
                               chinese-big5 "base64"           "B" t)
@@ -152,6 +153,7 @@
     ("iso-8859-15"       iso-8859-15)
     ("iso-2022-cn"       iso-2022-cn)
     ("iso-2022-cn-ext"   iso-2022-cn-ext)
+    ("gbk"               gbk)
     ("gb2312"            cn-gb-2312) ;; should be before cn-gb
     ("cn-gb"             cn-gb-2312)
     ("hz-gb-2312"        hz-gb-2312)
@@ -211,12 +213,13 @@
 				    japanese-jisx0208-1978
 				    japanese-jisx0213-1
 				    japanese-jisx0213-2
+				    katakana-jisx0201
 				    unicode))
 
 (if (fboundp 'set-charset-priority)
     (defun mew-find-cs-region (beg end)
       (let ((charset-list (charset-priority-list))
-	    ret lat1 lat0)
+	    ret)
 	(catch 'find
 	  (set-charset-priority 'latin-iso8859-1)
 	  (setq ret (find-charset-region beg end))
@@ -365,7 +368,7 @@
     (dolist (pri priority)
       (set (car rest-ctgs) pri)
       (setq rest-ctgs (cdr rest-ctgs)))
-    (if (fboundp 'update-coding-systems-internal) 
+    (if (fboundp 'update-coding-systems-internal)
 	(update-coding-systems-internal))
     (mew-set-coding-priority categories)))
 
@@ -387,7 +390,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1997-2009 Mew developing team.
+;; Copyright (C) 1997-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

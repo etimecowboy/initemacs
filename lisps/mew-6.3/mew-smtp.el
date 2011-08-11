@@ -312,14 +312,14 @@
 
 ;; (defun mew-smtp-command-pwd-plain (pro pnm)
 ;;   (let* ((case (mew-smtp-get-case pnm))
-;; 	 (user (mew-smtp-get-auth-user pnm))
-;; 	 (authorize-id (mew-smtp-auth-plain-authorize-id case))
-;; 	 (prompt (format "SMTP PLAIN password (%s): " user))
-;;          (passwd (mew-smtp-input-passwd prompt pnm))
-;; 	 (plain (mew-base64-encode-string
-;; 		 (if authorize-id
-;; 		     (format "%s\0%s\0%s" user user passwd)
-;; 		   (format "\0%s\0%s" user passwd)))))
+;;	 (user (mew-smtp-get-auth-user pnm))
+;;	 (authorize-id (mew-smtp-auth-plain-authorize-id case))
+;;	 (prompt (format "SMTP PLAIN password (%s): " user))
+;;	 (passwd (mew-smtp-input-passwd prompt pnm))
+;;	 (plain (mew-base64-encode-string
+;;		 (if authorize-id
+;;		     (format "%s\0%s\0%s" user user passwd)
+;;		   (format "\0%s\0%s" user passwd)))))
 ;;     (mew-smtp-process-send-string pro "%s" plain)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -393,7 +393,7 @@
 	(setq pro (make-network-process :name name :buffer buf
 					:host server :service port
 					:family family :nowait nowait))
- 	(if nowait
+	(if nowait
 	    (run-at-time mew-smtp-submission-timeout nil 'mew-smtp-submission-timeout pro))
 	pro))
   (defalias 'mew-open-network-stream 'open-network-stream))
@@ -533,8 +533,7 @@
 
 (defun mew-smtp-debug (label string)
   (when (mew-debug 'net)
-    (save-excursion
-      (set-buffer (get-buffer-create mew-buffer-debug))
+    (with-current-buffer (get-buffer-create mew-buffer-debug)
       (goto-char (point-max))
       (insert (format "\n<%s>\n%s\n" label string)))))
 
@@ -613,13 +612,13 @@
     (save-excursion
       (cond
        (error
-	(message "%s  This mail has been queued to %s" error qfld)
 	(when buf
 	  ;; A message file is not inserted at the beginning of the SMTP
 	  ;; session.
 	  (set-buffer buf)
 	  (mew-smtp-queue case error pnm))
-	(mew-smtp-log pnm error))
+	(mew-smtp-log pnm error)
+	(message-box (format "%s  This mail has been queued to %s" error qfld)))
        (done
 	(message "Sending in background...done"))
        (t
@@ -752,7 +751,7 @@
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1999-2009 Mew developing team.
+;; Copyright (C) 1999-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

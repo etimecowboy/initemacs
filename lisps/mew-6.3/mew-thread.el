@@ -162,9 +162,8 @@ All members must have the same length."
 (defun mew-thread-cache-valid-p (vfolder)
   (let ((cfolder (mew-summary-folder-name 'ext))
 	ofld)
-    (save-excursion
-      (when (get-buffer vfolder)
-	(set-buffer vfolder)
+    (when (get-buffer vfolder)
+      (with-current-buffer vfolder
 	(setq ofld (mew-vinfo-get-original-folder))
 	(and (equal ofld cfolder)
 	     (get-buffer ofld)
@@ -441,7 +440,7 @@ threads are created, see 'mew-use-complete-thread'."
 	 (insert (mew-thread-get-line me))
 	 (forward-line -1)
 	 (move-to-column column)
- 	 (setq pos (point))
+	 (setq pos (point))
 	 (if next
 	     (insert prefix (aref mew-thread-indent-strings 0))
 	   (insert prefix (aref mew-thread-indent-strings 1)))
@@ -530,8 +529,7 @@ with the current folder as a candidate in addition to guessed folders."
       (dolist (msg (sort (copy-sequence (cdr ent)) '<)) ;; sort has side effect
 	(setq msg (number-to-string msg))
 	(when (get-buffer fld)
-	  (save-excursion
-	    (set-buffer fld)
+	  (with-current-buffer fld
 	    (mew-refile-reset msg)
 	    (mew-refile-set msg folders)))))))
 
@@ -604,7 +602,7 @@ with the current folder as a candidate in addition to guessed folders."
 	  (setq pruned (point))
 	  (mew-thread-graft 'nomsg))
 	(move-to-column column)
- 	(setq indent (mew-thread-get-property (point)))
+	(setq indent (mew-thread-get-property (point)))
 	(setq fld (mew-summary-folder-name))
 	(setq msg (mew-summary-message-number))
 	(mew-mark-alist-set alist fld msg)
@@ -612,7 +610,7 @@ with the current folder as a candidate in addition to guessed folders."
 	(mew-mark-unmark)
 	(forward-line)
 	(catch 'loop
- 	  (while (not (eobp))
+	  (while (not (eobp))
 	    (move-to-column column)
 	    (when (setq cindent (mew-thread-get-property (point)))
 	      (if (>= indent cindent)
@@ -660,10 +658,10 @@ a top node, move onto the top of the previous thread."
        (beginning-of-line)
        (setq pos (point))
        (catch 'loop
- 	 (while (and (not (bobp))
+	 (while (and (not (bobp))
 		     (setq pos (mew-thread-previous-property pos)))
 	   (when (and pos (eq (mew-thread-get-property pos) 0))
- 	     (throw 'loop (setq here pos))))))
+	     (throw 'loop (setq here pos))))))
      (if (not here)
 	 (message "No more threads")
        (goto-char here)
@@ -844,11 +842,11 @@ a top node, move onto the top of the previous thread."
 	   (mew-thread-p)
 	   (mew-summary-message-number))
       (let (indent)
- 	(move-to-column (mew-vinfo-get-column))
- 	(if (setq indent (mew-thread-get-property (point)))
- 	    (unless (= indent 0)
- 	      (goto-char (mew-thread-next-property (point))))
- 	  (beginning-of-line)))
+	(move-to-column (mew-vinfo-get-column))
+	(if (setq indent (mew-thread-get-property (point)))
+	    (unless (= indent 0)
+	      (goto-char (mew-thread-next-property (point))))
+	  (beginning-of-line)))
     (beginning-of-line)))
 
 (defun mew-summary-thread-get-msglst (tree &optional add-separator)
@@ -1153,7 +1151,7 @@ The thread/message is specified with the mark(\\[set-mark-command])."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 2000-2009 Mew developing team.
+;; Copyright (C) 2000-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without

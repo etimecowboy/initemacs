@@ -79,7 +79,7 @@
   (mew-tinfo-set-privacy-type nil)
   (mew-tinfo-set-use-flowed (mew-use-format-flowed (mew-tinfo-get-case)))
   (mew-draft-mode-name) ;; must be after (mew-tinfo-set-encrypted-p encrypted)
-  (run-hooks 'text-mode-hook 'mew-draft-mode-hook)
+  (mew-run-mode-hooks 'text-mode-hook 'mew-draft-mode-hook)
   ;; auto-fill-function is set by mew-draft-mode-hook
   (when auto-fill-function
     (make-local-variable 'auto-fill-function)
@@ -141,8 +141,7 @@
 	 (same-window-regexps nil)
 	 (draftname (mew-path-to-folder draft-path)))
     (when (get-buffer draftname)
-      (save-excursion
-	(set-buffer draftname)
+      (with-current-buffer draftname
 	(clear-visited-file-modtime)
 	(set-buffer-modified-p nil) ;; just in case
 	(mew-delete-file buffer-auto-save-file-name)
@@ -550,7 +549,7 @@ citation prefix and label.
 		  (insert ellipses)
 		  (goto-char eol)
 		  (while (< fill-column (current-column))
-		    (delete-backward-char 1))))
+		    (delete-char -1))))
 	       ((eq mew-draft-cite-fill-mode 'wrap)
 		(setq beg (point))
 		(end-of-line)
@@ -604,6 +603,32 @@ format=flowed is used on composing."
 	    (mew-tinfo-set-flowed (if delsp "yes" "no")))))
       (mew-draft-rehighlight)
       (setq buffer-undo-list nil))))
+
+(defun mew-draft-use-format-flowed (&optional arg)
+  "Toggle the use of format=flowed for the current draft.
+If called with '\\[universal-argument]', enable format=flowed if the argument
+is positive.  You can use `mew-draft-use-format-flowed-hooks' to
+enable interesting minor modes according to whether the message is
+flowed or not.  Here is an example:
+
+\(add-hook 'mew-draft-use-format-flowed-hooks
+     '(lambda()
+	(if mew-use-format-flowed
+	    (progn
+	      (auto-fill-mode 0)
+	      (visual-line-mode 1))
+	  (progn
+            (auto-fill-mode 1)
+            (visual-line-mode 0)))
+	))"
+  (interactive "P")
+  (set (make-local-variable 'mew-use-format-flowed)
+       (if (null arg)
+	   (not (mew-use-format-flowed))
+	 (> (prefix-numeric-value arg) 0)))
+  (mew-tinfo-set-use-flowed mew-use-format-flowed)
+  (mew-draft-mode-name) ;; Display "F" if Flowed
+  (run-hooks 'mew-draft-use-format-flowed-hooks))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -975,7 +1000,7 @@ Set privacy service which will be effective when \\[mew-draft-make-message]."
 
 ;;; Copyright Notice:
 
-;; Copyright (C) 1996-2009 Mew developing team.
+;; Copyright (C) 1996-2011 Mew developing team.
 ;; All rights reserved.
 
 ;; Redistribution and use in source and binary forms, with or without
