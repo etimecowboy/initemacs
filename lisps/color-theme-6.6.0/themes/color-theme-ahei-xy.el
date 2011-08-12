@@ -4,7 +4,7 @@
 
 ;; Author: ahei <ahei0802@126.com>
 ;; Keywords: color theme ahei
-;; Time-stamp:<2011-08-11 Thu 18:11 xin on p6t>
+;; Time-stamp:<2011-08-12 Fri 13:04 xin on P6T-WIN7>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -388,7 +388,7 @@
      (icicle-input-completion-fail-lax ((t (:background "#00005E3B5A8D"))))
      (icicle-match-highlight-Completions ((t (:foreground "#1F1FA21CA21C"))))
      (icicle-match-highlight-minibuffer ((t (:underline t))))
-     (icicle-mode-line-help ((t (:foreground "Red"))))
+     (icicle-mode-line-help ((t (:foreground "yellow"))))
      (icicle-multi-command-completion ((t (:background "#8B3500007533" :foreground "#0000D53CD53C"))))
      (icicle-mustmatch-completion ((t (:box (:line-width 2 :color "Blue")))))
      (icicle-proxy-candidate ((t (:background "#316B22970000"))))
@@ -494,12 +494,12 @@
      (minibuffer-prompt ((t (:foreground "cyan"))))
      (moccur-current-line-face ((t (:background "blue" :foreground "red" :underline t))))
      (moccur-face ((t (:background "white" :foreground "red" :weight normal))))
-     (mode-line ((t (:background "grey40" :foreground "black" :box (:line-width -1 :style released-button)))))
-     (mode-line-buffer-id ((t (:foreground "Yellow"))))
-     (mode-line-emphasis ((t (:bold t :weight bold))))
-     (mode-line-highlight ((t (:box (:line-width 2 :color "blue" :style released-button)))))
-     (mode-line-inactive ((t (:background "white" :foreground "black" :box (:line-width -1 :color "grey40" :style nil) :weight light))))
-     (mode-line-lines-face ((t (:background "dark slate blue" :foreground "yellow"))))
+     ;; (mode-line ((t (:background "white" :foreground "black" :box (:line-width -1 :style released-button)))))
+     ;; (mode-line-buffer-id ((t (:foreground "Blue"))))
+     ;; (mode-line-emphasis ((t (:bold t :weight bold))))
+     ;; (mode-line-highlight ((t (:box (:line-width 2 :color "Blue" :style released-button)))))
+     ;; (mode-line-inactive ((t (:background "grey20" :foreground "white" :box (:line-width -1 :color "LightSkyBlue" :style nil) :weight light))))
+     ;; (mode-line-lines-face ((t (:background "dark slate blue" :foreground "LightSkyBlue"))))
      (mouse ((t (nil))))
      (black-red-face ((t (:background "red" :foreground "black"))))
      (blue-face ((t (:foreground "blue"))))
