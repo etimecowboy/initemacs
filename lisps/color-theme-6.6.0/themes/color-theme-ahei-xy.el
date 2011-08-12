@@ -4,7 +4,7 @@
 
 ;; Author: ahei <ahei0802@126.com>
 ;; Keywords: color theme ahei
-;; Time-stamp:<2011-08-12 Fri 13:04 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-12 Fri 14:11 xin on P6T-WIN7>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -270,7 +270,7 @@
      (diredp-file-name ((t (:foreground "LightGreen"))))
      (diredp-file-suffix ((t (:foreground "DarkMagenta"))))
      (diredp-flag-mark ((t (:background "Blueviolet" :foreground "Yellow"))))
-     (diredp-flag-mark-line ((t (:background "Skyblue"))))
+     (diredp-flag-mark-line ((t (:background "DarkRed"))))
      (diredp-ignored-file-name ((t (:foreground "#00006DE06DE0"))))
      (diredp-link-priv ((t (:foreground "DarkOrange"))))
      (diredp-no-priv ((t (:background "LightGray"))))
