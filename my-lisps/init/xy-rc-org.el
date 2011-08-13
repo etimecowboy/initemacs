@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-08-02 Tue 14:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-13 Sat 16:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -495,23 +495,23 @@
   (setq org-capture-templates 
   		'(("p" "Add a PhD Task----->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
-  		   "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :Score:       0\n   :END:"
+  		   "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
   		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("l" "Add a Life Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
-  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       0:30\n   :Score:       0\n   :END:"
+  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       0:30\n   :Score:           0\n   :END:"
   		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("g" "Add a Geek Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
-  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:       B\n   :Effort:       2:00\n   :Score:       0\n   :END:"
+  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       2:00\n   :Score:           0\n   :END:"
   		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("s" "Add a Learn Task--->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
-  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :Effort:       2:00\n   :Score:       0\n   :END:"
+  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
   		   :empty-lines 1 :prepend t :clock-keep t)
 		  ("m" "Add a Misc Task---->Day Planner"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
-  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       C\n   :Effort:       1:00\n   :Score:       0\n   :END:"
+  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      C\n   :Effort:       1:00\n   :Score:           0\n   :END:"
   		   :empty-lines 1 :prepend t :clock-keep t)
   		  ("n" "Write a Notes"
   		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
