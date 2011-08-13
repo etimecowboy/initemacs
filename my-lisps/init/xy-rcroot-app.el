@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-12 Fri 22:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-13 Sat 17:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -109,7 +109,7 @@
 ;; (add-hook 'temp-buffer-show-hook
 ;;           'fit-frame-if-one-window 'append)
 
-(global-set-key [M-F5] 'fit-frame)
+(global-set-key [M-f5] 'fit-frame)
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
 
