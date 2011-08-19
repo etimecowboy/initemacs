@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-08-12 Fri 22:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-19 Fri 17:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -78,15 +78,22 @@
 				   (mode . LaTeX-mode)
 				   (mode . tex-mode)
 				   (mode . TeX-mode)))
-		   ("vc"  (or
-				   (mode . egg-status)
-				   (mode . egg-log-msg-mode)
-				   (name .  "^\\*Egg:Select Action\\*$")))
+		   ;; ("vc"  (or
+		   ;; 		   (mode . egg-status)
+		   ;; 		   (mode . egg-log-msg-mode)
+		   ;; 		   (name .  "^\\*Egg:Select Action\\*$")))
 		   ("dired" (mode . dired-mode))
 		   ("emacs" (or
 					 (name . "^\\*scratch\\*$")
 					 (name . "^\\*Messages\\*$")
-					 (name . "^\\*Compile-Log\\*$")))
+					 (name . "^\\*Compile-Log\\*$")
+					 (name . "^\\*Completions\\*$")
+					 (name . "^\\*WoMan-Log\\*$")
+					 (mode . Custom-mode)
+					 (mode . help-mode)
+					 (mode . Info-mode)
+					 (mode . woman-mode)
+					 (mode . apropos-mode)))
 		   ("gnus"  (or
 					 (mode . message-mode)
 					 (mode . bbdb-mode)

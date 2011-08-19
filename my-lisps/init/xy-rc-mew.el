@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-02-28 Mon 07:44 xin on P6T>
+;; Time-stamp:<2011-08-19 Fri 15:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -91,13 +91,13 @@
   ;; (setq mew-prog-application/xml-ext     "/usr/bin/firefox")
   ;; (setq mew-prog-application/X-Dvi         "/usr/bin/xdvi")
   ;; Linux 使用w3m
-  (GNULinux
-   (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
-   (condition-case nil
-       (require 'mew-w3m)
-     (file-error nil))
-   (setq mew-use-w3m-minor-mode 1)
-   (setq mew-w3m-auto-insert-image t))
+  ;; (GNULinux
+  ;;  (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
+  ;;  (condition-case nil
+  ;;      (require 'mew-w3m)
+  ;;    (file-error nil))
+  ;;  (setq mew-use-w3m-minor-mode 1)
+  ;;  (setq mew-w3m-auto-insert-image t))
 
   ;; set signature
   ;; (setq mew-signature-file "~/.emacs.d/var/mew/signature")
@@ -245,17 +245,17 @@
 ;; 首先要下载biff.el这个文件，在.emacs中加入
 ;; (try-require 'biff)  
 ;; Biff
-;; (setq mew-use-cached-passwd t);;必须
-;; (when (try-require 'biff)
+(setq mew-use-cached-passwd t);;必须
+(when (try-require 'biff)
   (setq mew-use-biff t)
   (setq mew-use-biff-bell t)
   (setq mew-biff-interval 5)      ; 一定要小于下面的timer-unit和lifetime值
-;; )
+)
 ;; (setq mew-pop-biff-interval 3)
 ;; (setq mew-passwd-timer-unit 60) ; 60 minutes = 1 hour                                            
 ;; (setq mew-passwd-lifetime 24)   ; timer-unit x 24 = 24 hours 
 
-  (set-default 'mew-decode-quoted 't)
+(set-default 'mew-decode-quoted 't)
 
 ;; auto complete email address in various fields
   (defvar mew-field-completion-switch
