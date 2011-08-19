@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-08-19 Fri 17:53 xin on p6t>
+;; Time-stamp:<2011-08-19 Fri 20:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -72,7 +72,8 @@
 				   (name . "^\\*Org Select\\*$")
 				   (name . "^\\*Capture\\*$")
 				   (name . "^\\*Calendar\\*$")
-				   (name . "^diary$")))
+				   (name . "^diary$")
+				   ))
 		   ("tex" (or
 				   (mode . latex-mode)
 				   (mode . LaTeX-mode)

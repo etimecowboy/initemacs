@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-08-13 Sat 16:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-19 Fri 21:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -267,8 +267,9 @@
   
   (require 'appt)
   (setq org-agenda-include-diary t)
-  (setq appt-time-msg-list nil)
-  (org-agenda-to-appt)
+  ;; update appt each time agenda opened
+  (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
+  ;; (org-agenda-to-appt)
   
   (defadvice  org-agenda-redo (after org-agenda-redo-add-appts)
     "Pressing `r' on the agenda will also add appointments."

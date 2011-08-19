@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-08-19 Fri 15:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-19 Fri 20:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -212,6 +212,20 @@ from tradition chinese to simple chinese" t)
 (eval-after-load "calendar"
   `(progn
      (calendar-settings)))
+
+;;-------------------------------------------------------------
+
+;; Diary
+(eval-after-load "diary-lib"
+  `(progn
+     (diary-settings)))
+
+;;-------------------------------------------------------------
+
+;; Appointment
+(eval-after-load "appt"
+  `(progn
+     (appt-settings)))
 
 ;;-------------------------------------------------------------
 
