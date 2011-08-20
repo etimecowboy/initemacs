@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-19 Fri 17:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-20 Sat 22:12 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -368,6 +368,23 @@ the mode-line."
      (paren-face-settings)
      (paren-settings)))
 
+;; rainbow-delimiters.el 
+;; With this package, the delimiters all get different colors based on
+;; their nesting level. It works wonderfully well
+(require 'rainbow-delimiters)
+(am-add-hooks
+ `(find-file-hook
+   help-mode-hook Man-mode-hook log-view-mode-hook
+   compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
+   browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
+   inferior-ruby-mode-hook custom-mode-hook Info-mode-hook
+   svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
+   apropos-mode-hook)
+ 'rainbow-delimiters-mode)
+(eval-after-load "rainbow-delimiters"
+  `(progn
+	 (rainbow-delimiters-settings)))
+
 ;; highlight-parentheses.el, 用颜色配对括号
 (require 'highlight-parentheses)
 (am-add-hooks
@@ -381,7 +398,6 @@ the mode-line."
  'highlight-parentheses-mode)
 (eval-after-load "highlight-parentheses"
   `(progn
-     ;; (mic-paren-face-settings)
      (highlight-parentheses-settings)))
 
 ;; mic-paren

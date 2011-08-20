@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-08-19 Fri 15:38 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-20 Sat 18:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,11 +22,17 @@
 ;;   - [[http://baiyhome.spaces.live.com/blog/cns!6CC0192DC1074113!256.entry]]
 ;;   - [[http://bigclean.is-programmer.com/posts/18038.html]]
 ;;   - [[http://www.zeuux.com/blog/content/2858/]]
+;;   - [[http://zerodoo.appspot.com/emacs.mew.1.0001.html]
 
 ;;;###autoload
 (defun mew-settings ()
   "Settings of `Mew'."
 
+  ;; 编码设置，用 utf-8 发送邮件
+  ;; NOTE:经测试好像不需要。全英文时 Mew 用 ascii 编码，有中文时用 UTF-8
+  ;; (setq mew-charset-m17n "utf-8")
+  ;; (setq mew-internal-utf-8p t)
+  
   ;; set mew directories
   (setq mew-conf-path
       (concat my-emacs-path "/mew"))
@@ -257,17 +263,59 @@
 
 (set-default 'mew-decode-quoted 't)
 
+;; 新邮件来时发声
+(setq mew-arrivedmail-pending 0)
+
+;; (when window-system 				; terminal
+;;   (defadvice mew-biff-bark (before mew-biff-sound (arg))
+;; 	"Play a sound, if new Mail arrives"
+;; 	(cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
+;; 		   (setq mew-arrivedmail-pending arg)
+;; 		   (start-process-shell-command    "mail-sound"   "*Messages*"
+;; 										   "mplayer ~/emacs/mew/chimes.wav"))
+;; 		  ;; replace sndplay with your favorite command to
+;; 		  ;; play a sound-file
+;; 		  ((= arg 0)
+;; 		   (if (> mew-arrivedmail-pending 0)
+;; 			   (setq mew-arrivedmail-pending 0)))))
+;;   (ad-activate 'mew-biff-bark))
+
+(when (window-system) 					; window
+  (defadvice mew-biff-bark (before mew-biff-sound (arg))
+	"Use Todochiku to pop-up a notification, if new Mail arrives"
+
+	(if (featurep 'todochiku)
+		(cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
+			   (setq mew-arrivedmail-pending arg)
+			   (todochiku-message "Emacs-Mew"
+								  "New email(s)!"
+								  (todochiku-icon 'mail)))
+			  ;; replace sndplay with your favorite command to
+			  ;; play a sound-file
+			  ((= arg 0)
+			   (if (> mew-arrivedmail-pending 0)
+				   (setq mew-arrivedmail-pending 0))))))
+  (ad-activate 'mew-biff-bark))
+
+;; (when (window-system)
+;;   (if (featurep 'todochiku)
+;; 	  (add-hook 'mew-biff-bark
+;; 				(lambda ()
+;; 				  (todochiku-message "Emacs-Mew"
+;; 									 "New email(s)!"
+;; 									 (todochiku-icon 'mail))))))
+
 ;; auto complete email address in various fields
-  (defvar mew-field-completion-switch
-    '(("To:"        . mew-complete-address)
-      ("Cc:"        . mew-complete-address)
-      ("Dcc:"       . mew-complete-address)
-      ("Bcc:"       . mew-complete-address)
-      ("Reply-To:"  . mew-complete-address)
-      ("Fcc:"       . mew-complete-folder)
-      ("Resent-To:" . mew-complete-address)
-      ("Resent-Cc:" . mew-complete-address)
-      ("Config:"    . mew-complete-config))))
+(defvar mew-field-completion-switch
+  '(("To:"        . mew-complete-address)
+	("Cc:"        . mew-complete-address)
+	("Dcc:"       . mew-complete-address)
+	("Bcc:"       . mew-complete-address)
+	("Reply-To:"  . mew-complete-address)
+	("Fcc:"       . mew-complete-folder)
+	("Resent-To:" . mew-complete-address)
+	("Resent-Cc:" . mew-complete-address)
+	("Config:"    . mew-complete-config)))
 
 ;; news groups
 (setq mew-nntp-header-only t
@@ -278,6 +326,6 @@
 	  mew-nntp-size 1000
 	  ;; mew-nntp-user "Allen Yang"
 	  mew-nntp-msgid-user "etimecowboy"
-	  mew-nntp-msgid-domain "gmail.com")
+	  mew-nntp-msgid-domain "gmail.com"))
 
 (provide 'xy-rc-mew)

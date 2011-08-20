@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-08-09 Tue 08:24 xin on P6T>
+;; Time-stamp:<2011-08-20 Sat 04:37 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,9 +23,22 @@
   ;;Turn on documentation in elisp mode
 
   (am-add-hooks
-   `(lisp-mode-hook lisp-interaction-mode-hook)
+   ;; `(lisp-mode-hook lisp-interaction-mode-hook)
+   `(lisp-mode-hook)
    '(progn
 	  ;; (xy/set-font-default)
+	  ;; BUG: lisp-interaction-mode error
+	  ;; Debugger entered--Lisp error: (error "Invalid function:
+	  ;; (progn (turn-on-auto-fill) (turn-on-eldoc-mode))") 
+	  ;; signal(error ("Invalid function: (progn (turn-on-auto-fill)
+	  ;; (turn-on-eldoc-mode))")) 
+	  ;; error("%s" "Invalid function: (progn (turn-on-auto-fill)
+	  ;; (turn-on-eldoc-mode))") 
+	  ;; byte-code("\302!\210\303\304\305	!\"\207" [icicle-orig-buff
+	  ;; act-on-choice icicle-try-switch-buffer error "%s"
+	  ;; error-message-string] 4) 
+	  icicle-execute-extended-command()
+	  call-interactively(icicle-execute-extended-command nil nil)
 	  (turn-on-auto-fill)
 	  (turn-on-eldoc-mode))))
 

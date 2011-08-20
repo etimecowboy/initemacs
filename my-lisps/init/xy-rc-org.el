@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-08-19 Fri 21:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-20 Sat 07:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -263,9 +263,10 @@
   (org-clock-persistence-insinuate)
 
   ;;---------------------------------------------------------------------------
-  ;; Alarm  using appt
+  ;; Alarm  using `appt'
+  ;; `appt' uses `todochiku' to display pop-up notification in window-system
   
-  (require 'appt)
+  ;; (require 'appt)
   (setq org-agenda-include-diary t)
   ;; update appt each time agenda opened
   (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
@@ -286,6 +287,12 @@
   ;;   (defun my-appt-disp-window (min-to-app new-time msg)
   ;;     (call-process "~/script/popup.py" nil 0 nil min-to-app msg
   ;;   new-time)))
+
+  ;; (require 'xy-todochiku)
+  (setq org-show-notification-handler
+		'(lambda (notification)
+		   (todochiku-message "org-mode notification" notification
+							  (todochiku-icon 'emacs))))
   
   ;;--------------------------------------------------------------------------
   ;; Custom ageda views

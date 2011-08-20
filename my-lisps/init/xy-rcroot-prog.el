@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-03-21 Mon 15:17 xin on P6T>
+;; Time-stamp:<2011-08-20 Sat 04:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -172,8 +172,18 @@
   `(emacs-lisp-mode-settings))
 (eval-after-load "lisp-mode"
   `(lisp-mode-settings))
-(eval-after-load "lisp-interaction-mode"
-  `(lisp-mode-settings))
+;; BUG: lisp-interaction-mode error
+;; Debugger entered--Lisp error: (error "Invalid function:
+;; (progn (turn-on-auto-fill) (turn-on-eldoc-mode))") 
+;; signal(error ("Invalid function: (progn (turn-on-auto-fill)
+;; (turn-on-eldoc-mode))")) 
+;; error("%s" "Invalid function: (progn (turn-on-auto-fill)
+;; (turn-on-eldoc-mode))") 
+;; byte-code("\302!\210\303\304\305	!\"\207" [icicle-orig-buff
+;; act-on-choice icicle-try-switch-buffer error "%s"
+;; error-message-string] 4) 
+;; (eval-after-load "lisp-interaction-mode"
+;;   `(lisp-mode-settings))
 
 ;; eldoc, 显示变量, 函数的声明，可用在很多语言中(c)
 (am-add-hooks
