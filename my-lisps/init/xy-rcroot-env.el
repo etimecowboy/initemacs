@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-11 Thu 19:47 xin on p6t>
+;; Time-stamp:<2011-08-21 Sun 12:37 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -440,8 +440,8 @@
 ;; (if is-after-emacs-23
 ;; 	(progn
 (server-force-delete)
+(setq server-auth-dir (concat my-var-path "/server"))
 (server-start)
-;; (setq server-auth-dir (concat my-var-path "/server"))
 	  ;; (global-set-key (kbd "C-x C-c") 'xy/done)
 	  ;; ))
 

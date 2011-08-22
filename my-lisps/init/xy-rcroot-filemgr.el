@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-08-19 Fri 19:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-22 Mon 02:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -189,13 +189,14 @@
 
 ;;-----------------------------------------------------------------------------
 
+;; BUG: NOT work properly with other dired lisps. Removed.  
 ;; Sunrise commander; file manager
 ;; Check http://www.emacswiki.org/emacs/Sunrise_Commander_Tips
-(autoload 'sunrise "sunrise-commander"
-  "Two-pane file manager for Emacs based on Dired and inspired by MC." t)
-(eval-after-load "sunrise-commander"
-  `(sunrise-settings))
-(global-set-key (kbd "C-x J") 'sunrise)
+;; (autoload 'sunrise "sunrise-commander"
+;;   "Two-pane file manager for Emacs based on Dired and inspired by MC." t)
+;; (eval-after-load "sunrise-commander"
+;;   `(sunrise-settings))
+;; (global-set-key (kbd "C-x J") 'sunrise)
 
 ;; (try-require 'sunrise-commander)
 ;; (try-require 'sunrise-x-buttons) ;; cannot be used with popviewer

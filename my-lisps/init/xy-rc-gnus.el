@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-08-20 Sat 04:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-22 Mon 02:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -490,7 +490,7 @@ archive
   (add-hook 'message-mode-hook
             (lambda ()
 			  (auto-fill-mode 1)
-			  (setq fill-colum)
+			  (setq fill-colum 72)
 			  (auto-image-file-mode 1)))
    
   (add-hook 'gnus-startup-hook
