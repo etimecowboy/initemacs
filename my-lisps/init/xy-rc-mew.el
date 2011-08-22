@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-08-22 Mon 14:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-22 Mon 18:08 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -277,7 +277,7 @@
 		   ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
 		   (todochiku-message "emacs mew"
 							  (format "New mail (%d) arrived." arg)
-							  (todochiku-icon 'emacs))
+							  (todochiku-icon 'mail))
 		   )
 		  ;; replace sndplay with your favorite command to
 		  ;; play a sound-file
