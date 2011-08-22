@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-21 Sun 12:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-22 Mon 03:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,31 +40,79 @@
 ;; Add all to load-path
 ;; NOTE: very slow
 (fni/add-to-load-path my-local-lisp-path 'with-subdirs 'recursive)
+(message "* ---[ load-path added at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 ;; Single downloaded lisps
 (xy/install-all-lisps my-local-lisp-path)
 ;; (require 'loaddefs@e!!xin!.emacs.d!my-lisps!init)
+(message "* ---[ my local lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 ;; Manually installed packages
-(xy/install-all-lisps (concat my-local-lisp-path "/dea")) ;; load first
+(xy/install-all-lisps (concat my-local-lisp-path "/dea"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!dea)
+(message "* ---[ dea lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete-1.3.1"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!auto-complete-1.3.1)
+(message "* ---[ auto-complete lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
+
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!babel)
+
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/bookmark+"))
 (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!org-7.6)
+(message "* ---[ org installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; (xy/install-all-lisps (concat my-local-lisp-path "/color-theme-6.6.0/themes"))
 ;; (require 'color-theme-autoloads)
+
 (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!egg)
+(message "* ---[ egg lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!eim-2.4)
+(message "* ---[ eim lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 (xy/install-all-lisps (concat my-local-lisp-path "/yasnippet-0.6.1c"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!yasnippet-0.6.1c)
+(message "* ---[ yasnippet lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 (xy/install-all-lisps (concat my-local-lisp-path "/session-2.3/lisp"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!session-2.3!lisp)
-(xy/install-all-lisps (concat my-local-lisp-path "/color-theme-6.6.0/themes"))
+(message "* ---[ session lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 ;; CEDET
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/cogre"))
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/common"))
