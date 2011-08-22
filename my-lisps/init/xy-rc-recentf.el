@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-recentf.el'
-;; Time-stamp:<2011-08-09 Tue 08:28 xin on P6T>
+;; Time-stamp:<2011-08-22 Mon 17:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,6 +25,7 @@
 								  user-login-name "@"
 								  system-name "@"
 								  system-configuration))
+  (setq recentf-exclude '("bbdb" "gnus" "gtd"))
   (setq recentf-max-saved-items 100)
   (setq recentf-max-menu-items 20)
   (setq recentf-menu-filter 'recentf-sort-basenames-ascending)
