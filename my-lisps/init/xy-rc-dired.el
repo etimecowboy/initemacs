@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-08-09 Tue 08:17 xin on P6T>
+;; Time-stamp:<2011-08-23 Tue 02:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -183,7 +183,8 @@ which is options for `diff'."
 (defun dired-settings ()
   "Settings for `dired'."
 
-  (setq truncate-lines t)
+  ;; (setq truncate-lines t)
+  (setq dired-kept-versions 1)
   (setq dired-recursive-deletes t)  ; 可以递归的删除目录
   (setq dired-recursive-copies t) ; 可以递归的进行拷贝
   ;; (define-prefix-command 'dired-slash-map)

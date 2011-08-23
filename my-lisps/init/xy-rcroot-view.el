@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-02-20 Sun 14:40 xin on p6t>
+;; Time-stamp:<2011-08-23 Tue 02:45 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,6 +24,7 @@
 
 ;; Allow to view read-only files
 (setq view-read-only t)
+;; (toggle-read-only t)
 
 ;;--------------------------------------------------------------
 

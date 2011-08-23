@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-08-22 Mon 02:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-23 Tue 02:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -221,15 +221,16 @@
 ;; Version control settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; Emacs internal version control
-;; Do not make backup files 
 (setq make-backup-files nil)
+(setq vc-make-backup-files nil)
+(setq backup-directory-alist
+	  '(("." . "~/.backup")))
+(setq tramp-backup-directory-alist backup-directory-alist)
 (setq version-control t)
-(setq kept-new-versions 3)
+(setq kept-old-versions 5)
+(setq kept-new-versions 5)
 (setq delete-old-versions t)
-(setq kept-old-versions 2)
-(setq dired-kept-versions 1)
 
 ;; Autosaved files
 (setq auto-save-list-file-prefix 

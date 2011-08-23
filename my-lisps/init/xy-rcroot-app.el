@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-20 Sat 22:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-23 Tue 02:24 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -61,10 +61,13 @@
 (auto-image-file-mode 1)
 ;; automatically refresh buffer
 (global-auto-revert-mode 1)
+
+;;;###autoload
 (defun gbk-revert ()
   "Revert current buffer with gbk-dos encoding."
   (interactive)
   (revert-buffer-with-coding-system 'gbk-dos))
+
 (global-set-key [f5] 'revert-buffer)
 (global-set-key [C-f5] 'gbk-revert)
 
