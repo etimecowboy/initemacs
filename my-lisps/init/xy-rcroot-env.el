@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-22 Mon 03:33 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-23 Tue 01:08 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -462,11 +462,11 @@
  dired-mode-map
  `(("C-i"    auto-install-from-dired)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Start emacs server
 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Emacs可以做为一个server, 然后用emacsclient连接这个server,
 ;; 无需再打开两个Emacs。
@@ -490,8 +490,17 @@
 (server-force-delete)
 (setq server-auth-dir (concat my-var-path "/server"))
 (server-start)
-	  ;; (global-set-key (kbd "C-x C-c") 'xy/done)
-	  ;; ))
+;; (global-set-key (kbd "C-x C-c") 'xy/done)
+;; ))
+
+;; ;;;###autoload
+;; (defun xy/server-start ()
+;;   "My version of starting emacs-server"
+
+;;   (interactive)
+;;   (server-force-delete)
+;;   (setq server-auth-dir (concat my-var-path "/server"))
+;;   (server-start))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
