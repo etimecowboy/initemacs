@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-08-22 Mon 02:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-25 Thu 13:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -372,18 +372,18 @@
   (gnus-add-configuration
    '(article
 	 (horizontal 1.0
-				 (vertical 40
-						   (group 1.0))
+				 ;; (vertical 40
+						   ;; (group 1.0))
 				 (vertical 1.0
 						   (summary 0.35 point)
 						   (article 1.0)))))
-  (gnus-add-configuration
-   '(summary
-	 (horizontal 1.0
-				 (vertical 40
-						   (group 1.0))
-				 (vertical 1.0
-						   (summary 1.0 point)))))
+  ;; (gnus-add-configuration
+  ;;  '(summary
+  ;; 	 (horizontal 1.0
+  ;; 				 (vertical 40
+  ;; 						   (group 1.0))
+  ;; 				 (vertical 1.0
+  ;; 						   (summary 1.0 point)))))
 
   ;;
   ;;不喜欢 Summary buffer 的样子，如何调整？
