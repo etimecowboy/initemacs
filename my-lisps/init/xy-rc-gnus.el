@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-08-26 Fri 17:20 xin on p6t>
+;; Time-stamp:<2011-08-26 Fri 19:30 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -486,12 +486,13 @@ archive
 	  "nnml:sent_mails")) 
   (setq gnus-outgoing-message-group 'MySent)
 
-  ;; auto-fill mode
   (add-hook 'message-mode-hook
             (lambda ()
 			  (auto-fill-mode 1)
 			  (set-fill-colum 72)
-			  (auto-image-file-mode 1)))
+			  (auto-image-file-mode 1)
+			  (setq mm-inline-large-images t)
+			  (add-to-list 'mm-attachment-override-types "image/*")))
    
   (add-hook 'gnus-startup-hook
             '(lambda ()

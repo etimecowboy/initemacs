@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-08-26 Fri 14:21 xin on p6t>
+;; Time-stamp:<2011-08-26 Fri 19:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -244,6 +244,7 @@
    ("M-#"                 set-mark-command)
    ("C-k"                 kill-and-join-forward)
    ("C-x ^"               jlh-join-lines)
+   ("%"                   match-paren)
    ))
 
 ;; (eal-define-keys

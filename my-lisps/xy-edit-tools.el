@@ -300,6 +300,19 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
            (let ((mark-even-if-inactive transient-mark-mode))
              (indent-region (region-beginning) (region-end) nil))))))
 
+;;-------------------------------------------------------------------------------
+
+;; 王垠的解决方案，模仿 vim 的 % 命令，如果在括号上按下 % 则跳转到匹配的
+;; 括号处，否则输入一个 %
+;;;###autoload
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+		((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+		(t (self-insert-command (or arg 1)))))
+;; (global-set-key "%" 'match-paren)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; ahei 的函数
