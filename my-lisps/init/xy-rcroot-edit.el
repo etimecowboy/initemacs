@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-08-03 Wed 10:54 xin on p6t>
+;; Time-stamp:<2011-08-26 Fri 14:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -217,34 +217,33 @@
    ;;    ("M-w" smart-copy)
    ;;    ("C-x M-w" insert-cur-line)
    ;;    ("C-x M-W" insert-cur-sexp)
-   ("C-M-w" copy-sentence)
+   ("C-M-w"               copy-sentence)
    ;;    ;; 删除整行
    ;;    ("M-K" kill-line)
    ;;    ("C-k" smart-kill)              
    ;;    ("C-\\" delete-indentation)
-   ("C-x M-m" mark-invisible-region)
-   ("M-U" del-to-begin)
-   ("C-^" case-trans)
+   ("C-x M-m"             mark-invisible-region)
+   ("M-U"                 del-to-begin)
+   ("C-^"                 case-trans)
    ;;    ("C-6" case-trans)
-   ("C-w" backward-kill-word-or-kill-region)
+   ("C-w"                 backward-kill-word-or-kill-region)
    ;;    ("C-x S" mark-whole-sexp)
    ;;    ("C-x W" kill-whole-sexp)
    ;;    ("C-x w" copy-sexp)
-   ("M-D" my-kill-word)
+   ("M-d"                 my-kill-word)
    ;;    ("C-x TAB" indent-whole-buffer)
    ;;    ("C-h" c-electric-backspace-kill)
    ;;    ,(if window-system '("C-z" undo))
    ;;    ("M-Y" redo)
    ;;    ("M-m" beginning-of-line-text)
-   ("C-M-\\" smart-indent)
-   ("M-q" fill-paragraph-justify)
-   ("<escape> SPC" just-one-space)
-   ("C-a" smart-home)
-   ("C-M-a" mark-whole-buffer)
-   ("M-#" set-mark-command)
-
-   ("C-k" kill-and-join-forward)
-   ("C-x ^" jlh-join-lines)
+   ("C-M-\\"              smart-indent)
+   ("M-q"                 fill-paragraph)
+   ("<escape> SPC"        just-one-space)
+   ("C-a"                 smart-home)
+   ("C-M-a"               mark-whole-buffer)
+   ("M-#"                 set-mark-command)
+   ("C-k"                 kill-and-join-forward)
+   ("C-x ^"               jlh-join-lines)
    ))
 
 ;; (eal-define-keys
