@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-simple.el'
-;; Time-stamp:<2011-08-09 Tue 08:29 xin on P6T>
+;; Time-stamp:<2011-08-26 Fri 17:22 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,6 +21,6 @@
 (defun simple-settings ()
   "Settings of `simple.el'."
 
-  (setq fill-column 70))
+  (setq-default fill-column 70))
 
 (provide 'xy-rc-simple)
