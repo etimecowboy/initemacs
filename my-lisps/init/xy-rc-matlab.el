@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-matlab.el'
-;; Time-stamp:<2011-02-28 Mon 12:57 xin on P6T>
+;; Time-stamp:<2011-08-26 Fri 21:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,7 +28,7 @@
   ;; (cedet-start)
   ;; (matlab-cedet-setup)
   ;; (defun my-matlab-mode-hook ()
-  ;;   (auto-fill-mode 1)
+  ;;   (turn-on-auto-fill)
   ;; 	(setq fill-column 75))
   ;; (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
   ;; (defun my-matlab-shell-mode-hook ()

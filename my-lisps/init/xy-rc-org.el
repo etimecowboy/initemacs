@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-08-20 Sat 07:58 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-26 Fri 21:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -605,7 +605,7 @@
 			   ;; BUG: org-mobile
 			   ;; (org-mode-reftex-setup)
 			   (turn-on-org-cdlatex)
-			   (auto-fill-mode -1)
+			   (turn-on-auto-fill)
 			   (yas-start)
 			   (linkd-start)
 			   ;; (xy/set-font-write)
