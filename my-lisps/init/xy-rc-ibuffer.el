@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-08-19 Fri 20:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-08-29 Mon 00:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -57,9 +57,6 @@
 
   (setq ibuffer-saved-filter-groups
 		'(("default"
-		   ("lisp" (or
-					(mode . emacs-lisp-mode)
-					(mode . lisp-interaction-mode)))
 		   ("c"   (or
 				   (mode . c-mode)
 				   (mode . cc-mode)))
@@ -79,6 +76,9 @@
 				   (mode . LaTeX-mode)
 				   (mode . tex-mode)
 				   (mode . TeX-mode)))
+		   ("lisp" (or
+					(mode . emacs-lisp-mode)
+					(mode . lisp-interaction-mode)))
 		   ;; ("vc"  (or
 		   ;; 		   (mode . egg-status)
 		   ;; 		   (mode . egg-log-msg-mode)
