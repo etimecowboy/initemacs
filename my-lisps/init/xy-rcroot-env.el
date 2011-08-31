@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-08-23 Tue 01:08 xin on p6t>
+;; Time-stamp:<2011-08-30 Tue 13:56 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,6 +64,13 @@
 (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete-1.3.1"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!auto-complete-1.3.1)
 (message "* ---[ auto-complete lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+(xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
+;; (require 'loaddefs@e!!xin!.emacs.d!lisps!cc-mode-5.32)
+(message "* ---[ cc-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
