@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-07-22 Fri 22:08 xin on p6t>
+;; Time-stamp:<2011-09-01 Thu 22:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -78,3 +78,20 @@
               (if (boundp 'auto-mode-alist) auto-mode-alist)))
 (autoload  't2t-mode "txt2tags-mode" "Txt2tags Mode" t)
 (provide 'xy-rcroot-write)
+
+;;------------------------------------------------------------------------
+
+;; pdftools.el
+;; Save current buffer as a pdf file
+;; Should be used with `ps2pdf', which usually comes with a tex
+;; distribution
+(autoload 'pdf-save-buffer "pdftools.el"
+  "Save buffer as a pdf file." t)
+(autoload 'pdf-save-buffer-with-faces "pdftools.el"
+  "Save buffer as a pdf file with faces." t)
+(autoload 'pdf-save-region "pdftools.el"
+  "Save region as a pdf file." t)
+(autoload 'pdf-save-region-with-faces "pdftools.el"
+  "Save region as a pdf file with faces." t)
+
+;;-----------------------------------------------------------------------
