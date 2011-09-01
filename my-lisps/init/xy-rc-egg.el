@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-egg.el'
-;; Time-stamp:<2011-08-09 Tue 08:18 xin on P6T>
+;; Time-stamp:<2011-09-01 Thu 16:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
