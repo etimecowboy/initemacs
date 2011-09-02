@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-08-03 Wed 06:46 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-02 Fri 09:48 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,7 +64,7 @@
 ;;---------------------------------------------------------------------
 
 ;; Bookmark+
-(autoload 'bookmark+ "bookmark+" "Enhanced Emacs bookmark" t)
+;; (require 'bookmark+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
