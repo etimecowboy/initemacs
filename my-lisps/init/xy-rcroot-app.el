@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-08-23 Tue 02:24 xin on p6t>
+;; Time-stamp:<2011-09-03 Sat 23:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -413,19 +413,28 @@ the mode-line."
 ;; autopair
 ;; 自动给你加上括号
 (require 'autopair)
-(autopair-global-mode 1)
 (eval-after-load "autopair"
   '(autopair-settings))
 ;; some keybindings
+;; NOTE: autopair-global-mode cause problem with auctex, so use hooks
+;; with other modes.
+;; (autopair-global-mode 1)
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook
+				  cperl-mode-hook cc-mode-hook
+				  vhdl-mode-hook verilog-mode-hook
+				  matlab-mode-hook org-mode-hook
+				  text-mode-hook)
+ 'autopair-mode)
 (eal-define-keys-commonly
  global-map
  `(("C-M-]" ywb-indent-accoding-to-paren)
    ("\C-]" goto-paren)))
 
-;; 输入左大花扩号自动补齐右大花括号
-(eal-define-keys
- `(c-mode-base-map awk-mode-map)
- `(("{" skeleton-c-mode-left-brace)))
+;; ;; 输入左大花扩号自动补齐右大花括号
+;; (eal-define-keys
+;;  `(c-mode-base-map awk-mode-map)
+;;  `(("{" skeleton-c-mode-left-brace)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

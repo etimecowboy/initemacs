@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-07-24 Sun 14:57 xin on p6t>
+;; Time-stamp:<2011-09-03 Sat 23:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -171,6 +171,11 @@
 ;;   '(company-settings))
 ;; (define-key company-mode-map
 ;;    (kbd "M-RET") 'company-expand-top)
+;; (am-add-hooks
+;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
+;;    java-mode-hook lisp-interaction-mode-hook sh-mode-hook
+;;   ,(if (not is-before-emacs-21) 'awk-mode-hook) ruby-mode-hook)
+;;   'company-mode)
 
 ;;--------------------------------------------------------
 

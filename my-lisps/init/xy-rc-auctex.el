@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-03-21 Mon 15:55 xin on P6T>
+;; Time-stamp:<2011-09-03 Sat 23:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,6 +40,7 @@
   (setq-default LaTeX-math-mode t)
   (setq-default TeX-fold-mode t)
   (setq-default TeX-PDF-mode t)
+  ;; (autopair-global-mode -1)
   
   ;; load reftex
   ;; (require 'reftex)
@@ -56,6 +57,7 @@
 			   (flyspell-mode 1)
 			   (turn-on-reftex)
 			   (turn-on-cdlatex)
+			   ;; (autopair-mode -1)
 			   ;; (yas-start)
 			   ;; (linkd-start)
 			   ;; (xy/set-font-write)
@@ -69,6 +71,7 @@
 			 (flyspell-mode 1)
 			 (turn-on-reftex)
 			 (turn-on-cdlatex)
+			 ;; (autopair-mode -1)
 			 ;; (yas-start)
 			 ;; (linkd-start)
 			 ;; (xy/set-font-write)

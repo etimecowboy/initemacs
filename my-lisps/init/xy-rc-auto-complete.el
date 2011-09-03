@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-02-19 Sat 16:30 xin on P6T>
+;; Time-stamp:<2011-09-03 Sat 23:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -229,7 +229,7 @@
     '(ac-settings-4-autopair))
   (am-add-hooks
    `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-                    svn-log-edit-mode-hook change-log-mode-hook)
+     svn-log-edit-mode-hook change-log-mode-hook)
    'ac-settings-4-lisp)
   (apply-args-list-to-fun
    (lambda (hook fun)
