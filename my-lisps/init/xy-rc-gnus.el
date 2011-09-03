@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-08-27 Sat 15:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-03 Sat 00:31 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -489,7 +489,7 @@ archive
   (add-hook 'message-mode-hook
             (lambda ()
 			  (auto-fill-mode 1)
-			  (set-fill-column 72)
+			  (set-fill-column 64)
 			  (auto-image-file-mode 1)
 			  (setq mm-inline-large-images t)
 			  (add-to-list 'mm-attachment-override-types "image/*")))
