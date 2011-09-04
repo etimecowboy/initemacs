@@ -413,8 +413,8 @@ the mode-line."
 ;; autopair
 ;; 自动给你加上括号
 (require 'autopair)
-(eval-after-load "autopair"
-  '(autopair-settings))
+;; (eval-after-load "autopair"
+;;   '(autopair-settings))
 ;; some keybindings
 ;; NOTE: autopair-global-mode cause problem with auctex, so use hooks
 ;; with other modes.

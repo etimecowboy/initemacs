@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-09-03 Sat 23:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-04 Sun 16:50 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -246,7 +246,7 @@
      ;; ('tcl-mode-hook    'ac-settings-4-tcl)
      ))
   (eal-eval-by-modes
-   ac-modes
+   ac-mode
    (lambda (mode)
      (let ((mode-name (symbol-name mode)))
        (when (and (intern-soft mode-name) 

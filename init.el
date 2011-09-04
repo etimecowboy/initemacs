@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2011-08-20 Sat 06:57 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-04 Sun 17:43 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -97,18 +97,18 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; Document packages
-;; (require 'xy-rcroot-write)
-(load "xy-rcroot-write")
-(message "* ---[ `xy-rcroot-write.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
-
 ;; Various programming settings
 ;; (require 'xy-rcroot-prog)
 (load "xy-rcroot-prog")
 (message "* ---[ `xy-rcroot-prog.el' loaded at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; Document packages
+;; (require 'xy-rcroot-write)
+(load "xy-rcroot-write")
+(message "* ---[ `xy-rcroot-write.el' loaded at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
