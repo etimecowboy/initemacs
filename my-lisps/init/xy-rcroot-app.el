@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-09-03 Sat 23:50 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-04 Sun 22:51 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -34,7 +34,7 @@
 ;; User visible bell instead of bell sound
 (setq visible-bell t)
 ;; menu bar
-(menu-bar-mode nil)
+(menu-bar-mode -1)
 ;; This library enhances the "Text Properties" menu.  It adds menu
 ;; items to the menu, and provides two different versions of the
 ;; menu: one for the menu-bar Edit menu (`facemenu-menu') and one for
@@ -42,9 +42,9 @@
 ;; `facemenu.el', these two menus are the same.
 ;; (require 'facemenu+)
 ;; No tool bar
-(tool-bar-mode nil)
+(tool-bar-mode -1)
 ;; No scroll bar
-(scroll-bar-mode nil)
+(scroll-bar-mode -1)
 ;; Match parens
 (show-paren-mode 1)
 ;; Display key strokes quickly

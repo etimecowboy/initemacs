@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-09-01 Thu 16:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-06 Tue 00:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -492,22 +492,25 @@
 ;;       ;; 打开后让emacs跳到前面来
 ;;       (setenv "GNUSERV_SHOW_EMACS" "1")))
 
+;; NOTE: If you want to re-load emacs configuration during the run,
+;; don't start emacs server here, instead, you can `M-x server-start'
+;; when you need.
 ;; (if is-after-emacs-23
 ;; 	(progn
-(server-force-delete)
-(setq server-auth-dir (concat my-var-path "/server"))
-(server-start)
+;; (server-force-delete)
+(setq-default server-auth-dir (concat my-var-path "/server"))
+;; (server-start)
 ;; (global-set-key (kbd "C-x C-c") 'xy/done)
 ;; ))
 
-;; ;;;###autoload
-;; (defun xy/server-start ()
-;;   "My version of starting emacs-server"
+;;;###autoload
+(defun xy/server-start ()
+  "My version of starting emacs-server"
 
-;;   (interactive)
-;;   (server-force-delete)
-;;   (setq server-auth-dir (concat my-var-path "/server"))
-;;   (server-start))
+  (interactive)
+  (server-force-delete)
+  ;; (setq server-auth-dir (concat my-var-path "/server"))
+  (server-start))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

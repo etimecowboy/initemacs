@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-08-23 Tue 01:02 xin on p6t>
+;; Time-stamp:<2011-09-06 Tue 02:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -609,12 +609,12 @@ and COMMAND-off when IS-ON is nil."
 KEY is a string or vector representing a sequence of keystrokes."
   (define-key keymap key nil))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; 判断某个字体在系统中是否安装
 ;;;###autoload
@@ -623,15 +623,14 @@ KEY is a string or vector representing a sequence of keystrokes."
     (if (null (x-list-fonts font))
       nil t)))
     ;; (if (null (list-fonts font) nil t))))
-;;----------------------------------------------------------------------------------
+;;---------------------------------------------------------------------------------
 
 ;; 按顺序找到一个字体列表( list ) 中第一个已经安装可用的字体
 (defvar font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
 ;; (require 'cl) ;; find-if is in common list package
 (find-if #'qiang-font-existsp font-list)
 
-;;----------------------------------------------------------------------------------
-
+;;---------------------------------------------------------------------------------
 ;; 产生带上 font size 信息的 font 描述文本
 ;;;###autoload
 (defun qiang-make-font-string (font-name font-size)
@@ -640,7 +639,7 @@ KEY is a string or vector representing a sequence of keystrokes."
       (format "%s%s" font-name font-size)
     (format "%s %s" font-name font-size)))
 
-;;-----------------------------------------------------------------------------------
+;;---------------------------------------------------------------------------------
 
 ;; 自动设置字体函数,
 ;; REF: http://emacser.com/torture-emacs.htm
