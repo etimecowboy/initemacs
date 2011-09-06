@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-09-06 Tue 00:47 xin on p6t>
+;; Time-stamp:<2011-09-06 Tue 02:30 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -494,7 +494,8 @@
 
 ;; NOTE: If you want to re-load emacs configuration during the run,
 ;; don't start emacs server here, instead, you can `M-x server-start'
-;; when you need.
+;; or `M-x xy/server-start' in an emacs process when you need.
+
 ;; (if is-after-emacs-23
 ;; 	(progn
 ;; (server-force-delete)
