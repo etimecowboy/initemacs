@@ -3,7 +3,7 @@
 ;; Author    : Xin Yang
 ;; Based On  : Manoj Srivastava's `color-theme-manoj.el'---
 ;; http://orgmode.org/worg/color-themes/color-theme-manoj.el
-;; Time-stamp:<2011-09-08 Thu 00:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-08 Thu 01:50 xin on P6T-WIN7>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;###autoload
@@ -643,8 +643,7 @@
        (develock-whitespace-3 ((t (:background "Yellow" :foreground "Black"))))
        (diary ((t (:foreground "IndianRed"))))
        (diary-anniversary ((t (:foreground "Cyan1"))))
-       (diary-button ((t (:background "lightgrey" :foreground "black"  :box (:line-width 2 :style (font-lock-doc-string-face    ((t (:foreground "Plum"))))
-released-button)))))
+       (diary-button ((t (:background "lightgrey" :foreground "black"  :box (:line-width 2 :style released-button)))))
        (diary-face ((t (:foreground "IndianRed"))))
        (diary-time ((t (:foreground "LightGoldenrod"))))
        (dictionary-button-face ((t (:bold t :weight bold :background "lightgrey" :foreground "black"  :box (:line-width 2 :style released-button)))))
