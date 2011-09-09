@@ -3,7 +3,7 @@
 ;; Author    : Xin Yang
 ;; Based On  : Manoj Srivastava's `color-theme-manoj.el'---
 ;; http://orgmode.org/worg/color-themes/color-theme-manoj.el
-;; Time-stamp:<2011-09-08 Thu 01:50 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-09 Fri 12:50 xin on P6T-WIN7>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;###autoload
@@ -28,7 +28,7 @@
 	 (font-lock-regexp-grouping-backslash ((t (:foreground "red"))))
      (font-lock-regexp-grouping-construct ((t (:foreground "yellow"))))
      (font-lock-other-type-face    ((t (:foreground "Turquoise" :bold t))))
-	 (font-lock-string-face        ((t (:foreground "RosyBrown1")))) ;LightSalmon
+	 (font-lock-string-face        ((t (:foreground "Chocolate")))) ;LightSalmon
      (font-lock-type-face          ((t (:foreground "Green")))) ;PaleGreen
      (font-lock-variable-name-face ((t (:foreground "Yellow")))) ;LightGoldenrod
      (font-lock-reference-face     ((t (:foreground "PaleGreen"))))
