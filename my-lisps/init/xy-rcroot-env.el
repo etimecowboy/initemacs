@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-09-06 Tue 02:30 xin on p6t>
+;; Time-stamp:<2011-09-09 Fri 13:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -89,8 +89,8 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; (xy/install-all-lisps (concat my-local-lisp-path "/color-theme-6.6.0/themes"))
-;; (require 'color-theme-autoloads)
+(require 'color-theme-autoloads)
+(xy/install-all-lisps (concat my-local-lisp-path "/color-theme-6.6.0/themes"))
 
 (xy/install-all-lisps (concat my-local-lisp-path "/egg-1.01"))
 ;; (require 'loaddefs@e!!xin!.emacs.d!lisps!egg-1.01)

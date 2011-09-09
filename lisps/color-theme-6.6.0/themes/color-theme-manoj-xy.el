@@ -3,7 +3,7 @@
 ;; Author    : Xin Yang
 ;; Based On  : Manoj Srivastava's `color-theme-manoj.el'---
 ;; http://orgmode.org/worg/color-themes/color-theme-manoj.el
-;; Time-stamp:<2011-09-09 Fri 12:50 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-09 Fri 13:06 xin on P6T-WIN7>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;###autoload
@@ -16,11 +16,11 @@
      nil
      (font-lock-builtin-face       ((t (:foreground "LightSteelBlue"))))
 	 (font-lock-comment-face       ((t (:italic t :slant oblique :foreground "DimGrey"))))
-     (font-lock-comment-delimiter-face ((t (:foreground "chocolate1"))))
-     (font-lock-constant-face      ((t (:background "darkslateblue" :foreground "chartreuse" :bold t))))
-	 (font-lock-doc-face           ((t (:italic t :slant oblique :foreground "LightCoral")))) ;LightSalmon
+     (font-lock-comment-delimiter-face ((t (:foreground "Chocolate1"))))
+     (font-lock-constant-face      ((t (:background "DarkSlateBlue" :foreground "Chartreuse" :bold t))))
+	 (font-lock-doc-face           ((t (:italic t :slant oblique :foreground "LightSalmon"))))
 	 (font-lock-doc-string-face    ((t (:foreground "Plum"))))
-	 (font-lock-function-name-face ((t (:background "wheat" :foreground "red" :weight bold)))) ;LightSkyBlue
+	 (font-lock-function-name-face ((t (:background "Wheat" :foreground "Blue" :weight bold))))
 	 (font-lock-exit-face          ((t (:foreground "LightBlue"))))
 	 (font-lock-keyword-face       ((t (:foreground "cyan"))))
 	 (font-lock-negation-char-face ((t (nil))))
@@ -28,9 +28,9 @@
 	 (font-lock-regexp-grouping-backslash ((t (:foreground "red"))))
      (font-lock-regexp-grouping-construct ((t (:foreground "yellow"))))
      (font-lock-other-type-face    ((t (:foreground "Turquoise" :bold t))))
-	 (font-lock-string-face        ((t (:foreground "Chocolate")))) ;LightSalmon
-     (font-lock-type-face          ((t (:foreground "Green")))) ;PaleGreen
-     (font-lock-variable-name-face ((t (:foreground "Yellow")))) ;LightGoldenrod
+	 (font-lock-string-face        ((t (:foreground "LightSalmon"))))
+     (font-lock-type-face          ((t (:foreground "PaleGreen")))) ;PaleGreen
+     (font-lock-variable-name-face ((t (:foreground "yellow")))) ;LightGoldenrod
      (font-lock-reference-face     ((t (:foreground "PaleGreen"))))
      (font-lock-emphasized-face    ((t (:bold t))))
      (font-lock-other-emphasized-face ((t (:italic t :bold t))))

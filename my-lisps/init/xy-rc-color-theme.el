@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-theme.el'
-;; Time-stamp:<2011-09-07 Wed 16:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-09 Fri 13:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,10 +20,9 @@
 
 ;;;###autoload
 (defun color-theme-start ()
-  "Start color-theme"
+  "Start color-theme."
 
   (interactive)
-  (require 'color-theme-autoloads)
   (setq color-theme-is-global t)
   (color-theme-initialize)
   (color-theme-manoj-xy-dark)
