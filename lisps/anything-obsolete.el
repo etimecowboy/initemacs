@@ -1,5 +1,5 @@
 ;;;; anything-obsolete.el --- obsolete functions of anything
-;; Time-stamp:<2011-02-13 Sun 16:48 xin on p6t>
+;; Time-stamp:<2011-09-10 Sat 11:39 xin on P6T-WIN7>
 
 ;; Copyright (C) 2010  rubikitch
 
