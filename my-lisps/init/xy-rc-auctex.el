@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-09-03 Sat 23:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-09-13 Tue 13:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -106,9 +106,9 @@
   ;; (setenv "BIBINPUTS" "jabref")
 
   ;; preview-latex, preview latex output in Emacs
-  (LaTeX-preview-setup))
-
-  ;; (yas-start)
-  ;; (linkd-start))
+  (LaTeX-preview-setup)
+  ;; Picture scale
+  (setq preview-scale-function 1.5)
+)
 
 (provide 'xy-rc-auctex)
