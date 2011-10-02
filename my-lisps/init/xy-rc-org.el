@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-09-02 Fri 23:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-10-02 Sun 14:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -107,6 +107,23 @@
 ;;                 (if (not thisdone)
 ;;                     (next-logical-line))))
 ;;             (save-buffer)))))))
+
+;; REF: http://orgmode.org/worg/org-hacks.html#sec-1-3-1
+;;;###autoload
+(defun org-transpose-table-at-point ()
+  "Transpose orgmode table at point, eliminate hlines"
+  (interactive)
+  (let ((contents
+         (apply #'mapcar* #'list
+                ;; remove 'hline from list
+                (remove-if-not 'listp
+                               ;; signals error if not table
+                               (org-table-to-lisp)))))
+    (delete-region (org-table-begin) (org-table-end))
+    (insert (mapconcat (lambda(x) (concat "| " (mapconcat 'identity x " | " ) "  |\n" ))
+                       contents ""))
+    (org-table-align)))
+
 
 ;;;###autoload
 (defun org-settings ()
