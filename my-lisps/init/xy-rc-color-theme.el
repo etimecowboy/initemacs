@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-theme.el'
-;; Time-stamp:<2011-09-09 Fri 13:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-10 Thu 19:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,8 +24,10 @@
 
   (interactive)
   (setq color-theme-is-global t)
-  (color-theme-initialize)
+  ;; (color-theme-initialize)
+  ;; (require 'color-theme-manoj-xy)
   (color-theme-manoj-xy-dark)
+  ;; (require 'color-theme-blackboard)
   ;; (color-theme-blackboard)
   )
 
