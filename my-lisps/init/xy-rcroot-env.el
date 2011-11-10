@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-09-09 Fri 13:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-10 Thu 15:27 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -167,6 +167,8 @@
 (load "light-symbol-autoloads.el")
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/xml-rpc-1.6.7"))
 ;; (require 'xml-rpc-autoloads)
+(Windows
+ (load "w32-browser-autoloads.el"))
 
 ;; My own lisps, loaded at last
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
