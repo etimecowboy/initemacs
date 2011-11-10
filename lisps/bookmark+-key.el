@@ -1,27 +1,27 @@
 ;;; bookmark+-key.el --- Bookmark+ key and menu bindings.
-;; 
+;;
 ;; Filename: bookmark+-key.el
 ;; Description: Bookmark+ key and menu bindings.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams (concat "drew.adams" "@" "oracle" ".com")
 ;; Copyright (C) 2010-2011, Drew Adams, all rights reserved.
 ;; Created: Fri Apr  1 15:34:50 2011 (-0700)
-;; Version: 
-;; Last-Updated: Mon Apr 25 06:54:55 2011 (-0700)
+;; Version:
+;; Last-Updated: Tue Nov  1 20:56:54 2011 (-0700)
 ;;           By: dradams
-;;     Update #: 256
+;;     Update #: 309
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/bookmark+-key.el
 ;; Keywords: bookmarks, bookmark+, placeholders, annotations, search, info, url, w3m, gnus
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
-;; 
+;;
 ;; Features that might be required by this library:
 ;;
 ;;   None
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
-;;; Commentary: 
-;; 
+;;
+;;; Commentary:
+;;
 ;;    The Bookmark+ libraries are these:
 ;;
 ;;    `bookmark+.el'     - main (driver) library
@@ -45,7 +45,7 @@
 ;;
 ;;    2. From the Emacs-Wiki Web site:
 ;;       http://www.emacswiki.org/cgi-bin/wiki/BookmarkPlus.
-;;    
+;;
 ;;    3. From the Bookmark+ group customization buffer:
 ;;       `M-x customize-group bookmark-plus', then click link
 ;;       `Commentary'.
@@ -62,24 +62,24 @@
 ;;    `bmkp-set-map', `bmkp-tags-map', `bmkp-tags-menu'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;; *This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 3, or
 ;; (at your option) any later version.
-;; 
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 ;; General Public License for more details.
-;; 
+;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 ;; Floor, Boston, MA 02110-1301, USA.
-;; 
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;
@@ -108,30 +108,32 @@
 ;; `bookmark-map'
 
 (define-key ctl-x-map "p" bookmark-map)
-(define-key ctl-x-map "pj" 'bookmark-jump-other-window)
-(define-key ctl-x-map "rK" 'bmkp-set-desktop-bookmark)
-(define-key bookmark-map "0"      'bmkp-empty-file)
-(define-key bookmark-map "B"      'bmkp-choose-navlist-from-bookmark-list)
-(define-key bookmark-map "E"      'bmkp-edit-bookmark)
-(define-key bookmark-map "I"      'bookmark-insert-location) ; The original in `bookmark.el' was `f'.
-(define-key bookmark-map "K"      'bmkp-set-desktop-bookmark)
-(define-key bookmark-map "L"      'bmkp-switch-bookmark-file)
-(define-key bookmark-map "N"      'bmkp-navlist-bmenu-list)
-(define-key bookmark-map "o"      'bookmark-jump-other-window)
-(define-key bookmark-map "q"      'bookmark-jump-other-window)
-(define-key bookmark-map "x"      'bmkp-set-bookmark-file-bookmark)
+(define-key ctl-x-map "pj" 'bookmark-jump-other-window) ; `C-x p j' (also `C-x 4 j j')
+(define-key ctl-x-map "rK" 'bmkp-set-desktop-bookmark) ; `C-x r K' (also `C-x p K', `C-x p c K')
+(define-key bookmark-map "0"      'bmkp-empty-file) ; `C-x p 0'
+(define-key bookmark-map "B"      'bmkp-choose-navlist-from-bookmark-list) ; `C-x p B'
+(define-key bookmark-map "E"      'bmkp-edit-bookmark) ; `C-x p E'
+;; The original `bookmark-insert-location' in `bookmark.el' was `f'.
+(define-key bookmark-map "I"      'bookmark-insert-location) ; `C-x p I'
+(define-key bookmark-map "K"      'bmkp-set-desktop-bookmark) ; `C-x p K' (also `C-x r K', `C-x p c K')
+(define-key bookmark-map "L"      'bmkp-switch-bookmark-file) ; `C-x p L'
+(define-key bookmark-map "N"      'bmkp-navlist-bmenu-list) ; `C-x p N'
+(define-key bookmark-map "o"      'bookmark-jump-other-window) ; `C-x p o' (also `C-x 4 j j')
+(define-key bookmark-map "q"      'bookmark-jump-other-window) ; `C-x p q' (also `C-x 4 j j')
+(define-key bookmark-map "x"      'bmkp-toggle-autotemp-on-set) ; `C-x p x'
+(define-key bookmark-map "y"      'bmkp-set-bookmark-file-bookmark) ; `C-x p y'
 (when (featurep 'bookmark+-lit)
-  (define-key bookmark-map "h"    'bmkp-light-bookmark-this-buffer)
-  (define-key bookmark-map "H"    'bmkp-light-bookmarks)
-  (define-key bookmark-map "u"    'bmkp-unlight-bookmark-this-buffer)
-  (define-key bookmark-map "U"    'bmkp-unlight-bookmarks)
-  (define-key bookmark-map "\C-u" 'bmkp-unlight-bookmark-here)
-  (define-key bookmark-map "="    'bmkp-bookmarks-lighted-at-point))
-(define-key bookmark-map "."      'bmkp-this-buffer-bmenu-list)
-(define-key bookmark-map "?"      'bmkp-describe-bookmark)
-(define-key bookmark-map ":"      'bmkp-choose-navlist-of-type)
-(define-key bookmark-map "\r"     'bmkp-toggle-autonamed-bookmark-set/delete)
-(define-key bookmark-map [delete] 'bmkp-delete-bookmarks)
+  (define-key bookmark-map "h"    'bmkp-light-bookmark-this-buffer) ; `C-x p h'
+  (define-key bookmark-map "H"    'bmkp-light-bookmarks) ; `C-x p H'
+  (define-key bookmark-map "u"    'bmkp-unlight-bookmark-this-buffer) ; `C-x p u'
+  (define-key bookmark-map "U"    'bmkp-unlight-bookmarks) ; `C-x p U'
+  (define-key bookmark-map "\C-u" 'bmkp-unlight-bookmark-here) ; `C-x p C-u'
+  (define-key bookmark-map "="    'bmkp-bookmarks-lighted-at-point)) ; `C-x p ='
+(define-key bookmark-map "."      'bmkp-this-buffer-bmenu-list) ; `C-x p .'
+(define-key bookmark-map "?"      'bmkp-describe-bookmark) ; `C-x p ?'
+(define-key bookmark-map ":"      'bmkp-choose-navlist-of-type) ; `C-x p :'
+(define-key bookmark-map "\r"     'bmkp-toggle-autonamed-bookmark-set/delete) ; `C-x p RET'
+(define-key bookmark-map [delete] 'bmkp-delete-bookmarks) ; `C-x p delete'
 
 ;; If you use Emacs before Emacs 22, then you will want to bind the commands
 ;; whose names do *not* end in `-repeat' to keys that are easily repeatable.
@@ -139,9 +141,9 @@
 ;; (not `bmkp-next-bookmark-this-buffer-repeat') to a key such as [f2].
 ;;
 (when (> emacs-major-version 21)
-  (define-key bookmark-map [down]       'bmkp-next-bookmark-this-buffer-repeat)
-  (define-key bookmark-map "n"          'bmkp-next-bookmark-this-buffer-repeat)
-  (define-key bookmark-map "\C-n"       'bmkp-next-bookmark-this-buffer-repeat)
+  (define-key bookmark-map [down]       'bmkp-next-bookmark-this-buffer-repeat) ; `C-x p down'
+  (define-key bookmark-map "n"          'bmkp-next-bookmark-this-buffer-repeat) ; `C-x p n'
+  (define-key bookmark-map "\C-n"       'bmkp-next-bookmark-this-buffer-repeat) ; `C-x p C-n'
 
   ;; This requires the fix for Emacs bug #6256, which is in Emacs 23.3 (presumably).
   ;; For older Emacs versions you can bind the wheel event to `bmkp-next-bookmark-this-buffer'
@@ -150,10 +152,10 @@
              (or (> emacs-major-version 23)
                  (and (= emacs-major-version 23) (> emacs-minor-version 2))))
     (define-key bookmark-map (vector (list mouse-wheel-up-event))
-      'bmkp-next-bookmark-this-buffer-repeat))
-  (define-key bookmark-map [up]         'bmkp-previous-bookmark-this-buffer-repeat)
-  (define-key bookmark-map "p"          'bmkp-previous-bookmark-this-buffer-repeat)
-  (define-key bookmark-map "\C-p"       'bmkp-previous-bookmark-this-buffer-repeat)
+      'bmkp-next-bookmark-this-buffer-repeat)) ; `C-x p mouse-wheel-up'
+  (define-key bookmark-map [up]         'bmkp-previous-bookmark-this-buffer-repeat) ; `C-x p up'
+  (define-key bookmark-map "p"          'bmkp-previous-bookmark-this-buffer-repeat) ; `C-x p p'
+  (define-key bookmark-map "\C-p"       'bmkp-previous-bookmark-this-buffer-repeat) ; `C-x p C-p'
 
   ;; This requires the fix for Emacs bug #6256, which is in Emacs 23.3 (presumably).
   ;; For older Emacs versions you can bind the wheel event to `bmkp-previous-bookmark-this-buffer'
@@ -162,18 +164,18 @@
              (or (> emacs-major-version 23)
                  (and (= emacs-major-version 23) (> emacs-minor-version 2))))
     (define-key bookmark-map (vector (list mouse-wheel-down-event))
-      'bmkp-previous-bookmark-this-buffer-repeat))
-  (define-key bookmark-map [right]      'bmkp-next-bookmark-repeat)
-  (define-key bookmark-map "f"          'bmkp-next-bookmark-repeat)
-  (define-key bookmark-map "\C-f"       'bmkp-next-bookmark-repeat)
-  (define-key bookmark-map [left]       'bmkp-previous-bookmark-repeat)
-  (define-key bookmark-map "b"          'bmkp-previous-bookmark-repeat)
-  (define-key bookmark-map "\C-b"       'bmkp-previous-bookmark-repeat)
-  (define-key bookmark-map [next]       'bmkp-next-bookmark-w32-repeat)
-  (define-key bookmark-map [prior]      'bmkp-previous-bookmark-w32-repeat)
+      'bmkp-previous-bookmark-this-buffer-repeat)) ; `C-x p mouse-wheel-down'
+  (define-key bookmark-map [right]      'bmkp-next-bookmark-repeat) ; `C-x p right'
+  (define-key bookmark-map "f"          'bmkp-next-bookmark-repeat) ; `C-x p f'
+  (define-key bookmark-map "\C-f"       'bmkp-next-bookmark-repeat) ; `C-x p C-f'
+  (define-key bookmark-map [left]       'bmkp-previous-bookmark-repeat) ; `C-x p left'
+  (define-key bookmark-map "b"          'bmkp-previous-bookmark-repeat) ; `C-x p b'
+  (define-key bookmark-map "\C-b"       'bmkp-previous-bookmark-repeat) ; `C-x p C-b'
+  (define-key bookmark-map [next]       'bmkp-next-bookmark-w32-repeat) ; `C-x p next'
+  (define-key bookmark-map [prior]      'bmkp-previous-bookmark-w32-repeat) ; `C-x p prior'
   (when (featurep 'bookmark+-lit)
-    (define-key bookmark-map [C-down]   'bmkp-next-lighted-this-buffer-repeat)
-    (define-key bookmark-map [C-up]     'bmkp-previous-lighted-this-buffer-repeat)))
+    (define-key bookmark-map [C-down]   'bmkp-next-lighted-this-buffer-repeat) ; `C-x p C-down'
+    (define-key bookmark-map [C-up]     'bmkp-previous-lighted-this-buffer-repeat))) ; `C-x p C-up'
 
 
 ;; `bmkp-set-map': prefix `C-x p c'
@@ -188,7 +190,7 @@
 (define-key bmkp-set-map "K"  'bmkp-set-desktop-bookmark) ; `C-x p c K'
 (define-key bmkp-set-map "m"  'bookmark-set) ; `C-x p c m'
 (define-key bmkp-set-map "u"  'bmkp-url-target-set) ; `C-x p c u'
-(define-key bmkp-set-map "x"  'bmkp-set-bookmark-file-bookmark) ; `C-x p c x'
+(define-key bmkp-set-map "y"  'bmkp-set-bookmark-file-bookmark) ; `C-x p c y'
 (define-key bmkp-set-map "\r" 'bmkp-toggle-autonamed-bookmark-set/delete) ; `C-x p c RET'
 
 
@@ -198,25 +200,25 @@
 (add-hook 'occur-mode-hook
           #'(lambda ()
               (unless (lookup-key occur-mode-map "\C-c\C-b")
-                (define-key occur-mode-map "\C-c\C-b" 'bmkp-occur-target-set))
+                (define-key occur-mode-map "\C-c\C-b" 'bmkp-occur-target-set)) ; `C-c C-b'
               (unless (lookup-key occur-mode-map "\C-c\C-\M-b")
-                (define-key occur-mode-map "\C-c\C-\M-b" 'bmkp-occur-target-set-all))
+                (define-key occur-mode-map "\C-c\C-\M-b" 'bmkp-occur-target-set-all)) ; `C-c C-M-b'
               (unless (lookup-key occur-mode-map [(control ?c) (control meta shift ?b)])
                 (define-key occur-mode-map [(control ?c) (control meta shift ?b)]
-                  'bmkp-occur-create-autonamed-bookmarks))))
+                  'bmkp-occur-create-autonamed-bookmarks)))) ; `C-c C-M-B' (aka `C-c C-M-S-b')
 
 (add-hook 'compilation-mode-hook
           #'(lambda ()
               (unless (lookup-key occur-mode-map "\C-c\C-b")
-                (define-key occur-mode-map "\C-c\C-b" 'bmkp-compilation-target-set))
-              (unless (lookup-key occur-mode-map "\C-c\C-\M-b")
+                (define-key occur-mode-map "\C-c\C-b" 'bmkp-compilation-target-set)) ; `C-c C-b'
+              (unless (lookup-key occur-mode-map "\C-c\C-\M-b") ; `C-c C-M-b'
                 (define-key occur-mode-map "\C-c\C-\M-b" 'bmkp-compilation-target-set-all))))
 
 (add-hook 'compilation-minor-mode-hook
           #'(lambda ()
               (unless (lookup-key occur-mode-map "\C-c\C-b")
-                (define-key occur-mode-map "\C-c\C-b" 'bmkp-compilation-target-set))
-              (unless (lookup-key occur-mode-map "\C-c\C-\M-b")
+                (define-key occur-mode-map "\C-c\C-b" 'bmkp-compilation-target-set)) ; `C-c C-b'
+              (unless (lookup-key occur-mode-map "\C-c\C-\M-b") ; `C-c C-M-b'
                 (define-key occur-mode-map "\C-c\C-\M-b" 'bmkp-compilation-target-set-all))))
 
 
@@ -274,8 +276,8 @@
 (define-key bmkp-jump-map              "=f"   'bmkp-specific-files-jump) ; `C-x j = f'
 (define-key bmkp-jump-other-window-map "=f"   'bmkp-specific-files-jump-other-window) ; `C-x 4 j = f'
 (when (> emacs-major-version 21)        ; Needs `read-file-name' with a PREDICATE arg.
-  (define-key bmkp-jump-map              "a"  'bmkp-find-file) ; `C-x j a'
-  (define-key bmkp-jump-other-window-map "a"  'bmkp-find-file-other-window)) ; `C-x 4 j a'
+  (define-key bmkp-jump-map              "a"  'bmkp-autofile-jump) ; `C-x j a'
+  (define-key bmkp-jump-other-window-map "a"  'bmkp-autofile-jump-other-window)) ; `C-x 4 j a'
 (define-key bmkp-jump-map              "b"    'bmkp-non-file-jump) ; `C-x j b'
 (define-key bmkp-jump-other-window-map "b"    'bmkp-non-file-jump-other-window) ; `C-x 4 j b'
 (define-key bmkp-jump-map              "B"    'bmkp-bookmark-list-jump) ; `C-x j B'
@@ -381,23 +383,25 @@
 (define-key bmkp-jump-map              "v"    'bmkp-variable-list-jump) ; `C-x j v'
 (define-key bmkp-jump-map              "w"    'bmkp-w3m-jump) ; `C-x j w'
 (define-key bmkp-jump-other-window-map "w"    'bmkp-w3m-jump-other-window) ; `C-x 4 j w'
-(define-key bmkp-jump-map              "x"    'bmkp-bookmark-file-jump) ; `C-x j x'
+(define-key bmkp-jump-map              "x"    'bmkp-temporary-jump) ; `C-x j x'
+(define-key bmkp-jump-other-window-map "x"    'bmkp-temporary-jump-other-window) ; `C-x 4 j x'
+(define-key bmkp-jump-map              "y"    'bmkp-bookmark-file-jump) ; `C-x j y'
 (define-key bmkp-jump-map              ":"    'bmkp-jump-to-type) ; `C-x j :'
 (define-key bmkp-jump-other-window-map ":"    'bmkp-jump-to-type-other-window) ; `C-x 4 j :'
 
 ;; Add jump commands to other keymaps: Buffer-menu, Dired, Gnus, Info, Man, Woman, W3M.
 (add-hook 'buffer-menu-mode-hook
           #'(lambda () (unless (lookup-key Buffer-menu-mode-map "j")
-                         (define-key Buffer-menu-mode-map "j" 'bmkp-non-file-jump))))
+                         (define-key Buffer-menu-mode-map "j" 'bmkp-non-file-jump)))) ; `j'
 (add-hook 'dired-mode-hook
           #'(lambda ()
               (let ((now  (lookup-key dired-mode-map "J")))
                 ;; Uppercase, since `j' is `dired-goto-file'.
                 (unless (and now (not (eq now 'undefined))) ; `dired+.el' uses `undefined'.
-                  (define-key dired-mode-map "J" 'bmkp-dired-jump))
+                  (define-key dired-mode-map "J" 'bmkp-dired-jump)) ; `j'
                 (setq now  (lookup-key dired-mode-map "\C-j"))
                 (unless (and now (not (eq now 'undefined))) ; `dired+.el' uses `undefined'.
-                  (define-key dired-mode-map "\C-j" 'bmkp-dired-this-dir-jump)))
+                  (define-key dired-mode-map "\C-j" 'bmkp-dired-this-dir-jump))) ; `C-j'
               (let ((map   dired-mode-map)
                     (sep   '(menu-bar subdir separator-bmkp))
                     (bdj   '(menu-bar subdir bmkp-dired-jump))
@@ -478,17 +482,21 @@
                    'noerror)))
   'bmkp-set-bookmark-file-bookmark)
 (define-key-after menu-bar-bookmark-map [separator-delete] '("--") 'bmkp-toggle-autoname-bookmark-set)
-(define-key-after menu-bar-bookmark-map [bmkp-toggle-autoname-bookmark-delete]
-  '(menu-item "Delete Autonamed Bookmark" bmkp-toggle-autonamed-bookmark-set/delete
-    :help "Delete the autonamed bookmark at point"
-    :visible (bookmark-get-bookmark (funcall bmkp-autoname-bookmark-function (point))
-              'noerror))
-  'bmkp-set-bookmark-file-bookmark)
+(define-key-after menu-bar-bookmark-map [bmkp-delete-all-temporary-bookmarks]
+  '(menu-item "Delete All Temporaries..." bmkp-delete-all-temporary-bookmarks
+    :help "Delete the temporary bookmarks, (`X') whether visible here or not")
+  'separator-delete)
 (define-key-after menu-bar-bookmark-map [bmkp-delete-all-autonamed-for-this-buffer]
   '(menu-item "Delete All Autonamed Bookmarks Here..."
     bmkp-delete-all-autonamed-for-this-buffer
     :help "Delete all autonamed bookmarks for the current buffer"
     :enable (mapcar #'bookmark-name-from-full-record (bmkp-autonamed-this-buffer-alist-only)))
+  'bmkp-delete-all-temporary-bookmarks)
+(define-key-after menu-bar-bookmark-map [bmkp-toggle-autoname-bookmark-delete]
+  '(menu-item "Delete Autonamed Bookmark" bmkp-toggle-autonamed-bookmark-set/delete
+    :help "Delete the autonamed bookmark at point"
+    :visible (bookmark-get-bookmark (funcall bmkp-autoname-bookmark-function (point))
+              'noerror))
   'bmkp-toggle-autonamed-bookmark-set/delete)
 (define-key-after menu-bar-bookmark-map [bmkp-delete-bookmarks]
   '(menu-item "Delete Bookmarks Here..." bmkp-delete-bookmarks
@@ -571,6 +579,14 @@
   '(menu-item "Switch to Bookmark File..." bmkp-switch-bookmark-file
     :help "Switch to a different bookmark file, *replacing* the current set of bookmarks")
   'load)
+(define-key-after menu-bar-bookmark-map [bmkp-toggle-autotemp-on-set]
+  '(menu-item "Toggle Automatically Making Temporary" bmkp-toggle-autotemp-on-set
+    :help "Toggle automatically making any bookmark temporary whenever it is set")
+  'load-read-only)
+(define-key-after menu-bar-bookmark-map [bmkp-temporary-bookmarking-mode]
+  '(menu-item "Toggle Temporary Bookmarking Mode..." bmkp-temporary-bookmarking-mode
+    :help "Toggle temporary-only bookmarking (empty bookmark file *replaces* current bookmarks)")
+  'bmkp-toggle-autotemp-on-set)
 
 
 ;; `bmkp-highlight-menu' of `Bookmarks' menu
@@ -649,11 +665,21 @@
                              "Highlight Jump using Crosshairs"
                              "Crosshairs highlighting is %s"
                              "Temporarily highlight visited bookmarks using crosshairs"))
+(define-key bmkp-options-menu [bmkp-toggle-saving-menu-list-state]
+  (bmkp-menu-bar-make-toggle bmkp-bmenu-state-file bmkp-bmenu-state-file
+                             "Autosave *Bookmark List* Display State"
+                             "Autosaving of `*Bookmark List*' display state is %s"
+                             "Autosave `*Bookmark List*' state (aka \"menu list\") when you quit it"))
+(define-key bmkp-options-menu [bmkp-toggle-saving-bookmark-file]
+  (bmkp-menu-bar-make-toggle bookmark-save-flag bookmark-save-flag
+                             "Autosave Bookmark File"
+                             "Autosaving of bookmarks is %s"
+                             "Automatically save a bookmark after setting or changing it"))
 (define-key bmkp-options-menu [bmkp-save-new-location-flag]
   (bmkp-menu-bar-make-toggle bmkp-save-new-location-flag bmkp-save-new-location-flag
-                             "Save after Relocating"
-                             "Saving relocated bookmarks is %s"
-                             "Save a bookmark after automatically relocating it"))
+                             "Autosave after Relocating"
+                             "Autosaving relocated bookmarks is %s"
+                             "Automatically save a bookmark after automatically relocating it"))
 (define-key bmkp-options-menu [bmkp-prompt-for-tags-flag]
   (bmkp-menu-bar-make-toggle bmkp-prompt-for-tags-flag bmkp-prompt-for-tags-flag
                              "Prompt for Tags when Setting"
@@ -710,6 +736,12 @@
 ;; `Jump To': Add jump menu also to the `Bookmark+' menu, and remove the two jump commands there.
 (define-key bmkp-bmenu-menubar-menu [jump] (cons "Jump To" bmkp-jump-menu))
 
+(define-key bmkp-jump-menu [bmkp-temporary-jump-other-window]
+  '(menu-item "Temporary..." bmkp-temporary-jump-other-window
+    :help "Jump to a temporary bookmark"))
+(define-key bmkp-jump-menu [bmkp-autofile-jump-other-window]
+  '(menu-item "Autofile..." bmkp-autofile-jump-other-window
+    :help "Jump to an autofile bookmark"))
 (define-key bmkp-jump-menu [bmkp-autonamed-this-buffer-jump]
   '(menu-item "Autonamed for This Buffer..." bmkp-autonamed-this-buffer-jump
     :help "Jump to an autonamed bookmark in this buffer"))

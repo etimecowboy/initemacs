@@ -6,9 +6,9 @@
 ;; Maintainer: Drew Adams (concat "drew.adams" "@" "oracle" ".com")
 ;; Copyright (C) 2000-2011, Drew Adams, all rights reserved.
 ;; Created: Fri Sep 15 07:58:41 2000
-;; Last-Updated: Tue Aug  9 10:29:22 2011 (-0700)
+;; Last-Updated: Wed Nov  9 15:17:20 2011 (-0800)
 ;;           By: dradams
-;;     Update #: 13732
+;;     Update #: 13823
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/bookmark+-chg.el
 ;; Keywords: bookmarks, bookmark+
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -120,6 +120,37 @@
  
 ;;;(@* "CHANGE LOG FOR `bookmark+-1.el'")
 ;;
+;; 2011/11/09 dadams
+;;     bmkp-jump-dired, bmkp-jump-man: Added bmkp-select-buffer-other-window to other-window fns.
+;; 2011/11/08 dadams
+;;     bmkp-edit-bookmark: For new file name, use read-file-name, not read-from-minibuffer.
+;; 2011/11/03 dadams
+;;     Renamed: bmkp-autoname-bookmark to bmkp-autoname-bookmark-function-default.
+;; 2011/11/01 dadams
+;;     Added: bmkp-temporary-jump(-other-window).
+;;     bmkp-bookmark-description: Title now indicates whether temporary.
+;; 2011/10/31 dadams
+;;     Added: bmkp-toggle-autotemp-on-set, bmkp-autotemp-all-when-set-p.
+;;     bookmark-set: If bmkp-autotemp-all-when-set-p call bmkp-make-bookmark-temporary.
+;; 2011/10/28 dadams
+;;     Added: bmkp-delete-temporary-no-confirm.
+;;     bmkp-delete-all-temporary-bookmarks: Rewrote (it was just a stub).
+;;     bmkp-bmenu-menubar-menu:
+;;       Added: bmkp-temporary-bookmarking-mode, bmkp-delete-all-temporary-bookmarks,
+;;              bmkp-bmenu-toggle-marked-temporary/savable.
+;;     bmkp-bmenu-show-menu: Added: bmkp-bmenu-show-only-temporary.
+;;     bmkp-bmenu-mark-menu:
+;;       Added: bmkp-bmenu-mark-temporary-bookmarks, bmkp-bmenu-mark-autonamed-bookmarks.
+;;     bmkp-bmenu-mouse-3-menu: Added: bmkp-bmenu-toggle-temporary.
+;;     bookmark-bmenu-mode: Updated doc string.
+;; 2011/10/27 dadams
+;;     Added: bmkp-autotemp-bookmark-predicates, bmkp-temporary-bookmarking-mode(-hook),
+;;            bmkp-delete-all-temporary-bookmarks, bmkp-make-bookmark-(savable|temporary),
+;;            bmkp-toggle-temporary-bookmark, bmkp-temporary-alist-only, bmkp-temporary-bookmark-p.
+;;     bookmark-set: Make bookmark temporary, if bmkp-autotemp-bookmark-predicates says to.
+;;     bookmark-write-file: Do not save temporary bookmarks (bmkp-temporary-bookmark-p).
+;; 2011/10/25 dadams
+;;     bmkp-empty-file: Added optional arg CONFIRMP.  By default, no confirmation if not interactive.
 ;; 2011/08/09 dadams
 ;;     Bind icicle-unpropertize-completion-result-flag to t for all calls to completing-read.
 ;; 2011/08/07 dadams
@@ -354,6 +385,25 @@
  
 ;;;(@* "CHANGE LOG FOR `bookmark+-bmu.el'")
 ;;
+;; 2011/11/01 dadams
+;;     bookmark-bmenu-mode: Changed mode-name var for mode line: Bookmarks, not Bookmark Menu.
+;;                          Updated doc string for autofile & temporary jump commands.
+;; 2011/10/31 dadams
+;;     bookmark-bmenu-mode: Updated doc string with bmkp-toggle-autotemp-on-set.
+;;     bmkp-bmenu-menubar-menu: Added: bmkp-toggle-autotemp-on-set.
+;; 2011/10/27 dadams
+;;     Added: bmkp-X-mark, bmkp-bmenu-toggle-marked-temporary/savable, bmkp-bmenu-toggle-temporary,
+;;            bmkp-bmenu-mark-autonamed-bookmarks, bmkp-bmenu-show-only-temporary,
+;;            bmkp-bmenu-mark-temporary-bookmarks.
+;;     bmkp-bmenu-list-1: Mark with X in place of a, if bookmark is temporary.
+;;     bookmark-bmenu-mode: Mode-line major-mode name indicates when in temporary bookmarking mode.
+;;                          Updated doc string with temporary bookmark commands.
+;;     bmkp-t-mark: Changed default attributes.
+;;     Bind: M-L to bmkp-temporary-bookmarking-mode, M-X to bmkp-bmenu-toggle-marked-temporary/savable
+;;           X M to bmkp-bmenu-mark-temporary-bookmarks, X S to bmkp-bmenu-show-only-temporary,
+;;           C-M-X to bmkp-bmenu-toggle-temporary.
+;;     bmkp-bmenu-show-only-bookmark-files: Bind to Y S, not X S.
+;;     bmkp-bmenu-mark-bookmark-file-bookmarks: Bind to Y M, not X M.
 ;; 2011/07/01 dadams
 ;;     bmkp-bmenu-change-sort-order, bmkp(-multi)-reverse-sort-order: Handle null CURRENT-BMK.
 ;; 2011/04/24 dadams
@@ -468,6 +518,17 @@
  
 ;;;(@* "CHANGE LOG FOR `bookmark+-key.el'")
 ;;
+;; 2011/11/01 dadams
+;;     Bind alias bmkp-autofile-jump(-*), not bmkp-find-file(-*) to C-x j a, so Icicles picks up key.
+;;     Bind bmkp-bookmark-file-jump to C-x j y, not C-x j x.  Bind bmkp-temporary-jump(-*) to C-x j x.
+;;     bmkp-jump-menu: Bind bmkp-(autofile|temporary)-jump-other-window.
+;; 2011/10/31 dadams
+;;     Bind bmkp-toggle-autotemp-on-set to C-x p x.  Move bmkp-set-bookmark-file-bookmark to C-x p y.
+;;     menu-bar-bookmark-map: Added: bmkp-toggle-autotemp-on-set.
+;; 2011/10/28 dadams
+;;     menu-bar-bookmark-map:
+;;       Added: bmkp-delete-all-temporary-bookmarks, bmkp-temporary-bookmarking-mode.  Reordered.
+;;     bmkp-options-menu: Added: bmkp-toggle-saving-menu-list-state, bmkp-toggle-saving-bookmark-file.
 ;; 2011/04/24 dadams
 ;;     Added to Bookmarks menu and its Tags submenu: Purge Autofiles with No Tags.
 ;; 2011/04/23 dadams

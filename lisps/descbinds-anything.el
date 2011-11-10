@@ -5,7 +5,7 @@
 ;; Author: Taiki SUGAWARA <buzz.taiki@gmail.com>
 ;; Keywords: anything, help
 ;; Version: 1.05
-;; Time-stamp:<2011-06-10 Fri 20:04 xin on p6t>
+;; Time-stamp:<2011-11-10 Thu 15:54 xin on P6T-WIN7>
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/descbinds-anything.el
 ;; URL: http://bitbucket.org/buzztaiki/elisp/src/tip/descbinds-anything.el
 

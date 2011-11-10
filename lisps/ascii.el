@@ -5,7 +5,7 @@
 
 ;; Author:	Vinicius Jose Latorre <viniciusjl@ig.com.br>
 ;; Maintainer:	Vinicius Jose Latorre <viniciusjl@ig.com.br>
-;; Time-stamp:<2011-06-10 Fri 20:01 xin on p6t>
+;; Time-stamp:<2011-11-10 Thu 15:44 xin on P6T-WIN7>
 ;; Keywords:	data, ascii
 ;; Version:	3.1
 ;; X-URL:	http://www.emacswiki.org/cgi-bin/wiki/ViniciusJoseLatorre

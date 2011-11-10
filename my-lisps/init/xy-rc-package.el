@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2011-11-10 Thu 14:45 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-10 Thu 15:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,11 +35,16 @@
   			   my-local-lisp-path)))
   (setq-default package-archives 
     '(("ELPA" . "http://tromey.com/elpa/") 
-      ("gnu"  . "http://elpa.gnu.org/packages/")
-      ("SC"   . "http://joseito.republika.pl/sunrise-commander/")))
+      ("gnu"  . "http://elpa.gnu.org/packages/")))
 
   (add-to-list 'package-archives
-			   '("marmalade" . "http://marmalade-repo.org/packages/"))
+			   '("sunrise"   .
+			     "http://joseito.republika.pl/sunrise-commander/"))
+
+  (add-to-list 'package-archives
+			   '("marmalade" .
+			     "http://marmalade-repo.org/packages/"))
+
   )
 
 (provide 'xy-rc-package)
