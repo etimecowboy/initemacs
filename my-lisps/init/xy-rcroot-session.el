@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-09-02 Fri 09:48 xin on p6t>
+;; Time-stamp:<2011-11-10 Thu 22:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -65,6 +65,33 @@
 
 ;; Bookmark+
 ;; (require 'bookmark+)
+
+;;--------------------------------------------------------------------
+
+;; `bm.el' provides visible, buffer local, bookmarks and the ability
+;;  to jump forward and backward to the next bookmark.
+
+;; (require 'bm)
+;; or
+;; (autoload 'bm-toggle   "bm" "Toggle bookmark in current buffer." t)
+;; (autoload 'bm-next     "bm" "Goto bookmark."                     t)
+;; (autoload 'bm-previous "bm" "Goto previous bookmark."            t)
+
+;;   M$ Visual Studio key setup.
+(global-set-key (kbd "<C-f2>") 'bm-toggle)
+(global-set-key (kbd "<f2>")   'bm-next)
+(global-set-key (kbd "<S-f2>") 'bm-previous)
+;;
+;;   Click on fringe to toggle bookmarks, and use mouse wheel to move
+;;   between them.
+(global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
+;; (global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
+;; (global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
+;;
+;;   If you would like the markers on the right fringe instead of the
+;;   left, add the following to line:
+;;
+;;   (setq bm-marker 'bm-marker-right)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

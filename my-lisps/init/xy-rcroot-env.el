@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-10 Thu 19:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-10 Thu 22:37 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -129,17 +129,17 @@
 (load "auto-complete-etags-autoloads.el")
 (load "auto-complete-octave-autoloads.el")
 (load "auto-complete-verilog-autoloads.el")
-(load "auto-dictionary-autoloads.el")
+;; (load "auto-dictionary-autoloads.el")
 (load "autopair-autoloads.el")
 ;; (load "blank-mode-autoloads.el")
-;; (load "bm-autoloads.el")
+(load "bm-autoloads.el")
 (load "browse-kill-ring-autoloads.el")
-;; (load "cal-china-x-autoloads.el")
+(load "cal-china-x-autoloads.el")
 ;; (load "caps-mode-autoloads.el")
 (load "cdlatex-autoloads.el")
 (load "c-eldoc-autoloads.el")
 ;; (load "cmake-mode-autoloads.el")
-(load "cmake-mode-autoloads.el")
+(load "color-file-completion-autoloads.el")
 (load "color-theme-autoloads.el")
 ;; (load "color-theme-active-autoloads.el")
 ;; (load "color-theme-actress-autoloads.el")
@@ -162,7 +162,10 @@
 ;; (load "color-theme-wombat+-autoloads.el")
 ;; (load "color-theme-wombat-autoloads.el")
 ;; (load "color-theme-zenburn-autoloads.el")
+(load "columnify-autoloads.el")
 ;; (load "company-autoloads.el")
+(load "ctags-autoloads.el")
+(load "cursor-chg-autoloads.el")
 (load "descbinds-anything-autoloads.el")
 (load "dictionary-autoloads.el")
 (load "diminish-autoloads.el")
@@ -196,9 +199,13 @@
 ;; (load "org-table-comment-autoloads.el")
 (load "rect-mark-autoloads.el")
 (load "redo+-autoloads.el")
+(load "sr-speedbar-autoloads.el")
 (load "synonyms-autoloads.el")
 (load "tabbar-autoloads.el")
-;; (load "vline-autoloads.el")
+(load "tabbar-ruler-autoloads.el")
+(load "texdrive-autoloads.el")
+(load "tex-math-preview-autoloads.el")
+(load "vline-autoloads.el")
 (Windows
  (load "w32-browser-autoloads.el"))
 ;; (load "weblogger-autoloads.el")

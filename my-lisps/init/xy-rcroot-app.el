@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-09-04 Sun 22:51 xin on p6t>
+;; Time-stamp:<2011-11-10 Thu 22:51 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -297,6 +297,47 @@ the mode-line."
 (global-set-key [C-f10] 'tool-bar-mode)
 
 ;; tabbar，tab style buffer switch
+;; `tabbar-mode'
+;;     Toggle the Tabbar global minor mode.  When enabled a tab bar is
+;;     displayed in the header line.
+;;
+;; `tabbar-local-mode'         (C-c <C-f10>)
+;;     Toggle the Tabbar-Local minor mode.  Provided the global minor
+;;     mode is turned on, the tab bar becomes local in the current
+;;     buffer when the local minor mode is enabled.  This permits to
+;;     see the tab bar in a buffer where the header line is already
+;;     used by another mode (like `Info-mode' for example).
+;;
+;; `tabbar-mwheel-mode'
+;;     Toggle the Tabbar-Mwheel global minor mode.  When enabled you
+;;     can use the mouse wheel to navigate through tabs of groups.
+;;
+;; `tabbar-press-home'         (C-c <C-home>)
+;; `tabbar-press-scroll-left'  (C-c <C-prior>)
+;; `tabbar-press-scroll-right' (C-c <C-next>)
+;;     Simulate a mouse-1 click on respectively the "home", "scroll
+;;     left", and "scroll right" buttons.  A numeric prefix argument
+;;     value of 2, or 3, respectively simulates a mouse-2, or mouse-3
+;;     click.
+;;
+;; `tabbar-backward'           (C-c <C-left>)
+;; `tabbar-forward'            (C-c <C-right>)
+;;     Are the basic commands to navigate cyclically through tabs or
+;;     groups of tabs.  The cycle is controlled by the
+;;     `tabbar-cycle-scope' option.  The default is to navigate
+;;     through all tabs across all existing groups of tabs.  You can
+;;     change the default behavior to navigate only through the tabs
+;;     visible on the tab bar, or through groups of tabs only.  Or use
+;;     the more specialized commands below.
+;;
+;; `tabbar-backward-tab'
+;; `tabbar-forward-tab'
+;;     Navigate through the tabs visible on the tab bar.
+;;
+;; `tabbar-backward-group'     (C-c <C-up>)
+;; `tabbar-forward-group'      (C-c <C-down>)
+;;     Navigate through existing groups of tabs.
+
 ;; (require 'tabbar)
 ;; (tabbar-mode 1)
 ;; (global-set-key (kbd "C-+") 'tabbar-forward-group)
@@ -305,6 +346,15 @@ the mode-line."
 ;; (global-set-key (kbd "C--") 'tabbar-backward)
 ;; (setq tabbar-cycling-scope (quote tabs))
 ;; (setq tabbar-cycling-scope nil)
+
+;;-----------------------------------------------
+
+;; tabbar-ruler
+;; (setq EmacsPortable-global-tabbar 't) ; If you want tabbar
+;; (setq EmacsPortable-global-ruler 't) ; if you want a global ruler
+;; (setq EmacsPortable-popup-menu 't) ; If you want a popup menu.
+;; (setq EmacsPortable-popup-toolbar 't) ; If you want a popup toolbar
+;; (require 'tabbar-ruler)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
