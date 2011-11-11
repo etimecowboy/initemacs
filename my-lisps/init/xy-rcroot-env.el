@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-10 Thu 22:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-11 Fri 00:34 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -213,9 +213,17 @@
 (load "winpoint-autoloads.el")
 ;; (load "xml-rpc-autoloads.el")
 (load "yasnippet-autoloads.el")
+(message "* ---[ ELPA lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
 
 ;; My own lisps, loaded at last
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
+(message "* ---[ Emacswiki lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
 
 ;; NOTE: Another scheme for managing Emacs configurations
 ;; REF: - http://www.emacswiki.org/emacs/DotEmacsModular

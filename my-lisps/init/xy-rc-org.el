@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-10-02 Sun 14:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-11 Fri 00:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -740,7 +740,7 @@
   ;;                                  (delete-frame)))
 
   ;; load graphviz-dot-mode lisp
-  (load-file "~/.emacs.d/lisps/graphviz-dot-mode.el")
+  ;; (load-file "~/.emacs.d/lisps/graphviz-dot-mode.el")
 
   (defvar org-babel-octave-wrapper-method
     "%s
