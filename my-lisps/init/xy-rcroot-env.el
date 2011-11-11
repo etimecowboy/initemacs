@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-11 Fri 00:34 xin on p6t>
+;; Time-stamp:<2011-11-11 Fri 01:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -189,6 +189,9 @@
 ;; (load "icicles-autoloads.el")
 (load "icomplete+-autoloads.el")
 ;; (load "idle-require-autoloads.el")
+(load "ioccur-autoloads.el")
+(load "iresize-autoloads.el")
+(load "iy-go-to-char-autoloads.el")
 (load "kill-ring-search-autoloads.el")
 ;; (load "lacarte-autoloads.el")
 (load "light-symbol-autoloads.el")

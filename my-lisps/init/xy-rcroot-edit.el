@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-09-06 Tue 01:23 xin on p6t>
+;; Time-stamp:<2011-11-11 Fri 01:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -245,6 +245,16 @@
    ("C-k"                 kill-and-join-forward)
    ("C-M-6"               jlh-join-lines)
    ("%"                   match-paren)
+
+   ;; `iy-goto-char.el'
+   ;; (global-set-key (kbd "C-c f") 'iy-go-to-char)
+   ;; (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
+   ;; (global-set-key (kbd "C-c ;") 'iy-go-to-char-continue)
+   ;; (global-set-key (kbd "C-c ,") 'iy-go-to-char-continue-backward)
+   ("C-c F f"             iy-go-to-char)
+   ("C-c F b"             iy-go-to-char-backward)
+   ("C-c F c"             iy-go-to-char-continue)
+   ("C-c F a"             iy-go-to-char-continue-backward)
    ))
 
 ;; (eal-define-keys
