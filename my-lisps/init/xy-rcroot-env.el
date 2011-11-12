@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-11 Fri 01:12 xin on p6t>
+;; Time-stamp:<2011-11-12 Sat 21:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -175,6 +175,7 @@
 (load "dired-single-autoloads.el")
 (load "ecb_snap-autoloads.el")
 (load "emms-autoloads.el")
+;; (load "ert-autoloads.el")
 (load "full-ack-autoloads.el")
 (load "graphviz-dot-mode-autoloads.el")
 (require 'hexrgb)
@@ -199,6 +200,7 @@
 (load "mic-paren-autoloads.el")
 (load "multi-term-autoloads.el")
 (load "notify-autoloads.el")
+;; (load "org-email-autoloads.el")
 ;; (load "org-table-comment-autoloads.el")
 (load "rect-mark-autoloads.el")
 (load "redo+-autoloads.el")
