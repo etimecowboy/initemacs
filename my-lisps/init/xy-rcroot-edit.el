@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-11 Fri 01:27 xin on p6t>
+;; Time-stamp:<2011-11-12 Sat 21:47 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -182,6 +182,15 @@
 ;; examine color properties or choose colors. 
 ;; REF: Emacs配色的超级武器：Icicles，Color Palette和DoReMi
 ;;      http://emacser.com/icicles-doremi-palette.htm
+
+;;------------------------------------------------------------------
+
+;; buffer-move: swap buffers without typing C-x b on each window
+(require 'buffer-move)
+(global-set-key (kbd "<M-S-up>")     'buf-move-up)
+(global-set-key (kbd "<M-S-down>")   'buf-move-down)
+(global-set-key (kbd "<M-S-left>")   'buf-move-left)
+(global-set-key (kbd "<M-S-right>")  'buf-move-right)
 
 ;;------------------------------------------------------------------
 

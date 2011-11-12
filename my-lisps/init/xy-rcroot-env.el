@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-12 Sat 21:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-12 Sat 21:55 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -134,6 +134,7 @@
 ;; (load "blank-mode-autoloads.el")
 (load "bm-autoloads.el")
 (load "browse-kill-ring-autoloads.el")
+;; (load "buffer-move-autoloads.el")
 (load "cal-china-x-autoloads.el")
 ;; (load "caps-mode-autoloads.el")
 (load "cdlatex-autoloads.el")
@@ -168,6 +169,7 @@
 (load "cursor-chg-autoloads.el")
 (load "descbinds-anything-autoloads.el")
 (load "dictionary-autoloads.el")
+(load "diff-git-autoloads.el")
 (load "diminish-autoloads.el")
 (load "dired-details+-autoloads.el")
 (load "dired-details-autoloads.el")
