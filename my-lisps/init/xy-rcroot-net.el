@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-08-11 Thu 21:22 xin on p6t>
+;; Time-stamp:<2011-11-12 Sat 04:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,6 +33,22 @@
 
 ;; Emacs中的文本浏览器w3m
 ;; http://emacser.com/w3m.htm
+(require 'w3m-load)
+(eval-after-load "w3m"
+  `(w3m-settings))
+;; (setq w3m-use-favicon nil)
+;; (setq w3m-command-arguments '("-cookie" "-F"))
+;; (setq w3m-use-cookies t)
+;; (setq w3m-home-page "http://www.google.co.uk")     
+
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("M-M"     w3m-goto-url-new-session)
+;;    ("C-x M-B" view-w3m-bookmark)
+;;    ("C-x M-m" switch-to-w3m)))
+;; Middle click to open url in a new sesstion (tab)
+;; (define-key w3m-mode-map [mouse-2] 'w3m-mouse-view-this-url-new-session)
+
 
 ;;--------------------------------------------------------------------
 

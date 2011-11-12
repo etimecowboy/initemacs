@@ -1,29 +1,74 @@
-;; ahei's settings
-;; (eal-define-keys-commonly
-;;  global-map
-;;  `(("M-M"     w3m-goto-url-new-session)
-;;    ("C-x M-B" view-w3m-bookmark)
-;;    ("C-x M-m" switch-to-w3m)))
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;--------------------------------------------------------------------
+;; File name:    `xy-rc-w3m.el'
+;; Time-stamp:<2011-11-12 Sat 04:42 xin on P6T-WIN7>
+;; Author:       Xin Yang
+;; Email:        xin2.yang@gmail.com
+;; Depend on:    None
+;; Description:  My `Emacs-w3m' settings
+;;    ___ _ __ ___   __ _  ___ ___
+;;   / _ \ '_ ` _ \ / _` |/ __/ __|
+;;  |  __/ | | | | | (_| | (__\__ \
+;;  \____|_| |_| |_|\__,_|\___|___/
+;;
+;;--------------------------------------------------------------------
 
-;; (defun w3m-browse-current-buffer ()
-;;   "Use w3m browser current buffer."
-;;   (interactive)
-;;   (w3m-browse-buffer))
+(require 'cl)
+(require 'xy-rc-utils)
 
-;; (defun w3m-settings ()
-;;   "Settings for `w3m'."
+;; REF: ahei's settings
+
+;;;###autoload
+(defun w3m-browse-current-buffer ()
+  "Use w3m browser current buffer."
+  (interactive)
+  (w3m-browse-buffer))
+
+;;;###autoload
+(defun w3m-settings ()
+  "Settings for `w3m'."
+
 ;;   (defvar w3m-buffer-name-prefix "*w3m" "Name prefix of w3m buffer")
 ;;   (defvar w3m-buffer-name (concat w3m-buffer-name-prefix "*") "Name of w3m buffer")
 ;;   (defvar w3m-bookmark-buffer-name (concat w3m-buffer-name-prefix "-bookmark*") "Name of w3m buffer")
 ;;   (defvar w3m-dir (concat my-emacs-lisps-path "emacs-w3m/") "Dir of w3m.")
 
-;;   (setq w3m-command-arguments '("-cookie" "-F"))
-;;   (setq w3m-use-cookies t)
-;;   (setq w3m-icon-directory (concat w3m-dir "icons"))
-;;   (setq w3m-use-mule-ucs t)
-;;   (setq w3m-home-page "http://www.google.com.hk")
-;;   (setq w3m-default-display-inline-images t)
+  (setq w3m-add-tab-number t)
+  (setq w3m-arrived-file "~/emacs/w3m/arrived")
+  (setq w3m-bookmark-file "~/emacs/w3m/bookmark.html")
+  (setq w3m-coding-system 'utf-8)
+  (setq w3m-command-arguments '("-cookie" "-F"))
+  (setq w3m-cookie-file "~/emacs/w3m/cookie")
+  (setq w3m-default-coding-system 'utf-8)
+  (setq w3m-default-directory "~/emacs/w3m")
+  (setq w3m-default-display-inline-images t)
+  (setq-default w3m-display-inline-images t)
+  (setq w3m-default-save-directory "~/emacs/w3m")
+  (setq w3m-display-inline-image t)
+  (setq w3m-favicon-cache-file "~/emacs/w3m/favicach")
+  (setq w3m-favicon-use-cache-file t)
+  (setq w3m-file-coding-system 'utf-8)
+  (setq w3m-file-name-coding-system 'utf-8)
+  (setq w3m-fill-column 120)
+  (setq w3m-form-textarea-directory "~/emacs/w3m/textarea")
+  (setq w3m-home-page "http://www.google.co.uk")
+  (setq w3m-icon-directory (concat my-local-image-path "/w3m"))
+  (setq w3m-image-default-background "")
+  ;; (setq w3m-init-file "~/.emacs.d/xy-w3m.el")
+  (setq w3m-keep-cache-size 500)
+  (setq w3m-new-session-in-background t)
+  (setq w3m-new-session-url "about:blank")
+  (setq w3m-prefer-cache t)
+  (setq w3m-profile-directory "~/emacs/w3m")
+  (setq w3m-session-file "~/emacs/w3m/sessions")
+  (setq w3m-terminal-coding-system 'utf-8)
+  (setq w3m-use-ange-ftp t)
+  (setq w3m-use-cookies t)
+  (setq w3m-use-favicon nil)
+  (setq w3m-use-mule-ucs t)
+  (setq w3m-view-this-url-new-session-in-background t))
 
+  
 ;;   (defun w3m-mode-settings ()
 ;;     (make-local-variable 'hl-line-face)
 ;;     (setq hl-line-face 'hl-line-nonunderline-face)
@@ -181,10 +226,6 @@
 ;;      ("M-e"       w3m-bookmark-edit)
 ;;      ("'"         switch-to-other-buffer))))
 
-;; (eval-after-load "w3m"
-;;   `(w3m-settings))
-
-
 ;; (defun w3m-face-settings ()
 ;;   "Face settings for `w3m'."
 ;;   (set-face-foreground 'w3m-arrived-anchor-face "magenta"))
@@ -251,3 +292,5 @@
 ;;    (setq w3m-view-this-url-new-session-in-background t)
 ;;    )  
 ;;  )
+
+(provide 'xy-rc-w3m)

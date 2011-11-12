@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-08-22 Mon 18:08 xin on p6t>
+;; Time-stamp:<2011-11-12 Sat 04:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -89,21 +89,22 @@
   (setq mew-icon-directory "~/.emacs.d/icons/mew")
 
   ;; html邮件相关设置
-  ;; (setq mew-prog-text/html         'mew-mime-text/html-w3m) ;; See w3m.el
+  (setq mew-prog-text/html         'mew-mime-text/html-w3m) ;; See w3m.el
   ;; (setq mew-prog-text/html-ext     "/usr/bin/firefox")
-  ;; (setq mew-prog-text/xml         'mew-mime-text/html-w3m) ;; See w3m.el
+  (setq mew-prog-text/xml         'mew-mime-text/html-w3m) ;; See w3m.el
   ;; (setq mew-prog-text/xml-ext     "/usr/bin/firefox")
-  ;; (setq mew-prog-application/xml         'mew-mime-text/html-w3m)
+  (setq mew-prog-application/xml         'mew-mime-text/html-w3m)
   ;; (setq mew-prog-application/xml-ext     "/usr/bin/firefox")
   ;; (setq mew-prog-application/X-Dvi         "/usr/bin/xdvi")
   ;; Linux 使用w3m
   ;; (GNULinux
-  ;;  (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
-  ;;  (condition-case nil
-  ;;      (require 'mew-w3m)
-  ;;    (file-error nil))
-  ;;  (setq mew-use-w3m-minor-mode 1)
-  ;;  (setq mew-w3m-auto-insert-image t))
+  (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
+  (condition-case nil
+	  (require 'mew-w3m)
+	(file-error nil))
+  (setq mew-use-w3m-minor-mode 1)
+  (setq mew-w3m-auto-insert-image t)
+  ;; )
 
   ;; set signature
   ;; (setq mew-signature-file "~/.emacs.d/var/mew/signature")
