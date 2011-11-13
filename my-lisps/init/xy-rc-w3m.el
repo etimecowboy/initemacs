@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-12 Sat 04:42 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-13 Sun 00:42 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -41,15 +41,15 @@
   (setq w3m-cookie-file "~/emacs/w3m/cookie")
   (setq w3m-default-coding-system 'utf-8)
   (setq w3m-default-directory "~/emacs/w3m")
-  (setq w3m-default-display-inline-images t)
-  (setq-default w3m-display-inline-images t)
+  (setq w3m-default-display-inline-images nil)
+  (setq-default w3m-display-inline-images nil)
   (setq w3m-default-save-directory "~/emacs/w3m")
   (setq w3m-display-inline-image t)
   (setq w3m-favicon-cache-file "~/emacs/w3m/favicach")
   (setq w3m-favicon-use-cache-file t)
   (setq w3m-file-coding-system 'utf-8)
   (setq w3m-file-name-coding-system 'utf-8)
-  (setq w3m-fill-column 120)
+  (setq w3m-fill-column 100)
   (setq w3m-form-textarea-directory "~/emacs/w3m/textarea")
   (setq w3m-home-page "http://www.google.co.uk")
   (setq w3m-icon-directory (concat my-local-image-path "/w3m"))
