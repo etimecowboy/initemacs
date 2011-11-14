@@ -28,6 +28,10 @@ Emacs
 * Speedbar: (speedbar).        File/Tag summarizing utility.
 * Speedbar: (speedbar). File/Tag summarizing utility.
 
+GNU Emacs Lisp
+* Emacs-w3m: (emacs-w3m).       An Emacs interface to w3m
+* Emacs-w3m-ja: (emacs-w3m-ja). An Emacs interface to w3m (Japanese)
+
 Miscellaneous
 * cogre: (cogre).       Graphs & UML for Emacs
 * ede: (ede).       Project management for Emacs
