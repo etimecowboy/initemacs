@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-14 Mon 07:24 xin on p6t>
+;; Time-stamp:<2011-11-14 Mon 08:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,6 +37,30 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Icon search path
+(fni/add-to-image-load-path my-local-image-path 'with-subdirs 'recursive)
+
+;; Exec binary search path in the front of exec-path
+(add-to-list 'exec-path my-local-exec-path)
+(Windows
+ (add-to-list 'exec-path (concat my-local-exec-path "/win32")))
+;; NOTE: Linux don't need it
+(HomeDesktop
+ (GNULinux
+  (add-to-list 'exec-path (concat my-local-exec-path "/lin64"))))
+(Laptop
+ (add-to-list 'exec-path (concat my-local-exec-path "/lin32")))
+
+;; Info search path
+;; NOTE: auto-customised by setting `Info-additional-directory-list'
+;;
+;;   (add-to-list 'Info-additional-directory-list "~/.emacs.d/info")
+;;
+;; But seems not working
+(add-to-list 'Info-default-directory-list my-local-info-path)
+
+;; NOTE: additional manual(man) pathes are added in `woman-settings'
+
 ;; Add all to load-path
 ;; NOTE: very slow
 (fni/add-to-load-path my-local-lisp-path 'with-subdirs 'recursive)
@@ -47,7 +71,6 @@
 
 ;; Single downloaded lisps
 (xy/install-all-lisps my-local-lisp-path)
-;; (require 'loaddefs@e!!xin!.emacs.d!my-lisps!init)
 (message "* ---[ my local lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -55,14 +78,12 @@
 
 ;; Manually installed packages
 (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
-;; (require 'loaddefs@e!!xin!.emacs.d!lisps!dea)
 (message "* ---[ dea lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
-;; (require 'loaddefs@e!!xin!.emacs.d!lisps!cc-mode-5.32)
 (message "* ---[ cc-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -72,11 +93,9 @@
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
 
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
-;; (require 'loaddefs@e!!xin!.emacs.d!lisps!babel)
 
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/bookmark+"))
 (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
-;; (require 'loaddefs@e!!xin!.emacs.d!lisps!org-7.7)
 (message "* ---[ org installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -86,22 +105,31 @@
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/color-theme-6.6.0/themes"))
 
 (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
-;; (require 'loaddefs@e!!xin!.emacs.d!lisps!egg-1.01)
 (message "* ---[ egg lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
-;; (require 'loaddefs@e!!xin!.emacs.d!lisps!eim-2.4)
 (message "* ---[ eim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 (xy/install-all-lisps (concat my-local-lisp-path "/session-2.3/lisp"))
-;; (require 'loaddefs@e!!xin!.emacs.d!lisps!session-2.3!lisp)
 (message "* ---[ session lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+(xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
+(message "* ---[ w3m lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+(xy/install-all-lisps (concat my-local-lisp-path "/mew"))
+(message "* ---[ mew lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
@@ -238,27 +266,6 @@
 ;; (autoload 'my-site-start "my-site-start" nil t)
 ;; (my-site-start "~/.emacs.d/site-start.d/")
 
-;; Icon search path
-(fni/add-to-image-load-path my-local-image-path 'with-subdirs 'recursive)
-
-;; Exec binary search path in the front of exec-path
-(add-to-list 'exec-path my-local-exec-path)
-(Windows
- (add-to-list 'exec-path (concat my-local-exec-path "/win32")))
-;; NOTE: Linux don't need it
-(HomeDesktop
- (GNULinux
-  (add-to-list 'exec-path (concat my-local-exec-path "/lin64"))))
-(Laptop
- (add-to-list 'exec-path (concat my-local-exec-path "/lin32")))
-
-;; Info search path
-;; NOTE: auto-customised by setting `Info-additional-directory-list'
-;;
-;;   (add-to-list 'Info-additional-directory-list "~/.emacs.d/info")
-;;
-;; But seems not working
-(add-to-list 'Info-default-directory-list my-local-info-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
