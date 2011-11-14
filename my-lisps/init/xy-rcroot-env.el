@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-14 Mon 08:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-14 Mon 17:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -135,6 +135,12 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
+;; (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
+;; (message "* ---[ org2blog lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
+
 ;; CEDET
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/cogre"))
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/common"))
@@ -227,6 +233,7 @@
 (load "kill-ring-search-autoloads.el")
 ;; (load "lacarte-autoloads.el")
 (load "light-symbol-autoloads.el")
+;; (load "load-dir-autoloads.el")
 (load "maxframe-autoloads.el")
 (load "mic-paren-autoloads.el")
 (load "multi-term-autoloads.el")

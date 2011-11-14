@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-09-01 Thu 22:15 xin on p6t>
+;; Time-stamp:<2011-11-14 Mon 17:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,8 +35,13 @@
 ;;  `(("C-c )" reftex-citation)))
 (eval-after-load "org"
   `(org-settings))
+
 (eval-after-load "org-agenda"
   `(org-settings))
+
+(eal-define-keys
+ 'org-mode-map
+ `(("C-c C-'" w3m-browse-url)))
 
 ;;------------------------------------------------------------------------
 

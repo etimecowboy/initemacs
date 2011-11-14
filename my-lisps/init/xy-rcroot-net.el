@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-12 Sat 04:38 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-14 Mon 17:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,19 +16,6 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;--------------------------------------------------------------------
-
-;; Use system default web browser, w3m is too old
-(Windows
-  (setq browse-url-browser-function 
-        'browse-url-default-windows-browser))
-(GNULinux
-  (setq browse-url-browser-function
-		'browse-url-default-browser))
-
-;; Abbrev quickurl
-;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
-
 ;;----------------------------------------------------------------------
 
 ;; Emacs中的文本浏览器w3m
@@ -41,6 +28,11 @@
 ;; (setq w3m-use-cookies t)
 ;; (setq w3m-home-page "http://www.google.co.uk")     
 
+(eal-define-keys
+ 'w3m-mode-map
+ `(("f" w3m-external-view-current-url) ;; wicked/w3m-open-current-page-in-browser)
+   ("F" w3m-external-view-this-url)))  ;; wicked/w3m-open-link-or-image-in-browser)))
+
 ;; (eal-define-keys-commonly
 ;;  global-map
 ;;  `(("M-M"     w3m-goto-url-new-session)
@@ -49,6 +41,19 @@
 ;; Middle click to open url in a new sesstion (tab)
 ;; (define-key w3m-mode-map [mouse-2] 'w3m-mouse-view-this-url-new-session)
 
+;; Use w3m as default web browser, but can also use external program
+;; (Windows
+;;   (setq browse-url-browser-function 
+;;         'browse-url-default-windows-browser))
+;; (GNULinux
+;;   (setq browse-url-browser-function
+;; 		'browse-url-default-browser))
+
+;; (setq browse-url-browser-function 'browse-url-default-browser)
+(setq browse-url-browser-function 'w3m-browse-url)
+
+;; Abbrev quickurl
+;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
 ;;--------------------------------------------------------------------
 
@@ -62,6 +67,12 @@
 ;; Write blog with Emacs
 ;; (eval-after-load "weblogger"
 ;;   `(weblogger-settings))
+
+;;---------------------------------------------------------------------
+
+;; org2blog : use publish org to HTML then use xml-rpc to blog
+(eval-after-load "org2blog"
+  `(org2blog-settings))
 
 ;;---------------------------------------------------------------------
 

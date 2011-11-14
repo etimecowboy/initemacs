@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-13 Sun 00:42 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-14 Mon 17:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,6 +23,43 @@
   "Use w3m browser current buffer."
   (interactive)
   (w3m-browse-buffer))
+
+;; NOTE: there are already `w3m-external-view-current-url' and
+;; `w3m-external-view-this-url' functions.
+;; ;; Some functions to open links in external program
+;; ;; REF:
+;; ;; http://sachachua.com/blog/2008/09/emacs-w3m-open-pages-in-external-browsers/ 
+;; ;;;###autoload
+;; (defun wicked/w3m-open-current-page-in-browser ()
+;;   "Open the current URL in external browser."
+;;   (require 'xy-rc-utils)
+;;   (interactive)
+;;   (Windows
+;;     (setq browse-url-browser-function
+;; 		  'browse-url-default-windows-browser)
+;; 	(browse-url w3m-current-url)
+;; 	(setq browse-url-browser-function 'w3m-browse-url))
+;;   (GNULinux
+;;    (setq browse-url-browser-function
+;; 		 'browse-url-default-browser)
+;;    (browse-url w3m-current-url)
+;;    (setq browse-url-browser-function 'w3m-browse-url)))
+  
+;; ;;;###autoload
+;; (defun wicked/w3m-open-link-or-image-in-browser ()
+;;   "Open the current link or image in external browser."
+;;   (require 'xy-rc-utils)
+;;   (interactive)
+;;   (Windows
+;;    (setq browse-url-browser-function
+;; 		 'browse-url-default-windows-browser)
+;;    (browse-url (or (w3m-anchor) (w3m-image)))
+;;    (setq browse-url-browser-function 'w3m-browse-url))
+;;   (GNULinux
+;;    (setq browse-url-browser-function
+;; 		 'browse-url-default-browser)
+;;    (browse-url (or (w3m-anchor) (w3m-image)))
+;;    (setq browse-url-browser-function 'w3m-browse-url)))
 
 ;;;###autoload
 (defun w3m-settings ()

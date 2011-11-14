@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-11-11 Fri 00:44 xin on p6t>
+;; Time-stamp:<2011-11-14 Mon 18:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -148,7 +148,9 @@
           org-interactive-query org-invoice org-learn org-mairix
           org-man org-mtags org-panel org-registry org2rem
           org-screen org-secretary org-special-blocks
-          orgtbl-sqlinsert org-toc org-track))
+          orgtbl-sqlinsert org-toc org-track org-w3m))
+
+  (require 'org2blog-autoloads)
   
   (when (and (fboundp 'daemonp) (daemonp))
     (add-hook 'org-mode-hook 
