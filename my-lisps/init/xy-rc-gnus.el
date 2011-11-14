@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-09-03 Sat 00:31 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-14 Mon 13:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -251,8 +251,8 @@
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
-  ;; (setq mm-text-html-renderer 'w3m) ;用W3M显示HTML格式的邮件
-  (setq mm-text-html-renderer nil)  ;调用外部浏览器
+  (setq mm-text-html-renderer 'w3m) ;用W3M显示HTML格式的邮件
+  ;; (setq mm-text-html-renderer nil)  ;调用外部浏览器
 
   (defun wicked/gnus-article-show-html ()
 	"Show the current message as HTML mail."
