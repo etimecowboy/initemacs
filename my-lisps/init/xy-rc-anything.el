@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-16 Wed 10:10 xin on p6t>
+;; Time-stamp:<2011-11-16 Wed 11:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,7 +34,8 @@
 	 anything-c-source-emacs-commands
 	 anything-c-source-imenu
 	 anything-c-source-occur
-	 anything-c-source-emacs-process
+	 ;; BUG: not work in Windows 7
+	 ;; anything-c-source-emacs-process
 	 )
    "*my-anything*"))
 

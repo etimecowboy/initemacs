@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-16 Wed 03:52 xin on p6t>
+;; Time-stamp:<2011-11-16 Wed 10:45 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -177,19 +177,20 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (add-hook 'after-init-hook 'icy-start)
-;; (defun icicle-keys ()
-;;   "icicle-mode的按键设置."
-;;   (define-key minibuffer-local-completion-map 
-;;     (kbd "SPC") 'minibuffer-complete-word)
-;;   (define-key minibuffer-local-completion-map 
-;;     (kbd "C-w") 'backward-kill-word-or-kill-region)
-;;   (define-key minibuffer-local-completion-map
-;; 	(kbd "C-k") 'kill-line))
-;; ;; (define-key minibuffer-local-completion-map
-;; ;; 	[Tab] 'icicle-apropos))
-;; (add-hook 'icicle-mode-hook 'icicle-keys t)
-;; (eval-after-load "icicles" `(icicles-settings))
+(require 'icicles)
+(add-hook 'after-init-hook 'icy-start)
+(defun icicle-keys ()
+  "icicle-mode的按键设置."
+  (define-key minibuffer-local-completion-map 
+    (kbd "SPC") 'minibuffer-complete-word)
+  (define-key minibuffer-local-completion-map 
+    (kbd "C-w") 'backward-kill-word-or-kill-region)
+  (define-key minibuffer-local-completion-map
+	(kbd "C-k") 'kill-line))
+;; (define-key minibuffer-local-completion-map
+;; 	[Tab] 'icicle-apropos))
+(add-hook 'icicle-mode-hook 'icicle-keys t)
+(eval-after-load "icicles" `(icicles-settings))
 
 ;;-----------------------------------------------------------
 
