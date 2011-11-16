@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-16 Wed 10:42 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 12:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -243,8 +243,9 @@
      (moccur-face-settings)
      (moccur-settings)))
 (global-set-key [C-f7] 'moccur-grep-find)
-(global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
-(global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
+;; (global-set-key [C-f7] 'dmoccur)
+;; (global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
+;; (global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
 
 ;;-------------------------------------------------------------------
 
@@ -258,3 +259,4 @@
 ;;------------------------------------------------------------------
 
 (provide 'xy-rcroot-view)
+
