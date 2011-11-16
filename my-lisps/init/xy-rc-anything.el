@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-16 Wed 01:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 02:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,20 +40,6 @@
 	 )
    "*my-anything*"))
 
-;; ;;;###autoload
-;; (defun xy/anything-emacswiki ()
-;;   (interactive)
-;;   (require 'anything)
-;;   (require 'anything-match-plugin)
-;;   (require 'anything-config)
-;;   (require 'anything-auto-install)
-;;   (anything-other-buffer
-;;    '(;; auto-install elisps:
-;; 	 anything-c-source-auto-install-from-emacswiki
-;; 	 anything-c-source-auto-install-from-library
-;; 	 )
-;;    "*auto-install-from-emacswiki*"))
-
 ;;;###autoload
 (defun anything-settings ()
   "settings for `anything'."
@@ -63,6 +49,7 @@
   (require 'anything-match-plugin)
   (require 'anything-config)
   (require 'anything-auto-install)
+  (require 'anything-grep)
 
   (setq anything-c-adaptive-history-file 
         (concat my-var-path "/anything-c-adaptive-history"))

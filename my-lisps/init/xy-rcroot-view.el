@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-15 Tue 22:42 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 02:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -199,7 +199,10 @@
 ;;-------------------------------------------------------------------
 
 ;;** full-ack
-;; grep 纯 perl 代替
+;; ack is a tool like grep, designed for programmers with large trees
+;; of heterogeneous source code. 
+;; ack is written purely in Perl, and takes advantage of the power of
+;; Perl's regular expressions.  
 ;; (require 'full-ack)
 ;; (eal-define-keys
 ;;  'ack-mode-map

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-16 Wed 01:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 02:22 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -217,20 +217,20 @@
 
 ;;** anything-auto-install
 ;; anything interface for `auto-install'
-(autoload 'anything-auto-install-from-emacswiki
-  "anything-auto-install"
-  "Launch anything with auto-install separately." t)
+;; (autoload 'anything-auto-install-from-emacswiki
+;;   "anything-auto-install"
+;;   "Launch anything with auto-install separately." t)
 
-(autoload 'anything-auto-install-from-library
-  "anything-auto-install"
-  "Update library with `anything'." t)
+;; (autoload 'anything-auto-install-from-library
+;;   "anything-auto-install"
+;;   "Update library with `anything'." t)
 
-(autoload 'anything-auto-install-batch
-  "anything-auto-install"
-  "Batch install elisp libraries." t)
+;; (autoload 'anything-auto-install-batch
+;;   "anything-auto-install"
+;;   "Batch install elisp libraries." t)
 
-(autoload 'anything-auto-install
-  "anything-auto-install"
-  "All-in-one command for elisp installation." t)
+;; (autoload 'anything-auto-install
+;;   "anything-auto-install"
+;;   "All-in-one command for elisp installation." t)
 
 (provide 'xy-rcroot-complete)

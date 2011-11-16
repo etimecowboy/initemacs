@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-15 Tue 23:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 02:03 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,7 +33,9 @@
  'w3m-mode-map
  `(("f" w3m-external-view-current-url) ;; wicked/w3m-open-current-page-in-browser)
    ("F" w3m-external-view-this-url)   ;; wicked/w3m-open-link-or-image-in-browser)))
-   ("M-w" org-w3m-copy-for-org-mode)   ;; copy region as org format
+   ;; (if (featurep 'org)
+   ("C-x W c" org-w3m-copy-for-org-mode) ;;  copy region as org format
+	   ;; )
    ))
 
 ;; (eal-define-keys-commonly
