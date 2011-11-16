@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-15 Tue 23:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 12:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -97,8 +97,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;** recentf
-(recentf-mode 1)
-(eval-after-load "recentf" `(recentf-settings))
+(recentf-mode -1)
+;; (eval-after-load "recentf" `(recentf-settings))
 
 ;;---------------------------------------------------------------------
 
