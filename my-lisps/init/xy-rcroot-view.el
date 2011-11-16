@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-08-23 Tue 02:45 xin on p6t>
+;; Time-stamp:<2011-11-15 Tue 22:42 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,9 +18,19 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; View files
+;;* View files
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;** Revert a file in GBK encoding
+;;;###autoload
+(defun gbk-revert ()
+  "Revert current buffer with gbk-dos encoding."
+  (interactive)
+  (revert-buffer-with-coding-system 'gbk-dos))
+
+(global-set-key [S-f5] 'revert-buffer)
+(global-set-key [C-f5] 'gbk-revert)
 
 ;; Allow to view read-only files
 (setq view-read-only t)
@@ -28,7 +38,7 @@
 
 ;;--------------------------------------------------------------
 
-;; View mode settings
+;;** view-mode settings
 ;; (eal-define-keys
 ;;  'view-mode-map
 ;;  `(("U"           View-scroll-page-backward)
@@ -56,14 +66,22 @@
 
 ;;-----------------------------------------------------------------
 
+;;** doc-view
 ;; 把pdf,ps,dvi文件转换为png格式, 在Emacs里面浏览
 (if is-after-emacs-23
     (eval-after-load "doc-view" `(doc-view-settings)))
 
+;;---------------------------------------------------------------
+
+;;** log-view
+(eval-after-load "log-view"
+  `(log-view-face-settings))
+
 ;;-----------------------------------------------------------------
 
+;;** Emaci
 ;; Emacs才是世界上最强大的IDE － 用Emaci阅读文件
-;; http://emacser.com/emaci.htm
+;; REF: http://emacser.com/emaci.htm
 ;; (require 'emaci)
 (eval-after-load "emaci"
   '(progn
@@ -94,19 +112,13 @@
  `(("M-s" read-only)
    ("M-S" normal-edit)))
 
-;;---------------------------------------------------------------
-
-;; log viewing face settings
-(eval-after-load "log-view"
-  `(log-view-face-settings))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Compare buffers/files
+;;* Compare buffers/files
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; diff-mode
+;;** diff
 ;; (eal-define-keys
 ;;  'diff-mode-map
 ;;  `(("C-k" diff-hunk-kill)
@@ -125,7 +137,7 @@
 
 ;;---------------------------------------------------------------
 
-;; ediff mode
+;;** ediff
 (global-set-key (kbd "C-x D") 'ediff)
 ;; (defun ediff-keys ()
 ;;   (interactive)
@@ -154,11 +166,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Grep related settings
+;;* Grep related settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use grep in Emacs
+;;** Use grep in Emacs
 ;; (unless is-before-emacs-21
 ;;   (eal-define-keys-commonly
 ;;    global-map
@@ -186,7 +198,8 @@
 
 ;;-------------------------------------------------------------------
 
-;; full-ack, grep 纯 perl 代替
+;;** full-ack
+;; grep 纯 perl 代替
 ;; (require 'full-ack)
 ;; (eal-define-keys
 ;;  'ack-mode-map
@@ -208,7 +221,7 @@
 
 ;;--------------------------------------------------------------------
 
-;; color-moccur,
+;;** color-moccur
 ;; With color-moccur, you can search a regexp in all buffers. And you
 ;; can search files like grep(-find) without grep (and find) command.
 ;; (require 'color-moccur)
@@ -232,7 +245,8 @@
 
 ;;-------------------------------------------------------------------
 
-;; ioccur, incremental occur, more convenient and faster than OccurMode,
+;;** ioccur
+;; incremental occur, more convenient and faster than OccurMode,
 ;; which lists all lines of the current buffer that match a regexp.
 ;; This is ahei's ioccur which uses anything, not the emacswiki one. 
 (autoload 'ioccur "ioccur" "Incremental occur by ahei." t)

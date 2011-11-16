@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-14 Mon 17:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-15 Tue 22:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,13 +18,18 @@
 ;; `Header' for my Emacs configuration
 (require 'xy-rc-utils)
 
-;; User information
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;* User information
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (setq user-full-name "Xin Yang")
 (setq user-mail-address "xin2.yang@gmail.com")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Emacs generated customization
+;;* Emacs generated customization
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -33,14 +38,22 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Install additional lisp packages, and add some system paths
+;;* Search pathes
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Icon search path
+;;** Load pathes
+;; NOTE: add all = very slow
+(fni/add-to-load-path my-local-lisp-path 'with-subdirs 'recursive)
+(message "* ---[ load-path added at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;;** Image (icon) files
 (fni/add-to-image-load-path my-local-image-path 'with-subdirs 'recursive)
 
-;; Exec binary search path in the front of exec-path
+;;** Exec binaries
 (add-to-list 'exec-path my-local-exec-path)
 (Windows
  (add-to-list 'exec-path (concat my-local-exec-path "/win32")))
@@ -51,32 +64,29 @@
 (Laptop
  (add-to-list 'exec-path (concat my-local-exec-path "/lin32")))
 
-;; Info search path
+;;** Info files
 ;; NOTE: auto-customised by setting `Info-additional-directory-list'
-;;
 ;;   (add-to-list 'Info-additional-directory-list "~/.emacs.d/info")
-;;
 ;; But seems not working
 (add-to-list 'Info-default-directory-list my-local-info-path)
 
+;;** Man files
 ;; NOTE: additional manual(man) pathes are added in `woman-settings'
 
-;; Add all to load-path
-;; NOTE: very slow
-(fni/add-to-load-path my-local-lisp-path 'with-subdirs 'recursive)
-(message "* ---[ load-path added at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;* Install additional lisp packages
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Single downloaded lisps
+;;** Collected lisps (small lisps from emacswiki and other places)
 (xy/install-all-lisps my-local-lisp-path)
 (message "* ---[ my local lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; Manually installed packages
+;;** Manually installed packages (usually are develop version)
 (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
 (message "* ---[ dea lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -152,7 +162,7 @@
 ;; ECB
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/ecb-2.4"))
 
-;; ELPA packages
+;;** ELPA packages
 (load "anything-autoloads.el")
 (load "anything-complete-autoloads.el")
 (load "anything-config-autoloads.el")
@@ -228,7 +238,6 @@
 (load "icomplete+-autoloads.el")
 ;; (load "idle-require-autoloads.el")
 (load "ioccur-autoloads.el")
-(load "iresize-autoloads.el")
 (load "iy-go-to-char-autoloads.el")
 (load "kill-ring-search-autoloads.el")
 ;; (load "lacarte-autoloads.el")
@@ -253,6 +262,7 @@
  (load "w32-browser-autoloads.el"))
 ;; (load "weblogger-autoloads.el")
 (load "window-number-autoloads.el")
+(load "windresize-autoloads.el")
 (load "winpoint-autoloads.el")
 ;; (load "xml-rpc-autoloads.el")
 (load "yasnippet-autoloads.el")
@@ -261,7 +271,7 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; My own lisps, loaded at last
+;;** My own lisps (including init files and my own hacks)
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
 (message "* ---[ Emacswiki lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -277,11 +287,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Emacs help system customisation
+;;* Emacs help system customisation
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Info
+;;** Info
 (apply-args-list-to-fun
  'def-command-max-window `("info"))
 (global-set-key [C-f1] 'info-max-window)
@@ -320,7 +330,7 @@
   `(progn
      (info+-face-settings)))
 
-;; Man
+;;** Man
 (global-set-key [S-f1] 'man-follow)
 
 (eal-define-keys
@@ -354,7 +364,7 @@
 		("g"     emaci-g)
 		("'"     switch-to-other-buffer)))))
 
-;; woman settings
+;;*** woman settings
 (global-set-key [M-f1] 'woman)
 
 (eval-after-load "woman"
@@ -362,7 +372,7 @@
     (woman-face-settings)
     (woman-settings)))
 
-;; help-mode settings
+;;** help-mode settings
 (global-set-key (kbd "C-x H") 'goto-help-buffer)
 
 (eval-after-load "help-mode"
@@ -387,7 +397,7 @@
 		("."   find-symbol-at-point)
 		("/"   describe-symbol-at-point)))))
 
-;; 非常方便的查看emacs帮助的插件
+;;** 非常方便的查看emacs帮助的插件
 ;; (eal-define-keys `(emacs-lisp-mode-map 
 ;; 		   lisp-interaction-mode-map 
 ;; 		   completion-list-mode-map 
@@ -417,11 +427,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Language environment
+;;* Language environment
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; System encoding
+;;** System encodings
 (set-language-environment 'UTF-8)
 ;; NOTE: `default-buffer-file-coding-system' is an obsolete variable
 ;; (as of Emacs 23.2); use `buffer-file-coding-system' 
@@ -440,14 +450,19 @@
   (setq default-process-coding-system '(utf-8-unix . utf-8-unix)))
 ;; Time string format
 (setq system-time-locale "C")
-
-;; Fonts
 ;; 设置 sentence-end 可以识别中文断句。
 (setq sentence-end 
       "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
-;; Use scalable fonts
+
+;;** Use clipboard with x-window system
+(setq x-select-enable-clipboard t)
+
+;;** Fonts
+
+;;*** Use scalable fonts
 (setq scalable-fonts-allowed t)
-;; Emacs auto font selection for different OS
+
+;;*** Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
 ;; TODO: set font for each frame seperately
 (xy/set-font-default)
@@ -464,7 +479,7 @@
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
 (global-set-key (kbd "C-x F p") 'xy/set-font-prog)
 
-;; Ctrl+滚轮，字体放大缩小
+;;*** Ctrl+滚轮，字体放大缩小
 (GNULinux
  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease))
@@ -472,11 +487,12 @@
  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease))
 
-;; 中文输入法
+;;** 中文输入法
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
 ;;       除非不在图形系统下，才用 Emacs 内置的输入法或 eim。
 
-;; eim, another Emacs input-method
+;;*** eim
+;; another Emacs input-method
 ;; REF: http://www.emacswiki.org/emacs/InputMethods
 ;;   Basic usage:
 ;;   - `M-x set-input-method': switch to a new input method.
@@ -511,11 +527,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Emacs中的包管理器
+;;* Emacs中的包管理器
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ELPA packages
+;;** ELPA packages
 ;; BUG: Conflict with auctex's `style/url.el':
 ;;   "symbol's function definition is void: TeX-add-style-hook" error 
 ;; One solution is:
@@ -535,7 +551,7 @@
   `(progn
     (package-settings)))
 
-;; auto-install:
+;;** auto-install
 ;; BUG: Conflict with auctex's `style/url.el'
 (require 'auto-install)
 (eval-after-load "auto-install"
@@ -547,7 +563,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Start emacs server
+;;* Emacs server
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -591,7 +607,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Global keybindings for visit some files/directory 
+;;* Global keybindings for visiting some files/directory 
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

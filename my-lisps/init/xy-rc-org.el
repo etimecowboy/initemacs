@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-11-14 Mon 18:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-15 Tue 23:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -198,10 +198,11 @@
 		 "~/emacs/org/gtd/Notes.org"
 		 ))
 
-  ;; Don't recursively display gtd files in session list
-  (add-to-list 'session-globals-exclude 'org-mark-ring)
-  ;; Don't display org agenda files
-  (add-to-list 'session-globals-exclude 'org-agenda-files)
+  ;; BUG: error when load this two lines
+  ;; ;; Don't recursively display gtd files in session list
+  ;; (add-to-list 'session-globals-exclude 'org-mark-ring)
+  ;; ;; Don't display org agenda files
+  ;; (add-to-list 'session-globals-exclude 'org-agenda-files)
 
   ;;-------------------------------------------------------
   ;; GTD contexts & tags

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-08-20 Sat 07:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-15 Tue 23:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,34 +16,22 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Enable some hidden functions
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;* Enable some hidden functions
 (put 'narrow-to-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Emacs system improvement
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; ffap, finding Files and URLs at Point
+;;* ffap, finding Files and URLs at Point
 ;; REF: 
-;;   http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860
+;; http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860
 (ffap-bindings)
 (eval-after-load "ffap" `(ffap-settings))
 
 ;;------------------------------------------------------------------
 
-;; undo and redo
+;;* undo and redo
 ;; BUG: redo does not work
 (autoload 'redo "redo+"
   "Redo the the most recent undo.
@@ -59,24 +47,27 @@ A numeric argument serves as a repeat count." t)
 
 ;;------------------------------------------------------------------
 
+;;* auto-compression
 ;; 打开压缩文件时自动解压缩, 必须在 `session.el' 前面启用。
 (auto-compression-mode 1)
 
 ;;------------------------------------------------------------------
 
+;;* list-processes+
 ;; 查看Emacs内进程
 (autoload 'list-processes+ "list-processes+" 
   "Enhanced `list-processes'" t)
 
 ;;------------------------------------------------------------------
 
+;;* command-frequence
 ;; 统计命令使用频率
-(autoload 'command-frequence "command-frequence"
-  "Emacs command frequence statistics" t)
+;; (autoload 'command-frequence "command-frequence"
+;;   "Emacs command frequence statistics" t)
 
 ;;------------------------------------------------------------------
 
-;; Move deleted files to system trash
+;;* Move deleted files to system trash
 ;; It seems that this cause error when quiting emacs-23.1
 ;; in Linux systems --- Org-babel temporary directories cannot
 ;; be deleted. emacs-23.2 seems OK with this problem, but it works
@@ -87,7 +78,8 @@ A numeric argument serves as a repeat count." t)
 
 ;;------------------------------------------------------------------
 
-;; todochiku:  notification tool,
+;;* todochiku
+;; notification tool,
 ;; It started life interfacing with Growl (OS X, http://growl.info/), 
 ;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix). 
 ;; It can also do standard messages (in the minibuffer) and pop up a tooltip.
@@ -100,7 +92,7 @@ A numeric argument serves as a repeat count." t)
 
 ;;------------------------------------------------------------------
 
-;; Kill ring
+;;* kill-ring
 ;; Do not save same cut
 (setq kill-do-not-save-duplicates t)
 ;; Set a large kill ring
@@ -108,7 +100,8 @@ A numeric argument serves as a repeat count." t)
 ;; Save paster before kill emacs
 (setq save-interprogram-paste-before-kill t)
 
-;; browse-kill-ring，查看循环剪贴板的内容
+;;** browse-kill-ring
+;; 查看循环剪贴板的内容
 ;; (autoload 'browse-kill-ring "browse-kill-ring" 
 ;;   "Check contents in the kill ring" t)
 (eval-after-load "browse-kill-ring"
@@ -141,7 +134,7 @@ A numeric argument serves as a repeat count." t)
 
 ;;-------------------------------------------------------------------
 
-;; linum-mode settings
+;;* linum
 (am-add-hooks
  `(find-file-hook
    log-view-mode-hook chart-mode-hook
@@ -164,7 +157,7 @@ A numeric argument serves as a repeat count." t)
 		   (eq major-mode 'TeX-mode)
 		   (eq major-mode 'tex-mode))
      (linum-mode 1))))
-(global-set-key [f7] 'linum-mode)
+(global-set-key [S-f6] 'linum-mode)
 (eval-after-load 'linum
   `(progn 
      (linum-face-settings)
@@ -172,7 +165,8 @@ A numeric argument serves as a repeat count." t)
 
 ;;------------------------------------------------------------------
 
-;; Add time stamp to file
+;;* Add file infomation
+;;** time-stamp
 ;; maintain last change time stamps (`Time-stamp: <>' occurring within the
 ;; first 8 lines) in files edited by Emacs
 (add-hook 'write-file-hooks 'time-stamp)
@@ -180,9 +174,7 @@ A numeric argument serves as a repeat count." t)
   '(progn
      (time-stamp-settings)))
 
-;;------------------------------------------------------------------
-
-;; Add copyright statment
+;;** copyright
 ;; (GNUEmacs
 ;;  ;; update the copyright notice in current buffer
 ;;  (when (try-require 'copyright)
@@ -191,7 +183,8 @@ A numeric argument serves as a repeat count." t)
 
 ;;-------------------------------------------------------------
 
-;; Spelling: Use ASpell & flyspell
+;;* Spell
+;; Use ASpell & flyspell
 (setq text-mode-hook 'flyspell-mode)
 (eval-after-load 'flyspell
   `(progn
@@ -199,40 +192,43 @@ A numeric argument serves as a repeat count." t)
 
 ;;-------------------------------------------------------------
 
-;; Hanconvert, 自动在简体中文和繁体中文间转换.
+;;* Hanconvert
+;; 自动在简体中文和繁体中文间转换.
 (autoload 'hanconvert-region "hanconvert"
   "Convert a region from simple chinese to tradition chinese or
 from tradition chinese to simple chinese" t)
 
 ;;-------------------------------------------------------------
 
+;;* htmlize
 ;; 把文件或buffer彩色输出成html
 ;; (require 'htmlize)
 
 ;;-------------------------------------------------------------
 
-;; Calendar
+;;* Calendar
 (eval-after-load "calendar"
   `(progn
      (calendar-settings)))
 
 ;;-------------------------------------------------------------
 
-;; Diary
+;;* Diary
 (eval-after-load "diary-lib"
   `(progn
      (diary-settings)))
 
 ;;-------------------------------------------------------------
 
-;; Appointment
+;;* appt
 (eval-after-load "appt"
   `(progn
      (appt-settings)))
 
 ;;-------------------------------------------------------------
 
-;; inkd, 在各种 text 文档间提供链接
+;;* inkd
+;; 在各种 text 文档间提供链接
 (eval-after-load "linkd"
   `(progn
      (linkd-settings)
@@ -257,6 +253,7 @@ from tradition chinese to simple chinese" t)
 
 ;;------------------------------------------------------------------
 
+;;* ascii
 ;; ascii表查询
 ;; (autoload 'ascii-on        "ascii"
 ;;   "Turn on ASCII code display."   t)
@@ -269,24 +266,21 @@ from tradition chinese to simple chinese" t)
 
 ;;------------------------------------------------------------------
 
+;;* tramp
 ;; 以另一用户编辑文件, 或者编辑远程主机文件
 (global-set-key (kbd "C-c C-R") 'sudo-edit-current-file)
 (eval-after-load "tramp" `(tramp-settings))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Use terminals in Emacs
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;-------------------------------------------------------------------
 
-;; term mode 
+;;*  Use terminals in Emacs
+;;** term-mode 
 ;; (eval-after-load "term" 
 ;;   `(progn
 ;;      (term-settings)))
 
-;;--------------------------------------------------------------------
-
-;; multi-term: a mode based on term.el, 
+;;** multi-term
+;; a mode based on term.el, 
 ;; for managing multiple terminal buffers in Emacs.
 (global-set-key (kbd "C-x T") 'multi-term-start)
 (eval-after-load "multi-term" 
@@ -301,14 +295,10 @@ from tradition chinese to simple chinese" t)
 	 ;;  `(("M-J"   switch-term-and-text)
 	 ;;    ("M-L"   enter-term-mode)))))
 
-;;----------------------------------------------------------------------
-
-;; Shell/eshell mode
+;;** Shell/eshell-mode
 ;;(define-key shell-mode-map "\M-m" 'shell-add-to-history)
 
-;;----------------------------------------------------------------------
-
-;; Backgrounding a process in shell mode
+;;*** Backgrounding a process in shell mode
 ;; You might find it difficult to background 
 ;; a process that’s started, once you’re in shell mode.
 ;; If you hit ‘C-z’, you end up backgrounding Emacs!
@@ -317,9 +307,8 @@ from tradition chinese to simple chinese" t)
 ;; And if you want to background Emacs, just go to a different buffer.
 ;; ‘C-q C-z’ doesn’t work? - No, but C-c C-z should.
 
-;;----------------------------------------------------------------------
-
-;; Shell-pop, pop up a window for shell
+;;*** Shell-pop
+;; pop up a window for shell
 (autoload 'shell-pop "shell-pop" "Pop-up a shell" t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 

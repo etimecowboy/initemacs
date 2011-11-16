@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-09-10 Sat 14:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 01:12 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,14 +16,53 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
+;; TODO: write a function to find emacs config files and org files
+;;;###autoload
+(defun xy/my-anything ()
+  (interactive)
+  (require 'anything)
+  (require 'anything-match-plugin)
+  (require 'anything-config)
+  (anything-other-buffer
+   '(;; anything-c-source-buffers
+	 anything-c-source-buffers+
+	 anything-c-source-file-name-history
+	 ;; anything-c-source-recentf
+	 ;; anything-c-source-files-in-current-dir
+	 anything-c-source-files-in-current-dir+
+	 anything-c-source-bookmarks
+	 ;; BUG: minibuffer conflicts with icicle
+	 ;; anything-c-source-minibuffer-history
+	 anything-c-source-emacs-commands
+	 anything-c-source-imenu
+	 anything-c-source-occur
+	 anything-c-source-emacs-process
+	 )
+   "*my-anything*"))
+
+;; ;;;###autoload
+;; (defun xy/anything-emacswiki ()
+;;   (interactive)
+;;   (require 'anything)
+;;   (require 'anything-match-plugin)
+;;   (require 'anything-config)
+;;   (require 'anything-auto-install)
+;;   (anything-other-buffer
+;;    '(;; auto-install elisps:
+;; 	 anything-c-source-auto-install-from-emacswiki
+;; 	 anything-c-source-auto-install-from-library
+;; 	 )
+;;    "*auto-install-from-emacswiki*"))
+
 ;;;###autoload
 (defun anything-settings ()
   "settings for `anything'."
 
   ;;NOTE: anything-config will use <f5> as the prefix key, this
-  ;;conflicts with my emacs <f5> key bindings.
-  ;; (require 'anything-config)
-  ;; (require 'anything-auto-install)
+  ;;conflicts with your own emacs <f5> key bindings.
+  (require 'anything-match-plugin)
+  (require 'anything-config)
+  (require 'anything-auto-install)
 
   (setq anything-c-adaptive-history-file 
         (concat my-var-path "/anything-c-adaptive-history"))
@@ -73,7 +112,7 @@
   
   ;; (setq anything-sources
   ;;       (list
-  ;;         ;; Buffer:
+  ;;         ;; ;; Buffer:
   ;;         ;; anything-c-source-buffers
   ;;         ;; anything-c-source-buffer-not-found
   ;;         ;; anything-c-source-buffers+
@@ -146,12 +185,13 @@
   ;;         ;; anything-c-source-minibuffer-history
   ;;         ;; ;; System:
   ;;         ;; anything-c-source-emacs-process
-  ;; 		  ;; auto-install elisps
-  ;; 		  anything-c-source-auto-install-from-emacswiki
-  ;; 		  anything-c-source-auto-install-from-library))
+  ;; 	  ;; ;; auto-install elisps:
+  ;; 	  ;; anything-c-source-auto-install-from-emacswiki
+  ;; 	  ;; anything-c-source-auto-install-from-library
+  ;; 	  ))
 
   ;; (unless mswin
-  ;;   (add-to-list 'anything-sources 'anything-c-source-surfraw t)))
+  ;;   (add-to-list 'anything-sources 'anything-c-source-surfraw t))
   )
 
 (provide 'xy-rc-anything)

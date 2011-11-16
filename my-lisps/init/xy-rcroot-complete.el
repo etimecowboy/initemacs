@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-09-03 Sat 23:34 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 01:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,11 +18,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Mini buffer auto complete
+;;* Mini buffer auto complete
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ido, interactively do things with buffers and files
+;;** ido
+;; interactively do things with buffers and files
 ;; NOTE: From Emacs-22 it is a part of Emacs
 ;; (if is-before-emacs-21
 ;;     (require 'ido "ido-for-21"))
@@ -53,7 +54,8 @@
 
 ;;----------------------------------------------------------------
 
-;; icomplete: minibuffer中输入部分命令就可以使用补全
+;;** icomplete
+;; minibuffer中输入部分命令就可以使用补全
 ;; (define-key minibuffer-local-completion-map 
 ;;   (kbd "SPC") 'minibuffer-complete-word)
 ;; (icomplete-mode 1)
@@ -74,79 +76,26 @@
 ;;    ("'"   switch-to-other-buffer)
 ;;    ("L"   count-brf-lines)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; icicles: Better complete system for Emacs
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(add-hook 'after-init-hook 'icy-start)
-(defun icicle-keys ()
-  "icicle-mode的按键设置."
-  (define-key minibuffer-local-completion-map 
-    (kbd "SPC") 'minibuffer-complete-word)
-  (define-key minibuffer-local-completion-map 
-    (kbd "C-w") 'backward-kill-word-or-kill-region)
-  (define-key minibuffer-local-completion-map
-	(kbd "C-k") 'kill-line))
-  ;; (define-key minibuffer-local-completion-map
-  ;; 	[Tab] 'icicle-apropos))
-(add-hook 'icicle-mode-hook 'icicle-keys t)
-(eval-after-load "icicles" `(icicles-settings))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; apropos mode (with icicles?) completion
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (eal-define-keys
-;;  'apropos-mode-map
-;;  `(("u" scroll-down)
-;;    ("1" delete-other-windows)
-;;    ("n" forward-button)
-;;    ("p" backward-button)))
-;; (eval-after-load "apropos" `(apropos-face-settings))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; anything: narrowing and selecting candidates then executing
-;; action for selected candidates.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(eval-after-load 'anything
-  `(anything-settings))
-(global-set-key [S-f7] 'anything)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; DoReMi settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (eval-after-load "icicles" `(doremi-settings))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Buffer auto complete
+;;* Buffer auto complete
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Internal Emacs content auto complete system
+;;** Internal Emacs content auto complete system
 (setq-default abbrev-mode 1)
 (setq save-abbrevs nil)
 
 ;;-----------------------------------------------------------
 
-;; hippie-expand settings
+;;** hippie-expand settings
 (global-set-key (kbd "M-/") 'hippie-expand)
 (eval-after-load "hippie-exp"
   `(hippie-expand-settings))
 
 ;;----------------------------------------------------------
 
-;; auto-complete settings
+;;** auto-complete settings
 (eval-after-load "auto-complete"
   '(progn
 	 (auto-complete-settings)
@@ -164,7 +113,7 @@
 
 ;;--------------------------------------------------------
 
-;; company settings: complete anything.
+;;** company settings
 ;; It is a modular in-buffer completion mechanism.
 ;; (require 'company)
 ;; (eval-after-load "company"
@@ -179,7 +128,7 @@
 
 ;;--------------------------------------------------------
 
-;; template settings
+;;** template settings
 ;; (require 'template)
 ;; (eal-define-keys
 ;;  '(emacs-lisp-mode-map c-mode-base-map makefile-mode-map
@@ -191,13 +140,15 @@
 
 ;;-------------------------------------------------------
 
-;; auto-insert: 用template, 自动插入一些文件模板
+;;** auto-insert
+;; 用template, 自动插入一些文件模板
 ;; (auto-insert-mode 1)
 ;; (eval-after-load "autoinsert"
 ;;   `(auto-insert-settings))
 
 ;;---------------------------------------------------------
 
+;;** yasnippet
 ;; 超强的snippet
 (eval-after-load "yasnippet"
   '(progn
@@ -218,5 +169,68 @@
  `yas-start)
 
 ;;-------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;* icicles
+;; Better complete system for Emacs
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'after-init-hook 'icy-start)
+(defun icicle-keys ()
+  "icicle-mode的按键设置."
+  (define-key minibuffer-local-completion-map 
+    (kbd "SPC") 'minibuffer-complete-word)
+  (define-key minibuffer-local-completion-map 
+    (kbd "C-w") 'backward-kill-word-or-kill-region)
+  (define-key minibuffer-local-completion-map
+	(kbd "C-k") 'kill-line))
+;; (define-key minibuffer-local-completion-map
+;; 	[Tab] 'icicle-apropos))
+(add-hook 'icicle-mode-hook 'icicle-keys t)
+(eval-after-load "icicles" `(icicles-settings))
+
+;;-----------------------------------------------------------
+
+;;** apropos-mode
+;; (with icicles?) completion
+;; (eal-define-keys
+;;  'apropos-mode-map
+;;  `(("u" scroll-down)
+;;    ("1" delete-other-windows)
+;;    ("n" forward-button)
+;;    ("p" backward-button)))
+;; (eval-after-load "apropos" `(apropos-face-settings))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;* anything
+;; narrowing and selecting candidates then executing
+;; action for selected candidates.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(eval-after-load 'anything
+  `(anything-settings))
+(global-set-key [f7] 'xy/my-anything)
+
+;;** anything-auto-install
+;; anything interface for `auto-install'
+(autoload 'anything-auto-install-from-emacswiki
+  "anything-auto-install"
+  "Launch anything with auto-install separately." t)
+
+(autoload 'anything-auto-install-from-library
+  "anything-auto-install"
+  "Update library with `anything'." t)
+
+(autoload 'anything-auto-install-batch
+  "anything-auto-install"
+  "Batch install elisp libraries." t)
+
+(autoload 'anything-auto-install
+  "anything-auto-install"
+  "All-in-one command for elisp installation." t)
 
 (provide 'xy-rcroot-complete)

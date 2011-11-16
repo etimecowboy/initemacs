@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-10 Thu 22:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-15 Tue 23:37 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,17 +18,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Save editing information
+;;* Save editing information
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;** save-place
 ;; Save point places in buffers
 (setq save-place 1)
 (eval-after-load "saveplace" `(saveplace-settings))
 
 ;;-----------------------------------------------------------------------
 
-;; Winpoint,
+;;** Winpoint,
 ;; When two windows view the same buffer at the same time, and one
 ;; window is switched to another buffer and back, point is now the
 ;; same as in the other window, not as it was before we switched away.
@@ -40,7 +41,7 @@
 
 ;;-----------------------------------------------------------------------
 
-;; Bookmark
+;;** Bookmark
 ;; * ‘C-x r m’ – set a bookmark at the current location (e.g. in a file)
 ;; * ‘C-x r b’ – jump to a bookmark
 ;; * ‘C-x r l’ – list all of your bookmarks
@@ -61,16 +62,12 @@
 (setq bookmark-save-flag 1)
 (eval-after-load "bookmark" `(bookmark-settings))
 
-;;---------------------------------------------------------------------
-
-;; Bookmark+
+;;*** Bookmark+
 ;; (require 'bookmark+)
 
-;;--------------------------------------------------------------------
-
-;; `bm.el' provides visible, buffer local, bookmarks and the ability
-;;  to jump forward and backward to the next bookmark.
-
+;;*** bm
+;; provides visible, buffer local, bookmarks and the ability
+;; to jump forward and backward to the next bookmark.
 ;; (require 'bm)
 ;; or
 ;; (autoload 'bm-toggle   "bm" "Toggle bookmark in current buffer." t)
@@ -78,15 +75,15 @@
 ;; (autoload 'bm-previous "bm" "Goto previous bookmark."            t)
 
 ;;   M$ Visual Studio key setup.
-(global-set-key (kbd "<C-f2>") 'bm-toggle)
-(global-set-key (kbd "<f2>")   'bm-next)
+(global-set-key (kbd "<f2>") 'bm-toggle)
+(global-set-key (kbd "<C-f2>") 'bm-next)
 (global-set-key (kbd "<S-f2>") 'bm-previous)
 ;;
 ;;   Click on fringe to toggle bookmarks, and use mouse wheel to move
 ;;   between them.
-(global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
+;; (global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
 ;; (global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
-;; (global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
+(global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
 ;;
 ;;   If you would like the markers on the right fringe instead of the
 ;;   left, add the following to line:
@@ -95,16 +92,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Save Emacs session information 
+;;* Save Emacs session information 
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Recent files
-;; (recentf-mode 1)
-;; (eval-after-load "recentf" `(recentf-settings))
+;;** recentf
+(recentf-mode 1)
+(eval-after-load "recentf" `(recentf-settings))
 
 ;;---------------------------------------------------------------------
 
+;;** windows and revive
 ;; Workspace store and recover
 ;; windows.el
 (eval-after-load "windows" `(windows-settings))
@@ -120,6 +118,7 @@
 
 ;;--------------------------------------------------------------------
 
+;;** session
 ;; Use session.el instead of recentf.el
 ;; session.el can remember more information.
 (add-hook 'after-init-hook ;; 'session-start)

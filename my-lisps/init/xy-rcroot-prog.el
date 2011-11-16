@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-08-26 Fri 21:10 xin on p6t>
+;; Time-stamp:<2011-11-15 Tue 17:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -18,11 +18,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Code formatting
+;;* Code formatting
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Auto indent
+;;** Auto indent
 (eal-define-keys
  `(lisp-mode-map emacs-lisp-mode-map lisp-interaction-mode-map 
    sh-mode-map ,(if (not is-before-emacs-21) 'awk-mode-map) 
@@ -38,7 +38,7 @@
 ;; (global-set-key (kbd "C-x A a") 'align)
 ;; (global-set-key (kbd "C-x A r") 'align-regexp)
 
-;; Auto fill
+;;** Auto fill
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
    cperl-mode-hook cc-mode-hook
@@ -49,11 +49,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Code folding
+;;* Code folding
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; hide-region
+;;** hide-region
 ;; 代码区域折叠
 (require 'hide-region)
 (eal-define-keys-commonly
@@ -65,7 +65,8 @@
 
 ;;-------------------------------------------------------------------
 
-;; hs-minor-mode: a minor mode similar to outline-mode. 
+;;** hs-minor
+;; a minor mode similar to outline-mode. 
 ;; It hides and shows blocks of text. 
 ;; In particular, HideShow hides balanced-expression code blocks and 
 ;; multi-line comment blocks.
@@ -84,13 +85,59 @@
      (hs-minor-mode-face-settings)
      (hs-minor-mode-settings)))
 
+;;--------------------------------------------------------------------
+
+;;** outline-org-like
+;; org-like code folding
+;; REF:
+;; http://www.cnblogs.com/bamanzi/archive/2011/10/09/emacs-outline-org-like.html
+;; http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el
+(require 'outline)
+
+(require 'outline-magic)
+(add-hook 'outline-mode-hook 
+          (lambda () 
+            (require 'outline-cycle)))
+(add-hook 'outline-minor-mode-hook 
+          (lambda () 
+            (require 'outline-magic)
+            (define-key outline-minor-mode-map [(f6)] 'outline-cycle)
+			))
+
+(require 'outline-org-like)
+(am-add-hooks
+ `(c-mode-common-hook java-mode-hook
+   lisp-mode-hook emacs-lisp-mode-hook
+   vhdl-mode-hook verilog-mode-hook)
+ 'outline-org-mode)
+
+;;--------------------------------------------------------------------
+
+;; BUG: not working in elisp code
+;;** orgstruct-mode
+;; universal cycling keys
+;; (defun org-cycle-global ()
+;;   (interactive)
+;;   (org-cycle t))
+
+;; (defun org-cycle-local ()
+;;   (interactive)
+;;   (save-excursion
+;;     (move-beginning-of-line nil)
+;;     (org-cycle)))
+
+;; (global-set-key (kbd "M-[") 'org-cycle-global)
+;; (global-set-key (kbd "M-]") 'org-cycle-local)
+;; (add-hook 'emacs-lisp-mode-hook #'orgstruct-mode)
+;; (add-hook 'lisp-mode-hook #'orgstruct-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Code exploration
+;;* Code exploration
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;describe-symbol, find-symbol
+;;** describe-symbol and find-symbol
 ;; (eal-define-keys
 ;;  `(emacs-lisp-mode-map lisp-interaction-mode-map
 ;;    completion-list-mode-map help-mode-map debugger-mode-map)
@@ -118,7 +165,8 @@
 
 ;;--------------------------------------------------------------------
 
-;; which-func.el, 用来显示当前光标在哪个函数
+;;** which-func
+;; 用来显示当前光标在哪个函数
 (which-func-mode 1)
 (eval-after-load "which-func"
   `(progn
@@ -127,14 +175,14 @@
 
 ;;--------------------------------------------------------------------
 
-;; ;; imenu-tree: 
+;;** imenu-tree 
 ;; (require 'imenu-tree)
 ;; (eval-after-load "imenu-tree"
 ;;   `(imenu-tree-settings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Shell script development settings
+;;* Shell script development settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -151,7 +199,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Windows DOS batch script programming
+;;* Windows DOS batch script programming
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -160,7 +208,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Emacs lisp development settings
+;;* Emacs-lisp development settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -194,7 +242,8 @@
 ;; (eval-after-load "lisp-interaction-mode"
 ;;   `(lisp-mode-settings))
 
-;; eldoc, 显示变量, 函数的声明，可用在很多语言中(c)
+;;** eldoc
+;; 显示变量, 函数的声明，可用在很多语言中(c)
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
    lisp-interaction-mode-hook cperl-mode-hook)
@@ -206,12 +255,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; c/c++ development settings
+;;* c/c++ development settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; NOTE: C include directories' list are defined in `xy-util.el'
-;; cc-mode settings
+;;** cc-mode
 (eval-after-load "cc-mode"
   '(progn
 	 (cc-mode-settings)
@@ -228,7 +277,7 @@
 
 ;;----------------------------------------------------------------------------
 
-;; ifdef settings
+;;** ifdef
 ;; (eal-define-keys
 ;;  'c-mode-base-map
 ;;  `(("C-c I" mark-ifdef)))
@@ -237,7 +286,8 @@
 
 ;;----------------------------------------------------------------------------
 
-;; hide-ifdef, c中隐藏ifdef
+;;** hide-ifdef
+;; c中隐藏ifdef
 ;; (autoload 'hide-ifdef-block "hideif"
 ;;   "Hide the ifdef block (true or false part) enclosing or before the cursor."
 ;;   t)
@@ -278,14 +328,15 @@
 
 ;;-------------------------------------------------
 
-;; c-includes settings
+;;** c-includes
 ;; (require 'c-includes)
 (eval-after-load "c-includes"
   `(c-includes-settings))
 
 ;;-------------------------------------------------
 
-;; sourcepair,可以在cpp与h文件之间切换
+;;** sourcepair
+;; 可以在cpp与h文件之间切换
 ;; (eal-define-keys
 ;;  `(c-mode-base-map)
 ;;  `(("C-c S" sourcepair-load)))
@@ -315,7 +366,8 @@ See the documentation for these variables for more info.
 
 ;;-------------------------------------------------
 
-;; codepilot, someone else's c/c++ development environment
+;;** codepilot
+;; someone else's c/c++ development environment
 
 ;; (setq codepilot-dir (concat my-local-lisp-path "codepilot"))
 ;; (try-require 'mycutil)
@@ -331,8 +383,9 @@ See the documentation for these variables for more info.
 
 ;;------------------------------------------------------------
 
-;; kde-emacs 一个方便开发c的工具
-;; 改包中定义了C-j 为goto-line, 还设置了c-style
+;;** kde-emacs
+;; 一个方便开发c的工具
+;; ;; 改包中定义了C-j 为goto-line, 还设置了c-style
 ;; (require 'kde-emacs-core)
 
 ;; (autoload 'agulbra-make-member "kde-emacs-utils"
@@ -358,7 +411,7 @@ See the documentation for these variables for more info.
 
 ;;-------------------------------------------------
 
-;; snavigator
+;;** snavigator
 ;; (try-require 'sn)
 ;; (eal-define-keys
 ;;  `(c-mode-base-map)
@@ -369,7 +422,7 @@ See the documentation for these variables for more info.
 
 ;;-------------------------------------------------
 
-;; xrefactory settings
+;;** xrefactory settings
 ;; (require 'xrefactory)
 ;; ;; 查找定义
 ;; (global-set-key (kbd "C-c x d") 'xref-push-and-goto-definition)
@@ -394,7 +447,7 @@ See the documentation for these variables for more info.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; vhdl development settings
+;;* vhdl development settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -405,7 +458,7 @@ See the documentation for these variables for more info.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; verilog development settings
+;;* verilog development settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -416,7 +469,7 @@ See the documentation for these variables for more info.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;  Matlab settings
+;;* Matlab development settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -429,11 +482,11 @@ See the documentation for these variables for more info.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Documentation settings
+;;* Documentation settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; doxygen
+;;** doxygen
 
 ;; (require 'doxymacs-settings)
 ;; (autoload 'doxymacs-mode "doxymacs"
@@ -466,7 +519,7 @@ See the documentation for these variables for more info.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; CEDET settings
+;;* CEDET settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -493,7 +546,7 @@ See the documentation for these variables for more info.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; ecb 代码浏览器
+;;* ECB settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -502,16 +555,20 @@ See the documentation for these variables for more info.
 
 ;;--------------------------------------------------------------------
 
-;; eclim
+;;* eclim settings
 ;; 把Eclipse的功能带给Emacs
 ;; (require 'eclim)
 ;; (dolist (hook (list 'c-mode-common-hook 'lisp-mode-hook 
 ;;                     'emacs-lisp-mode-hook 'java-mode-hook))
 ;;   (add-hook hook 'eclim-mode))
 
-;;--------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;* Compile settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; autoconf-mode settings
+;;** autoconf-mode settings
 ;; (require 'autoconf-mode-settings)
 ;; ;;;###autoload
 ;; (defun autoconf-mode-settings ()
@@ -519,13 +576,9 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "autoconf-mode"
 ;;   `(autoconf-mode-settings))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Compile settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;--------------------------------------------------------------------
 
-;; flymake,
+;;** flymake
 ;; 动态检查语法错误
 (defvar flymake-mode-map (make-sparse-keymap))
 (autoload 'flymake-find-file-hook "flymake" "" t)
@@ -541,7 +594,7 @@ See the documentation for these variables for more info.
 
 ;;--------------------------------------------------------------------
 
-;; ahei 的智能编译
+;;** ahei 的智能编译
 ;; (require 'my-smart-compile)
 
 ;; (defalias 'cpl 'compile)
@@ -597,11 +650,11 @@ See the documentation for these variables for more info.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Debug settings
+;;* Debug settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; debug.el
+;;** debug.el
 ;; (eval-after-load "debug"
 ;;   '(progn
 ;;      ;; (require 'util)
@@ -613,7 +666,7 @@ See the documentation for these variables for more info.
 
 ;;----------------------------------------------------------------------
 
-;; edebug
+;;** edebug
 
 ;; (eal-define-keys-commonly
 ;;  global-map
@@ -631,7 +684,7 @@ See the documentation for these variables for more info.
 
 ;;---------------------------------------------------------------------
 
-;; `gdb'
+;;** gdb
 ;; (eal-define-keys
 ;;  'c-mode-base-map
 ;;  `(("C-c g" gdb)

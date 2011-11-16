@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-14 Mon 17:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-15 Tue 23:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,6 +18,7 @@
 
 ;;----------------------------------------------------------------------
 
+;;* w3m
 ;; Emacs中的文本浏览器w3m
 ;; http://emacser.com/w3m.htm
 (require 'w3m-load)
@@ -31,7 +32,9 @@
 (eal-define-keys
  'w3m-mode-map
  `(("f" w3m-external-view-current-url) ;; wicked/w3m-open-current-page-in-browser)
-   ("F" w3m-external-view-this-url)))  ;; wicked/w3m-open-link-or-image-in-browser)))
+   ("F" w3m-external-view-this-url)   ;; wicked/w3m-open-link-or-image-in-browser)))
+   ("M-w" org-w3m-copy-for-org-mode)   ;; copy region as org format
+   ))
 
 ;; (eal-define-keys-commonly
 ;;  global-map
@@ -55,29 +58,36 @@
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
+;;(global-set-key [f8]   'browse-url)
+(global-set-key [S-f8] 'lookup-word-definition)
+(global-set-key [C-f8] 'lookup-wikipedia)
+(global-set-key [f8] 'google-region)
+
 ;;--------------------------------------------------------------------
 
-;; ;; erc: Emacs中的IRC
+;;* erc
+;; ;; Emacs中的IRC
 ;; ;; ERC使用简介 emacser.com/erc.htm
 ;; (eval-after-load "erc" `(erc-settings))
 
 ;;---------------------------------------------------------------------
 
-;; weblogger.el and xml-rpc.el
+;;* weblogger and xml-rpc
 ;; Write blog with Emacs
 ;; (eval-after-load "weblogger"
 ;;   `(weblogger-settings))
 
 ;;---------------------------------------------------------------------
 
-;; org2blog : use publish org to HTML then use xml-rpc to blog
+;;* org2blog
+;; use publish org to HTML then use xml-rpc to blog
 (eval-after-load "org2blog"
   `(org2blog-settings))
 
 ;;---------------------------------------------------------------------
 
-;;; ### babel ###
-;;; --- 网络翻译接口
+;;* babel
+;;; 网络翻译接口
 (autoload 'babel "babel"
    "Use a web translation service to translate the message MSG." t)
 (autoload 'babel-region "babel"
@@ -97,6 +107,7 @@
 
 ;;---------------------------------------------------------------------
 
+;;* dictionary
 ;; Web dictionary via dictd
 (require 'dictionary-autoloads)
 ;; (global-set-key "\C-cS" 'dictionary-search)
@@ -104,22 +115,17 @@
 (global-set-key [f12] 'dictionary-search)
 (global-set-key [C-f12] 'dictionary-match-words)
 
-;;---------------------------------------------------------------------
+;;----------------------------------------------------------------------
 
-;;(global-set-key [f8]   'browse-url)
-(global-set-key [S-f8] 'lookup-word-definition)
-(global-set-key [C-f8] 'lookup-wikipedia)
-(global-set-key [f8] 'google-region)
-
-;;-------------------------------------------------------------------------------
-
+;;* eagle
 ;; ;; twitter client
 ;; (require 'eagle-settings)
 ;; (require 'twit-settings)
 
 ;;---------------------------------------------------------------------
 
-;; ;; google-maps-el – Emacs中的谷歌地图
+;;* google-maps-el
+;; Emacs中的谷歌地图
 ;; ;; http://emacser.com/emacs-google-map.htm
 
 ;; (require 'google-maps)
@@ -143,7 +149,7 @@
 
 ;;---------------------------------------------------------------------
 
-;; 查询天气预报
+;;* 查询天气预报
 
 ;; (require 'cn-weather)
 
@@ -152,7 +158,8 @@
 
 ;;----------------------------------------------------------------------
 
-;; emms: Emacs 音乐播放器
+;;* emms
+;; Emacs 音乐播放器
 ;; (autoload 'emms "emms-playlist-mode" nil t)
 ;; (autoload 'emms-browser "emms-browser" nil t)
 (emms-startit)
@@ -184,13 +191,15 @@
 
 ;;------------------------------------------------------------------------
 
-;; Gnus, news reader and email reader
+;;* Gnus
+;; news reader and email reader
 (eval-after-load "gnus"
   `(gnus-settings))
 
 ;;------------------------------------------------------------------------
 
-;; Mew, email client
+;;* Mew
+;; email client
 ;; load mew
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)

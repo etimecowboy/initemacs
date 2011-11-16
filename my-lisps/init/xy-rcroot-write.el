@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-11-14 Mon 17:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-15 Tue 23:51 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,13 +18,15 @@
 
 ;;-------------------------------------------------------------------------
 
-;; Muse, Emacs publishing tool
+;;* muse
+;; Emacs publishing tool
 ;; (eval-after-load "muse-mode"
 ;;   `(muse-settings))
 
 ;;--------------------------------------------------------------------------
 
-;; Org, Emacs note taking and GTD system
+;;* org
+;; Emacs note taking and GTD system
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -39,13 +41,10 @@
 (eval-after-load "org-agenda"
   `(org-settings))
 
-(eal-define-keys
- 'org-mode-map
- `(("C-c C-'" w3m-browse-url)))
-
 ;;------------------------------------------------------------------------
 
-;; Auctex, TeX writing IDE
+;;* auctex
+;; TeX writing IDE
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
 ;; (add-hook 'LaTeX-mode-hook 'auctex-start)
@@ -57,7 +56,8 @@
 	  'LaTeX-mode-map
 	  `(("M-c `" TeX-next-error))))) ;; C-c ` conflict with icy-mode 
 
-;; reftex, reference
+;;** reftex
+;; reference
 (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
 (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" t)
 (autoload 'reftex-citation "reftex-cite" "Make citation" t)
@@ -67,7 +67,7 @@
 ;; (eval-after-load "reftex-mode"
 ;;   `(reftex-settings))
 
-;; cdlatex, tex writing tools
+;;** cdlatex, tex writing tools
 ;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
 ;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
 ;; (eval-after-load "cdlatex"
@@ -75,7 +75,7 @@
 
 ;;------------------------------------------------------------------------
 
-;; txt2tags mode 
+;;* txt2tags
 ;; convert plain text files to various formats
 ;; (require 't2t-mode)
 (setq auto-mode-alist 
@@ -86,7 +86,7 @@
 
 ;;------------------------------------------------------------------------
 
-;; pdftools.el
+;;* pdftools
 ;; Save current buffer as a pdf file
 ;; Should be used with `ps2pdf', which usually comes with a tex
 ;; distribution
