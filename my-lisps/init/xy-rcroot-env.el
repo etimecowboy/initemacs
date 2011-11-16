@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-15 Tue 22:49 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 03:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -233,11 +233,11 @@
 (load "hl-line+-autoloads.el")
 (load "htmlize-autoloads.el")
 (load "hungry-delete-autoloads.el")
-(require 'icicles)
+;; (require 'icicles)
 ;; (load "icicles-autoloads.el")
-(load "icomplete+-autoloads.el")
+;; (load "icomplete+-autoloads.el")
 ;; (load "idle-require-autoloads.el")
-(load "ioccur-autoloads.el")
+;; (load "ioccur-autoloads.el")
 (load "iy-go-to-char-autoloads.el")
 (load "kill-ring-search-autoloads.el")
 ;; (load "lacarte-autoloads.el")

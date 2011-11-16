@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-16 Wed 02:19 xin on p6t>
+;; Time-stamp:<2011-11-16 Wed 10:10 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,8 +21,6 @@
 (defun xy/my-anything ()
   (interactive)
   (require 'anything)
-  (require 'anything-match-plugin)
-  (require 'anything-config)
   (anything-other-buffer
    '(;; anything-c-source-buffers
 	 anything-c-source-buffers+
@@ -53,6 +51,14 @@
 
   (setq anything-c-adaptive-history-file 
         (concat my-var-path "/anything-c-adaptive-history"))
+
+  (setq anything-grep-alist
+  	'(("buffers" ("egrep -Hin %s $buffers" "/"))
+  	  ("org files" ("ack-grep -af | xargs egrep -Hin %s" "~/emacs/org/source"))
+  	  ("lisps"
+  	   ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/lisps/")
+  	   ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/my-lisps/")))
+   )
 
   ;; (global-set-key (kbd "C-x b")
   ;; 	    (lambda() (interactive)

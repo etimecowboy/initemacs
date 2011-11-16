@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-16 Wed 02:20 xin on p6t>
+;; Time-stamp:<2011-11-16 Wed 03:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -227,24 +227,24 @@
 ;;** color-moccur
 ;; With color-moccur, you can search a regexp in all buffers. And you
 ;; can search files like grep(-find) without grep (and find) command.
-;; (require 'color-moccur)
-;; (eal-define-keys-commonly
-;;  'global-map
-;;  `(("C-x C-u" occur-by-moccur-displn)
-;;    ("C-x M-U" occur-by-moccur-at-point-displn)))
-;; (eal-define-keys
-;;  'isearch-mode-map
-;;  `(("C-x P" isearch-moccur-displn)))
-(autoload 'moccur-grep-find "color-moccur" nil t)
-(autoload 'occur-by-moccur-displn "color-moccur" nil t)
-(autoload 'occur-by-moccur-at-point-displn "color-moccur" nil t)
-(eval-after-load "color-moccur"
-  '(progn 
-     (moccur-face-settings)
-     (moccur-settings)))
-(global-set-key [C-f7] 'moccur-grep-find)
-(global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
-(global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
+;; ;; (require 'color-moccur)
+;; ;; (eal-define-keys-commonly
+;; ;;  'global-map
+;; ;;  `(("C-x C-u" occur-by-moccur-displn)
+;; ;;    ("C-x M-U" occur-by-moccur-at-point-displn)))
+;; ;; (eal-define-keys
+;; ;;  'isearch-mode-map
+;; ;;  `(("C-x P" isearch-moccur-displn)))
+;; (autoload 'moccur-grep-find "color-moccur" nil t)
+;; (autoload 'occur-by-moccur-displn "color-moccur" nil t)
+;; (autoload 'occur-by-moccur-at-point-displn "color-moccur" nil t)
+;; (eval-after-load "color-moccur"
+;;   '(progn 
+;;      (moccur-face-settings)
+;;      (moccur-settings)))
+;; (global-set-key [C-f7] 'moccur-grep-find)
+;; (global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
+;; (global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
 
 ;;-------------------------------------------------------------------
 
@@ -252,8 +252,8 @@
 ;; incremental occur, more convenient and faster than OccurMode,
 ;; which lists all lines of the current buffer that match a regexp.
 ;; This is ahei's ioccur which uses anything, not the emacswiki one. 
-(autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
-(global-set-key [M-f7] 'ioccur)
+;; (autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
+;; (global-set-key [M-f7] 'ioccur)
 
 ;;------------------------------------------------------------------
 
