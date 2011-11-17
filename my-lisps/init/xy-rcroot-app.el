@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-16 Wed 11:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 01:13 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -226,7 +226,7 @@ the mode-line."
 ;;** diminish
 ;; Removing or abbreviating minor mode indicators
 (eval-after-load "filladapt" '(diminish 'filladapt-mode))
-(eval-after-load "icicle" '(diminish 'icicle-mode))
+;; (eval-after-load "icicle" '(diminish 'icicle-mode))
 (eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "linkd" '(diminish 'linkd-mode))

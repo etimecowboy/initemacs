@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-15 Tue 17:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 22:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -95,9 +95,9 @@
 (require 'outline)
 
 (require 'outline-magic)
-(add-hook 'outline-mode-hook 
-          (lambda () 
-            (require 'outline-cycle)))
+;; (add-hook 'outline-mode-hook 
+;;           (lambda () 
+;;             (require 'outline-cycle)))
 (add-hook 'outline-minor-mode-hook 
           (lambda () 
             (require 'outline-magic)

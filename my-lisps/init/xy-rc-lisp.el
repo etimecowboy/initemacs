@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-08-20 Sat 04:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-16 Wed 22:29 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,9 +36,11 @@
 	  ;; (turn-on-eldoc-mode))") 
 	  ;; byte-code("\302!\210\303\304\305	!\"\207" [icicle-orig-buff
 	  ;; act-on-choice icicle-try-switch-buffer error "%s"
-	  ;; error-message-string] 4) 
-	  icicle-execute-extended-command()
-	  call-interactively(icicle-execute-extended-command nil nil)
+	  ;; error-message-string] 4)
+
+	  ;; NOTE: try to avoid icicle
+	  ;; icicle-execute-extended-command()
+	  ;; call-interactively(icicle-execute-extended-command nil nil)
 	  (turn-on-auto-fill)
 	  (turn-on-eldoc-mode))))
 

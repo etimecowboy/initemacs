@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-16 Wed 11:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 01:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -126,11 +126,12 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-(xy/install-all-lisps (concat my-local-lisp-path "/session-2.3/lisp"))
-(message "* ---[ session lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; BUG: `sesssion' conflicts with `anything'
+;; (xy/install-all-lisps (concat my-local-lisp-path "/session-2.3/lisp"))
+;; (message "* ---[ session lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; BUG: current cvs version has a bug when compiling
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
@@ -178,7 +179,7 @@
 (load "autopair-autoloads.el")
 ;; (load "blank-mode-autoloads.el")
 (load "bm-autoloads.el")
-(load "browse-kill-ring-autoloads.el")
+;; (load "browse-kill-ring-autoloads.el")
 ;; (load "buffer-move-autoloads.el")
 (load "cal-china-x-autoloads.el")
 ;; (load "caps-mode-autoloads.el")
@@ -226,7 +227,7 @@
 ;; (load "ert-autoloads.el")
 (load "full-ack-autoloads.el")
 (load "graphviz-dot-mode-autoloads.el")
-(require 'hexrgb)
+;; (require 'hexrgb)
 ;; (load "hexrgb-autoloads.el")
 (load "highlight-parentheses-autoloads.el")
 (load "highlight-symbol-autoloads.el")
