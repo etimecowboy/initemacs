@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-17 Thu 03:31 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 04:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None

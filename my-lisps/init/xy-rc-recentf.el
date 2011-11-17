@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-recentf.el'
-;; Time-stamp:<2011-08-22 Mon 17:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 04:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,11 +21,12 @@
 (defun recentf-settings ()
   "Settings of `recentf.el'."
 
-  (setq recentf-save-file (concat my-var-path "/recentf"
-								  user-login-name "@"
-								  system-name "@"
-								  system-configuration))
-  (setq recentf-exclude '("bbdb" "gnus" "gtd"))
+  ;; (setq-default recentf-save-file
+  ;; 				(concat my-var-path "/recentf"
+  ;; 						user-login-name "@"
+  ;; 						system-name "@"
+  ;; 						system-configuration))
+  (setq recentf-exclude '("bbdb" "gnus" "mew" "w3m" "gtd"))
   (setq recentf-max-saved-items 100)
   (setq recentf-max-menu-items 20)
   (setq recentf-menu-filter 'recentf-sort-basenames-ascending)
