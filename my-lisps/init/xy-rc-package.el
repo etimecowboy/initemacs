@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2011-11-10 Thu 15:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 02:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,6 +30,7 @@
 (defun package-settings ()
   "settings of `package.el'."
 
+  (require 'hexrgb)
   (setq-default package-user-dir 
   	(expand-file-name (convert-standard-filename
   			   my-local-lisp-path)))

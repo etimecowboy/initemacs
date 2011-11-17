@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-17 Thu 01:15 xin on p6t>
+;; Time-stamp:<2011-11-17 Thu 03:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -126,13 +126,6 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; BUG: `sesssion' conflicts with `anything'
-;; (xy/install-all-lisps (concat my-local-lisp-path "/session-2.3/lisp"))
-;; (message "* ---[ session lisps installed at %ds ]---"
-;;          (destructuring-bind (hi lo ms) (current-time)
-;;            (- (+ hi lo) (+ (first *emacs-load-start*)
-;;                            (second *emacs-load-start*)))))
-
 ;; BUG: current cvs version has a bug when compiling
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
 ;; (message "* ---[ w3m lisps installed at %ds ]---"
@@ -164,7 +157,7 @@
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/ecb-2.4"))
 
 ;;** ELPA packages
-(load "anything-autoloads.el")
+;; (load "anything-autoloads.el")
 (load "anything-complete-autoloads.el")
 (load "anything-config-autoloads.el")
 (load "anything-extension-autoloads.el")
@@ -214,6 +207,7 @@
 (load "ctags-autoloads.el")
 (load "cursor-chg-autoloads.el")
 (load "descbinds-anything-autoloads.el")
+;; (load "desktop-autoloads.el")
 (load "dictionary-autoloads.el")
 (load "diff-git-autoloads.el")
 (load "diminish-autoloads.el")
@@ -221,13 +215,15 @@
 (load "dired-details-autoloads.el")
 (load "dired-isearch-autoloads.el")
 (load "dired-single-autoloads.el")
+;; (load "django-theme-autoloads.el")
+;; (load "doc-mode-autoloads.el")
 (load "ecb_snap-autoloads.el")
 (load "elisp-cache-autoloads.el")
 (load "emms-autoloads.el")
 ;; (load "ert-autoloads.el")
 (load "full-ack-autoloads.el")
 (load "graphviz-dot-mode-autoloads.el")
-;; (require 'hexrgb)
+(require 'hexrgb)
 ;; (load "hexrgb-autoloads.el")
 (load "highlight-parentheses-autoloads.el")
 (load "highlight-symbol-autoloads.el")
@@ -253,6 +249,9 @@
 ;; (load "org-table-comment-autoloads.el")
 (load "rect-mark-autoloads.el")
 (load "redo+-autoloads.el")
+;; BUG: `sesssion' conflicts with `anything'
+;; (load "session-autoloads.el")
+;; (load "smex-autoloads.el")
 (load "sr-speedbar-autoloads.el")
 (load "synonyms-autoloads.el")
 (load "tabbar-autoloads.el")
@@ -268,6 +267,7 @@
 (load "winpoint-autoloads.el")
 ;; (load "xml-rpc-autoloads.el")
 (load "yasnippet-autoloads.el")
+
 (message "* ---[ ELPA lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)

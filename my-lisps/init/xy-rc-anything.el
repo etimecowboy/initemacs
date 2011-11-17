@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-17 Thu 02:03 xin on p6t>
+;; Time-stamp:<2011-11-17 Thu 03:31 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,7 +36,8 @@
 	 ;; anything-c-source-files-in-current-dir
 	 anything-c-source-files-in-current-dir+
 	 ;; anything-c-source-file-cache
-	 ;; anything-c-source-locate ;; NOTE: not sure work in Windows
+         ;; NOTE: may cause crash to emacs in Windows
+	 ;; anything-c-source-locate
 	 anything-c-source-ffap-line
 	 ;; anything-c-source-ffap-guesser
 	 
@@ -62,20 +63,18 @@
 	 )
    "*my-anything*"))
 
-
-
-
 ;;;###autoload
 (defun anything-settings ()
   "settings for `anything'."
 
   ;;NOTE: anything-config will use <f5> as the prefix key, this
   ;;conflicts with your own emacs <f5> key bindings.
-  ;; The following 5 are included in `anything-startup'
+  ;; The following 6 are included in `anything-startup'
   ;; (require 'anything-match-plugin)
   ;; (require 'anything-config)
   ;; (require 'anything-auto-install)
   ;; (require 'anything-grep)
+  ;; (require 'descbinds-anything)
   ;; (require 'anything-show-completion)
   (require 'anything-startup)
   (require 'anything-gtags)
