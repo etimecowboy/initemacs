@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil nil ("synonyms-pkg.el" "synonyms.el") (20156
-;;;;;;  2372 593000))
+;;;### (autoloads nil nil ("synonyms-pkg.el" "synonyms.el") (20165
+;;;;;;  5160 190000))
 
 ;;;***
 

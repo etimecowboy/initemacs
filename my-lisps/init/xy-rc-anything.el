@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-17 Thu 13:22 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 13:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -74,7 +74,7 @@
   ;; (require 'anything-config)
   ;; (require 'anything-grep)
   (require 'anything-startup)
-  (require 'anything-auto-install)
+  ;; (require 'anything-auto-install) ;; BUG: with git repo
   (require 'descbinds-anything)
   (require 'anything-gtags)
   (require 'anything-menu)
