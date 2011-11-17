@@ -12,7 +12,7 @@
 ;;;;;;  hexrgb-hsv-to-rgb hexrgb-rgb-to-hsv hexrgb-blue hexrgb-green
 ;;;;;;  hexrgb-red hexrgb-value hexrgb-saturation hexrgb-hue hexrgb-complement
 ;;;;;;  hexrgb-rgb-hex-string-p hexrgb-read-color hexrgb-canonicalize-defined-colors-flag)
-;;;;;;  "hexrgb" "hexrgb.el" (20165 5144))
+;;;;;;  "hexrgb" "hexrgb.el" (20165 8822))
 ;;; Generated autoloads from hexrgb.el
 
 (defconst hexrgb-defined-colors (eval-when-compile (and window-system (x-defined-colors))) "\
@@ -290,7 +290,7 @@ X must be between 0.0 and 1.0, or else an error is raised.
 
 ;;;***
 
-;;;### (autoloads nil nil ("hexrgb-pkg.el") (20165 5144 943000))
+;;;### (autoloads nil nil ("hexrgb-pkg.el") (20165 8822 802000))
 
 ;;;***
 

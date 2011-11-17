@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-16 Wed 22:29 xin on p6t>
+;; Time-stamp:<2011-11-17 Thu 15:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -214,6 +214,6 @@
 
 (eval-after-load 'anything
   `(anything-settings))
-(global-set-key [f7] 'xy/my-anything)
+(global-set-key (kbd "C-c i") 'xy/my-anything) ;; old <f7>
 
 (provide 'xy-rcroot-complete)

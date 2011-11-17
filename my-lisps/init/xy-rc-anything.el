@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-17 Thu 13:49 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 14:51 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -83,8 +83,8 @@
 
   ;; NOTE: a workaround to fix the Emacs crash with `anything' 
   ;; REF: http://permalink.gmane.org/gmane.emacs.anything/256
-  (setq anything-idle-delay 1.1)
-  (setq anything-input-idle-delay 1.1)
+  ;; (setq anything-idle-delay 1.1)
+  ;; (setq anything-input-idle-delay 1.1)
   
   (setq anything-c-adaptive-history-file 
         (concat my-var-path "/anything-c-adaptive-history"))

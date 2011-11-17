@@ -3,7 +3,7 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "icomplete+" "icomplete+.el" (20165 5151))
+;;;### (autoloads nil "icomplete+" "icomplete+.el" (20165 8631))
 ;;; Generated autoloads from icomplete+.el
 
 (when (< emacs-major-version 23) (defun icomplete-exhibit nil "Insert icomplete completions display.\nShould be run via minibuffer `post-command-hook'.\nSee `icomplete-mode' and `minibuffer-setup-hook'." (when (icomplete-simple-completing-p) (save-match-data (let* ((minibuf-begin (if (< emacs-major-version 21) (point-min) (minibuffer-prompt-end))) (contents (buffer-substring minibuf-begin (point-max))) (buffer-undo-list t)) (save-excursion (goto-char (point-max)) (unless (boundp 'icomplete-eoinput) (make-local-variable 'icomplete-eoinput)) (setq icomplete-eoinput (point)) (when (and (> (point-max) minibuf-begin) (save-excursion (goto-char minibuf-begin) (not (looking-at "\\(\\s-+$\\|\\s-*\\(\\s(\\|\\s\"\\|\\s'\\|\\s<\\|[0-9]\\)\\)"))) (or (> (point-max) icomplete-max-delay-chars) (if minibuffer-completion-table (cond ((numberp minibuffer-completion-table) (< minibuffer-completion-table icomplete-delay-completions-threshold)) ((sequencep minibuffer-completion-table) (< (length minibuffer-completion-table) icomplete-delay-completions-threshold)))) (sit-for icomplete-compute-delay))) (insert (icomplete-completions contents minibuffer-completion-table minibuffer-completion-predicate (not minibuffer-completion-confirm))))) (setq deactivate-mark nil))))))
@@ -16,7 +16,7 @@
 
 ;;;***
 
-;;;### (autoloads nil nil ("icomplete+-pkg.el") (20165 5151 704000))
+;;;### (autoloads nil nil ("icomplete+-pkg.el") (20165 8631 333000))
 
 ;;;***
 

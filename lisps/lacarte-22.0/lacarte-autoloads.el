@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads nil nil ("lacarte-pkg.el" "lacarte.el") (20165
-;;;;;;  5155 3000))
+;;;;;;  8666 932000))
 
 ;;;***
 
