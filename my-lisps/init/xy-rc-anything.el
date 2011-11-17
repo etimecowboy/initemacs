@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-17 Thu 04:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 13:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,8 +26,8 @@
   (require 'anything)
   (anything-other-buffer
    '(;; Buffer:
-	 ;; anything-c-source-buffers
-	 anything-c-source-buffers+
+	 anything-c-source-buffers
+	 ;; anything-c-source-buffers+
 	 ;; anything-c-source-buffer-not-found
 	 
 	 ;; File:
@@ -72,14 +72,19 @@
   ;; The following 6 are included in `anything-startup'
   ;; (require 'anything-match-plugin)
   ;; (require 'anything-config)
-  ;; (require 'anything-auto-install)
   ;; (require 'anything-grep)
-  ;; (require 'descbinds-anything)
-  ;; (require 'anything-show-completion)
   (require 'anything-startup)
+  (require 'anything-auto-install)
+  (require 'descbinds-anything)
   (require 'anything-gtags)
-  ;; (require 'anything-ipa)
   (require 'anything-menu)
+  (require 'anything-show-completion)
+  ;; (require 'anything-ipa)
+
+  ;; NOTE: a workaround to fix the Emacs crash with `anything' 
+  ;; REF: http://permalink.gmane.org/gmane.emacs.anything/256
+  (setq anything-idle-delay 1.1)
+  (setq anything-input-idle-delay 1.1)
   
   (setq anything-c-adaptive-history-file 
         (concat my-var-path "/anything-c-adaptive-history"))

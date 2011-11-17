@@ -1,11 +1,10 @@
-;;; anything-obsolete.el --- obsolete functions of anything
+;;;; anything-obsolete.el --- obsolete functions of anything
 ;; Time-stamp: <2010-11-18 11:02:25 rubikitch>
 
 ;; Copyright (C) 2010  rubikitch
 
 ;; Author: rubikitch <rubikitch@ruby-lang.org>
 ;; Keywords: tools, files
-;; Version: 0.1
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/download/anything-obsolete.el
 
 ;; This file is free software; you can redistribute it and/or modify

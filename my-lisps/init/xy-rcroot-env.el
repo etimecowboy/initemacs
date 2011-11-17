@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-17 Thu 03:38 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 13:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -156,13 +156,23 @@
 ;; ECB
 ;; (add-to-list 'load-path (concat my-local-lisp-path "/ecb-2.4"))
 
+;; Anything
+(xy/install-all-lisps (concat my-local-lisp-path "/anything-config"))
+(xy/install-all-lisps (concat my-local-lisp-path "/anything-config/extensions"))
+(xy/install-all-lisps (concat my-local-lisp-path "/anything-config/contrib"))
+(message "* ---[ anything lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 ;;** ELPA packages
+;; NOTE: ELPA `anything-xxx' packages are too old 
 ;; (load "anything-autoloads.el")
-(load "anything-complete-autoloads.el")
-(load "anything-config-autoloads.el")
-(load "anything-extension-autoloads.el")
-(load "anything-match-plugin-autoloads.el")
-(load "anything-obsolete-autoloads.el")
+;; (load "anything-complete-autoloads.el")
+;; (load "anything-config-autoloads.el")
+;; (load "anything-extension-autoloads.el")
+;; (load "anything-match-plugin-autoloads.el")
+;; (load "anything-obsolete-autoloads.el")
 ;; (load "archive-downloader-autoloads.el")
 (load "auto-complete-autoloads.el")
 (load "auto-complete-etags-autoloads.el")

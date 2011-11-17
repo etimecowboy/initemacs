@@ -1,9 +1,7 @@
 ;;; anything-complete.el --- completion with anything
 ;; $Id: anything-complete.el,v 1.86 2010-03-31 23:14:13 rubikitch Exp $
-;; Version: 1.86
-;; Copyright (C) 2008, 2009, 2010 rubikitch
 
-;; Package-Requires: ((anything "1.287") (anything-obsolete "0.1"))
+;; Copyright (C) 2008, 2009, 2010, 2011 rubikitch
 
 ;; Author: rubikitch <rubikitch@ruby-lang.org>
 ;; Keywords: matching, convenience, anything
@@ -120,17 +118,6 @@
 (require 'thingatpt)
 (require 'anything-obsolete)
 
-;; version check
-(let ((version "1.263"))
-  (when (and (string= "1." (substring version 0 2))
-             (string-match "1\.\\([0-9]+\\)" anything-version)
-             (< (string-to-number (match-string 1 anything-version))
-                (string-to-number (substring version 2))))
-    (error "Please update anything.el!!
-
-http://www.emacswiki.org/cgi-bin/wiki/download/anything.el
-
-or  M-x install-elisp-from-emacswiki anything.el")))
 
 ;; (@* "overlay")
 (when (require 'anything-show-completion nil t)
@@ -270,7 +257,11 @@ used by `anything-lisp-complete-symbol-set-timer' and `anything-apropos'"
             (with-current-buffer anything-current-buffer
               (save-excursion
                 (backward-char (string-width anything-complete-target))
-                (alcs-current-physical-column)))))
+                (max 0
+                     (- (alcs-current-physical-column)
+                        (if (buffer-local-value 'anything-enable-shortcuts (get-buffer anything-buffer))
+                            4           ;length of shortcut overlay
+                          0)))))))
   (mapcar (lambda (cand) (cons (concat (make-string alcs-physical-column-at-startup ? ) cand) cand))
           candidates))
 
@@ -374,7 +365,9 @@ used by `anything-lisp-complete-symbol-set-timer' and `anything-apropos'"
     anything-c-source-complete-emacs-faces))
 
 (defvar anything-apropos-sources
-  '(anything-c-source-apropos-emacs-commands
+  '(anything-c-source-emacs-function-at-point
+    anything-c-source-emacs-variable-at-point
+    anything-c-source-apropos-emacs-commands
     anything-c-source-apropos-emacs-functions
     anything-c-source-apropos-emacs-variables
     anything-c-source-apropos-emacs-faces))
