@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-17 Thu 13:30 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 21:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -79,84 +79,68 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;** Collected lisps (small lisps from emacswiki and other places)
+;;** Collected lisps (small/single lisps from emacswiki and other places)
 (xy/install-all-lisps my-local-lisp-path)
 (message "* ---[ my local lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;;** Manually installed packages (usually are develop version)
+;;** Manually installed packages (multiple files and are develop version)
+;; Packages with version numbers are stable releases, while
+;; packages without version numbers are development versions
+
+;; REF: http://code.google.com/p/dea/
 (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
 (message "* ---[ dea lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-(xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
-(message "* ---[ cc-mode lisps installed at %ds ]---"
+;; NOTE: These packages are closly related. They are widely used by
+;; Japanese developers which produced `mew', `wanderlust', `w3m' and
+;; etc.
+;; REF: https://github.com/wanderlust
+(xy/install-all-lisps (concat my-local-lisp-path "/apel"))
+(message "* ---[ apel lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-
-;; (load "auctex.el" nil t t)           ;; auctex
-;; (load "preview-latex.el" nil t t)    ;; preview-latex
-
-;; (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
-
-;; (xy/install-all-lisps (concat my-local-lisp-path "/bookmark+"))
-(xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
-(message "* ---[ org installed at %ds ]---"
+(xy/install-all-lisps (concat my-local-lisp-path "/flim"))
+(message "* ---[ flim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-
-;; (require 'color-theme-autoloads)
-;; (xy/install-all-lisps (concat my-local-lisp-path "/color-theme-6.6.0/themes"))
-
-(xy/install-all-lisps (concat my-local-lisp-path "/egg"))
-(message "* ---[ egg lisps installed at %ds ]---"
+(xy/install-all-lisps (concat my-local-lisp-path "/semi"))
+(message "* ---[ semi lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-
-(xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
-(message "* ---[ eim lisps installed at %ds ]---"
+;; (xy/install-all-lisps (concat my-local-lisp-path "/wanderlust"))
+;; (message "* ---[ wanderlust lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
+;; REF: http://mailcrypt.sourceforge.net/
+(xy/install-all-lisps (concat my-local-lisp-path "/mailcrypt-3.5.8"))
+(message "* ---[ mailcrypt lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-
-;; BUG: current cvs version has a bug when compiling
-;; (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
-;; (message "* ---[ w3m lisps installed at %ds ]---"
+;; REF: http://tats.haun.org/mule-ucs/
+;; (require 'un-define) ;; NOTE: The first thing the manual says to
+                        ;; include it in the init.el
+;; (xy/install-all-lisps
+;;  (concat my-local-lisp-path "/mule-ucs-20061127-1/lisp"))
+;; ;;  'with-subdirs 'recursive)
+;; (message "* ---[ mule-ucs lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-(xy/install-all-lisps (concat my-local-lisp-path "/mew"))
-(message "* ---[ mew lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;;--------------------------
 
-;; (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
-;; (message "* ---[ org2blog lisps installed at %ds ]---"
-;;          (destructuring-bind (hi lo ms) (current-time)
-;;            (- (+ hi lo) (+ (first *emacs-load-start*)
-;;                            (second *emacs-load-start*)))))
-
-;; CEDET
-;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/cogre"))
-;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/common"))
-;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/ede"))
-;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/semantic"))
-;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/speedbar"))
-;; (add-to-list 'load-path (concat my-local-lisp-path "/cedet-1.0/srecode"))
-;; (require 'cedet)
-;; ECB
-;; (add-to-list 'load-path (concat my-local-lisp-path "/ecb-2.4"))
-
-;; Anything
+;; REF: http://repo.or.cz/w/anything-config.git
 (xy/install-all-lisps (concat my-local-lisp-path "/anything-config"))
 (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/extensions"))
 (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/contrib"))
@@ -165,117 +149,170 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
+;; NOTE: auctex are patched by myself to make it works in my system.
+;; (the latex style file `url.el' of auctex conflicts with the
+;; standard `url.el')
+;; REF: http://www.gnu.org/s/auctex/
+;; (load "auctex.el" nil t t)           ;; auctex
+;; (load "preview-latex.el" nil t t)    ;; preview-latex
+
+;; (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
+;; (message "* ---[ babel installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
+
+;; REF: http://cc-mode.sourceforge.net/
+(xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
+(message "* ---[ cc-mode lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; NOTE: CEDET
+;; Installed by its `cedet-built.el' script, and
+;; will be load when `M-x cedet-start' which is a function write 
+;; by myself.
+;; REF: http://cedet.sourceforge.net/
+
+;; REF: https://github.com/bogolisk/egg
+(xy/install-all-lisps (concat my-local-lisp-path "/egg"))
+(message "* ---[ egg lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; NOTE: seems no one is maitaining this package
+;; REF: https://github.com/viogus/eim
+;;      http://ywb-codes.googlecode.com/svn/trunk/emacs/eim
+;; svn co http://ywb-codes.googlecode.com/svn/trunk/emacs/eim 
+(xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
+(message "* ---[ eim lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: http://www.mew.org/en/
+(xy/install-all-lisps (concat my-local-lisp-path "/mew-6.4"))
+(message "* ---[ mew lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: http://orgmode.org/
+(xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
+(message "* ---[ org installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: https://github.com/punchagan/org2blog
+;; (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
+;; (message "* ---[ org2blog lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
+
+;; REF: http://emacs-w3m.namazu.org/index-en.html
+;; BUG: current cvs version has a bug when compiling
+(xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
+(message "* ---[ w3m lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 ;;** ELPA packages
-;; NOTE: ELPA `anything-xxx' packages are too old 
-;; (load "anything-autoloads.el")
+;; Packages got from `package.el'. 
+;; They are usually for tests and will be moved out of the management 
+;; of the `package.el' when ready for production usage. Sometime, the
+;; ELPA packages are older than the lisps resided outside.
+
+;;*** Packges moved out
+;; (load "anything-autoloads.el") ;; now use author's git version
 ;; (load "anything-complete-autoloads.el")
 ;; (load "anything-config-autoloads.el")
 ;; (load "anything-extension-autoloads.el")
 ;; (load "anything-match-plugin-autoloads.el")
 ;; (load "anything-obsolete-autoloads.el")
 ;; (load "archive-downloader-autoloads.el")
-(load "auto-complete-autoloads.el")
-(load "auto-complete-etags-autoloads.el")
-(load "auto-complete-octave-autoloads.el")
-(load "auto-complete-verilog-autoloads.el")
-;; (load "auto-dictionary-autoloads.el")
-(load "autopair-autoloads.el")
+;; (load "auto-complete-autoloads.el")
+;; (load "auto-complete-etags-autoloads.el")
+;; (load "auto-complete-octave-autoloads.el")
+;; (load "auto-complete-verilog-autoloads.el")
+;; (load "autopair-autoloads.el")
 ;; (load "blank-mode-autoloads.el")
-(load "bm-autoloads.el")
+;; (load "bm-autoloads.el")
 ;; (load "browse-kill-ring-autoloads.el")
 ;; (load "buffer-move-autoloads.el")
-(load "cal-china-x-autoloads.el")
+;; (load "cal-china-x-autoloads.el")
 ;; (load "caps-mode-autoloads.el")
-(load "cdlatex-autoloads.el")
-(load "c-eldoc-autoloads.el")
+;; (load "cdlatex-autoloads.el")
+;; (load "c-eldoc-autoloads.el")
 ;; (load "cmake-mode-autoloads.el")
-(load "color-file-completion-autoloads.el")
-(load "color-theme-autoloads.el")
-;; (load "color-theme-active-autoloads.el")
-;; (load "color-theme-actress-autoloads.el")
-;; (load "color-theme-blackboard-autoloads.el")
-;; (load "color-theme-colorful-obsolescence-autoloads.el")
-;; (load "color-theme-complexity-autoloads.el")
-;; (load "color-theme-dg-autoloads.el")
-;; (load "color-theme-dpaste-autoloads.el")
-;; (load "color-theme-eclipse-autoloads.el")
-;; (load "color-theme-emacs-revert-theme-autoloads.el")
-;; (load "color-theme-github-autoloads.el")
-;; (load "color-theme-ir-black-autoloads.el")
-;; (load "color-theme-railscasts-autoloads.el")
-;; (load "color-theme-sanityinc-solarized-autoloads.el")
-;; (load "color-theme-solarized-autoloads.el")
-;; (load "color-theme-tango-autoloads.el")
-;; (load "color-theme-tangotango-autoloads.el")
-;; (load "color-theme-twilight-autoloads.el")
-;; (load "color-theme-vim-insert-mode-autoloads.el")
-;; (load "color-theme-wombat+-autoloads.el")
-;; (load "color-theme-wombat-autoloads.el")
-;; (load "color-theme-zenburn-autoloads.el")
-(load "columnify-autoloads.el")
-;; (load "company-autoloads.el")
-(load "ctags-autoloads.el")
-(load "cursor-chg-autoloads.el")
-(load "descbinds-anything-autoloads.el")
+;; (load "color-file-completion-autoloads.el")
+;; (load "color-theme-autoloads.el")
+;; (load "col-highlight.el")
+;; (load "columnify-autoloads.el")
+;; (load "ctags-autoloads.el")
+;; (load "cursor-chg-autoloads.el")
+;; (load "descbinds-anything-autoloads.el")
 ;; (load "desktop-autoloads.el")
-(load "dictionary-autoloads.el")
-(load "diff-git-autoloads.el")
-(load "diminish-autoloads.el")
-(load "dired-details+-autoloads.el")
-(load "dired-details-autoloads.el")
-(load "dired-isearch-autoloads.el")
-(load "dired-single-autoloads.el")
-;; (load "django-theme-autoloads.el")
+;; (load "diff-git-autoloads.el")
+;; (load "diminish-autoloads.el")
+;; (load "dired-details+-autoloads.el")
+;; (load "dired-details-autoloads.el")
+;; (load "dired-isearch-autoloads.el")
+;; (load "dired-single-autoloads.el")
 ;; (load "doc-mode-autoloads.el")
-(load "ecb_snap-autoloads.el")
-(load "elisp-cache-autoloads.el")
-(load "emms-autoloads.el")
+;; (load "elisp-cache-autoloads.el")
 ;; (load "ert-autoloads.el")
-(load "full-ack-autoloads.el")
-(load "graphviz-dot-mode-autoloads.el")
-(require 'hexrgb)
+;; (load "full-ack-autoloads.el")
+;; (load "graphviz-dot-mode-autoloads.el")
 ;; (load "hexrgb-autoloads.el")
-(load "highlight-parentheses-autoloads.el")
-(load "highlight-symbol-autoloads.el")
-(load "highline-autoloads.el")
-(load "hl-line+-autoloads.el")
-(load "htmlize-autoloads.el")
-(load "hungry-delete-autoloads.el")
-;; (require 'icicles)
+;; (load "highlight-parentheses-autoloads.el")
+;; (load "highlight-symbol-autoloads.el")
+;; (load "highline-autoloads.el")
+;; (load "hl-line+-autoloads.el")
+;; (load "htmlize-autoloads.el")
+;; (load "hungry-delete-autoloads.el")
 ;; (load "icicles-autoloads.el")
 ;; (load "icomplete+-autoloads.el")
 ;; (load "idle-require-autoloads.el")
-(load "ioccur-autoloads.el")
-(load "iy-go-to-char-autoloads.el")
-(load "kill-ring-search-autoloads.el")
+;; (load "ioccur-autoloads.el")
+;; (load "iy-go-to-char-autoloads.el")
+;; (load "kill-ring-search-autoloads.el")
 ;; (load "lacarte-autoloads.el")
-(load "light-symbol-autoloads.el")
+;; (load "light-symbol-autoloads.el")
 ;; (load "load-dir-autoloads.el")
-(load "maxframe-autoloads.el")
-(load "mic-paren-autoloads.el")
-(load "multi-term-autoloads.el")
-(load "notify-autoloads.el")
-;; (load "org-email-autoloads.el")
+;; (load "maxframe-autoloads.el")
+;; (load "mic-paren-autoloads.el")
+;; (load "multi-term-autoloads.el")
+;; (load "notify-autoloads.el")
 ;; (load "org-table-comment-autoloads.el")
-(load "rect-mark-autoloads.el")
-(load "redo+-autoloads.el")
-;; BUG: `sesssion' conflicts with `anything'
-;; (load "session-autoloads.el")
+;; (load "rect-mark-autoloads.el")
+;; (load "redo+-autoloads.el")
+;; (load "session-autoloads.el") ;; BUG: conflicts with `anything'
 ;; (load "smex-autoloads.el")
-(load "sr-speedbar-autoloads.el")
-(load "synonyms-autoloads.el")
-(load "tabbar-autoloads.el")
-(load "tabbar-ruler-autoloads.el")
-(load "texdrive-autoloads.el")
-(load "tex-math-preview-autoloads.el")
-(load "vline-autoloads.el")
-(Windows
- (load "w32-browser-autoloads.el"))
+;; (load "sr-speedbar-autoloads.el")
+;; (load "synonyms-autoloads.el")
+;; (load "tabbar-autoloads.el")
+;; (load "tabbar-ruler-autoloads.el")
+;; (load "texdrive-autoloads.el")
+;; (load "tex-math-preview-autoloads.el")
+;; (load "vline-autoloads.el")
+;; (Windows
+;;  (load "w32-browser-autoloads.el"))
 ;; (load "weblogger-autoloads.el")
-(load "window-number-autoloads.el")
-(load "windresize-autoloads.el")
-(load "winpoint-autoloads.el")
+;; (load "window-number-autoloads.el")
+;; (load "windresize-autoloads.el")
+;; (load "winpoint-autoloads.el")
 ;; (load "xml-rpc-autoloads.el")
+;;
+;;*** packages still managed by `package.el'
+;; (load "company-autoloads.el") ;; not in use
+(load "dictionary-autoloads.el")
+(load "ecb_snap-autoloads.el")
+(load "emms-autoloads.el")
 (load "yasnippet-autoloads.el")
 
 (message "* ---[ ELPA lisps installed at %ds ]---"
@@ -295,7 +332,6 @@
 ;;      - http://www.emacswiki.org/emacs/elinstall
 ;; (autoload 'my-site-start "my-site-start" nil t)
 ;; (my-site-start "~/.emacs.d/site-start.d/")
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
