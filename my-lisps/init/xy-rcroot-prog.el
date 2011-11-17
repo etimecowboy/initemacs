@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-16 Wed 22:20 xin on p6t>
+;; Time-stamp:<2011-11-17 Thu 23:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -92,9 +92,8 @@
 ;; REF:
 ;; http://www.cnblogs.com/bamanzi/archive/2011/10/09/emacs-outline-org-like.html
 ;; http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el
-(require 'outline)
-
-(require 'outline-magic)
+;; (require 'outline)
+;; (require 'outline-magic)
 ;; (add-hook 'outline-mode-hook 
 ;;           (lambda () 
 ;;             (require 'outline-cycle)))
@@ -104,12 +103,13 @@
             (define-key outline-minor-mode-map [(f6)] 'outline-cycle)
 			))
 
-(require 'outline-org-like)
 (am-add-hooks
  `(c-mode-common-hook java-mode-hook
    lisp-mode-hook emacs-lisp-mode-hook
    vhdl-mode-hook verilog-mode-hook)
- 'outline-org-mode)
+ (lambda()
+   (require 'outline-org-like)
+   (outline-org-mode 1)))
 
 ;;--------------------------------------------------------------------
 
@@ -473,7 +473,7 @@ See the documentation for these variables for more info.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'matlab-load)
+;; (require 'matlab-load)
 (eval-after-load "matlab"
   `(progn
      ;; (matlab-face-settings)

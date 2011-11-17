@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-16 Wed 02:03 xin on p6t>
+;; Time-stamp:<2011-11-17 Thu 23:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,7 +21,7 @@
 ;;* w3m
 ;; Emacs中的文本浏览器w3m
 ;; http://emacser.com/w3m.htm
-(require 'w3m-load)
+;; (require 'w3m-load)
 (eval-after-load "w3m"
   `(w3m-settings))
 ;; (setq w3m-use-favicon nil)
@@ -111,7 +111,7 @@
 
 ;;* dictionary
 ;; Web dictionary via dictd
-(require 'dictionary-autoloads)
+;; (require 'dictionary-autoloads)
 ;; (global-set-key "\C-cS" 'dictionary-search)
 ;; (global-set-key "\C-cM" 'dictionary-match-words)
 (global-set-key [f12] 'dictionary-search)

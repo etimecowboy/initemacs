@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-17 Thu 15:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 22:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -177,7 +177,6 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'icicles)
 (add-hook 'after-init-hook 'icy-start)
 (defun icicle-keys ()
   "icicle-mode的按键设置."

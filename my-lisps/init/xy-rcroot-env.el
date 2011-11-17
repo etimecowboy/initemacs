@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-17 Thu 21:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 23:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -188,6 +188,13 @@
 ;; svn co http://ywb-codes.googlecode.com/svn/trunk/emacs/eim 
 (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
 (message "* ---[ eim lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: http://matlab-emacs.sourceforge.net/
+(xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
+(message "* ---[ matlab-emacs lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
@@ -593,15 +600,36 @@
 ;;   "Display a list of packages.
 ;; Fetches the updated list of packages before displaying.
 ;; The list is displayed in a buffer named `*Packages*'." nil t)
-(require 'package)
-(package-initialize)
+;; (require 'package)
 (eval-after-load "package"
   `(progn
     (package-settings)))
 
 ;;** auto-install
 ;; BUG: Conflict with auctex's `style/url.el'
-(require 'auto-install)
+;; (require 'auto-install)
+(autoload 'auto-install-from-buffer "auto-install"
+  "Install the elisp file in the current buffer." nil t)
+(autoload 'auto-install-from-url "auto-install"
+  "Install an elisp file from a given url." nil t)
+(autoload 'auto-install-from-emacswiki "auto-install"
+  "Install an elisp file from EmacsWiki.org." nil t)
+(autoload 'auto-install-from-gist "auto-install"
+  "Install an elisp file from gist.github.com." nil t)
+(autoload 'auto-install-from-library "auto-install"
+  "Update an elisp LIBRARY." nil t)
+(autoload 'auto-install-from-directory "auto-install"
+  "Update elisp files under DIRECTORY from EmacsWiki." nil t)
+(autoload 'auto-install-from-dired "auto-install"
+  "Update dired marked elisp files from EmacsWiki.org." nil t)
+(autoload 'auto-install-update-emacswiki-package-name "auto-install"
+  "Update the list of elisp package names from `EmacsWiki'." nil t)
+(autoload 'auto-install-dired-mark-files "auto-install"
+  "Mark dired files that contain at `EmacsWiki.org'." nil t)
+(autoload 'auto-install-batch "auto-install"
+  "Batch install many files (libraries) in some extension." nil t)
+(autoload 'auto-install-batch-edit "auto-install"
+  "Edit auto-install-batch-list.el" nil t)
 (eval-after-load "auto-install"
   `(progn
     (auto-install-settings)))

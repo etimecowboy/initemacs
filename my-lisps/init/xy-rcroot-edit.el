@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-12 Sat 21:47 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 22:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -159,7 +159,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; table, 可以“所见即所得”的编辑一个文本模式的表格
-(if is-before-emacs-21 (require 'table "table-for-21"))
+;; (if is-before-emacs-21 (require 'table "table-for-21"))
 
 ;;----------------------------------------------------------------
 
@@ -186,7 +186,11 @@
 ;;------------------------------------------------------------------
 
 ;; buffer-move: swap buffers without typing C-x b on each window
-(require 'buffer-move)
+;; (require 'buffer-move)
+(autoload 'buf-move-up "buffer-move" nil t)
+(autoload 'buf-move-down "buffer-move" nil t)
+(autoload 'buf-move-left "buffer-move" nil t)
+(autoload 'buf-move-right "buffer-move" nil t)
 (global-set-key (kbd "<M-S-up>")     'buf-move-up)
 (global-set-key (kbd "<M-S-down>")   'buf-move-down)
 (global-set-key (kbd "<M-S-left>")   'buf-move-left)

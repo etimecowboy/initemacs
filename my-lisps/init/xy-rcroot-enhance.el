@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-15 Tue 23:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-17 Thu 23:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,11 +37,11 @@
   "Redo the the most recent undo.
 Prefix arg COUNT means redo the COUNT most recent undos.
 If you have modified the buffer since the last redo or undo,
-then you cannot redo any undos before then." t)
+then you cannot redo any undos before then." nil t)
 (autoload 'undo "redo+"
   "Undo some previous changes.
 Repeat this command to undo more changes.
-A numeric argument serves as a repeat count." t)
+A numeric argument serves as a repeat count." nil t)
 (global-set-key (kbd "C-?") 'redo)
 (global-set-key (kbd "C-/") 'undo) ;; or C-/
 

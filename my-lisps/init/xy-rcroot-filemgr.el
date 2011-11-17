@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-08-23 Tue 02:42 xin on p6t>
+;; Time-stamp:<2011-11-17 Thu 23:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -17,7 +17,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Buffer management
+;;* Buffer management
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -26,7 +26,7 @@
 
 ;;-------------------------------------------------------------------
 
-;; ibuffer
+;;** ibuffer
 (eval-after-load "ibuffer"
   `(progn
      (ibuffer-settings)))
@@ -34,7 +34,8 @@
 
 ;;--------------------------------------------------------------------
 
-;; uniquify, 可以为重名的 buffer 在前面加上其父目录的名字来让名字区分开来，
+;;** uniquify
+;; 可以为重名的 buffer 在前面加上其父目录的名字来让名字区分开来，
 ;; 而不是单纯的加一个没有太多意义的序号
 (require 'uniquify)
 (eval-after-load "uniquify"
@@ -43,11 +44,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; File management
+;;* File management
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; dired 文件管理
+;;** dired 文件管理
 (eal-define-keys-commonly
  global-map
  `(("C-x d" dired-jump)))
@@ -183,7 +184,7 @@
 
 ;;-----------------------------------------------------------------------------
 
-;; image dired
+;;** image-dired
 (eval-after-load "image-dired"
    `(image-dired-settings))
 
@@ -209,6 +210,7 @@
 
 ;;-----------------------------------------------------------------------------
 
+;;** open-with
 ;; open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
 (eval-after-load "openwith"
@@ -218,10 +220,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Version control settings
+;;* Version control settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Emacs internal version control
+
+;;** Emacs internal version control
 (setq make-backup-files nil)
 (setq vc-make-backup-files nil)
 (setq backup-directory-alist
@@ -238,12 +241,12 @@
 
 ;;--------------------------------------------------------------------
 
-;; git gui
+;;** git gui
 (global-set-key [f11] 'git-start)
 ;; Automatically refresh version control information
 (setq auto-revert-check-vc-info t)
+
 ;; egg git gui
-(require 'egg)
 (global-set-key [S-f11] 'egg-start)
 (eval-after-load "egg"
   '(progn
@@ -251,7 +254,7 @@
 
 ;;---------------------------------------------------------------------
 
-;; subversion gui
+;;** subversion gui
 ;; (require 'svn-settings)
 
 ;;--------------------------------------------------------------------

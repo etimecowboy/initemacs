@@ -15,7 +15,7 @@ Update various paths to get SRecode to identify our macros.
 ;;;***
 
 ;;;### (autoloads (company-matlab-shell) "company-matlab-shell" "company-matlab-shell.el"
-;;;;;;  (19026 24680))
+;;;;;;  (19026 24400))
 ;;; Generated autoloads from company-matlab-shell.el
 
 (autoload 'company-matlab-shell "company-matlab-shell" "\
@@ -26,7 +26,7 @@ A `company-mode' completion back-end for Matlab-Shell.
 ;;;***
 
 ;;;### (autoloads (matlab-shell matlab-mode) "matlab" "matlab.el"
-;;;;;;  (19536 9289))
+;;;;;;  (19086 58944))
 ;;; Generated autoloads from matlab.el
 
 (add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
@@ -97,7 +97,7 @@ a console application.
 
 ;;;***
 
-;;;### (autoloads (mlint-minor-mode) "mlint" "mlint.el" (19537 39561))
+;;;### (autoloads (mlint-minor-mode) "mlint" "mlint.el" (19086 58971))
 ;;; Generated autoloads from mlint.el
 
 (autoload 'mlint-minor-mode "mlint" "\
@@ -120,7 +120,7 @@ Set up a buffer for parsing of MATLAB files.
 
 ;;;***
 
-;;;### (autoloads (tlc-mode) "tlc" "tlc.el" (17295 18976))
+;;;### (autoloads (tlc-mode) "tlc" "tlc.el" (17295 18676))
 ;;; Generated autoloads from tlc.el
 
 (autoload 'tlc-mode "tlc" "\
@@ -131,8 +131,8 @@ Major mode for editing Tlc files, or files found in tlc directories.
 
 ;;;***
 
-;;;### (autoloads nil nil ("matlab-publish.el" "semanticdb-matlab.el")
-;;;;;;  (19596 65388 846624))
+;;;### (autoloads nil nil ("hg2.el" "matlab-publish.el" "semanticdb-matlab.el")
+;;;;;;  (19086 58974 113326))
 
 ;;;***
 
