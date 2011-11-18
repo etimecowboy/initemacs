@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-18 Fri 13:38 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-18 Fri 15:13 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -616,10 +616,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;** ELPA packages
-;; BUG: Conflict with auctex's `style/url.el':
+;; BUG: Conflict with auctex's `style/url.el' and flim's `mailcap.el'
 ;;   "symbol's function definition is void: TeX-add-style-hook" error 
 ;; One solution is:
-;;    1. Move auctex's `style/url.el' out of load-path
+;;    1. Move `style/url.el' out of load-path
 ;;    2. Install the package
 ;;    3. Move it back
 ;; Another solution: 
@@ -629,7 +629,7 @@
 ;;   "Display a list of packages.
 ;; Fetches the updated list of packages before displaying.
 ;; The list is displayed in a buffer named `*Packages*'." nil t)
-(require 'package)
+;; (require 'package)
 (eval-after-load "package"
   `(progn
     (package-settings)))
