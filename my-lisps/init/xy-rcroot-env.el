@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-17 Thu 23:19 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-18 Fri 00:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -579,6 +579,20 @@
 (eval-after-load "eim"
   `(progn
      (eim-settings)))
+
+;;** ibus
+;; IBus client for GNU Emacs
+;; REF:  http://www11.atwiki.jp/s-irie/pages/21.html
+(GNULinux
+ (require 'ibus)
+ ;; Turn on ibus-mode automatically after loading .emacs
+ (add-hook 'after-init-hook 'ibus-mode-on)
+ ;; Use C-SPC for Set Mark command
+ ;; (ibus-define-common-key ?\C-\s nil)
+ ;; Use C-/ for Undo command
+ (ibus-define-common-key ?\C-/ nil)
+ ;; Change cursor color depending on IBus status
+ (setq ibus-cursor-color '("red" "blue" "limegreen")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
