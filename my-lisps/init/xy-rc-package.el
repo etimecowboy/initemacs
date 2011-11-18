@@ -38,7 +38,7 @@
   (setq package-archives
 		(cons '("tromey" . "http://tromey.com/elpa/") package-archives))
 
-  Add the official GNU packages archives
+  ;; Add the official GNU packages archives
   (add-to-list 'package-archives
   			   '("gnu" . "http://elpa.gnu.org/packages/"))
 
