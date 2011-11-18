@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-17 Thu 15:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-18 Fri 12:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -386,7 +386,7 @@ the mode-line."
 ;; REF: http://emacser.com/cursor-change.htm
 ;; (when (try-require 'cursor-change)
 ;;   (cursor-change-mode 1))
-(cursor-change-mode 1)
+;; (cursor-change-mode 1)
 
 ;;** pulse
 ;; 实现Emacs的淡入淡出效果
@@ -572,11 +572,10 @@ the mode-line."
 ;; fancy themes for emacs
 ;; REF: http://emacser.com/color-theme.htm
 ;; (require 'color-theme-autoloads)
-(eval-after-load "color-theme-autoloads"
+(require 'color-theme)
+(eval-after-load "color-theme"
   '(progn
      (color-theme-settings)))
-(color-theme-start)
-
 (eal-define-keys-commonly
  color-theme-mode-map
  `(("'"   switch-to-other-buffer)

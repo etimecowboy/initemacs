@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2011-11-17 Thu 22:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-18 Fri 13:47 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,17 +33,25 @@
   (setq-default package-user-dir 
   	(expand-file-name (convert-standard-filename
   			   my-local-lisp-path)))
-  (setq-default package-archives 
-    '(("ELPA" . "http://tromey.com/elpa/") 
-      ("gnu"  . "http://elpa.gnu.org/packages/")))
 
+  ;; Original Emacs package.
+  (setq package-archives
+		(cons '("tromey" . "http://tromey.com/elpa/") package-archives))
+
+  Add the official GNU packages archives
+  (add-to-list 'package-archives
+  			   '("gnu" . "http://elpa.gnu.org/packages/"))
+
+  ;; Add the user-contributed repository
+  (add-to-list 'package-archives
+			   '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+  ;; Add the sunrise repository
   (add-to-list 'package-archives
 			   '("sunrise"   .
 			     "http://joseito.republika.pl/sunrise-commander/"))
 
-  (add-to-list 'package-archives
-			   '("marmalade" .
-			     "http://marmalade-repo.org/packages/"))
+  ;; go for it
   (package-initialize))
 
 (provide 'xy-rc-package)
