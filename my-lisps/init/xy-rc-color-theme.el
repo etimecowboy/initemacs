@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-theme.el'
-;; Time-stamp:<2011-11-18 Fri 12:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 00:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -141,7 +141,9 @@
   ;; (autoload 'color-theme-renegade "color-theme-library" nil t)
 
   ;; Set default color-theme
-  (color-theme-xy-dark)
+  ;; (color-theme-xy-dark)
+  (color-theme-solarized-dark)
+  ;; (color-theme-zenburn)
   
   ;; create some frames with different color themes
   ;; (let ((color-theme-is-global nil))

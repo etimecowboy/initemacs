@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-11-17 Thu 21:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 00:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,8 +20,6 @@
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."
 
-  ;; (require 'c-eldoc)
-  
   ;; (xy/set-font-default)
   (defalias 'cpp-mode 'c++-mode)
   
@@ -39,6 +37,7 @@
 			   (progn
 				 (c-mode-common-hook-settings)
 				 (turn-on-auto-fill)
+				 (require 'c-eldoc)
 				 (c-turn-on-eldoc-mode)
 				 ;; (yas-start)
 				 ;; (linkd-start)

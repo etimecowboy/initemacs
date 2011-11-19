@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-18 Fri 15:13 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-18 Fri 23:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -239,6 +239,13 @@
 ;; BUG: current cvs version has a bug when compiling
 (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
 (message "* ---[ w3m lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; My emacs themes collection
+(xy/install-all-lisps (concat my-local-lisp-path "/themes"))
+(message "* ---[ theme lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
