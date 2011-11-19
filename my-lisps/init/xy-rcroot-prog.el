@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-17 Thu 23:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 04:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -82,7 +82,7 @@
 ;;    ("C-c E" hs-show-all)))
 (eval-after-load "hideshow"
   `(progn
-     (hs-minor-mode-face-settings)
+     ;; (hs-minor-mode-face-settings) ;; TODO: to my theme
      (hs-minor-mode-settings)))
 
 ;;--------------------------------------------------------------------
@@ -170,7 +170,7 @@
 (which-func-mode 1)
 (eval-after-load "which-func"
   `(progn
-     (which-func-face-settings)
+     ;; (which-func-face-settings) ;; TODO: to my theme
      (which-func-settings)))
 
 ;;--------------------------------------------------------------------
@@ -194,7 +194,7 @@
 ;;    ("C-c g"   bashdb)))
 (eval-after-load "sh-script"
   `(progn
-     (sh-mode-face-settings)
+     ;; (sh-mode-face-settings) ;; TODO: to my theme
      (sh-mode-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -250,7 +250,7 @@
  'turn-on-eldoc-mode)
 (eval-after-load "eldoc"
   `(progn
-     (eldoc-face-settings)
+     ;; (eldoc-face-settings) ;; TODO: to my theme
      (eldoc-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -476,9 +476,8 @@ See the documentation for these variables for more info.
 ;; (require 'matlab-load)
 (eval-after-load "matlab"
   `(progn
-     ;; (matlab-face-settings)
-     (matlab-settings)
-	 (matlab-face-settings)))
+     ;; (matlab-face-settings) ;; TODO: to my theme
+     (matlab-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

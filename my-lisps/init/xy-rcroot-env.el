@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-18 Fri 23:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 04:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -375,7 +375,7 @@
 
 (eval-after-load "info"
   `(progn
-     (info-face-settings)
+     ;; (info-face-settings) ;; TODO: will be added to my theme
      (info-settings)
 	 (eal-define-keys
 	  'Info-mode-map
@@ -403,9 +403,9 @@
 		("C-c ,"     Info-history-back)
 		("C-c ."     Info-history-forward)))))
 
-(eval-after-load "info+"
-  `(progn
-     (info+-face-settings)))
+;; (eval-after-load "info+"
+;;   `(progn
+;;      (info+-face-settings))) ;; TODO: will be added to my theme
 
 ;;** Man
 (global-set-key [S-f1] 'man-follow)
@@ -416,7 +416,7 @@
 
 (eval-after-load "man"
   `(progn
-     (man-face-settings)
+     ;; (man-face-settings) ;; TODO: will be added to my theme
      (man-settings)
 	 (eal-define-keys
 	  'Man-mode-map
@@ -446,7 +446,7 @@
 
 (eval-after-load "woman"
   `(progn
-    (woman-face-settings)
+    ;; (woman-face-settings) ;; TODO: will be added to my theme
     (woman-settings)))
 
 ;;** help-mode settings
@@ -454,7 +454,7 @@
 
 (eval-after-load "help-mode"
   `(progn
-     (help-mode-face-settings)
+     ;; (help-mode-face-settings) ;; TODO: to my theme
      (help-mode-settings)
 	 (eal-define-keys
 	  'help-mode-map

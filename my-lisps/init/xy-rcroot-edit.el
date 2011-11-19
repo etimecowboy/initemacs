@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-17 Thu 22:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 04:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Some basic edting settings
+;;* Some basic edting settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -42,11 +42,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Fast point move
+;;* Fast point move
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; recent-jump, 返回到最近去过的地方
+;;** recent-jump
+;; 返回到最近去过的地方
 ;; (require 'recent-jump)
 ;; (require 'recent-jump-small)
 ;; (setq rj-mode-line-format nil)
@@ -64,6 +65,7 @@
 
 ;;---------------------------------------------------------------
 
+;;** dot-mode
 ;; 模拟vi的点(.)命令
 ;; (try-require 'dot-mode)
 ;; (autoload 'dot-mode "dot-mode" nil t) ; vi `.' command emulation
@@ -74,7 +76,7 @@
 
 ;;---------------------------------------------------------------
 
-;; Incremental search
+;;** Incremental search
 (eval-after-load "isearch"
   '(progn
      (isearch-face-settings)
@@ -95,12 +97,12 @@
 
 ;;-------------------------------------------------------------
 
-;; my own replace face
-(eval-after-load "replace" `(replace-face-settings))
+;;** my own replace face
+;; (eval-after-load "replace" `(replace-face-settings))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Fast select regions
+;;* Fast select regions
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -129,7 +131,7 @@
 
 ;;--------------------------------------------------------------
 
-;; 矩形区域操作
+;;** 矩形区域操作
 (eal-define-keys-commonly
   global-map
   `(("C-x \\"  rm-mark-command)
@@ -139,7 +141,7 @@
 
 ;;---------------------------------------------------------------
 
-;; CUA model settings
+;;** CUA model settings
 ;; CUA的矩阵区域操作特别方便
 ;; (setq use-cua t)
 ;; (eval-after-load "cua-base"
@@ -154,16 +156,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Graphic text tools
+;;* Graphic text tools
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; table, 可以“所见即所得”的编辑一个文本模式的表格
+;;** table
+;; 可以“所见即所得”的编辑一个文本模式的表格
 ;; (if is-before-emacs-21 (require 'table "table-for-21"))
 
 ;;----------------------------------------------------------------
 
-;; artist, 非常强大的文本画图的工具
+;;** artist
+;; 非常强大的文本画图的工具
 ;; (global-set-kbd "C-x M-A" 'artist-mode)
 (eval-after-load "artist"
   '(progn
@@ -178,14 +182,16 @@
 
 ;;------------------------------------------------------------------
 
-;; palette: provides a general color palette that you can use to 
+;;** palette
+;; provides a general color palette that you can use to 
 ;; examine color properties or choose colors. 
 ;; REF: Emacs配色的超级武器：Icicles，Color Palette和DoReMi
 ;;      http://emacser.com/icicles-doremi-palette.htm
 
 ;;------------------------------------------------------------------
 
-;; buffer-move: swap buffers without typing C-x b on each window
+;;** buffer-move
+;; swap buffers without typing C-x b on each window
 ;; (require 'buffer-move)
 (autoload 'buf-move-up "buffer-move" nil t)
 (autoload 'buf-move-down "buffer-move" nil t)
@@ -196,10 +202,13 @@
 (global-set-key (kbd "<M-S-left>")   'buf-move-left)
 (global-set-key (kbd "<M-S-right>")  'buf-move-right)
 
-;;------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;* Keyboard bindings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ahei 的按键设置
-
+;; 参照 ahei 的设置
 ;; (apply-args-list-to-fun
 ;;  'def-action-on-area-command
 ;;  `((copy-function        'copy-region   'mark-function     "Copy function.")

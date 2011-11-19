@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-16 Wed 12:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 04:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -74,8 +74,8 @@
 ;;---------------------------------------------------------------
 
 ;;** log-view
-(eval-after-load "log-view"
-  `(log-view-face-settings))
+;; (eval-after-load "log-view"
+;;   `(log-view-face-settings)) ;; TODO: to my theme
 
 ;;-----------------------------------------------------------------
 
@@ -132,7 +132,7 @@
 ;;    ("K" roll-up)))
 (eval-after-load "diff-mode"
   '(progn
-     (diff-face-settings)
+     ;; (diff-face-settings) ;; TODO: to my theme
      (diff-settings)))
 
 ;;---------------------------------------------------------------
@@ -161,7 +161,7 @@
 ;; (add-hook 'ediff-keymap-setup-hook 'ediff-keys)
 (eval-after-load "ediff"
   '(progn
-     (ediff-face-settings)
+     ;; (ediff-face-settings) ;; TODO: to my theme
      (ediff-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -240,7 +240,7 @@
 (autoload 'occur-by-moccur-at-point-displn "color-moccur" nil t)
 (eval-after-load "color-moccur"
   '(progn 
-     (moccur-face-settings)
+     ;; (moccur-face-settings) ;; TODO: to my theme
      (moccur-settings)))
 (global-set-key [C-f7] 'moccur-grep-find)
 ;; (global-set-key [C-f7] 'dmoccur)

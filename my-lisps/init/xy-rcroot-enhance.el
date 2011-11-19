@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-17 Thu 23:33 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 04:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -107,7 +107,8 @@ A numeric argument serves as a repeat count." nil t)
 (eval-after-load "browse-kill-ring"
   `(progn
      (browse-kill-ring-settings)
-     (browse-kill-ring-face-settings)
+     ;; (browse-kill-ring-face-settings) ;; TODO: will be added to
+	                                     ;; my own color theme
 	 (eal-define-keys
 	  'browse-kill-ring-mode-map
 	  `(("RET" browse-kill-ring-insert-and-quit)
@@ -160,7 +161,7 @@ A numeric argument serves as a repeat count." nil t)
 (global-set-key [S-f6] 'linum-mode)
 (eval-after-load 'linum
   `(progn 
-     (linum-face-settings)
+     ;; (linum-face-settings) ;; TODO: will be added to my theme
      (linum-settings)))
 
 ;;------------------------------------------------------------------
@@ -232,7 +233,7 @@ from tradition chinese to simple chinese" t)
 (eval-after-load "linkd"
   `(progn
      (linkd-settings)
-     (linkd-face-settings)
+     ;; (linkd-face-settings) ;; TODO: will be add to my theme
 	 (eal-define-keys
 	  'linkd-overlay-map
 	  `(("n"        linkd-next-link)
