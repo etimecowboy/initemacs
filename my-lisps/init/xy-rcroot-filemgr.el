@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-17 Thu 23:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-19 Sat 15:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -56,7 +56,7 @@
 ;; (define-key dired-mode-map (kbd "C-x 2") 'dired-two-columns)
 (eal-define-keys-commonly
  dired-mode-map
-    `(("C-x 3" dired-two-columns)
+    `(("C-x C-c 3" dired-two-columns)
 	  ("C-t"   dired-omit-mode)
 	  ;; ("M-b s" dired-sort-by-size)
 	  ;; ("M-b x" dired-sort-by-extension)
