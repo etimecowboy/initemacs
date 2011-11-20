@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-20 Sun 15:41 xin on p6t>
+;; Time-stamp:<2011-11-20 Sun 17:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1066,11 +1066,15 @@ The process is:
       (setq generated-autoload-file 
 			(concat this-directory "/loaddefs@" 
 					(subst-char-in-string ?/ ?! 
-					   (subst-char-in-string ?: ?! this-directory)) ".el"))
-	  ;; (add-to-list 'load-path this-directory)
-	  ;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
-	  (load-file generated-autoload-file)
-	  (message "* ---[ Loading `%s'... ]---" generated-autoload-file))))
+					   (subst-char-in-string ?: ?! this-directory))
+			        ".el"))
+	  (if (not (file-exists-p generated-autoload-file))
+		  (message "* ---[ Autoload file `%s' does not exist]"
+			generated-autoload-file)
+		;; (add-to-list 'load-path this-directory)
+		;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
+		(load-file generated-autoload-file)
+		(message "* ---[ Loading `%s'... ]---" generated-autoload-file)))))
 
 ;;;###autoload
 (defun xy/done ()
@@ -1085,8 +1089,32 @@ just like the `emacs --daemon'"
   "Compile my Emacs configurations, local lisps, and generate autoloads for them."
 
   (interactive)
-  
-  ) 
+  (xy/install-all-lisps my-local-lisp-path)
+  (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
+  (xy/install-all-lisps (concat my-local-lisp-path
+                                "/mailcrypt-3.5.8"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/anything-config"))
+  (xy/install-all-lisps (concat my-local-lisp-path
+								"/anything-config/extensions"))
+  (xy/install-all-lisps (concat my-local-lisp-path
+								"/anything-config/contrib"))
+  (xy/install-all-lisps (concat my-local-lisp-path
+								"/auctex-11.86-mypatched"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.4"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/themes"))
+  (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
+  )
+
 ;;------------------
 
 (provide 'xy-rc-utils)

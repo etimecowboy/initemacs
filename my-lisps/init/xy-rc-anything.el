@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-17 Thu 14:51 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-20 Sun 15:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,8 +36,8 @@
 	 ;; anything-c-source-files-in-current-dir
 	 anything-c-source-files-in-current-dir+
 	 ;; anything-c-source-file-cache
-         ;; NOTE: may cause crash to emacs in Windows
-	 ;; anything-c-source-locate
+	 ;; NOTE: may cause crash to emacs in Windows
+	 anything-c-source-locate
 	 anything-c-source-ffap-line
 	 ;; anything-c-source-ffap-guesser
 	 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-20 Sun 15:37 xin on p6t>
+;; Time-stamp:<2011-11-20 Sun 17:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -120,21 +120,25 @@
 
 ;;** Manual installed lisps
 ;;*** Small/single lisps from emacswiki and other places
-(xy/install-all-lisps my-local-lisp-path)
-;; (xy/load-autoload my-local-lisp-path)
+;; (GNULinux
+;;   (xy/install-all-lisps my-local-lisp-path))
+;; (Windows
+;;   (xy/load-autoload my-local-lisp-path))
+(xy/load-autoload my-local-lisp-path)
 (message "* ---[ my local lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;;** Multiple-file packages
+;;*** Multiple-file packages
 ;; Packages with version numbers are stable releases, while
 ;; packages without version numbers are development versions
 ;; REF: http://code.google.com/p/dea/
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/dea")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/dea")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/dea")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/dea")))
+(xy/load-autoload (concat my-local-lisp-path "/dea"))
 (message "* ---[ dea lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -153,26 +157,29 @@
 ;; Japanese developers which produced `mew', `wanderlust', `w3m' and
 ;; etc.
 ;; REF: https://github.com/wanderlust
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/apel")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/apel")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/apel")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/apel")))
+(xy/load-autoload (concat my-local-lisp-path "/apel"))
 (message "* ---[ apel lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/flim")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/flim")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/flim")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/flim")))
+(xy/load-autoload (concat my-local-lisp-path "/flim"))
 (message "* ---[ flim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/semi")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/semi")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/semi")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/semi")))
+(xy/load-autoload (concat my-local-lisp-path "/semi"))
 (message "* ---[ semi lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -185,10 +192,11 @@
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
-(GNULinux ;; REF: http://mailcrypt.sourceforge.net/
-  (xy/install-all-lisps (concat my-local-lisp-path "/mailcrypt-3.5.8")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/mailcrypt-3.5.8")))
+;; (GNULinux ;; REF: http://mailcrypt.sourceforge.net/
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/mailcrypt-3.5.8")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/mailcrypt-3.5.8")))
+(xy/load-autoload (concat my-local-lisp-path "/mailcrypt-3.5.8"))
 (message "* ---[ mailcrypt lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -207,18 +215,21 @@
 ;;--------------------------
 
 ;; REF: http://repo.or.cz/w/anything-config.git
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/anything-config")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/anything-config")))
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/extensions")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/anything-config/extensions")))
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/contrib")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/anything-config/contrib")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/anything-config")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/anything-config")))
+(xy/load-autoload (concat my-local-lisp-path "/anything-config"))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/extensions")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/anything-config/extensions")))
+(xy/load-autoload (concat my-local-lisp-path "/anything-config/extensions"))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/contrib")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/anything-config/contrib")))
+(xy/load-autoload (concat my-local-lisp-path "/anything-config/contrib"))
 (message "* ---[ anything lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -230,10 +241,11 @@
 ;; REF: http://www.gnu.org/s/auctex/
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/auctex-11.86-mypatched")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/auctex-11.86-mypatched")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/auctex-11.86-mypatched")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/auctex-11.86-mypatched")))
+(xy/load-autoload (concat my-local-lisp-path "/auctex-11.86-mypatched"))
 (message "* ---[ auctex installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -247,10 +259,11 @@
 ;;                            (second *emacs-load-start*)))))
 
 ;; REF: http://cc-mode.sourceforge.net/
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/cc-mode-5.32")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/cc-mode-5.32")))
+(xy/load-autoload (concat my-local-lisp-path "/cc-mode-5.32"))
 (message "* ---[ cc-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -262,63 +275,70 @@
 ;; REF: http://cedet.sourceforge.net/
 
 ;; REF: https://github.com/bogolisk/egg
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/egg")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/egg")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/egg")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/egg")))
+(xy/load-autoload (concat my-local-lisp-path "/egg"))
 (message "* ---[ egg lisps installed at %ds ]---"
+		 (message "* ---[ egg lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+                           (second *emacs-load-start*))))))
 
 ;; NOTE: seems no one is maitaining this package
 ;; REF: https://github.com/viogus/eim
 ;;      http://ywb-codes.googlecode.com/svn/trunk/emacs/eim
 ;; svn co http://ywb-codes.googlecode.com/svn/trunk/emacs/eim 
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/eim-2.4")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/eim-2.4")))
+(xy/load-autoload (concat my-local-lisp-path "/eim-2.4"))
 (message "* ---[ eim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; REF: http://matlab-emacs.sourceforge.net/
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/matlab-emacs")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/matlab-emacs")))
+(xy/load-autoload (concat my-local-lisp-path "/matlab-emacs"))
 (message "* ---[ matlab-emacs lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; REF: http://www.mew.org/en/
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.4")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/mew-6.4")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.4")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/mew-6.4")))
+(xy/load-autoload (concat my-local-lisp-path "/mew-6.4"))
 (message "* ---[ mew lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; REF: http://orgmode.org/
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/org-7.7")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/org-7.7")))
+(xy/load-autoload (concat my-local-lisp-path "/org-7.7"))
 (message "* ---[ org installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; REF: https://github.com/punchagan/org2blog
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/org2blog")))
-(Windows
- (xy/load-autoload (concat my-local-lisp-path "/org2blog")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/org2blog")))
+;; (Windows
+;;  (xy/load-autoload (concat my-local-lisp-path "/org2blog")))
+(xy/load-autoload (concat my-local-lisp-path "/org2blog"))
 ;; (message "* ---[ org2blog lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -326,19 +346,21 @@
 
 ;; REF: http://emacs-w3m.namazu.org/index-en.html
 ;; BUG: current cvs version has a bug when compiling
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/w3m")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/w3m")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/w3m")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/w3m")))
+(xy/load-autoload (concat my-local-lisp-path "/w3m"))
 (message "* ---[ w3m lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-(GNULinux
-  (xy/install-all-lisps (concat my-local-lisp-path "/themes")))
-(Windows
-  (xy/load-autoload (concat my-local-lisp-path "/themes")))
+;; (GNULinux
+;;   (xy/install-all-lisps (concat my-local-lisp-path "/themes")))
+;; (Windows
+;;   (xy/load-autoload (concat my-local-lisp-path "/themes")))
+(xy/load-autoload (concat my-local-lisp-path "/themes"))
 (message "* ---[ theme lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
