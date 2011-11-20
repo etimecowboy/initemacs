@@ -7,9 +7,9 @@
 ;; Copyright (C) 2000-2011, Drew Adams, all rights reserved.
 ;; Copyright (C) 2009, Thierry Volpiatto, all rights reserved.
 ;; Created: Mon Jul 12 09:05:21 2010 (-0700)
-;; Last-Updated: Tue Nov  1 20:52:06 2011 (-0700)
+;; Last-Updated: Sat Nov 19 07:58:37 2011 (-0800)
 ;;           By: dradams
-;;     Update #: 883
+;;     Update #: 949
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/bookmark+-bmu.el
 ;; Keywords: bookmarks, bookmark+, placeholders, annotations, search, info, url, w3m, gnus
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -122,6 +122,7 @@
 ;;    `bmkp-bmenu-mark-dired-bookmarks',
 ;;    `bmkp-bmenu-mark-file-bookmarks',
 ;;    `bmkp-bmenu-mark-gnus-bookmarks',
+;;    `bmkp-bmenu-mark-image-bookmarks',
 ;;    `bmkp-bmenu-mark-info-bookmarks',
 ;;    `bmkp-bmenu-mark-lighted-bookmarks',
 ;;    `bmkp-bmenu-mark-man-bookmarks',
@@ -150,6 +151,7 @@
 ;;    `bmkp-bmenu-show-only-bookmark-files',
 ;;    `bmkp-bmenu-show-only-desktops', `bmkp-bmenu-show-only-dired',
 ;;    `bmkp-bmenu-show-only-files', `bmkp-bmenu-show-only-gnus',
+;;    `bmkp-bmenu-show-only-image-files',
 ;;    `bmkp-bmenu-show-only-info-nodes',
 ;;    `bmkp-bmenu-show-only-man-pages',
 ;;    `bmkp-bmenu-show-only-non-files',
@@ -198,9 +200,11 @@
 ;;
 ;;  User options defined here:
 ;;
-;;    `bmkp-bmenu-commands-file', `bmkp-bmenu-omitted-bookmarks',
-;;    `bmkp-bmenu-state-file', `bmkp-propertize-bookmark-names-flag',
-;;    `bmkp-sort-orders-alist', `bmkp-sort-orders-for-cycling-alist'.
+;;    `bmkp-bmenu-commands-file',
+;;    `bmkp-bmenu-image-bookmark-icon-file',
+;;    `bmkp-bmenu-omitted-bookmarks', `bmkp-bmenu-state-file',
+;;    `bmkp-propertize-bookmark-names-flag', `bmkp-sort-orders-alist',
+;;    `bmkp-sort-orders-for-cycling-alist'.
 ;;
 ;;  Non-interactive functions defined here:
 ;;
@@ -231,11 +235,8 @@
 ;;    `bmkp-bmenu-menubar-menu', `bmkp-bmenu-omit-menu',
 ;;    `bmkp-bmenu-show-menu', `bmkp-bmenu-sort-menu',
 ;;    `bmkp-bmenu-tags-menu', `bmkp-bmenu-title',
-;;    `bmkp-bookmark-file-history', `bmkp-bookmark-list-history',
 ;;    `bmkp-current-bookmark-file', `bmkp-current-nav-bookmark',
-;;    `bmkp-desktop-history', `bmkp-dired-history',
-;;    `bmkp-file-history', `bmkp-gnus-history', `bmkp-highlight-menu',
-;;    `bmkp-info-history', `bmkp-isearch-bookmarks' (Emacs 23+),
+;;    `bmkp-highlight-menu', `bmkp-isearch-bookmarks' (Emacs 23+),
 ;;    `bmkp-jump-display-function', `bmkp-last-bmenu-bookmark'.
 ;;
 ;;
@@ -315,7 +316,7 @@
 ;; bmkp-edit-bookmark, bmkp-face-prop, bmkp-file-alpha-cp,
 ;; bmkp-file-remote-p, bmkp-function-bookmark-p, bmkp-get-buffer-name,
 ;; bmkp-get-tags, bmkp-gnus-bookmark-p, bmkp-gnus-cp, bmkp-handler-cp,
-;; bmkp-incremental-filter-delay, bmkp-info-bookmark-p, bmkp-info-cp,
+;; bmkp-incremental-filter-delay, bmkp-image-bookmark-p, bmkp-info-bookmark-p, bmkp-info-cp,
 ;; bmkp-isearch-bookmarks, bmkp-isearch-bookmarks-regexp, bmkp-jump-1,
 ;; bmkp-last-bookmark-file, bmkp-last-specific-buffer,
 ;; bmkp-last-specific-file, bmkp-latest-bookmark-alist,
@@ -557,6 +558,32 @@ was the last time you used it."
           (file  :tag "File for saving menu-list state"))
   :group 'bookmark-plus)
 
+;;;###autoload
+(defcustom bmkp-bmenu-image-bookmark-icon-file
+  (and (fboundp 'display-images-p) (display-images-p)
+       (let ((bmk-img    (convert-standard-filename "~/.emacs-bmk-bmenu-image-file-icon.png"))
+             (emacs-img  (convert-standard-filename
+                          (concat data-directory "images/gnus/exit-gnus.xpm"))))
+         (or (and (file-readable-p bmk-img)    bmk-img)
+             (and (file-readable-p emacs-img)  emacs-img))))
+  "*Iconic image file to show next to image-file bookmarks.
+If nil, show no image.  Otherwise, this is an absolute file name,
+possibly containing `~', (the value is not expanded).
+
+Use any image file that Emacs can display, but you probably want to
+use a small, iconic image - say 16x16 pixels.
+
+The default image, which you are sure to have in any Emacs version
+that supports images, is 24x24 pixels.  That wastes vertical space, so
+you probably want to use something smaller.
+
+If you don't have another image that you prefer, try this one (16x16):
+http://www.emacswiki.org/emacs/BookmarkPlusImageFileDefaultIcon"
+  :type '(choice
+          (file  :tag "Use iconic image file")
+          (const :tag "Show no image"))
+  :group 'bookmark-plus)
+
 ;; This is a general option.  It is in this file because it is used mainly by the bmenu code.
 (when (> emacs-major-version 20)
   (defcustom bmkp-sort-orders-alist ()
@@ -791,7 +818,7 @@ the deletions."
 
 ;; REPLACES ORIGINAL in `bookmark.el'.
 ;;
-;; 1. Added args TITLE, FILTEREDP, DONT-TOGGLE-FILENAMES-P.
+;; 1. Added arg FILTEREDP.
 ;; 2. Handles also region bookmarks and buffer (non-file) bookmarks.
 ;; 3. Uses `pop-to-buffer', not `switch-to-buffer', so we respect `special-display-*'
 ;;    (but keep `one-window-p' if that's the case).
@@ -909,11 +936,15 @@ Non-nil INTERACTIVEP means `bookmark-bmenu-list' was called
         (pop-to-buffer (get-buffer-create "*Bookmark List*"))
         (when one-win-p (delete-other-windows)))
     (set-buffer (get-buffer-create "*Bookmark List*")))
-  (let* ((inhibit-read-only  t)
-         (title              (if (and filteredp bmkp-bmenu-title (not (equal "" bmkp-bmenu-title)))
-				 bmkp-bmenu-title
-			       "All Bookmarks")))
+  (let* ((inhibit-read-only       t)
+         (title                   (if (and filteredp bmkp-bmenu-title (not (equal "" bmkp-bmenu-title)))
+                                      bmkp-bmenu-title
+                                    "All Bookmarks"))
+         (show-image-file-icon-p  (and (fboundp 'display-images-p) (display-images-p)
+                                       bmkp-bmenu-image-bookmark-icon-file
+                                       (file-readable-p bmkp-bmenu-image-bookmark-icon-file))))
     (erase-buffer)
+    (when (fboundp 'remove-images) (remove-images (point-min) (point-max)))
     (insert (format "%s\n%s\n" title (make-string (length title) ?-)))
     (add-text-properties (point-min) (point) (bmkp-face-prop 'bmkp-heading))
     (let ((max-width  0)
@@ -945,6 +976,9 @@ Non-nil INTERACTIVEP means `bookmark-bmenu-list' was called
         (insert " ")
         (when (and (featurep 'bookmark+-lit) (bmkp-get-lighting bmk)) ; Highlight highlight overrides.
           (put-text-property (1- (point)) (point) 'face 'bmkp-light-mark))
+        (when (and (bmkp-image-bookmark-p bmk)  show-image-file-icon-p)
+          (let ((image  (create-image bmkp-bmenu-image-bookmark-icon-file nil nil :ascent 95)))
+            (put-image image (point))))
         (insert name)
         (move-to-column max-width t)
         (bmkp-bmenu-propertize-item bmk start (point))
@@ -1034,7 +1068,7 @@ C-u \\[bmkp-switch-bookmark-file]\t- Switch back to the last bookmark file    (o
 \\[bmkp-choose-navlist-from-bookmark-list]\t- Set the navlist to the bookmarks of a \
 bookmark-list bookmark
 \\[bmkp-navlist-bmenu-list]\t- Open `*Bookmark List*' for bookmarks in navlist
-\\[bmkp-this-buffer-bmenu-list]\t- Open `*Bookmark List*' for bookmarks in current buffer
+\\[bmkp-this-file/buffer-bmenu-list]\t- Open `*Bookmark List*' for bookmarks in current file/buffer
 \\[bmkp-delete-bookmarks]\t- Delete some bookmarks at point or all in buffer
 
 \\[bmkp-toggle-bookmark-set-refreshes]
@@ -1085,6 +1119,7 @@ Jump to (Visit)
 \\[bmkp-local-file-jump]\t- Local-file bookmark
 \\[bmkp-remote-file-jump]\t- Remote-file bookmark
 \\[bmkp-region-jump]\t- Region bookmark
+\\[bmkp-image-jump]\t- Image-file bookmark
 \\[bmkp-info-jump]\t- Info bookmark
 \\[bmkp-man-jump]\t- `man'-page bookmark
 \\[bmkp-non-file-jump]\t- Non-file (buffer) bookmark
@@ -1164,6 +1199,7 @@ Mark/Unmark
 \\[bmkp-bmenu-mark-file-bookmarks]\t- Mark file & directory bookmarks (`C-u': local only)
 \\[bmkp-bmenu-mark-gnus-bookmarks]\t- Mark Gnus bookmarks
 \\[bmkp-bmenu-mark-lighted-bookmarks]\t- Mark the highlighted bookmarks
+\\[bmkp-bmenu-mark-image-bookmarks]\t- Mark image-file bookmarks
 \\[bmkp-bmenu-mark-info-bookmarks]\t- Mark Info bookmarks
 \\[bmkp-bmenu-mark-desktop-bookmarks]\t- Mark desktop bookmarks
 \\[bmkp-bmenu-mark-bookmark-file-bookmarks]\t- Mark bookmark-file bookmarks
@@ -1290,6 +1326,7 @@ Hide/Show
 \\[bmkp-bmenu-show-only-dired]\t- Show only Dired bookmarks
 \\[bmkp-bmenu-show-only-files]\t- Show only file & directory bookmarks (`C-u': local only)
 \\[bmkp-bmenu-show-only-gnus]\t- Show only Gnus bookmarks
+\\[bmkp-bmenu-show-only-image-files]\t- Show only image-file bookmarks
 \\[bmkp-bmenu-show-only-info-nodes]\t- Show only Info bookmarks
 \\[bmkp-bmenu-show-only-desktops]\t- Show only desktop bookmarks
 \\[bmkp-bmenu-show-only-bookmark-files]\t- Show only bookmark-file bookmarks
@@ -1362,7 +1399,7 @@ bmkp-save-new-location-flag - Save if bookmark relocated?
 bmkp-sequence-jump-display-function - How to display a sequence
 bmkp-sort-comparer          - Predicates for sorting bookmarks
 bmkp-su-or-sudo-regexp      - Bounce-show each end of region?
-bmkp-this-buffer-cycle-sort-comparer -  This-buffer cycling sort
+bmkp-this-file/buffer-cycle-sort-comparer -  cycling sort for here
 bmkp-use-region             - Activate saved region when visit?"
   (kill-all-local-variables)
   (use-local-map bookmark-bmenu-mode-map)
@@ -1753,6 +1790,20 @@ With a prefix argument, do not include remote files or directories."
     (bookmark-bmenu-list 'filteredp))
   (when (interactive-p)
     (bmkp-msg-about-sort-order (bmkp-current-sort-order) "Only Gnus bookmarks are shown")))
+
+;;;###autoload
+(defun bmkp-bmenu-show-only-image-files () ; Bound to `M-i S' in bookmark list
+  "Display (only) the image-file bookmarks."
+  (interactive)
+  (bmkp-bmenu-barf-if-not-in-menu-list)
+  (setq bmkp-bmenu-filter-function  'bmkp-image-alist-only
+        bmkp-bmenu-title            "Image-File Bookmarks")
+  (let ((bookmark-alist  (funcall bmkp-bmenu-filter-function)))
+    (setq bmkp-latest-bookmark-alist  bookmark-alist)
+    (bookmark-bmenu-list 'filteredp))
+  (when (interactive-p)
+    (bmkp-msg-about-sort-order (bmkp-current-sort-order)
+                               "Only image-file bookmarks are shown")))
 
 ;;;###autoload
 (defun bmkp-bmenu-show-only-info-nodes () ; Bound to `I S' in bookmark list
@@ -2192,6 +2243,12 @@ With a prefix argument, do not mark remote files or directories."
   "Mark Gnus bookmarks."
   (interactive)
   (bmkp-bmenu-mark-bookmarks-satisfying 'bmkp-gnus-bookmark-p))
+
+;;;###autoload
+(defun bmkp-bmenu-mark-image-bookmarks () ; Bound to `M-i M' in bookmark list
+  "Mark image-file bookmarks."
+  (interactive)
+  (bmkp-bmenu-mark-bookmarks-satisfying 'bmkp-image-bookmark-p))
 
 ;;;###autoload
 (defun bmkp-bmenu-mark-info-bookmarks () ; Bound to `I M' in bookmark list
@@ -3097,7 +3154,12 @@ Sorted:\t\t%s\nFiltering:\t%s\nMarked:\t\t%d\nOmitted:\t%d\nBookmark file:\t%s\n
             (put-text-property 0 (1- (length sequence))      'face 'bmkp-sequence      sequence)
             (put-text-property 0 (1- (length variable-list)) 'face 'bmkp-variable-list variable-list)
             (put-text-property 0 (1- (length function))      'face 'bmkp-function      function)
-            (insert "Face Legend for Bookmark Types\n------------------------------\n\n")
+            (insert "Legend for Bookmark Types\n-------------------------\n\n")
+            (when (and (fboundp 'display-images-p) (display-images-p)
+                       bmkp-bmenu-image-bookmark-icon-file
+                       (file-readable-p bmkp-bmenu-image-bookmark-icon-file))
+              (insert-image (create-image bmkp-bmenu-image-bookmark-icon-file nil nil :ascent 95))
+              (insert "Image file\n"))
             (insert gnus) (insert info) (insert man) (insert url) (insert local-no-region)
             (insert local-w-region) (insert buffer) (insert no-buf) (insert bad) (insert remote)
             (insert sudo) (insert local-dir) (insert bookmark-list) (insert bookmark-file)
@@ -3609,7 +3671,7 @@ use it."
  "by bookmark type"                     ; `bmkp-bmenu-sort-by-bookmark-type'
  ((bmkp-info-cp bmkp-url-cp bmkp-gnus-cp bmkp-local-file-type-cp bmkp-handler-cp)
   bmkp-alpha-p)
- "Sort bookmarks by type: Info, URL, Gnus, files, other.")
+ "Sort bookmarks by type: Info, URL, Gnus, files, other (by handler name).")
 
 (bmkp-define-sort-command               ; Bound to `s u' in bookmark list
  "by url"                           ; `bmkp-bmenu-sort-by-url'
@@ -3889,6 +3951,9 @@ Marked bookmarks that have no associated file are ignored."
 (define-key bookmark-bmenu-mode-map "I"                    nil) ; For Emacs 20
 (define-key bookmark-bmenu-mode-map "IM"                   'bmkp-bmenu-mark-info-bookmarks)
 (define-key bookmark-bmenu-mode-map "IS"                   'bmkp-bmenu-show-only-info-nodes)
+(define-key bookmark-bmenu-mode-map "\M-I"                 nil) ; For Emacs 20
+(define-key bookmark-bmenu-mode-map "\M-I\M-M"             'bmkp-bmenu-mark-image-bookmarks)
+(define-key bookmark-bmenu-mode-map "\M-I\M-S"             'bmkp-bmenu-show-only-image-files)
 (define-key bookmark-bmenu-mode-map "K"                    nil) ; For Emacs 20
 (define-key bookmark-bmenu-mode-map "KM"                   'bmkp-bmenu-mark-desktop-bookmarks)
 (define-key bookmark-bmenu-mode-map "KS"                   'bmkp-bmenu-show-only-desktops)
@@ -4230,6 +4295,9 @@ Marked bookmarks that have no associated file are ignored."
 (define-key bmkp-bmenu-show-menu [bmkp-bmenu-show-only-info-nodes]
   '(menu-item "Show Only Info Nodes" bmkp-bmenu-show-only-info-nodes
     :help "Display (only) the Info bookmarks"))
+(define-key bmkp-bmenu-show-menu [bmkp-bmenu-show-only-image-files]
+  '(menu-item "Show Only Image Files" bmkp-bmenu-show-only-image-files
+    :help "Display (only) image-file bookmarks"))
 (define-key bmkp-bmenu-show-menu [bmkp-bmenu-show-only-dired]
   '(menu-item "Show Only Dired Buffers" bmkp-bmenu-show-only-dired
     :help "Display (only) the Dired bookmarks"))
@@ -4353,6 +4421,8 @@ Marked bookmarks that have no associated file are ignored."
     :help "Mark `man' page bookmarks"))
 (define-key bmkp-bmenu-mark-menu [bmkp-bmenu-mark-info-bookmarks]
   '(menu-item "Mark Info Nodes" bmkp-bmenu-mark-info-bookmarks :help "Mark Info bookmarks"))
+(define-key bmkp-bmenu-mark-menu [bmkp-bmenu-mark-image-bookmarks]
+  '(menu-item "Mark Images" bmkp-bmenu-mark-image-bookmarks :help "Mark image-file bookmarks"))
 (define-key bmkp-bmenu-mark-menu [bmkp-bmenu-mark-dired-bookmarks]
   '(menu-item "Mark Dired Buffers" bmkp-bmenu-mark-dired-bookmarks :help "Mark Dired bookmarks"))
 (define-key bmkp-bmenu-mark-menu [bmkp-bmenu-mark-bookmark-file-bookmarks]

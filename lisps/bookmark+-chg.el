@@ -6,9 +6,9 @@
 ;; Maintainer: Drew Adams (concat "drew.adams" "@" "oracle" ".com")
 ;; Copyright (C) 2000-2011, Drew Adams, all rights reserved.
 ;; Created: Fri Sep 15 07:58:41 2000
-;; Last-Updated: Wed Nov  9 15:17:20 2011 (-0800)
+;; Last-Updated: Sat Nov 19 08:00:02 2011 (-0800)
 ;;           By: dradams
-;;     Update #: 13823
+;;     Update #: 13872
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/bookmark+-chg.el
 ;; Keywords: bookmarks, bookmark+
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -54,7 +54,7 @@
 ;;       `Commentary'.
 ;;
 ;;    (The commentary links in #1 and #3 work only if you put library
-;;    `bookmark+-doc.el' in your `load-path'.)
+ ;;    `bookmark+-doc.el' in your `load-path'.)
 ;;
 ;;
 ;;    ****** NOTE ******
@@ -120,6 +120,21 @@
  
 ;;;(@* "CHANGE LOG FOR `bookmark+-1.el'")
 ;;
+;; 2011/11/18 dadams
+;;     Renamed: bmkp-bookmark-image-bookmark-p to bmkp-image-bookmark-p.
+;;     Added: bmkp-image-alist-only, bmkp-image-jump(-other-window), bmkp-image-history.
+;;     bookmark-handle-bookmark: If bmk has handler but it's not a function, use default handler.
+;;     bmkp-autotemp-bookmark-predicates: Update doc string to include bmkp-image-bookmark-p.
+;;     bmkp-types-alist: Added entry for images.
+;; 2011/11/15 dadams
+;;     bookmark-relocate: Redefine without using old-*.  Update Dired location too.
+;;     Added: bmkp-cycle-this-file(/buffer)(-other-window),
+;;            bmkp-(next|previous)-bookmark-this-file(/buffer)(-repeat),
+;;            bmkp-this-file(/buffer)-bmenu-list, bmkp-this-file/buffer-alist-only.
+;;     Renamed bmkp-this-buffer-cycle-sort-comparer to bmkp-this-file/buffer-cycle-sort-comparer.
+;;     bmkp-this-buffer-p: Return nil if bookmark has a file diff from buffer.
+;;     bmkp-this-file-p:
+;;       Ensure bmkp-file-bookmark-p and bookmark-buffer-file-name.  Use bmkp-same-file-p.
 ;; 2011/11/09 dadams
 ;;     bmkp-jump-dired, bmkp-jump-man: Added bmkp-select-buffer-other-window to other-window fns.
 ;; 2011/11/08 dadams
@@ -385,6 +400,17 @@
  
 ;;;(@* "CHANGE LOG FOR `bookmark+-bmu.el'")
 ;;
+;; 2011/11/19 dadams
+;;     bmkp-bmenu-image-bookmark-icon-file: Default to an existing Emacs image file, not nil.
+;; 2011/11/18 dadams
+;;     Added: bmkp-bmenu-mark-image-bookmarks, bmkp-bmenu-show-only-image-files,
+;;            bmkp-bmenu-image-bookmark-icon-file.
+;;     bmkp-bmenu-list-1: Show icon image for image-file bookmarks.
+;;     bookmark-bmenu-mode: Add to doc string: bmkp-image-jump, bmkp-bmenu-mark-image-bookmarks,
+;;                                             bmkp-bmenu-show-only-image-files.
+;;     bmkp-bmenu-mode-status-help: Added image icon to legend.
+;;     Bound keys: M-I M-M, M-I M-S to *-mark-image-bookmarks *-show-only-image-files.
+;;     Added to menus (Mark, Show): bmkp-bmenu-mark-image-bookmarks, bmkp-bmenu-show-only-image-files.
 ;; 2011/11/01 dadams
 ;;     bookmark-bmenu-mode: Changed mode-name var for mode line: Bookmarks, not Bookmark Menu.
 ;;                          Updated doc string for autofile & temporary jump commands.
@@ -518,6 +544,11 @@
  
 ;;;(@* "CHANGE LOG FOR `bookmark+-key.el'")
 ;;
+;; 2011/11/18 dadams
+;;     Bind bmkp-image-jump(-other-window) to C-x (4) j M-i.
+;;     bmkp-jump-menu: Add bmkp-image-jump-other-window.
+;; 2011/11/15 dadams
+;;     Bind *-this-file/buffer*, not *-this-buffer*.
 ;; 2011/11/01 dadams
 ;;     Bind alias bmkp-autofile-jump(-*), not bmkp-find-file(-*) to C-x j a, so Icicles picks up key.
 ;;     Bind bmkp-bookmark-file-jump to C-x j y, not C-x j x.  Bind bmkp-temporary-jump(-*) to C-x j x.
@@ -557,6 +588,8 @@
  
 ;;;(@* "CHANGE LOG FOR `bookmark+-lit.el'")
 ;;
+;; 2011/11/15 dadams
+;;     Applied renaming: bmkp-this-buffer-cycle-sort-comparer to *-this-file/buffer*.
 ;; 2011/08/09 dadams
 ;;     Bind icicle-unpropertize-completion-result-flag to t for all calls to completing-read.
 ;; 2011/04/12
