@@ -281,10 +281,9 @@
 ;;   (xy/load-autoload (concat my-local-lisp-path "/egg")))
 (xy/load-autoload (concat my-local-lisp-path "/egg"))
 (message "* ---[ egg lisps installed at %ds ]---"
-		 (message "* ---[ egg lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*))))))
+                           (second *emacs-load-start*)))))
 
 ;; NOTE: seems no one is maitaining this package
 ;; REF: https://github.com/viogus/eim
