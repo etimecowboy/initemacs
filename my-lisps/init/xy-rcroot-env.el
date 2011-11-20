@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-19 Sat 04:28 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-20 Sun 04:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -79,8 +79,49 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;** ELPA packages
+;; Packages got from `package.el'. 
+;; They are usually for tests and will be moved out of the management 
+;; of the `package.el' when ready for production usage. Sometime, the
+;; ELPA packages are older than the lisps resided outside.
+
+;; Packges moved out
+;; `anything', `anything-complete', `anything-config',
+;; `anything-extension', `anything-match-plugin', `anything-obsolete',
+;; `archive-downloader', `auto-complete', `auto-complete-etags',
+;; `auto-complete-octave', `auto-complete-verilog', `autopair',
+;; `blank-mode', `bm', `browse-kill-ring' `buffer-move',
+;; `cal-china-x', `caps-mode', `cdlatex', `c-eldoc', `cmake-mode',
+;; `color-file-completion', `color-theme', `col-highlight',
+;; `columnify', `ctags', `cursor-chg', `descbinds-anything',
+;; `desktop', `diff-git', `diminish', `dired-details+',
+;; `dired-details', `dired-isearch', `dired-single', `doc-mode',
+;; `elisp-cache', `ert', `full-ack', `graphviz-dot-mode', `hexrgb',
+;; `highlight-parentheses', `highlight-symbol', `highline',
+;; `hl-line+', `htmlize', `hungry-delete', `icicles', `icomplete+',
+;; `idle-require', `ioccur', `iy-go-to-char', `kill-ring-search',
+;; `lacarte', `light-symbol', `load-dir', `maxframe', `mic-paren',
+;; `multi-term', `notify', `org', `org-table-comment', `rect-mark',
+;; `redo+', `session' (BUG: conflicts with `anything'), `smex',
+;; `sr-speedbar', `synonyms', `tabbar', `tabbar-ruler', `texdrive',
+;; `tex-math-preview', `vline', `w32-browser', `weblogger',
+;; `window-number', `windresize', `winpoint', `xml-rpc'
+
+;; packages still managed by `package.el'
+;; (load "company-autoloads.el") ;; not in use
+(load "dictionary-autoloads.el")
+(load "ecb_snap-autoloads.el")
+(load "emms-autoloads.el")
+(load "yasnippet-autoloads.el")
+
+(message "* ---[ ELPA lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
 ;;** Collected lisps (small/single lisps from emacswiki and other places)
 (xy/install-all-lisps my-local-lisp-path)
+;; (xy/load-autoload my-local-lisp-path)
 (message "* ---[ my local lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -91,12 +132,12 @@
 ;; packages without version numbers are development versions
 
 ;; REF: http://code.google.com/p/dea/
-(xy/install-all-lisps (concat my-local-lisp-path "/dea"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
+(xy/load-autoload (concat my-local-lisp-path "/dea"))
 (message "* ---[ dea lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-
 ;; NOTE:
 ;; `package.el' is now part of GNU Emacs 24. You can get the latest at
 ;; http://bit.ly/pkg-el while the last version that's compatible with
@@ -111,28 +152,33 @@
 ;; Japanese developers which produced `mew', `wanderlust', `w3m' and
 ;; etc.
 ;; REF: https://github.com/wanderlust
-(xy/install-all-lisps (concat my-local-lisp-path "/apel"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
+(xy/load-autoload (concat my-local-lisp-path "/apel"))
 (message "* ---[ apel lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-(xy/install-all-lisps (concat my-local-lisp-path "/flim"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
+(xy/load-autoload (concat my-local-lisp-path "/flim"))
 (message "* ---[ flim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-(xy/install-all-lisps (concat my-local-lisp-path "/semi"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
+(xy/load-autoload (concat my-local-lisp-path "/semi"))
 (message "* ---[ semi lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/wanderlust"))
+;; (xy/load-autoload (concat my-local-lisp-path "/wanderlust"))
 ;; (message "* ---[ wanderlust lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 ;; REF: http://mailcrypt.sourceforge.net/
-(xy/install-all-lisps (concat my-local-lisp-path "/mailcrypt-3.5.8"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/mailcrypt-3.5.8"))
+(xy/load-autoload (concat my-local-lisp-path "/mailcrypt-3.5.8"))
 (message "* ---[ mailcrypt lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -151,9 +197,12 @@
 ;;--------------------------
 
 ;; REF: http://repo.or.cz/w/anything-config.git
-(xy/install-all-lisps (concat my-local-lisp-path "/anything-config"))
-(xy/install-all-lisps (concat my-local-lisp-path "/anything-config/extensions"))
-(xy/install-all-lisps (concat my-local-lisp-path "/anything-config/contrib"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/anything-config"))
+(xy/load-autoload (concat my-local-lisp-path "/anything-config"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/extensions"))
+(xy/load-autoload (concat my-local-lisp-path "/anything-config/extensions"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/anything-config/contrib"))
+(xy/load-autoload (concat my-local-lisp-path "/anything-config/contrib"))
 (message "* ---[ anything lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -165,20 +214,23 @@
 ;; REF: http://www.gnu.org/s/auctex/
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
-(xy/install-all-lisps (concat my-local-lisp-path "/auctex-11.86-mypatched"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/auctex-11.86-mypatched"))
+(xy/load-autoload (concat my-local-lisp-path "/auctex-11.86-mypatched"))
 (message "* ---[ auctex installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/babel"))
+;; (xy/load-autoload (concat my-local-lisp-path "/babel"))
 ;; (message "* ---[ babel installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
 ;; REF: http://cc-mode.sourceforge.net/
-(xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
+(xy/load-autoload (concat my-local-lisp-path "/cc-mode-5.32"))
 (message "* ---[ cc-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -191,7 +243,8 @@
 ;; REF: http://cedet.sourceforge.net/
 
 ;; REF: https://github.com/bogolisk/egg
-(xy/install-all-lisps (concat my-local-lisp-path "/egg"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
+(xy/load-autoload (concat my-local-lisp-path "/egg"))
 (message "* ---[ egg lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -201,28 +254,32 @@
 ;; REF: https://github.com/viogus/eim
 ;;      http://ywb-codes.googlecode.com/svn/trunk/emacs/eim
 ;; svn co http://ywb-codes.googlecode.com/svn/trunk/emacs/eim 
-(xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
+(xy/load-autoload (concat my-local-lisp-path "/eim-2.4"))
 (message "* ---[ eim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; REF: http://matlab-emacs.sourceforge.net/
-(xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
+(xy/load-autoload (concat my-local-lisp-path "/matlab-emacs"))
 (message "* ---[ matlab-emacs lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; REF: http://www.mew.org/en/
-(xy/install-all-lisps (concat my-local-lisp-path "/mew-6.4"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.4"))
+(xy/load-autoload (concat my-local-lisp-path "/mew-6.4"))
 (message "* ---[ mew lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
 ;; REF: http://orgmode.org/
-(xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
+(xy/load-autoload (concat my-local-lisp-path "/org-7.7"))
 (message "* ---[ org installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -230,6 +287,7 @@
 
 ;; REF: https://github.com/punchagan/org2blog
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
+;; (xy/load-autoload (concat my-local-lisp-path "/org2blog"))
 ;; (message "* ---[ org2blog lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -237,114 +295,16 @@
 
 ;; REF: http://emacs-w3m.namazu.org/index-en.html
 ;; BUG: current cvs version has a bug when compiling
-(xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
+(xy/load-autoload (concat my-local-lisp-path "/w3m"))
 (message "* ---[ w3m lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; My emacs themes collection
-(xy/install-all-lisps (concat my-local-lisp-path "/themes"))
+;; (xy/install-all-lisps (concat my-local-lisp-path "/themes"))
+(xy/load-autoload (concat my-local-lisp-path "/themes"))
 (message "* ---[ theme lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
-
-;;** ELPA packages
-;; Packages got from `package.el'. 
-;; They are usually for tests and will be moved out of the management 
-;; of the `package.el' when ready for production usage. Sometime, the
-;; ELPA packages are older than the lisps resided outside.
-
-;;*** Packges moved out
-;; (load "anything-autoloads.el") ;; now use author's git version
-;; (load "anything-complete-autoloads.el")
-;; (load "anything-config-autoloads.el")
-;; (load "anything-extension-autoloads.el")
-;; (load "anything-match-plugin-autoloads.el")
-;; (load "anything-obsolete-autoloads.el")
-;; (load "archive-downloader-autoloads.el")
-;; (load "auto-complete-autoloads.el")
-;; (load "auto-complete-etags-autoloads.el")
-;; (load "auto-complete-octave-autoloads.el")
-;; (load "auto-complete-verilog-autoloads.el")
-;; (load "autopair-autoloads.el")
-;; (load "blank-mode-autoloads.el")
-;; (load "bm-autoloads.el")
-;; (load "browse-kill-ring-autoloads.el")
-;; (load "buffer-move-autoloads.el")
-;; (load "cal-china-x-autoloads.el")
-;; (load "caps-mode-autoloads.el")
-;; (load "cdlatex-autoloads.el")
-;; (load "c-eldoc-autoloads.el")
-;; (load "cmake-mode-autoloads.el")
-;; (load "color-file-completion-autoloads.el")
-;; (load "color-theme-autoloads.el")
-;; (load "col-highlight.el")
-;; (load "columnify-autoloads.el")
-;; (load "ctags-autoloads.el")
-;; (load "cursor-chg-autoloads.el")
-;; (load "descbinds-anything-autoloads.el")
-;; (load "desktop-autoloads.el")
-;; (load "diff-git-autoloads.el")
-;; (load "diminish-autoloads.el")
-;; (load "dired-details+-autoloads.el")
-;; (load "dired-details-autoloads.el")
-;; (load "dired-isearch-autoloads.el")
-;; (load "dired-single-autoloads.el")
-;; (load "doc-mode-autoloads.el")
-;; (load "elisp-cache-autoloads.el")
-;; (load "ert-autoloads.el")
-;; (load "full-ack-autoloads.el")
-;; (load "graphviz-dot-mode-autoloads.el")
-;; (load "hexrgb-autoloads.el")
-;; (load "highlight-parentheses-autoloads.el")
-;; (load "highlight-symbol-autoloads.el")
-;; (load "highline-autoloads.el")
-;; (load "hl-line+-autoloads.el")
-;; (load "htmlize-autoloads.el")
-;; (load "hungry-delete-autoloads.el")
-;; (load "icicles-autoloads.el")
-;; (load "icomplete+-autoloads.el")
-;; (load "idle-require-autoloads.el")
-;; (load "ioccur-autoloads.el")
-;; (load "iy-go-to-char-autoloads.el")
-;; (load "kill-ring-search-autoloads.el")
-;; (load "lacarte-autoloads.el")
-;; (load "light-symbol-autoloads.el")
-;; (load "load-dir-autoloads.el")
-;; (load "maxframe-autoloads.el")
-;; (load "mic-paren-autoloads.el")
-;; (load "multi-term-autoloads.el")
-;; (load "notify-autoloads.el")
-;; (load "org-table-comment-autoloads.el")
-;; (load "rect-mark-autoloads.el")
-;; (load "redo+-autoloads.el")
-;; (load "session-autoloads.el") ;; BUG: conflicts with `anything'
-;; (load "smex-autoloads.el")
-;; (load "sr-speedbar-autoloads.el")
-;; (load "synonyms-autoloads.el")
-;; (load "tabbar-autoloads.el")
-;; (load "tabbar-ruler-autoloads.el")
-;; (load "texdrive-autoloads.el")
-;; (load "tex-math-preview-autoloads.el")
-;; (load "vline-autoloads.el")
-;; (Windows
-;;  (load "w32-browser-autoloads.el"))
-;; (load "weblogger-autoloads.el")
-;; (load "window-number-autoloads.el")
-;; (load "windresize-autoloads.el")
-;; (load "winpoint-autoloads.el")
-;; (load "xml-rpc-autoloads.el")
-;;
-;;*** packages still managed by `package.el'
-;; (load "company-autoloads.el") ;; not in use
-(load "dictionary-autoloads.el")
-(load "ecb_snap-autoloads.el")
-(load "emms-autoloads.el")
-(load "yasnippet-autoloads.el")
-
-(message "* ---[ ELPA lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
@@ -449,7 +409,7 @@
     ;; (woman-face-settings) ;; TODO: will be added to my theme
     (woman-settings)))
 
-;;** help-mode settings
+;;** help
 (global-set-key (kbd "C-x H") 'goto-help-buffer)
 
 (eval-after-load "help-mode"
@@ -474,22 +434,37 @@
 		("."   find-symbol-at-point)
 		("/"   describe-symbol-at-point)))))
 
-;;** 非常方便的查看emacs帮助的插件
-;; (eal-define-keys `(emacs-lisp-mode-map 
-;; 		   lisp-interaction-mode-map 
-;; 		   completion-list-mode-map 
-;; 		   help-mode-map
-;; 		   debugger-mode-map)
-;;  `(("C-c /"   describe-symbol-at-point)
-;;    ("C-c M-v" describe-variable-at-point)
-;;    ("C-c M-f" describe-function-at-point)
-;;    ("C-c M-s" describe-face-at-point)
-;;    ("C-c C-j" find-symbol-at-point)
-;;    ("C-c C-h" find-symbol-go-back)
-;;    ("C-c M-V" find-symbol-var-at-point)
-;;    ("C-c M-F" find-symbol-fun-at-point)
-;;    ("C-c M-S" find-symbol-face-at-point)
-;;    ("C-c w"   where-is-at-point)))
+;;*** help+
+;; (require 'help+)
+;;    `C-h u'      `manual-entry'
+;;    `C-h C-a'    `apropos'
+;;    `C-h C-l'    `locate-library'
+;;    `C-h RET'    `help-on-click/key'
+;;    `C-h M-a'    `apropos-documentation'
+;;    `C-h M-o'    `pop-to-help-toggle'
+;;    `C-h C-M-a'  `tags-apropos'
+;;    [mouse-1]    `mouse-help-on-click' (non-mode-line)
+;;    [mouse-1]    `mouse-help-on-mode-line-click' (mode-line)
+(global-set-key [f1] 'help-on-click/key)
+
+;;*** describe-symbol
+;; ahei 非常方便的查看emacs帮助的插件, 没有 `help+' 方便但是有些很好的
+;; 功能
+(eal-define-keys `(emacs-lisp-mode-map 
+		   lisp-interaction-mode-map 
+		   completion-list-mode-map 
+		   help-mode-map
+		   debugger-mode-map)
+ `(("M-<f3>"   describe-symbol-at-point)
+   ;; ("C-c M-v" describe-variable-at-point)
+   ;; ("C-c M-f" describe-function-at-point)
+   ;; ("C-M-<f3>" describe-face-at-point)
+   ("C-<f3>" find-symbol-at-point)
+   ;; ("C-c C-h" find-symbol-go-back)
+   ;; ("C-c M-V" find-symbol-var-at-point)
+   ;; ("C-c M-F" find-symbol-fun-at-point)
+   ;; ("C-c M-S" find-symbol-face-at-point)
+   ("C-M-<f3>"   where-is-at-point)))
 
 ;; (eal-define-keys-commonly
 ;;  global-map
@@ -501,6 +476,19 @@
 ;;    ("C-x C-d" find-symbol-sb)
 ;;    ("C-x K"   find-symbol-fun-on-key-sb)
 ;;    (,(if window-system "C-x C-/" "C-x C-_") describe-symbol-sb)))
+
+;;** log
+;;*** mwe-log-commands
+;; This add-on can be used to demo Emacs to an audience.  When
+;; activated, keystrokes get logged into a designated buffer, along
+;; with the command bound to them.
+
+;; To enable, use e.g.: 
+;;
+;; (add-hook 'LaTeX-mode-hook (function mwe:log-keyboard-commands))
+;;
+;; To see the log buffer, call M-x mwe:open-command-log-buffer.
+;; To start logging, call M-x mwe:log-keyboard-commands
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -556,7 +544,7 @@
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
 (global-set-key (kbd "C-x F p") 'xy/set-font-prog)
 
-;;*** Ctrl+滚轮，字体放大缩小
+;;*** Font scale by mouse wheel
 (GNULinux
  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease))
@@ -564,7 +552,7 @@
  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease))
 
-;;** 中文输入法
+;;** Chinese input method
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
 ;;       除非不在图形系统下，才用 Emacs 内置的输入法或 eim。
 
@@ -602,7 +590,7 @@
   `(progn
      (eim-settings)))
 
-;;** ibus
+;;*** ibus
 ;; IBus client for GNU Emacs
 ;; REF:  http://www11.atwiki.jp/s-irie/pages/21.html
 (GNULinux

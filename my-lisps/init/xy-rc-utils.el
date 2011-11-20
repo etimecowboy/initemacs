@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-09-06 Tue 02:05 xin on p6t>
+;; Time-stamp:<2011-11-19 Sat 18:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1049,6 +1049,35 @@ directories starting with a `.'."
 				      'with-subdirs 'recursive)
               (xy/install-all-lisps dir-or-file)))
           (setq files (cdr files)))))))
+
+;;;###autoload
+(defun xy/load-autoload (this-directory)
+  "Install all the lisps in THIS-DIRECTORY. 
+The process is:
+  1. Add THIS-DIRECTORY to the load-path;
+  2. Load the autoloads cache file."
+  
+  ;; (require 'bytecomp)
+  ;; (require 'autoload)
+  (interactive (list (read-file-name "Source directory: ")))
+
+  (when (and this-directory
+             (file-directory-p this-directory))
+    (let* ((this-directory (expand-file-name this-directory))
+           (files (directory-files this-directory t "^[^\\.]")))
+
+      ;; completely canonicalize the directory name (*may not* begin with `~')
+      (while (not (string= this-directory (expand-file-name this-directory)))
+        (setq this-directory (expand-file-name this-directory)))
+
+      (setq generated-autoload-file 
+			(concat this-directory "/loaddefs@" 
+					(subst-char-in-string ?/ ?! 
+					   (subst-char-in-string ?: ?! this-directory)) ".el"))
+	  ;; (add-to-list 'load-path this-directory)
+	  ;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
+	  (load-file generated-autoload-file)
+	  (message "* ---[ Loading `%s'... ]---" generated-autoload-file))))
 
 ;;;###autoload
 (defun xy/done ()
