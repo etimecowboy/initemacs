@@ -1,0 +1,27 @@
+* Introduction
+This is my Emacs configuration with various collected lisps.
+
+* Installation
+1. Clone the repository.
+2. Un-compress the `cedet.zip' in the "/lisps" folder.
+3. Enter the "/lisp/cedet" folder, and run
+     "Emacs -nw -Q -l cedet-build.el -f cedet-build"
+   in the terminal to install the cedet package.
+4. Run Emacs, you will get Errors, but don't afraid of it.
+5. "M-x xy/emacs-build" in the Emacs that you just opened.
+6. Restart Emacs.
+
+* Maintain
+After installation, you might want to change the configuration
+files in "/my-lisps". Just do it and save the files.
+** In Windows
+You have to delete the `/my-lisps/init/xy-rcroot-env.elc' file
+before restarting Emacs.
+** In Linux
+Just restart Emacs.
+
+* Change local lisp packages
+After you update/delete/modify the local lisp packages, just
+change the corresponding configuration files and run 
+"M-x xy/emacs-build" in the Emacs program to activate the new 
+lisps.
