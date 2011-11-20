@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2011-11-17 Thu 00:20 xin on p6t>
+;; Time-stamp:<2011-11-20 Sun 22:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,7 +26,8 @@
 (setq message-log-max 10000)
 
 ;; Debug errors
-(setq debug-on-error t)
+(setq debug-on-error nil)
+(setq debug-on-quit t)
 
 ;; Add ~/.emacs.d/my-lisp to Emacs lisp load path 
 (add-to-list 'load-path "~/.emacs.d/my-lisps")

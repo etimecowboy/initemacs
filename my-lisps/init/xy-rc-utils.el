@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-20 Sun 17:36 xin on p6t>
+;; Time-stamp:<2011-11-20 Sun 23:24 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -390,7 +390,7 @@ See also `with-temp-buffer'."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;* From ahei used util.el, written by taoshanwen
+;;* From util.el used by ahei, written by taoshanwen
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -855,7 +855,7 @@ of a match for REGEXP."
 ;;
 ;;* My own functions
 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;###autoload
 (defun xy/recompile-dir (this-directory &optional with-subdirs recursive)
@@ -926,7 +926,7 @@ directories starting with a `.'."
       (setq generated-autoload-file 
 			(concat this-directory "/loaddefs@" 
 					(subst-char-in-string ?/ ?! 
-										  (subst-char-in-string ?: ?! this-directory)) ".el"))
+						(subst-char-in-string ?: ?! this-directory)) ".el"))
       (setq update-flag nil)
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
 		(while files
@@ -1086,7 +1086,8 @@ just like the `emacs --daemon'"
 
 ;;;###autoload
 (defun xy/emacs-build ()
-  "Compile my Emacs configurations, local lisps, and generate autoloads for them."
+  "Compile my Emacs configurations, local lisps, and generate
+ autoloads for them."
 
   (interactive)
   (xy/install-all-lisps my-local-lisp-path)
@@ -1096,7 +1097,8 @@ just like the `emacs --daemon'"
   (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
   (xy/install-all-lisps (concat my-local-lisp-path
                                 "/mailcrypt-3.5.8"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/anything-config"))
+  (xy/install-all-lisps (concat my-local-lisp-path
+								"/anything-config"))
   (xy/install-all-lisps (concat my-local-lisp-path
 								"/anything-config/extensions"))
   (xy/install-all-lisps (concat my-local-lisp-path
@@ -1112,7 +1114,8 @@ just like the `emacs --daemon'"
   (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
   (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
   (xy/install-all-lisps (concat my-local-lisp-path "/themes"))
-  (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
+  ;; NOTE: do it in `xy-rcroot-env.el'
+  ;; (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
   )
 
 ;;------------------

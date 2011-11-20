@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-20 Sun 04:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-20 Sun 23:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,7 +16,7 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;* Mini buffer auto complete
 ;;
@@ -175,9 +175,9 @@
 ;;* icicles
 ;; Better complete system for Emacs
 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'after-init-hook 'icy-start)
+;; (add-hook 'after-init-hook 'icy-start)
 (defun icicle-keys ()
   "icicle-mode的按键设置."
   (define-key minibuffer-local-completion-map 
@@ -191,7 +191,7 @@
 (add-hook 'icicle-mode-hook 'icicle-keys t)
 (eval-after-load "icicles" `(icicles-settings))
 
-;;-----------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** apropos-mode
 ;; (with icicles?) completion

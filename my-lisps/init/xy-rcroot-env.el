@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-20 Sun 17:47 xin on p6t>
+;; Time-stamp:<2011-11-20 Sun 22:39 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,7 @@
 ;; `Header' for my Emacs configuration
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;* User information
 ;;
@@ -367,6 +367,7 @@
 
 ;;** My own lisps (including init files and my own hacks)
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
+;; (xy/load-autoload my-local-lisp-path)
 (message "* ---[ Emacswiki lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
@@ -396,28 +397,28 @@
 	 (eal-define-keys
 	  'Info-mode-map
 	  `(("j"         next-line)
-		("k"         previous-line)
-		("h"         backward-char)
-		("l"         forward-char)
-		("J"         emaci-roll-down)
-		("K"         emaci-roll-up)
-		("f"         am-forward-word-or-to-word)
-		("/"         describe-symbol-at-point)
-		("U"         Info-up)
-		("u"         View-scroll-half-page-backward)
-		("Q"         kill-this-buffer)
-		("o"         other-window)
-		("S-SPC"     View-scroll-half-page-backward)
-		("SPC"       View-scroll-half-page-forward)
-		("C-h"       Info-up)
-		("N"         Info-next-reference)
-		("P"         Info-prev-reference)
-		("'"         switch-to-other-buffer)
-		("."         find-symbol-at-point)
-		("<mouse-4>" mwheel-scroll)
-		("<mouse-5>" mwheel-scroll)
-		("C-c ,"     Info-history-back)
-		("C-c ."     Info-history-forward)))))
+	    ("k"         previous-line)
+	    ("h"         backward-char)
+	    ("l"         forward-char)
+	    ("J"         emaci-roll-down)
+	    ("K"         emaci-roll-up)
+	    ("f"         am-forward-word-or-to-word)
+	    ("/"         describe-symbol-at-point)
+	    ("U"         Info-up)
+	    ("u"         View-scroll-half-page-backward)
+	    ("Q"         kill-this-buffer)
+	    ("o"         other-window)
+	    ("S-SPC"     View-scroll-half-page-backward)
+	    ("SPC"       View-scroll-half-page-forward)
+	    ("C-h"       Info-up)
+	    ("N"         Info-next-reference)
+	    ("P"         Info-prev-reference)
+	    ("'"         switch-to-other-buffer)
+	    ("."         find-symbol-at-point)
+	    ("<mouse-4>" mwheel-scroll)
+	    ("<mouse-5>" mwheel-scroll)
+	    ("C-c ,"     Info-history-back)
+	    ("C-c ."     Info-history-forward)))))
 
 ;; (eval-after-load "info+"
 ;;   `(progn
@@ -437,25 +438,25 @@
 	 (eal-define-keys
 	  'Man-mode-map
 	  `(("Q"     Man-kill)
-		("1"     delete-other-windows)
-		("2"     split-window-vertically)
-		("3"     split-window-horizontally)
-		("u"     View-scroll-half-page-backward)
-		("S-SPC" View-scroll-half-page-backward)
-		("SPC"   View-scroll-half-page-forward)
-		("w"     scroll-down)
-		("d"     scroll-up)
-		("f"     am-forward-word-or-to-word)
-		("b"     emaci-b)
-		("n"     emaci-n)
-		("p"     emaci-p)
-		("N"     Man-next-section)
-		("P"     Man-previous-section)
-		("m"     back-to-indentation)
-		("M-j"   Man-goto-section)
-		("."     set-mark-command)
-		("g"     emaci-g)
-		("'"     switch-to-other-buffer)))))
+	    ("1"     delete-other-windows)
+	    ("2"     split-window-vertically)
+	    ("3"     split-window-horizontally)
+	    ("u"     View-scroll-half-page-backward)
+	    ("S-SPC" View-scroll-half-page-backward)
+	    ("SPC"   View-scroll-half-page-forward)
+	    ("w"     scroll-down)
+	    ("d"     scroll-up)
+	    ("f"     am-forward-word-or-to-word)
+	    ("b"     emaci-b)
+	    ("n"     emaci-n)
+	    ("p"     emaci-p)
+	    ("N"     Man-next-section)
+	    ("P"     Man-previous-section)
+	    ("m"     back-to-indentation)
+	    ("M-j"   Man-goto-section)
+	    ("."     set-mark-command)
+	    ("g"     emaci-g)
+	    ("'"     switch-to-other-buffer)))))
 
 ;;*** woman settings
 (global-set-key [M-f1] 'woman)
@@ -475,20 +476,20 @@
 	 (eal-define-keys
 	  'help-mode-map
 	  `(("B"   help-go-back)
-		("F"   help-go-forward)
-		("f"   am-forward-word-or-to-word)
-		("d"   scroll-up)
-		("w"   scroll-down)
-		("C-h" help-go-back)
-		("C-;" help-go-forward)
-		("n"   forward-button)
-		("p"   backward-button)
-		("q"   delete-current-window)
-		("'"   switch-to-other-buffer)
-		("u"   View-scroll-half-page-backward)
-		("SPC" scroll-up)
-		("."   find-symbol-at-point)
-		("/"   describe-symbol-at-point)))))
+	    ("F"   help-go-forward)
+	    ("f"   am-forward-word-or-to-word)
+	    ("d"   scroll-up)
+	    ("w"   scroll-down)
+	    ("C-h" help-go-back)
+	    ("C-;" help-go-forward)
+	    ("n"   forward-button)
+	    ("p"   backward-button)
+	    ("q"   delete-current-window)
+	    ("'"   switch-to-other-buffer)
+	    ("u"   View-scroll-half-page-backward)
+	    ("SPC" scroll-up)
+	    ("."   find-symbol-at-point)
+	    ("/"   describe-symbol-at-point)))))
 
 ;;*** help+
 ;; (require 'help+)
