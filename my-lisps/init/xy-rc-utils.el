@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-19 Sat 18:22 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-20 Sun 15:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,13 +21,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Define some variables and macros
+;;* Define some variables and macros
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; System variables
+;;** System variables
 
-;; Important path
+;;*** Important path
 (defvar my-local-lisp-path "~/.emacs.d/lisps"
   "Name of directory where additional Emacs Lisp files reside.")
 (defvar my-own-lisp-path "~/.emacs.d/my-lisps"
@@ -47,7 +47,8 @@
 (defvar my-org-latex-path "~/emacs/org/latex/phd")
 (defvar my-var-path "~/emacs/var"
   "Name of directory where my various Emacs log/record files reside.")
-;; Machine name --- which machine are we using?
+
+;;*** Machine names --- which machine are we using?
 (defvar using-office-pc
   (string-match "brl" (prin1-to-string (downcase system-name))))
 (defvar using-home-desktop
@@ -64,9 +65,9 @@
 
 ;;---------------------------------------------------------------------
 
-;; System marcos
+;;** System marcos
 
-;; Machine name --- which machine are we using?
+;;*** Machine name --- which machine are we using?
 (defmacro OfficePC (&rest body)
   (list
    'if (string-match
@@ -82,7 +83,8 @@
    'if (string-match
 		"t42" (prin1-to-string (downcase system-name)))
    (cons 'progn body)))
-;; OS type --- are we running GNU Linux?
+
+;;*** OS type --- are we running GNU Linux?
 (defmacro GNULinux (&rest body)
   (list
    'if (string-match
@@ -93,10 +95,12 @@
    'if (string-match
 		"windows" (prin1-to-string system-type))
    (cons 'progn body)))
-;; Graphic mode --- are we running any window system ? 
+
+;;*** Graphic mode --- are we running any window system ? 
 (defmacro XLaunch (&rest body)
   (list 'if (eq window-system 'x)(cons 'progn body)))
-;; Emacs version
+
+;;*** Emacs version
 (defmacro GNUEmacs (&rest body)
   "Execute any number of forms if running under GNU Emacs."
   (list 'if (string-match "GNU Emacs" (version))
@@ -119,7 +123,7 @@
        window-system
        (when (boundp 'aquamacs-version) aquamacs-version)))
 
-;; c/c++ include dir
+;;** c/c++ include dir
 (Windows
  (defvar user-include-dirs
    '(".." "../include" "../inc" "../common" "../public"
@@ -156,13 +160,8 @@
      )
    "Preprocessor symbol files for cedet"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Jump to some directory, open some config files
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;** Jump to some directory, open some config files
 
-;; Go to some configuration folders
 ;;;###autoload
 (defun goto-my-local-lisp-dir ()
   "Goto `my-local-lisp-path'."
@@ -199,7 +198,7 @@
   (interactive)
   (dired my-org-latex-path))
 
-;; Reload init file
+;;**  Reload init file
 ;; Note: when using `require' in the init.el to load other setting files,
 ;; you have to restart Emacs.
 ;; When using `load', Emacs will load every setting files.
@@ -216,12 +215,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; F.Niessen's utilities in his .emacs
+;;* F.Niessen's utilities in his .emacs
 ;; REF: http://www.mygooglest.com/fni/dot-emacs.html
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; load-path enhancement
 ;;;###autoload
 (defun fni/add-to-load-path (this-directory &optional with-subdirs recursive)
   "Add THIS-DIRECTORY at the beginning of the load-path, if it exists.
@@ -250,7 +248,6 @@ Do it recursively if the third argument is not nil."
               (fni/add-to-load-path dir-or-file)))
           (setq files (cdr files)))))))
 
-;;image-load-path enhancement
 ;;;###autoload
 (defun fni/add-to-image-load-path (this-directory &optional with-subdirs recursive)
   "Add THIS-DIRECTORY at the beginning of the image-load-path, 
@@ -278,7 +275,6 @@ Do it recursively if the third argument is not nil."
               (fni/add-to-image-load-path dir-or-file)))
           (setq files (cdr files)))))))
 
-;; Attempt to load a feature/library, failing silently
 (defvar missing-packages-list nil
   "List of packages that `try-require' can't find.")
 ;;;###autoload
@@ -286,7 +282,6 @@ Do it recursively if the third argument is not nil."
   "Attempt to load a library or module. Return true if the
 library given as argument is successfully loaded. If not, instead
 of an error, just add the package to a list of missing packages."
-
   (condition-case err
       ;; protected form
       (progn
@@ -302,7 +297,6 @@ of an error, just add the package to a list of missing packages."
        (add-to-list 'missing-packages-list feature 'append))
      nil)))
 
-;; Ask user to create the DIR, if it does not already exist
 ;;;###autoload
 (defun my-make-directory-yes-or-no (dir)
   "Ask user to create the DIR, if it does not already exist."
@@ -315,7 +309,6 @@ of an error, just add the package to a list of missing packages."
              (concat "Cannot continue without directory `" dir "'"))))
     (error "my-make-directory-yes-or-no: missing operand")))
 
-;; Make sure the file FILE exists and is executable
 ;;;###autoload
 (defun my-file-executable-p (file)
   "Make sure the file FILE exists and is executable."
@@ -329,7 +322,7 @@ of an error, just add the package to a list of missing packages."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; From ahei-misc.el
+;;* From ahei-misc.el
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -397,7 +390,7 @@ See also `with-temp-buffer'."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; From ahei used util.el, written by taoshanwen
+;;* From ahei used util.el, written by taoshanwen
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -611,12 +604,12 @@ KEY is a string or vector representing a sequence of keystrokes."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Emacs auto font selection for different OS
+;;* Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; 判断某个字体在系统中是否安装
+;;** 判断某个字体在系统中是否安装
 ;;;###autoload
 (defun qiang-font-existsp (font)
   (when window-system
@@ -625,13 +618,13 @@ KEY is a string or vector representing a sequence of keystrokes."
     ;; (if (null (list-fonts font) nil t))))
 ;;---------------------------------------------------------------------------------
 
-;; 按顺序找到一个字体列表( list ) 中第一个已经安装可用的字体
+;;** 按顺序找到一个字体列表( list ) 中第一个已经安装可用的字体
 (defvar font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
 ;; (require 'cl) ;; find-if is in common list package
 (find-if #'qiang-font-existsp font-list)
 
 ;;---------------------------------------------------------------------------------
-;; 产生带上 font size 信息的 font 描述文本
+;;** 产生带上 font size 信息的 font 描述文本
 ;;;###autoload
 (defun qiang-make-font-string (font-name font-size)
   (if (and (stringp font-size) 
@@ -641,7 +634,7 @@ KEY is a string or vector representing a sequence of keystrokes."
 
 ;;---------------------------------------------------------------------------------
 
-;; 自动设置字体函数,
+;;** 自动设置字体函数,
 ;; REF: http://emacser.com/torture-emacs.htm
 ;; 设置字体 Emacs 会优先选用 Concolas + “雅黑”的组合。
 ;; 如果“雅黑”没有装的话，就使用“文泉驿等宽正黑”，依此类推。
@@ -729,7 +722,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; For compatibility among different version of Emacs
+;;* For compatibility among different version of Emacs
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -860,7 +853,7 @@ of a match for REGEXP."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; My own functions
+;;* My own functions
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1087,6 +1080,13 @@ just like the `emacs --daemon'"
   (server-edit)
   (make-frame-invisible nil t))
 
+;;;###autoload
+(defun xy/emacs-build ()
+  "Compile my Emacs configurations, local lisps, and generate autoloads for them."
+
+  (interactive)
+  
+  ) 
 ;;------------------
 
 (provide 'xy-rc-utils)
