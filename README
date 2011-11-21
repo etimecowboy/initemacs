@@ -2,7 +2,7 @@
 This is my Emacs configuration with various collected lisps.
 
 * Installation
-1. Clone the repository to your HOME directory.
+1. Clone the repository to ".emacs.d/" in your HOME directory.
 2. Un-compress the `cedet.zip' in the "/lisps" folder.
 3. Enter the "/lisp/cedet" folder, and run
      "Emacs -nw -Q -l cedet-build.el -f cedet-build"
