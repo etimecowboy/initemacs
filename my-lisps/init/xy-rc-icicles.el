@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-07-24 Sun 15:53 xin on p6t>
+;; Time-stamp:<2011-11-21 Mon 14:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,7 @@
 
 
 ;;;###autoload
-(defun icy-start ()
+(defun xy/icy-start ()
   "Start icy-mode"
   (interactive)
   (require 'icicles)

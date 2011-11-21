@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-11-16 Wed 22:29 xin on p6t>
+;; Time-stamp:<2011-11-21 Mon 14:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -62,8 +62,8 @@
 				 (elisp-mode-hook-settings)
 				 (turn-on-auto-fill)
 				 (turn-on-eldoc-mode)
-				 ;; (yas-start)
-				 ;; (linkd-start)
+				 ;; (xy/yas-start)
+				 ;; (xy/linkd-start)
 				 ))))
 
 (provide 'xy-rc-lisp)

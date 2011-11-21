@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-19 Sat 04:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 14:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -243,14 +243,14 @@ from tradition chinese to simple chinese" t)
 	  'linkd-map
 	  `(("<mouse-4>" nil)
 	    ("C-c ," nil)))))
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook
-   c-mode-hook c++-mode-hook
-   sh-mode-hook vhdl-mode-hook
-   verilog-mode-hook org-mode-hook
-   LaTeX-mode-hook latex-mode-hook
-   matlab-mode-hook)
- `linkd-start)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook
+;;    c-mode-hook c++-mode-hook
+;;    sh-mode-hook vhdl-mode-hook
+;;    verilog-mode-hook org-mode-hook
+;;    LaTeX-mode-hook latex-mode-hook
+;;    matlab-mode-hook)
+;;  `xy/linkd-start)
 
 ;;------------------------------------------------------------------
 
@@ -283,7 +283,7 @@ from tradition chinese to simple chinese" t)
 ;;** multi-term
 ;; a mode based on term.el, 
 ;; for managing multiple terminal buffers in Emacs.
-(global-set-key (kbd "C-x T") 'multi-term-start)
+(global-set-key (kbd "C-x T") 'xy/multi-term-start)
 (eval-after-load "multi-term" 
   `(progn
      (multi-term-settings)

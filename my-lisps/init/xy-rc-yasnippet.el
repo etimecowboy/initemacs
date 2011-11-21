@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-02-21 Mon 05:14 xin on p6t>
+;; Time-stamp:<2011-11-21 Mon 14:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,7 +17,7 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun yas-start ()
+(defun xy/yas-start ()
   "Start yasnippet."
   (interactive)
   (require 'yasnippet)

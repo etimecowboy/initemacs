@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-20 Sun 15:53 xin on p6t>
+;; Time-stamp:<2011-11-21 Mon 14:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,11 +35,11 @@
 	 anything-c-source-recentf
 	 ;; anything-c-source-files-in-current-dir
 	 anything-c-source-files-in-current-dir+
-	 ;; anything-c-source-file-cache
+	 anything-c-source-file-cache
 	 ;; NOTE: may cause crash to emacs in Windows
 	 anything-c-source-locate
 	 anything-c-source-ffap-line
-	 ;; anything-c-source-ffap-guesser
+	 anything-c-source-ffap-guesser
 	 
 	 ;; Bookmark:
 	 anything-c-source-bookmarks
@@ -52,7 +52,7 @@
 	 anything-c-source-emacs-commands
 	 
 	 ;; Buffer Contents:
-	 ;; anything-c-source-imenu
+	 anything-c-source-imenu
 	 ;; BUG: cause Emacs to crash in Windows 7
 	 ;; anything-c-source-occur
 	 
@@ -74,7 +74,7 @@
   ;; (require 'anything-config)
   ;; (require 'anything-grep)
   (require 'anything-startup)
-  ;; (require 'anything-auto-install) ;; BUG: with git repo
+  (require 'anything-auto-install) ;; BUG: with git repo
   (require 'descbinds-anything)
   (require 'anything-gtags)
   (require 'anything-menu)

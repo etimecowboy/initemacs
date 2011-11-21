@@ -14,9 +14,12 @@ This is my Emacs configuration with various collected lisps.
 * Maintain
 After installation, you might want to change the configuration
 files in "/my-lisps". Just do it and save the files.
+
 ** In Windows
-You have to delete the `/my-lisps/init/xy-rcroot-env.elc' file
-before restarting Emacs.
+You have to delete the `/my-lisps/init/xy-rcroot-env.elc'. 
+after you modify the `/my-lisps/init/xy-rcroot-env.el', then
+restart Emacs.
+
 ** In Linux
 Just restart Emacs.
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-20 Sun 05:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 13:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -85,7 +85,7 @@
 	 (define-key hs-minor-mode-map (kbd "S-<f6>") 'hs-toggle-hiding)
 	 (define-key hs-minor-mode-map (kbd "C-<f6>") 'hs-hide-level)
 	 (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
-	 (define-key hs-minor-mode-map (kbd "C-M-<f6>") 'hs-show-all)
+	 (define-key hs-minor-mode-map (kbd "C-S-<f6>") 'hs-show-all)
 	 ))
 
 ;;*** hideshow-org

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-egg.el'
-;; Time-stamp:<2011-09-01 Thu 16:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 14:16 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,7 +17,7 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun egg-start ()
+(defun xy/egg-start ()
   "Start egg -- another git Emacs gui."
 
   (interactive)

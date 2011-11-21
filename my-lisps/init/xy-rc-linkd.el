@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-linkd.el'
-;; Time-stamp:<2011-02-21 Mon 06:09 xin on p6t>
+;; Time-stamp:<2011-11-21 Mon 14:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,7 +17,7 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun linkd-start ()
+(defun xy/linkd-start ()
   "Start linkd."
 
   (interactive)

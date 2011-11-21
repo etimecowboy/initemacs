@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-20 Sun 22:39 xin on p6t>
+;; Time-stamp:<2011-11-21 Mon 14:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -270,7 +270,7 @@
                            (second *emacs-load-start*)))))
 
 ;; NOTE: CEDET can be installed by its `cedet-built.el' script, and
-;; will be load when `M-x cedet-start' which is a function write 
+;; will be load when `M-x xy/cedet-start' which is a function write 
 ;; by myself.
 ;; REF: http://cedet.sourceforge.net/
 
@@ -521,7 +521,7 @@
    ;; ("C-c M-V" find-symbol-var-at-point)
    ;; ("C-c M-F" find-symbol-fun-at-point)
    ;; ("C-c M-S" find-symbol-face-at-point)
-   ("C-M-<f3>"   where-is-at-point)))
+   ("C-S-<f3>"   where-is-at-point)))
 
 ;; (eal-define-keys-commonly
 ;;  global-map

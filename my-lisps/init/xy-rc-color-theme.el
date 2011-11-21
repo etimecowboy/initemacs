@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-theme.el'
-;; Time-stamp:<2011-11-19 Sat 00:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 14:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,7 @@
 ;; REF:  http://orgmode.org/worg/org-color-themes.html
 
 ;;;###autoload
-(defun color-theme-start ()
+(defun xy/color-theme-start ()
   "Start color-theme."
 
   (interactive)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-17 Thu 23:04 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 14:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -60,10 +60,10 @@
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
-;;(global-set-key [f8]   'browse-url)
+(global-set-key [f8]   'browse-url)
 (global-set-key [S-f8] 'lookup-word-definition)
 (global-set-key [C-f8] 'lookup-wikipedia)
-(global-set-key [f8] 'google-region)
+(global-set-key [M-f8] 'google-region)
 
 ;;--------------------------------------------------------------------
 
@@ -164,7 +164,7 @@
 ;; Emacs 音乐播放器
 ;; (autoload 'emms "emms-playlist-mode" nil t)
 ;; (autoload 'emms-browser "emms-browser" nil t)
-(emms-startit)
+;; (xy/emms-startit)
 (eval-after-load "emms-playlist-mode"
   '(progn
 	 (emms-settings)))

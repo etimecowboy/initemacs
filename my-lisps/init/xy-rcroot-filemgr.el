@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-20 Sun 04:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 14:29 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -242,12 +242,12 @@
 ;;--------------------------------------------------------------------
 
 ;;** git gui
-(global-set-key [f11] 'git-start)
+(global-set-key [f11] 'xy/git-start)
 ;; Automatically refresh version control information
 (setq auto-revert-check-vc-info t)
 
 ;; egg git gui
-(global-set-key [S-f11] 'egg-start)
+(global-set-key [S-f11] 'xy/egg-start)
 (eval-after-load "egg"
   '(progn
 	 (egg-settings)))

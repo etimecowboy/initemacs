@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-20 Sun 23:15 xin on p6t>
+;; Time-stamp:<2011-11-21 Mon 14:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -160,13 +160,13 @@
 	 (eal-define-keys
 	  'yas/minor-mode-map
 	  `(("C-c C-f" yas/find-snippets)))))
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook
-   c-mode-hook sh-mode-hook vhdl-mode-hook
-   verilog-mode-hook org-mode-hook
-   LaTeX-mode-hook latex-mode-hook
-   matlab-mode-hook)
- `yas-start)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook
+;;    c-mode-hook sh-mode-hook vhdl-mode-hook
+;;    verilog-mode-hook org-mode-hook
+;;    LaTeX-mode-hook latex-mode-hook
+;;    matlab-mode-hook)
+;;  `xy/yas-start)
 
 ;;-------------------------------------------------------------
 
@@ -177,7 +177,7 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (add-hook 'after-init-hook 'icy-start)
+;; (add-hook 'after-init-hook 'xy/icy-start)
 (defun icicle-keys ()
   "icicle-mode的按键设置."
   (define-key minibuffer-local-completion-map 

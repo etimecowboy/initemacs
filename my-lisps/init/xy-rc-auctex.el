@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-09-13 Tue 13:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 14:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -58,8 +58,8 @@
 			   (turn-on-reftex)
 			   (turn-on-cdlatex)
 			   ;; (autopair-mode -1)
-			   ;; (yas-start)
-			   ;; (linkd-start)
+			   ;; (xy/yas-start)
+			   ;; (xy/linkd-start)
 			   ;; (xy/set-font-write)
 			   ))
   (add-hook 'latex-mode-hook
@@ -72,8 +72,8 @@
 			 (turn-on-reftex)
 			 (turn-on-cdlatex)
 			 ;; (autopair-mode -1)
-			 ;; (yas-start)
-			 ;; (linkd-start)
+			 ;; (xy/yas-start)
+			 ;; (xy/linkd-start)
 			 ;; (xy/set-font-write)
 			 ))
   
