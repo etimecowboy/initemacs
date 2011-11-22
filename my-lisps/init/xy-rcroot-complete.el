@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-21 Mon 14:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 04:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -116,10 +116,9 @@
 ;;** company settings
 ;; It is a modular in-buffer completion mechanism.
 ;; (require 'company)
-;; (eval-after-load "company"
-;;   '(company-settings))
-;; (define-key company-mode-map
-;;    (kbd "M-RET") 'company-expand-top)
+(autoload 'company-mode "company" nil t)
+(eval-after-load "company"
+  '(company-settings))
 ;; (am-add-hooks
 ;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
 ;;    java-mode-hook lisp-interaction-mode-hook sh-mode-hook

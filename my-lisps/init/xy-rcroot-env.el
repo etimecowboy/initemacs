@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-21 Mon 14:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 04:53 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -108,7 +108,7 @@
 ;; `window-number', `windresize', `winpoint', `xml-rpc'
 
 ;; packages still managed by `package.el'
-;; (load "company-autoloads.el") ;; not in use
+(load "company-autoloads.el") ;; not in use
 (load "dictionary-autoloads.el")
 (load "ecb_snap-autoloads.el")
 (load "emms-autoloads.el")
@@ -361,6 +361,12 @@
 ;;   (xy/load-autoload (concat my-local-lisp-path "/themes")))
 (xy/load-autoload (concat my-local-lisp-path "/themes"))
 (message "* ---[ theme lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+(xy/load-autoload (concat my-local-lisp-path "/ibus-el-0.2.1"))
+(message "* ---[ ibus-el lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
@@ -647,7 +653,7 @@
   `(progn
      (eim-settings)))
 
-;;*** ibus
+;;*** ibus-el
 ;; IBus client for GNU Emacs
 ;; REF:  http://www11.atwiki.jp/s-irie/pages/21.html
 (GNULinux
