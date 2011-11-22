@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-22 Tue 04:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 12:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -102,14 +102,15 @@
 	 ;; 不让回车的时候执行`ac-complete', 因为当你输入完一个
 	 ;; 单词的时候, 很有可能补全菜单还在, 这时候你要回车的话,
 	 ;; 必须要干掉补全菜单, 很麻烦, 用M-j来执行`ac-complete'
-	 (eal-define-keys-commonly
-	  ac-complete-mode-map
-	  `(("<return>"   nil)
-		("RET"        nil)
-		("M-j"        ac-complete)
-		;; ("<C-return>" ac-complete)
-		("M-n"        ac-next)
-		("M-p"        ac-previous)))))
+	 ;; (eal-define-keys-commonly
+	 ;;  ac-complete-mode-map
+	 ;;  `(("<return>"   nil)
+	 ;; 	("RET"        nil)
+	 ;; 	;; ("M-j"        ac-complete)
+	 ;; 	;; ("<C-return>" ac-complete)
+	 ;; 	("M-n"        ac-next)
+	 ;; 	("M-p"        ac-previous)))
+	 ))
 
 ;;--------------------------------------------------------
 
