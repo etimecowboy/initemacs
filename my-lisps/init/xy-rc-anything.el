@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-21 Mon 14:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 04:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,9 +35,9 @@
 	 anything-c-source-recentf
 	 ;; anything-c-source-files-in-current-dir
 	 anything-c-source-files-in-current-dir+
-	 anything-c-source-file-cache
+	 ;; anything-c-source-file-cache
 	 ;; NOTE: may cause crash to emacs in Windows
-	 anything-c-source-locate
+	 ;; anything-c-source-locate
 	 anything-c-source-ffap-line
 	 anything-c-source-ffap-guesser
 	 
@@ -48,13 +48,11 @@
 	 ;; BUG: minibuffer conflicts with icicle, and cause emacs to
 	 ;; crash in Linux ? maybe `session'
 	 anything-c-source-minibuffer-history
-	 ;; BUG: not work in Windows 7
 	 anything-c-source-emacs-commands
 	 
 	 ;; Buffer Contents:
 	 anything-c-source-imenu
-	 ;; BUG: cause Emacs to crash in Windows 7
-	 ;; anything-c-source-occur
+	 anything-c-source-occur
 	 
 	 ;; System:
 	 ;; BUG: cause Emacs to crash in Linux
@@ -97,48 +95,49 @@
   ;; 	  ;;  ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/my-lisps/"))
   ;; 	  ))
 
-  ;; (global-set-key (kbd "C-x b")
-  ;; 	    (lambda() (interactive)
-  ;; 		  (anything
-  ;; 		   :prompt "Switch to: "
-  ;; 		   :candidate-number-limit 10                 ;; up to 10 of each 
-  ;; 		   :sources
-  ;; 		   '( anything-c-source-buffers               ;; buffers 
-  ;; 			  anything-c-source-recentf               ;; recent files 
-  ;; 			  anything-c-source-bookmarks             ;; bookmarks
-  ;; 			  anything-c-source-files-in-current-dir+ ;; current dir
-  ;; 			  anything-c-source-locate))))            ;; use 'locate'
+  (global-set-key (kbd "C-x b")
+  	    (lambda() (interactive)
+  		  (anything
+  		   :prompt "Switch to: "
+  		   :candidate-number-limit 10                 ;; up to 10 of each 
+  		   :sources
+  		   '( anything-c-source-buffers               ;; buffers 
+  			  anything-c-source-recentf               ;; recent files
+			  anything-c-source-file-cache
+  			  anything-c-source-bookmarks             ;; bookmarks
+  			  anything-c-source-files-in-current-dir+ ;; current dir
+  			  anything-c-source-locate))))            ;; use 'locate'
 
-  ;; (global-set-key (kbd "C-c I")  ;; i -> info
-  ;; 		 (lambda () (interactive)
-  ;; 		   (anything
-  ;; 			:prompt "Info about: "
-  ;; 			:candidate-number-limit 3
-  ;; 			:sources
-  ;; 			'( anything-c-source-info-libc             ;; glibc docs
-  ;; 			   anything-c-source-man-pages             ;; man pages
-  ;; 			   anything-c-source-info-emacs))))        ;; emacs
+  (global-set-key (kbd "C-<f1>")  ;; i -> info
+  		 (lambda () (interactive)
+  		   (anything
+  			:prompt "Info about: "
+  			:candidate-number-limit 3
+  			:sources
+  			'( ;; anything-c-source-info-libc             ;; glibc docs
+  			   anything-c-source-man-pages             ;; man pages
+  			   anything-c-source-info-emacs))))        ;; emacs
 
-  ;; (add-hook 'emacs-lisp-mode-hook
-  ;; 		 (lambda()
-  ;; 		   ;; other stuff...
-  ;; 		   ;; ...
-  ;; 		   ;; put useful info under C-c i
-  ;; 		   (local-set-key (kbd "C-c i")
-  ;; 						  (lambda() (interactive)
-  ;; 							(anything
-  ;; 							 :prompt "Info about: "
-  ;; 							 :candidate-number-limit 5
-  ;; 							 :sources
-  ;; 							 '( anything-c-source-emacs-functions
-  ;; 								anything-c-source-emacs-variables
-  ;; 								anything-c-source-info-elisp
-  ;; 								anything-c-source-emacs-commands
-  ;; 								anything-c-source-emacs-source-defun
-  ;; 								anything-c-source-emacs-lisp-expectations
-  ;; 								anything-c-source-emacs-lisp-toplevels
-  ;; 								anything-c-source-emacs-functions-with-abbrevs
-  ;; 								anything-c-source-info-emacs))))))
+  (add-hook 'emacs-lisp-mode-hook
+  		 (lambda()
+  		   ;; other stuff...
+  		   ;; ...
+  		   ;; put useful info under C-c i
+  		   (local-set-key (kbd "S-<f1>")
+  						  (lambda() (interactive)
+  							(anything
+  							 :prompt "Info about: "
+  							 :candidate-number-limit 5
+  							 :sources
+  							 '( anything-c-source-emacs-functions
+  								anything-c-source-emacs-variables
+  								anything-c-source-info-elisp
+  								anything-c-source-emacs-commands
+  								anything-c-source-emacs-source-defun
+  								anything-c-source-emacs-lisp-expectations
+  								anything-c-source-emacs-lisp-toplevels
+  								anything-c-source-emacs-functions-with-abbrevs
+  								anything-c-source-info-emacs))))))
   
   )
 
