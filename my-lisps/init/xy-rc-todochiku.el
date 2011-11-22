@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-todochiku.el'
-;; Time-stamp:<2011-08-20 Sat 07:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 21:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,7 +17,7 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun todochiku-start ()
+(defun todochiku-settings ()
   "Settings of `todochiku'."
 
   (setq todochiku-command

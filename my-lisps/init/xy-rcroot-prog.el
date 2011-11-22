@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-21 Mon 13:18 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 00:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -47,6 +47,16 @@
  'turn-on-auto-fill)
 (eval-after-load "simple" `(simple-settings))
 
+;;** hungry-delete-mode
+(autoload 'turn-on-hungry-delete-mode "hungry-delete"
+  "Turns on hungry delete mode if the buffer is appropriate." t nil)
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-map
+  sh-mode-map cperl-mode-hook cc-mode-hook
+  vhdl-mode-map verilog-mode-map
+  matlab-mode-hook)
+ 'turn-on-hungry-delete-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;* Code folding
@@ -55,7 +65,16 @@
 
 ;;** hide-region
 ;; 代码区域折叠
-(require 'hide-region)
+;; (require 'hide-region)
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook
+   cperl-mode-hook cc-mode-hook
+   vhdl-mode-hook verilog-mode-hook
+   matlab-mode-hook
+   ;; org-mode-hook text-mode-hook
+   )
+ '(lambda ()
+	(require 'hide-region)))
 (eal-define-keys-commonly
  global-map
  `(("C-x M-r" hide-region-hide)
@@ -122,7 +141,7 @@
  `(c-mode-common-hook java-mode-hook
    lisp-mode-hook emacs-lisp-mode-hook
    vhdl-mode-hook verilog-mode-hook)
- (lambda()
+ (lambda ()
    (require 'outline-org-like)
    (outline-org-mode 1)))
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-11-21 Mon 14:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 00:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,7 +16,6 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-
 ;;;###autoload
 (defun lisp-mode-settings ()
   "Settings for `lisp-interaction-mode'."
@@ -25,7 +24,7 @@
   (am-add-hooks
    ;; `(lisp-mode-hook lisp-interaction-mode-hook)
    `(lisp-mode-hook)
-   '(progn
+   '(lambda ()
 	  ;; (xy/set-font-default)
 	  ;; BUG: lisp-interaction-mode error
 	  ;; Debugger entered--Lisp error: (error "Invalid function:
@@ -42,7 +41,9 @@
 	  ;; icicle-execute-extended-command()
 	  ;; call-interactively(icicle-execute-extended-command nil nil)
 	  (turn-on-auto-fill)
-	  (turn-on-eldoc-mode))))
+	  (turn-on-eldoc-mode)
+	  (turn-on-hungry-delete-mode)
+	  )))
 
 ;;;###autoload
 (defun emacs-lisp-mode-settings ()
@@ -57,13 +58,13 @@
 
   (add-hook 'emacs-lisp-mode-hook
   			'(lambda ()
-			   (progn
-				 ;; (xy/set-font-default)
-				 (elisp-mode-hook-settings)
-				 (turn-on-auto-fill)
-				 (turn-on-eldoc-mode)
-				 ;; (xy/yas-start)
-				 ;; (xy/linkd-start)
-				 ))))
+			   ;; (xy/set-font-default)
+			   (elisp-mode-hook-settings)
+			   (turn-on-auto-fill)
+			   (turn-on-eldoc-mode)
+			   (turn-on-hungry-delete-mode)
+			   ;; (xy/yas-start)
+			   ;; (xy/linkd-start)
+			   )))
 
 (provide 'xy-rc-lisp)

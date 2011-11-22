@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-21 Mon 14:22 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-21 Mon 21:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -83,12 +83,10 @@ A numeric argument serves as a repeat count." nil t)
 ;; It started life interfacing with Growl (OS X, http://growl.info/), 
 ;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix). 
 ;; It can also do standard messages (in the minibuffer) and pop up a tooltip.
-;; (require 'xy-todochiku)
-;; (require 'xy-growl)
-;; (eval-after-load "xy-todochiku"
-;;   `(progn
-;; 	 (todochiku-settings)))
-(todochiku-start)
+;; (require 'todochiku)
+(eval-after-load "todochiku"
+  `(progn
+	 (todochiku-settings)))
 
 ;;------------------------------------------------------------------
 

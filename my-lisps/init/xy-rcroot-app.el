@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-19 Sat 13:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 01:50 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -55,14 +55,14 @@
 
 ;;** Transparent frame
 ;; REF: http://www.emacswiki.org/emacs/TransparentEmacs
-;; BUG: not work in Windows 7
-(when (and is-after-emacs-23 window-system) ; from emacs-22
+;; BUG: not work in Windows 7, not work in Linux with gnome 3
+;; (when (and is-after-emacs-23 window-system) ; from emacs-22
 
-  ;; User controls the frame opacity
-  ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) 
-  (set-frame-parameter (selected-frame) 'alpha '(100 100))
-  (add-to-list 'default-frame-alist '(alpha 100 100))
-  (global-set-key (kbd "C-x W t") 'toggle-transparency))
+;;   ;; User controls the frame opacity
+;;   ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) 
+;;   (set-frame-parameter (selected-frame) 'alpha '(100 100))
+;;   (add-to-list 'default-frame-alist '(alpha 100 100))
+;;   (global-set-key (kbd "C-x W t") 'toggle-transparency))
 
 ;;** Resize frame
 ;;*** fit-frame and autofit-frame
@@ -76,10 +76,9 @@
 ;; (add-hook 'after-make-frame-functions 'fit-frame)
 ;; (add-hook 'temp-buffer-show-hook
 ;;           'fit-frame-if-one-window 'append)
-
-(global-set-key [M-f5] 'fit-frame)
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
+(global-set-key [M-f5] 'xy/fit-frame)
 
 ;;  Add menu-bar items
 ;; (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
@@ -90,21 +89,22 @@
 
 ;;*** thumb-frm
 ;;  Shrink frames to a thumbnail size and restore them again.
-(require 'thumb-frm)
+;; (require 'thumb-frm)
 ;; (define-key special-event-map [iconify-frame]
 ;;             'thumfr-thumbify-frame-upon-event)
 ;; (global-set-key [(shift mouse-3)]
 ;;                 'thumfr-toggle-thumbnail-frame)
 ;; (global-set-key [(shift control mouse-3)]
 ;;                 'thumfr-thumbify-other-frames)
-(global-set-key [(shift control ?z)]
+(global-set-key [(shift meta ?z)]
 				'thumfr-thumbify-other-frames)
 (global-set-key [(shift control ?p)]
 				'thumfr-fisheye-previous-frame)
 (global-set-key [(shift control ?n)]
 				'thumfr-fisheye-next-frame)
-(global-set-key [(control meta ?z)]
-				'thumfr-really-iconify-or-deiconify-frame)
+(global-set-key [(shift control ?z)]
+				;;'thumfr-really-iconify-or-deiconify-frame)
+				'thumfr-toggle-thumbnail-frame)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -240,6 +240,7 @@ the mode-line."
 (eval-after-load "yasnippet" '(diminish 'yas/minor-mode))
 ;; (eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
 (eval-after-load "xy-recent-jump-small" '(diminish 'recent-jump-small-mode))
+(eval-after-load "ibus" '(diminish 'ibus-mode))
 
 ;;** modeline-posn
 ;; Display number of characters in a selected region
@@ -440,15 +441,26 @@ the mode-line."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;** paren-mode
-(show-paren-mode 1)
-(eval-after-load "paren"
+;; (show-paren-mode 1)
+;; (eval-after-load "paren"
+;;   `(progn
+;;      ;; (paren-face-settings)
+;;      (paren-settings)))
+
+;;** mic-paren
+;; An extension and replacement to the packages `paren.el' and
+;; `stig-paren.el' for Emacs
+;; (require 'mic-paren)
+(paren-activate)
+(eval-after-load "mic-paren"
   `(progn
-     (paren-face-settings)
-     (paren-settings)))
+     ;; (mic-paren-face-settings)
+     (mic-paren-settings)))
 
 ;;** rainbow-delimiters
 ;; With this package, the delimiters all get different colors based on
 ;; their nesting level. It works wonderfully well
+;; NOTE: It takes a lot of computation resource, so I disabled it.
 ;; (require 'rainbow-delimiters)
 ;; (am-add-hooks
 ;;  `(find-file-hook
@@ -465,52 +477,56 @@ the mode-line."
 
 ;;** highlight-parentheses
 ;; 用颜色配对括号
-(require 'highlight-parentheses)
-(am-add-hooks
- `(find-file-hook
-   help-mode-hook Man-mode-hook log-view-mode-hook
-   compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
-   browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
-   inferior-ruby-mode-hook custom-mode-hook Info-mode-hook
-   svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
-   apropos-mode-hook)
- 'highlight-parentheses-mode)
+;; (require 'highlight-parentheses)
 (eval-after-load "highlight-parentheses"
   `(progn
      (highlight-parentheses-settings)))
-
-;;** mic-paren
-(require 'mic-paren)
-(eval-after-load "mic-paren"
-  `(progn
-     (mic-paren-face-settings)
-     (mic-paren-settings)))
+(am-add-hooks
+ `(find-file-hook help-mode-hook Man-mode-hook log-view-mode-hook
+   custom-mode-hook Info-mode-hook compilation-mode-hook
+   svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
+   browse-kill-ring-mode-hook completion-list-mode-hook
+   apropos-mode-hook hs-hide-hook inferior-ruby-mode-hook
+   gdb-mode-hook
+   emacs-lisp-mode-hook lisp-interaction-mode-hook lisp-mode-hook
+   c-mode-common-hook cc-mode-hook
+   vhdl-mode-hook verilog-mode-hook
+   matlab-mode-hook
+   LaTeX-mode-hook latex-mode-hook)
+ '(lambda ()
+	(require 'highlight-parentheses)
+	(highlight-parentheses-mode 1)))
 
 ;;** autopair
 ;; 自动给你加上括号
-(require 'autopair)
-;; (eval-after-load "autopair"
-;;   '(autopair-settings))
-;; some keybindings
 ;; NOTE: autopair-global-mode cause problem with auctex, so use hooks
 ;; with other modes.
 ;; (autopair-global-mode 1)
+
+;; (require 'autopair)
+;; (eval-after-load "autopair"
+;;   '(autopair-settings))
 (am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook
-				  cperl-mode-hook cc-mode-hook
-				  vhdl-mode-hook verilog-mode-hook
-				  matlab-mode-hook org-mode-hook
-				  text-mode-hook)
- 'autopair-mode)
-(eal-define-keys-commonly
- global-map
- `(("C-M-]" ywb-indent-accoding-to-paren)
-   ("\C-]" goto-paren)))
+ `(lisp-interaction-mode-hook lisp-mode-hook emacs-lisp-mode-hook
+   cperl-mode-hook cc-mode-hook
+   vhdl-mode-hook verilog-mode-hook
+   matlab-mode-hook
+   ;; org-mode-hook text-mode-hook
+   )
+ '(lambda ()
+	(require 'autopair)
+	(autopair-mode)))
 
 ;; ;; 输入左大花扩号自动补齐右大花括号
 ;; (eal-define-keys
 ;;  `(c-mode-base-map awk-mode-map)
 ;;  `(("{" skeleton-c-mode-left-brace)))
+
+;; Global key bindings
+(eal-define-keys-commonly
+ global-map
+ `(("C-M-]" ywb-indent-accoding-to-paren)
+   ("\C-]"  goto-paren)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
