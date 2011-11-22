@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-22 Tue 12:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-22 Tue 19:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,7 +30,7 @@
   "Settings for `auto-complete'."
 
   (require 'auto-complete-config)
-  ;; (require 'auto-complete+)
+  (require 'auto-complete+)
   
   (add-to-list 'ac-dictionary-directories 
                (concat my-emacs-path "/auto-complete/ac-dict"))
@@ -42,12 +42,12 @@
   
   ;; (setq help-xref-following nil) 
 
-  ;; (setq ac-auto-show-menu t
-  ;;       ac-auto-start t
-  ;;       ac-dwim t
-  ;;       ac-candidate-limit ac-menu-height
-  ;;       ac-quick-help-delay .5
-  ;;       ac-disable-faces nil)
+  (setq ac-auto-show-menu t
+        ac-auto-start t
+        ac-dwim t
+        ac-candidate-limit ac-menu-height
+        ac-quick-help-delay .5
+        ac-disable-faces nil)
 
   ;; (set-default 'ac-sources
   ;;              '(ac-source-semantic-raw
@@ -244,7 +244,7 @@
   ;;      (when (and (intern-soft mode-name) 
   ;;                 (intern-soft (concat mode-name "-map")))
   ;;        (define-key (symbol-value (am-intern mode-name "-map")) 
-  ;;           (kbd "C-c A") 'ac-start)))))
+  ;;           (kbd "C-c A") 'xy/ac-start)))))
 )
 
 
