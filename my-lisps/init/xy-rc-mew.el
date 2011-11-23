@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-11-21 Mon 21:22 xin on p6t>
+;; Time-stamp:<2011-11-23 Wed 15:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -252,62 +252,62 @@
 ;; 首先要下载biff.el这个文件，在.emacs中加入
 ;; (try-require 'biff)  
 ;; Biff
-(setq mew-use-cached-passwd t);;必须
-(when (try-require 'biff)
-  (setq mew-use-biff t)
-  (setq mew-use-biff-bell t)
-  (setq mew-biff-interval 5)      ; 一定要小于下面的timer-unit和lifetime值
-)
-;; (setq mew-pop-biff-interval 3)
-;; (setq mew-passwd-timer-unit 60) ; 60 minutes = 1 hour                                            
-;; (setq mew-passwd-lifetime 24)   ; timer-unit x 24 = 24 hours 
+  (setq mew-use-cached-passwd t);;必须
 
-(set-default 'mew-decode-quoted 't)
+  (when (try-require 'biff)
+	(setq mew-use-biff t)
+	(setq mew-use-biff-bell t)
+	(setq mew-biff-interval 5) ; 一定要小于timer-unit和lifetime值
+	;; (setq mew-pop-biff-interval 3)
+	;; (message "[ biff setting is OK ! ]")
+	)
 
-(setq mew-arrivedmail-pending 0)
+  ;; (setq mew-passwd-timer-unit 60) ; 60 minutes = 1 hour
+  ;; (setq mew-passwd-lifetime 24)   ; timer-unit x 24 = 24 hours
+  (set-default 'mew-decode-quoted 't)
+  (setq mew-arrivedmail-pending 0)
+  ;; todochiku 新邮件通知
+  (when window-system
+	(require 'todochiku)
+	(defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
+	  "Use Todochiku to pop-up a notification, if new Mail arrives"
+	  (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
+			 (setq mew-arrivedmail-pending arg)
+			 ;; (start-process-shell-command
+			 ;;  "biff-bark"
+			 ;;  "*Messages*"
+			 ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
+			 (todochiku-message "emacs mew"
+								(format "New mail (%d) arrived." arg)
+								(todochiku-icon 'mail))
+			 )
+			;; replace sndplay with your favorite command to
+			;; play a sound-file
+			((= arg 0)
+			 (if (> mew-arrivedmail-pending 0)
+				 (setq mew-arrivedmail-pending 0))))))
 
-;; todochiku 新邮件通知
-(when window-system
-  (require 'todochiku)
-  (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
-	"Use Todochiku to pop-up a notification, if new Mail arrives"
-	(cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
-		   (setq mew-arrivedmail-pending arg)
-		   ;; (start-process-shell-command
-		   ;;  "biff-bark"
-		   ;;  "*Messages*"
-		   ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
-		   (todochiku-message "emacs mew"
-							  (format "New mail (%d) arrived." arg)
-							  (todochiku-icon 'mail))
-		   )
-		  ;; replace sndplay with your favorite command to
-		  ;; play a sound-file
-		  ((= arg 0)
-		   (if (> mew-arrivedmail-pending 0)
-			   (setq mew-arrivedmail-pending 0))))))
+  ;; auto complete email address in various fields
+  (defvar mew-field-completion-switch
+	'(("To:"        . mew-complete-address)
+	  ("Cc:"        . mew-complete-address)
+	  ("Dcc:"       . mew-complete-address)
+	  ("Bcc:"       . mew-complete-address)
+	  ("Reply-To:"  . mew-complete-address)
+	  ("Fcc:"       . mew-complete-folder)
+	  ("Resent-To:" . mew-complete-address)
+	  ("Resent-Cc:" . mew-complete-address)
+	  ("Config:"    . mew-complete-config)))
 
-;; auto complete email address in various fields
-(defvar mew-field-completion-switch
-  '(("To:"        . mew-complete-address)
-	("Cc:"        . mew-complete-address)
-	("Dcc:"       . mew-complete-address)
-	("Bcc:"       . mew-complete-address)
-	("Reply-To:"  . mew-complete-address)
-	("Fcc:"       . mew-complete-folder)
-	("Resent-To:" . mew-complete-address)
-	("Resent-Cc:" . mew-complete-address)
-	("Config:"    . mew-complete-config)))
-
-;; news groups
-(setq mew-nntp-header-only t
-	  mew-nntp-port "119"
-	  mew-nntp-ssl nil
-	  mew-nntp-server "news.virginmedia.com"
-	  mew-nntp-newsgroup "-cn.bbs.comp.emacs"
-	  mew-nntp-size 1000
-	  ;; mew-nntp-user "Allen Yang"
-	  mew-nntp-msgid-user "etimecowboy"
-	  mew-nntp-msgid-domain "gmail.com"))
+  ;; news groups
+  (setq mew-nntp-header-only t
+		mew-nntp-port "119"
+		mew-nntp-ssl nil
+		mew-nntp-server "news.virginmedia.com"
+		mew-nntp-newsgroup "-cn.bbs.comp.emacs"
+		mew-nntp-size 1000
+		;; mew-nntp-user "Allen Yang"
+		mew-nntp-msgid-user "etimecowboy"
+		mew-nntp-msgid-domain "gmail.com"))
 
 (provide 'xy-rc-mew)

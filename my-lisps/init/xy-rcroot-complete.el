@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-22 Tue 12:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 03:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -161,11 +161,10 @@
 	  'yas/minor-mode-map
 	  `(("C-c C-f" yas/find-snippets)))))
 ;; (am-add-hooks
-;;  `(lisp-mode-hook emacs-lisp-mode-hook
-;;    c-mode-hook sh-mode-hook vhdl-mode-hook
-;;    verilog-mode-hook org-mode-hook
-;;    LaTeX-mode-hook latex-mode-hook
-;;    matlab-mode-hook)
+;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+;;    c-mode-hook cc-mode-hook c-mode-common-hook
+;;    sh-mode-hook vhdl-mode-hook verilog-mode-hook org-mode-hook
+;;    LaTeX-mode-hook latex-mode-hook matlab-mode-hook)
 ;;  `xy/yas-start)
 
 ;;-------------------------------------------------------------

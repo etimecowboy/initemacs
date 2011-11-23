@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-22 Tue 01:50 xin on p6t>
+;; Time-stamp:<2011-11-23 Wed 03:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -233,14 +233,16 @@ the mode-line."
 (eval-after-load "simple" '(diminish 'global-visual-line-mode))
 (eval-after-load "simple" '(diminish 'visual-line-mode))
 (eval-after-load "abbrev" '(diminish 'abbrev-mode))
-(eval-after-load "auto-complete" '(diminish 'auto-complete-mode))
+;; (eval-after-load "auto-complete" '(diminish 'auto-complete-mode))
 (eval-after-load "flyspell" '(diminish 'flyspell-mode))
 (eval-after-load "autopair" '(diminish 'autopair-mode))
 (eval-after-load "hideshow" '(diminish 'hs-minor-mode))
-(eval-after-load "yasnippet" '(diminish 'yas/minor-mode))
-;; (eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
+;; (eval-after-load "yasnippet" '(diminish 'yas/minor-mode))
+(eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
 (eval-after-load "xy-recent-jump-small" '(diminish 'recent-jump-small-mode))
 (eval-after-load "ibus" '(diminish 'ibus-mode))
+(eval-after-load "outline" '(diminish 'outline-minor-mode))
+(eval-after-load "eldoc" '(diminish 'eldoc-mode))
 
 ;;** modeline-posn
 ;; Display number of characters in a selected region

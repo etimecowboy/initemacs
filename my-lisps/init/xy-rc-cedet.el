@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-23 Wed 00:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 03:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -160,7 +160,7 @@
             ("mm" . ("h")))))
 
   ;; zjl-hl, use semantic to highlight functions 
-  (require 'zjl-hl)
+  ;; (require 'zjl-hl)
   ;; (zjl-hl-enable-global-all-modes)
  )
 

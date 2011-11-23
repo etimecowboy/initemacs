@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cua.el'
-;; Time-stamp:<2011-08-09 Tue 08:16 xin on P6T>
+;; Time-stamp:<2011-11-23 Wed 04:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,15 +16,19 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; ;;;###autoload
-;; (defun cua-settings ()
-;;   "settings for `cua'."
+;;;###autoload
+(defun cua-settings ()
+  "settings for `cua'."
 
-;;   (setq cua-rectangle-mark-key "")
-
-;;   (when is-after-emacs-23
-;;     (setq cua-remap-control-z nil)
-;;     (setq cua-remap-control-v nil))
+  (setq cua-rectangle-mark-key [C-RET]) ;; default is [C-RET]
+  (setq cua-keep-region-after-copy t)
+  (setq cua-remap-control-z nil)
+  (setq cua-remap-control-v nil)
+  (define-key cua--cua-keys-keymap [(control z)] nil)
+  (define-key cua--cua-keys-keymap [(control v)] nil)
+  (define-key cua--cua-keys-keymap [(meta v)] nil)
+  (setq pc-select-selection-keys-only t)
+  (pc-selection-mode 1)
 
 ;;   (apply-args-list-to-fun
 ;;    'def-mark-move-command
@@ -36,11 +40,6 @@
 ;;      "cua-resize-rectangle-page-up"
 ;;      "cua-resize-rectangle-page-down"
 ;;      "cua-resize-rectangle-bot"))
-
-;;   (unless is-after-emacs-23
-;;     (define-key cua--cua-keys-keymap [(control z)] nil)
-;;     (define-key cua--cua-keys-keymap [(control v)] nil)
-;;     (define-key cua--cua-keys-keymap [(meta v)] nil))
 
 ;;   (autoload 'cua--init-rectangles "cua-rect")
 
@@ -55,6 +54,7 @@
 ;;      ("<right>" cua-resize-rectangle-right)
 ;;      ("<left>"  cua-resize-rectangle-left)
 ;;      ("<down"   cua-resize-rectangle-down)
-;;      ("<up>"    cua-resize-rectangle-up))))
+;;      ("<up>"    cua-resize-rectangle-up)))
+  )
 
 (provide 'xy-rc-cua)

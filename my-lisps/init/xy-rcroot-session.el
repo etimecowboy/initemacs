@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-17 Thu 04:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 11:10 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,7 +24,8 @@
 
 ;;** save-place
 ;; Save point places in buffers
-(setq save-place 1)
+(setq-default save-place t)
+(require 'saveplace)
 (eval-after-load "saveplace" `(saveplace-settings))
 
 ;;-----------------------------------------------------------------------
@@ -58,8 +59,8 @@
 ;;         keeping the bookmark list open
 ;; * ‘C-o’ – switch to the current bookmark in another window
 ;; * ‘r’ – rename the current bookmark
-
-(setq bookmark-save-flag 1)
+(setq-default bookmark-save-flag 1)
+(require 'bookmark)
 (eval-after-load "bookmark" `(bookmark-settings))
 
 ;;*** Bookmark+
@@ -97,13 +98,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;** recentf
-(setq-default recentf-save-file
-			  (concat my-var-path "/recentf"
-					  user-login-name "@"
-					  system-name "@"
-					  system-configuration))
+;; (setq-default recentf-save-file
+;; 			  (concat my-var-path "/recentf-"
+;; 					  user-login-name "@"
+;; 					  system-name "@"
+;; 					  system-configuration))
+;; (require 'recentf)
 (recentf-mode 1)
 (eval-after-load "recentf" `(recentf-settings))
+
+;;** savehist
+;; (require 'savehist)
+(savehist-mode 1)
+(eval-after-load "savehist" `(savehist-settings))
 
 ;;---------------------------------------------------------------------
 

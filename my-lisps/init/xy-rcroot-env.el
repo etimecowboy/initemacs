@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-22 Tue 18:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 04:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -579,6 +579,8 @@
 (setq default-keyboard-coding-system 'utf-8-unix)
 (setq default-sendmail-coding-system 'utf-8-unix)
 (Windows
+ ;; (let ((code (or file-name-coding-system default-file-name-coding-system)))
+ ;;   (setq default-process-coding-system (cons code code))))
   (setq default-file-name-coding-system 'gbk-dos)
   (setq default-terminal-coding-system 'gbk-dos)
   (setq default-process-coding-system '(gbk-dos . gbk-dos)))

@@ -1,11 +1,11 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
-;; File name:    `xy-rc-saveplace.el'
-;; Time-stamp:<2011-11-23 Wed 05:00 xin on P6T-WIN7>
+;; File name:    `xy-rc-savehist.el'
+;; Time-stamp:<2011-11-23 Wed 11:00 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
-;; Description:  My `saveplace.el' settings
+;; Description:  My `savehist.el' settings
 ;;    ___ _ __ ___   __ _  ___ ___
 ;;   / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;  |  __/ | | | | | (_| | (__\__ \
@@ -18,11 +18,11 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun saveplace-settings ()
-  "Settings of `saveplace.el'."
-  (setq-default save-place-file (concat my-var-path "/saveplace-"
+(defun savehist-settings ()
+  "Settings of `savehist.el'."
+  (setq-default save-place-file (concat my-var-path "/savehist-"
 										user-login-name "@"
 										system-name "@"
 										system-configuration)))
 
-(provide 'xy-rc-saveplace)
+(provide 'xy-rc-savehist)

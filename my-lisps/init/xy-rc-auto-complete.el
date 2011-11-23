@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-23 Wed 01:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 03:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,7 @@
 
   (interactive)
   (require 'auto-complete)
-  ;; (auto-complete-mode 1)
+  (xy/yas-start)
   (revert-buffer)
   )
 
