@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-22 Tue 19:22 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 00:47 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,8 @@
 
   (interactive)
   (require 'auto-complete)
-  (auto-complete-mode 1)
+  ;; (auto-complete-mode 1)
+  (revert-buffer)
   )
 
 ;;;###autoload
@@ -39,6 +40,15 @@
         (concat my-emacs-path "/auto-complete/ac-comphist"))
   
   (ac-config-default)
+  ;; In `auto-complete-config.el'
+  ;; (defun ac-config-default ()
+  ;; 	(setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  ;; 	(add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  ;; 	(add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  ;; 	(add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+  ;; 	(add-hook 'css-mode-hook 'ac-css-mode-setup)
+  ;; 	(add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  ;; 	(global-auto-complete-mode t))
   
   ;; (setq help-xref-following nil) 
 
@@ -48,7 +58,74 @@
         ac-candidate-limit ac-menu-height
         ac-quick-help-delay .5
         ac-disable-faces nil)
+  (define-key ac-mode-map  [(control tab)] 'auto-complete)
 
+  ;;---------------------------------------------------------------------------
+
+  ;; ;; ac-dabbrev
+  ;; NOTE: has been moved into `auto-complete.el'
+  ;; (require 'ac-dabbrev)
+  ;; (setq ac-sources
+  ;; 		(append 'ac-source-dabbrev ac-sources))
+
+  ;;----------------------------------------------------------------------------
+  
+  ;; ac-math
+  ;; provides three sources, one for LaTeX command completion, one for
+  ;; LaTeX math symbols and the another one for Unicode input of math
+  ;; characters.
+  ;; REF: http://code.google.com/p/ac-math/
+  (require 'ac-math)
+  (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of latex-mode
+
+  (defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
+	(setq ac-sources
+		  (append '(ac-source-math-unicode ac-source-math-latex
+	                ac-source-latex-commands)
+				  ac-sources)))
+
+  (add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
+  (ac-flyspell-workaround)
+
+  ;;-----------------------------------------------------------------------------
+
+  ;; Clang
+  ;; The AC sources for Clang. Combine the power of AC, `Clang' and
+  ;; `Yasnippet'.
+
+  (defun my-ac-cc-mode-setup ()
+	(setq ac-sources
+		  (append '(ac-source-clang ac-source-yasnippet)
+				  ac-sources)))
+  
+  (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+
+  ;;-----------------------------------------------------------------------------
+
+  ;; ;; ac-company
+  ;; ;; NOTE: NOT working
+  ;; ;; Use Company Backends for Auto-Complete.
+  ;; (require 'ac-company)
+
+  ;; ;; For example, if you want to use company-elisp for auto-complete
+  ;; (defun ac-company-setup ()
+  ;; 	(require 'company)
+  ;; 	(require 'company-elisp)
+  ;; 	(ac-company-define-source ac-source-company-elisp
+  ;; 							  company-elisp (symbol . "s"))
+  ;; 	(setq ac-sources
+  ;; 		  (append '(ac-source-company-elisp)
+  ;; 				  ac-sources)))
+  
+  ;; (add-hook 'emacs-lisp-mode-hook
+  ;; 			'ac-source-company-setup)
+
+  ;; ;; (ac-company-define-source ac-source-company-elisp company-elisp)
+  ;; ;; (add-hook 'emacs-lisp-mode-hook
+  ;; ;;        (lambda () 
+  ;; ;;          (add-to-list 'ac-sources 'ac-source-company-elisp)))
+
+  
   ;; (set-default 'ac-sources
   ;;              '(ac-source-semantic-raw
   ;;                ac-source-yasnippet
