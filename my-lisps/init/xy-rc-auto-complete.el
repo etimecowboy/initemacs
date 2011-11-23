@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-23 Wed 00:47 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 01:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,7 +49,12 @@
   ;; 	(add-hook 'css-mode-hook 'ac-css-mode-setup)
   ;; 	(add-hook 'auto-complete-mode-hook 'ac-common-setup)
   ;; 	(global-auto-complete-mode t))
-  
+
+  ;; add `yasnippet' as an AC source
+  (setq ac-sources
+	(append 'ac-source-yasnippet
+		ac-sources))
+
   ;; (setq help-xref-following nil) 
 
   (setq ac-auto-show-menu t
@@ -92,13 +97,14 @@
   ;; Clang
   ;; The AC sources for Clang. Combine the power of AC, `Clang' and
   ;; `Yasnippet'.
-
+  (require 'auto-complete-clang)
   (defun my-ac-cc-mode-setup ()
-	(setq ac-sources
-		  (append '(ac-source-clang ac-source-yasnippet)
+    (setq ac-sources
+		  (append 'ac-source-clang
 				  ac-sources)))
   
   (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+  (add-hook 'cc-mode-hook 'my-ac-cc-mode-setup)
 
   ;;-----------------------------------------------------------------------------
 
@@ -137,7 +143,7 @@
   ;;                ac-source-files-in-current-dir
   ;;                ac-source-filename))
   
-  ;; ;; (setq ac-modes ac+-modes)
+  ;; ;; (defalias ac-modes ac+-modes)
 
   ;; (defun ac-settings-4-cc ()
   ;; 	"`auto-complete' settings for `cc-mode'."
