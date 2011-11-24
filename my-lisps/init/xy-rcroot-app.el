@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-24 Thu 16:12 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 17:03 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -78,7 +78,8 @@
 ;;           'fit-frame-if-one-window 'append)
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
-(global-set-key [M-f5] 'xy/fit-frame)
+(global-set-key [M-f5] ;; 'fit-frame)
+				'xy/fit-frame)
 
 ;;  Add menu-bar items
 ;; (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))

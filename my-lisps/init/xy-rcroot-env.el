@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-24 Thu 03:55 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 18:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -132,6 +132,7 @@
 ;; Current ECB do not support cedet version 1.0
 ;; (load "ecb_snap-autoloads.el")
 (load "emms-autoloads.el")
+(load "magit-autoloads.el")
 (load "yasnippet-autoloads.el")
 (message "* ---[ ELPA lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)

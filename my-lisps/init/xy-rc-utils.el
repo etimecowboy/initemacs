@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-24 Thu 03:55 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 18:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1121,6 +1121,7 @@ just like the `emacs --daemon'"
   (xy/recompile-dir (concat my-local-lisp-path "/dictionary-1.8.7"))
   (xy/recompile-dir (concat my-local-lisp-path "/yasnippet-0.6.1"))
   (xy/recompile-dir (concat my-local-lisp-path "/ecb_snap-20110605"))
+  (xy/recompile-dir (concat my-local-lisp-path "/magit-1.0.0"))
   ;; NOTE: Do it in `xy-rcroot-env.el'?
   (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
   )

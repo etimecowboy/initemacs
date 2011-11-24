@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-info.el'
-;; Time-stamp:<2011-02-01 Tue 19:48 xin on P6T>
+;; Time-stamp:<2011-11-24 Thu 18:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,7 +21,7 @@
   "settings for `info'."
 ;; With `info+.el', you can merge an Info node with its subnodes into
 ;; the same buffer, by calling `Info-merge-subnodes' (bound to `+'),
-  (add-to-list 'Info-default-directory-list "~/.emacs.d/info")
+  ;; (add-to-list 'Info-default-directory-list "~/.emacs.d/info")
   (apply-args-list-to-fun
    'def-command-max-window `("info"))
   (require 'info+))
