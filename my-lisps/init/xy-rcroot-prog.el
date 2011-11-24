@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-24 Thu 05:27 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 13:22 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -756,7 +756,10 @@ See the documentation for these variables for more info.
 ;;    ("M-c"   gud-cont)
 ;;    ("M-C"   capitalize-word)
 ;;    ("C-c m" make)))
+
 (eval-after-load "gdb-ui"
   `(gud-settings))
+;; (eval-after-load "gdb-mi"
+;;   `(gud-settings))
 
 (provide 'xy-rcroot-prog)
