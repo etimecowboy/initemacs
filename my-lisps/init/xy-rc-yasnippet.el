@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-11-21 Mon 14:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 14:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,7 +21,9 @@
   "Start yasnippet."
   (interactive)
   (require 'yasnippet)
-  (yas/minor-mode-on))
+  ;; BUG: if (yas/minor-mode-on), there will be a conflict between
+  ;; `xy/yas-start' and `xy/ac-start' functions
+  (yas/minor-mode 1))
 
 ;;;###autoload
 (defun yasnippet-unbind-trigger-key ()

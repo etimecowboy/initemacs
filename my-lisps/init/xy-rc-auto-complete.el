@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-23 Wed 03:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 14:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,8 +21,9 @@
   "Start auto-complete"
 
   (interactive)
+  ;; (xy/yas-start)
   (require 'auto-complete)
-  (xy/yas-start)
+  (ac-config-default)
   (revert-buffer)
   )
 
@@ -39,7 +40,7 @@
   (setq ac-comphist-file 
         (concat my-emacs-path "/auto-complete/ac-comphist"))
   
-  (ac-config-default)
+  ;; (ac-config-default)
   ;; In `auto-complete-config.el'
   ;; (defun ac-config-default ()
   ;; 	(setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
@@ -51,9 +52,11 @@
   ;; 	(global-auto-complete-mode t))
 
   ;; add `yasnippet' as an AC source
-  (setq ac-sources
-	(append 'ac-source-yasnippet
-		ac-sources))
+  ;; (wnen (featurep 'yas/minor-mode)
+		;; (setq ac-sources
+		;; 	  (append 'ac-source-yasnippet
+		;; 			  ac-sources))
+		;; )
 
   ;; (setq help-xref-following nil) 
 
