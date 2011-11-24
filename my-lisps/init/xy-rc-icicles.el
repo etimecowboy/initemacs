@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-11-24 Thu 04:44 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 16:34 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,8 @@
 	(ido-mode -1))
   (require 'icicles)
   (icy-mode 1)
-  (global-set-key (kbd "M-x") 'icicle-execute-extended-command))
+  (global-set-key (kbd "M-x") 'icicle-execute-extended-command)
+  (global-set-key (kbd "M-X") 'icicle-execute-extended-command))
 
 ;; ;;;###autoload
 ;; (defun xy/icy-end()
