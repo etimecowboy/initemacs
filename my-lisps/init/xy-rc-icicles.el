@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-11-21 Mon 14:18 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 04:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,14 +21,25 @@
 (defun xy/icy-start ()
   "Start icy-mode"
   (interactive)
+  (when (featurep 'ido)
+	(ido-mode -1))
   (require 'icicles)
-  (icy-mode t))
+  (icy-mode 1)
+  (global-set-key (kbd "M-x") 'icicle-execute-extended-command))
+
+;; ;;;###autoload
+;; (defun xy/icy-end()
+;;   "Start icy-mode"
+;;   (interactive)
+;;   ;; (ido-mode -1)
+;;   (require 'icicles)
+;;   (icy-mode -1))
 
 ;;;###autoload
 (defun icicles-settings ()
   "settings of icicles."
   (setq icicle-download-dir my-local-lisp-path)
-  ;; (setq icicle-incremental-completion-flag 'alwasys)
+  (setq icicle-incremental-completion-flag 'alwasys)
   (setq icicle-incremental-completion-delay 0)
   (setq icicle-highlight-input-completion-failure-delay 0)
   (setq icicle-buffers-ido-like-flag t)

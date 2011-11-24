@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-11-22 Tue 00:33 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 01:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,9 +40,9 @@
 	  ;; NOTE: try to avoid icicle
 	  ;; icicle-execute-extended-command()
 	  ;; call-interactively(icicle-execute-extended-command nil nil)
-	  (turn-on-auto-fill)
-	  (turn-on-eldoc-mode)
-	  (turn-on-hungry-delete-mode)
+	  ;; (turn-on-auto-fill)
+	  ;; (turn-on-eldoc-mode)
+	  ;; (turn-on-hungry-delete-mode)
 	  )))
 
 ;;;###autoload
@@ -60,9 +60,9 @@
   			'(lambda ()
 			   ;; (xy/set-font-default)
 			   (elisp-mode-hook-settings)
-			   (turn-on-auto-fill)
-			   (turn-on-eldoc-mode)
-			   (turn-on-hungry-delete-mode)
+			   ;; (turn-on-auto-fill)
+			   ;; (turn-on-eldoc-mode)
+			   ;; (turn-on-hungry-delete-mode)
 			   ;; (xy/yas-start)
 			   ;; (xy/linkd-start)
 			   )))

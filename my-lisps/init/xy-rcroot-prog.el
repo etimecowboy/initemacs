@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-24 Thu 00:46 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 04:03 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -50,14 +50,16 @@
 (eval-after-load "simple" `(simple-settings))
 
 ;;** hungry-delete-mode
-(autoload 'turn-on-hungry-delete-mode "hungry-delete"
-  "Turns on hungry delete mode if the buffer is appropriate." t nil)
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-map
-  sh-mode-map cperl-mode-hook cc-mode-hook
-  vhdl-mode-map verilog-mode-map
-  matlab-mode-hook)
- 'turn-on-hungry-delete-mode)
+;; (autoload 'turn-on-hungry-delete-mode "hungry-delete"
+;;   "Turns on hungry delete mode if the buffer is appropriate." t nil)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-map
+;;   sh-mode-map cperl-mode-hook cc-mode-hook
+;;   vhdl-mode-map verilog-mode-map
+;;   matlab-mode-hook)
+;;  '(lambda ()
+;; 	(hungry-delete-mode 1)))
+ ;; 'turn-on-hungry-delete-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

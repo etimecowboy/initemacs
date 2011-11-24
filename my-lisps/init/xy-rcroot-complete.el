@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-23 Wed 23:10 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 04:51 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,7 +33,7 @@
 ;; NOTE: From Emacs-22 it is a part of Emacs
 ;; (if is-before-emacs-21
 ;;     (require 'ido "ido-for-21"))
-(ido-mode 1)
+;; (ido-mode 1)
 (eval-after-load 'ido
   `(progn 
      ;; (ido-face-settings)
@@ -69,13 +69,34 @@
 ;; Smex is a M-x enhancement for Emacs. Built on top of Ido, it
 ;; provides a convenient interface to your recently and most
 ;; frequently used commands. And to all the other commands, too.
-(require 'smex)
-(eval-after-load 'ido
+;; (require 'smex)
+;; (smex-initialize)
+(eval-after-load 'smex
   `(progn
-     (smex-settings)))
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands) 
+     (smex-settings)
+	 (global-set-key (kbd "M-x") 'smex)
+	 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+	 ))
+
+;;----------------------------------------------------------------
+
+;;** ido+smex
+;; NOTE: NEVER start both icy-mode and ido+smex. One is enough
+;;;###autoload
+(defun xy/ido+smex-start ()
+  "Start ido and smex mini-buffer completion."
+
+  (interactive)
+  (when (featurep 'icicles)
+	(icy-mode -1))
+  (require 'ido)
+  (require 'smex)
+  (ido-mode 1)
+  ;; (smex-initialize-ido)
+  (smex-initialize)
+  (add-hook 'org-mode-hook
+			'(lambda ()
+			   (setq org-completion-use-ido t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -178,17 +199,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (add-hook 'after-init-hook 'xy/icy-start)
-(defun icicle-keys ()
-  "icicle-mode的按键设置."
-  (define-key minibuffer-local-completion-map 
-    (kbd "SPC") 'minibuffer-complete-word)
-  (define-key minibuffer-local-completion-map 
-    (kbd "C-w") 'backward-kill-word-or-kill-region)
-  (define-key minibuffer-local-completion-map
-	(kbd "C-k") 'kill-line))
-;; (define-key minibuffer-local-completion-map
-;; 	[Tab] 'icicle-apropos))
-(add-hook 'icicle-mode-hook 'icicle-keys t)
+(add-hook 'after-init-hook 'icy-mode)
+;; (defun icicle-keys ()
+;;   "icicle-mode的按键设置."
+;;   (define-key minibuffer-local-completion-map 
+;;     (kbd "SPC") 'minibuffer-complete-word)
+;;   (define-key minibuffer-local-completion-map 
+;;     (kbd "C-w") 'backward-kill-word-or-kill-region)
+;;   (define-key minibuffer-local-completion-map
+;; 	(kbd "C-k") 'kill-line))
+;; ;; (define-key minibuffer-local-completion-map
+;; ;; 	[Tab] 'icicle-apropos))
+;; (add-hook 'icicle-mode-hook 'icicle-keys t)
 (eval-after-load "icicles" `(icicles-settings))
 
 ;;--------------------------------------------------------------------

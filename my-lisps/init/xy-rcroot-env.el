@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-23 Wed 23:48 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 03:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,7 +29,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Debug Emacs init
+;;* Debug Emacs init
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -41,11 +41,11 @@
 ;; (setq debug-on-quit t)
 
 ;; Compilation message
-(setq compilation-auto-jump-to-first-error t)
-(setq compilation-scroll-output t)
+;; (setq compilation-auto-jump-to-first-error t)
+;; (setq compilation-scroll-output t)
 
-;; (setq max-specpdl-size 4000)
-;; (setq max-lisp-eval-depth 4000)
+;; (setq max-specpdl-size 40000)
+;; (setq max-lisp-eval-depth 40000)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -98,7 +98,6 @@
 ;;* Install additional lisp packages
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;;** ELPA packages
 ;; Packages got from `package.el'. 
 ;; They are usually for tests and will be moved out of the management 
@@ -404,6 +403,7 @@
 ;;** My own lisps (including init files and my own hacks)
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
 ;; (xy/load-autoload my-local-lisp-path)
+;; (xy/load-autoload (concat my-local-lisp-path "/init"))
 (message "* ---[ Emacswiki lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)

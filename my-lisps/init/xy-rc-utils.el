@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-23 Wed 23:54 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 03:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1016,10 +1016,10 @@ directories starting with a `.'."
 		    (file-newer-than-file-p srcfile dstfile)
 		    (file-newer-than-file-p srcfile generated-autoload-file)
 		    (file-newer-than-file-p dstfile generated-autoload-file))
-		(setq update-flag t))
+		(setq update-flag (or update-flag t)))
 	    (setq files (cdr files))))
 
-	(if update-flag
+	(when update-flag ;; t
 	    (progn
 	      (cond ((fboundp 'update-autoloads-from-directory)
 		     (update-autoloads-from-directory this-directory))
@@ -1028,7 +1028,8 @@ directories starting with a `.'."
 		    ((fboundp 'update-directory-autoloads)
 		     (update-directory-autoloads this-directory)))
 	      (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
-	  (message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
+	  (message "* ---[ `%s' exists and is newer. ]---"
+	    generated-autoload-file))
       
 	(load-file generated-autoload-file)
 	(message "* ---[ Loading `%s'... ]---" generated-autoload-file))
@@ -1090,7 +1091,7 @@ just like the `emacs --daemon'"
  autoloads for them."
 
   (interactive)
-  (xy/install-all-lisps my-local-lisp-path)
+  (xy/install-all-lisps my-local-lisp-path) ;; 'with-subdirs 'recursive)
   (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
   (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
   (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
@@ -1116,12 +1117,12 @@ just like the `emacs --daemon'"
   (xy/install-all-lisps (concat my-local-lisp-path "/themes"))
   (xy/install-all-lisps (concat my-local-lisp-path "/ibus-el-0.2.1"))
   (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete"))
-  ;; NOTE: do it in `xy-rcroot-env.el'
-  ;; (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
   (xy/recompile-dir (concat my-local-lisp-path "/company-0.5"))
   (xy/recompile-dir (concat my-local-lisp-path "/dictionary-1.8.7"))
   (xy/recompile-dir (concat my-local-lisp-path "/yasnippet-0.6.1"))
   (xy/recompile-dir (concat my-local-lisp-path "/ecb_snap-20110605"))
+  ;; NOTE: Do it in `xy-rcroot-env.el'?
+  (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
   )
 
 ;;------------------

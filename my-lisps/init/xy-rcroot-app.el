@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-23 Wed 23:33 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 05:13 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -231,7 +231,7 @@ the mode-line."
 ;;** diminish
 ;; Removing or abbreviating minor mode indicators
 (eval-after-load "filladapt" '(diminish 'filladapt-mode))
-;; (eval-after-load "icicles" '(diminish 'icy-mode))
+(eval-after-load "icicles" '(diminish 'icicle-mode))
 (eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "linkd" '(diminish 'linkd-mode))
@@ -248,6 +248,7 @@ the mode-line."
 (eval-after-load "ibus" '(diminish 'ibus-mode))
 (eval-after-load "outline" '(diminish 'outline-minor-mode))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
+(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
 
 ;;** modeline-posn
 ;; Display number of characters in a selected region

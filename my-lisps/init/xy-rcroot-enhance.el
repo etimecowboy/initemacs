@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-23 Wed 23:37 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 05:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,18 +40,23 @@
 ;;           (file-cache-add-directory-recursively "/usr/local/include")))
 
 ;;* undo and redo
-;; BUG: redo does not work
-(autoload 'redo "redo+"
-  "Redo the the most recent undo.
-Prefix arg COUNT means redo the COUNT most recent undos.
-If you have modified the buffer since the last redo or undo,
-then you cannot redo any undos before then." nil t)
-(autoload 'undo "redo+"
-  "Undo some previous changes.
-Repeat this command to undo more changes.
-A numeric argument serves as a repeat count." nil t)
-(global-set-key (kbd "C-?") 'redo)
-(global-set-key (kbd "C-/") 'undo) ;; or C-/
+;; NOTE: not very useful
+;;** redo+
+;; (autoload 'redo "redo+"
+;;   "Redo the the most recent undo.
+;; Prefix arg COUNT means redo the COUNT most recent undos.
+;; If you have modified the buffer since the last redo or undo,
+;; then you cannot redo any undos before then." nil t)
+;; (autoload 'undo "redo+"
+;;   "Undo some previous changes.
+;; Repeat this command to undo more changes.
+;; A numeric argument serves as a repeat count." nil t)
+;; (global-set-key (kbd "C-?") 'redo)
+;; (global-set-key (kbd "C-/") 'undo) ;; or C-/
+
+;;** undo-tree
+(require 'undo-tree)
+(global-undo-tree-mode)
 
 ;;------------------------------------------------------------------
 
