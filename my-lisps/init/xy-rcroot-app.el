@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-24 Thu 17:03 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 19:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -65,6 +65,8 @@
 ;;   (global-set-key (kbd "C-x W t") 'toggle-transparency))
 
 ;;** Resize frame
+;; NOTE: `fit-frame' and `thumb-frm' cause issue when openning
+;; info-mode links.
 ;;*** fit-frame and autofit-frame
 ;; NOTE:
 ;;      - `fit-frame.el':     resizes a frame in order to  fit a frame
@@ -78,8 +80,8 @@
 ;;           'fit-frame-if-one-window 'append)
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
-(global-set-key [M-f5] ;; 'fit-frame)
-				'xy/fit-frame)
+;; (global-set-key [M-f5] ;; 'fit-frame)
+;; 				'xy/fit-frame)
 
 ;;  Add menu-bar items
 ;; (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
@@ -97,15 +99,15 @@
 ;;                 'thumfr-toggle-thumbnail-frame)
 ;; (global-set-key [(shift control mouse-3)]
 ;;                 'thumfr-thumbify-other-frames)
-(global-set-key [(shift meta ?z)]
-				'thumfr-thumbify-other-frames)
-(global-set-key [(shift control ?p)]
-				'thumfr-fisheye-previous-frame)
-(global-set-key [(shift control ?n)]
-				'thumfr-fisheye-next-frame)
-(global-set-key [(shift control ?z)]
-				;;'thumfr-really-iconify-or-deiconify-frame)
-				'thumfr-toggle-thumbnail-frame)
+;; (global-set-key [(shift meta ?z)]
+;; 				'thumfr-thumbify-other-frames)
+;; (global-set-key [(shift control ?p)]
+;; 				'thumfr-fisheye-previous-frame)
+;; (global-set-key [(shift control ?n)]
+;; 				'thumfr-fisheye-next-frame)
+;; (global-set-key [(shift control ?z)]
+;; 				;;'thumfr-really-iconify-or-deiconify-frame)
+;; 				'thumfr-toggle-thumbnail-frame)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
