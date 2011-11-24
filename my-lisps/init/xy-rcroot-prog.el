@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-23 Wed 02:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 00:46 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -21,6 +21,8 @@
 ;;* Code formatting
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq-default comment-column 40) ;; set comment alignment position
 
 ;;** Auto indent
 (eal-define-keys
@@ -171,6 +173,10 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;** find-func
+;; emacs build-in lisp for finding functions
+;; (find-function-setup-keys)
+
 ;;** describe-symbol and find-symbol
 ;; (eal-define-keys
 ;;  `(emacs-lisp-mode-map lisp-interaction-mode-map
@@ -209,7 +215,19 @@
 
 ;;--------------------------------------------------------------------
 
-;;** imenu-tree 
+;;** imenu
+;; (require 'imenu)
+;; (eval-after-load "imenu"
+;;   `(imenu-settings))
+;; (defvar text-imenu-generic-expression
+;;   `((nil ,"^ \\{0,4\\}\\([一二三四五六七八九十]+[、. )]\\)+ *[^,。，]+?$" 0)
+;;     (nil ,"^ \\{0,4\\}\\([0-9]+[、. )]\\)+ *[^,。，]+?$" 0)))
+;; (add-hook 'text-mode-hook
+;;           (lambda ()
+;;             (setq imenu-generic-expression text-imenu-generic-expression)
+;;             (imenu-add-menubar-index)))
+
+;;*** imenu-tree 
 ;; (require 'imenu-tree)
 ;; (eval-after-load "imenu-tree"
 ;;   `(imenu-tree-settings))
@@ -614,17 +632,17 @@ See the documentation for these variables for more info.
 
 ;;** flymake
 ;; 动态检查语法错误
-(defvar flymake-mode-map (make-sparse-keymap))
-(autoload 'flymake-find-file-hook "flymake" "" t)
-(add-hook 'find-file-hook 'flymake-find-file-hook)
-(eval-after-load "flymake"
-  '(progn
-	 (flymake-settings)
-	 (eal-define-keys
-	  'flymake-mode-map
-	  `(("C-c N"   flymake-goto-next-error-disp)
-		("C-c P"   flymake-goto-prev-error-disp)
-		("C-c M-w" flymake-display-current-warning/error)))))
+;; (defvar flymake-mode-map (make-sparse-keymap))
+;; (autoload 'flymake-find-file-hook "flymake" "" t)
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+;; (eval-after-load "flymake"
+;;   '(progn
+;; 	 (flymake-settings)
+;; 	 (eal-define-keys
+;; 	  'flymake-mode-map
+;; 	  `(("C-c N"   flymake-goto-next-error-disp)
+;; 		("C-c P"   flymake-goto-prev-error-disp)
+;; 		("C-c M-w" flymake-display-current-warning/error)))))
 
 ;;--------------------------------------------------------------------
 

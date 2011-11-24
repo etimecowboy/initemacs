@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-calendar.el'
-;; Time-stamp:<2011-08-19 Fri 21:31 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 00:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -88,6 +88,36 @@
   ;; (setq calendar-latitude [50 87 north])
   ;; (setq calendar-longitude [4 71 east])
   ;; (setq calendar-location-name "Leuven, BE")
+
+  ;; cal-china-x
+  ;; (when (try-require 'cal-china-x)
+	;; (require 'cal-china-x)
+	;; (setq cal-china-x-priority1-holidays
+	;; 	  (append cal-china-x-chinese-holidays
+	;; 			  '((holiday-fixed 2 14 "情人节")
+	;; 				(holiday-fixed 3 8 "妇女节")
+	;; 				(holiday-fixed 3 12 "植树节")
+	;; 				(holiday-fixed 5 4 "青年节")
+	;; 				(holiday-fixed 6 1 "儿童节")
+	;; 				(holiday-fixed 9 10 "教师节")
+	;; 				(holiday-lunar 1 15 "元宵节(正月十五)" 0)
+	;; 				(holiday-lunar 7 7 "七夕节")
+	;; 				(holiday-lunar 9 9 "重阳节(九月初九)"))))
+	;; (setq cal-china-x-priority2-holidays
+	;; 		'((holiday-chinese 6 23 "李浩斌生日")
+	;; 		  (holiday-fixed 10 16 "李可生日(1981)")
+	;; 		  (holiday-chinese 8 15 "爸妈生日(1955)")
+	;; 		  (holiday-fixed 4 9 "戚生日(1983)")
+	;; 		  (holiday-fixed 10 6 "奇奇阳历生日(2010)")
+	;; 		  (holiday-chinese 8 29 "奇奇阴历生日(2010)")
+	;; 		  (holiday-fixed 12 8 "刘阳历生日(1981)")
+	;; 		  (holiday-chinese 11 13 "刘阴历生日(1981)")))
+	;; (setq calendar-holidays
+	;; 	  (append calendar-holidays
+	;; 			  cal-china-x-priority1-holidays
+	;; 			  ;; cal-china-x-priority2-holidays
+	;; 			  ))
+	;; )
   )
 
 (provide 'xy-rc-calendar)

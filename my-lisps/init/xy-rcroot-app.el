@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-23 Wed 03:48 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 23:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -194,6 +194,11 @@ the mode-line."
 ;; emacs lock
 ;; (autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
 
+;; hl-line
+;; Higligh current line
+;; (setq hl-line-face 'underline) ; for highlight-symbol
+;; (global-hl-line-mode 1) ; (if window-system 1 -1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;* mode-line settings
@@ -248,14 +253,16 @@ the mode-line."
 ;; Display number of characters in a selected region
 (require 'modeline-posn)
 
+;;** mode-line-frame
+;; offers a frame to show various information
+;; (require 'mode-line-frame)
+;; (mode-line-frame-create)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;* mini-buffer settings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(unless is-after-emacs-23
-  (partial-completion-mode 1))
 
 ;; 可以递归的使用minibuffer
 (setq enable-recursive-minibuffers t)

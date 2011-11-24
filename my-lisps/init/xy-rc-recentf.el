@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-recentf.el'
-;; Time-stamp:<2011-11-23 Wed 05:00 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 22:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -11,7 +11,6 @@
 ;;  |  __/ | | | | | (_| | (__\__ \
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
-;; TODO: wirte a funtion to auto update all the lisps from EmacsWiki.
 ;;--------------------------------------------------------------------
 
 (require 'cl)

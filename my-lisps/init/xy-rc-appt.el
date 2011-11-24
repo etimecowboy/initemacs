@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
-;; Time-stamp:<2011-08-20 Sat 07:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 23:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,6 +20,10 @@
 (defun appt-settings ()
   "Settings of `appt'."
 
+  ;; (add-hook 'diary-hook 'appt-make-list)
+  ;; (setq appt-display-format 'window)
+  ;; (setq appt-display-diary nil)
+
   (setq appt-time-msg-list nil)
   
   (setq appt-audible t)
@@ -32,6 +36,8 @@
 
   ;; number of minutes to wait between checking the appointment list
   (setq appt-display-interval 5)  ; 3
+
+  (setq appt-display-duration (* 365 24 60 60))
 
   ;; show in the modeline
   (setq appt-display-mode-line t)
@@ -54,7 +60,8 @@
 	;; notifier
 
   ;; turn appointment checking on
-  (appt-activate 1)
+  ;; (appt-activate 1)
+  (unless (daemonp) (appt-activate 1))
  )
 
 (provide 'xy-rc-appt)

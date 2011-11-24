@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-19 Sat 04:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 00:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -111,6 +111,10 @@
  ;; ("M-S" emaci-mode-off)))
  `(("M-s" read-only)
    ("M-S" normal-edit)))
+
+;; hexl-mode
+(add-to-list 'auto-mode-alist
+             '("\\.\\(exe\\|vsd\\|so\\|dll\\)$" . hexl-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-23 Wed 11:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 20:23 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -59,7 +59,7 @@
 ;;         keeping the bookmark list open
 ;; * ‘C-o’ – switch to the current bookmark in another window
 ;; * ‘r’ – rename the current bookmark
-(setq-default bookmark-save-flag 1)
+(setq bookmark-save-flag 1)
 (require 'bookmark)
 (eval-after-load "bookmark" `(bookmark-settings))
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-11-21 Mon 14:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 23:14 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -173,7 +173,7 @@
 
   ;; NOTE: Use icicles instead
   ;; (setq org-completion-use-iswitchb t)
-  ;; (setq org-completion-use-ido t)
+  (setq org-completion-use-ido t)
 
   ;; Disable ENT to follow links --- avoid annoying jumping during writing
   (setq org-return-follows-link nil)

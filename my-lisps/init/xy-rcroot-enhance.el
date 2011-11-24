@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-21 Mon 21:12 xin on p6t>
+;; Time-stamp:<2011-11-23 Wed 23:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,10 +26,18 @@
 ;;* ffap, finding Files and URLs at Point
 ;; REF: 
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860
-(ffap-bindings)
+;; (ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
 (eval-after-load "ffap" `(ffap-settings))
 
 ;;------------------------------------------------------------------
+
+;;* filecache
+;; (eval-after-load "filecache"
+;;   '(progn (file-cache-add-directory-list load-path)
+;;           (file-cache-add-directory-list user-include-dirs)
+;;           (file-cache-add-directory "/usr/include")
+;;           (file-cache-add-directory-recursively "/usr/include/c++")
+;;           (file-cache-add-directory-recursively "/usr/local/include")))
 
 ;;* undo and redo
 ;; BUG: redo does not work

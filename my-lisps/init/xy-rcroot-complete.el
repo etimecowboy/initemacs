@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-23 Wed 03:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-23 Wed 23:10 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,35 +22,22 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; an do stuff like M-x q-r-r TAB, and it expands to
+;; query-replace-regexp.
+;; (unless is-after-emacs-23
+;;   (partial-completion-mode 1))
+(partial-completion-mode 1)
+
 ;;** ido
 ;; interactively do things with buffers and files
 ;; NOTE: From Emacs-22 it is a part of Emacs
 ;; (if is-before-emacs-21
 ;;     (require 'ido "ido-for-21"))
-;; (ido-mode 1)
-;; (global-set-key (kbd "C-x C-f") 'ido-find-file)
-;; (let ((map
-;;        (unless is-before-emacs-21
-;;          (setq ido-mode-map ido-completion-map)))))
-;; (eal-define-keys-commonly
-;;  map 
-;;  `(("M-."   ido-next-match-dir)
-;;    ("M-,"   ido-prev-match-dir)
-;;    ("C-h"   ido-delete-backward-updir)
-;;    ("M-h"   ido-up-directory)
-;;    ("M-H"   ido-up-directory-clean-text)
-;;    ("C-M-h" ido-goto-home)
-;;    ("C-r"   ido-goto-root)
-;;    ("C-u"   ido-clean-text)
-;;    ("M-b"   backward-word)
-;;    ("C-w"   ido-delete-backward-word-updir)
-;;    ("C-v"   ido-enter-svn-status-hide)
-;;    ("C-n"   ido-next-match)
-;;    ("C-p"   ido-prev-match)))
-;; (eval-after-load 'ido
-;;   `(progn 
-;;      (ido-face-settings)
-;;      (ido-settings)))
+(ido-mode 1)
+(eval-after-load 'ido
+  `(progn 
+     ;; (ido-face-settings)
+     (ido-settings)))
 
 ;;----------------------------------------------------------------
 
@@ -75,6 +62,20 @@
 ;;    ("."   set-mark-command)
 ;;    ("'"   switch-to-other-buffer)
 ;;    ("L"   count-brf-lines)))
+
+;;------------------------------------------------------------------
+
+;;** smex
+;; Smex is a M-x enhancement for Emacs. Built on top of Ido, it
+;; provides a convenient interface to your recently and most
+;; frequently used commands. And to all the other commands, too.
+(require 'smex)
+(eval-after-load 'ido
+  `(progn
+     (smex-settings)))
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands) 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
