@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-24 Thu 04:03 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 05:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -315,7 +315,6 @@
 
 ;; NOTE: C include directories' list are defined in `xy-util.el'
 ;;** cc-mode
-(autoload 'c-turn-on-eldoc-mode "c-eldoc" "Enable c-eldoc-mode" t nil)
 (eval-after-load "cc-mode"
   '(progn
 	 (cc-mode-settings)

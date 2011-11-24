@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-11-24 Thu 00:27 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 05:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -188,7 +188,7 @@ which is options for `diff'."
   (setq dired-recursive-deletes t)  ; 可以递归的删除目录
   (setq dired-recursive-copies t) ; 可以递归的进行拷贝
   ;; (define-prefix-command 'dired-slash-map)
-  (setq dired-dwim-target t)
+  ;; (setq dired-dwim-target t)
   ;; (add-hook 'dired-mode-hook
   ;; 			(lambda ()
   ;; 			  (define-key dired-mode-map (kbd "<return>")

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-11-23 Wed 03:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 05:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,12 +19,15 @@
 ;;;###autoload
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."
-  
-  (require 'c-eldoc)
+   
   ;; (xy/set-font-default)
-  
   ;; (defalias 'cpp-mode 'c++-mode)
+
+  ;; (require 'c-eldoc)
+  ;; (autoload 'c-turn-on-eldoc-mode "c-eldoc" "Enable c-eldoc-mode" t nil)
+  ;; (eval-after-load "c-eldoc" '(c-eldoc-settings))
   
+
   (defun c-mode-common-hook-settings ()
     "Settings for `c-mode-common-hook'."
 
@@ -38,8 +41,8 @@
 			'(lambda ()
 			   (c-mode-common-hook-settings)
 			   (turn-on-auto-fill)
-			   (require 'c-eldoc)
-			   (c-turn-on-eldoc-mode)
+			   ;; (require 'c-eldoc)
+			   ;; (c-turn-on-eldoc-mode)
 			   ;; (xy/yas-start)
 			   ;; (xy/linkd-start)
 			   ))
