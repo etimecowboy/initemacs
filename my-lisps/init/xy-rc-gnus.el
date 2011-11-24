@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-11-14 Mon 13:38 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 14:45 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -119,14 +119,12 @@
    (setq gnus-select-method
 		 '(nntp "news.virginmedia.com"
 				(nntp-port-number 119))))
-  ;;(setq gnus-secondary-select-methods '((nnml "")))
-  ;;(add-to-list 'gnus-secondary-select-methods '(nntp "freenews.netfront.net"))
-  ;;(add-to-list 'gnus-secondary-select-methods '(nntp "news.yaako.com"))
-  ;;(add-to-list 'gnus-secondary-select-methods '(nntp "news.newsfan.net"))
-  ;;(add-to-list 'gnus-secondary-select-methods '(nntp "news.CN99.com"))
-  ;;(add-to-list 'gnus-secondary-select-methods '(nntp
-  ;;"groups.google.com"))
-  
+  ;; NOTE: a list of free news servers
+  ;;       - news.cn99.com
+  ;;       - freenews.netfront.net
+  ;;       - news.aioe.org
+  ;;       - news.motzarella.org
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
   ;; 语言环境设定
