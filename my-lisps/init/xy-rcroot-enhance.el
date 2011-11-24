@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-24 Thu 05:06 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 20:30 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,6 +22,9 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
+
+;;* subword
+(global-subword-mode 1)
 
 ;;* ffap, finding Files and URLs at Point
 ;; REF: 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-24 Thu 19:44 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 21:32 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -521,14 +521,13 @@ the mode-line."
 ;;   '(autopair-settings))
 (am-add-hooks
  `(lisp-interaction-mode-hook lisp-mode-hook emacs-lisp-mode-hook
-   cperl-mode-hook cc-mode-hook
-   vhdl-mode-hook verilog-mode-hook
-   matlab-mode-hook
+   cperl-mode-hook cc-mode-hook c-mode-common-hook c-mode-hook
+   vhdl-mode-hook verilog-mode-hook matlab-mode-hook
    ;; org-mode-hook text-mode-hook
    )
  '(lambda ()
 	(require 'autopair)
-	(autopair-mode)))
+	(autopair-mode 1)))
 
 ;; ;; 输入左大花扩号自动补齐右大花括号
 ;; (eal-define-keys

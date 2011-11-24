@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-11-24 Thu 05:36 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 20:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,40 +21,57 @@
   "Settings for `cc-mode'."
    
   ;; (xy/set-font-default)
-  ;; (defalias 'cpp-mode 'c++-mode)
-
   ;; (require 'c-eldoc)
   ;; (autoload 'c-turn-on-eldoc-mode "c-eldoc" "Enable c-eldoc-mode" t nil)
   ;; (eval-after-load "c-eldoc" '(c-eldoc-settings))
-  
 
+  ;; 高亮显示C/C++中的可能的错误(CWarn mode)
+  (global-cwarn-mode 1)
+  
+  (c-set-offset 'inline-open 0)
+  (c-set-offset 'friend '-)
+  (c-set-offset 'substatement-open 0)
+  
   (defun c-mode-common-hook-settings ()
     "Settings for `c-mode-common-hook'."
 
     (c-set-style "awk")
     ;; 饥饿的删除键
-    (c-toggle-hungry-state)
+    (c-toggle-auto-hungry-state 1)
     ;; 对subword进行操作，而不是整个word
-    (subword-mode 1))
-  
-  (add-hook 'c-mode-hook
-			'(lambda ()
-			   (c-mode-common-hook-settings)
-			   (turn-on-auto-fill)
-			   ;; (require 'c-eldoc)
-			   ;; (c-turn-on-eldoc-mode)
-			   ;; (xy/yas-start)
-			   ;; (xy/linkd-start)
-			   ))
-  ;; (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
+    (c-subword-mode 1)
+	;;预处理设置
+	(setq c-macro-shrink-window-flag t)
+	(setq c-macro-preprocessor "cpp")
+	(setq c-macro-cppflags " ")
+	(setq c-macro-prompt-flag t)
+	(setq hs-minor-mode t)
+	(setq abbrev-mode t)
+	)
+  ;; (add-hook 'c-mode-common-hook
+  ;; 			'(lambda ()
+  ;; 			   (c-mode-common-hook-settings)
+  ;; 			   ;; (turn-on-auto-fill)
+  ;; 			   ;; (require 'c-eldoc)
+  ;; 			   ;; (c-turn-on-eldoc-mode)
+  ;; 			   ;; (xy/yas-start)
+  ;; 			   ;; (xy/linkd-start)
+  ;; 			   ))
+  (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
+
+  ;; C++语言编辑策略
+  (defun my-c++-mode-hook()
+	;; (setq tab-width 4 indent-tabs-mode nil)
+	(c-set-style "stroustrup")
+	;; (defalias 'cpp-mode 'c++-mode)
+	;; (define-key c++-mode-map [f3] 'replace-regexp)
+	)
+
   (add-to-list 'auto-mode-alist '("\\.hch" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.hcc" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 
   ;; (require 'kde-emacs-settings)
-
-  ;; 高亮显示C/C++中的可能的错误(CWarn mode)
-  (global-cwarn-mode 1)
 
   ;; 快速include一个系统/用户头文件
   ;; (mapc

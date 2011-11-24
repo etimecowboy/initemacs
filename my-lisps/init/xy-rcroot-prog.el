@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-24 Thu 13:22 xin on p6t>
+;; Time-stamp:<2011-11-24 Thu 21:16 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -633,17 +633,17 @@ See the documentation for these variables for more info.
 
 ;;** flymake
 ;; 动态检查语法错误
-;; (defvar flymake-mode-map (make-sparse-keymap))
-;; (autoload 'flymake-find-file-hook "flymake" "" t)
-;; (add-hook 'find-file-hook 'flymake-find-file-hook)
-;; (eval-after-load "flymake"
-;;   '(progn
-;; 	 (flymake-settings)
-;; 	 (eal-define-keys
-;; 	  'flymake-mode-map
-;; 	  `(("C-c N"   flymake-goto-next-error-disp)
-;; 		("C-c P"   flymake-goto-prev-error-disp)
-;; 		("C-c M-w" flymake-display-current-warning/error)))))
+(autoload 'flymake-find-file-hook "flymake" "" t)
+(add-hook 'find-file-hook 'flymake-find-file-hook)
+(eval-after-load "flymake"
+  '(progn
+	 (flymake-settings)
+	 ;; (eal-define-keys
+	 ;;  'flymake-mode-map
+	 ;;  `(("C-c N"   flymake-goto-next-error-disp)
+	 ;; 	("C-c P"   flymake-goto-prev-error-disp)
+	 ;; 	("C-c M-w" flymake-display-current-warning/error)))
+	 ))
 
 ;;--------------------------------------------------------------------
 

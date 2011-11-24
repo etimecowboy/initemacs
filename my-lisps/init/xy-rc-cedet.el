@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-23 Wed 03:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-24 Thu 22:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,8 @@
 ;;;###autoload
 (defun cedet-settings ()
   "Settings for `cedet'."
-
+  
+  ;; semantic
   ;; (semantic-load-enable-minimum-features)
   (semantic-load-enable-code-helpers)
   ;; (semantic-load-enable-gaudy-code-helpers)
@@ -44,8 +45,14 @@
            (global-semantic-show-parser-state-mode 1)))
   (ignore-errors (semantic-load-enable-primary-exuberent-ctags-support))
 
-  ;; (global-srecode-minor-mode 1)
+  ;;------------------------------------------------------------
 
+  ;; srecode
+  (global-srecode-minor-mode 1)
+
+  ;;------------------------------------------------------------
+
+  ;; ede
   (global-ede-mode 1)
 
   (when (executable-find "global")
