@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-25 Fri 01:09 xin on p6t>
+;; Time-stamp:<2011-11-25 Fri 15:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -124,8 +124,7 @@
 
 (eval-after-load "dired" 
   `(progn
-     (dired-settings)))
-
+    (dired-settings)))
 
 ;;---------------------------------------------------------------
 
@@ -185,8 +184,9 @@
 ;;-----------------------------------------------------------------------------
 
 ;;** image-dired
-(eval-after-load "image-dired"
-   `(image-dired-settings))
+(eval-after-load "image-dired" 
+  `(progn
+    (image-dired-settings)))
 
 ;;-----------------------------------------------------------------------------
 
@@ -213,8 +213,9 @@
 ;;** open-with
 ;; open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
-(eval-after-load "openwith"
-  `(openwith-settings))
+(eval-after-load "openwith" 
+  `(progn
+    (openwith-settings)))
 (GNULinux
   (openwith-mode 1))
 
@@ -254,10 +255,10 @@
 ;; 	 (egg-settings)))
 
 ;;*** magit
+(eval-after-load "magit" 
+  `(progn
+    (magit-settings)))
 (global-set-key [f11] 'magit-status)
-(setq magit-log-edit-mode-hook
-	  '(lambda ()
-		 (flyspell-mode 1)))
 
 ;;---------------------------------------------------------------------
 
