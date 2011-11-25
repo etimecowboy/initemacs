@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-11-23 Wed 23:01 xin on p6t>
+;; Time-stamp:<2011-11-25 Fri 01:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -65,7 +65,8 @@
   ;;   (setq ido-define-mode-map-hook 'ido-setup-hook))
 
   (setq-default ido-everywhere t)
-  ;; (ido-mode 'both)
+  ;; (require 'ido-ubiquitous)
+  ;; (ido-ubiquitous t)
   (setq-default ido-save-directory-list-file
 				(concat my-var-path "/ido-last-"
   						user-login-name "@"
@@ -86,6 +87,7 @@
   (setq ido-confirm-unique-completion t) ; wait for RET, even with;
 										; unique completion
   (setq ido-create-new-buffer 'always)
+  (ido-default-buffer-method  'selected-window)
   ;; when using ido, the confirmation is rather annoying...
   ;; (setq confirm-nonexistent-file-or-buffer nil)
 

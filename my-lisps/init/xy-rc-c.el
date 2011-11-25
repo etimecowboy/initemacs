@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-11-24 Thu 20:44 xin on p6t>
+;; Time-stamp:<2011-11-25 Fri 01:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,6 +31,9 @@
   (c-set-offset 'inline-open 0)
   (c-set-offset 'friend '-)
   (c-set-offset 'substatement-open 0)
+  (setq  ;; c-basic-offset 4
+         c-strict-syntax-p t
+		 c-syntactic-indentation t)
   
   (defun c-mode-common-hook-settings ()
     "Settings for `c-mode-common-hook'."

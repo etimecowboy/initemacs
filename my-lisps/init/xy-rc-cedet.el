@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-24 Thu 22:15 xin on p6t>
+;; Time-stamp:<2011-11-25 Fri 02:22 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -59,9 +59,18 @@
     (semanticdb-enable-gnu-global-databases 'c-mode)
     (semanticdb-enable-gnu-global-databases 'c++-mode)
     (setq ede-locate-setup-options '(ede-locate-global ede-locate-base)))
-  ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
 
+  ;;-------------------------------------------------------------
+  
+  ;; senator
+  ;; (global-senator-minor-mode -1)
+
+  ;;-------------------------------------------------------------
+
+  ;; More settings about semantic
+  
   (require 'semantic-c nil 'noerror)
+  ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
 
   (when (executable-find "gcc")
     (semantic-gcc-setup))
@@ -166,9 +175,30 @@
             ("m" . ("h"))
             ("mm" . ("h")))))
 
+  ;;-------------------------------------------------
+
+  ;; speedbar
+  (setq speedbar-use-images t
+		speedbar-track-mouse-flag nil
+		speedbar-update-flag nil
+		speedbar-show-unknown-files t
+		speedbar-directory-unshown-regexp
+		"^\\(CVS\\|RCS\\|SCCS\\|_darcs\\|\\.\\(git\\|hg\\|svn\\)\\)\\'")
+
+  (eval-after-load 'speedbar
+	'(progn
+	   ;; some dired-like bindings
+	   (define-key speedbar-key-map (kbd ";") 'speedbar-up-directory)
+	   (define-key speedbar-key-map (kbd "f") 'speedbar-edit-line)))
+
+  ;;---------------------------------------------------
+
   ;; zjl-hl, use semantic to highlight functions 
   ;; (require 'zjl-hl)
   ;; (zjl-hl-enable-global-all-modes)
+
+  ;;---------------------------------------------------
+
  )
 
 (provide 'xy-rc-cedet)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-14 Mon 17:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-25 Fri 02:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -70,6 +70,13 @@
 ;;   (defvar w3m-bookmark-buffer-name (concat w3m-buffer-name-prefix "-bookmark*") "Name of w3m buffer")
 ;;   (defvar w3m-dir (concat my-emacs-lisps-path "emacs-w3m/") "Dir of w3m.")
 
+  ;; (setq w3m-coding-system 'utf-8
+  ;; 		w3m-file-coding-system 'utf-8
+  ;; 		w3m-file-name-coding-system 'utf-8
+  ;; 		w3m-input-coding-system 'utf-8
+  ;; 		w3m-output-coding-system 'utf-8
+  ;; 		w3m-terminal-coding-system 'utf-8)
+  
   (setq w3m-add-tab-number t)
   (setq w3m-arrived-file "~/emacs/w3m/arrived")
   (setq w3m-bookmark-file "~/emacs/w3m/bookmark.html")
@@ -103,7 +110,17 @@
   (setq w3m-use-cookies t)
   (setq w3m-use-favicon nil)
   (setq w3m-use-mule-ucs t)
-  (setq w3m-view-this-url-new-session-in-background t))
+  (setq w3m-view-this-url-new-session-in-background t)
+
+  ;; (dolist (k '([right] [left] [up] [down]))
+  ;; 	(define-key w3m-mode-map k nil))
+
+  ;; (add-hook 'w3m-display-hook
+  ;; 			(lambda (url)
+  ;; 			  (rename-buffer
+  ;; 			   (format "*%s - w3m*" (or w3m-current-title
+  ;; 										w3m-current-url)) t)))
+  )
 
   
 ;;   (defun w3m-mode-settings ()
