@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 07:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -109,6 +109,10 @@
 
 ;;** savehist
 ;; (require 'savehist)
+(setq-default save-place-file (concat my-var-path "/savehist-"
+                                      user-login-name "@"
+                                      system-name "@"
+                                      system-configuration))
 (savehist-mode 1)
 (eval-after-load "savehist" `(savehist-settings))
 

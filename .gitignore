@@ -29,6 +29,7 @@ _region_*
 /tmp
 /auto*
 /server
+/url
 *.ADAPT
 *.asv
 *.session*

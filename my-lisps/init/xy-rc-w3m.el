@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-26 Sat 03:04 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 05:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -235,8 +235,8 @@
 
   (setq w3m-default-coding-system   'utf-8
         w3m-coding-system           'utf-8
-          w3m-input-coding-system     'utf-8
-          w3m-output-coding-system    'utf-8
+        w3m-input-coding-system     'utf-8
+        w3m-output-coding-system    'utf-8
         w3m-file-coding-system      'utf-8
         w3m-file-name-coding-system 'utf-8
         w3m-terminal-coding-system  'utf-8)

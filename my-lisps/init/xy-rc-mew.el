@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-11-26 Sat 03:00 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 06:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,19 +17,20 @@
 (require 'xy-rc-utils)
 
 ;; REF:
-;;   - [[http://everyjoe.com/technology/using-mew-as-a-mail-client/?utm_source=everyjoe&utm_medium=web&utm_campaign=b5hubs_migration]]
-;;   - [[http://www.mew.org/pipermail/mew-int/2009-July/002217.html]]
-;;   - [[http://baiyhome.spaces.live.com/blog/cns!6CC0192DC1074113!256.entry]]
-;;   - [[http://bigclean.is-programmer.com/posts/18038.html]]
-;;   - [[http://www.zeuux.com/blog/content/2858/]]
-;;   - [[http://zerodoo.appspot.com/emacs.mew.1.0001.html]
+;;   - http://everyjoe.com/technology/using-mew-as-a-mail-client/?utm_source=everyjoe&utm_medium=web&utm_campaign=b5hubs_migration
+;;   - http://www.mew.org/pipermail/mew-int/2009-July/002217.html
+;;   - http://baiyhome.spaces.live.com/blog/cns!6CC0192DC1074113!256.entry
+;;   - http://bigclean.is-programmer.com/posts/18038.html
+;;   - http://www.zeuux.com/blog/content/2858/
+;;   - http://zerodoo.appspot.com/emacs.mew.1.0001.htm
 
 ;;;###autoload
 (defun mew-settings ()
   "Settings of `Mew'."
 
   ;; 编码设置，用 utf-8 发送邮件
-  ;; NOTE:经测试好像不需要。全英文时 Mew 用 ascii 编码，有中文时用 UTF-8
+  ;; NOTE: 经测试好像不需要。全英文时 Mew 用 ascii 编码，有中文时用
+  ;; UTF-8
   ;; (setq mew-charset-m17n "utf-8")
   ;; (setq mew-internal-utf-8p t)
 
@@ -88,7 +89,8 @@
   ;; (setq mew-use-highlight-mouse-line t)
   (setq mew-icon-directory "~/.emacs.d/icons/mew")
 
-  ;; html邮件相关设置
+  ;; html邮件相关设置（使用w3m）
+  (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
   (setq mew-prog-text/html         'mew-mime-text/html-w3m) ;; See w3m.el
   ;; (setq mew-prog-text/html-ext     "/usr/bin/firefox")
   (setq mew-prog-text/xml         'mew-mime-text/html-w3m) ;; See w3m.el
@@ -96,17 +98,12 @@
   (setq mew-prog-application/xml         'mew-mime-text/html-w3m)
   ;; (setq mew-prog-application/xml-ext     "/usr/bin/firefox")
   ;; (setq mew-prog-application/X-Dvi         "/usr/bin/xdvi")
-  ;; Linux 使用w3m
-  ;; (GNULinux
-  (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
-  (condition-case nil
-      (require 'mew-w3m)
-    (file-error nil))
-  (setq mew-use-w3m-minor-mode 1)
-  (add-hook 'mew-message-hook 'mew-w3m-minor-mode-setter)
-  (define-key mew-summary-mode-map "T" 'mew-w3m-view-inline-image)
-  (setq mew-w3m-auto-insert-image t)
-  ;; )
+  (when (try-require 'mew-w3m)
+    (setq mew-use-w3m-minor-mode 1)
+    (add-hook 'mew-message-hook 'mew-w3m-minor-mode-setter)
+    (define-key mew-summary-mode-map "T" 'mew-w3m-view-inline-image)
+    (setq mew-w3m-auto-insert-image t)
+    )
 
   ;; set signature
   ;; (setq mew-signature-file "~/.emacs.d/var/mew/signature")

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 07:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,13 +17,18 @@
 (require 'xy-rc-utils)
 
 ;;----------------------------------------------------------------------
+;;* url
+(eval-after-load "w3m"
+`(progn
+   (w3m-settings)))
 
 ;;* w3m
 ;; Emacs中的文本浏览器w3m
 ;; http://emacser.com/w3m.htm
 ;; (require 'w3m-load)
 (eval-after-load "w3m"
-  `(w3m-settings))
+  `(progn
+     (w3m-settings)))
 ;; (setq w3m-use-favicon nil)
 ;; (setq w3m-command-arguments '("-cookie" "-F"))
 ;; (setq w3m-use-cookies t)
