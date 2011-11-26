@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-11-24 Thu 14:27 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -56,15 +56,15 @@
             (lambda ()
               (org-set-local 'yas/trigger-key "<tab>")
               (define-key yas/keymap "<tab>" 'yas/next-field-group)))
-  ;; A workaround is to inhibit flyspell overlays 
+  ;; A workaround is to inhibit flyspell overlays
   ;; while the snippet is active:
   (add-hook 'flyspell-incorrect-hook
             #'(lambda (dummy1 dummy2 dymmy3)
                 (and yas/active-field-overlay
                      (overlay-buffer yas/active-field-overlay))))
-  
+
   ;; (yasnippet-unbind-trigger-key)
   (add-hook 'after-save-hook 'yasnippet-reload-after-save)
-  (yas/load-directory yas/root-directory))  
+  (yas/load-directory yas/root-directory))
 
 (provide 'xy-rc-yasnippet)

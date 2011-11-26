@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-pulse.el'
-;; Time-stamp:<2011-11-22 Tue 18:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,8 +54,8 @@
 
   (custom-set-faces
    '(pulse-highlight-start-face
-	 ((((class color) (min-colors 88) (background dark)) :background "#AAAA33")
-	  (((class color) (min-colors 88) (background light)) :background "#FFFFAA")
-	  (((class color) (min-colors 8)) :background "blue" :foreground "red")))))
+     ((((class color) (min-colors 88) (background dark)) :background "#AAAA33")
+      (((class color) (min-colors 88) (background light)) :background "#FFFFAA")
+      (((class color) (min-colors 8)) :background "blue" :foreground "red")))))
 
 (provide 'xy-rc-pulse)

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-11-25 Fri 01:49 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,7 @@
 ;;;###autoload
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."
-   
+
   ;; (xy/set-font-default)
   ;; (require 'c-eldoc)
   ;; (autoload 'c-turn-on-eldoc-mode "c-eldoc" "Enable c-eldoc-mode" t nil)
@@ -27,14 +27,14 @@
 
   ;; 高亮显示C/C++中的可能的错误(CWarn mode)
   (global-cwarn-mode 1)
-  
+
   (c-set-offset 'inline-open 0)
   (c-set-offset 'friend '-)
   (c-set-offset 'substatement-open 0)
   (setq  ;; c-basic-offset 4
          c-strict-syntax-p t
-		 c-syntactic-indentation t)
-  
+         c-syntactic-indentation t)
+
   (defun c-mode-common-hook-settings ()
     "Settings for `c-mode-common-hook'."
 
@@ -43,32 +43,32 @@
     (c-toggle-auto-hungry-state 1)
     ;; 对subword进行操作，而不是整个word
     (c-subword-mode 1)
-	;;预处理设置
-	(setq c-macro-shrink-window-flag t)
-	(setq c-macro-preprocessor "cpp")
-	(setq c-macro-cppflags " ")
-	(setq c-macro-prompt-flag t)
-	(setq hs-minor-mode t)
-	(setq abbrev-mode t)
-	)
+    ;;预处理设置
+    (setq c-macro-shrink-window-flag t)
+    (setq c-macro-preprocessor "cpp")
+    (setq c-macro-cppflags " ")
+    (setq c-macro-prompt-flag t)
+    (setq hs-minor-mode t)
+    (setq abbrev-mode t)
+    )
   ;; (add-hook 'c-mode-common-hook
-  ;; 			'(lambda ()
-  ;; 			   (c-mode-common-hook-settings)
-  ;; 			   ;; (turn-on-auto-fill)
-  ;; 			   ;; (require 'c-eldoc)
-  ;; 			   ;; (c-turn-on-eldoc-mode)
-  ;; 			   ;; (xy/yas-start)
-  ;; 			   ;; (xy/linkd-start)
-  ;; 			   ))
+  ;;             '(lambda ()
+  ;;                (c-mode-common-hook-settings)
+  ;;                ;; (turn-on-auto-fill)
+  ;;                ;; (require 'c-eldoc)
+  ;;                ;; (c-turn-on-eldoc-mode)
+  ;;                ;; (xy/yas-start)
+  ;;                ;; (xy/linkd-start)
+  ;;                ))
   (add-hook 'c-mode-common-hook 'c-mode-common-hook-settings)
 
   ;; C++语言编辑策略
   (defun my-c++-mode-hook()
-	;; (setq tab-width 4 indent-tabs-mode nil)
-	(c-set-style "stroustrup")
-	;; (defalias 'cpp-mode 'c++-mode)
-	;; (define-key c++-mode-map [f3] 'replace-regexp)
-	)
+    ;; (setq tab-width 4 indent-tabs-mode nil)
+    (c-set-style "stroustrup")
+    ;; (defalias 'cpp-mode 'c++-mode)
+    ;; (define-key c++-mode-map [f3] 'replace-regexp)
+    )
 
   (add-to-list 'auto-mode-alist '("\\.hch" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.hcc" . c-mode))
@@ -101,7 +101,7 @@
    (lambda (mode)
    (define-abbrev-table mode '(("incd" "" skeleton-include 1))))
    '(c-mode-abbrev-table c++-mode-abbrev-table))
-  
+
   (define-skeleton skeleton-include
     "产生#include\"\"" "" > "#include \""
     (completing-read "包含用户头文件: "

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-moccur.el'
-;; Time-stamp:<2011-11-16 Wed 11:49 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,9 +52,9 @@
   (occur-by-moccur regexp arg)
   (let ((buffer (get-buffer "*Moccur*")))
     (if buffer
-	(with-current-buffer buffer
-	  (linum-mode 1)
-	  (moccur-my-keys)))))
+    (with-current-buffer buffer
+      (linum-mode 1)
+      (moccur-my-keys)))))
 
 ;;;###autoload
 (defun isearch-moccur-displn ()
@@ -63,9 +63,9 @@
   (isearch-moccur)
   (let ((buffer (get-buffer "*Moccur*")))
     (if buffer
-	(with-current-buffer buffer
-	  (linum-mode 1)
-	  (moccur-my-keys)))))
+    (with-current-buffer buffer
+      (linum-mode 1)
+      (moccur-my-keys)))))
 
 ;;;###autoload
 (defun moccur-disp-cur-line ()

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
-;; Time-stamp:<2011-11-23 Wed 23:42 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,7 @@
   ;; (setq appt-display-diary nil)
 
   (setq appt-time-msg-list nil)
-  
+
   (setq appt-audible t)
 
   ;; use echo notification when in terminal
@@ -43,21 +43,21 @@
   (setq appt-display-mode-line t)
 
   ;; (setq appt-disp-window-function (function rgr/org-display))
-  
-  (when window-system
-  	(setq appt-display-format 'window)
-	(setq appt-disp-window-function (function todochiku-appt-disp-window)))
 
-	;; (setq appt-disp-window-function (function rgr/org-display))
-	;; ;; FIXME Check `notify-send' (in `libnotify-bin' Ubuntu package) is installed
-	;; (defun rgr/org-display (min-to-app new-time msg)
-	;;   (shell-command
-	;;    (concat "notify-send "
-	;; 		   "-i /usr/share/icons/gnome/32x32/status/appointment-soon.png "
-	;; 		   "'Appointment' "
-	;; 		   "'" msg "'")))
-	;; ;; TODO For Windows users: use `todochicku.el' and the snarl
-	;; notifier
+  (when window-system
+    (setq appt-display-format 'window)
+    (setq appt-disp-window-function (function todochiku-appt-disp-window)))
+
+  ;; (setq appt-disp-window-function (function rgr/org-display))
+  ;; ;; FIXME Check `notify-send' (in `libnotify-bin' Ubuntu package) is installed
+  ;; (defun rgr/org-display (min-to-app new-time msg)
+  ;;   (shell-command
+  ;;    (concat "notify-send "
+  ;;            "-i /usr/share/icons/gnome/32x32/status/appointment-soon.png "
+  ;;            "'Appointment' "
+  ;;            "'" msg "'")))
+  ;; ;; TODO For Windows users: use `todochicku.el' and the snarl
+  ;; notifier
 
   ;; turn appointment checking on
   ;; (appt-activate 1)

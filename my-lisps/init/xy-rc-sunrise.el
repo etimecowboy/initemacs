@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sunrise.el'
-;; Time-stamp:<2011-08-09 Tue 08:29 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,8 +24,8 @@
   (setq sr-window-split-style 'vertical)
   (setq sr-start-hook
    (quote (sr-tree-menu-init
-		   sr-tabs-start-once
-		   sr-modeline-start-once)))
+           sr-tabs-start-once
+           sr-modeline-start-once)))
   (require 'sunrise-x-tree))
 
 (provide 'xy-rc-sunrise)

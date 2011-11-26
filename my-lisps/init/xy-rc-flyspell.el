@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-flyspell.el'
-;; Time-stamp:<2011-01-29 Sat 01:37 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:57 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,8 +19,8 @@
 ;;;###autoload
 (defun my-flyspell-ignore-uppercase (beg end &rest rest)
   (while (and (< beg end)
-	      (let ((c (char-after beg)))
-		(not (= c (downcase c)))))
+          (let ((c (char-after beg)))
+        (not (= c (downcase c)))))
     (setq beg (1+ beg)))
   (= beg end))
 

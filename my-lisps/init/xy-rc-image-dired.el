@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-image-dired+.el'
-;; Time-stamp:<2011-08-09 Tue 08:23 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,20 +27,20 @@
    (setq image-dired-main-image-directory "~/My Pictures"))
   (setq image-dired-db-file
         (concat image-dired-dir "/image-dired_db-"
-				user-login-name "@"
-				system-name "@"
-				system-configuration))
+                user-login-name "@"
+                system-name "@"
+                system-configuration))
   (setq image-dired-temp-image-file
-		(concat image-dired-dir "/image-dired_temp-"
-				user-login-name "@"
-				system-name "@"
-				system-configuration))
-  (setq image-file-name-extensions 
-        '("png"  "PNG"  "jpeg" "JPEG" "jpg" "JPG" 
+        (concat image-dired-dir "/image-dired_temp-"
+                user-login-name "@"
+                system-name "@"
+                system-configuration))
+  (setq image-file-name-extensions
+        '("png"  "PNG"  "jpeg" "JPEG" "jpg" "JPG"
           "gif"  "GIF"  "bmp"  "BMP"
-          "tiff" "TIFF" "tif"  "TIF"  "xbm" "XBM" 
-          "xpm"  "XPM"  "pbm"  "PBM"  "pgm" "PGM" 
-          "ppm"  "PPM"  "pnm"  "PNM" 
+          "tiff" "TIFF" "tif"  "TIF"  "xbm" "XBM"
+          "xpm"  "XPM"  "pbm"  "PBM"  "pgm" "PGM"
+          "ppm"  "PPM"  "pnm"  "PNM"
           "svg"  "SVG"  "eps"  "EPS")))
 
 (provide 'xy-image-dired+)

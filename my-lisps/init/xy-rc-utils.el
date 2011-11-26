@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-24 Thu 18:54 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:03 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -71,32 +71,32 @@
 (defmacro OfficePC (&rest body)
   (list
    'if (string-match
-		"brl" (prin1-to-string (downcase system-name)))
+        "brl" (prin1-to-string (downcase system-name)))
    (cons 'progn body)))
 (defmacro HomeDesktop (&rest body)
   (list
    'if (string-match
-		"p6t" (prin1-to-string (downcase system-name)))
+        "p6t" (prin1-to-string (downcase system-name)))
    (cons 'progn body)))
 (defmacro Laptop (&rest body)
   (list
    'if (string-match
-		"t42" (prin1-to-string (downcase system-name)))
+        "t42" (prin1-to-string (downcase system-name)))
    (cons 'progn body)))
 
 ;;*** OS type --- are we running GNU Linux?
 (defmacro GNULinux (&rest body)
   (list
    'if (string-match
-		"linux" (prin1-to-string system-type))
+        "linux" (prin1-to-string system-type))
    (cons 'progn body)))
 (defmacro Windows (&rest body)
   (list
    'if (string-match
-		"windows" (prin1-to-string system-type))
+        "windows" (prin1-to-string system-type))
    (cons 'progn body)))
 
-;;*** Graphic mode --- are we running any window system ? 
+;;*** Graphic mode --- are we running any window system ?
 (defmacro XLaunch (&rest body)
   (list 'if (eq window-system 'x)(cons 'progn body)))
 
@@ -203,13 +203,13 @@
 ;; you have to restart Emacs.
 ;; When using `load', Emacs will load every setting files.
 ;;;###autoload
-(defun load-dot-emacs-file () 
+(defun load-dot-emacs-file ()
   (interactive)
   (load-file "~/.emacs.d/init.el"))
 
 ;; Open init file
 ;;;###autoload
-(defun open-init-dot-el-file () 
+(defun open-init-dot-el-file ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
@@ -250,8 +250,8 @@ Do it recursively if the third argument is not nil."
 
 ;;;###autoload
 (defun fni/add-to-image-load-path (this-directory &optional with-subdirs recursive)
-  "Add THIS-DIRECTORY at the beginning of the image-load-path, 
-if it exists. Add all its subdirectories not starting with a '.' 
+  "Add THIS-DIRECTORY at the beginning of the image-load-path,
+if it exists. Add all its subdirectories not starting with a '.'
 if the optional argument WITH-SUBDIRS is not nil.
 Do it recursively if the third argument is not nil."
   (when (and this-directory
@@ -627,7 +627,7 @@ KEY is a string or vector representing a sequence of keystrokes."
 ;;** 产生带上 font size 信息的 font 描述文本
 ;;;###autoload
 (defun qiang-make-font-string (font-name font-size)
-  (if (and (stringp font-size) 
+  (if (and (stringp font-size)
            (equal ":" (string (elt font-size 0))))
       (format "%s%s" font-name font-size)
     (format "%s %s" font-name font-size)))
@@ -659,9 +659,9 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
         (zh-font
          (font-spec :family (find-if #'qiang-font-existsp chinese-fonts)
                     :size chinese-font-size)))
-    
+
     ;; Set the default English font
-    ;; 
+    ;;
     ;; The following 2 method cannot make the font settig work in new frames.
     ;; (set-default-font "Consolas:pixelsize=18")
     ;; (add-to-list 'default-frame-alist '(font . "Consolas:pixelsize=18"))
@@ -669,17 +669,17 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     (message "Set English Font to %s" en-font)
     (set-face-attribute
      'default nil :font en-font)
-    
-    ;; Set Chinese font 
+
+    ;; Set Chinese font
     ;; Do not use 'unicode charset, it will cause the english font invalid
     (message "Set Chinese Font to %s" zh-font)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font) charset zh-font))))
 
 ;; (qiang-set-font
-;;  '("Consolas" "Monaco" "DejaVu Sans Mono" "Monospace" 
+;;  '("Consolas" "Monaco" "DejaVu Sans Mono" "Monospace"
 ;;    "Courier New" "Courier") ":pixelsize=14"
-;;    '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
+;;    '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
 ;;      "黑体" "新宋体" "宋体") 16)
 
 ;;;###autoload
@@ -689,8 +689,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (if window-system
       (qiang-set-font
        '("DejaVu Sans Mono" "Monaco" "Consolas"
-		 "Monospace" "Courier") ":pixelsize=12"
-         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
+         "Monospace" "Courier") ":pixelsize=12"
+         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
            "黑体") 14)
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 11")))
@@ -702,8 +702,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (if window-system
       (qiang-set-font
        '("DejaVu Sans Mono" "Monaco" "Consolas"
-		 "Monospace" "Courier") ":pixelsize=10"
-         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
+         "Monospace" "Courier") ":pixelsize=10"
+         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
            "黑体") 12)
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 9")))
@@ -713,12 +713,12 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   "My Emacs font setting for writing articles."
   (interactive)
   (if window-system
-	  (qiang-set-font
-	   '("Monaco" "DejaVu Sans Mono" "Consolas"
-		 "Monospace" "Courier") ":pixelsize=14"
-		 '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑" 
-		   "黑体") 16)
-	(set-default-font "Monospace 12")))
+      (qiang-set-font
+       '("Monaco" "DejaVu Sans Mono" "Consolas"
+         "Monospace" "Courier") ":pixelsize=14"
+         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
+           "黑体") 16)
+    (set-default-font "Monospace 12")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -786,7 +786,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
             `(defun ,name ,arglist ,docstring
                ,@(cond-emacs-xemacs-macfn definition))
           ;; no dynamic docstring in this case
-          `(eval-and-compile		; no warnings in Emacs
+          `(eval-and-compile        ; no warnings in Emacs
              (defalias ',name
                (cond ,@(mapcar (lambda (func) `((fboundp ',func) ',func))
                                (nreverse reuses))
@@ -804,51 +804,51 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (when is-before-emacs-21
     '(progn
        (defun line-number-at-pos (&optional pos)
-	 "Return (narrowed) buffer line number at position POS.
+     "Return (narrowed) buffer line number at position POS.
 If POS is nil, use current buffer location.
 Counting starts at (point-min), so the value refers
 to the contents of the accessible portion of the buffer."
-	 (let ((opoint (or pos (point))) start)
-	   (save-excursion
-	     (goto-char (point-min))
-	     (setq start (point))
-	     (goto-char opoint)
-	     (forward-line 0)
-	     (1+ (count-lines start (point))))))
+     (let ((opoint (or pos (point))) start)
+       (save-excursion
+         (goto-char (point-min))
+         (setq start (point))
+         (goto-char opoint)
+         (forward-line 0)
+         (1+ (count-lines start (point))))))
 
 
        (defun looking-back (regexp &optional limit greedy)
-	 "Return non-nil if text before point matches regular 
-expression REGEXP. Like `looking-at' except matches before point, 
-and is slower. LIMIT if non-nil speeds up the search by specifying 
-a minimum starting position, to avoid checking matches that would 
+     "Return non-nil if text before point matches regular
+expression REGEXP. Like `looking-at' except matches before point,
+and is slower. LIMIT if non-nil speeds up the search by specifying
+a minimum starting position, to avoid checking matches that would
 start before LIMIT.
 
 If GREEDY is non-nil, extend the match backwards as far as possible,
 stopping when a single additional previous character cannot be part
 of a match for REGEXP."
-	 (let ((start (point))
-	       (pos
-		(save-excursion
-		  (and (re-search-backward 
-			(concat "\\(?:" regexp "\\)\\=") limit t)
-		       (point)))))
-	   (if (and greedy pos)
-	       (save-restriction
-		 (narrow-to-region (point-min) start)
-		 (while (and (> pos (point-min))
-			     (save-excursion
-			       (goto-char pos)
-			       (backward-char 1)
-			       (looking-at (concat 
-					    "\\(?:"  
-					    regexp 
-					    "\\)\\'"))))
-		   (setq pos (1- pos)))
-		 (save-excursion
-		   (goto-char pos)
-		   (looking-at (concat "\\(?:"  regexp "\\)\\'")))))
-	   (not (null pos))))
+     (let ((start (point))
+           (pos
+        (save-excursion
+          (and (re-search-backward
+            (concat "\\(?:" regexp "\\)\\=") limit t)
+               (point)))))
+       (if (and greedy pos)
+           (save-restriction
+         (narrow-to-region (point-min) start)
+         (while (and (> pos (point-min))
+                 (save-excursion
+                   (goto-char pos)
+                   (backward-char 1)
+                   (looking-at (concat
+                        "\\(?:"
+                        regexp
+                        "\\)\\'"))))
+           (setq pos (1- pos)))
+         (save-excursion
+           (goto-char pos)
+           (looking-at (concat "\\(?:"  regexp "\\)\\'")))))
+       (not (null pos))))
        ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -859,13 +859,13 @@ of a match for REGEXP."
 
 ;;;###autoload
 (defun xy/recompile-dir (this-directory &optional with-subdirs recursive)
-  "Recompile all files in THIS-DIRECTORY which are newer than their 
-corresponding .elc files. 
+  "Recompile all files in THIS-DIRECTORY which are newer than their
+corresponding .elc files.
 
-Provide WITH-SUBDIRS and RECURSIVE options to allow recursive 
+Provide WITH-SUBDIRS and RECURSIVE options to allow recursive
 operation when you use it in non-interatively manner, but without
 directories starting with a `.'."
-  
+
   ;; (require 'bytecomp)
   (interactive (list (read-file-name "Source directory: ")))
 
@@ -879,17 +879,17 @@ directories starting with a `.'."
         (setq this-directory (expand-file-name this-directory)))
 
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
-	(while files
-	  (let ((srcfile (car files))
-		(dstfile (concat (car files) "c")))
-	    (if (or (not (file-exists-p dstfile)) 
-		    (file-newer-than-file-p srcfile dstfile))
-		(progn 
-		  (byte-compile-file srcfile)
-		  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
-	      (message "* ---[ `%s' exists and is newer. ]---" dstfile)))
-	  (setq files (cdr files))))
-  
+    (while files
+      (let ((srcfile (car files))
+        (dstfile (concat (car files) "c")))
+        (if (or (not (file-exists-p dstfile))
+            (file-newer-than-file-p srcfile dstfile))
+        (progn
+          (byte-compile-file srcfile)
+          (message "* ---[ Byte compiling `%s'... ]---" srcfile))
+          (message "* ---[ `%s' exists and is newer. ]---" dstfile)))
+      (setq files (cdr files))))
+
       (when with-subdirs
         (while files
           (setq dir-or-file (car files))
@@ -901,12 +901,12 @@ directories starting with a `.'."
 
 ;;;###autoload
 (defun xy/update-all-autoloads (this-directory &optional with-subdirs recursive)
-  "Update the autoloads cache file for THIS-DIRECTORY, if there are 
+  "Update the autoloads cache file for THIS-DIRECTORY, if there are
 newer .el files. The file name of the autoloads cache is like
-`loaddefs@!home!user!.emacs.d!lisps.el', which is built from the 
+`loaddefs@!home!user!.emacs.d!lisps.el', which is built from the
 full path of the directory.
 
-Provide WITH-SUBDIRS and RECURSIVE options to allow recursive 
+Provide WITH-SUBDIRS and RECURSIVE options to allow recursive
 operation when you use it in non-interatively manner, but without
 directories starting with a `.'."
 
@@ -923,64 +923,64 @@ directories starting with a `.'."
       (while (not (string= this-directory (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
-      (setq generated-autoload-file 
-			(concat this-directory "/loaddefs@" 
-					(subst-char-in-string ?/ ?! 
-						(subst-char-in-string ?: ?! this-directory)) ".el"))
+      (setq generated-autoload-file
+            (concat this-directory "/loaddefs@"
+                    (subst-char-in-string ?/ ?!
+                        (subst-char-in-string ?: ?! this-directory)) ".el"))
       (setq update-flag nil)
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
-		(while files
-		  (let ((srcfile (car files))
-				(dstfile (concat (car files) "c")))
-			(if (or (not (file-exists-p generated-autoload-file))
-					(not (file-exists-p dstfile))
-					(file-newer-than-file-p srcfile dstfile)
-					(file-newer-than-file-p srcfile generated-autoload-file)
-					(file-newer-than-file-p dstfile generated-autoload-file))
-				(setq update-flag t))
-			(setq files (cdr files))))
+        (while files
+          (let ((srcfile (car files))
+                (dstfile (concat (car files) "c")))
+            (if (or (not (file-exists-p generated-autoload-file))
+                    (not (file-exists-p dstfile))
+                    (file-newer-than-file-p srcfile dstfile)
+                    (file-newer-than-file-p srcfile generated-autoload-file)
+                    (file-newer-than-file-p dstfile generated-autoload-file))
+                (setq update-flag t))
+            (setq files (cdr files))))
 
-		(if update-flag
-			(progn
-			  (cond ((fboundp 'update-autoloads-from-directory)
-					 (update-autoloads-from-directory this-directory))
-					((fboundp 'update-autoloads-from-directories)
-					 (update-autoloads-from-directories this-directory))
-					((fboundp 'update-directory-autoloads)
-					 (update-directory-autoloads this-directory)))
-			  (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
-		  (message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
-		
-		(load-file generated-autoload-file)
-		(message "* ---[ Loading `%s'... ]---" generated-autoload-file))
-	  
+        (if update-flag
+            (progn
+              (cond ((fboundp 'update-autoloads-from-directory)
+                     (update-autoloads-from-directory this-directory))
+                    ((fboundp 'update-autoloads-from-directories)
+                     (update-autoloads-from-directories this-directory))
+                    ((fboundp 'update-directory-autoloads)
+                     (update-directory-autoloads this-directory)))
+              (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
+          (message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
+
+        (load-file generated-autoload-file)
+        (message "* ---[ Loading `%s'... ]---" generated-autoload-file))
+
       (when with-subdirs
         (while files
           (setq dir-or-file (car files))
           (when (file-directory-p dir-or-file)
             (if recursive
-                (xy/install-all-lisps dir-or-file 
-									  'with-subdirs 'recursive)
+                (xy/install-all-lisps dir-or-file
+                                      'with-subdirs 'recursive)
               (xy/install-all-lisps dir-or-file)))
           (setq files (cdr files)))))))
 
 ;;;###autoload
 (defun xy/install-all-lisps (this-directory &optional with-subdirs recursive)
-  "Install all the lisps in THIS-DIRECTORY. 
+  "Install all the lisps in THIS-DIRECTORY.
 
 The process is:
 
 1. Add THIS-DIRECTORY to the load-path;
-2. Update the autoloads cache file for THIS-DIRECTORY, if there are 
+2. Update the autoloads cache file for THIS-DIRECTORY, if there are
 newer .el files. The file name of the autoloads cache is like
-`loaddefs@!home!user!.emacs.d!lisps.el', which is built from the 
+`loaddefs@!home!user!.emacs.d!lisps.el', which is built from the
 full path of the directory;
 3. Load the autoloads cache file.
 
-Provide WITH-SUBDIRS and RECURSIVE options to allow recursive 
+Provide WITH-SUBDIRS and RECURSIVE options to allow recursive
 operation when you use it in non-interatively manner, but without
 directories starting with a `.'."
-  
+
   ;; (require 'bytecomp)
   ;; (require 'autoload)
   (interactive (list (read-file-name "Source directory: ")))
@@ -994,63 +994,63 @@ directories starting with a `.'."
       (while (not (string= this-directory (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
-      (setq generated-autoload-file 
-	    (concat this-directory "/loaddefs@" 
-		    (subst-char-in-string ?/ ?! 
-			(subst-char-in-string ?: ?! this-directory)) ".el"))
+      (setq generated-autoload-file
+        (concat this-directory "/loaddefs@"
+            (subst-char-in-string ?/ ?!
+            (subst-char-in-string ?: ?! this-directory)) ".el"))
       (setq update-flag nil)
       (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
-	(while files
-	  (let ((srcfile (car files))
-		(dstfile (concat (car files) "c")))
+    (while files
+      (let ((srcfile (car files))
+        (dstfile (concat (car files) "c")))
 
-	    (if (or (not (file-exists-p dstfile)) 
-		    (file-newer-than-file-p srcfile dstfile))
-		(progn 
-		  (byte-compile-file srcfile)
-		  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
-	      (message "* ---[ `%s' exists and is newer. ]---" dstfile))
+        (if (or (not (file-exists-p dstfile))
+            (file-newer-than-file-p srcfile dstfile))
+        (progn
+          (byte-compile-file srcfile)
+          (message "* ---[ Byte compiling `%s'... ]---" srcfile))
+          (message "* ---[ `%s' exists and is newer. ]---" dstfile))
 
-	    (if (or (not (file-exists-p generated-autoload-file))
-		    (not (file-exists-p dstfile))
-		    (file-newer-than-file-p srcfile dstfile)
-		    (file-newer-than-file-p srcfile generated-autoload-file)
-		    (file-newer-than-file-p dstfile generated-autoload-file))
-		(setq update-flag (or update-flag t)))
-	    (setq files (cdr files))))
+        (if (or (not (file-exists-p generated-autoload-file))
+            (not (file-exists-p dstfile))
+            (file-newer-than-file-p srcfile dstfile)
+            (file-newer-than-file-p srcfile generated-autoload-file)
+            (file-newer-than-file-p dstfile generated-autoload-file))
+        (setq update-flag (or update-flag t)))
+        (setq files (cdr files))))
 
-	(when update-flag ;; t
-	    (progn
-	      (cond ((fboundp 'update-autoloads-from-directory)
-		     (update-autoloads-from-directory this-directory))
-		    ((fboundp 'update-autoloads-from-directories)
-		     (update-autoloads-from-directories this-directory))
-		    ((fboundp 'update-directory-autoloads)
-		     (update-directory-autoloads this-directory)))
-	      (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
-	  (message "* ---[ `%s' exists and is newer. ]---"
-	    generated-autoload-file))
-      
-	(load-file generated-autoload-file)
-	(message "* ---[ Loading `%s'... ]---" generated-autoload-file))
-	    
+    (when update-flag ;; t
+        (progn
+          (cond ((fboundp 'update-autoloads-from-directory)
+             (update-autoloads-from-directory this-directory))
+            ((fboundp 'update-autoloads-from-directories)
+             (update-autoloads-from-directories this-directory))
+            ((fboundp 'update-directory-autoloads)
+             (update-directory-autoloads this-directory)))
+          (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
+      (message "* ---[ `%s' exists and is newer. ]---"
+        generated-autoload-file))
+
+    (load-file generated-autoload-file)
+    (message "* ---[ Loading `%s'... ]---" generated-autoload-file))
+
       (when with-subdirs
         (while files
           (setq dir-or-file (car files))
           (when (file-directory-p dir-or-file)
             (if recursive
-                (xy/install-all-lisps dir-or-file 
-				      'with-subdirs 'recursive)
+                (xy/install-all-lisps dir-or-file
+                      'with-subdirs 'recursive)
               (xy/install-all-lisps dir-or-file)))
           (setq files (cdr files)))))))
 
 ;;;###autoload
 (defun xy/load-autoload (this-directory)
-  "Install all the lisps in THIS-DIRECTORY. 
+  "Install all the lisps in THIS-DIRECTORY.
 The process is:
   1. Add THIS-DIRECTORY to the load-path;
   2. Load the autoloads cache file."
-  
+
   ;; (require 'bytecomp)
   ;; (require 'autoload)
   (interactive (list (read-file-name "Source directory: ")))
@@ -1064,18 +1064,18 @@ The process is:
       (while (not (string= this-directory (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
-      (setq generated-autoload-file 
-			(concat this-directory "/loaddefs@" 
-					(subst-char-in-string ?/ ?! 
-					   (subst-char-in-string ?: ?! this-directory))
-			        ".el"))
-	  (if (not (file-exists-p generated-autoload-file))
-		  (message "* ---[ Autoload file `%s' does not exist]"
-			generated-autoload-file)
-		;; (add-to-list 'load-path this-directory)
-		;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
-		(load-file generated-autoload-file)
-		(message "* ---[ Loading `%s'... ]---" generated-autoload-file)))))
+      (setq generated-autoload-file
+            (concat this-directory "/loaddefs@"
+                    (subst-char-in-string ?/ ?!
+                       (subst-char-in-string ?: ?! this-directory))
+                    ".el"))
+      (if (not (file-exists-p generated-autoload-file))
+          (message "* ---[ Autoload file `%s' does not exist]"
+            generated-autoload-file)
+        ;; (add-to-list 'load-path this-directory)
+        ;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
+        (load-file generated-autoload-file)
+        (message "* ---[ Loading `%s'... ]---" generated-autoload-file)))))
 
 ;;;###autoload
 (defun xy/done ()
@@ -1099,13 +1099,13 @@ just like the `emacs --daemon'"
   (xy/install-all-lisps (concat my-local-lisp-path
                                 "/mailcrypt-3.5.8"))
   (xy/install-all-lisps (concat my-local-lisp-path
-								"/anything-config"))
+                                "/anything-config"))
   (xy/install-all-lisps (concat my-local-lisp-path
-								"/anything-config/extensions"))
+                                "/anything-config/extensions"))
   (xy/install-all-lisps (concat my-local-lisp-path
-								"/anything-config/contrib"))
+                                "/anything-config/contrib"))
   (xy/install-all-lisps (concat my-local-lisp-path
-								"/auctex-11.86-mypatched"))
+                                "/auctex-11.86-mypatched"))
   (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
   (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
   (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))

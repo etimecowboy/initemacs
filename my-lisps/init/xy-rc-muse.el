@@ -1,7 +1,7 @@
-;; ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;; ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;; ;;--------------------------------------------------------------------
 ;; ;; File name:    `xy-rc-muse.el'
-;; ;; Time-stamp:<2011-01-31 Mon 01:21 xin on P6T>
+;; ;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
 ;; ;; Author:       Xin Yang
 ;; ;; Email:        xin2.yang@gmail.com
 ;; ;; Description:  Emacs publish system
@@ -17,7 +17,7 @@
 
 ;; ;;* Muse
 ;; ;; muse configurations, publishing documents in various formats
-;; ;; Based on Michael Olson's example and ywb's configuration 
+;; ;; Based on Michael Olson's example and ywb's configuration
 
 ;; ;; Add to load path
 ;; ;;(add-to-list 'load-path "/home/mwolson/proj/emacs/muse/git-muse/experimental")
@@ -111,14 +111,14 @@
 ;; ;;   3. Publishing style
 ;; ;;   remainder: Other things to put in every generated style
 ;; (setq muse-project-alist
-;;       `( 
-;;         ("ideas" 
-;;          (,@(muse-project-alist-dirs 
+;;       `(
+;;         ("ideas"
+;;          (,@(muse-project-alist-dirs
 ;;              "~/emacs/muse/source/ideas/")
 ;;           :base-url "http://192.168.1.100/muse/ideas/"
 ;;           :force-publish ("index")
-;;           :default "index")                 
-;;          ,@(muse-project-alist-styles 
+;;           :default "index")
+;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/ideas"
 ;;             "/ftp:nobody@192.168.1.100:/muse/ideas"
 ;;             "my-xhtml")
@@ -126,45 +126,45 @@
 ;;             "~/emacs/muse/source/ideas"
 ;;             "~/emacs/muse/pdf/ideas"
 ;;             "my-pdfcjk"))
-;;         ("readings" 
-;;          (,@(muse-project-alist-dirs 
+;;         ("readings"
+;;          (,@(muse-project-alist-dirs
 ;;              "~/emacs/muse/source/readings/")
 ;;           :base-url "http://192.168.1.100/muse/readings/"
 ;;           :force-publish ("index")
-;;           :default "index")                 
-;;          ,@(muse-project-alist-styles 
+;;           :default "index")
+;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/readings"
 ;;             "/ftp:nobody@192.168.1.100:/muse/readings"
 ;;             "my-xhtml")
 ;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/readings"
 ;;             "~/emacs/muse/pdf/readings"
-;;             "my-pdfcjk"))   
-;;         ("research" 
-;;          (,@(muse-project-alist-dirs 
+;;             "my-pdfcjk"))
+;;         ("research"
+;;          (,@(muse-project-alist-dirs
 ;;              "~/emacs/muse/source/research/")
 ;;           :base-url "http://192.168.1.100/muse/research/"
 ;;           :force-publish ("index")
-;;           :default "index")                 
-;;          ,@(muse-project-alist-styles 
+;;           :default "index")
+;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/research/"
 ;;             "/ftp:nobody@192.168.1.100:/muse/research/"
 ;;             "my-xhtml")
-;;          ,@(muse-project-alist-styles 
+;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/research"
 ;;             "~/emacs/muse/pdf/research"
 ;;             "my-pdf")
-;;          ,@(muse-project-alist-styles 
+;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/research"
 ;;             "~/emacs/muse/pdf/research"
 ;;             "latex-draft"))
-;;         ("software" 
-;;          (,@(muse-project-alist-dirs 
+;;         ("software"
+;;          (,@(muse-project-alist-dirs
 ;;              "~/emacs/muse/source/software/")
 ;;           :base-url "http://192.168.1.100/muse/software/"
 ;;           :force-publish ("index")
-;;           :default "index")                 
-;;          ,@(muse-project-alist-styles 
+;;           :default "index")
+;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/software"
 ;;             "/ftp:nobody@192.168.1.100:/muse/software"
 ;;             "my-xhtml")
@@ -172,20 +172,20 @@
 ;;             "~/emacs/muse/source/software"
 ;;             "~/emacs/muse/pdf/software"
 ;;             "my-pdfcjk"))
-;;         ("hardware" 
-;;          (,@(muse-project-alist-dirs 
+;;         ("hardware"
+;;          (,@(muse-project-alist-dirs
 ;;              "~/emacs/muse/source/hardware/")
 ;;           :base-url "http://192.168.1.100/muse/hardware/"
 ;;           :force-publish ("index")
-;;           :default "index")                 
-;;          ,@(muse-project-alist-styles 
+;;           :default "index")
+;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/hardware"
 ;;             "/ftp:nobody@192.168.1.100:/muse/hardware"
 ;;             "my-xhtml")
 ;;          ,@(muse-project-alist-styles
 ;;             "~/emacs/muse/source/hardware"
 ;;             "~/emacs/muse/pdf/hardware"
-;;             "my-pdfcjk"))   
+;;             "my-pdfcjk"))
 ;;         ))
 
 ;; ;; Wiki settings

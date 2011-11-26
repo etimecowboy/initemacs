@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-25 Fri 15:49 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -53,17 +53,16 @@
  global-map
  `(("C-x d" dired-jump)))
 
-;; (define-key dired-mode-map (kbd "C-x 2") 'dired-two-columns)
 (eal-define-keys-commonly
  dired-mode-map
     `(("C-c C-x 3" dired-two-columns)
-	  ("C-t"   dired-omit-mode)
-	  ;; ("M-b s" dired-sort-by-size)
-	  ;; ("M-b x" dired-sort-by-extension)
-	  ;; ("M-b t" dired-sort-by-time)
-	  ;; ("M-b n" dired-sort-by-name)
-	  ("M-q"   ywb-dired-quickview)
-	  ))
+      ("C-t"   dired-omit-mode)
+      ;; ("M-b s" dired-sort-by-size)
+      ;; ("M-b x" dired-sort-by-extension)
+      ;; ("M-b t" dired-sort-by-time)
+      ;; ("M-b n" dired-sort-by-name)
+      ("M-q"   ywb-dired-quickview)
+      ))
 ;;  `(;; ("C-h"         dired-up-directory-same-buffer)
 ;;    ;; ("<backspace>" dired-up-directory-same-buffer)
 ;;    ;; ("'"           switch-to-other-buffer)
@@ -111,7 +110,7 @@
 ;;    ("t"           sb-toggle-keep-buffer)
 ;;    ("M-m"         dired-unmark-backward)
 ;;    ("C-c M-m"     dired-create-directory)
-   
+
 ;;    ("C-c C-m"     make-sb)
 ;;    ("C-c m"       make-check-sb)
 ;;    ("C-c M"       make-clean-sb)
@@ -122,7 +121,7 @@
 ;;    ("C-c b"       gud-break)
 ;;    ("C-c B"       gud-remove)))
 
-(eval-after-load "dired" 
+(eval-after-load "dired"
   `(progn
     (dired-settings)))
 
@@ -184,13 +183,13 @@
 ;;-----------------------------------------------------------------------------
 
 ;;** image-dired
-(eval-after-load "image-dired" 
+(eval-after-load "image-dired"
   `(progn
     (image-dired-settings)))
 
 ;;-----------------------------------------------------------------------------
 
-;; BUG: NOT work properly with other dired lisps. Removed.  
+;; BUG: NOT work properly with other dired lisps. Removed.
 ;; Sunrise commander; file manager
 ;; Check http://www.emacswiki.org/emacs/Sunrise_Commander_Tips
 ;; (autoload 'sunrise "sunrise-commander"
@@ -213,7 +212,7 @@
 ;;** open-with
 ;; open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
-(eval-after-load "openwith" 
+(eval-after-load "openwith"
   `(progn
     (openwith-settings)))
 (GNULinux
@@ -228,8 +227,7 @@
 ;;** Emacs internal version control
 (setq make-backup-files nil)
 (setq vc-make-backup-files nil)
-(setq backup-directory-alist
-	  '(("." . "~/.backup")))
+(setq backup-directory-alist '(("." . "~/.backup")))
 (setq tramp-backup-directory-alist backup-directory-alist)
 (setq version-control t)
 (setq kept-old-versions 5)
@@ -237,33 +235,46 @@
 (setq delete-old-versions t)
 
 ;; Autosaved files
-(setq auto-save-list-file-prefix 
-      (concat my-var-path "/auto-save-list/.saves-"))
+(setq auto-save-list-file-prefix
+      (concat my-var-path "/auto-save-list/auto-saves-"))
+
+;; Automatically refresh version control information
+(setq auto-revert-check-vc-info t)
 
 ;;--------------------------------------------------------------------
 
 ;;** git ui
 ;;*** git.el
 ;; (global-set-key [f11] 'xy/git-start)
-;; Automatically refresh version control information
-(setq auto-revert-check-vc-info t)
 
 ;;*** egg
 ;; (global-set-key [S-f11] 'xy/egg-start)
-;; (eval-after-load "egg"
-;;   '(progn
-;; 	 (egg-settings)))
+(eval-after-load "egg"
+  '(progn
+  (egg-settings)))
 
 ;;*** magit
-(eval-after-load "magit" 
+(eval-after-load "magit"
   `(progn
     (magit-settings)))
 (global-set-key [f11] 'magit-status)
 
+;;*** diff-git
+(eval-after-load "diff-git"
+  `(progn
+     (diff-git-settings)))
+(global-set-key (kbd "C-<f11>") 'diff-git-diff-unstaged)
+(global-set-key (kbd "M-<f11>") 'diff-git-diff-staged)
+;; NOTE: default key bindings after loading
+;; (define-key vc-prefix-map "["        'diff-git-diff-unstaged)
+;; (define-key vc-prefix-map "]"        'diff-git-diff-staged)
+;; (define-key diff-mode-shared-map "g" 'diff-git-update-current-buffer)
+;; (define-key diff-mode-map "\C-c\M-v" 'diff-git-buffer-stage)
+;; (define-key diff-mode-map "\C-c\C-v" 'diff-git-hunk-stage))
+
 ;;---------------------------------------------------------------------
 
 ;;** subversion gui
-;; (require 'svn-settings)
 
 ;;--------------------------------------------------------------------
 

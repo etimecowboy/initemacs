@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-24 Thu 00:15 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -85,14 +85,14 @@
 ;; (require 'emaci)
 (eval-after-load "emaci"
   '(progn
-	 (emaci-settings)
-	 (eal-define-keys
-	  'emaci-mode-map
-	  `(("/" describe-symbol-at-point)
-		("'" switch-to-other-buffer)
-		("L" count-brf-lines)
-		;; ("t" sb-toggle-keep-buffer)
-		("]" goto-paren)))))
+     (emaci-settings)
+     (eal-define-keys
+      'emaci-mode-map
+      `(("/" describe-symbol-at-point)
+        ("'" switch-to-other-buffer)
+        ("L" count-brf-lines)
+        ;; ("t" sb-toggle-keep-buffer)
+        ("]" goto-paren)))))
 (defun read-only ()
   "Read-only mode."
   (interactive)
@@ -204,9 +204,9 @@
 
 ;;** full-ack
 ;; ack is a tool like grep, designed for programmers with large trees
-;; of heterogeneous source code. 
+;; of heterogeneous source code.
 ;; ack is written purely in Perl, and takes advantage of the power of
-;; Perl's regular expressions.  
+;; Perl's regular expressions.
 ;; (require 'full-ack)
 ;; (eal-define-keys
 ;;  'ack-mode-map
@@ -243,7 +243,7 @@
 (autoload 'occur-by-moccur-displn "color-moccur" nil t)
 (autoload 'occur-by-moccur-at-point-displn "color-moccur" nil t)
 (eval-after-load "color-moccur"
-  '(progn 
+  '(progn
      ;; (moccur-face-settings) ;; TODO: to my theme
      (moccur-settings)))
 (global-set-key [C-f7] 'moccur-grep-find)
@@ -256,7 +256,7 @@
 ;;** ioccur
 ;; incremental occur, more convenient and faster than OccurMode,
 ;; which lists all lines of the current buffer that match a regexp.
-;; This is ahei's ioccur which uses anything, not the emacswiki one. 
+;; This is ahei's ioccur which uses anything, not the emacswiki one.
 (autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
 (global-set-key [M-f7] 'ioccur)
 

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-24 Thu 18:53 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -99,8 +99,8 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;** ELPA packages
-;; Packages got from `package.el'. 
-;; They are usually for tests and will be moved out of the management 
+;; Packages got from `package.el'.
+;; They are usually for tests and will be moved out of the management
 ;; of the `package.el' when ready for production usage. Sometime, the
 ;; ELPA packages are older than the lisps resided outside.
 
@@ -167,7 +167,7 @@
 
 ;; NOTE: `package.el' is now part of GNU Emacs 24. You can get the
 ;; latest at http://bit.ly/pkg-el while the last version that's
-;; compatible with Emacs 23 is at http://bit.ly/pkg-el23 
+;; compatible with Emacs 23 is at http://bit.ly/pkg-el23
 ;; (xy/install-all-lisps (concat my-local-lisp-path "/package"))
 ;; (message "* ---[ package lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
@@ -299,7 +299,7 @@
                            (second *emacs-load-start*)))))
 
 ;; NOTE: CEDET can be installed by its `cedet-built.el' script, and
-;; will be load when `M-x xy/cedet-start' which is a function write 
+;; will be load when `M-x xy/cedet-start' which is a function write
 ;; by myself.
 ;; REF: http://cedet.sourceforge.net/
 
@@ -317,7 +317,7 @@
 ;; NOTE: seems no one is maitaining this package
 ;; REF: https://github.com/viogus/eim
 ;;      http://ywb-codes.googlecode.com/svn/trunk/emacs/eim
-;; svn co http://ywb-codes.googlecode.com/svn/trunk/emacs/eim 
+;; svn co http://ywb-codes.googlecode.com/svn/trunk/emacs/eim
 ;; (GNULinux
 ;;   (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4")))
 ;; (Windows
@@ -431,31 +431,31 @@
   `(progn
      ;; (info-face-settings) ;; TODO: will be added to my theme
      (info-settings)
-	 (eal-define-keys
-	  'Info-mode-map
-	  `(("j"         next-line)
-	    ("k"         previous-line)
-	    ("h"         backward-char)
-	    ("l"         forward-char)
-	    ("J"         emaci-roll-down)
-	    ("K"         emaci-roll-up)
-	    ("f"         am-forward-word-or-to-word)
-	    ("/"         describe-symbol-at-point)
-	    ("U"         Info-up)
-	    ("u"         View-scroll-half-page-backward)
-	    ("Q"         kill-this-buffer)
-	    ("o"         other-window)
-	    ("S-SPC"     View-scroll-half-page-backward)
-	    ("SPC"       View-scroll-half-page-forward)
-	    ("C-h"       Info-up)
-	    ("N"         Info-next-reference)
-	    ("P"         Info-prev-reference)
-	    ("'"         switch-to-other-buffer)
-	    ("."         find-symbol-at-point)
-	    ("<mouse-4>" mwheel-scroll)
-	    ("<mouse-5>" mwheel-scroll)
-	    ("C-c ,"     Info-history-back)
-	    ("C-c ."     Info-history-forward)))))
+     (eal-define-keys
+      'Info-mode-map
+      `(("j"         next-line)
+        ("k"         previous-line)
+        ("h"         backward-char)
+        ("l"         forward-char)
+        ("J"         emaci-roll-down)
+        ("K"         emaci-roll-up)
+        ("f"         am-forward-word-or-to-word)
+        ("/"         describe-symbol-at-point)
+        ("U"         Info-up)
+        ("u"         View-scroll-half-page-backward)
+        ("Q"         kill-this-buffer)
+        ("o"         other-window)
+        ("S-SPC"     View-scroll-half-page-backward)
+        ("SPC"       View-scroll-half-page-forward)
+        ("C-h"       Info-up)
+        ("N"         Info-next-reference)
+        ("P"         Info-prev-reference)
+        ("'"         switch-to-other-buffer)
+        ("."         find-symbol-at-point)
+        ("<mouse-4>" mwheel-scroll)
+        ("<mouse-5>" mwheel-scroll)
+        ("C-c ,"     Info-history-back)
+        ("C-c ."     Info-history-forward)))))
 
 ;; (eval-after-load "info+"
 ;;   `(progn
@@ -472,28 +472,28 @@
   `(progn
      ;; (man-face-settings) ;; TODO: will be added to my theme
      (man-settings)
-	 (eal-define-keys
-	  'Man-mode-map
-	  `(("Q"     Man-kill)
-	    ("1"     delete-other-windows)
-	    ("2"     split-window-vertically)
-	    ("3"     split-window-horizontally)
-	    ("u"     View-scroll-half-page-backward)
-	    ("S-SPC" View-scroll-half-page-backward)
-	    ("SPC"   View-scroll-half-page-forward)
-	    ("w"     scroll-down)
-	    ("d"     scroll-up)
-	    ("f"     am-forward-word-or-to-word)
-	    ("b"     emaci-b)
-	    ("n"     emaci-n)
-	    ("p"     emaci-p)
-	    ("N"     Man-next-section)
-	    ("P"     Man-previous-section)
-	    ("m"     back-to-indentation)
-	    ("M-j"   Man-goto-section)
-	    ("."     set-mark-command)
-	    ("g"     emaci-g)
-	    ("'"     switch-to-other-buffer)))))
+     (eal-define-keys
+      'Man-mode-map
+      `(("Q"     Man-kill)
+        ("1"     delete-other-windows)
+        ("2"     split-window-vertically)
+        ("3"     split-window-horizontally)
+        ("u"     View-scroll-half-page-backward)
+        ("S-SPC" View-scroll-half-page-backward)
+        ("SPC"   View-scroll-half-page-forward)
+        ("w"     scroll-down)
+        ("d"     scroll-up)
+        ("f"     am-forward-word-or-to-word)
+        ("b"     emaci-b)
+        ("n"     emaci-n)
+        ("p"     emaci-p)
+        ("N"     Man-next-section)
+        ("P"     Man-previous-section)
+        ("m"     back-to-indentation)
+        ("M-j"   Man-goto-section)
+        ("."     set-mark-command)
+        ("g"     emaci-g)
+        ("'"     switch-to-other-buffer)))))
 
 ;;*** woman settings
 (global-set-key [M-f1] 'woman)
@@ -510,23 +510,23 @@
   `(progn
      ;; (help-mode-face-settings) ;; TODO: to my theme
      (help-mode-settings)
-	 (eal-define-keys
-	  'help-mode-map
-	  `(("B"   help-go-back)
-	    ("F"   help-go-forward)
-	    ("f"   am-forward-word-or-to-word)
-	    ("d"   scroll-up)
-	    ("w"   scroll-down)
-	    ("C-h" help-go-back)
-	    ("C-;" help-go-forward)
-	    ("n"   forward-button)
-	    ("p"   backward-button)
-	    ("q"   delete-current-window)
-	    ("'"   switch-to-other-buffer)
-	    ("u"   View-scroll-half-page-backward)
-	    ("SPC" scroll-up)
-	    ("."   find-symbol-at-point)
-	    ("/"   describe-symbol-at-point)))))
+     (eal-define-keys
+      'help-mode-map
+      `(("B"   help-go-back)
+        ("F"   help-go-forward)
+        ("f"   am-forward-word-or-to-word)
+        ("d"   scroll-up)
+        ("w"   scroll-down)
+        ("C-h" help-go-back)
+        ("C-;" help-go-forward)
+        ("n"   forward-button)
+        ("p"   backward-button)
+        ("q"   delete-current-window)
+        ("'"   switch-to-other-buffer)
+        ("u"   View-scroll-half-page-backward)
+        ("SPC" scroll-up)
+        ("."   find-symbol-at-point)
+        ("/"   describe-symbol-at-point)))))
 
 ;;*** help+
 ;; (require 'help+)
@@ -544,11 +544,11 @@
 ;;*** describe-symbol
 ;; ahei 非常方便的查看emacs帮助的插件, 没有 `help+' 方便但是有些很好的
 ;; 功能
-(eal-define-keys `(emacs-lisp-mode-map 
-		   lisp-interaction-mode-map 
-		   completion-list-mode-map 
-		   help-mode-map
-		   debugger-mode-map)
+(eal-define-keys `(emacs-lisp-mode-map
+           lisp-interaction-mode-map
+           completion-list-mode-map
+           help-mode-map
+           debugger-mode-map)
  `(("M-<f3>"   describe-symbol-at-point)
    ;; ("C-c M-v" describe-variable-at-point)
    ;; ("C-c M-f" describe-function-at-point)
@@ -577,7 +577,7 @@
 ;; activated, keystrokes get logged into a designated buffer, along
 ;; with the command bound to them.
 
-;; To enable, use e.g.: 
+;; To enable, use e.g.:
 ;;
 ;; (add-hook 'LaTeX-mode-hook (function mwe:log-keyboard-commands))
 ;;
@@ -593,7 +593,7 @@
 ;;** System encodings
 (set-language-environment 'UTF-8)
 ;; NOTE: `default-buffer-file-coding-system' is an obsolete variable
-;; (as of Emacs 23.2); use `buffer-file-coding-system' 
+;; (as of Emacs 23.2); use `buffer-file-coding-system'
 ;; instead.
 ;; (setq default-buffer-file-coding-system 'utf-8-unix)
 (setq-default buffer-file-coding-system 'utf-8-unix)
@@ -612,7 +612,7 @@
 ;; Time string format
 (setq system-time-locale "C")
 ;; 设置 sentence-end 可以识别中文断句。
-(setq sentence-end 
+(setq sentence-end
       "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 
 ;;** Use clipboard with x-window system
@@ -676,8 +676,8 @@
 ;;  "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
 (register-input-method
  "eim-py" "utf-8" 'eim-use-package "eim-py" "eim-py" (concat
-													  my-emacs-path
-													  "/eim/py.txt")) 
+                                                      my-emacs-path
+                                                      "/eim/py.txt"))
 (setq default-input-method "eim-py")
 ;; (setq input-activate nil)
 ;; (add-hook 'find-file-hook
@@ -708,12 +708,12 @@
 
 ;;** ELPA packages
 ;; BUG: Conflict with auctex's `style/url.el' and flim's `mailcap.el'
-;;   "symbol's function definition is void: TeX-add-style-hook" error 
+;;   "symbol's function definition is void: TeX-add-style-hook" error
 ;; One solution is:
 ;;    1. Move `style/url.el' out of load-path
 ;;    2. Install the package
 ;;    3. Move it back
-;; Another solution: 
+;; Another solution:
 ;;    Change auctex's `style/url.el' to another name.
 ;;    (No bug found yet)
 ;; (autoload 'package-list-packages "package"
@@ -785,7 +785,7 @@
 ;; or `M-x xy/server-start' in an emacs process when you need.
 
 ;; (if is-after-emacs-23
-;; 	(progn
+;;     (progn
 ;; (server-force-delete)
 (setq-default server-auth-dir (concat my-var-path "/server"))
 ;; (server-start)
@@ -803,7 +803,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;* Global keybindings for visiting some files/directory 
+;;* Global keybindings for visiting some files/directory
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

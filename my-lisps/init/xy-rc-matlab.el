@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-matlab.el'
-;; Time-stamp:<2011-11-21 Mon 14:13 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:00 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,13 +23,13 @@
   (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
   (setq auto-mode-alist (cons '("\\.M\\'" . matlab-mode) auto-mode-alist))
   (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
-  (setq matlab-indent-function t)	; if you want function bodies indented
+  (setq matlab-indent-function t)    ; if you want function bodies indented
   (setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
   ;; (xy/cedet-start)
   ;; (matlab-cedet-setup)
   ;; (defun my-matlab-mode-hook ()
   ;;   (turn-on-auto-fill)
-  ;; 	(setq fill-column 75))
+  ;;     (setq fill-column 75))
   ;; (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
   ;; (defun my-matlab-shell-mode-hook ()
   ;; '())
@@ -42,9 +42,9 @@
 
   (custom-set-faces
    '(matlab-cross-function-variable-face
-		((t (:foreground "cornflower blue" :slant italic :weight bold))))
+        ((t (:foreground "cornflower blue" :slant italic :weight bold))))
    '(matlab-nested-function-keyword-face
-		((t (:foreground "Yellow" :slant italic))))))
+        ((t (:foreground "Yellow" :slant italic))))))
 ;;--------------------------------------------------------------------
 
 (provide 'xy-rc-matlab)

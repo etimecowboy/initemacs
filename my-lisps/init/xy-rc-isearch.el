@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-isearch.el'
-;; Time-stamp:<2011-02-18 Fri 16:53 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,25 +24,25 @@
   "Replace current searching string."
   (interactive)
   (let ((case-fold-search isearch-case-fold-search)
-	(from-string isearch-string))
+    (from-string isearch-string))
     (if (string= from-string "")
-	(isearch-update)
+    (isearch-update)
       (if (not isearch-success)
-	  (progn
-	    (message "Search string not found")
-	    (sleep-for 0.5)
-	    (isearch-update))
-	(progn
-	  (isearch-done)
-	  (goto-char (min (point) isearch-other-end)))
-	(perform-replace
-	 from-string
-	 (read-from-minibuffer
-	  (format "Query replace %s with: " from-string)
-	  "" nil nil query-replace-to-history-variable from-string t)
-	 t                                ; query flag
-	 isearch-regexp
-	 nil)))))
+      (progn
+        (message "Search string not found")
+        (sleep-for 0.5)
+        (isearch-update))
+    (progn
+      (isearch-done)
+      (goto-char (min (point) isearch-other-end)))
+    (perform-replace
+     from-string
+     (read-from-minibuffer
+      (format "Query replace %s with: " from-string)
+      "" nil nil query-replace-to-history-variable from-string t)
+     t                                ; query flag
+     isearch-regexp
+     nil)))))
 
 ;;;###autoload
 (defun toggle-case-fold-search-when-search ()
@@ -90,7 +90,7 @@
 ;;;###autoload
 (defun isearch-settings ()
   "settings for `isearch'."
- 
+
   ;; 搜索时不区分大小写
   (setq-default case-fold-search t))
 

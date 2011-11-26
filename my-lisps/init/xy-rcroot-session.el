@@ -1,11 +1,11 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-23 Wed 20:23 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
-;; Description:  Save editor information between Emacs sessions 
+;; Description:  Save editor information between Emacs sessions
 ;;    ___ _ __ ___   __ _  ___ ___
 ;;   / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;  |  __/ | | | | | (_| | (__\__ \
@@ -50,12 +50,12 @@
 ;; Some keys in `*Bookmark List*’:
 ;; * ‘a’ – show annotation for the current bookmark
 ;; * ‘A’ – show all annotations for your bookmarks
-;; * ‘d’ – mark various entries for deletion 
+;; * ‘d’ – mark various entries for deletion
 ;;         (‘x’ – to delete them)
 ;; * ‘e’ – edit the annotation for the current bookmark
-;; * ‘m’ – mark various entries for display and other operations, 
+;; * ‘m’ – mark various entries for display and other operations,
 ;;         (‘v’ – to visit)
-;; * ‘o’ – visit the current bookmark in another window, 
+;; * ‘o’ – visit the current bookmark in another window,
 ;;         keeping the bookmark list open
 ;; * ‘C-o’ – switch to the current bookmark in another window
 ;; * ‘r’ – rename the current bookmark
@@ -93,16 +93,16 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;* Save Emacs session information 
+;;* Save Emacs session information
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;** recentf
 ;; (setq-default recentf-save-file
-;; 			  (concat my-var-path "/recentf-"
-;; 					  user-login-name "@"
-;; 					  system-name "@"
-;; 					  system-configuration))
+;;               (concat my-var-path "/recentf-"
+;;                       user-login-name "@"
+;;                       system-name "@"
+;;                       system-configuration))
 ;; (require 'recentf)
 (recentf-mode 1)
 (eval-after-load "recentf" `(recentf-settings))
@@ -134,7 +134,7 @@
 ;; ;; Use session.el instead of recentf.el
 ;; ;; session.el can remember more information.
 ;; (add-hook 'after-init-hook ;; 'session-start)
-;; 		  'session-initialize)
+;;           'session-initialize)
 ;; (eval-after-load "session" `(session-settings))
 
 (provide 'xy-rcroot-session)

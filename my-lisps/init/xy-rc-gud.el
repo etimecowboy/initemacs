@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gud.el'
-;; Time-stamp:<2011-11-24 Thu 13:39 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,42 +21,42 @@
   "Set/clear breakpoin."
   (interactive "P")
   (save-excursion
-	(if (or force-remove
-			(eq (car (fringe-bitmaps-at-pos (point))) 'breakpoint))
-		(gud-remove nil)
-	  (gud-break nil))))
+    (if (or force-remove
+            (eq (car (fringe-bitmaps-at-pos (point))) 'breakpoint))
+        (gud-remove nil)
+      (gud-break nil))))
 
 ;;;###autoload
 (defun gud-enable-or-disable ()
   "Enable/disable breakpoint."
   (interactive)
   (let ((obj))
-	(save-excursion
-	  (move-beginning-of-line nil)
-	  (dolist (overlay (overlays-in (point) (point)))
-		(when (overlay-get overlay 'put-break)
-		  (setq obj (overlay-get overlay 'before-string))))
-	  (if (and obj (stringp obj))
-		  (cond ((featurep 'gdb-ui)
-				 (let* ((bptno (get-text-property 0 'gdb-bptno obj)))
-				   (string-match "\\([0-9+]\\)*" bptno)
-				   (gdb-enqueue-input
-					(list
-					 (concat gdb-server-prefix
-							 (if (get-text-property 0 'gdb-enabled obj)
-								 "disable "
-							   "enable ")
-							 (match-string 1 bptno) "\n")
-					 'ignore))))
-				((featurep 'gdb-mi)
-				 (gud-basic-call
-				  (concat
-				   (if (get-text-property 0 'gdb-enabled obj)
-					   "-break-disable "
-					 "-break-enable ")
-				   (get-text-property 0 'gdb-bptno obj))))
-				(t (error "No gud-ui or gui-mi?")))
-		(message "May be there isn't have a breakpoint.")))))
+    (save-excursion
+      (move-beginning-of-line nil)
+      (dolist (overlay (overlays-in (point) (point)))
+        (when (overlay-get overlay 'put-break)
+          (setq obj (overlay-get overlay 'before-string))))
+      (if (and obj (stringp obj))
+          (cond ((featurep 'gdb-ui)
+                 (let* ((bptno (get-text-property 0 'gdb-bptno obj)))
+                   (string-match "\\([0-9+]\\)*" bptno)
+                   (gdb-enqueue-input
+                    (list
+                     (concat gdb-server-prefix
+                             (if (get-text-property 0 'gdb-enabled obj)
+                                 "disable "
+                               "enable ")
+                             (match-string 1 bptno) "\n")
+                     'ignore))))
+                ((featurep 'gdb-mi)
+                 (gud-basic-call
+                  (concat
+                   (if (get-text-property 0 'gdb-enabled obj)
+                       "-break-disable "
+                     "-break-enable ")
+                   (get-text-property 0 'gdb-bptno obj))))
+                (t (error "No gud-ui or gui-mi?")))
+        (message "May be there isn't have a breakpoint.")))))
 
 ;;;###autoload
 (defun gud-kill ()
@@ -78,36 +78,36 @@
 ;; (defun gdb-tooltip-hook ()
 ;;   (gud-tooltip-mode 1)
 ;;   (let ((process (ignore-errors (get-buffer-process (current-buffer)))))
-;; 	(when process
-;; 	  (set-process-sentinel process
-;; 							(lambda (proc change)
-;; 							  (let ((status (process-status proc)))
-;; 								(when (or (eq status 'exit)
-;; 										  (eq status 'signal))
-;; 								  (gud-tooltip-mode -1))))))))
+;;     (when process
+;;       (set-process-sentinel process
+;;                             (lambda (proc change)
+;;                               (let ((status (process-status proc)))
+;;                                 (when (or (eq status 'exit)
+;;                                           (eq status 'signal))
+;;                                   (gud-tooltip-mode -1))))))))
 
 ;;;###autoload
 (defun gud-settings ()
   "Settings of `gud.el'."
-  
+
   ;; 退出gdb的时候关闭gdb对应的buffer
   ;;(add-hook 'gdb-mode-hook 'kill-buffer-when-shell-command-exit)
   ;; 显示gdb的鼠标提示
   ;; (gud-tooltip-mode 1))
   ;; 显示工具栏方便调试
   ;; (add-hook 'gdb-mode-hook
-  ;; 			'(lambda ()
-  ;; 			   ;; 退出gdb的时候关闭gdb对应的buffer
-  ;; 			   (kill-buffer-when-shell-command-exit)
-  ;; 			   (when window-system
-  ;; 				 ;; 显示工具栏方便调试
-  ;; 				 (toolbar-mode 1))))
+  ;;             '(lambda ()
+  ;;                ;; 退出gdb的时候关闭gdb对应的buffer
+  ;;                (kill-buffer-when-shell-command-exit)
+  ;;                (when window-system
+  ;;                  ;; 显示工具栏方便调试
+  ;;                  (toolbar-mode 1))))
 
   ;; 退出gdb的时候关闭gdb对应的buffer
   (add-hook 'gdb-mode-hook 'kill-buffer-when-shell-command-exit)
   ;; 显示工具栏方便调试
   (when window-system
-	(tool-bar-mode 1))
+    (tool-bar-mode 1))
   ;; 在一个新的 Frame 中调试
   (setq gdb-same-frame -1)
   ;; 多窗口的布局
@@ -152,5 +152,5 @@
   ;;      (define-key gud-minor-mode-map [f11] 'gud-step)
   ;;      (define-key gud-minor-mode-map [C-f11] 'gud-finish)))
    )
-    
+
 (provide 'xy-rc-gud)

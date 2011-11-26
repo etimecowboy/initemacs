@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-11-25 Fri 15:13 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,7 @@
   "Start icy-mode"
   (interactive)
   (when (featurep 'ido)
-	(ido-mode -1))   ;; icicles and ido conflicts
+    (ido-mode -1))   ;; icicles and ido conflicts
   (require 'icicles)
   (icy-mode 1)
   (global-set-key (kbd "M-x") 'icicle-execute-extended-command)
@@ -47,7 +47,7 @@
   (setq icicle-Completions-window-max-height 5)
   (setq icicle-Completions-text-scale-decrease 1.0)
   (setq icicle-candidate-width-factor 100))
-  
+
   ;; (setq icicle-prefix-complete-keys (quote ([S-tab] [(control 105)])))
   ;; (setq icicle-apropos-complete-keys '([TAB]))
   ;;   (setq icicle-top-level-key-bindings

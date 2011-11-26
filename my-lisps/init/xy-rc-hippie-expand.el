@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hippie-expand.el'
-;; Time-stamp:<2011-01-30 Sun 17:11 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,7 @@
 
   (interactive)
   (let ((hippie-expand-try-functions-list
-         '(try-complete-file-name 
+         '(try-complete-file-name
            try-complete-file-name-partially)))
     (call-interactively 'hippie-expand)))
 

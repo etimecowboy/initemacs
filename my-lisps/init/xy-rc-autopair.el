@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-autopair.el'
-;; Time-stamp:<2011-09-03 Sat 23:00 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,7 @@
 ;;;###autoload
 (defun autopair-settings ()
   "settings for `autopair'."
-  
+
   ;; After do this, isearch any string, M-: (match-data) always return (0 3)
   (setq autopair-extra-pairs `(:everywhere ((?` . ?'))))
 
@@ -40,7 +40,7 @@
                (equal last-command-event ?{))
           (call-interactively 'skeleton-c-mode-left-brace)
         (call-interactively 'autopair-insert-opening-internal))))
-  
+
   (defvar modes-use-self-opening
     '(c-mode c++-mode java-mode awk-mode php-mode)
     "*Modes use themselves insert opening function.")

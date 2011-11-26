@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-multi-term.el'
-;; Time-stamp:<2011-11-21 Mon 14:22 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,7 @@
 ;;;###autoload
 (defun multi-term-settings ()
   "Settings for `term'."
-  
+
   ;; (when use-cua
   ;;   (cua-selection-mode 1))
   (setq multi-term-switch-after-close nil)

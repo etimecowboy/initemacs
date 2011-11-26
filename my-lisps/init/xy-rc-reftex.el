@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-reftex.el'
-;; Time-stamp:<2011-08-09 Tue 08:28 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,11 +21,11 @@
 (defun reftex-settings ()
   "Settings of `reftex.el'."
 
-  (setq reftex-default-bibliography 
-		(list "~/emacs/org/source/phd/bib/bio" 
-			  "~/emacs/org/source/phd/bib/lyon" 
-			  "~/emacs/org/source/phd/bib/meddis"
-			  "~/emacs/org/source/phd/bib/patterson"
-			  "~/emacs/org/source/phd/bib/manuals")))
+  (setq reftex-default-bibliography
+        (list "~/emacs/org/source/phd/bib/bio"
+              "~/emacs/org/source/phd/bib/lyon"
+              "~/emacs/org/source/phd/bib/meddis"
+              "~/emacs/org/source/phd/bib/patterson"
+              "~/emacs/org/source/phd/bib/manuals")))
 
 (provide 'xy-rc-reftex)

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-24 Thu 21:32 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -24,17 +24,17 @@
 ;;** Default frame layout
 (when window-system
   ;; Initial fram layout
-  ;; (setq initial-frame-alist 
-  ;; 	'((height . 40) 
-  ;; 	  (width  . 90))) 
+  ;; (setq initial-frame-alist
+  ;;     '((height . 40)
+  ;;       (width  . 90)))
   ;; ;; New frame layout
-  ;; (setq pop-up-frame-alist 
-  ;; 	'((height . 40) 
-  ;; 	  (width  . 90)))
+  ;; (setq pop-up-frame-alist
+  ;;     '((height . 40)
+  ;;       (width  . 90)))
   ;; Default frame layout
-  ;; (setq 'default-frame-alist 
-  ;; 	'((height . 40) 
-  ;; 	  (width  . 90)))
+  ;; (setq 'default-frame-alist
+  ;;     '((height . 40)
+  ;;       (width  . 90)))
   (add-to-list 'default-frame-alist '(height . 40))
   (add-to-list 'default-frame-alist '(width . 95)))
 
@@ -42,8 +42,8 @@
 ;; Set frame title display: filename @ process
 ;; (setq frame-title-format "%f @ %s")
 (setq frame-title-format
-	  `(,(user-login-name) "@" ,(system-name) "     "
-		global-mode-string "     %f" ))
+      `(,(user-login-name) "@" ,(system-name) "     "
+        global-mode-string "     %f" ))
 ;; 在标题栏显示登陆名称和文件名
 ;; (setq frame-title-format
 ;;       '((:eval
@@ -59,7 +59,7 @@
 ;; (when (and is-after-emacs-23 window-system) ; from emacs-22
 
 ;;   ;; User controls the frame opacity
-;;   ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) 
+;;   ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
 ;;   (set-frame-parameter (selected-frame) 'alpha '(100 100))
 ;;   (add-to-list 'default-frame-alist '(alpha 100 100))
 ;;   (global-set-key (kbd "C-x W t") 'toggle-transparency))
@@ -81,7 +81,7 @@
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
 ;; (global-set-key [M-f5] ;; 'fit-frame)
-;; 				'xy/fit-frame)
+;;                 'xy/fit-frame)
 
 ;;  Add menu-bar items
 ;; (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
@@ -100,14 +100,14 @@
 ;; (global-set-key [(shift control mouse-3)]
 ;;                 'thumfr-thumbify-other-frames)
 ;; (global-set-key [(shift meta ?z)]
-;; 				'thumfr-thumbify-other-frames)
+;;                 'thumfr-thumbify-other-frames)
 ;; (global-set-key [(shift control ?p)]
-;; 				'thumfr-fisheye-previous-frame)
+;;                 'thumfr-fisheye-previous-frame)
 ;; (global-set-key [(shift control ?n)]
-;; 				'thumfr-fisheye-next-frame)
+;;                 'thumfr-fisheye-next-frame)
 ;; (global-set-key [(shift control ?z)]
-;; 				;;'thumfr-really-iconify-or-deiconify-frame)
-;; 				'thumfr-toggle-thumbnail-frame)
+;;                 ;;'thumfr-really-iconify-or-deiconify-frame)
+;;                 'thumfr-toggle-thumbnail-frame)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -138,7 +138,7 @@ the mode-line."
 
 ;; NOTE: another approach to move the point between windows is to use
 ;; `windmove' which is a part of GNU Emacs. However, the default key
-;; bindings are conflict with many other packages. 
+;; bindings are conflict with many other packages.
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
@@ -179,7 +179,7 @@ the mode-line."
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; 关闭buffer的时候, 如果该buffer有对应的进程存在, 不提示
-(delq 'process-kill-buffer-query-function 
+(delq 'process-kill-buffer-query-function
       kill-buffer-query-functions)
 
 ;; automatically display images
@@ -216,17 +216,17 @@ the mode-line."
 
 ;; Display the current location in the file
 (size-indication-mode 1)
-(setq-default mode-line-buffer-identification 
-			  (propertized-buffer-identification "%b"))
+(setq-default mode-line-buffer-identification
+              (propertized-buffer-identification "%b"))
 
 ;; Display time and date
 (if (not window-system)
-	(progn
-	  (setq display-time-day-and-date t)
-	  (display-time-mode 1))
+    (progn
+      (setq display-time-day-and-date t)
+      (display-time-mode 1))
   (progn
-	(setq display-time-day-and-date nil)
-	(display-time-mode -1)))
+    (setq display-time-day-and-date nil)
+    (display-time-mode -1)))
 
 ;; Display battery infomation, after Emacs-22
 ;; (when is-after-emacs-23 (display-battery-mode -1))
@@ -252,6 +252,7 @@ the mode-line."
 (eval-after-load "outline" '(diminish 'outline-minor-mode))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+(eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
 
 ;;** modeline-posn
 ;; Display number of characters in a selected region
@@ -386,7 +387,7 @@ the mode-line."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;光标不闪烁
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 
 ;; Draw block cursor
 (setq x-stretch-cursor t)
@@ -421,10 +422,10 @@ the mode-line."
 (mouse-avoidance-mode 'jump)
 (setq mouse-drag-copy-region nil)
 (setq mouse-wheel-progressive-speed t)
-(setq mouse-wheel-scroll-amount 
+(setq mouse-wheel-scroll-amount
       '(5
-		((shift) . 1)
-		((control))))
+        ((shift) . 1)
+        ((control))))
 
 (eval-after-load "mouse-drag"
   '(progn
@@ -486,7 +487,7 @@ the mode-line."
 ;;  'rainbow-delimiters-mode)
 ;; (eval-after-load "rainbow-delimiters"
 ;;   `(progn
-;; 	 (rainbow-delimiters-settings)))
+;;      (rainbow-delimiters-settings)))
 
 ;;** highlight-parentheses
 ;; 用颜色配对括号
@@ -507,8 +508,8 @@ the mode-line."
    matlab-mode-hook
    LaTeX-mode-hook latex-mode-hook)
  '(lambda ()
-	(require 'highlight-parentheses)
-	(highlight-parentheses-mode 1)))
+    (require 'highlight-parentheses)
+    (highlight-parentheses-mode 1)))
 
 ;;** autopair
 ;; 自动给你加上括号
@@ -526,8 +527,8 @@ the mode-line."
    ;; org-mode-hook text-mode-hook
    )
  '(lambda ()
-	(require 'autopair)
-	(autopair-mode 1)))
+    (require 'autopair)
+    (autopair-mode 1)))
 
 ;; ;; 输入左大花扩号自动补齐右大花括号
 ;; (eal-define-keys
@@ -551,8 +552,8 @@ the mode-line."
 (eval-after-load "font-lock"
   `(progn
      (font-lock-settings)
-	 ;; (font-lock-face-settings)
-	 ))
+     ;; (font-lock-face-settings)
+     ))
 
 ;;** smart-hl
 ;; 像Eclipse那样双击高亮当前字符串
@@ -583,8 +584,8 @@ the mode-line."
 ;; use CEDET semantic to highlight function calls
 (eval-after-load "zjl-hl"
   '(progn
-	 (zjl-hl-face-settings)
-	 (zjl-hl-settings)))
+     (zjl-hl-face-settings)
+     (zjl-hl-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -626,22 +627,22 @@ the mode-line."
      (eal-define-keys
       'palette-mode-map
       `(("j"     palette-down)
-		("k"     palette-up)
-		("h"     palette-left)
-		("l"     palette-right)
-		("J"     palette-down-quickly)
-		("K"     palette-up-quickly)
-		("H"     palette-left-quickly)
-		("L"     palette-right-quickly)
-		("r"     palette-face-restore-bg-fg)
-		("f"     palette-set-face-changed-to-foreground)
-		("b"     palette-set-face-changed-to-background)
-		("B"     facemenup-face-bg-restore)
-		("F"     facemenup-face-fg-restore)
-		("d"     palette-disply-which-in-changine)
-		("m"     palette-pick-background-at-point)
-		("C"     palette-copy-current-color)
-		("C-x k" palette-quit-restore-bg-fg)))))
+        ("k"     palette-up)
+        ("h"     palette-left)
+        ("l"     palette-right)
+        ("J"     palette-down-quickly)
+        ("K"     palette-up-quickly)
+        ("H"     palette-left-quickly)
+        ("L"     palette-right-quickly)
+        ("r"     palette-face-restore-bg-fg)
+        ("f"     palette-set-face-changed-to-foreground)
+        ("b"     palette-set-face-changed-to-background)
+        ("B"     facemenup-face-bg-restore)
+        ("F"     facemenup-face-fg-restore)
+        ("d"     palette-disply-which-in-changine)
+        ("m"     palette-pick-background-at-point)
+        ("C"     palette-copy-current-color)
+        ("C-x k" palette-quit-restore-bg-fg)))))
 
 (eal-define-keys-commonly
  global-map

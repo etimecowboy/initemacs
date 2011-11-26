@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-palette.el'
-;; Time-stamp:<2011-08-09 Tue 08:27 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,10 +35,10 @@
   "Restore face have changed."
   (interactive)
   (unless (or (string= facemenup-last-face-color palette-current-color)
-			  (string= (hexrgb-color-name-to-hex facemenup-last-face-color) palette-current-color))
-	(if facemenup-palette-change-face-bg
-		(facemenup-face-bg-restore)
-	  (facemenup-face-fg-restore))))
+              (string= (hexrgb-color-name-to-hex facemenup-last-face-color) palette-current-color))
+    (if facemenup-palette-change-face-bg
+        (facemenup-face-bg-restore)
+      (facemenup-face-fg-restore))))
 
 ;;;###autoload
 (defun palette-face-restore-bg-fg ()
@@ -53,10 +53,10 @@
   (interactive "P")
   (setq facemenup-palette-change-face-bg is-bg)
   (setq palette-action
-		`(lambda ()
-		   ,(if is-bg
-				`(set-face-background facemenup-last-face-changed palette-current-color)
-			  `(set-face-foreground facemenup-last-face-changed palette-current-color))))
+        `(lambda ()
+           ,(if is-bg
+                `(set-face-background facemenup-last-face-changed palette-current-color)
+              `(set-face-foreground facemenup-last-face-changed palette-current-color))))
   (message (concat "Change to " (if is-bg "back" "fore") "ground")))
 
 ;;;###autoload
@@ -95,7 +95,7 @@
   "settings of `palette'."
 
   (require 'facemenu+)
-  
+
   ;; (add-hook 'palette-mode-hook 'blink-cursor-mode-disable)
 
   (defmacro def-palette-move-command (move-command speed)

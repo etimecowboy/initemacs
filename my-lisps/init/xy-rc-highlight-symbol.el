@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-highlight-symbol.el'
-;; Time-stamp:<2011-08-09 Tue 08:21 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,7 +29,7 @@
   (highlight-symbol-mode -1))
 
 ;;;###autoload
-(define-globalized-minor-mode global-highlight-symbol-mode 
+(define-globalized-minor-mode global-highlight-symbol-mode
   highlight-symbol-mode highlight-symbol-mode-on)
 
 ;;;###autoload

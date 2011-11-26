@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-full-ack.el'
-;; Time-stamp:<2011-01-29 Sat 09:50 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:57 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,15 +19,15 @@
 ;;;###autoload
 (defun ack-arguments-from-options (regexp)
   (let ((arguments (list "--color"
-			 (ack-option "smart-case" (eq ack-ignore-case 'smart))
-			 (ack-option "heading" ack-heading)
-			 (ack-option "env" ack-use-environment))))
+             (ack-option "smart-case" (eq ack-ignore-case 'smart))
+             (ack-option "heading" ack-heading)
+             (ack-option "env" ack-use-environment))))
     (unless ack-ignore-case
       (push "-i" arguments))
     (unless regexp
       (push "--literal" arguments))
     (if (> ack-context 0)
-	(push (format "--context=%d" ack-context) arguments))
+    (push (format "--context=%d" ack-context) arguments))
     arguments))
 
 ;;;###autoload

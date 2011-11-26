@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-11-24 Thu 01:12 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -53,9 +53,9 @@
 ;; minibuffer."
 ;;   (interactive)
 ;;   (let ((done nil)
-;;         tmp thisdone html-file pos 
+;;         tmp thisdone html-file pos
 ;;         (end-style
-;; 		 ".*\\([^
+;;          ".*\\([^
 ;; -~]\\)[ \t]*$")
 ;;         (beginning-style "^[ \t]*[^
 ;; -~]"))
@@ -67,18 +67,18 @@
 ;;       (if (or (not (file-exists-p html-file))
 ;;               (file-directory-p html-file)
 ;;               (not (string-match ".+\\.html"
-;; 								 html-file)))
-          
+;;                                  html-file)))
+
 ;;           (error "Error: %s is not a valid
 ;; filename" html-file)
 ;;         (save-excursion
 ;;           (with-current-buffer
-;; 			  (find-file-noselect html-file)
+;;               (find-file-noselect html-file)
 ;;             (beginning-of-buffer)
 ;;             (while (not done)
 ;;               (setq thisdone nil)
 ;;               ;; check to ensure at least two lines
-;; 			  left
+;;               left
 ;;               (end-of-line)
 ;;               (if (= (point) (point-max))
 ;;                   (setq done t)
@@ -86,16 +86,16 @@
 ;;                 (beginning-of-line)
 ;;                 ;; skip black lines
 ;;                 (if (and (not (looking-at
-;; 							   "[ \t]*$"))
+;;                                "[ \t]*$"))
 ;;                          (looking-at end-style))
 ;;                     (progn
 ;;                       (setq pos (match-end 1))
 ;;                       (next-logical-line)
 ;;                       (beginning-of-line)
 ;;                       ;; check the first char in this
-;; 					  line
+;;                       line
 ;;                       (when (and (not
-;; 								  (looking-at "[ \t]*$"))
+;;                                   (looking-at "[ \t]*$"))
 ;;                                  (looking-at beginning-style))
 ;;                         (setq thisdone t)
 ;;                         (join-line)
@@ -103,7 +103,7 @@
 ;;                         (delete-horizontal-space)))))
 ;;               (end-of-line)
 ;;               (if (= (point) (point-max))
-;;                   (setq done t)              
+;;                   (setq done t)
 ;;                 (if (not thisdone)
 ;;                     (next-logical-line))))
 ;;             (save-buffer)))))))
@@ -136,11 +136,11 @@
   ;; Some basic settings and some confliction fixes
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
+
   ;; Loaded modules
-  (setq org-modules 
+  (setq org-modules
         '(org-bbdb org-bibtex org-crypt
-		  org-ctags org-docview org-id
+          org-ctags org-docview org-id
           org-info org-habit org-inlinetask org-mew org-gnus
           org-annotate-file org-bookmark org-checklist org-choose
           org-collector org-depend org-elisp-symbol org-eval
@@ -151,9 +151,9 @@
           orgtbl-sqlinsert org-toc org-track org-w3m))
 
   (require 'org2blog-autoloads)
-  
+
   (when (and (fboundp 'daemonp) (daemonp))
-    (add-hook 'org-mode-hook 
+    (add-hook 'org-mode-hook
               'wl-org-column-view-uses-fixed-width-face))
 
   ;; Locate some files
@@ -161,15 +161,15 @@
   (setq org-default-notes-file
         (concat my-emacs-path "/org/gtd/Notes.org"))
   (setq org-combined-agenda-icalendar-file
-        (concat my-emacs-path "/org/org.ics")) 
+        (concat my-emacs-path "/org/org.ics"))
   (setq org-id-locations-file
         (concat my-emacs-path "/org/org-id-locations"))
-  
+
   ;; NOTE: Has been soved from org 7.6
   ;; ;; org-crypt security issue about auto-save
   ;; (add-hook 'org-mode-hook
-  ;; 			'(lambda ()
-  ;; 			   (auto-save-mode -1)))
+  ;;             '(lambda ()
+  ;;                (auto-save-mode -1)))
 
   ;; NOTE: Use icicles instead
   ;; (setq org-completion-use-iswitchb t)
@@ -181,7 +181,7 @@
   ;; Enable inline image display.
   ;; But may breaks access to emacs from an Android phone
   (setq org-startup-with-inline-images t)
-  
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
   ;; GTD system settings
@@ -191,12 +191,12 @@
   ;; agenda files
   (setq org-agenda-files
         (list
-		 "~/emacs/org/gtd/PhdWork.org"
-		 "~/emacs/org/gtd/DailyLife.org"
-		 "~/emacs/org/gtd/GeekInterests.org"
-		 "~/emacs/org/gtd/Learn.org"
-		 "~/emacs/org/gtd/Notes.org"
-		 ))
+         "~/emacs/org/gtd/PhdWork.org"
+         "~/emacs/org/gtd/DailyLife.org"
+         "~/emacs/org/gtd/GeekInterests.org"
+         "~/emacs/org/gtd/Learn.org"
+         "~/emacs/org/gtd/Notes.org"
+         ))
 
   ;; BUG: error when load this two lines
   ;; ;; Don't recursively display gtd files in session list
@@ -206,42 +206,42 @@
 
   ;;-------------------------------------------------------
   ;; GTD contexts & tags
-  
+
   (setq org-tag-persistent-alist ;; contexts
         '((:startgroup)
-		  ("@campus" . ?C) ("@BRL" . ?B) ("@library" . ?L)
-		  ("@home" . ?H) ("@street" . ?S)
-		  (:endgroup) 
+          ("@campus" . ?C) ("@BRL" . ?B) ("@library" . ?L)
+          ("@home" . ?H) ("@street" . ?S)
+          (:endgroup)
 
-		  ("online" . ?O) ("post" . ?M) ("email" . ?E)
-		  ("phone" . ?F) ("people" . ?Z)
-		  
-		  ("appt" . ?A) ("proj" . ?P)
-		  ("repeat" . ?R)		  
+          ("online" . ?O) ("post" . ?M) ("email" . ?E)
+          ("phone" . ?F) ("people" . ?Z)
+
+          ("appt" . ?A) ("proj" . ?P)
+          ("repeat" . ?R)
           ("delegated" . ?D)))
-  
+
   ;; Inherit tags in most of cases
   (setq org-use-tag-inheritance t)
   ;; Exclusions of tag inheritance
   (setq org-tags-exclude-from-inheritance '("proj"))
-  
+
   ;;-------------------------------------------------------
   ;; Properties
-  
+
   (setq org-use-property-inheritance
-		nil)  ;; Don't inheritant property for sub-items, 
+        nil)  ;; Don't inheritant property for sub-items,
               ;; since it slows down property searchings.
 
   ;; NOTE: a task should not takes more than 4 hours, otherwise it
-  ;; MUST be a project and can be broken into smaller tasks. 
+  ;; MUST be a project and can be broken into smaller tasks.
   (setq org-global-properties   ;; Additional properties
-		'(("Effort_ALL" . 
-		   "0:10 0:20 0:30 1:00 1:30 2:00 2:30 3:00 4:00")
-		  ("Importance_ALL" . 
-		   "A B C")
-		  ("Score_ALL" .
-		   "0 1 2 3 4 5 6 7 8 9 10")
-		  ))
+        '(("Effort_ALL" .
+           "0:10 0:20 0:30 1:00 1:30 2:00 2:30 3:00 4:00")
+          ("Importance_ALL" .
+           "A B C")
+          ("Score_ALL" .
+           "0 1 2 3 4 5 6 7 8 9 10")
+          ))
 
   ;;--------------------------------------------------------
   ;; Priority
@@ -257,7 +257,7 @@
 
   ; Set default column view headings: Task Effort Clock_Summary
   (setq org-columns-default-format
-		"%CATEGORY(Cat.) %PRIORITY(Pri.) %Importance(Imp.) %6TODO(State) %35ITEM(Details) %ALLTAGS(Tags) %5Effort(Plan){:} %6CLOCKSUM(Clock){Total} %Score(Score)")
+        "%CATEGORY(Cat.) %PRIORITY(Pri.) %Importance(Imp.) %6TODO(State) %35ITEM(Details) %ALLTAGS(Tags) %5Effort(Plan){:} %6CLOCKSUM(Clock){Total} %Score(Score)")
 
 
   ;;--------------------------------------------------------
@@ -265,60 +265,60 @@
 
   (setq org-use-fast-todo-selection t) ;; C-c C-t key
   (setq org-todo-keywords
-  		'((sequence "TODO(t!)" "NEXT(n)" "STARTED(s!)" "|"
-                    "DONE(d!)") 
-  		  (sequence "SOMEDAY(x!)" "WAITING(w@/!)" "|"
+          '((sequence "TODO(t!)" "NEXT(n)" "STARTED(s!)" "|"
+                    "DONE(d!)")
+            (sequence "SOMEDAY(x!)" "WAITING(w@/!)" "|"
                     "CANCELLED(c@/!)")))
-  
-  ;; (setq org-todo-keyword-faces 
-  ;; 		(quote (("TODO" :foreground "red" :weight bold)
-  ;; 				("NEXT" :foreground "blue" :weight bold)
-  ;; 				("STARTED" :foreground "blue" :weight bold)
-  ;; 				("DONE" :foreground "forest green" :weight bold)
-  ;; 				("WAITING" :foreground "orange" :weight bold)
-  ;; 				("SOMEDAY" :foreground "magenta" :weight bold)
-  ;; 				("CANCELLED" :foreground "forest green" :weight bold)
-  ;; 				("OPEN" :foreground "blue" :weight bold)
-  ;; 				("CLOSED" :foreground "forest green" :weight bold)
-  ;; 				("PHONE" :foreground "forest green" :weight bold))))
+
+  ;; (setq org-todo-keyword-faces
+  ;;         (quote (("TODO" :foreground "red" :weight bold)
+  ;;                 ("NEXT" :foreground "blue" :weight bold)
+  ;;                 ("STARTED" :foreground "blue" :weight bold)
+  ;;                 ("DONE" :foreground "forest green" :weight bold)
+  ;;                 ("WAITING" :foreground "orange" :weight bold)
+  ;;                 ("SOMEDAY" :foreground "magenta" :weight bold)
+  ;;                 ("CANCELLED" :foreground "forest green" :weight bold)
+  ;;                 ("OPEN" :foreground "blue" :weight bold)
+  ;;                 ("CLOSED" :foreground "forest green" :weight bold)
+  ;;                 ("PHONE" :foreground "forest green" :weight bold))))
 
   ;; Tag change triggers
   ;; (setq org-todo-state-tags-triggers
-  ;; 		'(("TODO"      ("new"))
-  ;; 		  ("NEXT"      ("new"))
-  ;; 		  ("STARTED"   ("new"))
-  ;; 		  ("DONE"      ("new") ("old" . t))
-  ;; 		  ("WAITING"   ("new"))
-  ;; 		  ("SOMEDAY"   ("new"))
-  ;; 		  ("CANCELLED" ("new") ("important") ("old" . t))))
+  ;;         '(("TODO"      ("new"))
+  ;;           ("NEXT"      ("new"))
+  ;;           ("STARTED"   ("new"))
+  ;;           ("DONE"      ("new") ("old" . t))
+  ;;           ("WAITING"   ("new"))
+  ;;           ("SOMEDAY"   ("new"))
+  ;;           ("CANCELLED" ("new") ("important") ("old" . t))))
 
   ;; Treat adding item as state change
   (setq org-treat-insert-todo-heading-as-state-change t)
-  
+
   (setq org-enforce-todo-checkbox-dependencies
-		t) ;; Block checkbox entries from CHECKED while they have
-           ;; children that are not CHECKED  
+        t) ;; Block checkbox entries from CHECKED while they have
+           ;; children that are not CHECKED
 
   (setq org-enforce-todo-dependencies
-		t)   ;; Block TODO items from changing state to DONE while
+        t)   ;; Block TODO items from changing state to DONE while
              ;; they have children that are not DONE
 
   (setq org-stuck-projects ;; Define stuck projects
         '("+proj/!-TODO-SOMEDAY"
-		  ("\\<NEXT\\>" "\\<STARTED\\>")))
+          ("\\<NEXT\\>" "\\<STARTED\\>")))
 
-  ;; TODO entry automatically changes to DONE 
+  ;; TODO entry automatically changes to DONE
   ;; when all children are done
   ;; (defun org-summary-todo (n-done n-not-done)
   ;;   "Switch entry to DONE when all subentries are done, to TODO
-  ;; otherwise." 
+  ;; otherwise."
   ;;   (let (org-log-done org-log-states)   ; turn off logging
   ;;     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   ;; (add-hook ('org-after-todo-statistics-hook 'org-summary-todo)
-  
+
   ;;--------------------------------------------------------------------------
   ;; Log settings
-  
+
   (setq org-log-done        'time)
   (setq org-log-done-with-time t)
   (setq org-log-into-drawer 'time)
@@ -352,21 +352,21 @@
   ;;---------------------------------------------------------------------------
   ;; Alarm  using `appt'
   ;; `appt' uses `todochiku' to display pop-up notification in window-system
-  
+
   ;; (require 'appt)
   (setq org-agenda-include-diary t)
   ;; update appt each time agenda opened
   (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
   ;; (org-agenda-to-appt)
-  
+
   (defadvice  org-agenda-redo (after org-agenda-redo-add-appts)
     "Pressing `r' on the agenda will also add appointments."
-    (progn 
+    (progn
       (setq appt-time-msg-list nil)
       (org-agenda-to-appt)))
 
   (ad-activate 'org-agenda-redo)
-  
+
   ;; (progn
   ;;   (appt-activate 1)
   ;;   (setq appt-display-format 'window)
@@ -377,10 +377,10 @@
 
   ;; (require 'xy-todochiku)
   (setq org-show-notification-handler
-		'(lambda (notification)
-		   (todochiku-message "org-mode notification" notification
-							  (todochiku-icon 'emacs))))
-  
+        '(lambda (notification)
+           (todochiku-message "org-mode notification" notification
+                              (todochiku-icon 'emacs))))
+
   ;;--------------------------------------------------------------------------
   ;; Custom ageda views
 
@@ -389,7 +389,7 @@
 
   ;; Display two windows in the current frame
   (setq org-agenda-window-setup ;; 'other-frame)
-		'reorganize-frame)
+        'reorganize-frame)
 
   ;; Agenda window frame fractions
   (setq org-agenda-window-frame-fractions (quote (0.20 . 0.80)))
@@ -406,150 +406,150 @@
   (setq org-agenda-todo-ignore-timestamp nil)
   (setq org-agenda-todo-ignore-with-date nil)
 
-  ;; Show all items when do a tag-todo search (C-c a M) 
+  ;; Show all items when do a tag-todo search (C-c a M)
   ;; (org-agenda-tags-todo-honor-ignore-options nil)
 
   ;; Do not display sublevels
   (setq org-agenda-todo-list-sublevels nil)
 
-  ;; Display items within their dealine periods 
+  ;; Display items within their dealine periods
   (setq org-agenda-include-deadlines t)
 
   ;; Use grid style timeline
   (setq org-agenda-use-time-grid t)
-  (setq org-agenda-time-grid 
-        '((daily today require-timed) "----------------" 
+  (setq org-agenda-time-grid
+        '((daily today require-timed) "----------------"
           (800 1000 1200 1400 1600 1800 2000 22:00)))
-  
+
   ;; Agenda view presentation and sorting
   ;; org-agenda-tags-column
   ;; org-agenda-prefix-format
-  (setq org-agenda-sorting-strategy 
-        '((agenda time-up category-keep priority-down todo-state-up) 
+  (setq org-agenda-sorting-strategy
+        '((agenda time-up category-keep priority-down todo-state-up)
           (todo time-up category-keep priority-down todo-state-up)
-          (tags time-up category-keep priority-down todo-state-up) 
+          (tags time-up category-keep priority-down todo-state-up)
           (search time-up category-keep priority-down todo-state-up)))
-  
+
   ;; custom agenda commands
   ;; Custom agenda command definitions
   (setq org-agenda-custom-commands
-  		'((" " "Day Planner"
-		   ((tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+SCHEDULED<\"<today>\""
-					   ((org-agenda-overriding-header
-						 "Un-finished Tasks of Yesterday or Earlier (Re-Schedule them first!)") 
-						(org-tags-match-list-sublevels t)))
+          '((" " "Day Planner"
+           ((tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+SCHEDULED<\"<today>\""
+                       ((org-agenda-overriding-header
+                         "Un-finished Tasks of Yesterday or Earlier (Re-Schedule them first!)")
+                        (org-tags-match-list-sublevels t)))
 
-			(agenda ""
-					((org-agenda-ndays 1)
-					 (org-agenda-deadline-warning-days 30)
-					 (org-agenda-use-time-grid t)
-					 (org-agenda-skip-scheduled-if-done t)
-					 (org-agenda-skip-deadline-if-done t)
-					 (org-agenda-skip-timestamp-if-done t)
-					 (org-agenda-skip-archived-trees t)
-					 (org-agenda-skip-comment-trees t)
-					 (org-agenda-todo-list-sublevel t)
-					 (org-agenda-timeline-show-empty-dates nil)))
+            (agenda ""
+                    ((org-agenda-ndays 1)
+                     (org-agenda-deadline-warning-days 30)
+                     (org-agenda-use-time-grid t)
+                     (org-agenda-skip-scheduled-if-done t)
+                     (org-agenda-skip-deadline-if-done t)
+                     (org-agenda-skip-timestamp-if-done t)
+                     (org-agenda-skip-archived-trees t)
+                     (org-agenda-skip-comment-trees t)
+                     (org-agenda-todo-list-sublevel t)
+                     (org-agenda-timeline-show-empty-dates nil)))
 
-		    (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-				       ((org-agenda-overriding-header
-					     "1. Urgent & Important Tasks Scheduled for Today") 
-						(org-tags-match-list-sublevels t)))
-			
-			(tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-					   ((org-agenda-overriding-header
-						 "2. Urgent & NOT Important Tasks Scheduled for Today")
-						(org-tags-match-list-sublevels t)))
+            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+                       ((org-agenda-overriding-header
+                         "1. Urgent & Important Tasks Scheduled for Today")
+                        (org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-					   ((org-agenda-overriding-header
-						 "3. NOT Urgent & Important Tasks Scheduled for Today")
-						(org-tags-match-list-sublevels t)))
+            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+                       ((org-agenda-overriding-header
+                         "2. Urgent & NOT Important Tasks Scheduled for Today")
+                        (org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\"" 
-					   ((org-agenda-overriding-header
-						 "4. NOT Urgent & NOT Important Tasks Scheduled for Today")
-						(org-tags-match-list-sublevels t)))
+            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+                       ((org-agenda-overriding-header
+                         "3. NOT Urgent & Important Tasks Scheduled for Today")
+                        (org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\""
-				       ((org-agenda-overriding-header
-						 "New Task Today (Un-Processed, Make Sure it is Empty at the end of today)") 
-						(org-tags-match-list-sublevels t)))
- 
-			(tags      "CLOSED<\"<tomorrow>\"+CLOSED>=\"<today>\""
-					   ((org-agenda-overriding-header
-						 "Finished Tasks Today (Refile them at End of this Week)") 
-						(org-tags-match-list-sublevels nil)
-						(org-agenda-skip-scheduled-if-done nil)
-						(org-agenda-skip-deadline-if-done nil)
-						(org-agenda-skip-timestamp-if-done nil)
-						(org-agenda-skip-archived-trees nil)))
+            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+                       ((org-agenda-overriding-header
+                         "4. NOT Urgent & NOT Important Tasks Scheduled for Today")
+                        (org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO=\"NEXT\"+SCHEDULED>=\"<tomorrow>\"+SCHEDULED<=\"<+3d>\""
-				       ((org-agenda-overriding-header
-						 "Scheduled Tasks for the Next 3 days") 
-						(org-tags-match-list-sublevels nil)))
+            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\""
+                       ((org-agenda-overriding-header
+                         "New Task Today (Un-Processed, Make Sure it is Empty at the end of today)")
+                        (org-tags-match-list-sublevels t)))
 
-			(tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\""
-					   ((org-agenda-overriding-header
-						 "Old Un-Processed Tasks (Process Them ASAP)") 
-						(org-tags-match-list-sublevels t)))
+            (tags      "CLOSED<\"<tomorrow>\"+CLOSED>=\"<today>\""
+                       ((org-agenda-overriding-header
+                         "Finished Tasks Today (Refile them at End of this Week)")
+                        (org-tags-match-list-sublevels nil)
+                        (org-agenda-skip-scheduled-if-done nil)
+                        (org-agenda-skip-deadline-if-done nil)
+                        (org-agenda-skip-timestamp-if-done nil)
+                        (org-agenda-skip-archived-trees nil)))
 
-			(tags-todo "TODO=\"SOMEDAY\""
-					   ((org-agenda-overriding-header
-						 "Un-Scheduled Tasks (Schedule Them if Possible)")
-						(org-tags-match-list-sublevels nil)))
-			))
-	  
-		  ("n" "Recent Notes NOT Refiled" tags
-		     "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\"" 
-		   ((org-agenda-overriding-header
-			 "Recent Notes (Refile Them ASAP)")
-			(org-tags-match-list-sublevels nil)))
-			
-		  ("i" "Recent Ideas NOT Refiled" tags
-		   "+idea+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
-		   ((org-agenda-overriding-header "Recent Ideas (Refile Them ASAP)")
-			(org-tags-match-list-sublevels nil)))
+            (tags-todo "TODO=\"NEXT\"+SCHEDULED>=\"<tomorrow>\"+SCHEDULED<=\"<+3d>\""
+                       ((org-agenda-overriding-header
+                         "Scheduled Tasks for the Next 3 days")
+                        (org-tags-match-list-sublevels nil)))
 
-		  ("w" "Weekly Review"
-		   ((tags-todo "TODO=\"TODO\""
-					   ((org-agenda-overriding-header
-						 "Un-Processed New Tasks (Empty before Weekly Review)") 
-						(org-tags-match-list-sublevels t)))
+            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\""
+                       ((org-agenda-overriding-header
+                         "Old Un-Processed Tasks (Process Them ASAP)")
+                        (org-tags-match-list-sublevels t)))
 
-			(agenda ""
-					 ((org-agenda-span 'week)
-					 (org-agenda-ndays 7)
-					 (org-agenda-deadline-warning-days 60)
-					 (org-agenda-use-time-grid nil)
-					 (org-agenda-skip-scheduled-if-done nil)
-					 (org-agenda-skip-deadline-if-done nil)
-					 (org-agenda-skip-timestamp-if-done nil)
-					 (org-agenda-skip-archived-trees nil)
-					 (org-agenda-skip-comment-trees t)
-					 (org-agenda-todo-list-sublevel nil)
-					 (org-agenda-timeline-show-empty-dates t)))
+            (tags-todo "TODO=\"SOMEDAY\""
+                       ((org-agenda-overriding-header
+                         "Un-Scheduled Tasks (Schedule Them if Possible)")
+                        (org-tags-match-list-sublevels nil)))
+            ))
 
-			(tags	 "CLOSED<\"<tomorrow>\"+CLOSED>=\"<-1w>\""
-			         ((org-agenda-overriding-header
-					   "Finished Tasks in This Week (Archive now)") 
-					  (org-tags-match-list-sublevels t)
-					  (org-agenda-skip-scheduled-if-done nil)
-					  (org-agenda-skip-deadline-if-done nil)
-					  (org-agenda-skip-timestamp-if-done nil)
-					  (org-agenda-skip-archived-trees nil)))
+          ("n" "Recent Notes NOT Refiled" tags
+             "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
+           ((org-agenda-overriding-header
+             "Recent Notes (Refile Them ASAP)")
+            (org-tags-match-list-sublevels nil)))
 
-		   (tags-todo "TODO<>\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
-					   ((org-agenda-overriding-header
-						 "Un-Finished Tasks in This Week (Re-Schedule now)")
-						(org-tags-match-list-sublevels t)))
+          ("i" "Recent Ideas NOT Refiled" tags
+           "+idea+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
+           ((org-agenda-overriding-header "Recent Ideas (Refile Them ASAP)")
+            (org-tags-match-list-sublevels nil)))
 
-		   (tags      "proj/!-TODO-SOMEDAY"
-					  ((org-agenda-overriding-header
-						"Projects Review (Make Sure NOT Stuck)")
-					   (org-tags-match-list-sublevels t)))))
-		  ))
+          ("w" "Weekly Review"
+           ((tags-todo "TODO=\"TODO\""
+                       ((org-agenda-overriding-header
+                         "Un-Processed New Tasks (Empty before Weekly Review)")
+                        (org-tags-match-list-sublevels t)))
+
+            (agenda ""
+                     ((org-agenda-span 'week)
+                     (org-agenda-ndays 7)
+                     (org-agenda-deadline-warning-days 60)
+                     (org-agenda-use-time-grid nil)
+                     (org-agenda-skip-scheduled-if-done nil)
+                     (org-agenda-skip-deadline-if-done nil)
+                     (org-agenda-skip-timestamp-if-done nil)
+                     (org-agenda-skip-archived-trees nil)
+                     (org-agenda-skip-comment-trees t)
+                     (org-agenda-todo-list-sublevel nil)
+                     (org-agenda-timeline-show-empty-dates t)))
+
+            (tags     "CLOSED<\"<tomorrow>\"+CLOSED>=\"<-1w>\""
+                     ((org-agenda-overriding-header
+                       "Finished Tasks in This Week (Archive now)")
+                      (org-tags-match-list-sublevels t)
+                      (org-agenda-skip-scheduled-if-done nil)
+                      (org-agenda-skip-deadline-if-done nil)
+                      (org-agenda-skip-timestamp-if-done nil)
+                      (org-agenda-skip-archived-trees nil)))
+
+           (tags-todo "TODO<>\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
+                       ((org-agenda-overriding-header
+                         "Un-Finished Tasks in This Week (Re-Schedule now)")
+                        (org-tags-match-list-sublevels t)))
+
+           (tags      "proj/!-TODO-SOMEDAY"
+                      ((org-agenda-overriding-header
+                        "Projects Review (Make Sure NOT Stuck)")
+                       (org-tags-match-list-sublevels t)))))
+          ))
 
   ;;------------------------------------------------------------------------------------
   ;; MobileOrg settings
@@ -564,64 +564,64 @@
   ;; Agenda view export C-x C-w
 
   (setq org-agenda-exporter-settings
-		'((ps-number-of-columns 2)
-		  (ps-landscape-mode t)
-		  ;; (org-agenda-prefix-format " [ ] ")
-		  ;; (org-agenda-with-colors nil)
-		  ;; (org-agenda-remove-tags t)
-		  (org-agenda-add-entry-text-maxlines 5)
-		  (htmlize-output-type 'css)))
-  
-  
+        '((ps-number-of-columns 2)
+          (ps-landscape-mode t)
+          ;; (org-agenda-prefix-format " [ ] ")
+          ;; (org-agenda-with-colors nil)
+          ;; (org-agenda-remove-tags t)
+          (org-agenda-add-entry-text-maxlines 5)
+          (htmlize-output-type 'css)))
+
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
   ;; Capture, refile & archive settings
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; NOTE: Swithed from 'remember' to 'org-capture' 
+  ;; NOTE: Swithed from 'remember' to 'org-capture'
   ;; (setq org-remember-default-headline "Tasks")
   ;; (org-remember-insinuate)
   ;; (define-key global-map "\C-cr" 'org-remember)
   ;; New capture system org-capture since version 7.01g
   ;; (define-key global-map "\C-cc" 'org-capture)
-  
+
   ;; cpature templates
-  (setq org-capture-templates 
-  		'(("p" "Add a PhD Task----->Day Planner"
-  		   entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
-  		   "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
-  		   :empty-lines 1 :prepend t :clock-keep t)
-  		  ("l" "Add a Life Task---->Day Planner"
-  		   entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
-  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       0:30\n   :Score:           0\n   :END:"
-  		   :empty-lines 1 :prepend t :clock-keep t)
-  		  ("g" "Add a Geek Task---->Day Planner"
-  		   entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
-  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       2:00\n   :Score:           0\n   :END:"
-  		   :empty-lines 1 :prepend t :clock-keep t)
-  		  ("s" "Add a Learn Task--->Day Planner"
-  		   entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
-  		   "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
-  		   :empty-lines 1 :prepend t :clock-keep t)
-		  ("m" "Add a Misc Task---->Day Planner"
-  		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
-  		   "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      C\n   :Effort:       1:00\n   :Score:           0\n   :END:"
-  		   :empty-lines 1 :prepend t :clock-keep t)
-  		  ("n" "Write a Notes"
-  		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
-  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
-  		   :empty-lines 1 :prepend t :clock-keep t)
-  		  ("i" "Record an Idea"
-  		   entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
-  		   "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
-  		   :empty-lines 1 :prepend t :clock-keep t)
-  		   ))
+  (setq org-capture-templates
+          '(("p" "Add a PhD Task----->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
+             "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
+             :empty-lines 1 :prepend t :clock-keep t)
+            ("l" "Add a Life Task---->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
+             "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       0:30\n   :Score:           0\n   :END:"
+             :empty-lines 1 :prepend t :clock-keep t)
+            ("g" "Add a Geek Task---->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
+             "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       2:00\n   :Score:           0\n   :END:"
+             :empty-lines 1 :prepend t :clock-keep t)
+            ("s" "Add a Learn Task--->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
+             "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
+             :empty-lines 1 :prepend t :clock-keep t)
+          ("m" "Add a Misc Task---->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
+             "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      C\n   :Effort:       1:00\n   :Score:           0\n   :END:"
+             :empty-lines 1 :prepend t :clock-keep t)
+            ("n" "Write a Notes"
+             entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
+             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+             :empty-lines 1 :prepend t :clock-keep t)
+            ("i" "Record an Idea"
+             entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
+             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+             :empty-lines 1 :prepend t :clock-keep t)
+             ))
 
   ; Targets include this file and any file contributing to the agenda
-  ; - up to 3 levels deep 
+  ; - up to 3 levels deep
   (setq org-refile-targets '((nil :maxlevel . 3)
-							 (org-agenda-files :maxlevel . 3)))
+                             (org-agenda-files :maxlevel . 3)))
 
   ;; Put the newest item on the top
   (setq org-reverse-note-order t)
@@ -636,24 +636,24 @@
   (setq org-refile-allow-creating-parent-nodes 'confirm)
 
   ;; Infomation saved in archives
-  (setq org-archive-save-context-info 
-		'(time file category todo priority itags olpath ltags))
+  (setq org-archive-save-context-info
+        '(time file category todo priority itags olpath ltags))
 
   ;; makes it possible to archive tasks that are not marked DONE
   (setq org-archive-mark-done nil)
-  
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
   ;; Babel settings
   ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; babel evaluation languages
-  (setq org-babel-load-languages 
-        '((emacs-lisp . t) 
-          (ditaa      . t) 
+  (setq org-babel-load-languages
+        '((emacs-lisp . t)
+          (ditaa      . t)
           (dot        . t)
-          ;; (octave     . t) 
+          ;; (octave     . t)
           (matlab     . t)
           (latex      . t)
           (sh         . t)
@@ -669,64 +669,64 @@
   (require 'ob-sh)
 
   ;; default latex package list
-  (setq org-export-latex-default-packages-alist 
-        '(("AUTO" "inputenc" t) ("T1" "fontenc" t) ("" "fixltx2e" nil) 
-          ("UTF8,noindent,hyperref" "ctex" nil) 
-          ("" "graphicx" t) ("" "longtable" nil) ("" "float" nil) 
-          ("" "wrapfig" nil) ("" "soul" t) ("" "t1enc" t) ("" "textcomp" t) 
-          ("" "marvosym" t) ("" "wasysym" t) ("" "latexsym" t) 
+  (setq org-export-latex-default-packages-alist
+        '(("AUTO" "inputenc" t) ("T1" "fontenc" t) ("" "fixltx2e" nil)
+          ("UTF8,noindent,hyperref" "ctex" nil)
+          ("" "graphicx" t) ("" "longtable" nil) ("" "float" nil)
+          ("" "wrapfig" nil) ("" "soul" t) ("" "t1enc" t) ("" "textcomp" t)
+          ("" "marvosym" t) ("" "wasysym" t) ("" "latexsym" t)
           ("" "amssymb" t) ("" "hyperref" nil) "\\tolerance=1000"))
 
   ;; latex to pdf command list
-  ;; (setq org-latex-to-pdf-process 
-  ;;   '(("pdflatex -interaction nonstopmode %b" 
-  ;;      "bibtex %b" 
-  ;;      "pdflatex -interaction nonstopmode %b" 
+  ;; (setq org-latex-to-pdf-process
+  ;;   '(("pdflatex -interaction nonstopmode %b"
+  ;;      "bibtex %b"
+  ;;      "pdflatex -interaction nonstopmode %b"
   ;;      "pdflatex -interaction nonstopmode %b")
   ;;    )
   ;; )
 
   (require 'org-exp-bibtex)
   (add-hook 'org-mode-hook
-			'(lambda ()
-			   ;; BUG: org-mobile
-			   ;; (org-mode-reftex-setup)
-			   (turn-on-org-cdlatex)
-			   (turn-on-auto-fill)
-			   ;; (xy/yas-start)
-			   ;; (xy/linkd-start)
-			   ;; (xy/set-font-write)
-			   ))
- 
+            '(lambda ()
+               ;; BUG: org-mobile
+               ;; (org-mode-reftex-setup)
+               (turn-on-org-cdlatex)
+               (turn-on-auto-fill)
+               ;; (xy/yas-start)
+               ;; (xy/linkd-start)
+               ;; (xy/set-font-write)
+               ))
+
   ;; contrib modules
-  ;; (add-to-list 'load-path  
-  ;;       "~/.emacs.d/site-lisp/org/contrib/babel/lisp") 
+  ;; (add-to-list 'load-path
+  ;;       "~/.emacs.d/site-lisp/org/contrib/babel/lisp")
   ;;       "~/.emacs.d/site-lisp/org/contrib/lisp"))
   ;;    "/usr/local/share/emacs/site-lisp/org/contrib/babel/lisp")
 
-  ;; (add-to-list 'load-path  
+  ;; (add-to-list 'load-path
   ;;       "~/.emacs.d/site-lisp/org/contrib/lisp")
-  ;;    "/usr/local/share/emacs/site-lisp/org/contrib/lisp")              
+  ;;    "/usr/local/share/emacs/site-lisp/org/contrib/lisp")
 
   ;; Use ditaa/graphviz to generate png pictures.
   ;;  *  Use artist mode to draw ascii picutre,
   ;;  *  then convert to png pictures using ditaa.
-  ;; Now ditta is included in org, but I use the 
+  ;; Now ditta is included in org, but I use the
   ;; official release instead.
   ;;
   ;; Tips:
-  ;;  *  C-x b to switch buffers. Originally, 
-  ;;     it is bound for `switch-to-buffer'. 
-  ;;     Instead, binding `iswitchb-buffer' 
+  ;;  *  C-x b to switch buffers. Originally,
+  ;;     it is bound for `switch-to-buffer'.
+  ;;     Instead, binding `iswitchb-buffer'
   ;;     to C-x b is much easier to use.
-  ;;  *  C-x n n to narrow the region, `narrow-to-region'. 
-  ;;     It is very useful to prevent the unwanted change 
-  ;;     on other portion of the buffer, and makes the user 
-  ;;     concentrating on what he or she want to do. 
+  ;;  *  C-x n n to narrow the region, `narrow-to-region'.
+  ;;     It is very useful to prevent the unwanted change
+  ;;     on other portion of the buffer, and makes the user
+  ;;     concentrating on what he or she want to do.
   ;;     The narrowing is reverted by the command, C-x n w `widen'.
-  ;;  *  Create a begin_src block for the appropriate tool, 
-  ;;     edit the text, and build the pictures with C-c C-c. 
-  ;;     You can view the result directly in Emacs with C-c C-o 
+  ;;  *  Create a begin_src block for the appropriate tool,
+  ;;     edit the text, and build the pictures with C-c C-c.
+  ;;     You can view the result directly in Emacs with C-c C-o
   ;;     in the block.
 
   (setq org-ditaa-jar-path "~/.emacs.d/bin/ditaa0_9.jar")
@@ -803,7 +803,7 @@ save -ascii %s ans")
               :priority t
               :TeX-macros t
               :LaTeX-fragments t
-              :latex-listings nil 
+              :latex-listings nil
               :skip-before-1st-heading nil
               :fixed-width t
               :timestamps t
@@ -824,13 +824,13 @@ save -ascii %s ans")
               :timestamp t
               :publishing-directory "/ftp:nobody@192.168.1.100:/org/"
               ;;            :preamble
-              ;;            :postamble           
-              ;;            :auto-preamble       
-              ;;            :auto-postamble      
+              ;;            :postamble
+              ;;            :auto-preamble
+              ;;            :auto-postamble
               :author "Xin Yang"
               :email "Xin2.Yang@gmail.com"
-              ;;            :select-tags         
-              ;;            :exclude-tags        
+              ;;            :select-tags
+              ;;            :exclude-tags
               ;;            :latex-image-options
               :auto-sitemap t
               :sitemap-filename "SiteMap.org"
@@ -842,7 +842,7 @@ save -ascii %s ans")
               :makeindex nil
               :recursive t
               )
-             ("local-extra" 
+             ("local-extra"
               :base-directory "~/emacs/org/source/"
               :base-extension "css\\|pdf\\|png\\|jpg\\|gif\\|CSS\\|PDF\\|PNG\\|JPG\\|GIF\\|c\\|C\\|m\\|M\\|vhd\\|VHD\\|v\\|V\\|cpp\\|CPP"
               :publishing-directory "/ftp:nobody@192.168.1.100:/org/"
@@ -850,7 +850,7 @@ save -ascii %s ans")
               :recursive t
               :author nil
               )
-             ("local-addon" 
+             ("local-addon"
               :base-directory "~/emacs/org/addon/"
               :base-extension "css\\|pdf\\|png\\|jpg\\|gif\\|CSS\\|PDF\\|PNG\\|JPG\\|GIF"
               :publishing-directory "/ftp:nobody@192.168.1.100:/org/"
@@ -893,7 +893,7 @@ save -ascii %s ans")
               :priority nil
               :TeX-macros t
               :LaTeX-fragments t
-              :latex-listings t 
+              :latex-listings t
               :skip-before-1st-heading nil
               :fixed-width t
               :timestamps t
@@ -914,13 +914,13 @@ save -ascii %s ans")
               ;;            :timestamp t
               :publishing-directory "~/emacs/org/latex/phd"
               ;;            :preamble
-              ;;            :postamble           
-              ;;            :auto-preamble       
-              ;;            :auto-postamble      
+              ;;            :postamble
+              ;;            :auto-preamble
+              ;;            :auto-postamble
               :author "Xin Yang"
               :email "Xin2.Yang@gmail.com"
-              ;;            :select-tags         
-              ;;            :exclude-tags        
+              ;;            :select-tags
+              ;;            :exclude-tags
               ;;-----------------------------------------------------------
               ;;            :latex-image-options
               ;;------------------------------------------------------------
@@ -934,31 +934,54 @@ save -ascii %s ans")
               :makeindex nil
               :recursive t
               )
-             ("phd-img" 
+             ("phd-img"
               :base-directory "~/emacs/org/source/phd/img"
               :base-extension "pdf\\|ps\\|png\\|jpg\\|bmp\\|eps\\|svg\\|PDF\\|PS\\|PNG\\|JPG\\|BMP\\|EPS\\|SVG"
               :publishing-directory "~/emacs/org/latex/phd/img"
               :publishing-function org-publish-attachment
               :recursive t
               )
-             ("phd-src" 
+             ("phd-src"
               :base-directory "~/emacs/org/source/phd/src"
               :base-extension "v\\|vhd\\|c\\|hcc\\|cpp\\|m\\|V\\|VHD\\|C\\|HCC\\|CPP\\|M"
               :publishing-directory "~/emacs/org/latex/phd/src"
               :publishing-function org-publish-attachment
               :recursive t
-              ) 
-             ("phd-bib" 
+              )
+             ("phd-bib"
               :base-directory "~/emacs/org/source/phd/bib"
               :base-extension "bib\\|bst\\|BIB\\|BST"
               :publishing-directory "~/emacs/org/latex/phd/bib"
               :publishing-function org-publish-attachment
               :recursive t
-              )         
+              )
              ("phd-all"
               :components ("phd-org" "phd-img" "phd-src" "phd-bib")
               )
-			 ))))
+             )))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Contrib lisps
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; org-mime
+  (when (try-require 'org-mime)
+    (setq org-mime-library 'mml)
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (local-set-key "\C-c\M-o"
+                               'org-mime-org-buffer-htmlize)))
+    (add-hook 'org-mime-html-hook
+              (lambda ()
+                (org-mime-change-element-style
+                 "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
+                               "#E6E1DC" "#232323")
+                 "blockquote" "border-left: 2px solid gray; padding-left: 4px;"))))
+  )
+
+(provide 'xy-rc-org)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -983,7 +1006,7 @@ save -ascii %s ans")
 ;;              fold-fun 'org-toggle-fold-subtree))
 ;;     (org-literal-links))
 ;;   (add-hook 'org-mode-hook 'org-hook-settings)
-  
+
 ;;   (defun org-kill-whole-line (&optional arg)
 ;;     "Kill line, to tags or end of line."
 ;;     (interactive "P")
@@ -1000,7 +1023,7 @@ save -ascii %s ans")
 ;;   (defun org-literal-links ()
 ;;     "Show literal links."
 ;;     (interactive)
-;; 	(org-remove-from-invisibility-spec '(org-link)) (org-restart-font-lock))
+;;     (org-remove-from-invisibility-spec '(org-link)) (org-restart-font-lock))
 
 ;;   (defun org-descriptive-links ()
 ;;     "Show descriptive links."
@@ -1018,7 +1041,7 @@ save -ascii %s ans")
 
 ;;   (defvar org-fold-subtree nil "Fold subtree or not now.")
 ;;   (make-variable-buffer-local 'org-fold-subtree)
-  
+
 ;;   (defun org-toggle-display-content ()
 ;;     "Toggle display content."
 ;;     (interactive)
@@ -1049,7 +1072,7 @@ save -ascii %s ans")
 ;;    'emaci-mode-map
 ;;    `(("N" emaci-N)
 ;;      ("P" emaci-P)))
-  
+
 ;;   (defun org-jsinfo-settings ()
 ;;     "Settings for `org-jsinfo'."
 ;;     (setcdr (assoc 'view org-infojs-options) "showall"))
@@ -1093,7 +1116,3 @@ save -ascii %s ans")
 
 ;; (eval-after-load "org-colview"
 ;;   `(org-colview-settings))
-
-
-(provide 'xy-rc-org)
-

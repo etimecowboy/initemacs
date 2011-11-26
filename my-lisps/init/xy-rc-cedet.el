@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-25 Fri 02:22 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,7 @@
 ;;;###autoload
 (defun cedet-settings ()
   "Settings for `cedet'."
-  
+
   ;; semantic
   ;; (semantic-load-enable-minimum-features)
   (semantic-load-enable-code-helpers)
@@ -61,14 +61,14 @@
     (setq ede-locate-setup-options '(ede-locate-global ede-locate-base)))
 
   ;;-------------------------------------------------------------
-  
+
   ;; senator
   ;; (global-senator-minor-mode -1)
 
   ;;-------------------------------------------------------------
 
   ;; More settings about semantic
-  
+
   (require 'semantic-c nil 'noerror)
   ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
 
@@ -179,21 +179,21 @@
 
   ;; speedbar
   (setq speedbar-use-images t
-		speedbar-track-mouse-flag nil
-		speedbar-update-flag nil
-		speedbar-show-unknown-files t
-		speedbar-directory-unshown-regexp
-		"^\\(CVS\\|RCS\\|SCCS\\|_darcs\\|\\.\\(git\\|hg\\|svn\\)\\)\\'")
+        speedbar-track-mouse-flag nil
+        speedbar-update-flag nil
+        speedbar-show-unknown-files t
+        speedbar-directory-unshown-regexp
+        "^\\(CVS\\|RCS\\|SCCS\\|_darcs\\|\\.\\(git\\|hg\\|svn\\)\\)\\'")
 
   (eval-after-load 'speedbar
-	'(progn
-	   ;; some dired-like bindings
-	   (define-key speedbar-key-map (kbd ";") 'speedbar-up-directory)
-	   (define-key speedbar-key-map (kbd "f") 'speedbar-edit-line)))
+    '(progn
+       ;; some dired-like bindings
+       (define-key speedbar-key-map (kbd ";") 'speedbar-up-directory)
+       (define-key speedbar-key-map (kbd "f") 'speedbar-edit-line)))
 
   ;;---------------------------------------------------
 
-  ;; zjl-hl, use semantic to highlight functions 
+  ;; zjl-hl, use semantic to highlight functions
   ;; (require 'zjl-hl)
   ;; (zjl-hl-enable-global-all-modes)
 

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-term.el'
-;; Time-stamp:<2011-01-31 Mon 11:36 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 03:03 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -90,7 +90,7 @@
 
 ;;;###autoload
 (defun switch-term-and-text ()
-  "if current in `term-mode', switch to `text-mode', 
+  "if current in `term-mode', switch to `text-mode',
    else switch to `term-mode'."
   (interactive)
   (if (equal major-mode 'term-mode)
@@ -113,12 +113,12 @@
 ;;;###autoload
 (defun term-settings ()
   "Settings for `term'."
-  
-  ;; multi-term: a mode based on term.el, 
+
+  ;; multi-term: a mode based on term.el,
   ;; for managing multiple terminal buffers in Emacs.
   (require 'multi-term)
   (add-hook 'term-mode-hook 'term-mode-hook-settings)
-  
+
   (setq term-unbind-key-list '("C-x" "<ESC>" "<up>" "<down>" "C-j"))
   (setq term-bind-key-alist
       `(("C-c"   . term-send-raw)

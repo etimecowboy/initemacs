@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org2blog.el'
-;; Time-stamp:<2011-11-14 Mon 15:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,19 +21,19 @@
   "Settings of `org2blog.el'."
 
   ;; (setq org2blog-server-url "http://etimecowboy.wordpress.com/xmlrpc.php"
-  ;; 		org2blog-server-user "etimecowboy"
-  ;; 		org2blog-server-weblog-id ""
-  ;; 		org2blog-use-tags-as-categories t)
-  
+  ;;         org2blog-server-user "etimecowboy"
+  ;;         org2blog-server-weblog-id ""
+  ;;         org2blog-use-tags-as-categories t)
+
   (setq org2blog/wp-blog-alist
-		'(("wp"
-		   :url "http://etimecowboy.wordpress.com/xmlrpc.php"
-		   :username "etimecowboy"
-		   :default-title ""
-		   :default-categories ("Uncategorized")
-		   :tags-as-categories nil
-		   )
-		  ))
+        '(("wp"
+           :url "http://etimecowboy.wordpress.com/xmlrpc.php"
+           :username "etimecowboy"
+           :default-title ""
+           :default-categories ("Uncategorized")
+           :tags-as-categories nil
+           )
+          ))
 
   ;; (org2blog-login)
 )

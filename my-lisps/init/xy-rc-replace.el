@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-replace.el'
-;; Time-stamp:<2011-08-09 Tue 08:28 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,7 @@
 ;;;###autoload
 (defun replace-face-settings ()
   "Face settings for `replace'."
-  
+
   (custom-set-faces
    '(match
      ((((class color) (min-colors 88) (background light))

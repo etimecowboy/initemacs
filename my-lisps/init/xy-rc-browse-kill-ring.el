@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-browse-kill-ring.el'
-;; Time-stamp:<2011-02-02 Wed 09:40 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,9 +38,9 @@
   (setq browse-kill-ring-no-duplicates t)
   (setq browse-kill-ring-display-duplicates nil)
   (setq browse-kill-ring-recenter t)
-  (setq browse-kill-ring-separator 
-	"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-  
+  (setq browse-kill-ring-separator
+    "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+
   ;; (add-hook 'browse-kill-ring-hook 'browse-kill-ring-my-keys)
 
   ;; browse-kill-ring navigation have bug when linum-mode is on

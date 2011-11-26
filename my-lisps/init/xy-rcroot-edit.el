@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-19 Sat 04:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,21 +24,32 @@
 
 ;; Emacs找不到合适的模式时，缺省使用text-mode
 (setq default-major-mode 'text-mode)
+
 ;; 不用TAB字符来缩进，使用空格
-(setq-default indent-tabs-mode -1)
 (setq default-tab-width 4)
-(setq tab-stop-list nil)
-(loop for x downfrom 40 to 1 do
+(setq tab-width 4)
+(loop for x downfrom 50 to 1 do
       (setq tab-stop-list (cons (* x tab-width) tab-stop-list)))
+(setq-default indent-tabs-mode nil)
+
 ;; 先格式化再补全
 (setq tab-always-indent 'complete)
-;; 自动的在文件末增加一新行
-(setq require-final-newline t)
-;; outline-mode, structural editing
-;; (eal-define-keys
-;;  'outline-mode-map
-;;  `(("C-M-h"   outline-mark-subtree)
-;;    ("C-c u"   outline-up-heading)))
+
+;; 不要自动的在文件末增加一新行
+(setq require-final-newline nil)
+
+;; ethan-wspace
+;; REF: https://github.com/glasserc/ethan-wspace
+(when (try-require 'ethan-wspace)
+  (global-ethan-wspace-mode 1))
+
+;; ws-trim
+;; automatically trims whitespace on edited lines. With a low
+;; `ws-trim-level' it is complementary to `ethan-wspace', and may be
+;; useful to encourage you to delete whitespace organically. Hopefully
+;; ethan-wspace will grow similar functionality soon.
+;; (when (try-require 'ws-trim)
+;;    (gloabl-ws-trim-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -81,17 +92,17 @@
   '(progn
      (isearch-face-settings)
      (isearch-settings)
-	 (eal-define-keys
-	  'isearch-mode-map
-	  `(("M-i" isearch-query-replace-current)
-		("M-k" isearch-clean)
-		("M-g" isearch-cancel)
-		("M-u" isearch-toggle-word)
-		("M-y" isearch-yank-line)
-		("C-y" isearch-yank-kill)
-		("M-h" isearch-del-char)
-		("M-H" ,(if is-after-emacs-23 isearch-help-map 
-				  'isearch-mode-help))))))
+     (eal-define-keys
+      'isearch-mode-map
+      `(("M-i" isearch-query-replace-current)
+        ("M-k" isearch-clean)
+        ("M-g" isearch-cancel)
+        ("M-u" isearch-toggle-word)
+        ("M-y" isearch-yank-line)
+        ("C-y" isearch-yank-kill)
+        ("M-h" isearch-del-char)
+        ("M-H" ,(if is-after-emacs-23 isearch-help-map
+                  'isearch-mode-help))))))
 (define-key-list
   global-map `(("C-x M-s" isearch-forward-cur-word)))
 
@@ -171,20 +182,20 @@
 ;; (global-set-kbd "C-x M-A" 'artist-mode)
 (eval-after-load "artist"
   '(progn
-	 (artist-settings)
-	 (eal-define-keys
-	  'artist-mode-map
-	  `(("C-c l"   artist-select-op-line)
-		("C-c r"   artist-select-op-rectangle)
-		("C-c M-c" artist-select-op-copy-rectangle)
-		("C-c M-w" artist-select-op-cut-rectangle)
-		("C-c M-p" artist-select-op-paste)))))
+     (artist-settings)
+     (eal-define-keys
+      'artist-mode-map
+      `(("C-c l"   artist-select-op-line)
+        ("C-c r"   artist-select-op-rectangle)
+        ("C-c M-c" artist-select-op-copy-rectangle)
+        ("C-c M-w" artist-select-op-cut-rectangle)
+        ("C-c M-p" artist-select-op-paste)))))
 
 ;;------------------------------------------------------------------
 
 ;;** palette
-;; provides a general color palette that you can use to 
-;; examine color properties or choose colors. 
+;; provides a general color palette that you can use to
+;; examine color properties or choose colors.
 ;; REF: Emacs配色的超级武器：Icicles，Color Palette和DoReMi
 ;;      http://emacser.com/icicles-doremi-palette.htm
 
@@ -242,7 +253,7 @@
    ("C-M-w"               copy-sentence)
    ;;    ;; 删除整行
    ;;    ("M-K" kill-line)
-   ;;    ("C-k" smart-kill)              
+   ;;    ("C-k" smart-kill)
    ;;    ("C-\\" delete-indentation)
    ("C-x M-m"             mark-invisible-region)
    ("M-U"                 del-to-begin)

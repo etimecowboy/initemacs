@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-11-25 Fri 03:07 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -58,7 +58,7 @@
 ;;;###autoload
 (defun ido-settings ()
   "settings for `ido'."
-  
+
   ;; (If is-before-emacs-21
   ;;     (setq read-buffer-function 'ido-read-buffer)
   ;;   (ido-everywhere t)
@@ -68,24 +68,24 @@
   ;; (require 'ido-ubiquitous)
   ;; (ido-ubiquitous t)
   (setq-default ido-save-directory-list-file
-				(concat my-var-path "/ido-last-"
-  						user-login-name "@"
-  						system-name "@"
-  						system-configuration))
+                (concat my-var-path "/ido-last-"
+                          user-login-name "@"
+                          system-name "@"
+                          system-configuration))
   (setq ido-enable-last-directory-history t) ; remember last used dirs
   (setq ido-max-work-directory-list 50)      ; should be enough
   (setq ido-max-work-file-list      50)      ; remember many
   (setq ido-max-directory-size 1000000)
   ;; (setq ido-ignore-buffers ;; ignore these guys
-  ;; 		'("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido"
-  ;; 		  "^\*trace" "^\*compilation" "^\*GTAGS" "^session\.*" "^\*"))
+  ;;         '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido"
+  ;;           "^\*trace" "^\*compilation" "^\*GTAGS" "^session\.*" "^\*"))
   (setq ido-case-fold  t)              ; be case-insensitive
   (setq ido-use-filename-at-point 'guess)
   (setq ido-use-url-at-point t)
   (setq ido-enable-flex-matching t)
   (setq ido-max-prospects 8)
   (setq ido-confirm-unique-completion t) ; wait for RET, even with;
-										; unique completion
+                                        ; unique completion
   (setq ido-create-new-buffer 'always)
   (setq ido-default-buffer-method  (quote selected-window))
   ;; when using ido, the confirmation is rather annoying...
@@ -100,19 +100,19 @@
   "Face settings for `ido'."
   (if is-before-emacs-21
       (progn
-        (custom-set-faces 
+        (custom-set-faces
          '(ido-first-match-face
            ((((type tty pc)) :foreground "yellow")
             (t :bold nil :foreground "yellow"))))
-        (custom-set-faces 
+        (custom-set-faces
          '(ido-only-match
            ((((class color)) (:bold nil :foreground "green"))))))
-    
-    (custom-set-faces 
+
+    (custom-set-faces
      '(ido-first-match
        ((((type tty pc)) :foreground "yellow")
         (t :bold nil :foreground "yellow"))))
-    (custom-set-faces 
+    (custom-set-faces
      '(ido-only-match
        ((((class color)) (:bold nil :foreground "green")))))))
 
@@ -123,7 +123,7 @@
 ;;        (unless is-before-emacs-21
 ;;          (setq ido-mode-map ido-completion-map)))))
 ;; (eal-define-keys-commonly
-;;  map 
+;;  map
 ;;  `(("M-."   ido-next-match-dir)
 ;;    ("M-,"   ido-prev-match-dir)
 ;;    ("C-h"   ido-delete-backward-updir)

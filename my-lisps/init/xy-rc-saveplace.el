@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-saveplace.el'
-;; Time-stamp:<2011-11-23 Wed 05:00 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,8 +21,8 @@
 (defun saveplace-settings ()
   "Settings of `saveplace.el'."
   (setq-default save-place-file (concat my-var-path "/saveplace-"
-										user-login-name "@"
-										system-name "@"
-										system-configuration)))
+                                        user-login-name "@"
+                                        system-name "@"
+                                        system-configuration)))
 
 (provide 'xy-rc-saveplace)

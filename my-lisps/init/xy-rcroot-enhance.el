@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-24 Thu 20:30 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,7 @@
 (global-subword-mode 1)
 
 ;;* ffap, finding Files and URLs at Point
-;; REF: 
+;; REF:
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860
 ;; (ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
 (eval-after-load "ffap" `(ffap-settings))
@@ -71,7 +71,7 @@
 
 ;;* list-processes+
 ;; 查看Emacs内进程
-(autoload 'list-processes+ "list-processes+" 
+(autoload 'list-processes+ "list-processes+"
   "Enhanced `list-processes'" t)
 
 ;;------------------------------------------------------------------
@@ -88,7 +88,7 @@
 ;; in Linux systems --- Org-babel temporary directories cannot
 ;; be deleted. emacs-23.2 seems OK with this problem, but it works
 ;; not as expected (move deleted files to system trash).
-;; Comment out for comparability. 
+;; Comment out for comparability.
 (when is-after-emacs-23
   (setq delete-by-moving-to-trash t))
 
@@ -96,13 +96,13 @@
 
 ;;* todochiku
 ;; notification tool,
-;; It started life interfacing with Growl (OS X, http://growl.info/), 
-;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix). 
+;; It started life interfacing with Growl (OS X, http://growl.info/),
+;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix).
 ;; It can also do standard messages (in the minibuffer) and pop up a tooltip.
 ;; (require 'todochiku)
 (eval-after-load "todochiku"
   `(progn
-	 (todochiku-settings)))
+     (todochiku-settings)))
 
 ;;------------------------------------------------------------------
 
@@ -116,28 +116,28 @@
 
 ;;** browse-kill-ring
 ;; 查看循环剪贴板的内容
-;; (autoload 'browse-kill-ring "browse-kill-ring" 
+;; (autoload 'browse-kill-ring "browse-kill-ring"
 ;;   "Check contents in the kill ring" t)
 (eval-after-load "browse-kill-ring"
   `(progn
      (browse-kill-ring-settings)
      ;; (browse-kill-ring-face-settings) ;; TODO: will be added to
-	                                     ;; my own color theme
-	 (eal-define-keys
-	  'browse-kill-ring-mode-map
-	  `(("RET" browse-kill-ring-insert-and-quit)
-		("<"   beginning-of-buffer)
-		(">"   end-of-buffer)
-		("j"   next-line)
-		("k"   previous-line)
-		("h"   backward-char)
-		("l"   forward-char)
-		("n"   browse-kill-ring-forward-without-linum-mode)
-		("p"   browse-kill-ring-previous-without-linum-mode)
-		("SPC" scroll-up)
-		("U"   scroll-down)
-		("u"   View-scroll-half-page-backward)
-		("o"   other-window)))))
+                                         ;; my own color theme
+     (eal-define-keys
+      'browse-kill-ring-mode-map
+      `(("RET" browse-kill-ring-insert-and-quit)
+        ("<"   beginning-of-buffer)
+        (">"   end-of-buffer)
+        ("j"   next-line)
+        ("k"   previous-line)
+        ("h"   backward-char)
+        ("l"   forward-char)
+        ("n"   browse-kill-ring-forward-without-linum-mode)
+        ("p"   browse-kill-ring-previous-without-linum-mode)
+        ("SPC" scroll-up)
+        ("U"   scroll-down)
+        ("u"   View-scroll-half-page-backward)
+        ("o"   other-window)))))
 
 (global-set-key (kbd "C-=") 'browse-kill-ring)
 
@@ -162,19 +162,19 @@
    matlab-mode-hook matlab-shell-mode-hook)
  '(lambda()
    (unless (or (eq major-mode 'image-mode)
-	       (eq major-mode 'org-mode)
-		   (eq major-mode 'custom-mode)
-		   (eq major-mode 'lisp-interaction-mode)
-		   (eq major-mode 'fundamental-mode)
-		   (eq major-mode 'text-mode)
-		   (eq major-mode 'LaTeX-mode)
-		   (eq major-mode 'latex-mode)
-		   (eq major-mode 'TeX-mode)
-		   (eq major-mode 'tex-mode))
+           (eq major-mode 'org-mode)
+           (eq major-mode 'custom-mode)
+           (eq major-mode 'lisp-interaction-mode)
+           (eq major-mode 'fundamental-mode)
+           (eq major-mode 'text-mode)
+           (eq major-mode 'LaTeX-mode)
+           (eq major-mode 'latex-mode)
+           (eq major-mode 'TeX-mode)
+           (eq major-mode 'tex-mode))
      (linum-mode 1))))
 (global-set-key [S-f6] 'linum-mode)
 (eval-after-load 'linum
-  `(progn 
+  `(progn
      ;; (linum-face-settings) ;; TODO: will be added to my theme
      (linum-settings)))
 
@@ -193,7 +193,7 @@
 ;; (GNUEmacs
 ;;  ;; update the copyright notice in current buffer
 ;;  (when (try-require 'copyright)
-;; 	       ; XXX Check no other copyright.el gets in the way
+;;            ; XXX Check no other copyright.el gets in the way
 ;;    (add-hook 'write-file-hooks 'copyright-update)))
 
 ;;-------------------------------------------------------------
@@ -248,15 +248,15 @@ from tradition chinese to simple chinese" t)
   `(progn
      (linkd-settings)
      ;; (linkd-face-settings) ;; TODO: will be add to my theme
-	 (eal-define-keys
-	  'linkd-overlay-map
-	  `(("n"        linkd-next-link)
-	    ("p"        linkd-previous-link)
-	    ("<return>" linkd-follow-at-point)))
-	 (eal-define-keys
-	  'linkd-map
-	  `(("<mouse-4>" nil)
-	    ("C-c ," nil)))))
+     (eal-define-keys
+      'linkd-overlay-map
+      `(("n"        linkd-next-link)
+        ("p"        linkd-previous-link)
+        ("<return>" linkd-follow-at-point)))
+     (eal-define-keys
+      'linkd-map
+      `(("<mouse-4>" nil)
+        ("C-c ," nil)))))
 ;; (am-add-hooks
 ;;  `(lisp-mode-hook emacs-lisp-mode-hook
 ;;    c-mode-hook c++-mode-hook
@@ -289,36 +289,36 @@ from tradition chinese to simple chinese" t)
 ;;-------------------------------------------------------------------
 
 ;;*  Use terminals in Emacs
-;;** term-mode 
-;; (eval-after-load "term" 
+;;** term-mode
+;; (eval-after-load "term"
 ;;   `(progn
 ;;      (term-settings)))
 
 ;;** multi-term
-;; a mode based on term.el, 
+;; a mode based on term.el,
 ;; for managing multiple terminal buffers in Emacs.
 (global-set-key (kbd "C-x T") 'xy/multi-term-start)
-(eval-after-load "multi-term" 
+(eval-after-load "multi-term"
   `(progn
      (multi-term-settings)
-	 (eal-define-keys-commonly
-	  global-map
-	  `(("C-c T n" multi-term-next)
-	    ("C-c T p" multi-term-prev)))))
-	 ;; (eal-define-keys
-	 ;;  'text-mode-map
-	 ;;  `(("M-J"   switch-term-and-text)
-	 ;;    ("M-L"   enter-term-mode)))))
+     (eal-define-keys-commonly
+      global-map
+      `(("C-c T n" multi-term-next)
+        ("C-c T p" multi-term-prev)))))
+     ;; (eal-define-keys
+     ;;  'text-mode-map
+     ;;  `(("M-J"   switch-term-and-text)
+     ;;    ("M-L"   enter-term-mode)))))
 
 ;;** Shell/eshell-mode
 ;;(define-key shell-mode-map "\M-m" 'shell-add-to-history)
 
 ;;*** Backgrounding a process in shell mode
-;; You might find it difficult to background 
+;; You might find it difficult to background
 ;; a process that’s started, once you’re in shell mode.
 ;; If you hit ‘C-z’, you end up backgrounding Emacs!
 ;; To solve this, just execute
-;;  M-x local-set-key RET C-z self-insert-command 
+;;  M-x local-set-key RET C-z self-insert-command
 ;; And if you want to background Emacs, just go to a different buffer.
 ;; ‘C-q C-z’ doesn’t work? - No, but C-c C-z should.
 

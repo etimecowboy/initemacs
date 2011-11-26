@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-22 Tue 04:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 02:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,44 +21,44 @@
 ;;;###autoload
 (defun xy/my-anything ()
   "My anything."
-  
+
   (interactive)
   (require 'anything)
   (anything-other-buffer
    '(;; Buffer:
-	 anything-c-source-buffers
-	 ;; anything-c-source-buffers+
-	 ;; anything-c-source-buffer-not-found
-	 
-	 ;; File:
-	 anything-c-source-file-name-history
-	 anything-c-source-recentf
-	 ;; anything-c-source-files-in-current-dir
-	 anything-c-source-files-in-current-dir+
-	 ;; anything-c-source-file-cache
-	 ;; NOTE: may cause crash to emacs in Windows
-	 ;; anything-c-source-locate
-	 anything-c-source-ffap-line
-	 anything-c-source-ffap-guesser
-	 
-	 ;; Bookmark:
-	 anything-c-source-bookmarks
-	 
-	 ;; Command:
-	 ;; BUG: minibuffer conflicts with icicle, and cause emacs to
-	 ;; crash in Linux ? maybe `session'
-	 anything-c-source-minibuffer-history
-	 anything-c-source-emacs-commands
-	 
-	 ;; Buffer Contents:
-	 anything-c-source-imenu
-	 anything-c-source-occur
-	 
-	 ;; System:
-	 ;; BUG: cause Emacs to crash in Linux
-	 anything-c-source-kill-ring
-	 anything-c-source-emacs-process
-	 )
+     anything-c-source-buffers
+     ;; anything-c-source-buffers+
+     ;; anything-c-source-buffer-not-found
+
+     ;; File:
+     anything-c-source-file-name-history
+     anything-c-source-recentf
+     ;; anything-c-source-files-in-current-dir
+     anything-c-source-files-in-current-dir+
+     ;; anything-c-source-file-cache
+     ;; NOTE: may cause crash to emacs in Windows
+     ;; anything-c-source-locate
+     anything-c-source-ffap-line
+     anything-c-source-ffap-guesser
+
+     ;; Bookmark:
+     anything-c-source-bookmarks
+
+     ;; Command:
+     ;; BUG: minibuffer conflicts with icicle, and cause emacs to
+     ;; crash in Linux ? maybe `session'
+     anything-c-source-minibuffer-history
+     anything-c-source-emacs-commands
+
+     ;; Buffer Contents:
+     anything-c-source-imenu
+     anything-c-source-occur
+
+     ;; System:
+     ;; BUG: cause Emacs to crash in Linux
+     anything-c-source-kill-ring
+     anything-c-source-emacs-process
+     )
    "*my-anything*"))
 
 ;;;###autoload
@@ -79,66 +79,66 @@
   (require 'anything-show-completion)
   ;; (require 'anything-ipa)
 
-  ;; NOTE: a workaround to fix the Emacs crash with `anything' 
+  ;; NOTE: a workaround to fix the Emacs crash with `anything'
   ;; REF: http://permalink.gmane.org/gmane.emacs.anything/256
   ;; (setq anything-idle-delay 1.1)
   ;; (setq anything-input-idle-delay 1.1)
-  
-  (setq anything-c-adaptive-history-file 
+
+  (setq anything-c-adaptive-history-file
         (concat my-var-path "/anything-c-adaptive-history"))
 
   ;; (setq anything-grep-alist
-  ;; 	'(("buffers" ("egrep -Hin %s $buffers" "/"))
-  ;; 	  ;; ("org files" ("ack-grep -af | xargs egrep -Hin %s" "~/emacs/org/source"))
-  ;; 	  ;; ("lisps"
-  ;; 	  ;;  ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/lisps/")
-  ;; 	  ;;  ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/my-lisps/"))
-  ;; 	  ))
+  ;;     '(("buffers" ("egrep -Hin %s $buffers" "/"))
+  ;;       ;; ("org files" ("ack-grep -af | xargs egrep -Hin %s" "~/emacs/org/source"))
+  ;;       ;; ("lisps"
+  ;;       ;;  ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/lisps/")
+  ;;       ;;  ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/my-lisps/"))
+  ;;       ))
 
   (global-set-key (kbd "C-x b")
-  	    (lambda() (interactive)
-  		  (anything
-  		   :prompt "Switch to: "
-  		   :candidate-number-limit 10                 ;; up to 10 of each 
-  		   :sources
-  		   '( anything-c-source-buffers               ;; buffers 
-  			  anything-c-source-recentf               ;; recent files
-			  anything-c-source-file-cache
-  			  anything-c-source-bookmarks             ;; bookmarks
-  			  anything-c-source-files-in-current-dir+ ;; current dir
-  			  anything-c-source-locate))))            ;; use 'locate'
+          (lambda() (interactive)
+            (anything
+             :prompt "Switch to: "
+             :candidate-number-limit 10                 ;; up to 10 of each
+             :sources
+             '( anything-c-source-buffers               ;; buffers
+                anything-c-source-recentf               ;; recent files
+              anything-c-source-file-cache
+                anything-c-source-bookmarks             ;; bookmarks
+                anything-c-source-files-in-current-dir+ ;; current dir
+                anything-c-source-locate))))            ;; use 'locate'
 
   (global-set-key (kbd "C-<f1>")  ;; i -> info
-  		 (lambda () (interactive)
-  		   (anything
-  			:prompt "Info about: "
-  			:candidate-number-limit 3
-  			:sources
-  			'( ;; anything-c-source-info-libc             ;; glibc docs
-  			   anything-c-source-man-pages             ;; man pages
-  			   anything-c-source-info-emacs))))        ;; emacs
+           (lambda () (interactive)
+             (anything
+              :prompt "Info about: "
+              :candidate-number-limit 3
+              :sources
+              '( ;; anything-c-source-info-libc             ;; glibc docs
+                 anything-c-source-man-pages             ;; man pages
+                 anything-c-source-info-emacs))))        ;; emacs
 
   (add-hook 'emacs-lisp-mode-hook
-  		 (lambda()
-  		   ;; other stuff...
-  		   ;; ...
-  		   ;; put useful info under C-c i
-  		   (local-set-key (kbd "S-<f1>")
-  						  (lambda() (interactive)
-  							(anything
-  							 :prompt "Info about: "
-  							 :candidate-number-limit 5
-  							 :sources
-  							 '( anything-c-source-emacs-functions
-  								anything-c-source-emacs-variables
-  								anything-c-source-info-elisp
-  								anything-c-source-emacs-commands
-  								anything-c-source-emacs-source-defun
-  								anything-c-source-emacs-lisp-expectations
-  								anything-c-source-emacs-lisp-toplevels
-  								anything-c-source-emacs-functions-with-abbrevs
-  								anything-c-source-info-emacs))))))
-  
+           (lambda()
+             ;; other stuff...
+             ;; ...
+             ;; put useful info under C-c i
+             (local-set-key (kbd "S-<f1>")
+                            (lambda() (interactive)
+                              (anything
+                               :prompt "Info about: "
+                               :candidate-number-limit 5
+                               :sources
+                               '( anything-c-source-emacs-functions
+                                  anything-c-source-emacs-variables
+                                  anything-c-source-info-elisp
+                                  anything-c-source-emacs-commands
+                                  anything-c-source-emacs-source-defun
+                                  anything-c-source-emacs-lisp-expectations
+                                  anything-c-source-emacs-lisp-toplevels
+                                  anything-c-source-emacs-functions-with-abbrevs
+                                  anything-c-source-info-emacs))))))
+
   )
 
 (provide 'xy-rc-anything)
@@ -221,10 +221,10 @@
 ;;         ;; anything-c-source-minibuffer-history
 ;;         ;; ;; System:
 ;;         ;; anything-c-source-emacs-process
-;; 	  ;; ;; auto-install elisps:
-;; 	  ;; anything-c-source-auto-install-from-emacswiki
-;; 	  ;; anything-c-source-auto-install-from-library
-;; 	  ))
+;;       ;; ;; auto-install elisps:
+;;       ;; anything-c-source-auto-install-from-emacswiki
+;;       ;; anything-c-source-auto-install-from-library
+;;       ))
 
 ;; (unless mswin
 ;;   (add-to-list 'anything-sources 'anything-c-source-surfraw t)))

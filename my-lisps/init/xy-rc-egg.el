@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-egg.el'
-;; Time-stamp:<2011-11-21 Mon 14:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 02:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,7 +30,7 @@
 
   (setq egg-enable-tooltip t)
   (setq egg-refresh-index-in-backround t)
-  (setq egg-show-key-help-in-buffers 
+  (setq egg-show-key-help-in-buffers
         '((:status :log :file-log :reflog :diff :commit))))
-  
+
 (provide 'xy-rc-egg)

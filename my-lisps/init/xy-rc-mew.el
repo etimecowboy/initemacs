@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-11-23 Wed 15:22 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:00 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,7 +16,7 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; REF: 
+;; REF:
 ;;   - [[http://everyjoe.com/technology/using-mew-as-a-mail-client/?utm_source=everyjoe&utm_medium=web&utm_campaign=b5hubs_migration]]
 ;;   - [[http://www.mew.org/pipermail/mew-int/2009-July/002217.html]]
 ;;   - [[http://baiyhome.spaces.live.com/blog/cns!6CC0192DC1074113!256.entry]]
@@ -32,7 +32,7 @@
   ;; NOTE:经测试好像不需要。全英文时 Mew 用 ascii 编码，有中文时用 UTF-8
   ;; (setq mew-charset-m17n "utf-8")
   ;; (setq mew-internal-utf-8p t)
-  
+
   ;; set mew directories
   (setq mew-conf-path
       (concat my-emacs-path "/mew"))
@@ -100,9 +100,11 @@
   ;; (GNULinux
   (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
   (condition-case nil
-	  (require 'mew-w3m)
-	(file-error nil))
+      (require 'mew-w3m)
+    (file-error nil))
   (setq mew-use-w3m-minor-mode 1)
+  (add-hook 'mew-message-hook 'mew-w3m-minor-mode-setter)
+  (define-key mew-summary-mode-map "T" 'mew-w3m-view-inline-image)
   (setq mew-w3m-auto-insert-image t)
   ;; )
 
@@ -115,7 +117,7 @@
 
   ;; Summary page settings
   ;; unread mark
-  (setq mew-use-unread-mark t) 
+  (setq mew-use-unread-mark t)
   ;; (setq mew-unread-mark-list '((t t)))
   ;; (setq mew-delete-unread-mark-by-mark nil)
   ;; (setq mew-summary-form-mark-delete nil)
@@ -123,41 +125,41 @@
   ;; (setq mew-summary-form-mark-spam 83)   ;; S
   ;; (setq mew-summary-form-size-0k t)
   (setq mew-summary-reply-with-citation-position 'body)
-  (setq mew-summary-form 
+  (setq mew-summary-form
         '(type " | " (15 from) " | " t (50 subj) " | " (5 date) " " (5 time) " | " (-4 size)))
 
   ;; (setq mew-trash-folder-list '("%Deleted Items" "%已删除邮件" "%Trash" "%trash"))
-  
+
   ;; smtp server setting
   ;; gmail smtp as default but need tls
   (setq mew-smtp-server "smtp.gmail.com"
-  		mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")
-  		mew-smtp-ssl       t
-  		mew-smtp-ssl-port  465
-  		mew-smtp-user      "xin2.yang")
+          mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")
+          mew-smtp-ssl       t
+          mew-smtp-ssl-port  465
+          mew-smtp-user      "xin2.yang")
 
   ;; UWE smtp
   (OfficePC
    (setq mew-smtp-server "staf-smtp.uwe.ac.uk"
-		 mew-smtp-port      25
-		 mew-use-smtp-auth  nil
-		 mew-smtp-auth-list nil
-		 mew-smtp-ssl       nil))
+         mew-smtp-port      25
+         mew-use-smtp-auth  nil
+         mew-smtp-auth-list nil
+         mew-smtp-ssl       nil))
 
   ;; Virgin Media smtp
   (HomeDesktop
    (setq mew-smtp-server "smtp.blueyonder.co.uk"
-		 mew-smtp-port      25
-		 mew-use-smtp-auth  nil
-		 mew-smtp-auth-list nil
-		 mew-smtp-ssl       nil))
+         mew-smtp-port      25
+         mew-use-smtp-auth  nil
+         mew-smtp-auth-list nil
+         mew-smtp-ssl       nil))
 
   ;; (Laptop
   ;;  (setq mew-smtp-server "smtp.gmail.com"
-  ;; 		 mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")
-  ;; 		 mew-smtp-ssl       t
-  ;; 		 mew-smtp-ssl-port  465
-  ;; 		 mew-smtp-user      "xin2.yang"))
+  ;;          mew-smtp-auth-list '("PLAIN" "LOGIN" "CRAM-MD5")
+  ;;          mew-smtp-ssl       t
+  ;;          mew-smtp-ssl-port  465
+  ;;          mew-smtp-user      "xin2.yang"))
 
   ;;------------------------------------------------------------
   ;; Switch account command --- capital `C'
@@ -170,7 +172,7 @@
          ("proto"                . "%")
          ("name"                 . "Xin Yang")
          ("user"                 . "xin2.yang")
-		 ("reply-to"             . "xin2.yang@uwe.ac.uk")
+         ("reply-to"             . "xin2.yang@uwe.ac.uk")
          ("mail-domain"          . "uwe.ac.uk")
          ("signature-file"       . "~/emacs/mew/sig/siguwe")
          ("imap-server"          . "ses-imap.uwe.ac.uk")
@@ -184,14 +186,14 @@
          ("imap-trash-folder"    . "%Deleted Items")
          ("imap-queue-folder"    . "%Outbox")
          ("imap-spam-folder"     . "%Junk E-mail"))
-        
+
         ;; Gmail xin2.yang@gmail.com
         ("gx2"
          ("mailbox-type"         . imap)
          ("proto"                . "%")
          ("name"                 . "Xin Yang")
          ("user"                 . "xin2.yang")
-		 ("reply-to"             . "xin2.yang@gmail.com")
+         ("reply-to"             . "xin2.yang@gmail.com")
          ("signature-file"       . "~/emacs/mew/sig/grad")
          ("mail-domain"          . "gmail.com")
          ("imap-server"          . "imap.gmail.com")
@@ -201,14 +203,14 @@
          ("imap-user"            . "xin2.yang")
          ("imap-size"            . 0)
          ("imap-delete"          . t))
-        
+
         ;; Gmail etimecowboy@gmail.com
         ("ge"
          ("mailbox-type"         . imap)
          ("proto"                . "%")
          ("name"                 . "etimecowboy")
          ("user"                 . "etimecowboy")
-		 ("reply-to"             . "etimecowboy@gmail.com")
+         ("reply-to"             . "etimecowboy@gmail.com")
          ("signature-file"       . "~/emacs/mew/sig/bulb")
          ("mail-domain"          . "gmail.com")
          ("imap-server"          . "imap.gmail.com")
@@ -218,23 +220,23 @@
          ("imap-user"            . "etimecowboy")
          ("imap-size"            . 0)
          ("imap-delete"          . t))
-        
-        ;; newsgroup 
+
+        ;; newsgroup
         ;; ("news"
-		;;  ("mailbox-type"          . nntp)
-		;;  ("proto"                 . "-")
-		;;  ("nntp-server"           . "news.virginmedia.com")
-		;;  ("nntp-user"             . "etimecowboy")
-		;;  ("signature-file"        . "~/emacs/mew/sig/bulb")
-		;;  ("name"                  . "etimecowboy")
-		;;  ("mew-nntp-msgid-user"   . "etimecowboy")
-		;;  ("mew-nntp-msgid-domain" . "gmail.com")
-		;;  ("nntp-ssl"              . nil)
-		;;  ("nntp-ssl-port"         . 119)
-		;;  ("nntp-size"             . 0)
-		;;  ("nntp-header-only"      . t)
-		;;  ("nntp-newsgroup"        . "cn.bbs.comp.emacs"))
-		))
+        ;;  ("mailbox-type"          . nntp)
+        ;;  ("proto"                 . "-")
+        ;;  ("nntp-server"           . "news.virginmedia.com")
+        ;;  ("nntp-user"             . "etimecowboy")
+        ;;  ("signature-file"        . "~/emacs/mew/sig/bulb")
+        ;;  ("name"                  . "etimecowboy")
+        ;;  ("mew-nntp-msgid-user"   . "etimecowboy")
+        ;;  ("mew-nntp-msgid-domain" . "gmail.com")
+        ;;  ("nntp-ssl"              . nil)
+        ;;  ("nntp-ssl-port"         . 119)
+        ;;  ("nntp-size"             . 0)
+        ;;  ("nntp-header-only"      . t)
+        ;;  ("nntp-newsgroup"        . "cn.bbs.comp.emacs"))
+        ))
 
   (when (boundp 'utf-translate-cjk)
     (setq utf-translate-cjk t)
@@ -250,17 +252,17 @@
 
 ;; biff设置（新邮件通知）
 ;; 首先要下载biff.el这个文件，在.emacs中加入
-;; (try-require 'biff)  
+;; (try-require 'biff)
 ;; Biff
   (setq mew-use-cached-passwd t);;必须
 
   (when (try-require 'biff)
-	(setq mew-use-biff t)
-	(setq mew-use-biff-bell t)
-	(setq mew-biff-interval 5) ; 一定要小于timer-unit和lifetime值
-	;; (setq mew-pop-biff-interval 3)
-	;; (message "[ biff setting is OK ! ]")
-	)
+    (setq mew-use-biff t)
+    (setq mew-use-biff-bell t)
+    (setq mew-biff-interval 5) ; 一定要小于timer-unit和lifetime值
+    ;; (setq mew-pop-biff-interval 3)
+    ;; (message "[ biff setting is OK ! ]")
+    )
 
   ;; (setq mew-passwd-timer-unit 60) ; 60 minutes = 1 hour
   ;; (setq mew-passwd-lifetime 24)   ; timer-unit x 24 = 24 hours
@@ -268,46 +270,54 @@
   (setq mew-arrivedmail-pending 0)
   ;; todochiku 新邮件通知
   (when window-system
-	(require 'todochiku)
-	(defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
-	  "Use Todochiku to pop-up a notification, if new Mail arrives"
-	  (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
-			 (setq mew-arrivedmail-pending arg)
-			 ;; (start-process-shell-command
-			 ;;  "biff-bark"
-			 ;;  "*Messages*"
-			 ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
-			 (todochiku-message "emacs mew"
-								(format "New mail (%d) arrived." arg)
-								(todochiku-icon 'mail))
-			 )
-			;; replace sndplay with your favorite command to
-			;; play a sound-file
-			((= arg 0)
-			 (if (> mew-arrivedmail-pending 0)
-				 (setq mew-arrivedmail-pending 0))))))
+    (require 'todochiku)
+    (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
+      "Use Todochiku to pop-up a notification, if new Mail arrives"
+      (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
+             (setq mew-arrivedmail-pending arg)
+             ;; (start-process-shell-command
+             ;;  "biff-bark"
+             ;;  "*Messages*"
+             ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
+             (todochiku-message "emacs mew"
+                                (format "New mail (%d) arrived." arg)
+                                (todochiku-icon 'mail))
+             )
+            ;; replace sndplay with your favorite command to
+            ;; play a sound-file
+            ((= arg 0)
+             (if (> mew-arrivedmail-pending 0)
+                 (setq mew-arrivedmail-pending 0))))))
 
   ;; auto complete email address in various fields
   (defvar mew-field-completion-switch
-	'(("To:"        . mew-complete-address)
-	  ("Cc:"        . mew-complete-address)
-	  ("Dcc:"       . mew-complete-address)
-	  ("Bcc:"       . mew-complete-address)
-	  ("Reply-To:"  . mew-complete-address)
-	  ("Fcc:"       . mew-complete-folder)
-	  ("Resent-To:" . mew-complete-address)
-	  ("Resent-Cc:" . mew-complete-address)
-	  ("Config:"    . mew-complete-config)))
+    '(("To:"        . mew-complete-address)
+      ("Cc:"        . mew-complete-address)
+      ("Dcc:"       . mew-complete-address)
+      ("Bcc:"       . mew-complete-address)
+      ("Reply-To:"  . mew-complete-address)
+      ("Fcc:"       . mew-complete-folder)
+      ("Resent-To:" . mew-complete-address)
+      ("Resent-Cc:" . mew-complete-address)
+      ("Config:"    . mew-complete-config)))
 
   ;; news groups
   (setq mew-nntp-header-only t
-		mew-nntp-port "119"
-		mew-nntp-ssl nil
-		mew-nntp-server "news.virginmedia.com"
-		mew-nntp-newsgroup "-cn.bbs.comp.emacs"
-		mew-nntp-size 1000
-		;; mew-nntp-user "Allen Yang"
-		mew-nntp-msgid-user "etimecowboy"
-		mew-nntp-msgid-domain "gmail.com"))
+        mew-nntp-port "119"
+        mew-nntp-ssl nil
+        mew-nntp-server "news.virginmedia.com"
+        mew-nntp-newsgroup "-cn.bbs.comp.emacs"
+        mew-nntp-size 1000
+        ;; mew-nntp-user "Allen Yang"
+        mew-nntp-msgid-user "etimecowboy"
+        mew-nntp-msgid-domain "gmail.com")
+
+   ;; org-mime for mew
+  (when (try-require 'org-mime)
+    (add-hook 'mew-draft-mode-hook
+              (lambda ()
+                (local-set-key "\C-c\M-o" 'org-mime-htmlize)))
+    )
+  )
 
 (provide 'xy-rc-mew)

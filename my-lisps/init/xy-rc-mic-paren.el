@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mic-paren.el'
-;; Time-stamp:<2011-11-22 Tue 01:50 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:00 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,5 +28,5 @@
   (set-face-background 'paren-face-match "magenta")
   (set-face-foreground 'paren-face-match "yellow")
   (set-face-background 'paren-face-mismatch "red"))
-  
+
 (provide 'xy-rc-mic-paren)

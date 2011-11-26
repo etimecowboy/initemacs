@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-11-21 Mon 14:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 02:50 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -41,7 +41,7 @@
   (setq-default TeX-fold-mode t)
   (setq-default TeX-PDF-mode t)
   ;; (autopair-global-mode -1)
-  
+
   ;; load reftex
   ;; (require 'reftex)
 
@@ -49,34 +49,34 @@
   ;; (require 'cdlatex)
 
   (add-hook 'LaTeX-mode-hook
-			'(lambda ()
-			   (turn-on-auto-fill)
-			   (outline-minor-mode 1)
-			   (cdlatex-mode 1)
-			   (reftex-mode 1)
-			   (flyspell-mode 1)
-			   (turn-on-reftex)
-			   (turn-on-cdlatex)
-			   ;; (autopair-mode -1)
-			   ;; (xy/yas-start)
-			   ;; (xy/linkd-start)
-			   ;; (xy/set-font-write)
-			   ))
+            '(lambda ()
+               (turn-on-auto-fill)
+               (outline-minor-mode 1)
+               (cdlatex-mode 1)
+               (reftex-mode 1)
+               (flyspell-mode 1)
+               (turn-on-reftex)
+               (turn-on-cdlatex)
+               ;; (autopair-mode -1)
+               ;; (xy/yas-start)
+               ;; (xy/linkd-start)
+               ;; (xy/set-font-write)
+               ))
   (add-hook 'latex-mode-hook
-  		  '(lambda ()
-			 (turn-on-auto-fill)
-			 (outline-minor-mode 1)
-			 (cdlatex-mode 1)
-			 (reftex-mode 1)
-			 (flyspell-mode 1)
-			 (turn-on-reftex)
-			 (turn-on-cdlatex)
-			 ;; (autopair-mode -1)
-			 ;; (xy/yas-start)
-			 ;; (xy/linkd-start)
-			 ;; (xy/set-font-write)
-			 ))
-  
+            '(lambda ()
+             (turn-on-auto-fill)
+             (outline-minor-mode 1)
+             (cdlatex-mode 1)
+             (reftex-mode 1)
+             (flyspell-mode 1)
+             (turn-on-reftex)
+             (turn-on-cdlatex)
+             ;; (autopair-mode -1)
+             ;; (xy/yas-start)
+             ;; (xy/linkd-start)
+             ;; (xy/set-font-write)
+             ))
+
   ;; (require 'tex-mik)
   ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
 
@@ -84,17 +84,17 @@
   ;; 为AUCTeX添加自定义命令，注意命令中用了很多引号，这是为了适应文件名中含有空格的情况
   ;;-------------------------------------------------------------------
   ;;(setq my-tex-commands-extra (list
-  ;; 			     (list "texify" "texify --tex-opt=--src %s.tex" 'TeX-run-command nil t)
-  ;; 			     (list "pdf texify" "texify --pdf %s.tex" 'TeX-run-command nil t)
-  ;; 			     (list "pdflatex" "pdflatex \"%s.tex\"" 'TeX-run-LaTeX nil t)
-  ;; 			     (list "dvipdfmx" "dvipdfmx \"%s.dvi\"" 'TeX-run-command nil t)
-  ;; 			     (list "dvips" "dvips %s.dvi" 'TeX-run-command nil t)
-  ;; 			     (list "ps2pdf" "ps2pdf %s.ps" 'TeX-run-command nil t)
-  ;; 			     (list "gbk2uni" "gbk2uni \"%s.out\"" 'TeX-run-command nil t)
+  ;;                  (list "texify" "texify --tex-opt=--src %s.tex" 'TeX-run-command nil t)
+  ;;                  (list "pdf texify" "texify --pdf %s.tex" 'TeX-run-command nil t)
+  ;;                  (list "pdflatex" "pdflatex \"%s.tex\"" 'TeX-run-LaTeX nil t)
+  ;;                  (list "dvipdfmx" "dvipdfmx \"%s.dvi\"" 'TeX-run-command nil t)
+  ;;                  (list "dvips" "dvips %s.dvi" 'TeX-run-command nil t)
+  ;;                  (list "ps2pdf" "ps2pdf %s.ps" 'TeX-run-command nil t)
+  ;;                  (list "gbk2uni" "gbk2uni \"%s.out\"" 'TeX-run-command nil t)
   ;;               (list "Yap" "yap -1 \"%dS\" \"%d\"" 'TeX-run-discard nil t)
-  ;; 			     (list "Gsview" "start .\\\"%s.ps\"" 'TeX-run-LaTeX nil t)
-  ;; 			     (list "Acrobat" "acroread \"%s.pdf\"" 'TeX-run-command nil t))
-  ;; 			     (list "Clean" "rm -f *.log *.aux %s.out %s.exa %s.ilg %s.idx %s.ind %s.lof %s.lot %s.toc %s.bbl %s.blg ctextemp_*.*" 'TeX-run-command nil t))
+  ;;                  (list "Gsview" "start .\\\"%s.ps\"" 'TeX-run-LaTeX nil t)
+  ;;                  (list "Acrobat" "acroread \"%s.pdf\"" 'TeX-run-command nil t))
+  ;;                  (list "Clean" "rm -f *.log *.aux %s.out %s.exa %s.ilg %s.idx %s.ind %s.lof %s.lot %s.toc %s.bbl %s.blg ctextemp_*.*" 'TeX-run-command nil t))
   ;;)
   ;; 添加上面定义的命令
   ;;(require 'tex)

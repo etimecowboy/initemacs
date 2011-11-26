@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-view.el'
-;; Time-stamp:<2011-01-29 Sat 10:14 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 03:04 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,7 +36,7 @@
         (append
          `((view-mode " ") (view-mode ,view-mode-line-format))
          (delq (assq 'view-mode minor-mode-alist) minor-mode-alist) ))
-  
+
   (defun previous-line-or-backward-button ()
     "`major-mode'为`help-mode'时, 执行`backward-button', 否则执行`previous-line'."
     (interactive)

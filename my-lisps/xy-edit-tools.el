@@ -366,6 +366,31 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
     (set-buffer-modified-p nil)
     (ediff-buffers orig-buf buf)))
 
+;;----------------------------------------------------------------
+
+;; REF: http://emacsblog.org/2007/09/30/quick-tip-spaces-instead-of-tabs/
+;; BUG: NOT work
+;; ;;;###autoload
+;; (defun my-show-tabs ()
+;;   (interactive)
+;;   (let ((i 0) (disptab make-display-table)))
+;;   (while (&lt; i 32)
+;;           (or (= i ?\n)
+;;               (aset disptab i (vector ?^ (+ i 64))))
+;;           (setq i (1+ i)))
+;;     (aset disptab 127 (vector ?^ ??))
+;;     (setq buffer-display-table disptab)))
+
+;; ;;;###autoload
+;; (defun my-hide-tabs ()
+;;   (interactive)
+;;   (let ((i 0) (disptab make-display-table)))
+;;   (while (&lt; i 32)
+;;           (or (= i ?\n) (= i ?\t)
+;;               (aset disptab i (vector ?^ (+ i 64))))
+;;           (setq i (1+ i)))
+;;     (aset disptab 127 (vector ?^ ??))
+;;     (setq buffer-display-table disptab)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -373,7 +398,7 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use `redo.el' instead
+;; Use `undo-tree.el' instead
 ;; ;;;###autoload
 ;; (defmacro def-redo-command (fun-name redo undo)
 ;;   "Make redo command."

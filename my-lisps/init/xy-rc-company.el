@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-company.el'
-;; Time-stamp:<2011-11-22 Tue 04:34 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,12 +19,12 @@
 ;;;###autoload
 (defun company-settings ()
   "Settings of `company'."
-  
+
   (setq company-idle-delay 0.2)
   (setq company-minimum-prefix-length 1)
   (setq company-begin-commands '(self-insert-command))
   (define-key company-mode-map
-	(kbd "M-RET") 'company-expand-top)
+    (kbd "M-RET") 'company-expand-top)
 )
-  
+
 (provide 'xy-rc-company)

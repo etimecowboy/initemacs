@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-21 Mon 14:17 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,7 @@
 ;; (setq w3m-use-favicon nil)
 ;; (setq w3m-command-arguments '("-cookie" "-F"))
 ;; (setq w3m-use-cookies t)
-;; (setq w3m-home-page "http://www.google.co.uk")     
+;; (setq w3m-home-page "http://www.google.co.uk")
 
 (eal-define-keys
  'w3m-mode-map
@@ -35,7 +35,7 @@
    ("F" w3m-external-view-this-url)   ;; wicked/w3m-open-link-or-image-in-browser)))
    ;; (if (featurep 'org)
    ("C-x W c" org-w3m-copy-for-org-mode) ;;  copy region as org format
-	   ;; )
+       ;; )
    ))
 
 ;; (eal-define-keys-commonly
@@ -48,11 +48,11 @@
 
 ;; Use w3m as default web browser, but can also use external program
 ;; (Windows
-;;   (setq browse-url-browser-function 
+;;   (setq browse-url-browser-function
 ;;         'browse-url-default-windows-browser))
 ;; (GNULinux
 ;;   (setq browse-url-browser-function
-;; 		'browse-url-default-browser))
+;;         'browse-url-default-browser))
 
 ;; (setq browse-url-browser-function 'browse-url-default-browser)
 (setq browse-url-browser-function 'w3m-browse-url)
@@ -100,7 +100,7 @@
   "Use a web translation service to translate the current buffer." t)
 (eval-after-load "babel"
   '(progn
-	 (babel-settings)))
+     (babel-settings)))
 
 ;; Key binds
 ;; (global-set-key [f12] 'babel)
@@ -167,7 +167,7 @@
 ;; (xy/emms-startit)
 (eval-after-load "emms-playlist-mode"
   '(progn
-	 (emms-settings)))
+     (emms-settings)))
 (eal-define-keys-commonly
  dired-mode-map
  `(("|"    emms-add-dired)
@@ -202,6 +202,7 @@
 
 ;;* Mew
 ;; email client
+(setq mail-user-agent 'mew-user-agent)
 ;; load mew
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)

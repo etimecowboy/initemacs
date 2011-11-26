@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-11-18 Fri 13:11 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:07 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,7 +33,7 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-cc" 'org-capture)
 ;; (eal-define-key
-;;  'org-mode-map 
+;;  'org-mode-map
 ;;  `(("C-c )" reftex-citation)))
 (eval-after-load "org"
   `(org-settings))
@@ -51,10 +51,10 @@
 ;; (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (eval-after-load "latex"
   '(progn
-	 (auctex-settings)
-	 (eal-define-keys
-	  'LaTeX-mode-map
-	  `(("M-c `" TeX-next-error))))) ;; C-c ` conflict with icy-mode 
+     (auctex-settings)
+     (eal-define-keys
+      'LaTeX-mode-map
+      `(("M-c `" TeX-next-error))))) ;; C-c ` conflict with icy-mode
 
 ;;** reftex
 ;; reference
@@ -78,7 +78,7 @@
 ;;* txt2tags
 ;; convert plain text files to various formats
 ;; (require 't2t-mode)
-(setq auto-mode-alist 
+(setq auto-mode-alist
       (append (list '("\\.t2t$" . t2t-mode))
               (if (boundp 'auto-mode-alist) auto-mode-alist)))
 (autoload  't2t-mode "txt2tags-mode" "Txt2tags Mode" t)

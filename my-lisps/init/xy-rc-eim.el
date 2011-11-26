@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-eim.el'
-;; Time-stamp:<2011-08-09 Tue 08:18 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,7 +21,7 @@
   "Settings for eim"
 
   (when (require 'eim-extra nil 'noerror)
-    (global-set-key ";" 'eim-insert-ascii))  
+    (global-set-key ";" 'eim-insert-ascii))
   (setq eim-use-tooltip nil))
 
 (provide 'xy-rc-eim)

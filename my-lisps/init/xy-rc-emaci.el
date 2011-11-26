@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emaci.el'
-;; Time-stamp:<2011-02-17 Thu 12:11 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,7 @@
 
 ;; ;;;###autoload
 ;; (defun emacs-lisp-mode-settings-4-emaci ()
-;;   "`emacs-lisp-mode' settings for `emaci'."  
+;;   "`emacs-lisp-mode' settings for `emaci'."
 ;;   (defvar lisp-modes '(emacs-lisp-mode lisp-mode lisp-interaction-mode) "*Lisp modes.")
 ;;   (emaci-add-key-definition
 ;;    "." 'find-symbol-at-point

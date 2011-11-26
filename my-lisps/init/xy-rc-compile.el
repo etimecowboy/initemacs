@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-compile.el'
-;; Time-stamp:<2011-08-09 Tue 08:13 xin on P6T>
+;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,7 +28,7 @@
 ;;;###autoload
 (defun compile-face-settings ()
   "Face settings for `compile'."
-  
+
   (custom-set-faces '(compilation-info
                       ((((type tty)) :bold t :foreground "green")
                        (t :foreground "green"))))

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-11-24 Thu 05:37 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -190,12 +190,12 @@ which is options for `diff'."
   ;; (define-prefix-command 'dired-slash-map)
   ;; (setq dired-dwim-target t)
   ;; (add-hook 'dired-mode-hook
-  ;; 			(lambda ()
-  ;; 			  (define-key dired-mode-map (kbd "<return>")
-  ;; 				'dired-find-alternate-file)
-  ;; 			  (define-key dired-mode-map (kbd "^")
-  ;; 				(lambda () (interactive) (find-alternate-file "..")))))
-  
+  ;;             (lambda ()
+  ;;               (define-key dired-mode-map (kbd "<return>")
+  ;;                 'dired-find-alternate-file)
+  ;;               (define-key dired-mode-map (kbd "^")
+  ;;                 (lambda () (interactive) (find-alternate-file "..")))))
+
   ;; (require 'dired-x)
   ;; (require 'wuxch-dired "my-wuxch-dired")
   ;; (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
@@ -224,7 +224,7 @@ which is options for `diff'."
 
   ;; dired中用T就把一个目录压缩为一个.tar.gz文件
   (require 'dired-tar)
-  
+
   ;; wdired提供修改文件名的一种非常方便方法。它把dired-mode当作一般的
   ;; 文本处理，这样无论是修改一个文件，还是批量修改文件都不是一般的爽。
   ;; wdired has been a part of GNU Emacs since Emacs 23
@@ -238,7 +238,7 @@ which is options for `diff'."
     "Settings for `dired-mode-hook'."
     ;; (dired-keys)
     (setq mode-line-buffer-identification
-		  (propertized-buffer-identification "%b")))
+          (propertized-buffer-identification "%b")))
 
   (add-hook 'dired-mode-hook 'dired-mode-hook-settings)
   (add-hook 'dired-mode-hook 'dired-omit-mode)

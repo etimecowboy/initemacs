@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-zjl-hl.el'
-;; Time-stamp:<2011-09-09 Fri 12:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,56 +28,56 @@
 
   (custom-set-faces
    ;; '(zjl-elisp-hl-function-call-face
-   ;; 	 ((((class grayscale) (background light))
-   ;; 	   :foreground "LightGray" :weight bold)
-   ;; 	  (((class grayscale) (background dark))
-   ;; 	   :foreground "DimGray" :weight bold)
-   ;; 	  (((class color) (min-colors 88) (background light))
-   ;; 	   :foreground "Orchid")
-   ;; 	  (((class color) (min-colors 88) (background dark))
-   ;; 	   :foreground "cornflower blue")
-   ;; 	  (((class color) (min-colors 16) (background light))
-   ;; 	   :foreground "Orchid")
-   ;; 	  (((class color) (min-colors 16) (background dark))
-   ;; 	   :foreground "LightSteelBlue")
-   ;; 	  (((class color) (min-colors 8))
-   ;; 	   (:foreground "blue" :weight bold)) (t (:weight bold))))
+   ;;      ((((class grayscale) (background light))
+   ;;        :foreground "LightGray" :weight bold)
+   ;;       (((class grayscale) (background dark))
+   ;;        :foreground "DimGray" :weight bold)
+   ;;       (((class color) (min-colors 88) (background light))
+   ;;        :foreground "Orchid")
+   ;;       (((class color) (min-colors 88) (background dark))
+   ;;        :foreground "cornflower blue")
+   ;;       (((class color) (min-colors 16) (background light))
+   ;;        :foreground "Orchid")
+   ;;       (((class color) (min-colors 16) (background dark))
+   ;;        :foreground "LightSteelBlue")
+   ;;       (((class color) (min-colors 8))
+   ;;        (:foreground "blue" :weight bold)) (t (:weight bold))))
    ;; '(zjl-elisp-hl-setq-face
-   ;; 	 ((((class grayscale) (background light))
-   ;; 	   :foreground "LightGray" :weight bold)
-   ;; 	  (((class grayscale) (background dark))
-   ;; 	   :foreground "DimGray" :weight bold)
-   ;; 	  (((class color) (min-colors 88) (background light))
-   ;; 	   :foreground "Orchid")
-   ;; 	  (((class color) (min-colors 88) (background dark))
-   ;; 	   :foreground "cornflower blue")
-   ;; 	  (((class color) (min-colors 16) (background light))
-   ;; 	   :foreground "Orchid")
-   ;; 	  (((class color) (min-colors 16) (background dark))
-   ;; 	   :foreground "LightSteelBlue")
-   ;; 	  (((class color) (min-colors 8))
-   ;; 	   (:foreground "blue" :weight bold)) (t (:weight bold))))
+   ;;      ((((class grayscale) (background light))
+   ;;        :foreground "LightGray" :weight bold)
+   ;;       (((class grayscale) (background dark))
+   ;;        :foreground "DimGray" :weight bold)
+   ;;       (((class color) (min-colors 88) (background light))
+   ;;        :foreground "Orchid")
+   ;;       (((class color) (min-colors 88) (background dark))
+   ;;        :foreground "cornflower blue")
+   ;;       (((class color) (min-colors 16) (background light))
+   ;;        :foreground "Orchid")
+   ;;       (((class color) (min-colors 16) (background dark))
+   ;;        :foreground "LightSteelBlue")
+   ;;       (((class color) (min-colors 8))
+   ;;        (:foreground "blue" :weight bold)) (t (:weight bold))))
    '(zjl-hl-elisp-function-call-face
-   	 ((((class color) (background dark)) (:foreground "cyan"))))
+        ((((class color) (background dark)) (:foreground "cyan"))))
    '(zjl-hl-elisp-setq-face
-	 ((((class color) (background dark)) (:foreground "cyan"))))
+     ((((class color) (background dark)) (:foreground "cyan"))))
    '(zjl-hl-font-lock-bracket-face
-	 ((((class color) (background dark))
-	   (:foreground "firebrick3" :weight bold :height 1.2))))
+     ((((class color) (background dark))
+       (:foreground "firebrick3" :weight bold :height 1.2))))
    '(zjl-hl-function-call-face ((t (:foreground "cyan"))))
    '(zjl-hl-local-variable-reference-face
-	 ((((class color) (background dark)) nil)))
+     ((((class color) (background dark)) nil)))
    '(zjl-hl-number-face
-	 ((((class color) (background dark)) (:foreground "red"))))
+     ((((class color) (background dark)) (:foreground "red"))))
    '(zjl-hl-operators-face
-	 ((((class color) (background dark))
-	   (:foreground "Green" :weight bold))))
+     ((((class color) (background dark))
+       (:foreground "Green" :weight bold))))
    '(zjl-hl-parameters-reference-face
-	 ((((class color) (background dark))
-	   (:foreground "Yellow" :weight bold))))))
-  
+     ((((class color) (background dark))
+       (:foreground "Yellow" :weight bold))))))
 
-  
+
+
   ;; (custom-set-faces
   ;;  '(zjl-hl-function-call-face
   ;;    ((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
@@ -91,25 +91,25 @@
 
   ;; (custom-set-faces
   ;;  '(zjl-elisp-hl-function-call-face
-  ;; 	 ((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
-  ;; 	  (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
-  ;; 	  (((class color) (min-colors 88) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
-  ;; 	  (((class color) (min-colors 16) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
-  ;; 	  (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
-  ;; 	  (t (:weight bold)))))
+  ;;      ((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
+  ;;       (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
+  ;;       (((class color) (min-colors 88) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
+  ;;       (((class color) (min-colors 16) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
+  ;;       (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
+  ;;       (t (:weight bold)))))
 
   ;; (custom-set-faces
   ;;  '(zjl-elisp-hl-setq-face
-  ;; 	 ((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
-  ;; 	  (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
-  ;; 	  (((class color) (min-colors 88) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
-  ;; 	  (((class color) (min-colors 16) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
-  ;; 	  (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
-  ;; 	  (t (:weight bold)))))
+  ;;      ((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
+  ;;       (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
+  ;;       (((class color) (min-colors 88) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
+  ;;       (((class color) (min-colors 16) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
+  ;;       (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
+  ;;       (t (:weight bold)))))
 
   ;; (setq zjl-hl-function-call-face
   ;;    '((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
@@ -122,24 +122,24 @@
   ;;     (t (:weight bold))))
 
   ;; (setq zjl-elisp-hl-function-call-face
-  ;; 	 '((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
-  ;; 	  (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
-  ;; 	  (((class color) (min-colors 88) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
-  ;; 	  (((class color) (min-colors 16) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
-  ;; 	  (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
-  ;; 	  (t (:weight bold))))
+  ;;      '((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
+  ;;       (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
+  ;;       (((class color) (min-colors 88) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
+  ;;       (((class color) (min-colors 16) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
+  ;;       (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
+  ;;       (t (:weight bold))))
 
   ;; (setq zjl-elisp-hl-setq-face
-  ;; 	 '((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
-  ;; 	  (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
-  ;; 	  (((class color) (min-colors 88) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
-  ;; 	  (((class color) (min-colors 16) (background light)) :foreground "Orchid")
-  ;; 	  (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
-  ;; 	  (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
-  ;; 	  (t (:weight bold))))
+  ;;      '((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
+  ;;       (((class grayscale) (background dark)) :foreground "DimGray" :weight bold)
+  ;;       (((class color) (min-colors 88) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 88) (background dark)) :foreground "cornflower blue")
+  ;;       (((class color) (min-colors 16) (background light)) :foreground "Orchid")
+  ;;       (((class color) (min-colors 16) (background dark)) :foreground "LightSteelBlue")
+  ;;       (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
+  ;;       (t (:weight bold))))
 
   ;; (setq zjl-hl-operators-face 'font-lock-type-face
   ;;       zjl-hl-local-variable-reference-face 'font-lock-variable-name-face

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-24 Thu 14:20 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 02:50 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,32 +33,32 @@
 
   (require 'auto-complete-config)
   (require 'auto-complete+)
-  
-  (add-to-list 'ac-dictionary-directories 
+
+  (add-to-list 'ac-dictionary-directories
                (concat my-emacs-path "/auto-complete/ac-dict"))
 
-  (setq ac-comphist-file 
+  (setq ac-comphist-file
         (concat my-emacs-path "/auto-complete/ac-comphist"))
-  
+
   ;; (ac-config-default)
   ;; In `auto-complete-config.el'
   ;; (defun ac-config-default ()
-  ;; 	(setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-  ;; 	(add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-  ;; 	(add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-  ;; 	(add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-  ;; 	(add-hook 'css-mode-hook 'ac-css-mode-setup)
-  ;; 	(add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  ;; 	(global-auto-complete-mode t))
+  ;;     (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  ;;     (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  ;;     (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  ;;     (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+  ;;     (add-hook 'css-mode-hook 'ac-css-mode-setup)
+  ;;     (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  ;;     (global-auto-complete-mode t))
 
   ;; add `yasnippet' as an AC source
   ;; (wnen (featurep 'yas/minor-mode)
-		;; (setq ac-sources
-		;; 	  (append 'ac-source-yasnippet
-		;; 			  ac-sources))
-		;; )
+        ;; (setq ac-sources
+        ;;       (append 'ac-source-yasnippet
+        ;;               ac-sources))
+        ;; )
 
-  ;; (setq help-xref-following nil) 
+  ;; (setq help-xref-following nil)
 
   (setq ac-auto-show-menu t
         ac-auto-start t
@@ -74,10 +74,10 @@
   ;; NOTE: has been moved into `auto-complete.el'
   ;; (require 'ac-dabbrev)
   ;; (setq ac-sources
-  ;; 		(append 'ac-source-dabbrev ac-sources))
+  ;;         (append 'ac-source-dabbrev ac-sources))
 
   ;;----------------------------------------------------------------------------
-  
+
   ;; ac-math
   ;; provides three sources, one for LaTeX command completion, one for
   ;; LaTeX math symbols and the another one for Unicode input of math
@@ -87,10 +87,10 @@
   (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of latex-mode
 
   (defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
-	(setq ac-sources
-		  (append '(ac-source-math-unicode ac-source-math-latex
-	                ac-source-latex-commands)
-				  ac-sources)))
+    (setq ac-sources
+          (append '(ac-source-math-unicode ac-source-math-latex
+                    ac-source-latex-commands)
+                  ac-sources)))
 
   (add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
   (ac-flyspell-workaround)
@@ -103,9 +103,9 @@
   (require 'auto-complete-clang)
   (defun my-ac-cc-mode-setup ()
     (setq ac-sources
-		  (append 'ac-source-clang
-				  ac-sources)))
-  
+          (append 'ac-source-clang
+                  ac-sources)))
+
   (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
   (add-hook 'cc-mode-hook 'my-ac-cc-mode-setup)
 
@@ -118,23 +118,23 @@
 
   ;; ;; For example, if you want to use company-elisp for auto-complete
   ;; (defun ac-company-setup ()
-  ;; 	(require 'company)
-  ;; 	(require 'company-elisp)
-  ;; 	(ac-company-define-source ac-source-company-elisp
-  ;; 							  company-elisp (symbol . "s"))
-  ;; 	(setq ac-sources
-  ;; 		  (append '(ac-source-company-elisp)
-  ;; 				  ac-sources)))
-  
+  ;;     (require 'company)
+  ;;     (require 'company-elisp)
+  ;;     (ac-company-define-source ac-source-company-elisp
+  ;;                               company-elisp (symbol . "s"))
+  ;;     (setq ac-sources
+  ;;           (append '(ac-source-company-elisp)
+  ;;                   ac-sources)))
+
   ;; (add-hook 'emacs-lisp-mode-hook
-  ;; 			'ac-source-company-setup)
+  ;;             'ac-source-company-setup)
 
   ;; ;; (ac-company-define-source ac-source-company-elisp company-elisp)
   ;; ;; (add-hook 'emacs-lisp-mode-hook
-  ;; ;;        (lambda () 
+  ;; ;;        (lambda ()
   ;; ;;          (add-to-list 'ac-sources 'ac-source-company-elisp)))
 
-  
+
   ;; (set-default 'ac-sources
   ;;              '(ac-source-semantic-raw
   ;;                ac-source-yasnippet
@@ -145,119 +145,119 @@
   ;;                ac-source-imenu
   ;;                ac-source-files-in-current-dir
   ;;                ac-source-filename))
-  
+
   ;; ;; (defalias ac-modes ac+-modes)
 
   ;; (defun ac-settings-4-cc ()
-  ;; 	"`auto-complete' settings for `cc-mode'."
-  ;; 	(dolist (command `(c-electric-backspace
-  ;; 					   c-electric-backspace-kill))
-  ;; 	  (add-to-list 'ac-trigger-commands-on-completing command)))
+  ;;     "`auto-complete' settings for `cc-mode'."
+  ;;     (dolist (command `(c-electric-backspace
+  ;;                        c-electric-backspace-kill))
+  ;;       (add-to-list 'ac-trigger-commands-on-completing command)))
 
   ;; (defun ac-settings-4-c ()
-  ;; 	(setq ac-sources
-  ;; 		  '(ac-source-yasnippet
-  ;; 			ac-source-dictionary
-  ;; 			ac-source-semantic
-  ;; 			ac-source-abbrev
-  ;; 			ac-source-words-in-buffer
-  ;; 			ac-source-words-in-same-mode-buffers
-  ;; 			ac-source-files-in-current-dir
-  ;; 			ac-source-filename)))
+  ;;     (setq ac-sources
+  ;;           '(ac-source-yasnippet
+  ;;             ac-source-dictionary
+  ;;             ac-source-semantic
+  ;;             ac-source-abbrev
+  ;;             ac-source-words-in-buffer
+  ;;             ac-source-words-in-same-mode-buffers
+  ;;             ac-source-files-in-current-dir
+  ;;             ac-source-filename)))
 
   ;; (defun ac-settings-4-cpp ()
-  ;; 	(setq ac-sources
-  ;; 		  '(ac-source-yasnippet
-  ;; 			ac-source-dictionary
-  ;; 			ac-source-semantic
-  ;; 			ac-source-abbrev
-  ;; 			ac-source-words-in-buffer
-  ;; 			ac-source-words-in-same-mode-buffers
-  ;; 			ac-source-files-in-current-dir
-  ;; 			ac-source-filename)))
+  ;;     (setq ac-sources
+  ;;           '(ac-source-yasnippet
+  ;;             ac-source-dictionary
+  ;;             ac-source-semantic
+  ;;             ac-source-abbrev
+  ;;             ac-source-words-in-buffer
+  ;;             ac-source-words-in-same-mode-buffers
+  ;;             ac-source-files-in-current-dir
+  ;;             ac-source-filename)))
 
   ;; (defun ac-settings-4-autopair ()
-  ;; 	"`auto-complete' settings for `autopair'."
-  ;; 	(defun ac-trigger-command-p (command)
-  ;; 	  "Return non-nil if `this-command' is a trigger command."
-  ;; 	  (or
-  ;; 	   (and
-  ;; 		(symbolp command)
-  ;; 		(or (memq command ac-trigger-commands)
-  ;; 			(string-match "self-insert-command" (symbol-name command))
-  ;; 			(string-match "electric" (symbol-name command))
-  ;; 			(let* ((autopair-emulation-alist nil)
-  ;; 				   (key (this-single-command-keys))
-  ;; 				   (beyond-autopair 
-  ;; 					(or (key-binding key)
-  ;; 						(key-binding 
-  ;; 						 (lookup-key local-function-key-map key)))))
-  ;; 			  (or
-  ;; 			   (memq beyond-autopair ac-trigger-commands)
-  ;; 			   (and ac-completing
-  ;; 					(memq beyond-autopair 
-  ;; 						  ac-trigger-commands-on-completing)))))))))
+  ;;     "`auto-complete' settings for `autopair'."
+  ;;     (defun ac-trigger-command-p (command)
+  ;;       "Return non-nil if `this-command' is a trigger command."
+  ;;       (or
+  ;;        (and
+  ;;         (symbolp command)
+  ;;         (or (memq command ac-trigger-commands)
+  ;;             (string-match "self-insert-command" (symbol-name command))
+  ;;             (string-match "electric" (symbol-name command))
+  ;;             (let* ((autopair-emulation-alist nil)
+  ;;                    (key (this-single-command-keys))
+  ;;                    (beyond-autopair
+  ;;                     (or (key-binding key)
+  ;;                         (key-binding
+  ;;                          (lookup-key local-function-key-map key)))))
+  ;;               (or
+  ;;                (memq beyond-autopair ac-trigger-commands)
+  ;;                (and ac-completing
+  ;;                     (memq beyond-autopair
+  ;;                           ac-trigger-commands-on-completing)))))))))
 
   ;; (defun ac-settings-4-lisp ()
-  ;; 	"Auto complete settings for lisp mode."
+  ;;     "Auto complete settings for lisp mode."
 
-  ;; 	(require 'auto-complete+)
-  ;; 	(setq ac-omni-completion-sources 
-  ;; 		  '(("\\<featurep\s+'" ac+-source-elisp-features)
-  ;; 			("\\<require\s+'"  ac+-source-elisp-features)
-  ;; 			("\\<load\s+\""    ac-source-emacs-lisp-features)))
-  ;; 	;; (ac+-apply-source-elisp-faces)
-  ;; 	(setq ac-sources
-  ;; 		  '(ac-source-features
-  ;; 			ac-source-functions
-  ;; 			ac-source-yasnippet
-  ;; 			ac-source-variables
-  ;; 			ac-source-symbols
-  ;; 			ac-source-dictionary
-  ;; 			ac-source-abbrev
-  ;; 			ac-source-words-in-buffer
-  ;; 			ac-source-files-in-current-dir
-  ;; 			ac-source-filename
-  ;; 			ac-source-words-in-same-mode-buffers)))
+  ;;     (require 'auto-complete+)
+  ;;     (setq ac-omni-completion-sources
+  ;;           '(("\\<featurep\s+'" ac+-source-elisp-features)
+  ;;             ("\\<require\s+'"  ac+-source-elisp-features)
+  ;;             ("\\<load\s+\""    ac-source-emacs-lisp-features)))
+  ;;     ;; (ac+-apply-source-elisp-faces)
+  ;;     (setq ac-sources
+  ;;           '(ac-source-features
+  ;;             ac-source-functions
+  ;;             ac-source-yasnippet
+  ;;             ac-source-variables
+  ;;             ac-source-symbols
+  ;;             ac-source-dictionary
+  ;;             ac-source-abbrev
+  ;;             ac-source-words-in-buffer
+  ;;             ac-source-files-in-current-dir
+  ;;             ac-source-filename
+  ;;             ac-source-words-in-same-mode-buffers)))
 
   ;; (defun ac-settings-4-java ()
-  ;; 	(setq ac-omni-completion-sources (list (cons "\\." '(ac-source-semantic))
-  ;; 										   (cons "->" '(ac-source-semantic))))
-  ;; 	(setq ac-sources
-  ;; 		  '(ac-source-semantic
-  ;; 			ac-source-yasnippet
-  ;; 			ac-source-abbrev
-  ;; 			ac-source-words-in-buffer
-  ;; 			ac-source-words-in-same-mode-buffers
-  ;; 			ac-source-files-in-current-dir
-  ;; 			ac-source-filename)))
+  ;;     (setq ac-omni-completion-sources (list (cons "\\." '(ac-source-semantic))
+  ;;                                            (cons "->" '(ac-source-semantic))))
+  ;;     (setq ac-sources
+  ;;           '(ac-source-semantic
+  ;;             ac-source-yasnippet
+  ;;             ac-source-abbrev
+  ;;             ac-source-words-in-buffer
+  ;;             ac-source-words-in-same-mode-buffers
+  ;;             ac-source-files-in-current-dir
+  ;;             ac-source-filename)))
 
   ;; (defun ac-settings-4-text ()
-  ;; 	(setq ac-sources
-  ;; 		  '(ac-source-yasnippet
-  ;; 			ac-source-abbrev
-  ;; 			ac-source-words-in-buffer
-  ;; 			ac-source-words-in-same-mode-buffers
-  ;; 			ac-source-imenu)))
+  ;;     (setq ac-sources
+  ;;           '(ac-source-yasnippet
+  ;;             ac-source-abbrev
+  ;;             ac-source-words-in-buffer
+  ;;             ac-source-words-in-same-mode-buffers
+  ;;             ac-source-imenu)))
 
   ;; (defun ac-settings-4-org ()
-  ;; 	(setq ac-sources
-  ;; 		  '(ac-source-yasnippet
-  ;; 			ac-source-abbrev
-  ;; 			ac-source-words-in-buffer
-  ;; 			ac-source-words-in-same-mode-buffers
-  ;; 			ac-source-imenu)))
+  ;;     (setq ac-sources
+  ;;           '(ac-source-yasnippet
+  ;;             ac-source-abbrev
+  ;;             ac-source-words-in-buffer
+  ;;             ac-source-words-in-same-mode-buffers
+  ;;             ac-source-imenu)))
 
   ;; (defun ac-settings-4-eshell ()
-  ;; 	(setq ac-sources
-  ;; 		  '(ac-source-yasnippet
-  ;; 			ac-source-abbrev
-  ;; 			ac-source-words-in-buffer
-  ;; 			ac-source-words-in-same-mode-buffers
-  ;; 			ac-source-files-in-current-dir
-  ;; 			ac-source-filename
-  ;; 			ac-source-symbols
-  ;; 			ac-source-imenu)))
+  ;;     (setq ac-sources
+  ;;           '(ac-source-yasnippet
+  ;;             ac-source-abbrev
+  ;;             ac-source-words-in-buffer
+  ;;             ac-source-words-in-same-mode-buffers
+  ;;             ac-source-files-in-current-dir
+  ;;             ac-source-filename
+  ;;             ac-source-symbols
+  ;;             ac-source-imenu)))
 
   ;; ;; ;;;###autoload
   ;; ;; (defun ac-settings-4-ruby ()
@@ -295,12 +295,12 @@
   ;; ;;           ac-source-words-in-same-mode-buffers
   ;; ;;           ac-source-files-in-current-dir
   ;; ;;           ac-source-filename)))
-  
+
   ;; (defun ac-start-use-sources (sources)
-  ;; 	(interactive)
-  ;; 	(let ((ac-sources sources))
-  ;; 	  (call-interactively 'xy/ac-start)))
-  
+  ;;     (interactive)
+  ;;     (let ((ac-sources sources))
+  ;;       (call-interactively 'xy/ac-start)))
+
   ;; (eval-after-load "cc-mode"
   ;;   '(ac-settings-4-cc))
   ;; (eval-after-load "autopair"
@@ -327,9 +327,9 @@
   ;;  ac-modes
   ;;  (lambda (mode)
   ;;    (let ((mode-name (symbol-name mode)))
-  ;;      (when (and (intern-soft mode-name) 
+  ;;      (when (and (intern-soft mode-name)
   ;;                 (intern-soft (concat mode-name "-map")))
-  ;;        (define-key (symbol-value (am-intern mode-name "-map")) 
+  ;;        (define-key (symbol-value (am-intern mode-name "-map"))
   ;;           (kbd "C-c A") 'xy/ac-start)))))
 )
 

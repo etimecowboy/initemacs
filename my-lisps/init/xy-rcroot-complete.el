@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-24 Thu 14:33 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,7 +35,7 @@
 ;;     (require 'ido "ido-for-21"))
 ;; (ido-mode 1)
 (eval-after-load 'ido
-  `(progn 
+  `(progn
      ;; (ido-face-settings)
      (ido-settings)))
 
@@ -43,7 +43,7 @@
 
 ;;** icomplete
 ;; minibuffer中输入部分命令就可以使用补全
-;; (define-key minibuffer-local-completion-map 
+;; (define-key minibuffer-local-completion-map
 ;;   (kbd "SPC") 'minibuffer-complete-word)
 ;; (icomplete-mode 1)
 ;; (eval-after-load "icomplete"
@@ -74,9 +74,9 @@
 (eval-after-load 'smex
   `(progn
      (smex-settings)
-	 (global-set-key (kbd "M-x") 'smex)
-	 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-	 ))
+     (global-set-key (kbd "M-x") 'smex)
+     (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+     ))
 
 ;;----------------------------------------------------------------
 
@@ -88,15 +88,15 @@
 
   (interactive)
   (when (featurep 'icicles)
-	(icy-mode -1))
+    (icy-mode -1))
   (require 'ido)
   (require 'smex)
   (ido-mode 1)
   ;; (smex-initialize-ido)
   (smex-initialize)
   (add-hook 'org-mode-hook
-			'(lambda ()
-			   (setq org-completion-use-ido t))))
+            '(lambda ()
+               (setq org-completion-use-ido t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -120,19 +120,19 @@
 ;;** auto-complete settings
 (eval-after-load "auto-complete"
   '(progn
-	 (auto-complete-settings)
-	 ;; 不让回车的时候执行`ac-complete', 因为当你输入完一个
-	 ;; 单词的时候, 很有可能补全菜单还在, 这时候你要回车的话,
-	 ;; 必须要干掉补全菜单, 很麻烦, 用M-j来执行`ac-complete'
-	 ;; (eal-define-keys-commonly
-	 ;;  ac-complete-mode-map
-	 ;;  `(("<return>"   nil)
-	 ;; 	("RET"        nil)
-	 ;; 	;; ("M-j"        ac-complete)
-	 ;; 	;; ("<C-return>" ac-complete)
-	 ;; 	("M-n"        ac-next)
-	 ;; 	("M-p"        ac-previous)))
-	 ))
+     (auto-complete-settings)
+     ;; 不让回车的时候执行`ac-complete', 因为当你输入完一个
+     ;; 单词的时候, 很有可能补全菜单还在, 这时候你要回车的话,
+     ;; 必须要干掉补全菜单, 很麻烦, 用M-j来执行`ac-complete'
+     ;; (eal-define-keys-commonly
+     ;;  ac-complete-mode-map
+     ;;  `(("<return>"   nil)
+     ;;     ("RET"        nil)
+     ;;     ;; ("M-j"        ac-complete)
+     ;;     ;; ("<C-return>" ac-complete)
+     ;;     ("M-n"        ac-next)
+     ;;     ("M-p"        ac-previous)))
+     ))
 
 ;;--------------------------------------------------------
 
@@ -174,14 +174,14 @@
 ;; 超强的snippet
 (eval-after-load "yasnippet"
   '(progn
-	 (yasnippet-settings)
-	 (eal-define-keys
-	  'yas/keymap
-	  `(("M-j"     yas/next-field-or-maybe-expand)
-		("M-k"     yas/prev-field)))
-	 (eal-define-keys
-	  'yas/minor-mode-map
-	  `(("C-c C-f" yas/find-snippets)))))
+     (yasnippet-settings)
+     (eal-define-keys
+      'yas/keymap
+      `(("M-j"     yas/next-field-or-maybe-expand)
+        ("M-k"     yas/prev-field)))
+     (eal-define-keys
+      'yas/minor-mode-map
+      `(("C-c C-f" yas/find-snippets)))))
 ;; (am-add-hooks
 ;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
 ;;    c-mode-hook cc-mode-hook c-mode-common-hook
@@ -202,14 +202,14 @@
 (add-hook 'after-init-hook 'icy-mode)
 (defun icicle-keys ()
   "icicle-mode的按键设置."
-  (define-key minibuffer-local-completion-map 
+  (define-key minibuffer-local-completion-map
     (kbd "SPC") 'minibuffer-complete-word)
-  (define-key minibuffer-local-completion-map 
+  (define-key minibuffer-local-completion-map
     (kbd "C-w") 'backward-kill-word-or-kill-region)
   (define-key minibuffer-local-completion-map
-	(kbd "C-k") 'kill-line)
+    (kbd "C-k") 'kill-line)
   ;; (define-key minibuffer-local-completion-map
-  ;; 	[Tab] 'icicle-apropos)
+  ;;     [Tab] 'icicle-apropos)
   )
 (add-hook 'icicle-mode-hook 'icicle-keys t)
 (eval-after-load "icicles" `(icicles-settings))

@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-shell.el'
-;; Time-stamp:<2011-02-03 Thu 12:36 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,7 +31,7 @@
   (require 'shell-completion)
 
   ;; Add command of `shell-command', `shell-command-on-region',
-  ;; `compile', `grep', and `background' to shell history file 
+  ;; `compile', `grep', and `background' to shell history file
 
   (require 'shell-history))
 

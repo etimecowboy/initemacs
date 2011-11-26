@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-24 Thu 21:16 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -26,8 +26,8 @@
 
 ;;** Auto indent
 (eal-define-keys
- `(lisp-mode-map emacs-lisp-mode-map lisp-interaction-mode-map 
-   sh-mode-map ,(if (not is-before-emacs-21) 'awk-mode-map) 
+ `(lisp-mode-map emacs-lisp-mode-map lisp-interaction-mode-map
+   sh-mode-map ,(if (not is-before-emacs-21) 'awk-mode-map)
    java-mode-map ruby-mode-map c-mode-base-map tcl-mode-map
    python-mode-map perl-mode-map)
  `(("RET" newline-and-indent)))
@@ -58,8 +58,9 @@
 ;;   vhdl-mode-map verilog-mode-map
 ;;   matlab-mode-hook)
 ;;  '(lambda ()
-;; 	(hungry-delete-mode 1)))
- ;; 'turn-on-hungry-delete-mode)
+;;     (require 'hungry-delete)
+;;     ;; (hurn-on-hungry-delete-mode)
+;;     (hungry-delete-mode 1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -78,7 +79,7 @@
    ;; org-mode-hook text-mode-hook
    )
  '(lambda ()
-	(require 'hide-region)))
+    (require 'hide-region)))
 (eal-define-keys-commonly
  global-map
  `(("C-x M-r" hide-region-hide)
@@ -88,10 +89,19 @@
 
 ;;-------------------------------------------------------------------
 
+;;** outline
+;; outline-mode, structural editing
+;; (eal-define-keys
+;;  'outline-mode-map
+;;  `(("C-M-h"   outline-mark-subtree)
+;;    ("C-c u"   outline-up-heading)))
+
+;;------------------------------------------------------------------
+
 ;;** hide show
-;; a minor mode similar to outline-mode. 
-;; It hides and shows blocks of text. 
-;; In particular, HideShow hides balanced-expression code blocks and 
+;; a minor mode similar to outline-mode.
+;; It hides and shows blocks of text.
+;; In particular, HideShow hides balanced-expression code blocks and
 ;; multi-line comment blocks.
 ;; REF: http://www.emacswiki.org/emacs/HideShow
 (am-add-hooks
@@ -103,13 +113,13 @@
   `(progn
      ;; (hs-minor-mode-face-settings) ;; TODO: to my theme
      (hs-minor-mode-settings)
-	 ;; (define-key hs-minor-mode-map (kbd "C-c @ C-h") 'hs-hide-block)
-	 ;; (define-key hs-minor-mode-map (kbd "C-c @ C-w") 'hs-show-block)
-	 (define-key hs-minor-mode-map (kbd "S-<f6>") 'hs-toggle-hiding)
-	 (define-key hs-minor-mode-map (kbd "C-<f6>") 'hs-hide-level)
-	 (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
-	 (define-key hs-minor-mode-map (kbd "C-S-<f6>") 'hs-show-all)
-	 ))
+     ;; (define-key hs-minor-mode-map (kbd "C-c @ C-h") 'hs-hide-block)
+     ;; (define-key hs-minor-mode-map (kbd "C-c @ C-w") 'hs-show-block)
+     (define-key hs-minor-mode-map (kbd "S-<f6>") 'hs-toggle-hiding)
+     (define-key hs-minor-mode-map (kbd "C-<f6>") 'hs-hide-level)
+     (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
+     (define-key hs-minor-mode-map (kbd "C-S-<f6>") 'hs-show-all)
+     ))
 
 ;;*** hideshow-org
 ;; The extension makes hideshow.el’s functionality behave like org-mode’s.
@@ -118,8 +128,8 @@
 ;; NOTE: the default <TAB> key conflicts with `icicles' and
 ;;       `yasnippet'
 ;; (add-hook 'hs-minor-mode
-;; 		  (lambda ()
-;; 			(require 'hideshow-org)))
+;;           (lambda ()
+;;             (require 'hideshow-org)))
 ;; (eval-after-load "hideshow-org"
 ;;   `(progn
 ;;      (hideshow-org-settings)))
@@ -133,14 +143,14 @@
 ;; http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el
 ;; (require 'outline)
 ;; (require 'outline-magic)
-;; (add-hook 'outline-mode-hook 
-;;           (lambda () 
+;; (add-hook 'outline-mode-hook
+;;           (lambda ()
 ;;             (require 'outline-cycle)))
-(add-hook 'outline-minor-mode-hook 
-          (lambda () 
+(add-hook 'outline-minor-mode-hook
+          (lambda ()
             (require 'outline-magic)
             (define-key outline-minor-mode-map [(f6)] 'outline-cycle)
-			))
+            ))
 (am-add-hooks
  `(c-mode-common-hook java-mode-hook
    lisp-mode-hook emacs-lisp-mode-hook
@@ -229,7 +239,7 @@
 ;;             (setq imenu-generic-expression text-imenu-generic-expression)
 ;;             (imenu-add-menubar-index)))
 
-;;*** imenu-tree 
+;;*** imenu-tree
 ;; (require 'imenu-tree)
 ;; (eval-after-load "imenu-tree"
 ;;   `(imenu-tree-settings))
@@ -285,14 +295,14 @@
   `(lisp-mode-settings))
 ;; BUG: lisp-interaction-mode error
 ;; Debugger entered--Lisp error: (error "Invalid function:
-;; (progn (turn-on-auto-fill) (turn-on-eldoc-mode))") 
+;; (progn (turn-on-auto-fill) (turn-on-eldoc-mode))")
 ;; signal(error ("Invalid function: (progn (turn-on-auto-fill)
-;; (turn-on-eldoc-mode))")) 
+;; (turn-on-eldoc-mode))"))
 ;; error("%s" "Invalid function: (progn (turn-on-auto-fill)
-;; (turn-on-eldoc-mode))") 
-;; byte-code("\302!\210\303\304\305	!\"\207" [icicle-orig-buff
+;; (turn-on-eldoc-mode))")
+;; byte-code("\302!\210\303\304\305    !\"\207" [icicle-orig-buff
 ;; act-on-choice icicle-try-switch-buffer error "%s"
-;; error-message-string] 4) 
+;; error-message-string] 4)
 ;; (eval-after-load "lisp-interaction-mode"
 ;;   `(lisp-mode-settings))
 
@@ -317,17 +327,17 @@
 ;;** cc-mode
 (eval-after-load "cc-mode"
   '(progn
-	 (cc-mode-settings)
-	 (eal-define-keys
-	  `(c-mode-base-map)
-	  `(("C-c H"     c-electric-backspace)
-		("C-c M-a" beginning-of-defun)
-		("C-c M-e" end-of-defun)
-		("C-c M-F" copy-current-fun-name)
-		;; ifdef settings
-		("C-c I" mark-ifdef)
-		;; sourcepair,可以在cpp与h文件之间切换
-		("C-c S" sourcepair-load)))))
+     (cc-mode-settings)
+     (eal-define-keys
+      `(c-mode-base-map)
+      `(("C-c H"     c-electric-backspace)
+        ("C-c M-a" beginning-of-defun)
+        ("C-c M-e" end-of-defun)
+        ("C-c M-F" copy-current-fun-name)
+        ;; ifdef settings
+        ("C-c I" mark-ifdef)
+        ;; sourcepair,可以在cpp与h文件之间切换
+        ("C-c S" sourcepair-load)))))
 
 ;;----------------------------------------------------------------------------
 
@@ -365,7 +375,7 @@
 
 (eval-after-load "hideif"
   '(progn
-	 (hideif-settings)))
+     (hideif-settings)))
 
 (eval-after-load "cc-mode"
   '(progn
@@ -378,7 +388,7 @@
      ;;      ("C-c W"   hide-ifdefs)
      ;;      ("C-c M-i" show-ifdef-block)
      ;;      ("C-c M-I" show-ifdefs))))))
-	 ))
+     ))
 
 ;;-------------------------------------------------
 
@@ -577,7 +587,7 @@ See the documentation for these variables for more info.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; if want to use offical cedet
-;; (let ((cedet-possible-dirs 
+;; (let ((cedet-possible-dirs
 ;;        '((concat my-local-lisp-path "/cedet-1.0pre6")
 ;;          (concat my-local-lisp-path "/cedet-1.0pre7")
 ;;          (concat my-local-lisp-path "/cedet-1.0"))))
@@ -595,7 +605,7 @@ See the documentation for these variables for more info.
 
 (eval-after-load "cedet"
   '(progn
-	 (cedet-settings)))
+     (cedet-settings)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -611,7 +621,7 @@ See the documentation for these variables for more info.
 ;;* eclim settings
 ;; 把Eclipse的功能带给Emacs
 ;; (require 'eclim)
-;; (dolist (hook (list 'c-mode-common-hook 'lisp-mode-hook 
+;; (dolist (hook (list 'c-mode-common-hook 'lisp-mode-hook
 ;;                     'emacs-lisp-mode-hook 'java-mode-hook))
 ;;   (add-hook hook 'eclim-mode))
 
@@ -637,13 +647,13 @@ See the documentation for these variables for more info.
 (add-hook 'find-file-hook 'flymake-find-file-hook)
 (eval-after-load "flymake"
   '(progn
-	 (flymake-settings)
-	 ;; (eal-define-keys
-	 ;;  'flymake-mode-map
-	 ;;  `(("C-c N"   flymake-goto-next-error-disp)
-	 ;; 	("C-c P"   flymake-goto-prev-error-disp)
-	 ;; 	("C-c M-w" flymake-display-current-warning/error)))
-	 ))
+     (flymake-settings)
+     ;; (eal-define-keys
+     ;;  'flymake-mode-map
+     ;;  `(("C-c N"   flymake-goto-next-error-disp)
+     ;;     ("C-c P"   flymake-goto-prev-error-disp)
+     ;;     ("C-c M-w" flymake-display-current-warning/error)))
+     ))
 
 ;;--------------------------------------------------------------------
 
@@ -671,8 +681,8 @@ See the documentation for these variables for more info.
 ;; (eal-define-keys
 ;;  'java-mode-map
 ;;  `(("C-c C-m" ant-sb)
-;;    ("C-c M"	  ant-clean-sb)
-;;    ("C-c m"	  ant-test-sb)))
+;;    ("C-c M"      ant-clean-sb)
+;;    ("C-c m"      ant-test-sb)))
 
 ;; (eal-define-keys-commonly
 ;;  global-map
@@ -681,8 +691,8 @@ See the documentation for these variables for more info.
 
 ;; (eal-define-keys
 ;;  makefile-mode-map-list
-;;  `(("M-p"	  previous-error)
-;;    ("M-n"	  next-error)
+;;  `(("M-p"      previous-error)
+;;    ("M-n"      next-error)
 ;;    ("C-c p" makefile-previous-dependency)
 ;;    ("C-c n" makefile-next-dependency)))
 
