@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-26 Sat 05:36 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 15:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -274,17 +274,18 @@
     (w3m-fb-mode 1))
   (autoload 'w3m-weather "w3m-weather" "Display weather report." t)
 
-  ;; (dolist (k '([right] [left] [up] [down]))
-  ;;     (define-key w3m-mode-map k nil))
-
-  (eal-define-keys 'w3m-mode-map
-    `(;; Middle click to open url in a new sesstion (tab)
-      ("<mouse-1>"    w3m-mouse-view-this-url)
-      ("S-<mouse-1>"  w3m-mouse-view-this-url-new-session)
-      ("<mouse-3>"    w3m-mouse-major-mode-menu)
-      ("C-x C-s"      w3m-save-current-buffer)
-      ("C-c l"        w3m-copy-current-url)
-      ))
+  (eal-define-keys
+   'w3m-mode-map
+   `(("C-x W f" w3m-external-view-current-url)
+     ("C-x W F" w3m-external-view-this-url)
+     ("C-x W c" org-w3m-copy-for-org-mode) ;;  copy region as org format
+     ("<mouse-1>"    w3m-mouse-view-this-url)
+     ("S-<mouse-1>"  w3m-mouse-view-this-url-new-session)
+     ("<mouse-3>"    w3m-mouse-major-mode-menu)
+     ("C-x W s"      w3m-save-current-buffer)
+     ("C-x W w"      w3m-weather)
+     ("C-c l"        w3m-copy-current-url)
+     ))
   )
 
 (provide 'xy-rc-w3m)

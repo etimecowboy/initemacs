@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 15:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,18 +25,17 @@
 ;; Emacs找不到合适的模式时，缺省使用text-mode
 (setq default-major-mode 'text-mode)
 
+;; 自动的在文件末增加一新行
+(setq require-final-newline t)
+
 ;; 不用TAB字符来缩进，使用空格
 (setq default-tab-width 4)
 (setq tab-width 4)
 (loop for x downfrom 50 to 1 do
       (setq tab-stop-list (cons (* x tab-width) tab-stop-list)))
 (setq-default indent-tabs-mode nil)
-
 ;; 先格式化再补全
 (setq tab-always-indent 'complete)
-
-;; 不要自动的在文件末增加一新行
-(setq require-final-newline nil)
 
 ;; ethan-wspace
 ;; REF: https://github.com/glasserc/ethan-wspace

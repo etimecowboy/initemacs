@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-26 Sat 07:27 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 15:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,19 +29,9 @@
 (eval-after-load "w3m"
   `(progn
      (w3m-settings)))
-;; (setq w3m-use-favicon nil)
-;; (setq w3m-command-arguments '("-cookie" "-F"))
-;; (setq w3m-use-cookies t)
-;; (setq w3m-home-page "http://www.google.co.uk")
 
-(eal-define-keys
- 'w3m-mode-map
- `(("f" w3m-external-view-current-url) ;; wicked/w3m-open-current-page-in-browser)
-   ("F" w3m-external-view-this-url)   ;; wicked/w3m-open-link-or-image-in-browser)))
-   ;; (if (featurep 'org)
-   ("C-x W c" org-w3m-copy-for-org-mode) ;;  copy region as org format
-       ;; )
-   ))
+;; (dolist (k '([right] [left] [up] [down]))
+;;     (define-key w3m-mode-map k nil))
 
 ;; (eal-define-keys-commonly
 ;;  global-map
