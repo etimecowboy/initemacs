@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-11-26 Sat 06:15 xin on p6t>
+;; Time-stamp:<2011-11-26 Sat 20:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -267,24 +267,26 @@
   (setq mew-arrivedmail-pending 0)
   ;; todochiku 新邮件通知
   (when window-system
-    (require 'todochiku)
-    (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
-      "Use Todochiku to pop-up a notification, if new Mail arrives"
-      (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
-             (setq mew-arrivedmail-pending arg)
-             ;; (start-process-shell-command
-             ;;  "biff-bark"
-             ;;  "*Messages*"
-             ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
-             (todochiku-message "emacs mew"
-                                (format "New mail (%d) arrived." arg)
-                                (todochiku-icon 'mail))
-             )
-            ;; replace sndplay with your favorite command to
-            ;; play a sound-file
-            ((= arg 0)
-             (if (> mew-arrivedmail-pending 0)
-                 (setq mew-arrivedmail-pending 0))))))
+    (when (try-require 'todochiku)
+      (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
+        "Use Todochiku to pop-up a notification, if new Mail arrives"
+        (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
+               (setq mew-arrivedmail-pending arg)
+               ;; (start-process-shell-command
+               ;;  "biff-bark"
+               ;;  "*Messages*"
+               ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
+               (todochiku-message "emacs mew"
+                                  (format "New mail (%d) arrived." arg)
+                                  (todochiku-icon 'mail))
+               )
+              ;; replace sndplay with your favorite command to
+              ;; play a sound-file
+              ((= arg 0)
+               (if (> mew-arrivedmail-pending 0)
+                   (setq mew-arrivedmail-pending 0)))))
+      (message "[ todochiku for mew setting is OK ! ]")
+      ))
 
   ;; auto complete email address in various fields
   (defvar mew-field-completion-switch

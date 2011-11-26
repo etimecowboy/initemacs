@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-26 Sat 15:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-26 Sat 21:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -210,11 +210,11 @@
   ;;            "-no-proxy")
   ;;           ;; Use the proxy server to visit any foreign urls.
   ;;         ("" "-o" "http_proxy=http://your_proxy:80/")))
-
-  (setq w3m-init-file nil) ;; "~/.emacs.d/xy-w3m.el")
+  (setq w3m-default-directory "~/emacs/w3m")
+  (setq w3m-init-file
+        (concat my-own-lisp-path "/init/xy-rc-w3m.el"))
   (setq w3m-icon-directory
         (concat my-local-image-path "/w3m"))
-  (setq w3m-default-directory "~/emacs/w3m")
   (setq w3m-default-save-directory
         (concat w3m-default-directory "/download"))
   (setq w3m-profile-directory
@@ -268,17 +268,21 @@
   (try-require 'mime-w3m)
   (when (try-require 'octet)
     (octet-mime-setup))
-  (when (try-require 'w3m-lnum)
-    (w3m-lnum-mode 1))
+  (GNULinux  ;; BUG: cause w3m to crash in Windows 7
+   (when (try-require 'w3m-lnum)
+     (w3m-lnum-mode 1)))
   (when (try-require 'w3m-fb)
     (w3m-fb-mode 1))
+
   (autoload 'w3m-weather "w3m-weather" "Display weather report." t)
+  (autoload 'org-w3m-copy-for-org-mode "org-w3m"
+    "Copy current buffer content or active region with `org-mode' style links." t)
 
   (eal-define-keys
    'w3m-mode-map
-   `(("C-x W f" w3m-external-view-current-url)
-     ("C-x W F" w3m-external-view-this-url)
-     ("C-x W c" org-w3m-copy-for-org-mode) ;;  copy region as org format
+   `(("C-x W f"      w3m-external-view-current-url)
+     ("C-x W F"      w3m-external-view-this-url)
+     ("C-x W o"      org-w3m-copy-for-org-mode) ;; copy region as org format
      ("<mouse-1>"    w3m-mouse-view-this-url)
      ("S-<mouse-1>"  w3m-mouse-view-this-url-new-session)
      ("<mouse-3>"    w3m-mouse-major-mode-menu)
