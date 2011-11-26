@@ -6,25 +6,25 @@
 ;; Maintainer: Xin Yang
 ;; Created: 28 Jan 2011
 ;; Timestamp:
-;; Keywords: 
+;; Keywords:
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
 ;;; Commentary:
 
 
 ;; REF: [[http://xahlee.org/emacs/emacs_lookup_ref.html]]
-;; use emacs as a dictionary application, that allows you to lookup 
-;; the definitions of a word under cursor, or any general reference 
-;; such as Wikipedia, Google, or lookup documentation of computer 
+;; use emacs as a dictionary application, that allows you to lookup
+;; the definitions of a word under cursor, or any general reference
+;; such as Wikipedia, Google, or lookup documentation of computer
 ;; language's keywords.
 
-;; press F6 will launch your browser and lookup definition 
+;; press F6 will launch your browser and lookup definition
 ;; of the word under cursor.
 
 ;; You can change the url to a different online dictionary reference website.
 
-;; Here are some other online dictionary sites and their url 
-;; search syntax, using sample word “curlicue”. 
+;; Here are some other online dictionary sites and their url
+;; search syntax, using sample word “curlicue”.
 ;; AHD means American Heritage Dictionary.
 
 ;; http://education.yahoo.com/reference/dictionary/entry/curlicue (AHD)
@@ -84,18 +84,18 @@ to browser. If a region is active (a phrase), lookup that phrase."
 
 ;; REF: [[http://blog.tuxicity.se/?p=32]]
 ;; by Johan Andersson
-;; Two of my most frequently used tools when programming are Emacs and Firefox. 
-;; And much of the time in Firefox I spend on Google. 
-;; That’s why I created this (simple) function that googles a region. 
-;; Just select the region you want to google and then do 
+;; Two of my most frequently used tools when programming are Emacs and Firefox.
+;; And much of the time in Firefox I spend on Google.
+;; That’s why I created this (simple) function that googles a region.
+;; Just select the region you want to google and then do
 ;; M-x google-region (or preferably bind a key to it).
 
 ;;;###autoload
-(defun google-region (beg end) 
-  "Google the selected region." 
-  (interactive "r") 
-  (browse-url (concat 
-               "http://www.google.co.uk/search?ie=utf-8&oe=utf-8&q=" 
+(defun google-region (beg end)
+  "Google the selected region."
+  (interactive "r")
+  (browse-url (concat
+               "http://www.google.co.uk/search?ie=utf-8&oe=utf-8&q="
                (buffer-substring beg end))))
 
 (provide 'xy-lookup)

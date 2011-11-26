@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Collected various functions to assist edting. 
+;; Collected various functions to assist edting.
 
 ;;; Code:
 
@@ -71,23 +71,23 @@
   (interactive)
   (message "major-mode is %s, mode-name is %s" major-mode mode-name))
 
-;; (global-set-key (kbd "C-x M") 'get-mode-name) 
+;; (global-set-key (kbd "C-x M") 'get-mode-name)
 
 ;;----------------------------------------------------------------------
 
 ;; REF: [[http://xahlee.org/emacs/emacs_lookup_ref.html]]
-;; use emacs as a dictionary application, that allows you to lookup 
-;; the definitions of a word under cursor, or any general reference 
-;; such as Wikipedia, Google, or lookup documentation of computer 
+;; use emacs as a dictionary application, that allows you to lookup
+;; the definitions of a word under cursor, or any general reference
+;; such as Wikipedia, Google, or lookup documentation of computer
 ;; language's keywords.
 
-;; press F6 will launch your browser and lookup definition 
+;; press F6 will launch your browser and lookup definition
 ;; of the word under cursor.
 
 ;; You can change the url to a different online dictionary reference website.
 
-;; Here are some other online dictionary sites and their url 
-;; search syntax, using sample word “curlicue”. 
+;; Here are some other online dictionary sites and their url
+;; search syntax, using sample word “curlicue”.
 ;; AHD means American Heritage Dictionary.
 
 ;; http://education.yahoo.com/reference/dictionary/entry/curlicue (AHD)
@@ -154,18 +154,18 @@ to browser. If a region is active (a phrase), lookup that phrase."
 
 ;; REF: [[http://blog.tuxicity.se/?p=32]]
 ;; by Johan Andersson
-;; Two of my most frequently used tools when programming are Emacs and Firefox. 
-;; And much of the time in Firefox I spend on Google. 
-;; That’s why I created this (simple) function that googles a region. 
-;; Just select the region you want to google and then do 
+;; Two of my most frequently used tools when programming are Emacs and Firefox.
+;; And much of the time in Firefox I spend on Google.
+;; That’s why I created this (simple) function that googles a region.
+;; Just select the region you want to google and then do
 ;; M-x google-region (or preferably bind a key to it).
 
 ;;;###autoload
-(defun google-region (beg end) 
-  "Google the selected region." 
-  (interactive "r") 
-  (browse-url (concat 
-               "http://www.google.co.uk/search?ie=utf-8&oe=utf-8&q=" 
+(defun google-region (beg end)
+  "Google the selected region."
+  (interactive "r")
+  (browse-url (concat
+               "http://www.google.co.uk/search?ie=utf-8&oe=utf-8&q="
                (buffer-substring beg end))))
 
 ;; (global-set-key [M-f8] 'google-region)
@@ -194,10 +194,10 @@ to browser. If a region is active (a phrase), lookup that phrase."
 ;; 可惜，Emacs 虽然有这个功能，默认的配置却并不好用：
 ;;     * 注释/反注释这两个功能默认没有绑定快捷键
 ;;     * 需要先选中一段区域才能调用注释功能，哪怕只想注释/反注释当前行
-;;     * 好在有一个 Alt-; 的快捷键，默认绑定了 
+;;     * 好在有一个 Alt-; 的快捷键，默认绑定了
 ;;       comment-dwim，能注释/反注释当前激活的区域。
 ;;       如果没有激活区域，就在当前行末加注释
-;; 其实 Alt-; 默认绑定的 comment-dwim 已经很理想了，可是，还是不够 dwim 
+;; 其实 Alt-; 默认绑定的 comment-dwim 已经很理想了，可是，还是不够 dwim
 ;; (Do What I Mean)。
 ;; 如果没有激活的区域，就注释/反注释当前行，仅当在行尾的时候才在行尾加注释
 ;; REF: http://emacser.com/torture-emacs.htm
@@ -269,7 +269,7 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
 ;; 还可以选中一块代码，按 Ctrl-Alt-\ 对这块代码重新进行格式化。
 ;; 如果要粘贴一块代码的话，粘贴完了紧接着按 Ctrl-Alt-\ ，
 ;; 就可以把新加入的代码格式化好。下面的代码能实现这些机械操作。
-;; 你可以加入或删除一些 mode 名称来定制上面的配置。 
+;; 你可以加入或删除一些 mode 名称来定制上面的配置。
 ;; REF: http://emacser.com/torture-emacs.htm
 
 ;;;###autoload
@@ -309,8 +309,8 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
   "Go to the matching paren if on a paren; otherwise insert %."
   (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-		((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-		(t (self-insert-command (or arg 1)))))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
 ;; (global-set-key "%" 'match-paren)
 
 ;;--------------------------------------------------------------------------------
@@ -774,7 +774,7 @@ otherwise call `move-beginning-of-line'."
         (beginning-of-line-text)
       (move-beginning-of-line 1))))
 
-;;----------------------------------------------------------------------- 
+;;-----------------------------------------------------------------------
 
 ;; ;;;###autoload
 ;; (defun smart-kill ()
@@ -953,7 +953,7 @@ that, execute `" command "'.")
 
 ;;;###autoload
 (defun rm-mark-command ()
-  "如果是CUA mode, 则执行`cua-set-rectangle-mark', 
+  "如果是CUA mode, 则执行`cua-set-rectangle-mark',
 否则执行`rm-set-mark'"
 
   (interactive)
@@ -977,8 +977,8 @@ that, execute `" command "'.")
             (cua-copy-rectangle t)
             (cua-cancel))
         (call-interactively 'cua-copy-region))
-    (if (rm-mark-active) 
-        (call-interactively 'rm-kill-ring-save) 
+    (if (rm-mark-active)
+        (call-interactively 'rm-kill-ring-save)
       (copy-region-as-kill-nomark beg end))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -993,12 +993,12 @@ that, execute `" command "'.")
   "Switches from a horizontal split to a vertical split."
   (interactive)
   (let ((one-buf (window-buffer (selected-window)))
-		(buf-point (point)))
-	(other-window 1)
-	(delete-other-windows)
-	(split-window-horizontally)
-	(switch-to-buffer one-buf)
-	(goto-char buf-point)))
+        (buf-point (point)))
+    (other-window 1)
+    (delete-other-windows)
+    (split-window-horizontally)
+    (switch-to-buffer one-buf)
+    (goto-char buf-point)))
 
 ;;--------------------------------------------------------------------
 
@@ -1007,12 +1007,12 @@ that, execute `" command "'.")
   "Switches from a vertical split to a horizontal split."
   (interactive)
   (let ((one-buf (window-buffer (selected-window)))
-		(buf-point (point)))
-	(other-window 1)
-	(delete-other-windows)
-	(split-window-vertically)
-	(switch-to-buffer one-buf)
-	(goto-char buf-point)))
+        (buf-point (point)))
+    (other-window 1)
+    (delete-other-windows)
+    (split-window-vertically)
+    (switch-to-buffer one-buf)
+    (goto-char buf-point)))
 
 ;;--------------------------------------------------------------------
 
@@ -1021,12 +1021,12 @@ that, execute `" command "'.")
   "Insert the same character as in the prior line. Space if none."
   (interactive)
   (let* ((cur (current-column))
-		 (char (save-excursion
-				 (if (or (not (eq 0 (forward-line -1)))
-						 (not (eq cur (move-to-column cur)) ))
-					 32
-				   (char-after)))))
-	(insert char)))
+         (char (save-excursion
+                 (if (or (not (eq 0 (forward-line -1)))
+                         (not (eq cur (move-to-column cur)) ))
+                     32
+                   (char-after)))))
+    (insert char)))
 
 ;;--------------------------------------------------------------------
 
@@ -1053,24 +1053,24 @@ that, execute `" command "'.")
    the click is in another window the search still occurs in the current window."
   (interactive "e")
   (let (searchword)
-	(save-excursion
-	  (set-buffer (window-buffer (posn-window (event-end event))))
-	  (save-excursion
-		(goto-char (posn-point (event-end event)))
-		(setq searchword (current-word))))
-	(if searchword
-		(let ((cpt (point)))
-		  (goto-char (point-min))
-		  (setq menu-bar-last-search-type 'string)
-		  (isearch-update-ring searchword nil)
-		  (if (string= searchword (car (symbol-value minibuffer-history-variable)))
-			  ()
-			(set minibuffer-history-variable
-				 (cons searchword (symbol-value minibuffer-history-variable))))
-		  (unless (search-forward searchword nil t)
-			(goto-char cpt)
-			(error "Search Failed: \"%s\"" searchword)))
-	  (ding))))
+    (save-excursion
+      (set-buffer (window-buffer (posn-window (event-end event))))
+      (save-excursion
+        (goto-char (posn-point (event-end event)))
+        (setq searchword (current-word))))
+    (if searchword
+        (let ((cpt (point)))
+          (goto-char (point-min))
+          (setq menu-bar-last-search-type 'string)
+          (isearch-update-ring searchword nil)
+          (if (string= searchword (car (symbol-value minibuffer-history-variable)))
+              ()
+            (set minibuffer-history-variable
+                 (cons searchword (symbol-value minibuffer-history-variable))))
+          (unless (search-forward searchword nil t)
+            (goto-char cpt)
+            (error "Search Failed: \"%s\"" searchword)))
+      (ding))))
 
 ;; (global-set-key [mouse-2]  'search-word-at-mouseclick)
 
@@ -1198,11 +1198,11 @@ that, execute `" command "'.")
      Deletes whitespace at join."
   (interactive "P")
   (if (and (eolp) (not (bolp)))
-	  (progn
-     	(delete-indentation t)
-     	(if (looking-at " $")
-     	    (delete-char 1)))
-	(kill-line arg)))
+      (progn
+         (delete-indentation t)
+         (if (looking-at " $")
+             (delete-char 1)))
+    (kill-line arg)))
 
 ;;-----------------------------------------------------------------------------
 
@@ -1524,7 +1524,7 @@ Like eclipse's Ctrl+Alt+F."
   (interactive)
   (let ((word (if mark-active
                   (buffer-substring-no-properties (region-beginning) (region-end))
-				(current-word nil t))))
+                (current-word nil t))))
     (setq word (read-string (format "Search the dictionary for (default %s): " word)
                             nil nil word))
     (set-buffer (get-buffer-create "*sdcv*"))
