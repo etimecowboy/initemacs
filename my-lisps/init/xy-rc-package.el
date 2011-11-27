@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 01:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,6 +52,9 @@
                  "http://joseito.republika.pl/sunrise-commander/"))
 
   ;; go for it
-  (package-initialize))
+  (package-initialize)
+  (when (not package-archive-contents)
+    (package-refresh-contents))
+  )
 
 (provide 'xy-rc-package)

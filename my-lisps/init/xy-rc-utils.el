@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-26 Sat 03:03 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 04:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,11 +19,9 @@
 ;; REF: http://emacser.com/eval-after-load.htm
 ;; (require 'eval-after-load)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;* Define some variables and macros
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
+;;* Definitions
+;;====================================================================
 
 ;;** System variables
 
@@ -63,7 +61,7 @@
 (defvar running-gnu-linux
   (string-match "linux" (prin1-to-string system-type)))
 
-;;---------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** System marcos
 
@@ -123,7 +121,10 @@
        window-system
        (when (boundp 'aquamacs-version) aquamacs-version)))
 
+;;--------------------------------------------------------------------
+
 ;;** c/c++ include dir
+
 (Windows
  (defvar user-include-dirs
    '(".." "../include" "../inc" "../common" "../public"
@@ -159,6 +160,8 @@
    '(
      )
    "Preprocessor symbol files for cedet"))
+
+;;--------------------------------------------------------------------
 
 ;;** Jump to some directory, open some config files
 
@@ -213,27 +216,28 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* F.Niessen's utilities in his .emacs
 ;; REF: http://www.mygooglest.com/fni/dot-emacs.html
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;;###autoload
-(defun fni/add-to-load-path (this-directory &optional with-subdirs recursive)
+(defun fni/add-to-load-path
+  (this-directory &optional with-subdirs recursive)
   "Add THIS-DIRECTORY at the beginning of the load-path, if it exists.
-Add all its subdirectories not starting with a '.' if the
-optional argument WITH-SUBDIRS is not nil.
-Do it recursively if the third argument is not nil."
+Add all its subdirectories not starting with a '.' if the optional
+argument WITH-SUBDIRS is not nil. Do it recursively if the third
+argument is not nil."
 
   (when (and this-directory
              (file-directory-p this-directory))
     (let* ((this-directory (expand-file-name this-directory))
            (files (directory-files this-directory t "^[^\\.]")))
 
-      ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory (expand-file-name this-directory)))
+      ;; completely canonicalize the directory name (*may not* begin
+      ;; with `~')
+      (while (not (string= this-directory
+                           (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
       (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
@@ -244,26 +248,33 @@ Do it recursively if the third argument is not nil."
           (setq dir-or-file (car files))
           (when (file-directory-p dir-or-file)
             (if recursive
-                (fni/add-to-load-path dir-or-file 'with-subdirs 'recursive)
+                (fni/add-to-load-path dir-or-file
+                                      'with-subdirs 'recursive)
               (fni/add-to-load-path dir-or-file)))
           (setq files (cdr files)))))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
-(defun fni/add-to-image-load-path (this-directory &optional with-subdirs recursive)
-  "Add THIS-DIRECTORY at the beginning of the image-load-path,
-if it exists. Add all its subdirectories not starting with a '.'
-if the optional argument WITH-SUBDIRS is not nil.
-Do it recursively if the third argument is not nil."
+(defun fni/add-to-image-load-path
+  (this-directory &optional with-subdirs recursive)
+  "Add THIS-DIRECTORY at the beginning of the image-load-path, if it
+exists. Add all its subdirectories not starting with a '.' if the
+optional argument WITH-SUBDIRS is not nil. Do it recursively if the
+third argument is not nil."
+
   (when (and this-directory
              (file-directory-p this-directory))
     (let* ((this-directory (expand-file-name this-directory))
            (files (directory-files this-directory t "^[^\\.]")))
 
       ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory (expand-file-name this-directory)))
+      (while (not (string= this-directory
+                           (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
-      (message "* ---[ Adding `%s' to image-load-path... ]---" this-directory)
+      (message "* ---[ Adding `%s' to image-load-path... ]---"
+               this-directory)
       (add-to-list 'image-load-path this-directory)
 
       (when with-subdirs
@@ -271,17 +282,24 @@ Do it recursively if the third argument is not nil."
           (setq dir-or-file (car files))
           (when (file-directory-p dir-or-file)
             (if recursive
-                (fni/add-to-image-load-path dir-or-file 'with-subdirs 'recursive)
+                (fni/add-to-image-load-path dir-or-file
+                                            'with-subdirs 'recursive)
               (fni/add-to-image-load-path dir-or-file)))
           (setq files (cdr files)))))))
 
+;;--------------------------------------------------------------------
+
 (defvar missing-packages-list nil
   "List of packages that `try-require' can't find.")
+
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun try-require (feature)
-  "Attempt to load a library or module. Return true if the
-library given as argument is successfully loaded. If not, instead
-of an error, just add the package to a list of missing packages."
+  "Attempt to load a library or module. Return true if the library
+given as argument is successfully loaded. If not, instead of an error,
+just add the package to a list of missing packages."
+
   (condition-case err
       ;; protected form
       (progn
@@ -289,21 +307,26 @@ of an error, just add the package to a list of missing packages."
         (if (stringp feature)
             (load-library feature)
           (require feature))
-        (message "* ---[ Checking for library `%s'... Found ]---" feature))
+        (message "* ---[ Checking for library `%s'... Found ]---"
+                 feature))
     ;; error handler
     (file-error  ; condition
      (progn
-       (message "* ---[ Checking for library `%s'... Missing ]---" feature)
-       (add-to-list 'missing-packages-list feature 'append))
-     nil)))
+       (message "* ---[ Checking for library `%s'... Missing ]---"
+                feature)
+       (add-to-list 'missing-packages-list feature 'append)) nil)))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun my-make-directory-yes-or-no (dir)
   "Ask user to create the DIR, if it does not already exist."
+
   (if dir
       (if (not (file-directory-p dir))
-          (if (yes-or-no-p (concat "The directory `" dir
-                                   "' does not exist currently. Create it? "))
+          (if (yes-or-no-p
+               (concat "The directory `" dir
+                       "' does not exist currently. Create it? "))
               (make-directory dir t)
             (error
              (concat "Cannot continue without directory `" dir "'"))))
@@ -315,28 +338,29 @@ of an error, just add the package to a list of missing packages."
   (if file
       (if (file-executable-p file)
           file
-        (message "* ---[ WARNING: Can't find executable `%s' ]---" file)
+        (message "* ---[ WARNING: Can't find executable `%s' ]---"
+                 file)
         ;; sleep 1 s so that you can read the warning
         (sit-for 1))
     (error "my-file-executable-p: missing operand")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* From ahei-misc.el
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;;###autoload
 (defun am-add-hooks (hooks function &optional append local)
-  "Call `add-hook' on hook list HOOKS use arguments FUNCTION, APPEND, LOCAL.
+  "Call `add-hook' on hook list HOOKS use arguments FUNCTION, APPEND,
+LOCAL. HOOKS can be one list or just a hook."
 
-HOOKS can be one list or just a hook."
   (if (listp hooks)
       (mapc
        `(lambda (hook)
           (add-hook hook ',function append local))
        hooks)
     (add-hook hooks function append local)))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun am-intern (&rest strings)
@@ -349,10 +373,14 @@ HOOKS can be one list or just a hook."
        (if (stringp element) element (symbol-name element)))
      strings))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun am-variable-is-t (symbol)
   "Return SYMBOL's value is t or not."
   (and (boundp symbol) (symbol-value symbol)))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defmacro am-def-active-fun (symbol &optional fun-name)
@@ -360,6 +388,8 @@ HOOKS can be one list or just a hook."
   `(defun ,(if fun-name fun-name symbol) ()
      ,(concat "`" (symbol-name symbol) "' is t or not.")
      (am-variable-is-t ',symbol)))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun am-forward-word-or-to-word ()
@@ -375,29 +405,33 @@ is at next line, then rollback and excute `forward-word'"
         (forward-word)
       (forward-to-word 1))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defmacro am-with-temp-mode (mode &rest body)
-  "Create a temporary buffer with mode MODE, and evaluate BODY there like `progn'.
-See also `with-temp-buffer'."
+  "Create a temporary buffer with mode MODE, and evaluate BODY there
+like `progn'. See also `with-temp-buffer'."
   `(with-temp-buffer
      (funcall ,mode)
      ,@body))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun am-equal-ignore-case (str1 str2)
   "STR1 equal ignore case to STR2 or not."
   (string= (downcase str1) (downcase str2)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* From util.el used by ahei, written by taoshanwen
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; (require 'eval-after-load)
 
-(defvar mswin  (equal window-system 'w32)  "Non-nil means windows system.")
-(defvar cygwin (equal system-type 'cygwin) "Non-nil means cygwin system.")
+(defvar mswin  (equal window-system 'w32)
+  "Non-nil means windows system.")
+(defvar cygwin (equal system-type 'cygwin)
+  "Non-nil means cygwin system.")
 
 (defvar use-cua nil "Use CUA mode or not.")
 
@@ -406,14 +440,25 @@ See also `with-temp-buffer'."
 (defvar last-region-is-rect nil "Last region is rectangle or not.")
 (defvar last-region-use-cua nil "Last region use CUA mode or not.")
 
-(defconst system-head-file-dir (list "/usr/include" "/usr/local/include" "/usr/include/sys") "系统头文件目录")
-(defconst user-head-file-dir   (list "." "../hdr" "../include") "用户头文件目录")
+(defconst system-head-file-dir
+  (list "/usr/include" "/usr/local/include" "/usr/include/sys")
+  "系统头文件目录")
+(defconst user-head-file-dir
+  (list "." "../hdr" "../include")
+  "用户头文件目录")
 
-(defconst is-before-emacs-21 (>= 21 emacs-major-version) "是否是emacs 21或以前的版本")
-(defconst is-after-emacs-23  (<= 23 emacs-major-version) "是否是emacs 23或以后的版本")
+(defconst is-before-emacs-21 (>= 21 emacs-major-version)
+  "是否是emacs 21或以前的版本")
+(defconst is-after-emacs-23  (<= 23 emacs-major-version)
+  "是否是emacs 23或以后的版本")
 
 (defvar c-modes '(c-mode c++-mode awk-mode java-mode) "*C modes.")
-(defvar dev-modes (append c-modes '(python-mode perl-mode makefile-gmake-mode)) "*Modes for develop.")
+(defvar dev-modes (append c-modes
+                          '(python-mode perl-mode
+                                        makefile-gmake-mode))
+  "*Modes for develop.")
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun execute-command-on-file (file command)
@@ -430,9 +475,12 @@ See also `with-temp-buffer'."
     (message "* ---[ Executing command `%s'... ]---" command)
     (shell-command command)))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun execute-command-on-current-file (command)
-  "对当前buffer执行命令COMMAND, 如果该buffer对应文件的话, 再执行`revert-buffer-no-confirm'"
+  "对当前buffer执行命令COMMAND, 如果该buffer对应文件的话, 再执行
+`revert-buffer-no-confirm'"
   (interactive
    (list (let* ((input ""))
            (while (string= input "")
@@ -442,6 +490,8 @@ See also `with-temp-buffer'."
     (execute-command-on-file file command)
     (if file
         (revert-buffer-no-confirm))))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun execute-command-on-current-dir (command)
@@ -456,52 +506,72 @@ See also `with-temp-buffer'."
     (if file
         (revert-buffer-no-confirm))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defmacro def-execute-command-on-file-command (command)
   "Make definition of command which execute command on file."
   `(defun ,(intern (subst-char-in-string ?\ ?- command)) (file)
      ,(concat "Run command `" command "' on file FILE.")
-     (interactive (list (read-file-name (concat "File to " ,command ": "))))
+     (interactive
+      (list (read-file-name (concat "File to " ,command ": "))))
      (execute-command-on-file file ,command)))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defmacro def-execute-command-on-current-file-command (command)
   "Make definition of command which execute command on current file."
-  `(defun ,(am-intern (subst-char-in-string ?\ ?- command) "-current-file") ()
+  `(defun ,(am-intern (subst-char-in-string ?\ ?- command)
+                      "-current-file") ()
      ,(concat "Execute command `" command "' on current file.")
      (interactive)
      (execute-command-on-current-file ,command)))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defmacro def-execute-command-on-current-dir-command (command)
-  "Make definition of command which execute command on current directory."
-  `(defun ,(am-intern (subst-char-in-string ?\ ?- command) "-current-dir") ()
+  "Make definition of command which execute command on current
+directory."
+  `(defun ,(am-intern (subst-char-in-string ?\ ?- command)
+                      "-current-dir") ()
      ,(concat "Execute command `" command "' on current directory.")
      (interactive)
      (execute-command-on-current-dir ,command)))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
-(defmacro define-kbd     (keymap key def) `(define-key ,keymap (kbd ,key) ,def))
+(defmacro define-kbd (keymap key def)
+  `(define-key ,keymap (kbd ,key) ,def))
 ;;;###autoload
-(defmacro local-set-kbd  (key command)    `(local-set-key (kbd ,key) ,command))
+(defmacro local-set-kbd (key command)
+  `(local-set-key (kbd ,key) ,command))
 ;;;###autoload
-(defmacro global-set-kbd (key command)    `(global-set-key (kbd ,key) ,command))
+(defmacro global-set-kbd (key command)
+  `(global-set-key (kbd ,key) ,command))
 
 ;; ;;;###autoload
 ;; (defalias 'apply-define-key 'eal-define-keys-commonly)
 ;; ;;;###autoload
 ;; (defalias 'define-key-list 'eal-define-keys-commonly)
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun apply-args-list-to-fun (fun-list args-list)
   "Apply args list to function FUN-LIST.
-FUN-LIST can be a symbol, also can be a list whose element is a symbol."
+FUN-LIST can be a symbol, also can be a list whose element is a
+symbol."
   (let ((is-list (and (listp fun-list) (not (functionp fun-list)))))
     (dolist (args args-list)
       (if is-list
           (dolist (fun fun-list)
             (apply-args-to-fun fun args))
         (apply-args-to-fun fun-list args)))))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun apply-args-to-fun (fun args)
@@ -510,15 +580,21 @@ FUN-LIST can be a symbol, also can be a list whose element is a symbol."
       (eval `(,fun ,@args))
     (eval `(,fun ,args))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun kill-buffer-when-shell-command-exit ()
   "Close current buffer when `shell-command' exit."
-  (let ((process (ignore-errors (get-buffer-process (current-buffer)))))
+  (let ((process (ignore-errors
+                   (get-buffer-process (current-buffer)))))
     (when process
-      (set-process-sentinel process
-                            (lambda (proc change)
-                              (when (string-match "\\(finished\\|exited\\)" change)
-                                (kill-buffer (process-buffer proc))))))))
+      (set-process-sentinel
+       process
+       (lambda (proc change)
+         (when (string-match "\\(finished\\|exited\\)" change)
+           (kill-buffer (process-buffer proc))))))))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun list-colors-display-htm (&optional list)
@@ -558,6 +634,8 @@ FUN-LIST can be a symbol, also can be a list whose element is a symbol."
               "</body>"
               "</html>"))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun html-color (string)
   "Convert colors names to rgb(n1,n2,n3) strings."
@@ -566,14 +644,20 @@ FUN-LIST can be a symbol, also can be a list whose element is a symbol."
           (/ (nth 1 (x-color-values string)) 256)
           (/ (nth 2 (x-color-values string)) 256)))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defmacro def-command-max-window (command)
-  "Make definition of command which after execute command COMMAND execute `delete-other-windows'."
+  "Make definition of command which after execute command COMMAND
+execute `delete-other-windows'."
   `(defun ,(am-intern command "-max-window") ()
-     ,(concat "After run command `" command "' execute command `delete-other-windows'.")
+     ,(concat "After run command `" command
+              "' execute command `delete-other-windows'.")
      (interactive)
      (call-interactively ',(intern command))
      (delete-other-windows)))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun delete-current-window (&optional frame)
@@ -586,6 +670,8 @@ FUN-LIST can be a symbol, also can be a list whose element is a symbol."
       (bury-buffer)
     (delete-windows-on (current-buffer) frame)))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defmacro def-turn-on (command &optional is-on)
   "Make definition of command whose name is COMMAND-on when IS-ON is t
@@ -596,18 +682,18 @@ and COMMAND-off when IS-ON is nil."
        (interactive)
        (funcall ',(intern command) ,(if is-on 1 -1)))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun unset-key (keymap key)
   "Remove binding of KEY in map KEYMAP.
 KEY is a string or vector representing a sequence of keystrokes."
   (define-key keymap key nil))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** 判断某个字体在系统中是否安装
 ;;;###autoload
@@ -616,14 +702,16 @@ KEY is a string or vector representing a sequence of keystrokes."
     (if (null (x-list-fonts font))
       nil t)))
     ;; (if (null (list-fonts font) nil t))))
-;;---------------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** 按顺序找到一个字体列表( list ) 中第一个已经安装可用的字体
-(defvar font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
+(defvar font-list
+  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
 ;; (require 'cl) ;; find-if is in common list package
 (find-if #'qiang-font-existsp font-list)
 
-;;---------------------------------------------------------------------------------
+;;--------------------------------------------------------------------
+
 ;;** 产生带上 font size 信息的 font 描述文本
 ;;;###autoload
 (defun qiang-make-font-string (font-name font-size)
@@ -632,7 +720,7 @@ KEY is a string or vector representing a sequence of keystrokes."
       (format "%s%s" font-name font-size)
     (format "%s %s" font-name font-size)))
 
-;;---------------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** 自动设置字体函数,
 ;; REF: http://emacser.com/torture-emacs.htm
@@ -644,7 +732,6 @@ KEY is a string or vector representing a sequence of keystrokes."
 ;; 对不齐。 测试：
 ;;       1234567890
 ;;       一二三四五
-
 ;;;###autoload
 (defun qiang-set-font (english-fonts
                        english-font-size
@@ -662,7 +749,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
     ;; Set the default English font
     ;;
-    ;; The following 2 method cannot make the font settig work in new frames.
+    ;; The following 2 method cannot make the font settig work in new
+    ;; frames.
     ;; (set-default-font "Consolas:pixelsize=18")
     ;; (add-to-list 'default-frame-alist '(font . "Consolas:pixelsize=18"))
     ;; We have to use set-face-attribute
@@ -682,6 +770,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 ;;    '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
 ;;      "黑体" "新宋体" "宋体") 16)
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun xy/set-font-default ()
   "My default Emacs font setting."
@@ -694,6 +784,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
            "黑体") 14)
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 11")))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun xy/set-font-prog ()
@@ -708,6 +800,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 9")))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
 (defun xy/set-font-write ()
   "My Emacs font setting for writing articles."
@@ -720,27 +814,29 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
            "黑体") 16)
     (set-default-font "Monospace 12")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* For compatibility among different version of Emacs
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
-;;;###autoload
 ;; General Emacs/XEmacs-compatibility compile-time macros
+;;;###autoload
 (defmacro cond-emacs-xemacs (&rest args)
   (cond-emacs-xemacs-macfn
    args "`cond-emacs-xemacs' must return exactly one element"))
+
+;;--------------------------------------------------------------------
 
 (defun cond-emacs-xemacs-macfn (args &optional msg)
   (if (atom args) args
     (and (eq (car args) :@) (null msg) ; (:@ ...spliced...)
          (setq args (cdr args)
                msg "(:@ ....) must return exactly one element"))
-    (let ((ignore (if (string-match "XEmacs" emacs-version) :EMACS :XEMACS))
+    (let ((ignore
+           (if (string-match "XEmacs" emacs-version) :EMACS :XEMACS))
           (mode :BOTH) code)
       (while (consp args)
-        (if (memq (car args) '(:EMACS :XEMACS :BOTH)) (setq mode (pop args)))
+        (if (memq (car args)
+                  '(:EMACS :XEMACS :BOTH)) (setq mode (pop args)))
         (if (atom args)
             (or args (error "Used selector %s without elements" mode))
           (or (eq ignore mode)
@@ -750,9 +846,12 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
             ((or (null args) (eq ignore mode)) (nreverse code))
             (t (nconc (nreverse code) args))))))
 
-;; Emacs/XEmacs-compatibility `defun': remove interactive "_" for Emacs, use
-;; existing functions when they are `fboundp', provide shortcuts if they are
-;; known to be defined in a specific Emacs branch (for short .elc)
+;;--------------------------------------------------------------------
+
+;; Emacs/XEmacs-compatibility `defun': remove interactive "_" for
+;; Emacs, use existing functions when they are `fboundp', provide
+;; shortcuts if they are known to be defined in a specific Emacs
+;; branch (for short .elc)
 ;;;###autoload
 (defmacro defunx (name arglist &rest definition)
   (let ((xemacsp (string-match "XEmacs" emacs-version)) reuses first)
@@ -769,9 +868,11 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
       (setq definition (cddr definition)))
     (if (and reuses (symbolp reuses))
         `(defalias ',name ',reuses)
-      (let* ((docstring (if (stringp (car definition)) (pop definition)))
+      (let* ((docstring
+              (if (stringp (car definition)) (pop definition)))
              (spec (and (not xemacsp)
-                        (eq (car-safe (car definition)) 'interactive)
+                        (eq (car-safe (car definition))
+                            'interactive)
                         (null (cddar definition))
                         (cadar definition))))
         (if (and (stringp spec)
@@ -788,26 +889,32 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
           ;; no dynamic docstring in this case
           `(eval-and-compile        ; no warnings in Emacs
              (defalias ',name
-               (cond ,@(mapcar (lambda (func) `((fboundp ',func) ',func))
-                               (nreverse reuses))
+               (cond ,@(mapcar
+                        (lambda (func) `((fboundp ',func) ',func))
+                        (nreverse reuses))
                      (t ,(if definition
                              `(lambda ,arglist ,docstring
-                                ,@(cond-emacs-xemacs-macfn definition))
+                                ,@(cond-emacs-xemacs-macfn
+                                   definition))
                            'ignore))))))))))
 
+;;--------------------------------------------------------------------
 
 (when (>= 21 emacs-major-version)
   (defalias 'move-beginning-of-line 'beginning-of-line)
   (defalias 'move-end-of-line       'end-of-line))
+
+;;--------------------------------------------------------------------
 
 ;; 定义一些emacs 21没有的函数
 (when is-before-emacs-21
     '(progn
        (defun line-number-at-pos (&optional pos)
      "Return (narrowed) buffer line number at position POS.
-If POS is nil, use current buffer location.
-Counting starts at (point-min), so the value refers
-to the contents of the accessible portion of the buffer."
+If POS is nil, use current buffer location. Counting starts
+at (point-min), so the value refers to the contents of the
+accessible portion of the buffer."
+
      (let ((opoint (or pos (point))) start)
        (save-excursion
          (goto-char (point-min))
@@ -820,9 +927,9 @@ to the contents of the accessible portion of the buffer."
        (defun looking-back (regexp &optional limit greedy)
      "Return non-nil if text before point matches regular
 expression REGEXP. Like `looking-at' except matches before point,
-and is slower. LIMIT if non-nil speeds up the search by specifying
-a minimum starting position, to avoid checking matches that would
-start before LIMIT.
+and is slower. LIMIT if non-nil speeds up the search by
+specifying a minimum starting position, to avoid checking matches
+that would start before LIMIT.
 
 If GREEDY is non-nil, extend the match backwards as far as possible,
 stopping when a single additional previous character cannot be part
@@ -851,14 +958,13 @@ of a match for REGEXP."
        (not (null pos))))
        ))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* My own functions
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;;###autoload
-(defun xy/recompile-dir (this-directory &optional with-subdirs recursive)
+(defun xy/recompile-dir
+  (this-directory &optional with-subdirs recursive)
   "Recompile all files in THIS-DIRECTORY which are newer than their
 corresponding .elc files.
 
@@ -875,10 +981,12 @@ directories starting with a `.'."
            (files (directory-files this-directory t "^[^\\.]")))
 
       ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory (expand-file-name this-directory)))
+      (while (not (string= this-directory
+                           (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
-      (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
+      (let ((files
+             (directory-files this-directory t "^[^.]+\\.el$" nil)))
     (while files
       (let ((srcfile (car files))
         (dstfile (concat (car files) "c")))
@@ -895,12 +1003,16 @@ directories starting with a `.'."
           (setq dir-or-file (car files))
           (when (file-directory-p dir-or-file)
             (if recursive
-                (xy/recompile-dir dir-or-file 'with-subdirs 'recursive)
+                (xy/recompile-dir dir-or-file
+                                  'with-subdirs 'recursive)
               (xy/recompile-dir dir-or-file)))
           (setq files (cdr files)))))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
-(defun xy/update-all-autoloads (this-directory &optional with-subdirs recursive)
+(defun xy/update-all-autoloads
+  (this-directory &optional with-subdirs recursive)
   "Update the autoloads cache file for THIS-DIRECTORY, if there are
 newer .el files. The file name of the autoloads cache is like
 `loaddefs@!home!user!.emacs.d!lisps.el', which is built from the
@@ -920,23 +1032,29 @@ directories starting with a `.'."
            (files (directory-files this-directory t "^[^\\.]")))
 
       ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory (expand-file-name this-directory)))
+      (while (not (string= this-directory
+                           (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
       (setq generated-autoload-file
             (concat this-directory "/loaddefs@"
                     (subst-char-in-string ?/ ?!
-                        (subst-char-in-string ?: ?! this-directory)) ".el"))
+                        (subst-char-in-string ?: ?! this-directory))
+                    ".el"))
       (setq update-flag nil)
-      (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
+      (let ((files (directory-files
+                    this-directory t "^[^.]+\\.el$" nil)))
         (while files
           (let ((srcfile (car files))
                 (dstfile (concat (car files) "c")))
             (if (or (not (file-exists-p generated-autoload-file))
                     (not (file-exists-p dstfile))
-                    (file-newer-than-file-p srcfile dstfile)
-                    (file-newer-than-file-p srcfile generated-autoload-file)
-                    (file-newer-than-file-p dstfile generated-autoload-file))
+                    (file-newer-than-file-p
+                     srcfile dstfile)
+                    (file-newer-than-file-p
+                     srcfile generated-autoload-file)
+                    (file-newer-than-file-p
+                     dstfile generated-autoload-file))
                 (setq update-flag t))
             (setq files (cdr files))))
 
@@ -948,11 +1066,14 @@ directories starting with a `.'."
                      (update-autoloads-from-directories this-directory))
                     ((fboundp 'update-directory-autoloads)
                      (update-directory-autoloads this-directory)))
-              (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
-          (message "* ---[ `%s' exists and is newer. ]---" generated-autoload-file))
+              (message "* ---[ Updating `%s'... ]---"
+                       generated-autoload-file))
+          (message "* ---[ `%s' exists and is newer. ]---"
+                   generated-autoload-file))
 
         (load-file generated-autoload-file)
-        (message "* ---[ Loading `%s'... ]---" generated-autoload-file))
+        (message "* ---[ Loading `%s'... ]---"
+                 generated-autoload-file))
 
       (when with-subdirs
         (while files
@@ -964,8 +1085,11 @@ directories starting with a `.'."
               (xy/install-all-lisps dir-or-file)))
           (setq files (cdr files)))))))
 
+;;--------------------------------------------------------------------
+
 ;;;###autoload
-(defun xy/install-all-lisps (this-directory &optional with-subdirs recursive)
+(defun xy/install-all-lisps
+  (this-directory &optional with-subdirs recursive)
   "Install all the lisps in THIS-DIRECTORY.
 
 The process is:
@@ -991,7 +1115,8 @@ directories starting with a `.'."
            (files (directory-files this-directory t "^[^\\.]")))
 
       ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory (expand-file-name this-directory)))
+      (while (not (string= this-directory
+                           (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
       (setq generated-autoload-file
@@ -999,7 +1124,8 @@ directories starting with a `.'."
             (subst-char-in-string ?/ ?!
             (subst-char-in-string ?: ?! this-directory)) ".el"))
       (setq update-flag nil)
-      (let ((files (directory-files this-directory t "^[^.]+\\.el$" nil)))
+      (let ((files (directory-files
+                    this-directory t "^[^.]+\\.el$" nil)))
     (while files
       (let ((srcfile (car files))
         (dstfile (concat (car files) "c")))
@@ -1027,12 +1153,14 @@ directories starting with a `.'."
              (update-autoloads-from-directories this-directory))
             ((fboundp 'update-directory-autoloads)
              (update-directory-autoloads this-directory)))
-          (message "* ---[ Updating `%s'... ]---" generated-autoload-file))
+          (message "* ---[ Updating `%s'... ]---"
+                   generated-autoload-file))
       (message "* ---[ `%s' exists and is newer. ]---"
         generated-autoload-file))
 
     (load-file generated-autoload-file)
-    (message "* ---[ Loading `%s'... ]---" generated-autoload-file))
+    (message "* ---[ Loading `%s'... ]---"
+             generated-autoload-file))
 
       (when with-subdirs
         (while files
@@ -1043,6 +1171,8 @@ directories starting with a `.'."
                       'with-subdirs 'recursive)
               (xy/install-all-lisps dir-or-file)))
           (setq files (cdr files)))))))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun xy/load-autoload (this-directory)
@@ -1061,7 +1191,8 @@ The process is:
            (files (directory-files this-directory t "^[^\\.]")))
 
       ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory (expand-file-name this-directory)))
+      (while (not (string= this-directory
+                           (expand-file-name this-directory)))
         (setq this-directory (expand-file-name this-directory)))
 
       (setq generated-autoload-file
@@ -1075,15 +1206,19 @@ The process is:
         ;; (add-to-list 'load-path this-directory)
         ;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
         (load-file generated-autoload-file)
-        (message "* ---[ Loading `%s'... ]---" generated-autoload-file)))))
+        (message "* ---[ Loading `%s'... ]---"
+                 generated-autoload-file)))))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun xy/done ()
-  "Make Emacs frame invisible,
-just like the `emacs --daemon'"
+  "Make Emacs frame invisible, just like the `emacs --daemon'"
   (interactive)
   (server-edit)
   (make-frame-invisible nil t))
+
+;;--------------------------------------------------------------------
 
 ;;;###autoload
 (defun xy/emacs-build ()
@@ -1091,7 +1226,7 @@ just like the `emacs --daemon'"
  autoloads for them."
 
   (interactive)
-  (xy/install-all-lisps my-local-lisp-path) ;; 'with-subdirs 'recursive)
+  (xy/install-all-lisps my-local-lisp-path)
   (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
   (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
   (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
