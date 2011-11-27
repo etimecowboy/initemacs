@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 16:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -107,49 +107,6 @@
     (if back
         (semantic-ia-fast-jump-back)
       (semantic-ia-fast-jump (point))))
-
-  (pulse-toggle-integration-advice (if window-system 1 -1))
-
-  (defadvice cua-exchange-point-and-mark (after pulse-advice activate)
-    "Cause the line that is `goto'd to pulse when the cursor gets there."
-    (when (and pulse-command-advice-flag (interactive-p)
-               (> (abs (- (point) (mark))) 400))
-      (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice switch-to-buffer (after pulse-advice activate)
-    "After switch-to-buffer, pulse the line the cursor lands on."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice previous-buffer (after pulse-advice activate)
-    "After previous-buffer, pulse the line the cursor lands on."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice next-buffer (after pulse-advice activate)
-    "After next-buffer, pulse the line the cursor lands on."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice ido-switch-buffer (after pulse-advice activate)
-    "After ido-switch-buffer, pulse the line the cursor lands on."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice beginning-of-buffer (after pulse-advice activate)
-    "After beginning-of-buffer, pulse the line the cursor lands on."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice viss-bookmark-next-buffer (after pulse-advice activate)
-    "After viss-bookmark-next-buffer, pulse the line the cursor lands on."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice viss-bookmark-prev-buffer (after pulse-advice activate)
-    "After viss-bookmark-prev-buffer, pulse the line the cursor lands on."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
 
   (when (and window-system
              (> emacs-major-version 21)

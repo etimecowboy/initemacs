@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 15:51 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,7 +29,7 @@
 ;;* ffap, finding Files and URLs at Point
 ;; REF:
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860
-;; (ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
+(ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
 (eval-after-load "ffap" `(ffap-settings))
 
 ;;------------------------------------------------------------------

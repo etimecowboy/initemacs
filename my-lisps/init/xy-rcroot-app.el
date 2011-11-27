@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 16:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -15,47 +15,50 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Frame settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** Default frame layout
-(when window-system
-  ;; Initial fram layout
-  ;; (setq initial-frame-alist
-  ;;     '((height . 40)
-  ;;       (width  . 90)))
-  ;; ;; New frame layout
-  ;; (setq pop-up-frame-alist
-  ;;     '((height . 40)
-  ;;       (width  . 90)))
-  ;; Default frame layout
-  ;; (setq 'default-frame-alist
-  ;;     '((height . 40)
-  ;;       (width  . 90)))
-  (add-to-list 'default-frame-alist '(height . 40))
-  (add-to-list 'default-frame-alist '(width . 95)))
+;; (when window-system
+;;   ;; Initial fram layout
+;;   ;; (setq initial-frame-alist
+;;   ;;     '((height . 40)
+;;   ;;       (width  . 90)))
+;;   ;; ;; New frame layout
+;;   ;; (setq pop-up-frame-alist
+;;   ;;     '((height . 40)
+;;   ;;       (width  . 90)))
+;;   ;; Default frame layout
+;;   ;; (setq 'default-frame-alist
+;;   ;;     '((height . 40)
+;;   ;;       (width  . 90)))
+;;   (add-to-list 'default-frame-alist '(height . 40))
+;;   (add-to-list 'default-frame-alist '(width . 95)))
+
+;;--------------------------------------------------------------------
 
 ;;** Frame title
-;; Set frame title display: filename @ process
-;; (setq frame-title-format "%f @ %s")
-(setq frame-title-format
-      `(,(user-login-name) "@" ,(system-name) "     "
-        global-mode-string "     %f" ))
-;; 在标题栏显示登陆名称和文件名
+;; ;; Set frame title display: filename @ process
+;; ;; (setq frame-title-format "%f @ %s")
 ;; (setq frame-title-format
-;;       '((:eval
-;;          (let ((login-name (getenv-internal "LOGNAME")))
-;;            (if login-name (concat login-name "@") "")))
-;;         (:eval (system-name))
-;;         ":"
-;;         (:eval (or (buffer-file-name) (buffer-name)))))
+;;       `(,(user-login-name) "@" ,(system-name) "     "
+;;         global-mode-string "     %f" ))
+;; ;; 在标题栏显示登陆名称和文件名
+;; ;; NOTE: `windows.el' and `revive.el' overwirte title
+;; ;; (setq frame-title-format
+;; ;;       '((:eval
+;; ;;          (let ((login-name (getenv-internal "LOGNAME")))
+;; ;;            (if login-name (concat login-name "@") "")))
+;; ;;         (:eval (system-name))
+;; ;;         ":"
+;; ;;         (:eval (or (buffer-file-name) (buffer-name)))))
+
+;;--------------------------------------------------------------------
 
 ;;** Transparent frame
 ;; REF: http://www.emacswiki.org/emacs/TransparentEmacs
-;; BUG: not work in Windows 7, not work in Linux with gnome 3
+;; BUG: not work in Windows 7, nor in Linux with gnome 3
 ;; (when (and is-after-emacs-23 window-system) ; from emacs-22
 
 ;;   ;; User controls the frame opacity
@@ -64,9 +67,12 @@
 ;;   (add-to-list 'default-frame-alist '(alpha 100 100))
 ;;   (global-set-key (kbd "C-x W t") 'toggle-transparency))
 
-;;** Resize frame
-;; NOTE: `fit-frame' and `thumb-frm' cause issue when openning
+;;---------------------------------------------------------------------
+
+;;** Resize frame and window
+;; BUG: `fit-frame' and `thumb-frm' cause issue when openning
 ;; info-mode links.
+
 ;;*** fit-frame and autofit-frame
 ;; NOTE:
 ;;      - `fit-frame.el':     resizes a frame in order to  fit a frame
@@ -109,11 +115,9 @@
 ;;                 ;;'thumfr-really-iconify-or-deiconify-frame)
 ;;                 'thumfr-toggle-thumbnail-frame)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Window settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** window-number
 ;; assign a number to a window
@@ -136,20 +140,29 @@ the mode-line."
 ;;   )
 ;; (global-set-key [f6] 'xy/window-number-toggle)
 
-;; NOTE: another approach to move the point between windows is to use
-;; `windmove' which is a part of GNU Emacs. However, the default key
-;; bindings are conflict with many other packages.
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
+;;--------------------------------------------------------------------
+
+;;** Windmove
+(when (fboundp 'windmove)
+  (global-set-key (kbd "M-S-<left>")  'windmove-left)
+  (global-set-key (kbd "M-S-<up>")    'windmove-up)
+  (global-set-key (kbd "M-S-<right>") 'windmove-right)
+  (global-set-key (kbd "M-S-<down>")  'windmove-down)
+  (setq windmove-wrap-around t))
+
+;;--------------------------------------------------------------------
 
 ;;** Winner mode for window splits
 (winner-mode 1)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;--------------------------------------------------------------------
+
+;;** Windresize
+(global-set-key (kbd "M-<f5>") 'windresize)
+
+;;====================================================================
 ;;* Buffer settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; Wrap line dynamically
 (global-visual-line-mode 1)
@@ -202,11 +215,9 @@ the mode-line."
 ;; (setq hl-line-face 'underline) ; for highlight-symbol
 ;; (global-hl-line-mode 1) ; (if window-system 1 -1)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* mode-line settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; Do not display mode-line in non-selected windows
 (setq-default mode-line-in-non-selected-windows 1)
@@ -231,12 +242,16 @@ the mode-line."
 ;; Display battery infomation, after Emacs-22
 ;; (when is-after-emacs-23 (display-battery-mode -1))
 
+;;--------------------------------------------------------------------
+
 ;;** diminish
 ;; Removing or abbreviating minor mode indicators
 (eval-after-load "filladapt" '(diminish 'filladapt-mode))
 (eval-after-load "icicles" '(diminish 'icicle-mode))
-(eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
-(eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
+(eval-after-load "highlight-symbol"
+  '(diminish 'highlight-symbol-mode))
+(eval-after-load "highlight-parentheses"
+  '(diminish 'highlight-parentheses-mode))
 (eval-after-load "linkd" '(diminish 'linkd-mode))
 (eval-after-load "simple" '(diminish 'global-visual-line-mode))
 (eval-after-load "simple" '(diminish 'visual-line-mode))
@@ -247,46 +262,46 @@ the mode-line."
 (eval-after-load "hideshow" '(diminish 'hs-minor-mode))
 ;; (eval-after-load "yasnippet" '(diminish 'yas/minor-mode))
 (eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
-(eval-after-load "xy-recent-jump-small" '(diminish 'recent-jump-small-mode))
+(eval-after-load "xy-recent-jump-small"
+  '(diminish 'recent-jump-small-mode))
 (eval-after-load "ibus" '(diminish 'ibus-mode))
 (eval-after-load "outline" '(diminish 'outline-minor-mode))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
 (eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
 
+;;--------------------------------------------------------------------
+
 ;;** modeline-posn
 ;; Display number of characters in a selected region
 (require 'modeline-posn)
+
+;;--------------------------------------------------------------------
 
 ;;** mode-line-frame
 ;; offers a frame to show various information
 ;; (require 'mode-line-frame)
 ;; (mode-line-frame-create)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;* mini-buffer settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;--------------------------------------------------------------------
 
+;;* mini-buffer settings
 ;; 可以递归的使用minibuffer
 (setq enable-recursive-minibuffers t)
 
 ;; 当你在shell、telnet、w3m等模式下时，加密显出你的密码
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Vaious bar settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** menu-bar
 ;; No menu bar as default
 (menu-bar-mode -1)
 
 ;; Toggle menua display
-(global-set-key [M-f10] 'menu-bar-mode)
+(global-set-key (kbd "M-<f10>") 'menu-bar-mode)
 
 ;;*** menua-bar+
 ;; improved menu
@@ -300,6 +315,8 @@ the mode-line."
 ;; `facemenu.el', these two menus are the same.
 ;; (require 'facemenu+)
 
+;;--------------------------------------------------------------------
+
 ;;** tool-bar
 ;; No tool bar as default
 (tool-bar-mode -1)
@@ -311,53 +328,16 @@ the mode-line."
 ;; improved tool bar; broken
 ;; (try-require 'tool-bar+)
 
+;;--------------------------------------------------------------------
+
 ;;** scroll-bar
 ;; No scroll bar as default
 (scroll-bar-mode -1)
 
+;;--------------------------------------------------------------------
+
 ;;** tabbar
 ;; tab style buffer switch
-;; `tabbar-mode'
-;;     Toggle the Tabbar global minor mode.  When enabled a tab bar is
-;;     displayed in the header line.
-;;
-;; `tabbar-local-mode'         (C-c <C-f10>)
-;;     Toggle the Tabbar-Local minor mode.  Provided the global minor
-;;     mode is turned on, the tab bar becomes local in the current
-;;     buffer when the local minor mode is enabled.  This permits to
-;;     see the tab bar in a buffer where the header line is already
-;;     used by another mode (like `Info-mode' for example).
-;;
-;; `tabbar-mwheel-mode'
-;;     Toggle the Tabbar-Mwheel global minor mode.  When enabled you
-;;     can use the mouse wheel to navigate through tabs of groups.
-;;
-;; `tabbar-press-home'         (C-c <C-home>)
-;; `tabbar-press-scroll-left'  (C-c <C-prior>)
-;; `tabbar-press-scroll-right' (C-c <C-next>)
-;;     Simulate a mouse-1 click on respectively the "home", "scroll
-;;     left", and "scroll right" buttons.  A numeric prefix argument
-;;     value of 2, or 3, respectively simulates a mouse-2, or mouse-3
-;;     click.
-;;
-;; `tabbar-backward'           (C-c <C-left>)
-;; `tabbar-forward'            (C-c <C-right>)
-;;     Are the basic commands to navigate cyclically through tabs or
-;;     groups of tabs.  The cycle is controlled by the
-;;     `tabbar-cycle-scope' option.  The default is to navigate
-;;     through all tabs across all existing groups of tabs.  You can
-;;     change the default behavior to navigate only through the tabs
-;;     visible on the tab bar, or through groups of tabs only.  Or use
-;;     the more specialized commands below.
-;;
-;; `tabbar-backward-tab'
-;; `tabbar-forward-tab'
-;;     Navigate through the tabs visible on the tab bar.
-;;
-;; `tabbar-backward-group'     (C-c <C-up>)
-;; `tabbar-forward-group'      (C-c <C-down>)
-;;     Navigate through existing groups of tabs.
-
 ;; (require 'tabbar)
 ;; (tabbar-mode 1)
 ;; (global-set-key (kbd "C-+") 'tabbar-forward-group)
@@ -367,8 +347,6 @@ the mode-line."
 ;; (setq tabbar-cycling-scope (quote tabs))
 ;; (setq tabbar-cycling-scope nil)
 
-;;-----------------------------------------------
-
 ;;*** tabbar-ruler
 ;; (setq EmacsPortable-global-tabbar 't) ; If you want tabbar
 ;; (setq EmacsPortable-global-ruler 't) ; if you want a global ruler
@@ -376,15 +354,9 @@ the mode-line."
 ;; (setq EmacsPortable-popup-toolbar 't) ; If you want a popup toolbar
 ;; (require 'tabbar-ruler)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Point (cursor) settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;光标不闪烁
 (blink-cursor-mode 1)
@@ -392,9 +364,13 @@ the mode-line."
 ;; Draw block cursor
 (setq x-stretch-cursor t)
 
+;;--------------------------------------------------------------------
+
 ;;** bar-cursor
 ;; 光标由方块变成一个小长条
 ;; (require 'bar-cursor)
+
+;;--------------------------------------------------------------------
 
 ;;** cursor-change
 ;; 智能的改变光标形状
@@ -403,20 +379,20 @@ the mode-line."
 ;;   (cursor-change-mode 1))
 ;; (cursor-change-mode 1)
 
+;;--------------------------------------------------------------------
+
 ;;** pulse
 ;; 实现Emacs的淡入淡出效果
 ;; REF: http://emacser.com/pulse.htm
-;; (require 'pulse)
+(require 'pulse)
 (eval-after-load "pulse"
   `(progn
      (pulse-face-settings)
      (pulse-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Mouse settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;(setq mouse-autoselect-window 1.0)
 (mouse-avoidance-mode 'jump)
@@ -448,11 +424,9 @@ the mode-line."
 (setq scroll-margin 3
       scroll-conservatively 10000)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* 所有关于括号的配置
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** paren-mode
 ;; (show-paren-mode 1)
@@ -460,6 +434,8 @@ the mode-line."
 ;;   `(progn
 ;;      ;; (paren-face-settings)
 ;;      (paren-settings)))
+
+;;--------------------------------------------------------------------
 
 ;;** mic-paren
 ;; An extension and replacement to the packages `paren.el' and
@@ -470,6 +446,8 @@ the mode-line."
   `(progn
      ;; (mic-paren-face-settings)
      (mic-paren-settings)))
+
+;;--------------------------------------------------------------------
 
 ;;** rainbow-delimiters
 ;; With this package, the delimiters all get different colors based on
@@ -488,6 +466,8 @@ the mode-line."
 ;; (eval-after-load "rainbow-delimiters"
 ;;   `(progn
 ;;      (rainbow-delimiters-settings)))
+
+;;--------------------------------------------------------------------
 
 ;;** highlight-parentheses
 ;; 用颜色配对括号
@@ -510,6 +490,8 @@ the mode-line."
  '(lambda ()
     (require 'highlight-parentheses)
     (highlight-parentheses-mode 1)))
+
+;;--------------------------------------------------------------------
 
 ;;** autopair
 ;; 自动给你加上括号
@@ -541,11 +523,9 @@ the mode-line."
  `(("C-M-]" ywb-indent-accoding-to-paren)
    ("\C-]"  goto-paren)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Syntax highlighting
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** font-lock
 (global-font-lock-mode 1)
@@ -555,11 +535,15 @@ the mode-line."
      ;; (font-lock-face-settings)
      ))
 
+;;--------------------------------------------------------------------
+
 ;;** smart-hl
 ;; 像Eclipse那样双击高亮当前字符串
 ;; NOTE: A part of codepilot which is removed.
 ;;       Use highlight-symbol-mode instead.
 ;; (require 'smart-hl)
+
+;;--------------------------------------------------------------------
 
 ;;** highlight-symbol
 ;; 像Eclipse那样高亮光标处单词
@@ -580,6 +564,8 @@ the mode-line."
    ("C-c M-n" highlight-symbol-next-in-defun)
    ("C-c M-p" highlight-symbol-prev-in-defun)))
 
+;;--------------------------------------------------------------------
+
 ;;** zjl-hl
 ;; use CEDET semantic to highlight function calls
 (eval-after-load "zjl-hl"
@@ -587,15 +573,15 @@ the mode-line."
      (zjl-hl-face-settings)
      (zjl-hl-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Color settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** generic-x
 ;; 增加更丰富的高亮
 ;; (require 'generic-x)
+
+;;--------------------------------------------------------------------
 
 ;;** color-theme
 ;; fancy themes for emacs
@@ -605,49 +591,54 @@ the mode-line."
 (eval-after-load "color-theme"
   '(progn
      (color-theme-settings)))
-(eal-define-keys-commonly
- color-theme-mode-map
- `(("'"   switch-to-other-buffer)
-   ("u"   View-scroll-half-page-backward)
-   ("SPC" scroll-up)
-   ("1"   delete-other-windows)
-   ("."   find-symbol-at-point)))
+;; (eal-define-keys-commonly
+;;  color-theme-mode-map
+;;  `(("'"   switch-to-other-buffer)
+;;    ("u"   View-scroll-half-page-backward)
+;;    ("SPC" scroll-up)
+;;    ("1"   delete-other-windows)
+;;    ("."   find-symbol-at-point)))
+
+;;--------------------------------------------------------------------
 
 ;;** doremi
 ;; (eval-after-load "icicles" `(doremi-settings))
 
+;;--------------------------------------------------------------------
+
 ;;** palette
 ;; emacs 的调色板
-(defvar facemenup-palette-change-face-bg nil "Face background be changed or not.")
-(defvar facemenup-last-face-color nil "Last face color used.")
+;; (defvar facemenup-palette-change-face-bg nil
+;;   "Face background be changed or not.")
+;; (defvar facemenup-last-face-color nil
+;;   "Last face color used.")
+;; (eval-after-load "palette"
+;;   `(progn
+;;      (palette-settings)
+;;      (eal-define-keys
+;;       'palette-mode-map
+;;       `(("j"     palette-down)
+;;         ("k"     palette-up)
+;;         ("h"     palette-left)
+;;         ("l"     palette-right)
+;;         ("J"     palette-down-quickly)
+;;         ("K"     palette-up-quickly)
+;;         ("H"     palette-left-quickly)
+;;         ("L"     palette-right-quickly)
+;;         ("r"     palette-face-restore-bg-fg)
+;;         ("f"     palette-set-face-changed-to-foreground)
+;;         ("b"     palette-set-face-changed-to-background)
+;;         ("B"     facemenup-face-bg-restore)
+;;         ("F"     facemenup-face-fg-restore)
+;;         ("d"     palette-disply-which-in-changine)
+;;         ("m"     palette-pick-background-at-point)
+;;         ("C"     palette-copy-current-color)
+;;         ("C-x k" palette-quit-restore-bg-fg)))))
 
-(eval-after-load "palette"
-  `(progn
-     (palette-settings)
-     (eal-define-keys
-      'palette-mode-map
-      `(("j"     palette-down)
-        ("k"     palette-up)
-        ("h"     palette-left)
-        ("l"     palette-right)
-        ("J"     palette-down-quickly)
-        ("K"     palette-up-quickly)
-        ("H"     palette-left-quickly)
-        ("L"     palette-right-quickly)
-        ("r"     palette-face-restore-bg-fg)
-        ("f"     palette-set-face-changed-to-foreground)
-        ("b"     palette-set-face-changed-to-background)
-        ("B"     facemenup-face-bg-restore)
-        ("F"     facemenup-face-fg-restore)
-        ("d"     palette-disply-which-in-changine)
-        ("m"     palette-pick-background-at-point)
-        ("C"     palette-copy-current-color)
-        ("C-x k" palette-quit-restore-bg-fg)))))
-
-(eal-define-keys-commonly
- global-map
- `(("C-x P" palette)
-   ("C-x M-F" facemenup-palette-face-fg-at-point)
-   ("C-x M-B" facemenup-palette-face-bg-at-point)))
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("C-x P" palette)
+;;    ("C-x M-F" facemenup-palette-face-fg-at-point)
+;;    ("C-x M-B" facemenup-palette-face-bg-at-point)))
 
 (provide 'xy-rcroot-app)
