@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-27 Sun 16:30 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-27 Sun 17:45 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -144,11 +144,25 @@ the mode-line."
 
 ;;** Windmove
 (when (fboundp 'windmove)
-  (global-set-key (kbd "M-S-<left>")  'windmove-left)
-  (global-set-key (kbd "M-S-<up>")    'windmove-up)
-  (global-set-key (kbd "M-S-<right>") 'windmove-right)
-  (global-set-key (kbd "M-S-<down>")  'windmove-down)
+  (global-set-key (kbd "C-S-<left>")  'windmove-left)
+  (global-set-key (kbd "C-S-<up>")    'windmove-up)
+  (global-set-key (kbd "C-S-<right>") 'windmove-right)
+  (global-set-key (kbd "C-S-<down>")  'windmove-down)
   (setq windmove-wrap-around t))
+
+;;--------------------------------------------------------------------
+
+;;** buffer-move
+;; swap buffers without typing C-x b on each window
+;; (require 'buffer-move)
+(autoload 'buf-move-up "buffer-move" nil t)
+(autoload 'buf-move-down "buffer-move" nil t)
+(autoload 'buf-move-left "buffer-move" nil t)
+(autoload 'buf-move-right "buffer-move" nil t)
+(global-set-key (kbd "<M-S-up>")     'buf-move-up)
+(global-set-key (kbd "<M-S-down>")   'buf-move-down)
+(global-set-key (kbd "<M-S-left>")   'buf-move-left)
+(global-set-key (kbd "<M-S-right>")  'buf-move-right)
 
 ;;--------------------------------------------------------------------
 
@@ -481,12 +495,9 @@ the mode-line."
    svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
    browse-kill-ring-mode-hook completion-list-mode-hook
    apropos-mode-hook hs-hide-hook inferior-ruby-mode-hook
-   gdb-mode-hook
-   emacs-lisp-mode-hook lisp-interaction-mode-hook lisp-mode-hook
-   c-mode-common-hook cc-mode-hook
-   vhdl-mode-hook verilog-mode-hook
-   matlab-mode-hook
-   LaTeX-mode-hook latex-mode-hook)
+   gdb-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+   lisp-mode-hook c-mode-common-hook cc-mode-hook vhdl-mode-hook
+   verilog-mode-hook matlab-mode-hook LaTeX-mode-hook latex-mode-hook)
  '(lambda ()
     (require 'highlight-parentheses)
     (highlight-parentheses-mode 1)))

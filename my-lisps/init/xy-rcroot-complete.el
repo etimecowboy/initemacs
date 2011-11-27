@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 16:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,17 +16,17 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Mini buffer auto complete
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; an do stuff like M-x q-r-r TAB, and it expands to
 ;; query-replace-regexp.
 ;; (unless is-after-emacs-23
 ;;   (partial-completion-mode 1))
 (partial-completion-mode 1)
+
+;;--------------------------------------------------------------------
 
 ;;** ido
 ;; interactively do things with buffers and files
@@ -39,7 +39,7 @@
      ;; (ido-face-settings)
      (ido-settings)))
 
-;;----------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** icomplete
 ;; minibuffer中输入部分命令就可以使用补全
@@ -63,7 +63,7 @@
 ;;    ("'"   switch-to-other-buffer)
 ;;    ("L"   count-brf-lines)))
 
-;;------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** smex
 ;; Smex is a M-x enhancement for Emacs. Built on top of Ido, it
@@ -78,7 +78,7 @@
      (global-set-key (kbd "M-X") 'smex-major-mode-commands)
      ))
 
-;;----------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** ido+smex
 ;; NOTE: NEVER start both icy-mode and ido+smex. One is enough
@@ -98,24 +98,22 @@
             '(lambda ()
                (setq org-completion-use-ido t))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Buffer auto complete
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** Internal Emacs content auto complete system
 (setq-default abbrev-mode 1)
 (setq save-abbrevs nil)
 
-;;-----------------------------------------------------------
+;;--------------------------------------------------------------------
 
-;;** hippie-expand settings
+;;** hippie-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 (eval-after-load "hippie-exp"
   `(hippie-expand-settings))
 
-;;----------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** auto-complete settings
 (eval-after-load "auto-complete"
@@ -134,7 +132,7 @@
      ;;     ("M-p"        ac-previous)))
      ))
 
-;;--------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** company settings
 ;; It is a modular in-buffer completion mechanism.
@@ -148,7 +146,7 @@
 ;;   ,(if (not is-before-emacs-21) 'awk-mode-hook) ruby-mode-hook)
 ;;   'company-mode)
 
-;;--------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** template settings
 ;; (require 'template)
@@ -160,7 +158,7 @@
 ;; (eval-after-load "template" `(template-settings))
 ;; (template-initialize)
 
-;;-------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** auto-insert
 ;; 用template, 自动插入一些文件模板
@@ -168,7 +166,7 @@
 ;; (eval-after-load "autoinsert"
 ;;   `(auto-insert-settings))
 
-;;---------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** yasnippet
 ;; 超强的snippet
@@ -189,16 +187,11 @@
 ;;    LaTeX-mode-hook latex-mode-hook matlab-mode-hook)
 ;;  `xy/yas-start)
 
-;;-------------------------------------------------------------
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* icicles
-;; Better complete system for Emacs
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; System-wide completion
+;;====================================================================
 
-;; (add-hook 'after-init-hook 'xy/icy-start)
 (add-hook 'after-init-hook 'icy-mode)
 (defun icicle-keys ()
   "icicle-mode的按键设置."
@@ -226,13 +219,10 @@
 ;;    ("p" backward-button)))
 ;; (eval-after-load "apropos" `(apropos-face-settings))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* anything
-;; narrowing and selecting candidates then executing
-;; action for selected candidates.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Quicksilver for Emacs
+;;====================================================================
 
 (eval-after-load 'anything
   `(anything-settings))

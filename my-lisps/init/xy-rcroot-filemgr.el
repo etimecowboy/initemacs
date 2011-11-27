@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 19:10 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -15,16 +15,14 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Buffer management
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; 按下C-x k立即关闭掉当前的buffer
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
-;;-------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** ibuffer
 (eval-after-load "ibuffer"
@@ -42,13 +40,15 @@
   `(progn
      (uniquify-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* File management
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** dired
+(eval-after-load "dired"
+  `(progn
+     (dired-settings)))
+
 (eal-define-keys-commonly
  global-map
  `(("C-x d" dired-jump)))
@@ -121,13 +121,9 @@
 ;;    ("C-c b"       gud-break)
 ;;    ("C-c B"       gud-remove)))
 
-(eval-after-load "dired"
-  `(progn
-    (dired-settings)))
+;;--------------------------------------------------------------------
 
-;;---------------------------------------------------------------
-
-;; ;; dired-details+, 更多文件信息
+;;** dired-details+, 更多文件信息
 ;; ;;;###autoload
 ;; (defun dired-details+-settings ()
 ;;   "Settings for `dired-details+'.")
@@ -135,24 +131,24 @@
 ;; (eval-after-load "dired-details+"
 ;;   `(dired-details+-settings))
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
-;; dired+, 增强的 dired
+;;** dired+, 增强的 dired
 ;; (eval-after-load "dired+"
 ;;   `(progn
 ;;      (dired+-face-settings)
 ;;      (dired+-settings)))
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
-;; ;; dired-x, 忽略不感兴趣的文件
+;;** dired-x，忽略不感兴趣的文件
 ;; (autoload 'dired-omit-mode "dired-x"
-;;   "Toggle Dired-Omit mode.
-;; With numeric ARG, enable Dired-Omit mode if ARG is positive, disable
-;; otherwise.  Enabling and disabling is buffer-local.
-;; If enabled, \"uninteresting\" files are not listed.
-;; Uninteresting files are those whose filenames match regexp `dired-omit-files',
-;; plus those ending with extensions in `dired-omit-extensions'."
+;;   "Toggle Dired-Omit mode. With numeric ARG, enable Dired-Omit mode
+;; if ARG is positive, disable otherwise. Enabling and disabling is
+;; buffer-local. If enabled, \"uninteresting\" files are not listed.
+;; Uninteresting files are those whose filenames match regexp
+;; `dired-omit-files', plus those ending with extensions in
+;; `dired-omit-extensions'."
 ;;   t)
 ;; (am-add-hooks
 ;;  `(dired-mode-hook)
@@ -161,16 +157,18 @@
 ;; (defun dired-x-settings ()
 ;;   "Settings for `dired-x'."
 ;;   ;; (unless is-before-emacs-21
-;;   ;;   (setq dired-omit-files (concat dired-omit-files "\\|^\\.\\|^semantic.cache$\\|^CVS$"))
+;;   ;;   (setq dired-omit-files
+;;          (concat dired-omit-files
+;;                  "\\|^\\.\\|^semantic.cache$\\|^CVS$"))
 ;;   ;;   (if mswin
 ;;   ;;       (setq dired-omit-files (concat dired-omit-files "\\|^_"))))
 ;;   ;; (setq dired-omit-size-limit 1000000)
 ;; )
 ;; (eval-after-load "dired-x" `(dired-x-settings))
 
-;;-----------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
-;; dired-lis.el
+;;** dired-lis
 ;; (eal-define-keys
 ;;  'isearch-mode-map
 ;;  `(("C-h" dired-lis-isearch-up-directory)))
@@ -180,24 +178,24 @@
 ;; (eval-after-load "dired-lis"
 ;;   `(dired-lis-settings))
 
-;;-----------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** image-dired
 (eval-after-load "image-dired"
   `(progn
     (image-dired-settings)))
 
-;;-----------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
+;;** Sunrise commander; file manager
 ;; BUG: NOT work properly with other dired lisps. Removed.
-;; Sunrise commander; file manager
 ;; Check http://www.emacswiki.org/emacs/Sunrise_Commander_Tips
+
 ;; (autoload 'sunrise "sunrise-commander"
 ;;   "Two-pane file manager for Emacs based on Dired and inspired by MC." t)
 ;; (eval-after-load "sunrise-commander"
 ;;   `(sunrise-settings))
 ;; (global-set-key (kbd "C-x J") 'sunrise)
-
 ;; (try-require 'sunrise-commander)
 ;; (try-require 'sunrise-x-buttons) ;; cannot be used with popviewer
 ;; ;;(try-require 'sunrise-x-popviewer) ;; cannot be used with buttons
@@ -207,7 +205,7 @@
 ;; (try-require 'sunrise-x-tabs)
 ;; (try-require 'sunrise-x-tree)
 
-;;-----------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** open-with
 ;; open files in external applications
@@ -218,11 +216,9 @@
 (GNULinux
   (openwith-mode 1))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Version control settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** Emacs internal version control
 (setq make-backup-files nil)
@@ -243,7 +239,8 @@
 
 ;;--------------------------------------------------------------------
 
-;;** git ui
+;;** git settings
+
 ;;*** git.el
 ;; (global-set-key [f11] 'xy/git-start)
 
@@ -254,12 +251,14 @@
   (egg-settings)))
 
 ;;*** magit
+;; Project range git
 (eval-after-load "magit"
   `(progn
     (magit-settings)))
 (global-set-key [f11] 'magit-status)
 
 ;;*** diff-git
+;; Single file range
 (eval-after-load "diff-git"
   `(progn
      (diff-git-settings)))
@@ -271,11 +270,5 @@
 ;; (define-key diff-mode-shared-map "g" 'diff-git-update-current-buffer)
 ;; (define-key diff-mode-map "\C-c\M-v" 'diff-git-buffer-stage)
 ;; (define-key diff-mode-map "\C-c\C-v" 'diff-git-hunk-stage))
-
-;;---------------------------------------------------------------------
-
-;;** subversion gui
-
-;;--------------------------------------------------------------------
 
 (provide 'xy-rcroot-filemgr)

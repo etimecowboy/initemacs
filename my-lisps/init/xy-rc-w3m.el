@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-27 Sun 14:48 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-27 Sun 22:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -277,6 +277,10 @@
   (autoload 'w3m-weather "w3m-weather" "Display weather report." t)
   (autoload 'org-w3m-copy-for-org-mode "org-w3m"
     "Copy current buffer content or active region with `org-mode' style links." t)
+
+  ;; NOT using arrow
+  ;; (dolist (k '([right] [left] [up] [down]))
+  ;;     (define-key w3m-mode-map k nil))
 
   (eal-define-keys
    'w3m-mode-map

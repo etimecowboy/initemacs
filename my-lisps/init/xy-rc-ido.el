@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 17:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -95,26 +95,26 @@
   ;; (ido-ubiquitous-mode 1)
   )
 
-;;;###autoload
-(defun ido-face-settings ()
-  "Face settings for `ido'."
-  (if is-before-emacs-21
-      (progn
-        (custom-set-faces
-         '(ido-first-match-face
-           ((((type tty pc)) :foreground "yellow")
-            (t :bold nil :foreground "yellow"))))
-        (custom-set-faces
-         '(ido-only-match
-           ((((class color)) (:bold nil :foreground "green"))))))
+;; ;;;###autoload
+;; (defun ido-face-settings ()
+;;   "Face settings for `ido'."
+;;   (if is-before-emacs-21
+;;       (progn
+;;         (custom-set-faces
+;;          '(ido-first-match-face
+;;            ((((type tty pc)) :foreground "yellow")
+;;             (t :bold nil :foreground "yellow"))))
+;;         (custom-set-faces
+;;          '(ido-only-match
+;;            ((((class color)) (:bold nil :foreground "green"))))))
 
-    (custom-set-faces
-     '(ido-first-match
-       ((((type tty pc)) :foreground "yellow")
-        (t :bold nil :foreground "yellow"))))
-    (custom-set-faces
-     '(ido-only-match
-       ((((class color)) (:bold nil :foreground "green")))))))
+;;     (custom-set-faces
+;;      '(ido-first-match
+;;        ((((type tty pc)) :foreground "yellow")
+;;         (t :bold nil :foreground "yellow"))))
+;;     (custom-set-faces
+;;      '(ido-only-match
+;;        ((((class color)) (:bold nil :foreground "green")))))))
 
 (provide 'xy-rc-ido)
 

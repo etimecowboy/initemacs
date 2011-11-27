@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 21:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -16,11 +16,9 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Code formatting
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 (setq-default comment-column 40) ;; set comment alignment position
 
@@ -32,15 +30,17 @@
    python-mode-map perl-mode-map)
  `(("RET" newline-and-indent)))
 
-;; BUG: not working
-;; (eal-define-keys-commonly
-;;  global-map
-;;  `(("C-x A"   align)
-;;    ("C-x A r" align-regexp)))
-;; (global-set-key (kbd "C-x A a") 'align)
-;; (global-set-key (kbd "C-x A r") 'align-regexp)
+;;--------------------------------------------------------------------
 
-;;** Auto fill
+;;** align
+(eal-define-keys-commonly
+ global-map
+ `(("C-x A a"   align)
+   ("C-x A r"   align-regexp)))
+
+;;--------------------------------------------------------------------
+
+;;** auto-fill
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
    cperl-mode-hook cc-mode-hook
@@ -48,6 +48,8 @@
    matlab-mode-hook org-mode-hook)
  'turn-on-auto-fill)
 (eval-after-load "simple" `(simple-settings))
+
+;;--------------------------------------------------------------------
 
 ;;** hungry-delete-mode
 ;; (autoload 'turn-on-hungry-delete-mode "hungry-delete"
@@ -62,11 +64,9 @@
 ;;     ;; (hurn-on-hungry-delete-mode)
 ;;     (hungry-delete-mode 1)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Code folding
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** hide-region
 ;; 代码区域折叠
@@ -87,7 +87,7 @@
 (eval-after-load "hide-region"
   `(hide-region-settings))
 
-;;-------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** outline
 ;; outline-mode, structural editing
@@ -98,7 +98,7 @@
 
 ;;------------------------------------------------------------------
 
-;;** hide show
+;;** hide-show
 ;; a minor mode similar to outline-mode.
 ;; It hides and shows blocks of text.
 ;; In particular, HideShow hides balanced-expression code blocks and
@@ -120,6 +120,8 @@
      (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
      (define-key hs-minor-mode-map (kbd "C-S-<f6>") 'hs-show-all)
      ))
+
+;;--------------------------------------------------------------------
 
 ;;*** hideshow-org
 ;; The extension makes hideshow.el’s functionality behave like org-mode’s.
@@ -161,9 +163,9 @@
 
 ;;--------------------------------------------------------------------
 
-;; BUG: not working in elisp code
 ;;** orgstruct-mode
 ;; universal cycling keys
+;; BUG: not working in elisp code
 ;; (defun org-cycle-global ()
 ;;   (interactive)
 ;;   (org-cycle t))
@@ -179,15 +181,15 @@
 ;; (add-hook 'emacs-lisp-mode-hook #'orgstruct-mode)
 ;; (add-hook 'lisp-mode-hook #'orgstruct-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Code exploration
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** find-func
 ;; emacs build-in lisp for finding functions
 ;; (find-function-setup-keys)
+
+;;--------------------------------------------------------------------
 
 ;;** describe-symbol and find-symbol
 ;; (eal-define-keys
@@ -244,12 +246,9 @@
 ;; (eval-after-load "imenu-tree"
 ;;   `(imenu-tree-settings))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Shell script development settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;====================================================================
 ;; (eal-define-keys
 ;;  'sh-mode-map
 ;;  `(("<"       self-insert-command)
@@ -261,20 +260,15 @@
      ;; (sh-mode-face-settings) ;; TODO: to my theme
      (sh-mode-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Windows DOS batch script programming
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;====================================================================
 (autoload 'batch-mode "batch-mode")
 (add-to-list 'auto-mode-alist '("\\.bat$" . batch-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Emacs-lisp development settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; (eval-after-load "lisp-mode"
 ;;   `(lisp-interaction-mode-settings))
@@ -293,6 +287,7 @@
   `(emacs-lisp-mode-settings))
 (eval-after-load "lisp-mode"
   `(lisp-mode-settings))
+
 ;; BUG: lisp-interaction-mode error
 ;; Debugger entered--Lisp error: (error "Invalid function:
 ;; (progn (turn-on-auto-fill) (turn-on-eldoc-mode))")
@@ -306,6 +301,8 @@
 ;; (eval-after-load "lisp-interaction-mode"
 ;;   `(lisp-mode-settings))
 
+--------------------------------------------------------------------
+
 ;;** eldoc
 ;; 显示变量, 函数的声明，可用在很多语言中(c)
 (am-add-hooks
@@ -317,13 +314,12 @@
      ;; (eldoc-face-settings) ;; TODO: to my theme
      (eldoc-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* c/c++ development settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; NOTE: C include directories' list are defined in `xy-util.el'
+
 ;;** cc-mode
 (eval-after-load "cc-mode"
   '(progn
@@ -331,15 +327,15 @@
      (eal-define-keys
       `(c-mode-base-map)
       `(("C-c H"     c-electric-backspace)
-        ("C-c M-a" beginning-of-defun)
-        ("C-c M-e" end-of-defun)
-        ("C-c M-F" copy-current-fun-name)
+        ("C-c M-a"   beginning-of-defun)
+        ("C-c M-e"   end-of-defun)
+        ("C-c M-F"   copy-current-fun-name)
         ;; ifdef settings
-        ("C-c I" mark-ifdef)
+        ("C-c I"     mark-ifdef)
         ;; sourcepair,可以在cpp与h文件之间切换
-        ("C-c S" sourcepair-load)))))
+        ("C-c S"      sourcepair-load)))))
 
-;;----------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** ifdef
 ;; (eal-define-keys
@@ -348,7 +344,7 @@
 ;; (eval-after-load "ifdef"
 ;;   `(ifdef-settings))
 
-;;----------------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** hide-ifdef
 ;; c中隐藏ifdef
@@ -390,45 +386,23 @@
      ;;      ("C-c M-I" show-ifdefs))))))
      ))
 
-;;-------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** c-includes
 ;; (require 'c-includes)
 (eval-after-load "c-includes"
   `(c-includes-settings))
 
-;;-------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** sourcepair
 ;; 可以在cpp与h文件之间切换
-;; (eal-define-keys
-;;  `(c-mode-base-map)
-;;  `(("C-c S" sourcepair-load)))
-
 (autoload 'sourcepair-load "sourcepair"
-  "Load the corresponding C/C++ header or source file for the current buffer.
-
-This function can be invoked by \\[sourcepair-load].  It will load the the
-corresponding header or source file for the current buffer.  For example, if
-you are looking at the file FooParser.cpp and press \\[sourcepair-load], the
-file FooParser.h will be loaded.  It also works the other way as well.
-
-There are six global variables that can be used to adjust how the function
-works:
-
- `sourcepair-source-extensions'
- `sourcepair-header-extensions'
- `sourcepair-source-path'
- `sourcepair-header-path'
- `sourcepair-recurse-ignore'
- `sourcepair-private-header-suffixes'
-
-See the documentation for these variables for more info.
-" t)
-
+  "Load the corresponding C/C++ header or source file for the current
+buffer."  t)
 (eval-after-load "sourcepair" `(sourcepair-settings))
 
-;;-------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** codepilot
 ;; someone else's c/c++ development environment
@@ -445,7 +419,7 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "emaci"
 ;;   `(codepilot-settings-4-emaci))
 
-;;------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** kde-emacs
 ;; 一个方便开发c的工具
@@ -473,7 +447,7 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "kde-emacs-core"
 ;;   `(kde-emacs-settings))
 
-;;-------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** snavigator
 ;; (try-require 'sn)
@@ -484,7 +458,7 @@ See the documentation for these variables for more info.
 ;;    ("C-c M-e" end-of-defun)
 ;;    ("C-c M-F" copy-current-fun-name)))
 
-;;-------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** xrefactory settings
 ;; (require 'xrefactory)
@@ -509,48 +483,36 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "xref"
 ;;   `(xref-settings))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* vhdl development settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;====================================================================
 (eval-after-load "vhdl"
   `(progn
      ;; (vhdl-mode-face-settings)
      (vhdl-mode-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* verilog development settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;====================================================================
 (eval-after-load "verilog"
   `(progn
      ;; (verilog-mode-face-settings)
      (verilog-mode-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Matlab development settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;====================================================================
 ;; (require 'matlab-load)
 (eval-after-load "matlab"
   `(progn
      ;; (matlab-face-settings) ;; TODO: to my theme
      (matlab-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Documentation settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** doxygen
-
 ;; (require 'doxymacs-settings)
 ;; (autoload 'doxymacs-mode "doxymacs"
 ;;   ;; All of the following text shows up in the "mode help" (C-h m)
@@ -580,39 +542,18 @@ See the documentation for these variables for more info.
 ;; (eval-after-load "doxymacs"
 ;;   `(doxymacs-settings))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;* CEDET settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
+;;* IDE settings
+;;====================================================================
 
-;; if want to use offical cedet
-;; (let ((cedet-possible-dirs
-;;        '((concat my-local-lisp-path "/cedet-1.0pre6")
-;;          (concat my-local-lisp-path "/cedet-1.0pre7")
-;;          (concat my-local-lisp-path "/cedet-1.0"))))
-;;   (dolist (dir cedet-possible-dirs)
-;;     (let ((default-directory (expand-file-name dir)))
-;;       (when (file-exists-p default-directory)
-;;         (add-to-list 'load-path default-directory)
-;;         (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-;;             (normal-top-level-add-subdirs-to-load-path))))))
-
-;; (when (and (or (not (boundp 'semantic-mode))
-;;                (and (boundp 'semantic-mode) (null semantic-mode)))
-;;            (locate-library "semantic-ctxt") ; offical cedet
-;;            (require 'cedet nil 'noerror))
-
+;;** CEDET settings
 (eval-after-load "cedet"
   '(progn
      (cedet-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;* ECB settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;--------------------------------------------------------------------
 
+;;** ECB settings
 (eval-after-load "ecb"
   `(ecb-settings))
 
@@ -625,11 +566,9 @@ See the documentation for these variables for more info.
 ;;                     'emacs-lisp-mode-hook 'java-mode-hook))
 ;;   (add-hook hook 'eclim-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;* Compile settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
+;;* Compiler settings
+;;====================================================================
 
 ;;** autoconf-mode settings
 ;; (require 'autoconf-mode-settings)
@@ -659,13 +598,12 @@ See the documentation for these variables for more info.
 
 ;;** ahei 的智能编译
 ;; (require 'my-smart-compile)
-
 ;; (defalias 'cpl 'compile)
-
 ;; (defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
 ;; (if is-before-emacs-21
 ;;     (setq makefile-mode-map-list '(makefile-mode-map))
-;;   (setq makefile-mode-map-list '(makefile-gmake-mode-map makefile-automake-mode-map)))
+;;   (setq makefile-mode-map-list '(makefile-gmake-mode-map
+;; makefile-automake-mode-map)))
 
 ;; (eal-define-keys
 ;;  (append makefile-mode-map-list
@@ -711,17 +649,14 @@ See the documentation for these variables for more info.
 ;;      (compile-face-settings)
 ;;      (compile-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Debug settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** debug.el
 ;; (eval-after-load "debug"
 ;;   '(progn
 ;;      ;; (require 'util)
-
 ;;      (apply-define-key
 ;;       debugger-mode-map
 ;;       `(("'" switch-to-other-buffer)
@@ -730,7 +665,6 @@ See the documentation for these variables for more info.
 ;;----------------------------------------------------------------------
 
 ;;** edebug
-
 ;; (eal-define-keys-commonly
 ;;  global-map
 ;;  `(("C-x M-E" toggle-debug-on-error)

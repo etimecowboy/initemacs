@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-26 Sat 15:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-27 Sun 17:27 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,11 +16,9 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Some basic edting settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; Emacs找不到合适的模式时，缺省使用text-mode
 (setq default-major-mode 'text-mode)
@@ -37,12 +35,16 @@
 ;; 先格式化再补全
 (setq tab-always-indent 'complete)
 
-;; ethan-wspace
+;;--------------------------------------------------------------------
+
+;;** ethan-wspace
 ;; REF: https://github.com/glasserc/ethan-wspace
 (when (try-require 'ethan-wspace)
   (global-ethan-wspace-mode 1))
 
-;; ws-trim
+;;--------------------------------------------------------------------
+
+;;** ws-trim
 ;; automatically trims whitespace on edited lines. With a low
 ;; `ws-trim-level' it is complementary to `ethan-wspace', and may be
 ;; useful to encourage you to delete whitespace organically. Hopefully
@@ -50,11 +52,9 @@
 ;; (when (try-require 'ws-trim)
 ;;    (gloabl-ws-trim-mode 1))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Fast point move
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** recent-jump
 ;; 返回到最近去过的地方
@@ -64,16 +64,16 @@
 ;; (setq rjs-mode-line-format nil)
 ;;(recent-jump-mode 1)
 (recent-jump-small-mode 1)
-(eal-define-keys-commonly
- global-map
- `(;; ("M-,"   recent-jump-backward)
-   ;; ("M-."   recent-jump-forward)
-   ;; ("C-x M-," recent-jump-small-backward)
-   ;; ("C-x M-." recent-jump-small-forward)))
-   ("M-,"   recent-jump-small-backward)
-   ("M-."   recent-jump-small-forward)))
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(;; ("M-,"   recent-jump-backward)
+;;    ;; ("M-."   recent-jump-forward)
+;;    ;; ("C-x M-," recent-jump-small-backward)
+;;    ;; ("C-x M-." recent-jump-small-forward)))
+;;    ("M-,"   recent-jump-small-backward)
+;;    ("M-."   recent-jump-small-forward)))
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** dot-mode
 ;; 模拟vi的点(.)命令
@@ -84,7 +84,7 @@
 ;;                   (interactive) (dot-mode 1)
 ;;                   (message "Dot mode activated.")))
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** Incremental search
 (eval-after-load "isearch"
@@ -100,21 +100,20 @@
         ("M-y" isearch-yank-line)
         ("C-y" isearch-yank-kill)
         ("M-h" isearch-del-char)
-        ("M-H" ,(if is-after-emacs-23 isearch-help-map
-                  'isearch-mode-help))))))
-(define-key-list
-  global-map `(("C-x M-s" isearch-forward-cur-word)))
+        ;; ("M-H" ,(if is-after-emacs-23 isearch-help-map
+        ;;           'isearch-mode-help))
+        ))))
+;; (define-key-list
+;;   global-map `(("C-x M-s" isearch-forward-cur-word)))
 
-;;-------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** my own replace face
 ;; (eval-after-load "replace" `(replace-face-settings))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Fast select regions
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 (transient-mark-mode 1)
 (apply-args-list-to-fun
@@ -137,19 +136,19 @@
 ;;     ("C-x M-<" mark-and-beginning-of-buffer)))
 ;; (if window-system
 ;;     (define-key global-map (kbd "C-2") 'set-mark-command))
-(define-key global-map (kbd "C-x M-l") 'wcy-mark-some-thing-at-point)
+;; (define-key global-map (kbd "C-x M-l") 'wcy-mark-some-thing-at-point)
 
-;;--------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** 矩形区域操作
-(eal-define-keys-commonly
-  global-map
-  `(("C-x \\"  rm-mark-command)
-   ;; ("M-w"     copy-region)
-    ))
+;; (eal-define-keys-commonly
+;;   global-map
+;;   `(("C-x \\"  rm-mark-command)
+;;     ("M-w"      copy-region)
+;;     ))
 (am-def-active-fun rm-mark-active rm-mark-active)
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** CUA model settings
 ;; CUA的矩阵区域操作特别方便
@@ -157,24 +156,25 @@
 ;; (eval-after-load "cua-base"
 ;;   `(cua-settings))
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
-(global-set-key (kbd "M-|") 'ywb-hippie-expand-filename)
-(global-set-key (kbd "C-x M-M") 'switch-major-mode)
-(global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
-(global-set-key (kbd "M-k") 'qiang-copy-line)
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("M-|"      ywb-hippie-expand-filename)
+;;    ("C-x M-M"  switch-major-mode)
+;;    ("M-;"      qiang-comment-dwim-line)
+;;    ("M-k"      qiang-copy-line)
+;;    ))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Graphic text tools
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** table
 ;; 可以“所见即所得”的编辑一个文本模式的表格
 ;; (if is-before-emacs-21 (require 'table "table-for-21"))
 
-;;----------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** artist
 ;; 非常强大的文本画图的工具
@@ -182,15 +182,16 @@
 (eval-after-load "artist"
   '(progn
      (artist-settings)
-     (eal-define-keys
-      'artist-mode-map
-      `(("C-c l"   artist-select-op-line)
-        ("C-c r"   artist-select-op-rectangle)
-        ("C-c M-c" artist-select-op-copy-rectangle)
-        ("C-c M-w" artist-select-op-cut-rectangle)
-        ("C-c M-p" artist-select-op-paste)))))
+     ;; (eal-define-keys
+     ;;  'artist-mode-map
+     ;;  `(("C-c l"   artist-select-op-line)
+     ;;    ("C-c r"   artist-select-op-rectangle)
+     ;;    ("C-c M-c" artist-select-op-copy-rectangle)
+     ;;    ("C-c M-w" artist-select-op-cut-rectangle)
+     ;;    ("C-c M-p" artist-select-op-paste)))
+     ))
 
-;;------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** palette
 ;; provides a general color palette that you can use to
@@ -198,25 +199,9 @@
 ;; REF: Emacs配色的超级武器：Icicles，Color Palette和DoReMi
 ;;      http://emacser.com/icicles-doremi-palette.htm
 
-;;------------------------------------------------------------------
-
-;;** buffer-move
-;; swap buffers without typing C-x b on each window
-;; (require 'buffer-move)
-(autoload 'buf-move-up "buffer-move" nil t)
-(autoload 'buf-move-down "buffer-move" nil t)
-(autoload 'buf-move-left "buffer-move" nil t)
-(autoload 'buf-move-right "buffer-move" nil t)
-(global-set-key (kbd "<M-S-up>")     'buf-move-up)
-(global-set-key (kbd "<M-S-down>")   'buf-move-down)
-(global-set-key (kbd "<M-S-left>")   'buf-move-left)
-(global-set-key (kbd "<M-S-right>")  'buf-move-right)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Keyboard bindings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;; 参照 ahei 的设置
 ;; (apply-args-list-to-fun
@@ -265,28 +250,29 @@
    ("M-d"                 my-kill-word)
    ;;    ("C-x TAB" indent-whole-buffer)
    ;;    ("C-h" c-electric-backspace-kill)
-   ;;    ,(if window-system '("C-z" undo))
-   ;;    ("M-Y" redo)
    ;;    ("M-m" beginning-of-line-text)
    ("C-M-\\"              smart-indent)
    ("M-q"                 fill-paragraph)
    ("<escape> SPC"        just-one-space)
    ("C-a"                 smart-home)
    ("C-M-a"               mark-whole-buffer)
-   ;; ("M-#"                 set-mark-command) ;; Use standard `C-@'
    ("C-k"                 kill-and-join-forward)
    ("C-M-6"               jlh-join-lines)
    ("%"                   match-paren)
-
-   ;; `iy-goto-char.el'
-   ;; (global-set-key (kbd "C-c f") 'iy-go-to-char)
-   ;; (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
-   ;; (global-set-key (kbd "C-c ;") 'iy-go-to-char-continue)
-   ;; (global-set-key (kbd "C-c ,") 'iy-go-to-char-continue-backward)
    ("C-c F f"             iy-go-to-char)
    ("C-c F b"             iy-go-to-char-backward)
    ("C-c F c"             iy-go-to-char-continue)
    ("C-c F a"             iy-go-to-char-continue-backward)
+   ("M-,"                 recent-jump-small-backward)
+   ("M-."                 recent-jump-small-forward)
+   ("C-x M-s"             isearch-forward-cur-word)
+   ("C-x M-l"             wcy-mark-some-thing-at-point)
+   ("C-x \\"              rm-mark-command)
+   ("M-w"                 copy-region)
+   ("M-|"                 ywb-hippie-expand-filename)
+   ("C-x M-M"             switch-major-mode)
+   ("M-;"                 qiang-comment-dwim-line)
+   ("M-k"                 qiang-copy-line)
    ))
 
 ;; (eal-define-keys

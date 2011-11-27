@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-27 Sun 16:19 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-27 Sun 20:00 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -159,3 +159,20 @@
  )
 
 (provide 'xy-rc-cedet)
+
+;; if want to use offical cedet
+;; (let ((cedet-possible-dirs
+;;        '((concat my-local-lisp-path "/cedet-1.0pre6")
+;;          (concat my-local-lisp-path "/cedet-1.0pre7")
+;;          (concat my-local-lisp-path "/cedet-1.0"))))
+;;   (dolist (dir cedet-possible-dirs)
+;;     (let ((default-directory (expand-file-name dir)))
+;;       (when (file-exists-p default-directory)
+;;         (add-to-list 'load-path default-directory)
+;;         (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+;;             (normal-top-level-add-subdirs-to-load-path))))))
+
+;; (when (and (or (not (boundp 'semantic-mode))
+;;                (and (boundp 'semantic-mode) (null semantic-mode)))
+;;            (locate-library "semantic-ctxt") ; offical cedet
+;;            (require 'cedet nil 'noerror))

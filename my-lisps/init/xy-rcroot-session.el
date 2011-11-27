@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-26 Sat 07:15 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 21:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,19 +16,9 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Save editing information
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;** save-place
-;; Save point places in buffers
-(setq-default save-place t)
-(require 'saveplace)
-(eval-after-load "saveplace" `(saveplace-settings))
-
-;;-----------------------------------------------------------------------
+;;====================================================================
 
 ;;** Winpoint,
 ;; When two windows view the same buffer at the same time, and one
@@ -91,11 +81,9 @@
 ;;
 ;;   (setq bm-marker 'bm-marker-right)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Save Emacs session information
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** recentf
 ;; (setq-default recentf-save-file
@@ -103,16 +91,24 @@
 ;;                       user-login-name "@"
 ;;                       system-name "@"
 ;;                       system-configuration))
-;; (require 'recentf)
 (recentf-mode 1)
 (eval-after-load "recentf" `(recentf-settings))
 
+;;--------------------------------------------------------------------
+
+;;** save-place
+;; Save point places in buffers
+(setq-default save-place t)
+(eval-after-load "saveplace" `(saveplace-settings))
+
+;;-----------------------------------------------------------------------
+
 ;;** savehist
 ;; (require 'savehist)
-(setq-default save-place-file (concat my-var-path "/savehist-"
-                                      user-login-name "@"
-                                      system-name "@"
-                                      system-configuration))
+;; (setq-default save-place-file (concat my-var-path "/savehist-"
+;;                                       user-login-name "@"
+;;                                       system-name "@"
+;;                                       system-configuration))
 (savehist-mode 1)
 (eval-after-load "savehist" `(savehist-settings))
 
@@ -135,7 +131,6 @@
 ;;--------------------------------------------------------------------
 
 ;;** session
-;; ;; Use session.el instead of recentf.el
 ;; ;; session.el can remember more information.
 ;; (add-hook 'after-init-hook ;; 'session-start)
 ;;           'session-initialize)

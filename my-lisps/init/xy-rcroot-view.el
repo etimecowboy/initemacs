@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-26 Sat 03:06 xin on p6t>
+;; Time-stamp:<2011-11-27 Sun 21:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,19 +16,11 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* View files
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
-;;** Revert a file in GBK encoding
-;;;###autoload
-(defun gbk-revert ()
-  "Revert current buffer with gbk-dos encoding."
-  (interactive)
-  (revert-buffer-with-coding-system 'gbk-dos))
-
+;; Revisit files in GBK encoding
 (global-set-key [S-f5] 'revert-buffer)
 (global-set-key [C-f5] 'gbk-revert)
 
@@ -36,7 +28,7 @@
 (setq view-read-only t)
 ;; (toggle-read-only t)
 
-;;--------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** view-mode settings
 ;; (eal-define-keys
@@ -64,20 +56,19 @@
 ;;    ("B"           eval-buffer)))
 (eval-after-load "view" `(view-mode-settings))
 
-;;-----------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** doc-view
 ;; 把pdf,ps,dvi文件转换为png格式, 在Emacs里面浏览
-(if is-after-emacs-23
-    (eval-after-load "doc-view" `(doc-view-settings)))
+(eval-after-load "doc-view" `(doc-view-settings))
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** log-view
 ;; (eval-after-load "log-view"
 ;;   `(log-view-face-settings)) ;; TODO: to my theme
 
-;;-----------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** Emaci
 ;; Emacs才是世界上最强大的IDE － 用Emaci阅读文件
@@ -93,16 +84,19 @@
         ("L" count-brf-lines)
         ;; ("t" sb-toggle-keep-buffer)
         ("]" goto-paren)))))
+
 (defun read-only ()
   "Read-only mode."
   (interactive)
   (emaci-mode-on)
   (view-mode t))
+
 (defun normal-edit ()
   "Normal edit mode."
   (interactive)
   (View-quit)
   (emaci-mode-off))
+
 ;; (add-hook 'find-file-hook 'read-only)
 (eal-define-keys-commonly
  global-map
@@ -112,15 +106,15 @@
  `(("M-s" read-only)
    ("M-S" normal-edit)))
 
-;; hexl-mode
+;;--------------------------------------------------------------------
+
+;;** hexl-mode
 (add-to-list 'auto-mode-alist
              '("\\.\\(exe\\|vsd\\|so\\|dll\\)$" . hexl-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Compare buffers/files
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** diff
 ;; (eal-define-keys
@@ -139,7 +133,7 @@
      ;; (diff-face-settings) ;; TODO: to my theme
      (diff-settings)))
 
-;;---------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** ediff
 (global-set-key (kbd "C-x D") 'ediff)
@@ -168,11 +162,9 @@
      ;; (ediff-face-settings) ;; TODO: to my theme
      (ediff-settings)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+;;====================================================================
 ;;* Grep related settings
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================
 
 ;;** Use grep in Emacs
 ;; (unless is-before-emacs-21
@@ -200,7 +192,7 @@
 ;;      ("L"     count-brf-lines))))
 ;; (eval-after-load "grep" `(grep-settings))
 
-;;-------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** full-ack
 ;; ack is a tool like grep, designed for programmers with large trees
@@ -251,7 +243,7 @@
 ;; (global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
 ;; (global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
 
-;;-------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;;** ioccur
 ;; incremental occur, more convenient and faster than OccurMode,
@@ -260,7 +252,6 @@
 (autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
 (global-set-key [M-f7] 'ioccur)
 
-;;------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 (provide 'xy-rcroot-view)
-
