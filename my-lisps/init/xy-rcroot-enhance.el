@@ -27,12 +27,12 @@
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
---------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;; subword
 (global-subword-mode 1)
 
---------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;; ffap, finding Files and URLs at point
 ;; REF: http://www.gnu.org/software/emacs/manual/html_node/emacs/
@@ -69,7 +69,7 @@
 ;; Save paster before kill emacs
 (setq save-interprogram-paste-before-kill t)
 
---------------------------------------------------------------------
+;;--------------------------------------------------------------------
 
 ;; linum
 (am-add-hooks
