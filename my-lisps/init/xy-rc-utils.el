@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-27 Sun 04:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 16:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1226,6 +1226,7 @@ The process is:
  autoloads for them."
 
   (interactive)
+  (setq debug-on-error t)
   (xy/install-all-lisps my-local-lisp-path)
   (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
   (xy/install-all-lisps (concat my-local-lisp-path "/apel"))

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-27 Sun 17:27 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 15:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -268,7 +268,7 @@
    ("C-x M-s"             isearch-forward-cur-word)
    ("C-x M-l"             wcy-mark-some-thing-at-point)
    ("C-x \\"              rm-mark-command)
-   ("M-w"                 copy-region)
+   ;; ("M-w"                 copy-region)
    ("M-|"                 ywb-hippie-expand-filename)
    ("C-x M-M"             switch-major-mode)
    ("M-;"                 qiang-comment-dwim-line)

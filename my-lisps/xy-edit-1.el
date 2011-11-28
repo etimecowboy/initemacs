@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-11-27 Sun 03:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 16:18 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -602,20 +602,20 @@ that, execute `" command "'.")
       (call-interactively 'cua-set-rectangle-mark)
     (try-require 'rect-mark)
     (call-interactively 'rm-set-mark)))
-;;;###autoload
-(defun copy-region (beg end)
-  "根据`mark-active'和`rm-mark-active'来决定是执行
-`copy-region-as-kill-nomark'还是`rm-kill-ring-save'"
+;; ;;;###autoload
+;; (defun copy-region (beg end)
+;;   "根据`mark-active'和`rm-mark-active'来决定是执行
+;; `copy-region-as-kill-nomark'还是`rm-kill-ring-save'"
 
-  (interactive "r")
-  (if cua-mode
-      (if cua--rectangle
-          (progn
-            (cua-copy-rectangle t)
-            (cua-cancel))
-        (call-interactively 'cua-copy-region))
-    (if (rm-mark-active)
-        (call-interactively 'rm-kill-ring-save)
-      (copy-region-as-kill-nomark beg end))))
-
+;;   (interactive "r")
+;;   (if cua-mode
+;;       (if cua--rectangle
+;;           (progn
+;;             (cua-copy-rectangle t)
+;;             (cua-cancel))
+;;         (call-interactively 'cua-copy-region))
+;;     (if (rm-mark-active)
+;;         (call-interactively 'rm-kill-ring-save)
+;;       ;; BUG: cannot find  `copy-region-as-kill-nomark'
+;;       (copy-region-as-kill-nomark beg end))))
 (provide 'xy-edit-1)

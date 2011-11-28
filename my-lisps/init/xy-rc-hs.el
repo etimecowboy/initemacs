@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hs.el'
-;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
+;; Time-stamp:<2011-11-28 Mon 16:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -88,7 +88,8 @@
        ("S" toggle-fold-all))))
 
   (eval-after-load "emaci"
-    '(hs-minor-mode-4-emaci-settings))
+    '(progn
+       (hs-minor-mode-4-emaci-settings)))
   )
 
 ;;;###autoload

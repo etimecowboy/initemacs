@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-27 Sun 19:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 15:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -184,6 +184,14 @@
 (eval-after-load "image-dired"
   `(progn
     (image-dired-settings)))
+
+;;--------------------------------------------------------------------
+
+;;** thumbs
+;; Thumbnails previewer for images files
+(eval-after-load "thumbs"
+  `(progn
+     (thumbs-settings)))
 
 ;;--------------------------------------------------------------------
 

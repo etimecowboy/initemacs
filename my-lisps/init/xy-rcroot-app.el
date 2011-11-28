@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-28 Mon 01:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 16:27 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -143,12 +143,11 @@ the mode-line."
 ;;--------------------------------------------------------------------
 
 ;;** Windmove
-(when (fboundp 'windmove)
-  (global-set-key (kbd "C-S-<left>")  'windmove-left)
-  (global-set-key (kbd "C-S-<up>")    'windmove-up)
-  (global-set-key (kbd "C-S-<right>") 'windmove-right)
-  (global-set-key (kbd "C-S-<down>")  'windmove-down)
-  (setq windmove-wrap-around t))
+(global-set-key (kbd "C-S-<left>")  'windmove-left)
+(global-set-key (kbd "C-S-<up>")    'windmove-up)
+(global-set-key (kbd "C-S-<right>") 'windmove-right)
+(global-set-key (kbd "C-S-<down>")  'windmove-down)
+(setq windmove-wrap-around t)
 
 ;;--------------------------------------------------------------------
 
@@ -159,10 +158,10 @@ the mode-line."
 (autoload 'buf-move-down "buffer-move" nil t)
 (autoload 'buf-move-left "buffer-move" nil t)
 (autoload 'buf-move-right "buffer-move" nil t)
-(global-set-key (kbd "<M-S-up>")     'buf-move-up)
-(global-set-key (kbd "<M-S-down>")   'buf-move-down)
-(global-set-key (kbd "<M-S-left>")   'buf-move-left)
-(global-set-key (kbd "<M-S-right>")  'buf-move-right)
+(global-set-key (kbd "M-S-<up>")     'buf-move-up)
+(global-set-key (kbd "M-S-<down>")   'buf-move-down)
+(global-set-key (kbd "M-S-<left>")   'buf-move-left)
+(global-set-key (kbd "M-S-<right>")  'buf-move-right)
 
 ;;--------------------------------------------------------------------
 
@@ -302,9 +301,9 @@ the mode-line."
 ;;* mini-buffer settings
 ;; 可以递归的使用minibuffer
 (setq enable-recursive-minibuffers t)
-
 ;; 当你在shell、telnet、w3m等模式下时，加密显出你的密码
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+;; (minibuffer-electric-default-mode t)
 
 ;;====================================================================
 ;;* Vaious bar settings
@@ -400,7 +399,7 @@ the mode-line."
 ;; REF: http://emacser.com/pulse.htm
 (require 'pulse)
 (eval-after-load "pulse"
-  `(progn
+  '(progn
      (pulse-face-settings)
      (pulse-settings)))
 
@@ -408,8 +407,8 @@ the mode-line."
 ;;* Mouse settings
 ;;====================================================================
 
-(mouse-wheel-mode 1)
-(mouse-sel-mode 1)
+;; (mouse-wheel-mode 1)
+;; (mouse-sel-mode 1)
 (mouse-avoidance-mode 'jump)
 (setq mouse-drag-copy-region nil)
 (setq mouse-wheel-progressive-speed t)

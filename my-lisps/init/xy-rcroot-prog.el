@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-27 Sun 22:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 16:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -423,7 +423,7 @@ buffer."  t)
 
 ;;** kde-emacs
 ;; 一个方便开发c的工具
-;; ;; 改包中定义了C-j 为goto-line, 还设置了c-style
+;; ;; 包中定义了C-j 为goto-line, 还设置了c-style
 ;; (require 'kde-emacs-core)
 
 ;; (autoload 'agulbra-make-member "kde-emacs-utils"
