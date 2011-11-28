@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-28 Mon 16:27 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 17:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -391,17 +391,6 @@ the mode-line."
 ;; (when (try-require 'cursor-change)
 ;;   (cursor-change-mode 1))
 ;; (cursor-change-mode 1)
-
-;;--------------------------------------------------------------------
-
-;;** pulse
-;; 实现Emacs的淡入淡出效果
-;; REF: http://emacser.com/pulse.htm
-(require 'pulse)
-(eval-after-load "pulse"
-  '(progn
-     (pulse-face-settings)
-     (pulse-settings)))
 
 ;;====================================================================
 ;;* Mouse settings

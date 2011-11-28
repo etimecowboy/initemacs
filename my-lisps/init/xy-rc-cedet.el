@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-27 Sun 20:00 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 17:31 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -45,12 +45,12 @@
            (global-semantic-show-parser-state-mode 1)))
   (ignore-errors (semantic-load-enable-primary-exuberent-ctags-support))
 
-  ;;------------------------------------------------------------
+  ;;------------------------------------------------------------------
 
   ;; srecode
   (global-srecode-minor-mode 1)
 
-  ;;------------------------------------------------------------
+  ;;------------------------------------------------------------------
 
   ;; ede
   (global-ede-mode 1)
@@ -60,12 +60,12 @@
     (semanticdb-enable-gnu-global-databases 'c++-mode)
     (setq ede-locate-setup-options '(ede-locate-global ede-locate-base)))
 
-  ;;-------------------------------------------------------------
+  ;;------------------------------------------------------------------
 
   ;; senator
   ;; (global-senator-minor-mode -1)
 
-  ;;-------------------------------------------------------------
+  ;;------------------------------------------------------------------
 
   ;; More settings about semantic
 
@@ -132,7 +132,7 @@
             ("m" . ("h"))
             ("mm" . ("h")))))
 
-  ;;-------------------------------------------------
+  ;;------------------------------------------------------------------
 
   ;; speedbar
   (setq speedbar-use-images t
@@ -141,20 +141,31 @@
         speedbar-show-unknown-files t
         speedbar-directory-unshown-regexp
         "^\\(CVS\\|RCS\\|SCCS\\|_darcs\\|\\.\\(git\\|hg\\|svn\\)\\)\\'")
-
   (eval-after-load 'speedbar
     '(progn
        ;; some dired-like bindings
        (define-key speedbar-key-map (kbd ";") 'speedbar-up-directory)
        (define-key speedbar-key-map (kbd "f") 'speedbar-edit-line)))
 
-  ;;---------------------------------------------------
+
+  ;;------------------------------------------------------------------
+
+  ;; pulse
+  ;; 实现Emacs的淡入淡出效果, is a part of cedet
+  ;; REF: http://emacser.com/pulse.htm
+  (require 'pulse)
+  (eval-after-load "pulse"
+    '(progn
+       (pulse-face-settings)
+       (pulse-settings)))
+
+  ;;------------------------------------------------------------------
 
   ;; zjl-hl, use semantic to highlight functions
   ;; (require 'zjl-hl)
   ;; (zjl-hl-enable-global-all-modes)
 
-  ;;---------------------------------------------------
+  ;;------------------------------------------------------------------
 
  )
 
