@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-27 Sun 17:45 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-28 Mon 01:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -408,7 +408,8 @@ the mode-line."
 ;;* Mouse settings
 ;;====================================================================
 
-;;(setq mouse-autoselect-window 1.0)
+(mouse-wheel-mode 1)
+(mouse-sel-mode 1)
 (mouse-avoidance-mode 'jump)
 (setq mouse-drag-copy-region nil)
 (setq mouse-wheel-progressive-speed t)
@@ -416,6 +417,7 @@ the mode-line."
       '(5
         ((shift) . 1)
         ((control))))
+;;(setq mouse-autoselect-window 1.0)
 
 (eval-after-load "mouse-drag"
   '(progn
