@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-11-27 Sun 21:58 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 01:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,8 @@
 ;;* muse
 ;;====================================================================
 ;; (eval-after-load "muse-mode"
-;;   `(muse-settings))
+;;   '(progn
+;;     (muse-settings)))
 
 ;;====================================================================
 ;;* org
@@ -28,9 +29,14 @@
 (add-to-list 'auto-mode-alist
              '("\\.\\(org\\|org_archive\\)$" . org-mode))
 (eval-after-load "org"
-  `(org-settings))
+  '(progn
+     (org-settings)))
 (eval-after-load "org-agenda"
-  `(org-settings))
+  '(progn
+     (org-settings)))
+(eval-after-load "org-capture"
+  '(progn
+     (org-settings)))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
@@ -59,7 +65,8 @@
 (autoload 'reftex-citation "reftex-cite" "Make citation" t)
 (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
 (eval-after-load "reftex"
-  `(reftex-settings))
+  '(progn
+     (reftex-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -67,7 +74,8 @@
 ;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
 ;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
 ;; (eval-after-load "cdlatex"
-;;   `(cdlatex-settings))
+;;   '(progn
+;;     (cdlatex-settings)))
 
 ;;====================================================================
 ;;* txt2tags

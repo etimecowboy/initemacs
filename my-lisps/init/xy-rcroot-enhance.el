@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-27 Sun 18:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 00:51 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,7 +38,9 @@
 ;; REF: http://www.gnu.org/software/emacs/manual/html_node/emacs/
 ;; FFAP.html#index-ffap-3860
 (ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
-(eval-after-load "ffap" `(ffap-settings))
+(eval-after-load "ffap"
+  '(progn
+     (ffap-settings)))
 
 ;; filecache
 ;; (eval-after-load "filecache"
@@ -96,7 +98,7 @@
       (linum-mode 1))))
 (global-set-key [S-f6] 'linum-mode)
 (eval-after-load 'linum
-  `(progn
+  '(progn
      ;; (linum-face-settings) ;; TODO: will be added to my theme
      (linum-settings)))
 
@@ -116,28 +118,28 @@
 ;; Use ASpell & flyspell
 (setq text-mode-hook 'flyspell-mode)
 (eval-after-load 'flyspell
-  `(progn
+  '(progn
      (flyspell-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;; Calendar
 (eval-after-load "calendar"
-  `(progn
+  '(progn
      (calendar-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;; Diary
 (eval-after-load "diary-lib"
-  `(progn
+  '(progn
      (diary-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;; appt
 (eval-after-load "appt"
-  `(progn
+  '(progn
      (appt-settings)))
 
 ;;--------------------------------------------------------------------
@@ -145,14 +147,16 @@
 ;; tramp
 ;; 以另一用户编辑文件, 或者编辑远程主机文件
 (global-set-key (kbd "C-c C-R") 'sudo-edit-current-file)
-(eval-after-load "tramp" `(tramp-settings))
+(eval-after-load "tramp"
+  '(progn
+     (tramp-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;; term-mode
-;; (eval-after-load "term"
-;;   `(progn
-;;      (term-settings)))
+(eval-after-load "term"
+  '(progn
+     (term-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -199,7 +203,7 @@
 ;;tooltip.
 ;; (require 'todochiku)
 (eval-after-load "todochiku"
-  `(progn
+  '(progn
      (todochiku-settings)))
 
 ;;====================================================================
@@ -209,7 +213,7 @@
 ;; (autoload 'browse-kill-ring "browse-kill-ring"
 ;;   "Check contents in the kill ring" t)
 (eval-after-load "browse-kill-ring"
-  `(progn
+  '(progn
      (browse-kill-ring-settings)
      ;; (browse-kill-ring-face-settings) ;; TODO: will be added to
                                          ;; my own color theme
@@ -268,7 +272,7 @@ from tradition chinese to simple chinese" t)
 ;; 在各种 text 文档间提供链接
 ;;====================================================================
 (eval-after-load "linkd"
-  `(progn
+  '(progn
      (linkd-settings)
      ;; (linkd-face-settings) ;; TODO: will be add to my theme
      (eal-define-keys
@@ -308,7 +312,7 @@ from tradition chinese to simple chinese" t)
 ;; a mode based on term.el, for managing multiple terminal buffers
 ;;====================================================================
 (eval-after-load "multi-term"
-  `(progn
+  '(progn
      (multi-term-settings)
      (eal-define-keys-commonly
       global-map

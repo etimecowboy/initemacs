@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-27 Sun 19:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 01:00 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,8 +20,8 @@
 ;;* url
 ;;====================================================================
 (eval-after-load "w3m"
-`(progn
-   (w3m-settings)))
+  '(progn
+     (w3m-settings)))
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
@@ -41,7 +41,7 @@
 (setq browse-url-browser-function 'w3m-browse-url)
 
 (eval-after-load "w3m"
-  `(progn
+  '(progn
      (w3m-settings)))
 
 (eal-define-keys-commonly
@@ -58,20 +58,24 @@
 ;;====================================================================
 ;;* erc
 ;;====================================================================
-;; (eval-after-load "erc" `(erc-settings))
+;; (eval-after-load "erc"
+;;   '(progn
+;;      (erc-settings)))
 
 ;;====================================================================
 ;;* weblogger
 ;;====================================================================
 ;; (eval-after-load "weblogger"
-;;   `(weblogger-settings))
+;;   '(progn
+;;     (weblogger-settings)))
 
 ;;====================================================================
 ;;* org2blog
 ;;====================================================================
 ;; use publish org to HTML then use xml-rpc to blog
 (eval-after-load "org2blog"
-  `(org2blog-settings))
+  '(progn
+     (org2blog-settings)))
 
 ;;====================================================================
 ;;* babel
@@ -129,7 +133,8 @@
 ;;   "Settings for `google-maps'.")
 
 ;; (eval-after-load "google-maps"
-;;   `(google-maps-settings))
+;;   '(progn
+;;     (google-maps-settings)))
 
 ;;====================================================================
 ;;* cn-weather
@@ -176,7 +181,8 @@
 ;; news reader and email reader
 ;;====================================================================
 (eval-after-load "gnus"
-  `(gnus-settings))
+  '(progn
+     (gnus-settings)))
 
 ;;====================================================================
 ;;* mew
@@ -187,6 +193,7 @@
 (autoload 'mew-user-agent-compose "mew" nil t)
 (setq mail-user-agent 'mew-user-agent)
 (eval-after-load "mew"
-  `(mew-settings))
+  '(progn
+     (mew-settings)))
 
 (provide 'xy-rcroot-net)

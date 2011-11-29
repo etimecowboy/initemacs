@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-27 Sun 21:39 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 01:12 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,7 +28,9 @@
 ;; restoring per-window positions for each buffer.
 (require 'winpoint)
 (window-point-remember-mode 1)
-(eval-after-load "winpoint" `(winpoint-settings))
+(eval-after-load "winpoint"
+  '(progn
+     (winpoint-settings)))
 
 ;;-----------------------------------------------------------------------
 
@@ -51,7 +53,9 @@
 ;; * ‘r’ – rename the current bookmark
 (setq bookmark-save-flag 1)
 (require 'bookmark)
-(eval-after-load "bookmark" `(bookmark-settings))
+(eval-after-load "bookmark"
+  '(progn
+     (bookmark-settings)))
 
 ;;*** Bookmark+
 ;; (require 'bookmark+)
@@ -92,14 +96,18 @@
 ;;                       system-name "@"
 ;;                       system-configuration))
 (recentf-mode 1)
-(eval-after-load "recentf" `(recentf-settings))
+(eval-after-load "recentf"
+  '(progn
+     (recentf-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;;** save-place
 ;; Save point places in buffers
 (setq-default save-place t)
-(eval-after-load "saveplace" `(saveplace-settings))
+(eval-after-load "saveplace"
+  '(progn
+     (saveplace-settings)))
 
 ;;-----------------------------------------------------------------------
 
@@ -110,20 +118,26 @@
 ;;                                       system-name "@"
 ;;                                       system-configuration))
 (savehist-mode 1)
-(eval-after-load "savehist" `(savehist-settings))
+(eval-after-load "savehist"
+  '(progn
+     (savehist-settings)))
 
 ;;---------------------------------------------------------------------
 
 ;;** windows and revive
 ;; Workspace store and recover
 ;; windows.el
-(eval-after-load "windows" `(windows-settings))
+(eval-after-load "windows"
+  '(progn
+     (windows-settings)))
 (add-hook 'after-init-hook 'windows-start)
 (define-key ctl-x-map "C" 'see-you-again)
 (define-key ctl-x-map "S" 'win-save-all-configurations)
 (define-key ctl-x-map "V" 'resume-windows)
 ;; revive.el
-(eval-after-load "revive" `(revive-settings))
+(eval-after-load "revive"
+  '(progn
+     (revive-settings)))
 ;; And define favorite keys to those functions.
 ;; (define-key ctl-x-map "F" 'resume)
 ;; (define-key ctl-x-map "K" 'wipe)
@@ -134,7 +148,9 @@
 ;; ;; session.el can remember more information.
 ;; (add-hook 'after-init-hook ;; 'session-start)
 ;;           'session-initialize)
-;; (eval-after-load "session" `(session-settings))
+;; (eval-after-load "session"
+;;   '(progn
+;;     (session-settings)))
 
 (provide 'xy-rcroot-session)
 

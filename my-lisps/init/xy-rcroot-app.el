@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-28 Mon 17:28 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 00:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -435,7 +435,7 @@ the mode-line."
 ;;** paren-mode
 ;; (show-paren-mode 1)
 ;; (eval-after-load "paren"
-;;   `(progn
+;;   '(progn
 ;;      ;; (paren-face-settings)
 ;;      (paren-settings)))
 
@@ -447,7 +447,7 @@ the mode-line."
 ;; (require 'mic-paren)
 (paren-activate)
 (eval-after-load "mic-paren"
-  `(progn
+  '(progn
      ;; (mic-paren-face-settings)
      (mic-paren-settings)))
 
@@ -468,7 +468,7 @@ the mode-line."
 ;;    apropos-mode-hook)
 ;;  'rainbow-delimiters-mode)
 ;; (eval-after-load "rainbow-delimiters"
-;;   `(progn
+;;   '(progn
 ;;      (rainbow-delimiters-settings)))
 
 ;;--------------------------------------------------------------------
@@ -531,7 +531,7 @@ the mode-line."
 ;;** font-lock
 (global-font-lock-mode 1)
 (eval-after-load "font-lock"
-  `(progn
+  '(progn
      (font-lock-settings)
      ;; (font-lock-face-settings)
      ))
@@ -550,7 +550,7 @@ the mode-line."
 ;; 像Eclipse那样高亮光标处单词
 ;; (require 'highlight-symbol)
 (eval-after-load "highlight-symbol"
-  `(progn
+  '(progn
      (highlight-symbol-face-settings)
      (highlight-symbol-settings)))
 
@@ -614,7 +614,7 @@ the mode-line."
 ;; (defvar facemenup-last-face-color nil
 ;;   "Last face color used.")
 ;; (eval-after-load "palette"
-;;   `(progn
+;;   '(progn
 ;;      (palette-settings)
 ;;      (eal-define-keys
 ;;       'palette-mode-map

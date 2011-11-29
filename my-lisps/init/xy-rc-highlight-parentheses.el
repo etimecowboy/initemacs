@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-highlight-parentheses.el'
-;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
+;; Time-stamp:<2011-11-29 Tue 01:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,7 +15,6 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
-(require 'eval-after-load)
 
 ;;;###autoload
 (defun highlight-parentheses-settings ()

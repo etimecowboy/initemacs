@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-28 Mon 15:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 00:57 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -26,7 +26,7 @@
 
 ;;** ibuffer
 (eval-after-load "ibuffer"
-  `(progn
+  '(progn
      (ibuffer-settings)))
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
@@ -37,7 +37,7 @@
 ;; 而不是单纯的加一个没有太多意义的序号
 (require 'uniquify)
 (eval-after-load "uniquify"
-  `(progn
+  '(progn
      (uniquify-settings)))
 
 ;;====================================================================
@@ -46,7 +46,7 @@
 
 ;;** dired
 (eval-after-load "dired"
-  `(progn
+  '(progn
      (dired-settings)))
 
 (eal-define-keys-commonly
@@ -127,15 +127,15 @@
 ;; ;;;###autoload
 ;; (defun dired-details+-settings ()
 ;;   "Settings for `dired-details+'.")
-
 ;; (eval-after-load "dired-details+"
-;;   `(dired-details+-settings))
+;;   '(progn
+;;      (dired-details+-settings))
 
 ;;--------------------------------------------------------------------
 
 ;;** dired+, 增强的 dired
 ;; (eval-after-load "dired+"
-;;   `(progn
+;;   '(progn
 ;;      (dired+-face-settings)
 ;;      (dired+-settings)))
 
@@ -164,7 +164,9 @@
 ;;   ;;       (setq dired-omit-files (concat dired-omit-files "\\|^_"))))
 ;;   ;; (setq dired-omit-size-limit 1000000)
 ;; )
-;; (eval-after-load "dired-x" `(dired-x-settings))
+;; (eval-after-load "dired-x"
+;;   '(progn
+;;      (dired-x-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -176,13 +178,14 @@
 ;; (defun dired-lis-settings ()
 ;;   "Settings for `dired-lis'.")
 ;; (eval-after-load "dired-lis"
-;;   `(dired-lis-settings))
+;;   '(progn
+;;      (dired-lis-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;;** image-dired
 (eval-after-load "image-dired"
-  `(progn
+  '(progn
     (image-dired-settings)))
 
 ;;--------------------------------------------------------------------
@@ -190,7 +193,7 @@
 ;;** thumbs
 ;; Thumbnails previewer for images files
 (eval-after-load "thumbs"
-  `(progn
+  '(progn
      (thumbs-settings)))
 
 ;;--------------------------------------------------------------------
@@ -202,7 +205,7 @@
 ;; (autoload 'sunrise "sunrise-commander"
 ;;   "Two-pane file manager for Emacs based on Dired and inspired by MC." t)
 ;; (eval-after-load "sunrise-commander"
-;;   `(sunrise-settings))
+;;   '(progn (sunrise-settings)))
 ;; (global-set-key (kbd "C-x J") 'sunrise)
 ;; (try-require 'sunrise-commander)
 ;; (try-require 'sunrise-x-buttons) ;; cannot be used with popviewer
@@ -219,7 +222,7 @@
 ;; open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
 (eval-after-load "openwith"
-  `(progn
+  '(progn
     (openwith-settings)))
 (GNULinux
   (openwith-mode 1))
@@ -261,14 +264,14 @@
 ;;*** magit
 ;; Project range git
 (eval-after-load "magit"
-  `(progn
+  '(progn
     (magit-settings)))
 (global-set-key [f11] 'magit-status)
 
 ;;*** diff-git
 ;; Single file range
 (eval-after-load "diff-git"
-  `(progn
+  '(progn
      (diff-git-settings)))
 (global-set-key (kbd "C-<f11>") 'diff-git-diff-unstaged)
 (global-set-key (kbd "M-<f11>") 'diff-git-diff-staged)

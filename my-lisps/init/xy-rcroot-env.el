@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-28 Mon 16:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 00:53 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -346,7 +346,7 @@
  'def-command-max-window `("info"))
 (global-set-key [C-f1] 'info-max-window)
 (eval-after-load "info"
-  `(progn
+  '(progn
      ;; (info-face-settings) ;; TODO: will be added to my theme
      (info-settings)
      (eal-define-keys
@@ -377,7 +377,7 @@
 
 ;;*** info+
 ;; (eval-after-load "info+"
-;;   `(progn
+;;   '(progn
 ;;      (info+-face-settings))) ;; TODO: will be added to my theme
 
 ;;--------------------------------------------------------------------
@@ -389,7 +389,7 @@
  `(c-mode-base-map sh-mode-map)
  `(("C-c /" man-current-word)))
 (eval-after-load "man"
-  `(progn
+  '(progn
      ;; (man-face-settings) ;; TODO: will be added to my theme
      (man-settings)
      (eal-define-keys
@@ -418,7 +418,7 @@
 ;;*** woman settings
 (global-set-key [M-f1] 'woman)
 (eval-after-load "woman"
-  `(progn
+  '(progn
     ;; (woman-face-settings) ;; TODO: will be added to my theme
     (woman-settings)))
 
@@ -428,7 +428,7 @@
 
 (global-set-key (kbd "C-x H") 'goto-help-buffer)
 (eval-after-load "help-mode"
-  `(progn
+  '(progn
      ;; (help-mode-face-settings) ;; TODO: to my theme
      (help-mode-settings)
      (eal-define-keys
@@ -610,7 +610,7 @@
 ;; (add-hook 'find-file-hook
 ;;           (lambda ()(if (eq input-activate t) (toggle-input-method))))
 (eval-after-load "eim"
-  `(progn
+  '(progn
      (eim-settings)))
 
 ;;*** ibus-el
@@ -647,7 +647,7 @@
 ;; The list is displayed in a buffer named `*Packages*'." nil t)
 ;; (require 'package)
 (eval-after-load "package"
-  `(progn
+  '(progn
     (package-settings)))
 
 ;;--------------------------------------------------------------------
@@ -678,7 +678,7 @@
 (autoload 'auto-install-batch-edit "auto-install"
   "Edit auto-install-batch-list.el" nil t)
 (eval-after-load "auto-install"
-  `(progn
+  '(progn
     (auto-install-settings)))
 (eal-define-keys-commonly
  dired-mode-map

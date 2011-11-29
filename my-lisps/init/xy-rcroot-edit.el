@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-28 Mon 15:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 00:45 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -109,7 +109,9 @@
 ;;--------------------------------------------------------------------
 
 ;;** my own replace face
-;; (eval-after-load "replace" `(replace-face-settings))
+;; (eval-after-load "replace"
+;;   '(progn
+;;      (replace-face-settings)))
 
 ;;====================================================================
 ;;* Fast select regions
@@ -154,7 +156,8 @@
 ;; CUA的矩阵区域操作特别方便
 ;; (setq use-cua t)
 ;; (eval-after-load "cua-base"
-;;   `(cua-settings))
+;;   (progn
+;;     (cua-settings)))
 
 ;;--------------------------------------------------------------------
 

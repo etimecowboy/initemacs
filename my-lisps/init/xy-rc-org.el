@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-11-26 Sat 05:09 xin on p6t>
+;; Time-stamp:<2011-11-29 Tue 01:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -996,8 +996,9 @@ save -ascii %s ans")
 ;;     "Hook settings for `org'."
 ;;     (setq truncate-lines nil)
 ;;     (eval-after-load "hideshow"
-;;       `(setq fold-all-fun 'org-toggle-display-content
-;;              fold-fun 'org-toggle-fold-subtree))
+;;       '(progn
+;;         (setq fold-all-fun 'org-toggle-display-content
+;;               fold-fun 'org-toggle-fold-subtree)))
 ;;     (org-literal-links))
 ;;   (add-hook 'org-mode-hook 'org-hook-settings)
 
@@ -1060,7 +1061,8 @@ save -ascii %s ans")
 ;;                               '(eq major-mode 'org-mode)))
 
 ;;   (eval-after-load "emaci"
-;;     `(org-settings-4-emaci))
+;;     '(progn
+;;       (org-settings-4-emaci)))
 
 ;;   (eal-define-keys
 ;;    'emaci-mode-map
@@ -1072,7 +1074,8 @@ save -ascii %s ans")
 ;;     (setcdr (assoc 'view org-infojs-options) "showall"))
 
 ;;   (eval-after-load "org-jsinfo"
-;;     `(org-jsinfo-settings)))
+;;     '(progn
+;;       (org-jsinfo-settings))))
 
 ;; (eal-define-keys
 ;;  'org-mode-map
@@ -1106,7 +1109,9 @@ save -ascii %s ans")
 ;;   (define-key org-columns-map "b" (key-binding (kbd "M-b"))))
 
 ;; (eval-after-load "org"
-;;   `(org-settings))
+;;   '(progn
+;;     (org-settings)))
 
 ;; (eval-after-load "org-colview"
-;;   `(org-colview-settings))
+;;   '(progn
+;;     (org-colview-settings)))

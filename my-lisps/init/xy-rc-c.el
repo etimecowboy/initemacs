@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
+;; Time-stamp:<2011-11-29 Tue 01:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,9 @@
   ;; (xy/set-font-default)
   ;; (require 'c-eldoc)
   ;; (autoload 'c-turn-on-eldoc-mode "c-eldoc" "Enable c-eldoc-mode" t nil)
-  ;; (eval-after-load "c-eldoc" '(c-eldoc-settings))
+  ;; (eval-after-load "c-eldoc"
+  ;;   (progn
+  ;;    '(c-eldoc-settings)))
 
   ;; 高亮显示C/C++中的可能的错误(CWarn mode)
   (global-cwarn-mode 1)

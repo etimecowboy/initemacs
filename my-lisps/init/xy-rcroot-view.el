@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-27 Sun 21:50 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 01:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,19 +54,24 @@
 ;;    ("2"           split-window-vertically)
 ;;    ("3"           split-window-horizontally)
 ;;    ("B"           eval-buffer)))
-(eval-after-load "view" `(view-mode-settings))
+(eval-after-load "view"
+  '(progn
+     (view-mode-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;;** doc-view
 ;; 把pdf,ps,dvi文件转换为png格式, 在Emacs里面浏览
-(eval-after-load "doc-view" `(doc-view-settings))
+(eval-after-load "doc-view"
+  '(progn
+     (doc-view-settings)))
 
 ;;--------------------------------------------------------------------
 
 ;;** log-view
 ;; (eval-after-load "log-view"
-;;   `(log-view-face-settings)) ;; TODO: to my theme
+;;   '(progn
+;;     (log-view-face-settings))) ;; TODO: to my theme
 
 ;;--------------------------------------------------------------------
 

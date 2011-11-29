@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ffap.el'
-;; Time-stamp:<2011-11-26 Sat 02:56 xin on p6t>
+;; Time-stamp:<2011-11-29 Tue 00:47 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,6 +24,6 @@
                      ffap-c-path
                      ;;system-head-file-dir
                      ;;user-head-file-dir)))
-             user-include-dirs)))
+                     user-include-dirs)))
 
 (provide 'xy-rc-ffap)

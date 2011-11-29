@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-28 Mon 16:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 01:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -47,7 +47,9 @@
    LaTeX-mode-hook latex-mode-hook
    matlab-mode-hook org-mode-hook)
  'turn-on-auto-fill)
-(eval-after-load "simple" `(simple-settings))
+(eval-after-load "simple"
+  '(progn
+     (simple-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -85,7 +87,8 @@
  `(("C-x M-r" hide-region-hide)
    ("C-x M-R" hide-region-unhide)))
 (eval-after-load "hide-region"
-  `(hide-region-settings))
+  '(progn
+     (hide-region-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -110,7 +113,7 @@
    'hs-minor-mode)
 
 (eval-after-load "hideshow"
-  `(progn
+  '(progn
      ;; (hs-minor-mode-face-settings) ;; TODO: to my theme
      (hs-minor-mode-settings)
      ;; (define-key hs-minor-mode-map (kbd "C-c @ C-h") 'hs-hide-block)
@@ -133,7 +136,7 @@
 ;;           (lambda ()
 ;;             (require 'hideshow-org)))
 ;; (eval-after-load "hideshow-org"
-;;   `(progn
+;;   '(progn
 ;;      (hideshow-org-settings)))
 
 ;;--------------------------------------------------------------------
@@ -223,7 +226,7 @@
 ;; 用来显示当前光标在哪个函数
 (which-func-mode 1)
 (eval-after-load "which-func"
-  `(progn
+  '(progn
      ;; (which-func-face-settings) ;; TODO: to my theme
      (which-func-settings)))
 
@@ -232,7 +235,8 @@
 ;;** imenu
 ;; (require 'imenu)
 ;; (eval-after-load "imenu"
-;;   `(imenu-settings))
+;;   '(progn
+;;     (imenu-settings)))
 ;; (defvar text-imenu-generic-expression
 ;;   `((nil ,"^ \\{0,4\\}\\([一二三四五六七八九十]+[、. )]\\)+ *[^,。，]+?$" 0)
 ;;     (nil ,"^ \\{0,4\\}\\([0-9]+[、. )]\\)+ *[^,。，]+?$" 0)))
@@ -244,7 +248,8 @@
 ;;*** imenu-tree
 ;; (require 'imenu-tree)
 ;; (eval-after-load "imenu-tree"
-;;   `(imenu-tree-settings))
+;;   '(progn
+;;     (imenu-tree-settings)))
 
 ;;====================================================================
 ;;* Shell script development settings
@@ -256,7 +261,7 @@
 ;;    ("C-c C-c" comment)
 ;;    ("C-c g"   bashdb)))
 (eval-after-load "sh-script"
-  `(progn
+  '(progn
      ;; (sh-mode-face-settings) ;; TODO: to my theme
      (sh-mode-settings)))
 
@@ -271,7 +276,8 @@
 ;;====================================================================
 
 ;; (eval-after-load "lisp-mode"
-;;   `(lisp-interaction-mode-settings))
+;;   '(progn
+;;     (lisp-interaction-mode-settings)))
 ;; (eal-define-keys
 ;;  'lisp-interaction-mode-map
 ;;  `(("C-j" goto-line)
@@ -284,9 +290,11 @@
 ;;    ("C-c M-e" end-of-defun)))
 
 (eval-after-load "emacs-lisp-mode"
-  `(emacs-lisp-mode-settings))
+  '(progn
+     (emacs-lisp-mode-settings)))
 (eval-after-load "lisp-mode"
-  `(lisp-mode-settings))
+  '(progn
+     (lisp-mode-settings)))
 
 ;; BUG: lisp-interaction-mode error
 ;; Debugger entered--Lisp error: (error "Invalid function:
@@ -299,7 +307,8 @@
 ;; act-on-choice icicle-try-switch-buffer error "%s"
 ;; error-message-string] 4)
 ;; (eval-after-load "lisp-interaction-mode"
-;;   `(lisp-mode-settings))
+;;   '(progn
+;;     (lisp-mode-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -310,7 +319,7 @@
    lisp-interaction-mode-hook cperl-mode-hook)
  'turn-on-eldoc-mode)
 (eval-after-load "eldoc"
-  `(progn
+  '(progn
      ;; (eldoc-face-settings) ;; TODO: to my theme
      (eldoc-settings)))
 
@@ -342,7 +351,8 @@
 ;;  'c-mode-base-map
 ;;  `(("C-c I" mark-ifdef)))
 ;; (eval-after-load "ifdef"
-;;   `(ifdef-settings))
+;;   '(progn
+;;     (ifdef-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -391,7 +401,8 @@
 ;;** c-includes
 ;; (require 'c-includes)
 (eval-after-load "c-includes"
-  `(c-includes-settings))
+  '(progn
+     (c-includes-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -400,7 +411,9 @@
 (autoload 'sourcepair-load "sourcepair"
   "Load the corresponding C/C++ header or source file for the current
 buffer."  t)
-(eval-after-load "sourcepair" `(sourcepair-settings))
+(eval-after-load "sourcepair"
+  '(progn
+     (sourcepair-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -417,7 +430,8 @@ buffer."  t)
 ;;    '(memq major-mode dev-modes)))
 
 ;; (eval-after-load "emaci"
-;;   `(codepilot-settings-4-emaci))
+;;   '(progn
+;;     (codepilot-settings-4-emaci)))
 
 ;;--------------------------------------------------------------------
 
@@ -445,7 +459,8 @@ buffer."  t)
 ;;      (c-set-style "kde-c++"))))
 
 ;; (eval-after-load "kde-emacs-core"
-;;   `(kde-emacs-settings))
+;;   '(progn
+;;     (kde-emacs-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -481,13 +496,14 @@ buffer."  t)
 ;;   (setq exec-path (cons (concat my-local-lisp-path "xref") exec-path)))
 
 ;; (eval-after-load "xref"
-;;   `(xref-settings))
+;;   '(progn
+;;     (xref-settings)))
 
 ;;====================================================================
 ;;* vhdl development settings
 ;;====================================================================
 (eval-after-load "vhdl"
-  `(progn
+  '(progn
      ;; (vhdl-mode-face-settings)
      (vhdl-mode-settings)))
 
@@ -495,7 +511,7 @@ buffer."  t)
 ;;* verilog development settings
 ;;====================================================================
 (eval-after-load "verilog"
-  `(progn
+  '(progn
      ;; (verilog-mode-face-settings)
      (verilog-mode-settings)))
 
@@ -504,7 +520,7 @@ buffer."  t)
 ;;====================================================================
 ;; (require 'matlab-load)
 (eval-after-load "matlab"
-  `(progn
+  '(progn
      ;; (matlab-face-settings) ;; TODO: to my theme
      (matlab-settings)))
 
@@ -540,7 +556,8 @@ buffer."  t)
 ;;   "Settings for `doxymacs'.")
 
 ;; (eval-after-load "doxymacs"
-;;   `(doxymacs-settings))
+;;   '(progn
+;;     (doxymacs-settings)))
 
 ;;====================================================================
 ;;* IDE settings
@@ -555,7 +572,8 @@ buffer."  t)
 
 ;;** ECB settings
 (eval-after-load "ecb"
-  `(ecb-settings))
+  '(progn
+     (ecb-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -645,7 +663,7 @@ buffer."  t)
 ;;    ("w" scroll-down)))
 
 ;; (eval-after-load "compile"
-;;   `(progn
+;;   '(progn
 ;;      (compile-face-settings)
 ;;      (compile-settings)))
 
@@ -702,8 +720,10 @@ buffer."  t)
 ;;    ("C-c m" make)))
 
 (eval-after-load "gdb-ui"
-  `(gud-settings))
+  '(progn
+     (gud-settings)))
 ;; (eval-after-load "gdb-mi"
-;;   `(gud-settings))
+;;   '(progn
+;;     (gud-settings)))
 
 (provide 'xy-rcroot-prog)

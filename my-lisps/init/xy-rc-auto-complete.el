@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-26 Sat 02:50 xin on p6t>
+;; Time-stamp:<2011-11-29 Tue 01:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -302,9 +302,11 @@
   ;;       (call-interactively 'xy/ac-start)))
 
   ;; (eval-after-load "cc-mode"
-  ;;   '(ac-settings-4-cc))
+  ;;   '(progn
+  ;;     (ac-settings-4-cc)))
   ;; (eval-after-load "autopair"
-  ;;   '(ac-settings-4-autopair))
+  ;;   '(progn
+  ;;     (ac-settings-4-autopair)))
   ;; (am-add-hooks
   ;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
   ;;    svn-log-edit-mode-hook change-log-mode-hook)

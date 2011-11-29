@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-27 Sun 16:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-29 Tue 00:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,7 +35,7 @@
 ;;     (require 'ido "ido-for-21"))
 ;; (ido-mode 1)
 (eval-after-load 'ido
-  `(progn
+  '(progn
      ;; (ido-face-settings)
      (ido-settings)))
 
@@ -47,9 +47,11 @@
 ;;   (kbd "SPC") 'minibuffer-complete-word)
 ;; (icomplete-mode 1)
 ;; (eval-after-load "icomplete"
-;;   `(icomplete-settings))
+;;   '(prog
+;;     (icomplete-settings)))
 ;; (eval-after-load 'my-icomplete+
-;;   `(icomplete+-face-settings))
+;;   '(prog
+;;     (icomplete+-face-settings)))
 ;; completion-list-mode settings
 ;; (eal-define-keys
 ;;  'completion-list-mode-map
@@ -72,7 +74,7 @@
 ;; (require 'smex)
 ;; (smex-initialize)
 (eval-after-load 'smex
-  `(progn
+  '(progn
      (smex-settings)
      (global-set-key (kbd "M-x") 'smex)
      (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -111,7 +113,8 @@
 ;;** hippie-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 (eval-after-load "hippie-exp"
-  `(hippie-expand-settings))
+  '(progn
+     (hippie-expand-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -139,7 +142,8 @@
 ;; (require 'company)
 (autoload 'company-mode "company" nil t)
 (eval-after-load "company"
-  '(company-settings))
+  '(progn
+     (company-settings)))
 ;; (am-add-hooks
 ;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
 ;;    java-mode-hook lisp-interaction-mode-hook sh-mode-hook
@@ -155,7 +159,8 @@
 ;;    makefile-automake-mode-map sh-mode-map text-mode-map)
 ;;  `(("C-c T" my-template-expand-template)
 ;;    ("C-c C-t" template-expand-template)))
-;; (eval-after-load "template" `(template-settings))
+;; (eval-after-load "template"
+;;   '(progn (template-settings)))
 ;; (template-initialize)
 
 ;;--------------------------------------------------------------------
@@ -163,8 +168,9 @@
 ;;** auto-insert
 ;; 用template, 自动插入一些文件模板
 ;; (auto-insert-mode 1)
-;; (eval-after-load "autoinsert"
-;;   `(auto-insert-settings))
+(eval-after-load "autoinsert"
+  '(progn
+     (auto-insert-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -205,7 +211,9 @@
   ;;     [Tab] 'icicle-apropos)
   )
 (add-hook 'icicle-mode-hook 'icicle-keys t)
-(eval-after-load "icicles" `(icicles-settings))
+(eval-after-load "icicles"
+  '(progn
+     (icicles-settings)))
 
 ;;--------------------------------------------------------------------
 
@@ -217,7 +225,9 @@
 ;;    ("1" delete-other-windows)
 ;;    ("n" forward-button)
 ;;    ("p" backward-button)))
-;; (eval-after-load "apropos" `(apropos-face-settings))
+;; (eval-after-load "apropos"
+;;   '(progn
+;;      (apropos-face-settings)))
 
 ;;====================================================================
 ;;* anything
@@ -225,7 +235,8 @@
 ;;====================================================================
 
 (eval-after-load 'anything
-  `(anything-settings))
+  '(progn
+     (anything-settings)))
 (global-set-key (kbd "C-c i") 'xy/my-anything) ;; old <f7>
 
 (provide 'xy-rcroot-complete)

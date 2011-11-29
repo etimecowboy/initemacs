@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emaci.el'
-;; Time-stamp:<2011-11-26 Sat 02:55 xin on p6t>
+;; Time-stamp:<2011-11-29 Tue 01:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,7 +33,8 @@
 ;;    ("," emaci-\,)))
 
 ;; (eval-after-load "emaci"
-;;   `(emacs-lisp-mode-settings-4-emaci))
+;;   '(progn
+;;     (emacs-lisp-mode-settings-4-emaci)))
 
 ;;;###autoload
 (defun emaci-settings ()
