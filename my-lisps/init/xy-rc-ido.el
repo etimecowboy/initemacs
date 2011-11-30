@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-11-27 Sun 17:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 17:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -93,7 +93,10 @@
 
   ;; (require 'ido-ubiquitous)
   ;; (ido-ubiquitous-mode 1)
-  )
+
+ (when (try-require 'idomenu)
+   (global-set-key (kbd "C-c g") 'idomenu)
+  ))
 
 ;; ;;;###autoload
 ;; (defun ido-face-settings ()

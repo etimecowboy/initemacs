@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
+;; Time-stamp:<2011-11-30 Wed 16:53 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -50,7 +50,9 @@
   "Settings for `emacs-lisp-mode'."
 
   ;; Add menu item for emacs-lisp mode
-  (add-to-list emacs-lisp-mode-hook 'imenu-add-menubar-index)
+  ;; NOTE: can use `font-lock-mode-hook' to add Imenu Index for any
+  ;; mode that supports Imenu.
+  ;; (add-to-list emacs-lisp-mode-hook 'imenu-add-menubar-index)
 
   (defun elisp-mode-hook-settings ()
     "Settings for `emacs-lisp-mode-hook'."

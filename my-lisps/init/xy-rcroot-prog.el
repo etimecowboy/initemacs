@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-30 Wed 06:08 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 18:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -152,7 +152,7 @@
 (add-hook 'outline-minor-mode-hook
           (lambda ()
             (require 'outline-magic)
-            (define-key outline-minor-mode-map [(f6)] 'outline-cycle)
+            (define-key outline-minor-mode-map (kbd "<f6>") 'outline-cycle)
             ))
 (am-add-hooks
  `(c-mode-common-hook java-mode-hook
@@ -231,22 +231,18 @@
 
 ;;** imenu
 ;; (require 'imenu)
-;; (eval-after-load "imenu"
-;;   '(progn
-;;     (imenu-settings)))
-;; (defvar text-imenu-generic-expression
-;;   `((nil ,"^ \\{0,4\\}\\([一二三四五六七八九十]+[、. )]\\)+ *[^,。，]+?$" 0)
-;;     (nil ,"^ \\{0,4\\}\\([0-9]+[、. )]\\)+ *[^,。，]+?$" 0)))
-;; (add-hook 'text-mode-hook
-;;           (lambda ()
-;;             (setq imenu-generic-expression text-imenu-generic-expression)
-;;             (imenu-add-menubar-index)))
+;; Add an Imenu index to the menu bar in any mode that supports Imenu.
+(add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+(eval-after-load "imenu"
+  '(progn
+    (imenu-settings)))
 
 ;;*** imenu-tree
 ;; (require 'imenu-tree)
-;; (eval-after-load "imenu-tree"
-;;   '(progn
-;;     (imenu-tree-settings)))
+(eval-after-load "imenu-tree"
+  '(progn
+    (imenu-tree-settings)))
+(global-set-key (kbd "C-c t") 'imenu-tree)
 
 ;;====================================================================
 ;;* Shell script development settings

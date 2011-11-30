@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-imenu-tree.el'
-;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
+;; Time-stamp:<2011-11-30 Wed 18:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,21 +17,27 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
+(defun imenu-tree-expand (tree)
+  (or (widget-get tree :args)
+      (let ((buf (widget-get tree :buffer))
+            index)
+        (setq index
+              (with-current-buffer buf
+                (setq imenu--index-alist nil)
+                (let ((imenu-create-index-function 'imenu-default-create-index-function))
+                  (imenu--make-index-alist t))
+                (delq nil imenu--index-alist)))
+        (mapcar
+         (lambda (item)
+           (imenu-tree-item item buf "function"))
+         index))))
+
+
+;;;###autoload
 (defun imenu-tree-settings ()
   "Settings for `imenu-tree'."
-  (defun imenu-tree-expand (tree)
-    (or (widget-get tree :args)
-        (let ((buf (widget-get tree :buffer))
-              index)
-          (setq index
-                (with-current-buffer buf
-                  (setq imenu--index-alist nil)
-                  (let ((imenu-create-index-function 'imenu-default-create-index-function))
-                    (imenu--make-index-alist t))
-                  (delq nil imenu--index-alist)))
-          (mapcar
-           (lambda (item)
-             (imenu-tree-item item buf "function"))
-           index)))))
+  ;; (add-hook 'imenu-tree 'imenu-tree-expand)
+  (setq imenu-tree-auto-update t)
+)
 
 (provide 'xy-rc-imenu-tree)
