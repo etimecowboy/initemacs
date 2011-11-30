@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-11-29 Tue 01:17 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 06:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,14 +18,14 @@
 
 ;;====================================================================
 ;;* muse
-;;====================================================================
+
 ;; (eval-after-load "muse-mode"
 ;;   '(progn
 ;;     (muse-settings)))
 
 ;;====================================================================
 ;;* org
-;;====================================================================
+
 (add-to-list 'auto-mode-alist
              '("\\.\\(org\\|org_archive\\)$" . org-mode))
 (eval-after-load "org"
@@ -44,7 +44,7 @@
 
 ;;====================================================================
 ;;* auctex
-;;====================================================================
+
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
 ;; (add-hook 'LaTeX-mode-hook 'auctex-start)
@@ -79,8 +79,8 @@
 
 ;;====================================================================
 ;;* txt2tags
+
 ;; convert plain text files to various formats
-;;====================================================================
 ;; (require 't2t-mode)
 (setq auto-mode-alist
       (append (list '("\\.t2t$" . t2t-mode))
@@ -90,8 +90,8 @@
 
 ;;====================================================================
 ;;* pdftools
+
 ;; Save current buffer as a pdf file
-;;====================================================================
 ;; Should be used with `ps2pdf', which usually comes with a tex
 ;; distribution
 (autoload 'pdf-save-buffer "pdftools.el"

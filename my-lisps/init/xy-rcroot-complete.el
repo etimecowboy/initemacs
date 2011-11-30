@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-29 Tue 00:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 05:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,6 @@
 
 ;;====================================================================
 ;;* Mini buffer auto complete
-;;====================================================================
 
 ;; an do stuff like M-x q-r-r TAB, and it expands to
 ;; query-replace-regexp.
@@ -102,7 +101,6 @@
 
 ;;====================================================================
 ;;* Buffer auto complete
-;;====================================================================
 
 ;;** Internal Emacs content auto complete system
 (setq-default abbrev-mode 1)
@@ -196,7 +194,6 @@
 ;;====================================================================
 ;;* icicles
 ;; System-wide completion
-;;====================================================================
 
 (add-hook 'after-init-hook 'icy-mode)
 (defun icicle-keys ()
@@ -232,7 +229,6 @@
 ;;====================================================================
 ;;* anything
 ;; Quicksilver for Emacs
-;;====================================================================
 
 (eval-after-load 'anything
   '(progn

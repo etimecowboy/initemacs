@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-29 Tue 00:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 05:57 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -17,7 +17,6 @@
 
 ;;====================================================================
 ;;* Frame settings
-;;====================================================================
 
 ;;** Default frame layout
 ;; (when window-system
@@ -117,7 +116,6 @@
 
 ;;====================================================================
 ;;* Window settings
-;;====================================================================
 
 ;;** window-number
 ;; assign a number to a window
@@ -175,7 +173,6 @@ the mode-line."
 
 ;;====================================================================
 ;;* Buffer settings
-;;====================================================================
 
 ;; Wrap line dynamically
 (global-visual-line-mode 1)
@@ -230,7 +227,6 @@ the mode-line."
 
 ;;====================================================================
 ;;* mode-line settings
-;;====================================================================
 
 ;; Do not display mode-line in non-selected windows
 (setq-default mode-line-in-non-selected-windows 1)
@@ -296,18 +292,17 @@ the mode-line."
 ;; (require 'mode-line-frame)
 ;; (mode-line-frame-create)
 
-;;--------------------------------------------------------------------
-
+;;====================================================================
 ;;* mini-buffer settings
 ;; 可以递归的使用minibuffer
 (setq enable-recursive-minibuffers t)
 ;; 当你在shell、telnet、w3m等模式下时，加密显出你的密码
-(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+(add-hook 'comint-output-filter-functions
+          'comint-watch-for-password-prompt)
 ;; (minibuffer-electric-default-mode t)
 
 ;;====================================================================
 ;;* Vaious bar settings
-;;====================================================================
 
 ;;** menu-bar
 ;; No menu bar as default
@@ -369,7 +364,6 @@ the mode-line."
 
 ;;====================================================================
 ;;* Point (cursor) settings
-;;====================================================================
 
 ;;光标不闪烁
 (blink-cursor-mode 1)
@@ -394,7 +388,6 @@ the mode-line."
 
 ;;====================================================================
 ;;* Mouse settings
-;;====================================================================
 
 ;; (mouse-wheel-mode 1)
 ;; (mouse-sel-mode 1)
@@ -430,7 +423,6 @@ the mode-line."
 
 ;;====================================================================
 ;;* 所有关于括号的配置
-;;====================================================================
 
 ;;** paren-mode
 ;; (show-paren-mode 1)
@@ -526,7 +518,6 @@ the mode-line."
 
 ;;====================================================================
 ;;* Syntax highlighting
-;;====================================================================
 
 ;;** font-lock
 (global-font-lock-mode 1)
@@ -576,7 +567,6 @@ the mode-line."
 
 ;;====================================================================
 ;;* Color settings
-;;====================================================================
 
 ;;** generic-x
 ;; 增加更丰富的高亮

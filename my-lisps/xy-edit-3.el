@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-11-27 Sun 03:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 05:54 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -19,7 +19,6 @@
 ;;====================================================================
 ;;* 小强的“折腾Emacs“中的函数
 ;; REF: http://emacser.com/torture-emacs.htm
-;;====================================================================
 
 ;;** 添加删除注释
 ;; 写程序的，要经常和注释打交道，注释和反注释一段代码是家常便饭。

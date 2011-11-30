@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-29 Tue 00:57 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 06:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -17,7 +17,6 @@
 
 ;;====================================================================
 ;;* Buffer management
-;;====================================================================
 
 ;; 按下C-x k立即关闭掉当前的buffer
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
@@ -42,7 +41,6 @@
 
 ;;====================================================================
 ;;* File management
-;;====================================================================
 
 ;;** dired
 (eval-after-load "dired"
@@ -229,7 +227,6 @@
 
 ;;====================================================================
 ;;* Version control settings
-;;====================================================================
 
 ;;** Emacs internal version control
 (setq make-backup-files nil)

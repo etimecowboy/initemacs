@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-11-27 Sun 21:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 05:54 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -18,7 +18,6 @@
 
 ;;====================================================================
 ;;* 收集的一些有用的辅助编辑函数
-;;====================================================================
 
 ;;** 交换两个 Window 里的内容
 ;; NOTE: 换用`buffer-move'
@@ -277,7 +276,6 @@ to browser. If a region is active (a phrase), lookup that phrase."
 
 ;;====================================================================
 ;;* Programming tools
-;;====================================================================
 
 ;;;###autoload
 (defun ywb-indent-accoding-to-paren ()
@@ -421,7 +419,6 @@ to running 'delete-indentation (aka 'join-line)."
 ;;====================================================================
 ;;* From pluskid (星黎殿)
 ;; REF: http://lifegoo.pluskid.org/wiki/index.html
-;;====================================================================
 
 ;;** 在 Emacs 里面使用 Stardict
 ;; 调用 stardict 的命令行接口来查辞典

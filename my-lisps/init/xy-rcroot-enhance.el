@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-29 Tue 00:51 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 06:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,6 @@
 
 ;;====================================================================
 ;;* Emacs build-in functions
-;;====================================================================
 
 ;; Enable some hidden functions
 (put 'narrow-to-region 'disabled nil)
@@ -175,28 +174,28 @@
 
 ;;====================================================================
 ;;* undo-tree
-;;====================================================================
+
 (require 'undo-tree)
 (global-undo-tree-mode)
 
 ;;====================================================================
 ;;* list-processes+
+
 ;; 查看Emacs内进程
-;;====================================================================
 (autoload 'list-processes+ "list-processes+"
   "Enhanced `list-processes'" t)
 
 ;;====================================================================
 ;;* command-frequence
+
 ;; 统计命令使用频率
-;;====================================================================
 ;; (autoload 'command-frequence "command-frequence"
 ;;   "Emacs command frequence statistics" t)
 
 ;;====================================================================
 ;;* todochiku
+
 ;; notification tool.
-;;====================================================================
 ;; It started life interfacing with Growl (OS X, http://growl.info/),
 ;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix).
 ;; It can also do standard messages (in the minibuffer) and pop up a
@@ -208,8 +207,8 @@
 
 ;;====================================================================
 ;;* browse-kill-ring
+
 ;; 查看循环剪贴板的内容
-;;====================================================================
 ;; (autoload 'browse-kill-ring "browse-kill-ring"
 ;;   "Check contents in the kill ring" t)
 (eval-after-load "browse-kill-ring"
@@ -237,8 +236,8 @@
 
 ;;====================================================================
 ;;* kill-ring-search
+
 ;; Search the kill ring in the minibuffer.
-;;====================================================================
 ;; (autoload 'kill-ring-search "kill-ring-search"
 ;;  "Search the kill ring in the minibuffer."
 ;;  (interactive))
@@ -246,7 +245,7 @@
 
 ;;====================================================================
 ;;* copyright
-;;====================================================================
+
 ;; (GNUEmacs
 ;;  ;; update the copyright notice in current buffer
 ;;  (when (try-require 'copyright)
@@ -255,22 +254,22 @@
 
 ;;====================================================================
 ;;* Hanconvert
+
 ;; 自动在简体中文和繁体中文间转换.
-;;====================================================================
 (autoload 'hanconvert-region "hanconvert"
   "Convert a region from simple chinese to tradition chinese or
 from tradition chinese to simple chinese" t)
 
 ;;====================================================================
 ;;* htmlize
+
 ;; 把文件或buffer彩色输出成html
-;;====================================================================
 ;; (require 'htmlize)
 
 ;;====================================================================
 ;;* inkd
+
 ;; 在各种 text 文档间提供链接
-;;====================================================================
 (eval-after-load "linkd"
   '(progn
      (linkd-settings)
@@ -295,8 +294,8 @@ from tradition chinese to simple chinese" t)
 
 ;;====================================================================
 ;;* ascii
+
 ;; ascii表查询
-;;====================================================================
 ;; (autoload 'ascii-on        "ascii"
 ;;   "Turn on ASCII code display."   t)
 ;; (autoload 'ascii-off       "ascii"
@@ -309,8 +308,8 @@ from tradition chinese to simple chinese" t)
 
 ;;====================================================================
 ;;* multi-term
+
 ;; a mode based on term.el, for managing multiple terminal buffers
-;;====================================================================
 (eval-after-load "multi-term"
   '(progn
      (multi-term-settings)
@@ -326,8 +325,8 @@ from tradition chinese to simple chinese" t)
 
 ;;====================================================================
 ;;* shell-pop
+
 ;; pop up a window for shell
-;;====================================================================
 (autoload 'shell-pop "shell-pop" "Pop-up a shell" t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (eval-after-load "shell-pop"

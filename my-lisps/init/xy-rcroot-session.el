@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-29 Tue 01:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 06:08 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,6 @@
 
 ;;====================================================================
 ;;* Save editing information
-;;====================================================================
 
 ;;** Winpoint,
 ;; When two windows view the same buffer at the same time, and one
@@ -87,7 +86,6 @@
 
 ;;====================================================================
 ;;* Save Emacs session information
-;;====================================================================
 
 ;;** recentf
 ;; (setq-default recentf-save-file

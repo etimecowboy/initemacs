@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-11-27 Sun 03:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 05:53 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -19,7 +19,6 @@
 ;;====================================================================
 ;;* Rick Bielawski's function collection
 ;; REF: http://www.emacswiki.org/emacs/Rick_Bielawski
-;;====================================================================
 
 ;;;###autoload
 (defun rgb-window-horizontal-to-vertical ()

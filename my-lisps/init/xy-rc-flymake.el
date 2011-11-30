@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-flymake.el'
-;; Time-stamp:<2011-11-29 Tue 01:22 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 07:00 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,7 +52,7 @@
   (defadvice flymake-goto-next-error (after display activate)
     (message (get-char-property (point) 'help-echo)))
 
-  (when (executable-find "texify")
+  (when (executable-find "pdflatex") ;;"texify")
     (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.tex\\'" flymake-simple-tex-init))
     (add-to-list 'flymake-allowed-file-name-masks
@@ -292,6 +292,16 @@ checked via master file compilation."
     (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.\\(?:c\\(?:pp\\|xx\\|\\+\\+\\)?\\|CC\\)\\'"
                    flymake-simple-make-cc-init)))
+
+  ;; TeX
+  ;; (defun flymake-get-tex-args (file-name)
+  ;;   ;;(list "latex" (list "-c-style-errors" file-name))
+  ;;   ;;(list "pdflatex" (list "-file-line-error" "-draftmode" "-
+  ;;   interaction=nonstopmode" file-name)))
+
+  ;; (list "xelatex" (list "-file-line-error" "-draftmode"
+  ;;  "-interaction=nonstopmode"
+  ;; file-name))
 
   )
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-11-28 Mon 16:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 05:51 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,7 +21,6 @@
 
 ;;====================================================================
 ;;* Definitions
-;;====================================================================
 
 ;;** System variables
 
@@ -219,7 +218,6 @@
 ;;====================================================================
 ;;* F.Niessen's utilities in his .emacs
 ;; REF: http://www.mygooglest.com/fni/dot-emacs.html
-;;====================================================================
 
 ;;;###autoload
 (defun fni/add-to-load-path
@@ -346,7 +344,6 @@ just add the package to a list of missing packages."
 
 ;;====================================================================
 ;;* From ahei-misc.el
-;;====================================================================
 
 ;;;###autoload
 (defun am-add-hooks (hooks function &optional append local)
@@ -424,7 +421,6 @@ like `progn'. See also `with-temp-buffer'."
 
 ;;====================================================================
 ;;* From util.el used by ahei, written by taoshanwen
-;;====================================================================
 
 ;; (require 'eval-after-load)
 
@@ -693,7 +689,6 @@ KEY is a string or vector representing a sequence of keystrokes."
 ;;====================================================================
 ;;* Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
-;;====================================================================
 
 ;;** 判断某个字体在系统中是否安装
 ;;;###autoload
@@ -816,7 +811,6 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
 ;;====================================================================
 ;;* For compatibility among different version of Emacs
-;;====================================================================
 
 ;; General Emacs/XEmacs-compatibility compile-time macros
 ;;;###autoload
@@ -960,7 +954,6 @@ of a match for REGEXP."
 
 ;;====================================================================
 ;;* My own functions
-;;====================================================================
 
 ;;;###autoload
 (defun xy/recompile-dir

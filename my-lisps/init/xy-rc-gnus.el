@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-11-26 Sat 02:57 xin on p6t>
+;; Time-stamp:<2011-11-30 Wed 06:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,30 +16,18 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-
 ;; ;;;###autoload
 ;; (defun gnus-start ()
 ;;   "Start gnus news reader."
-
 ;;   (interactive)
 ;;   (gnus-agentize)
 ;;   (gnus))
-
 
 ;;;###autoload
 (defun gnus-settings ()
   "Settings of `gnus'."
 
-  ;; gnus-notify+从这里下载：http://www.emacswiki.org/emacs/gnus-notify%2B.el
-  ;; 邮件新闻通知
-  (require 'gnus-notify+)
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
   ;; Set Gnus directorys
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
   (setq gnus-init-file (concat my-local-lisp-path "/xy-rc-gnus.el") ;gnus设置文件
         gnus-default-directory "~/emacs/gnus"   ;默认目录
         gnus-home-directory "~/emacs/gnus"      ;主目录
@@ -75,16 +63,6 @@
   ;; canlock 密码
   (setq canlock-password "7a4a2fd70bf79c29088dbd76df1a2029301428ed")
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
-  ;; 常规设置
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  ;; Define user info in `xy-rcroot-env.el'
-  ;;(setq user-full-name "Xin Yang")
-  ;;(setq user-mail-address "xin2.yang@gmail.com")
-
   (setq gnus-agent t ;开启代理功能, 以支持离线浏览
         gnus-inhibit-startup-message t  ;关闭启动时的画面
         gnus-novice-user nil ;关闭新手设置, 不进行确认
@@ -107,30 +85,25 @@
         nnmail-expiry-wait 7   ;邮件自动删除的期限 (单位: 天)
         nnmairix-allowfast-default t)       ;加快进入搜索结果的组
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
   ;; nntp server
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+  ;; NOTE: a list of free news servers
+  ;;       - news.cn99.com
+  ;;       - freenews.netfront.net
+  ;;       - news.aioe.org
+  ;;       - news.motzarella.org
   (setq gnus-select-method
         '(nntp "news.aioe.org"))
   (HomeDesktop
    (setq gnus-select-method
          '(nntp "news.virginmedia.com"
                 (nntp-port-number 119))))
-  ;; NOTE: a list of free news servers
-  ;;       - news.cn99.com
-  ;;       - freenews.netfront.net
-  ;;       - news.aioe.org
-  ;;       - news.motzarella.org
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
+  ;; gnus-notify+
+  ;; REF: http://www.emacswiki.org/emacs/gnus-notify%2B.el
+  ;; 邮件新闻通知
+  (require 'gnus-notify+)
+
   ;; 语言环境设定
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
   ;; Gnus encoding (old settings)
   ;; (setq gnus-default-charset 'cn-gb-2312)
   ;; (setq gnus-group-name-charset-group-alist '((".*" . cn-gb-2312)))
@@ -161,8 +134,6 @@
   ;;              '(iso-8859-1 gbk utf-8))))
   ;;          gnus-parameters))
 
-  ;; 设置编码，这个是改变了整个emacs的编码！太恐怖了
-  ;;(set-language-environment 'Chinese-GBK)
   (setq gnus-default-charset 'gbk)
   (add-to-list 'gnus-group-charset-alist
                  '("\\(^\\|:\\)cn\\>\\|\\<chinese\\>" gbk))
@@ -177,17 +148,15 @@
   ;; (setq gnus-group-name-charset-group-alist
   ;;         '(("\\.com\\.cn:" . gbk)
   ;;           ("news\\.newsfan\\.net" . gbk)))
-
   ;; (setq gnus-group-name-charset-method-alist
   ;;         '(((nntp "news.cn99.net") . gbk)))
-
   ;; (setq gnus-group-name-charset-method-alist
   ;;         '(((nntp "news.newsfan.net") . gbk)))
 
   (setq gnus-newsgroup-ignored-charsets
           '(unknown-8bit x-unknown x-gbk gb18030))
 
-  ;; ;; 显示编码格式
+  ;; 显示编码格式
   ;; (add-hook 'gnus-startup-hook
   ;;             '(lambda ()
   ;;                (setq gnus-visible-headers
@@ -243,12 +212,7 @@
            )
           ))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
   ;; 显示阅读设置
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
   (setq mm-text-html-renderer 'w3m) ;用W3M显示HTML格式的邮件
   ;; (setq mm-text-html-renderer nil)  ;调用外部浏览器
 
@@ -289,7 +253,7 @@
           ((gnus-seconds-year) . "%m-%d %H:%M") ;今年
           (t . "%y-%m-%d %H:%M")))              ;其他
 
-  ;; 主题模式外观, `%B'
+  ;; 主题模式外观
   (setq gnus-summary-same-subject "Re:►")
   (setq gnus-sum-thread-tree-indent "  ")
   (setq gnus-sum-thread-tree-single-indent "☉ ")
@@ -298,7 +262,6 @@
   (setq gnus-sum-thread-tree-vertical "┃ ")
   (setq gnus-sum-thread-tree-leaf-with-other "┣━")
   (setq gnus-sum-thread-tree-single-leaf "┗━")
-
 
   ;; 用 Supercite 显示多种多样的引文形式
   (setq sc-attrib-selection-list nil
@@ -328,21 +291,17 @@
   (add-hook 'gnus-select-group-hook 'gnus-group-set-timestamp)
   ; 新闻组分组
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
-
   ;; 排序
   (setq gnus-thread-sort-functions
         '((not gnus-thread-sort-by-date) ;时间的逆序
           (not gnus-thread-sort-by-number))) ;跟踪的数量的逆序
-
   ;; 自动跳到第一个没有阅读的组
-  ;; (add-hook 'gnus-switch-on-after-hook 'gnus-group-first-unread-group)    ; gnus切换时
+  ;; (add-hook 'gnus-switch-on-after-hook 'gnus-group-first-unread-group) ; gnus切换时
   ;; (add-hook 'gnus-summary-exit-hook 'gnus-group-first-unread-group) ;退出Summary时
-
   ;; 自动更新新消息，功能不错，但在我的机器上会很慢...
   ;; (add-hook 'gnus-summary-exit-hook 'gnus-notify+) ;退出summary模式后
   ;; (add-hook 'gnus-group-catchup-group-hook 'gnus-notify+) ;当清理当前组后
   ;; (add-hook 'mail-notify-pre-hook 'gnus-notify+) ;更新邮件时
-
   ;; 斑纹化
   (setq gnus-summary-stripe-regexp        ;设置斑纹化匹配的正则表达式
         (concat "^[^"
@@ -350,8 +309,6 @@
                 "]*"))
 
   ;; 其他的一些设置
-  ;;
-  ;;
   ;;不喜欢 Summary buffer 和 Article buffer 的版面，如何改变？或者三个
   ;;窗口的显示？
   ;;可以通过调用函数 gnus-add-configuration 来控制窗口的配置。语法有点
@@ -365,7 +322,6 @@
   ;;
   ;;三个窗口显示。左边是 Group buffer，右上是 Summary buffer，右下是
   ;;Article buffer：
-  ;;
 
   (gnus-add-configuration
    '(article
@@ -392,7 +348,6 @@
   ;;
   ;;从 5.10.0 起，Gnus 新提供了一些很不错的标志符，例如，%B 可以形成一
   ;;个线索树，%&user-date 根据帖子给出时间细节。例子如下：
-  ;;
   (setq gnus-summary-line-format
         "%U %R %B %s %-60= | %4L | %-20,20f | %&user-date; \n")
 
@@ -406,21 +361,12 @@
   ;; topic mode 参考这里：(info "(gnus)Group Topics")
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
   ;; 存帖设定
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  ;;
-  ;;    如何存档有趣的消息？我将这个函数绑定在了F6键上
-  ;;
+  ;; 如何存档有趣的消息？我将这个函数绑定在了F6键上
   ;; 例如在 gnu.emacs.gnus 中，你偶然发现一个有趣的消息，想要存档，有好
   ;; 几种方法。第一种，也是最简单的，另存为文件`O f'。但是，从 Gnus 访问
   ;; 这样的存档文件并不方便。把 Frank Haun &lt;pille3003@fhaun.de&gt; 的
   ;; 这个代码片断放入 ~/.gnus：
-  ;;
   (defun my-archive-article (&optional n)
     "Copies one or more article(s) to a corresponding `nnml:'
 group, e.g.
@@ -440,41 +386,27 @@ archive
                                                gnus-newsgroup-name)))))
       (gnus-summary-copy-article n archive-name)))
 
-  ;;
   ;; 此时，可以在 summary buffer 中用 `M-x my-archive-article' 把光标处
-  ;;    的文章存档到一个 nnml 组（当然，可以改为你想要的其他后端）。
-  ;;
-  ;;    当然，也可以使用缓冲：
-  ;;
-  (setq gnus-use-cache t)
-
-  ;;
+  ;; 的文章存档到一个 nnml 组（当然，可以改为你想要的其他后端）。
+  ;; 当然，也可以使用缓冲：(setq gnus-use-cache t)
   ;; 这样，你只需设置 tick 或者 dormant 标记来保存，在缓冲中设置已读标记
   ;;    可以删除（文章）。
-  ;;
+
   ;;另一种保存帖子的方法：
   ;;看到有价值的帖子，只要按下`*'键，这篇帖子就会被拷贝到本地的
   ;;cache中保存起来，即使服务器那边删除了帖子，也没关系了。如
   ;;果不想要了，用`Meta-*'就可以把帖子从缓存中删掉。
-  ;;
   (setq gnus-use-cache 'passive)
 
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
   ;; 发帖设定
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    ;;;; 一个老外的例子，可以参考
-;;;;A function that selects a reasonable group for Gcc'ing this mail.
+  ;;A function that selects a reasonable group for Gcc'ing this mail.
   ;;(defun MySendedMail ()
   ;;  (cond ((and gnus-newsgroup-name
   ;;              (not (message-news-p))
   ;;              (stringp gnus-newsgroup-name))
   ;;         gnus-newsgroup-name)
   ;;        (t ted-default-gcc-group)))
-;;;; Use it.
+  ;; Use it.
   ;;(setq gnus-outgoing-message-group "nnml:SendMails")
 
   ;; 自动保存发送的帖子
@@ -511,52 +443,6 @@ archive
   ;;压缩保存的邮件
   (setq nnml-use-compressed-files t)
 
-  ;;
-  ;;    如何存档有趣的消息？我将这个函数绑定在了F6键上
-  ;;
-  ;; 例如在 gnu.emacs.gnus 中，你偶然发现一个有趣的消息，想要存档，有好
-  ;; 几种方法。第一种，也是最简单的，另存为文件`O f'。但是，从 Gnus 访问
-  ;; 这样的存档文件并不方便。把 Frank Haun &lt;pille3003@fhaun.de&gt; 的
-  ;; 这个代码片断放入 ~/.gnus：
-  ;;
-  (defun my-archive-article (&optional n)
-    "Copies one or more article(s) to a corresponding `nnml:'
-group, e.g.
-     `gnus.ding' goes to `nnml:1.gnus.ding'. And `nnml:List-gnus.ding'
-goes
-     to `nnml:1.List-gnus-ding'.
-
-     Use process marks or mark a region in the summary buffer to
-archive
-     more then one article."
-    (interactive "P")
-    (let ((archive-name
-           (format "nnml:archives.%s"
-                   (if (featurep 'xemacs)
-                       (replace-in-string gnus-newsgroup-name "^.*:" "")
-                     (replace-regexp-in-string "^.*:" ""
-                                               gnus-newsgroup-name)))))
-      (gnus-summary-copy-article n archive-name)))
-
-  ;;
-  ;; 此时，可以在 summary buffer 中用 `M-x my-archive-article' 把光标处
-  ;;    的文章存档到一个 nnml 组（当然，可以改为你想要的其他后端）。
-  ;;
-  ;;    当然，也可以使用缓冲：
-  ;;
-  (setq gnus-use-cache t)
-
-  ;;
-  ;; 这样，你只需设置 tick 或者 dormant 标记来保存，在缓冲中设置已读标记
-  ;;    可以删除（文章）。
-  ;;
-  ;;另一种保存帖子的方法：
-  ;;看到有价值的帖子，只要按下`*'键，这篇帖子就会被拷贝到本地的
-  ;;cache中保存起来，即使服务器那边删除了帖子，也没关系了。如
-  ;;果不想要了，用`Meta-*'就可以把帖子从缓存中删掉。
-  ;;
-  (setq gnus-use-cache 'passive)
-
   ;; multimedia content reading
   (eval-after-load "mm-decode"
     '(progn
@@ -564,14 +450,7 @@ archive
        (add-to-list 'mm-discouraged-alternatives "text/richtext")
        (setq mm-inline-large-images t)))
 
-
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
   ;; 积分设定
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
   (setq gnus-use-adaptive-scoring t  ;开启积分
         gnus-save-score t)           ;保存积分
 
@@ -602,7 +481,6 @@ archive
         message-kill-buffer-on-exit t
         message-elide-ellipsis "[...]\n")
 
-
   ;; Message posting
   ;; (setq gnus-posting-styles
   ;;       '((".*"
@@ -614,54 +492,18 @@ archive
               (gnus-article-fill-long-lines)
               (gnus-article-date-local)))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
   ;; Gnus Email settings
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
   ;; Recieving
-
-  (setq gnus-secondary-select-methods
-        '((nnimap "Gmail-etimecowboy"
-                    (nnimap-address "imap.gmail.com")
-                    (nnimap-server-port 993)
-                    (nnimap-stream ssl))
-          ;; (nnimap "UWE-staff"
-          ;;           (nnimap-address "ses-smtp.uwe.ac.uk")
-          ;;           (nnimap-server-port 993)
-          ;;           (nnimap-stream ssl))
-          ))
-
-  ;; (add-to-list 'gnus-secondary-select-methods
-  ;;              '(nnimap "gmail"
-  ;;                          (nnimap-address "imap.gmail.com")
-  ;;                          (nnimap-server-port 993)
-  ;;                          (nnimap-stream ssl)))
-  ;;                          ;; "uwe"
-  ;;                          ;; (nnimap-address "ses-imap.uwe.ac.uk")
-  ;;                          ;; (nnimap-server-port 993)
-  ;;                          ;; (nnimap-stream ssl)))
-
-  ;; uwe staff
-  ;; (add-to-list 'gnus-secondary-select-methods
-  ;;              '(nnimap "uwestaff"
-  ;;                 (nnimap-address "ses-smtp.uwe.ac.uk")
-  ;;                 (nnimap-server-port 993)
-  ;;                 (nnimap-stream ssl)
-  ;;                 (nnimap-authinfo-file
-  ;;                   "~/.emacs.d/var/gnus/authinfo"))
-  ;; )
-
-  ;; windows settings
-  ;; (add-to-list 'gnus-secondary-select-methods
-  ;;              '(nnimap "gmail"
-  ;;                 (nnimap-address "127.0.0.1")
-  ;;                 (nnimap-server-port 994)
-  ;;                 (nnimap-stream ssl)
-  ;;                 (nnimap-authinfo-file
-  ;;                   "~/.emacs.d/var/gnus/authinfo"))
-  ;; )
+  ;; (setq gnus-secondary-select-methods
+  ;;       '((nnimap "Gmail-etimecowboy"
+  ;;                   (nnimap-address "imap.gmail.com")
+  ;;                   (nnimap-server-port 993)
+  ;;                   (nnimap-stream ssl))
+  ;;         ;; (nnimap "UWE-staff"
+  ;;         ;;           (nnimap-address "ses-smtp.uwe.ac.uk")
+  ;;         ;;           (nnimap-server-port 993)
+  ;;         ;;           (nnimap-stream ssl))
+  ;;         ))
 
   ;; (setq mail-sources
   ;;         '((imap :server "imap.gmail.com"
@@ -678,7 +520,6 @@ archive
   ;;                   :leave t)))
 
   ;; Sending
-
   ;; REF: [[http://ejd.posterous.com/send-email-through-gmail-with-gnu-emacs]]
   ;; NOTE: In linux environment,You will need starttls which is now
   ;;       (included in emacs release), which is used to set up the
@@ -746,12 +587,7 @@ archive
    ;; [[http://deebo.posterous.com/setting-up-emacs-gnus-on-windows-to-read-gmai]]
    ;; [[http://www.mail-archive.com/info-gnus-english@gnu.org/msg08606.html]]
 
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;;
    ;; 多窗口处理
-   ;;
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
    ;;
    ;; From: Katsumi Yamaoka <yamaoka@jpl.org>
    ;; Subject: Re: multiple message frames
@@ -766,7 +602,6 @@ archive
    ;; each frame automatically after sending or killing it.  You can use
    ;; it by simply putting it in your .gnus.el file.  Enjoy!
    ;;
-
    (let* ((default
             ;; Winodw layout for normal message frames.
             '(vertical
@@ -846,11 +681,7 @@ archive
             (set (make-local-variable 'gnus-configure-windows-hook)
                  nil)))))
 
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;;
    ;; Additional lisps
-   ;;
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; org-mime
    (when (try-require 'org-mime)
      (add-hook 'message-mode-hook
