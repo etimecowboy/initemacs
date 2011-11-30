@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-11-29 Tue 01:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 07:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -121,11 +121,8 @@ filename" html-file)
 
   (require 'org-install)
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
+  ;;==================================================================
   ;; Some basic settings and some confliction fixes
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; Locate some files
   (setq org-directory
@@ -137,7 +134,7 @@ filename" html-file)
   (setq org-id-locations-file
         (concat org-directory "/org-id-locations"))
 
-  ;;-----------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Loaded modules
   (setq org-modules
         (quote
@@ -150,7 +147,7 @@ filename" html-file)
   org-mtags org-odt org-panel org-registry org2rem org-screen
   org-secretary orgtbl-sqlinsert org-toc org-track)))
 
-  ;;------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Fix some other lisp packages
 
   ;; For Emacs daemon mode
@@ -174,7 +171,7 @@ filename" html-file)
   ;; ;; Don't display org agenda files
   ;; (add-to-list 'session-globals-exclude 'org-agenda-files)
 
-  ;;--------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; NOTE: Use icicles instead
   ;; (setq org-completion-use-iswitchb t)
   ;; (setq org-completion-use-ido t)
@@ -186,11 +183,8 @@ filename" html-file)
   ;; But may breaks access to emacs from an Android phone
   (setq org-startup-with-inline-images t)
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
+  ;;==================================================================
   ;; GTD system settings
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; agenda files
   (setq org-agenda-files
@@ -202,7 +196,7 @@ filename" html-file)
          "~/emacs/org/gtd/Notes.org"
          ))
 
-  ;;----------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; GTD contexts & tags
   (setq org-tag-persistent-alist ;; contexts
         '((:startgroup)
@@ -222,7 +216,7 @@ filename" html-file)
   ;; Exclusions of tag inheritance
   (setq org-tags-exclude-from-inheritance '("proj"))
 
-  ;;-------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Properties
   (setq org-use-property-inheritance
         nil)  ;; Don't inheritant property for sub-items,
@@ -239,7 +233,7 @@ filename" html-file)
            "0 1 2 3 4 5 6 7 8 9 10")
           ))
 
-  ;;--------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Priority
   (setq org-enable-priority-commands t)
   (setq org-highest-priority ?A)
@@ -247,14 +241,14 @@ filename" html-file)
   (setq org-default-priority ?B)
   (setq org-priority-start-cycle-with-default t)
 
-  ;;--------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Column view
   ; Set default column view headings: Task Effort Clock_Summary
   (setq org-columns-default-format
         "%CATEGORY(Cat.) %PRIORITY(Pri.) %Importance(Imp.) %6TODO(State) %35ITEM(Details) %ALLTAGS(Tags) %5Effort(Plan){:} %6CLOCKSUM(Clock){Total} %Score(Score)")
 
 
-  ;;--------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; TODO item keywords
   (setq org-use-fast-todo-selection t) ;; C-c C-t key
   (setq org-todo-keywords
@@ -309,7 +303,7 @@ filename" html-file)
   ;;     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   ;; (add-hook ('org-after-todo-statistics-hook 'org-summary-todo)
 
-  ;;--------------------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Log settings
 
   (setq org-log-done        'time)
@@ -321,7 +315,7 @@ filename" html-file)
   (setq org-log-state-notes-insert-after-drawers t)
   (setq org-agenda-log-mode-items '(closed state))
 
-  ;;--------------------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Clock settings
 
   (setq org-clock-history-length 10)
@@ -343,7 +337,7 @@ filename" html-file)
   (setq org-clock-sound t)
   (org-clock-persistence-insinuate)
 
-  ;;---------------------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Alarm
 
   ;; `appt' alarm
@@ -374,7 +368,7 @@ filename" html-file)
              (todochiku-message "org-mode notification" notification
                                 (todochiku-icon 'emacs)))))
 
-  ;;--------------------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; Custom ageda views
 
   ;; Do not dim blocked tasks
@@ -544,7 +538,7 @@ filename" html-file)
                        (org-tags-match-list-sublevels t)))))
           ))
 
-  ;;------------------------------------------------------------------------------------
+  ;;------------------------------------------------------------------
   ;; MobileOrg settings
   ;; NOTE: I use Dropbox serveice
   (setq org-mobile-directory
@@ -554,7 +548,7 @@ filename" html-file)
   (setq org-mobile-files org-agenda-files)
   (setq org-mobile-inbox-for-pull
         (concat org-directory "/gtd/from-mobile.org"))
- ;;------------------------------------------------------------------------------------
+ ;;-------------------------------------------------------------------
   ;; Agenda view export C-x C-w
   (setq org-agenda-exporter-settings
         '((ps-number-of-columns 2)
@@ -565,11 +559,8 @@ filename" html-file)
           (org-agenda-add-entry-text-maxlines 5)
           (htmlize-output-type 'css)))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
+  ;;==================================================================
   ;; Capture, refile & archive settings
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; NOTE: Swithed from 'remember' to 'org-capture'
   ;; (setq org-remember-default-headline "Tasks")
@@ -634,11 +625,8 @@ filename" html-file)
   ;; makes it possible to archive tasks that are not marked DONE
   (setq org-archive-mark-done nil)
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
+  ;;==================================================================
   ;; Babel settings
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; babel evaluation languages
   (setq org-babel-load-languages
@@ -737,12 +725,8 @@ save -ascii %s ans")
   ;; Fontify code in code blocks
   (setq org-src-fontify-natively t)
 
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
+  ;;==================================================================
   ;; Publishing settings
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (setq org-publish-timestamp-directory
         (concat org-directory "/timestamps"))
@@ -942,11 +926,8 @@ save -ascii %s ans")
               )
              )))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
+  ;;==================================================================
   ;; Contrib lisps
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; org-mime
   ;; REF: http://orgmode.org/worg/org-contrib/org-mime.html
@@ -964,7 +945,8 @@ save -ascii %s ans")
                 (org-mime-change-element-style
                  "blockquote" "border-left: 2px solid gray; padding-left: 4px;"))))
 
-  ;;------------------------------------------------------------------------
+
+  ;;------------------------------------------------------------------
   ;; org-google-weather
   ;; google-weather-el for org
   ;; Add the following in one of your Org file.
@@ -972,6 +954,10 @@ save -ascii %s ans")
   ;;   %%(org-google-weather "New York" "en-gb")
   (try-require 'google-weather)
   (try-require 'org-google-weather)
+
+  ;;------------------------------------------------------------------
+  (define-key org-mode-map (kbd "C-c t") 'timestamp)
+
   )
 
 (provide 'xy-rc-org)
