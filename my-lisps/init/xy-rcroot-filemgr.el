@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-30 Wed 06:04 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 18:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -263,7 +263,7 @@
 (eval-after-load "magit"
   '(progn
     (magit-settings)))
-(global-set-key [f11] 'magit-status)
+(global-set-key (kbd "<f11>") 'magit-status)
 
 ;;*** diff-git
 ;; Single file range

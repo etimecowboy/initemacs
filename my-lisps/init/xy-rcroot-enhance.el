@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-30 Wed 06:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 18:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -95,7 +95,7 @@
                 (eq major-mode 'TeX-mode)
                 (eq major-mode 'tex-mode))
       (linum-mode 1))))
-(global-set-key [S-f6] 'linum-mode)
+(global-set-key (kbd "S-<f6>") 'linum-mode)
 (eval-after-load 'linum
   '(progn
      ;; (linum-face-settings) ;; TODO: will be added to my theme
@@ -169,8 +169,8 @@
 ;;  M-x local-set-key RET C-z self-insert-command
 ;; And if you want to background Emacs, just go to a different buffer.
 ;; ‘C-q C-z’ doesn’t work? - No, but C-c C-z should.
-(global-set-key [S-f9] 'shell)
-(global-set-key [C-f9] 'eshell)
+(global-set-key (kbd "S-<f9>") 'shell)
+(global-set-key (kbd "C-<f9>") 'eshell)
 
 ;;====================================================================
 ;;* undo-tree
@@ -241,7 +241,7 @@
 ;; (autoload 'kill-ring-search "kill-ring-search"
 ;;  "Search the kill ring in the minibuffer."
 ;;  (interactive))
-(global-set-key "\M-\C-y" 'kill-ring-search)
+(global-set-key (kbd "C-M-y") 'kill-ring-search)
 
 ;;====================================================================
 ;;* copyright
@@ -332,7 +332,7 @@ from tradition chinese to simple chinese" t)
 (eval-after-load "shell-pop"
   '(progn
      (shell-pop-settings)))
-(global-set-key [f9] 'shell-pop)
+(global-set-key (kbd "<f9>") 'shell-pop)
 
 
 (provide 'xy-rcroot-enhance)

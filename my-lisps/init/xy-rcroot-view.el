@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-30 Wed 06:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 18:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,8 +20,8 @@
 ;;* View files
 
 ;; Revisit files in GBK encoding
-(global-set-key [S-f5] 'revert-buffer)
-(global-set-key [C-f5] 'gbk-revert)
+(global-set-key (kbd "S-<f5>") 'revert-buffer)
+(global-set-key (kbd "C-<f5>") 'gbk-revert)
 
 ;; Allow to view read-only files
 (setq view-read-only t)
@@ -240,7 +240,7 @@
   '(progn
      ;; (moccur-face-settings) ;; TODO: to my theme
      (moccur-settings)))
-(global-set-key [C-f7] 'moccur-grep-find)
+(global-set-key (kbd "C-<f7>") 'moccur-grep-find)
 ;; (global-set-key [C-f7] 'dmoccur)
 ;; (global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
 ;; (global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
@@ -252,7 +252,7 @@
 ;; which lists all lines of the current buffer that match a regexp.
 ;; This is ahei's ioccur which uses anything, not the emacswiki one.
 (autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
-(global-set-key [M-f7] 'ioccur)
+(global-set-key (kbd "M-<f7>") 'ioccur)
 
 ;;--------------------------------------------------------------------
 
