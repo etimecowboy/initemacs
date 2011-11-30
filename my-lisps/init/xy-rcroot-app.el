@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-11-30 Wed 10:45 xin on P6T-WIN7>
+;; Time-stamp:<2011-11-30 Wed 23:10 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -109,6 +109,13 @@
 (global-set-key [(shift control ?z)]
                 ;;'thumfr-really-iconify-or-deiconify-frame)
                 'thumfr-toggle-thumbnail-frame)
+
+;;*** maxframe
+(eval-after-load "maxframe"
+  '(progn
+     (maxframe-settings)))
+(global-set-key (kbd "C-S-<f5>") 'maximize-frame)
+(global-set-key (kbd "M-S-<f5>") 'restore-frame)
 
 ;;====================================================================
 ;;* Window settings
