@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-browse-kill-ring.el'
-;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
+;; Time-stamp:<2011-12-01 Thu 03:13 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -39,7 +39,7 @@
   (setq browse-kill-ring-display-duplicates nil)
   (setq browse-kill-ring-recenter t)
   (setq browse-kill-ring-separator
-    "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    "************************************************************")
 
   ;; (add-hook 'browse-kill-ring-hook 'browse-kill-ring-my-keys)
 
