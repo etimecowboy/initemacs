@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ecb.el'
-;; Time-stamp:<2011-11-26 Sat 02:54 xin on p6t>
+;; Time-stamp:<2011-12-01 Thu 21:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,15 +20,28 @@
 (defun xy/ecb-start ()
   "启动ecb"
   (interactive)
+  (xy/cedet-start)
   (require 'ecb-autoloads)
   (ecb-activate)
-  (ecb-layout-switch "leftright-analyse"))
+  (ecb-layout-switch "leftright-analyse")
+)
 
 ;;;###autoload
 (defun ecb-settings ()
   "Settings for `ecb'."
-  (setq-default ecb-tip-of-the-day nil)
-  ;; (setq-default ecb-options-version "2.40")
-  (setq-default ecb-auto-compatibility-check nil))
+  (setq ecb-auto-compatibility-check nil
+        ecb-tip-of-the-day nil
+        ecb-options-version "2.40"
+        ecb-compile-window-height 10
+        ecb-compile-window-width  'edit-window
+        ;; ecb-layout-name "leftright-analyse"
+        )
+  (Windows
+   (setq ecb-source-path
+         '("~/work" "~/Dropbox/phdwork")))
+  (GNULinux
+   (setq ecb-source-path
+         '("~/work" "~/Dropbox/phdwork")))
+  )
 
 (provide 'xy-rc-ecb)

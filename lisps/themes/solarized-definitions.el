@@ -311,7 +311,7 @@ in order to expand or compress the tonal range displayed."
             ((t (:box (:line-width 1 :color ,base00) :inherit default))))
            (widget-single-line-field ((t (:inherit widget-field))))
            ;; extra modules
-           ;; -------------
+           ;; --------------------------------------------------------
            ;; HACK: before gnus, add more modules
            (which-func ((t (:foreground ,blue))))
            ;; (cscope-file-face ((t (:foreground ,magenta))))
@@ -320,7 +320,16 @@ in order to expand or compress the tonal range displayed."
            ;; (cscope-line-number-face ((t (:foreground ,base01 :background ,base02))))
            ;; (cscope-mouse-face ((t (:background ,green :foreground ,base3))))
            (browse-kill-ring-separator-face ((t (:foreground ,orange :weight ,bold))))
-           ;;--------------
+           (bbdb-company ((t (:italic t :slant italic))))
+           (bbdb-field-name ((t (:bold t :weight bold))))
+           (bbdb-field-value ((t (nil))))
+           (bbdb-name ((t (:underline t))))
+           (apropos-keybinding-face  ((t (:underline t))))
+           (apropos-label-face  ((t (:italic t))))
+           (apropos-match-face ((t (:background ,blue))))
+           (apropos-property-face ((t (:bold t :italic t :slant italic :weight bold))))
+           (apropos-symbol-face ((t (:bold t :weight bold))))
+           ;;---------------------------------------------------------
            ;; gnus
            (gnus-cite-1 ((t (:foreground ,magenta))))
            (gnus-cite-2 ((t (:foreground ,base2))))
