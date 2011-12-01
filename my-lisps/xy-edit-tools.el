@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-11-30 Wed 07:47 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-01 Thu 06:28 xin on P6T>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -82,7 +82,7 @@
 ;;;###autoload
 (defun timestamp ()
   (interactive)
-  (insert (format-time-string "[%Y-%m-%d %a %H:%M:%S]")))
+  (insert (format-time-string "[%Y-%m-%d %a %H:%M]")))
 
 ;;--------------------------------------------------------------------
 
