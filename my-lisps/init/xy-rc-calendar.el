@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-calendar.el'
-;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
+;; Time-stamp:<2011-12-01 Thu 16:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,6 +15,23 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+;;;###autoload
+(defun animals(birthyear)
+  "Calculate the Chinese aninal by year"
+  (let ((x (% (- 1997 birthyear) 12)))
+    (cond ((or (= x 1) (= x -11))  "鼠")
+          ((= x 0)                 "牛")
+          ((or (= x 11) (= x -1))  "虎")
+          ((or (= x 10) (= x -2))  "兔")
+          ((or (= x 9) (= x -3))   "龙")
+          ((or (= x 8) (= x -4))   "蛇")
+          ((or (= x 7) (= x -5))   "马")
+          ((or (= x 6) (= x -6))   "羊")
+          ((or (= x 5) (= x -7))   "猴")
+          ((or (= x 4) (= x -8))   "鸡")
+          ((or (= x 3) (= x -9))   "狗")
+          ((or (= x 2) (= x -10))  "猪"))))
 
 ;;;###autoload
 (defun calendar-settings ()
@@ -45,6 +62,7 @@
 
   (setq calendar-mark-holidays-flag t)
   ;; remove some holidays
+  ;; (setq christian-holidays nil)
   (setq holiday-bahai-holidays nil)       ; get rid of Baha'i holidays
   (setq holiday-general-holidays nil)     ; get rid of too U.S.-centric holidays
   (setq holiday-hebrew-holidays nil)      ; get rid of religious holidays
@@ -64,10 +82,14 @@
           (holiday-fixed 10 01 "PRC Anniversary")
           ;; (holiday-fixed 11 01 "Toussaint")
           ;; (holiday-fixed 11 11 "Armistice 1918")
-
           ;; holidays with variable dates
           (holiday-float 5 0 2 "Mother's Day")
-          (holiday-float 6 0 3 "Father's Day")))
+          (holiday-float 6 0 3 "Father's Day")
+          (holiday-chinese 1 15  "元宵节 (正月十五)")
+          (holiday-chinese 5 5   "端午节 (五月初五)")
+          (holiday-chinese 9 9   "重阳节 (九月初九)")
+          (holiday-chinese 8 15  "中秋节 (八月十五)")
+          ))
 
   ;; mark all visible dates that have diary entries
   (setq mark-diary-entries-in-calendar t)
@@ -85,6 +107,8 @@
                 'scroll-calendar-right)))
 
   ;; Sunrise/Sunset
+  ;; 设置所在地的经纬度和地名，calendar 中按 S，可以根据这些信息告知你
+  ;; 每天的日出和日落的时间
   ;; (setq calendar-latitude [50 87 north])
   ;; (setq calendar-longitude [4 71 east])
   ;; (setq calendar-location-name "Leuven, BE")

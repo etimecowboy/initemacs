@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-11-30 Wed 18:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-01 Thu 14:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,21 +19,23 @@
 ;;====================================================================
 ;;* Emacs build-in functions
 
-;; Enable some hidden functions
+;;** Enable some hidden functions
 (put 'narrow-to-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
+(global-subword-mode 1) ;; subword
+(when is-after-emacs-23 ;; Move deleted files to system trash
+  (setq delete-by-moving-to-trash t))
+(auto-compression-mode 1) ;; put in front of `session.el'
+(setq kill-do-not-save-duplicates t) ;; Do not save same cut
+(setq kill-ring-max 500) ;; Set a large kill ring
+(setq save-interprogram-paste-before-kill t) ;; Save paster
 
 ;;--------------------------------------------------------------------
 
-;; subword
-(global-subword-mode 1)
-
-;;--------------------------------------------------------------------
-
-;; ffap, finding Files and URLs at point
+;;** ffap, finding Files and URLs at point
 ;; REF: http://www.gnu.org/software/emacs/manual/html_node/emacs/
 ;; FFAP.html#index-ffap-3860
 (ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
@@ -41,7 +43,9 @@
   '(progn
      (ffap-settings)))
 
-;; filecache
+;;--------------------------------------------------------------------
+
+;;** filecache
 ;; (eval-after-load "filecache"
 ;;   '(progn (file-cache-add-directory-list load-path)
 ;;           (file-cache-add-directory-list user-include-dirs)
@@ -49,30 +53,9 @@
 ;;           (file-cache-add-directory-recursively "/usr/include/c++")
 ;;           (file-cache-add-directory-recursively "/usr/local/include")))
 
-;; auto-compression
-;; 打开压缩文件时自动解压缩, 必须在 `session.el' 前面启用。
-(auto-compression-mode 1)
-
-;; Move deleted files to system trash
-;; It seems that this cause error when quiting emacs-23.1
-;; in Linux systems --- Org-babel temporary directories cannot
-;; be deleted. emacs-23.2 seems OK with this problem, but it works
-;; not as expected (move deleted files to system trash).
-;; Comment out for comparability.
-(when is-after-emacs-23
-  (setq delete-by-moving-to-trash t))
-
-;; kill-ring
-;; Do not save same cut
-(setq kill-do-not-save-duplicates t)
-;; Set a large kill ring
-(setq kill-ring-max 500)
-;; Save paster before kill emacs
-(setq save-interprogram-paste-before-kill t)
-
 ;;--------------------------------------------------------------------
 
-;; linum
+;;** linum
 (am-add-hooks
  `(find-file-hook
    log-view-mode-hook chart-mode-hook
@@ -103,7 +86,7 @@
 
 ;;--------------------------------------------------------------------
 
-;; time-stamp
+;;** time-stamp
 ;; maintain last change time stamps
 ;; (`Time-stamp: <>' occurring within the first 8 lines)
 ;; in files edited by Emacs
@@ -114,7 +97,7 @@
 
 ;;--------------------------------------------------------------------
 
-;; Use ASpell & flyspell
+;;** flyspell
 (setq text-mode-hook 'flyspell-mode)
 (eval-after-load 'flyspell
   '(progn
@@ -122,28 +105,51 @@
 
 ;;--------------------------------------------------------------------
 
-;; Calendar
+;;** Calendar
+;; Emacs 中有日历，而且可以称之为一个系统，因为其中除了最常用的日历之外，
+;; 还有其他的近十种历法，其中有日记、约会提醒、纪念日提示以及节假日提示等
+;; 等。其中的历法包括中国的农历、希伯来历、伊斯兰历、法国革命历、中美玛雅
+;; 历等等，可以根据经纬度告知你的所在的每天日出日落的时间等等。
+;;
+;; holiday-fixed m d    固定阳历节日， m 月 d 日
+;; holiday-float m w n 浮动阳历节日， m 月的第 n 个星期 w%7
+;;
+;; ----------------------------------------------
+;; .    跳回当前天
+;; o    跳到某一个月
+;; g d    跳到某年某月某日
+;; g c    跳到某年某星期的星期几
+;; g C    跳到阴历的某一天
+;; p C    显示当前的阴历日期
+;; h    显示当前节日
+;; i d    加入当前这一天的日程安排
+;; i w    加入每周这一天的日程安排
+;; i m    加入每月这一天的日程安排
+;; i y    加入每年这一天的日程安排
+;; i a    加入周年纪念（anniversary），比如生日等
+;; d    察看当前日期的diary
+;; -----------------------------------------------
 (eval-after-load "calendar"
   '(progn
      (calendar-settings)))
 
 ;;--------------------------------------------------------------------
 
-;; Diary
+;;** Diary
 (eval-after-load "diary-lib"
   '(progn
      (diary-settings)))
 
 ;;--------------------------------------------------------------------
 
-;; appt
+;;** appt
 (eval-after-load "appt"
   '(progn
      (appt-settings)))
 
 ;;--------------------------------------------------------------------
 
-;; tramp
+;;** tramp
 ;; 以另一用户编辑文件, 或者编辑远程主机文件
 (global-set-key (kbd "C-c C-R") 'sudo-edit-current-file)
 (eval-after-load "tramp"
@@ -152,14 +158,14 @@
 
 ;;--------------------------------------------------------------------
 
-;; term-mode
+;;** term-mode
 (eval-after-load "term"
   '(progn
      (term-settings)))
 
 ;;--------------------------------------------------------------------
 
-;; Shell/eshell-mode
+;;** Shell/eshell-mode
 ;;(define-key shell-mode-map "\M-m" 'shell-add-to-history)
 ;; Backgrounding a process in shell mode
 ;; You might find it difficult to background

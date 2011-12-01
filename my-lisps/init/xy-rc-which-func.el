@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-which-func.el'
-;; Time-stamp:<2011-11-26 Sat 03:04 xin on p6t>
+;; Time-stamp:<2011-12-01 Thu 16:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,18 +19,22 @@
 ;;;###autoload
 (defun which-func-settings ()
   "Settings for `which-func'."
-  (setq which-func-unknown "unknown"))
+  (setq which-func-unknown "unknown")
+  (setq which-func-modes
+        '(emacs-lisp-mode cc-mode c-mode c++-mode perl-mode cperl-mode
+          python-mode makefile-mode sh-mode fortran-mode f90-mode
+          ada-mode diff-mode vhdl-mode verilog-mode)))
 
-;;;###autoload
-(defun which-func-face-settings ()
-  "Face settings for `which-func'."
-  (if window-system
-      (progn
-        (unless is-before-emacs-21
-          (set-face-foreground 'which-func "yellow2")
-          (set-face-background 'which-func "dark magenta")))
-    (unless is-before-emacs-21
-      (set-face-foreground 'which-func "yellow")
-      (set-face-background 'which-func "black"))))
+;; ;;;###autoload
+;; (defun which-func-face-settings ()
+;;   "Face settings for `which-func'."
+;;   (if window-system
+;;       (progn
+;;         (unless is-before-emacs-21
+;;           (set-face-foreground 'which-func "yellow2")
+;;           (set-face-background 'which-func "dark magenta")))
+;;     (unless is-before-emacs-21
+;;       (set-face-foreground 'which-func "yellow")
+;;       (set-face-background 'which-func "black"))))
 
 (provide 'xy-rc-which-func)
