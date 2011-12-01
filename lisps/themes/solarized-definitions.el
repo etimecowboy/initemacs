@@ -114,8 +114,10 @@ in order to expand or compress the tonal range displayed."
                      opt-under t)))
         `((;; basic
            (default ((t (:foreground ,base0 ,:background ,back))))
-           (cursor
-            ((t (:foreground ,base0 :background ,base03 :inverse-video t))))
+           ;; (cursor
+           ;;  ((t (:foreground ,base0 :background ,base03 :inverse-video t))))
+           (cursor ;; HACK:
+            ((t (:foreground ,base0 :background ,magenta :inverse-video t))))
            (escape-glyph-face ((t (:foreground ,red))))
            (fringe ((t (:foreground ,base01 :background ,base02))))
            (linum ((t (:foreground ,base01 :background ,base02))))
@@ -397,7 +399,9 @@ in order to expand or compress the tonal range displayed."
           ((foreground-color . ,base0)
            (background-color . ,base03)
            (background-mode . ,mode)
-           (cursor-color . ,base0)))))))
+           ;; (cursor-color . ,base0) ;; HACK:
+           (cursor-color . ,magenta)
+           ))))))
 
 (defmacro create-solarized-theme (mode)
   (let* ((theme-name (intern (concat "solarized-" (symbol-name mode))))
