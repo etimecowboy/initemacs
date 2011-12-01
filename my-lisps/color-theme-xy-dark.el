@@ -3,8 +3,8 @@
 ;; Author    : Xin Yang
 ;; Based On  : Manoj Srivastava's `color-theme-manoj.el'---
 ;; http://orgmode.org/worg/color-themes/color-theme-manoj.el
-;; Time-stamp:<2011-12-01 Thu 16:17 xin on P6T-WIN7>
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Time-stamp:<2011-12-01 Thu 17:51 xin on P6T-WIN7>
+;;--------------------------------------------------------------------
 
 ;; ;;;###autoload
 ;; (defun color-theme-manoj-xy-font-lock ()

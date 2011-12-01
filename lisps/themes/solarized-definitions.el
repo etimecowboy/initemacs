@@ -209,8 +209,9 @@ in order to expand or compress the tonal range displayed."
            (font-lock-warning-face ((t (:foreground ,red :weight ,bold))))
            (font-lock-doc-face ((t (:foreground ,cyan :slant ,italic))))
            (font-lock-color-constant-face ((t (:foreground ,green))))
-           (font-lock-comment-delimiter-face
-            ((t (:foreground ,base01 :weight ,bold))))
+           ;; (font-lock-comment-delimiter-face
+           ;;  ((t (:foreground ,base01 :weight ,bold))))
+           (font-lock-comment-delimiter-face ((t (:foreground ,orange :weight ,bold)))) ;; HACK:
            (font-lock-doc-string-face ((t (:foreground ,green))))
            (font-lock-preprocessor-face ((t (:foreground ,orange))))
            (font-lock-reference-face ((t (:foreground ,cyan))))
@@ -227,21 +228,23 @@ in order to expand or compress the tonal range displayed."
            (info-xref-visited ((t (:inherit info-xref :foreground ,magenta))))
            ;; org
            (org-hide ((t (:foreground ,base03))))
-           (org-todo ((t (:foreground ,base03 :background ,red :weight ,bold))))
-           (org-done ((t (:foreground ,green :weight ,bold))))
-           (org-todo-kwd-face ((t (:foreground ,red :background ,base03))))
-           (org-done-kwd-face ((t (:foreground ,green :background ,base03))))
-           (org-project-kwd-face
-            ((t (:foreground ,violet :background ,base03))))
-           (org-waiting-kwd-face
-            ((t (:foreground ,orange :background ,base03))))
-           (org-someday-kwd-face ((t (:foreground ,blue :background ,base03))))
-           (org-started-kwd-face
-            ((t (:foreground ,yellow :background ,base03))))
-           (org-cancelled-kwd-face
-            ((t (:foreground ,green :background ,base03))))
-           (org-delegated-kwd-face
-            ((t (:foreground ,cyan :background ,base03))))
+           ;; (org-todo ((t (:foreground ,base03 :background ,red :weight ,bold))))
+           (org-todo ((t (:foreground ,red :weight ,bold))))
+           ;; (org-done ((t (:foreground ,green :weight ,bold))))
+           (org-done ((t (:foreground ,cyan :weight ,bold))))
+           ;; (org-todo-kwd-face ((t (:foreground ,red :background ,base03))))
+           ;; (org-done-kwd-face ((t (:foreground ,green :background ,base03))))
+           ;; (org-project-kwd-face
+           ;;  ((t (:foreground ,violet :background ,base03))))
+           ;; (org-waiting-kwd-face
+           ;;  ((t (:foreground ,orange :background ,base03))))
+           ;; (org-someday-kwd-face ((t (:foreground ,blue :background ,base03))))
+           ;; (org-started-kwd-face
+           ;;  ((t (:foreground ,yellow :background ,base03))))
+           ;; (org-cancelled-kwd-face
+           ;;  ((t (:foreground ,green :background ,base03))))
+           ;; (org-delegated-kwd-face
+           ;;  ((t (:foreground ,cyan :background ,base03))))
            ;;---------------------------------------------------------
            ;; HACK: my org
            (org-agenda-clocking ((t (:background ,blue))))
@@ -252,8 +255,8 @@ in order to expand or compress the tonal range displayed."
            (org-agenda-date-weekend ((t (:foreground ,red :weight ,bold))))
            (org-agenda-diary ((t (:foundry unknown :foreground ,blue))))
            (org-agenda-dimmed-todo-face ((t (:foreground ,base01))))
-           (org-agenda-todo ((t (:foreground ,base03 :background ,red :weight ,bold))))
-           (org-agenda-done ((t (:foreground ,green :weight ,bold))))
+           ;; (org-agenda-todo ((t (:foreground ,base03 :background ,red :weight ,bold))))
+           ;; (org-agenda-done ((t (:foreground ,green :weight ,bold))))
            (org-agenda-restriction-lock ((t (:background ,magenta))))
            (org-agenda-structure ((t (:foreground ,magenta))))
            (org-archived ((t (:foreground ,base01))))
@@ -293,7 +296,7 @@ in order to expand or compress the tonal range displayed."
            (org-scheduled-previously ((t (:foreground ,base00))))
            (org-scheduled-today ((t (:foreground ,green))))
            (org-sexp-date ((t (:foreground ,cyan))))
-           (org-special-keyword ((t (:foreground ,red))))
+           (org-special-keyword ((t (:foreground ,orange))))
            (org-table ((t (:foreground ,violet))))
            (org-tag ((t (:weight bold))))
            (org-target ((t (:underline t))))
@@ -316,6 +319,8 @@ in order to expand or compress the tonal range displayed."
            ;; (cscope-line-face ((t (:foreground ,green))))
            ;; (cscope-line-number-face ((t (:foreground ,base01 :background ,base02))))
            ;; (cscope-mouse-face ((t (:background ,green :foreground ,base3))))
+           (browse-kill-ring-separator-face ((t (:foreground ,orange :weight ,bold))))
+           ;;--------------
            ;; gnus
            (gnus-cite-1 ((t (:foreground ,magenta))))
            (gnus-cite-2 ((t (:foreground ,base2))))

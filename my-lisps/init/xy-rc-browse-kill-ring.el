@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-browse-kill-ring.el'
-;; Time-stamp:<2011-12-01 Thu 03:13 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-01 Thu 17:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -57,9 +57,9 @@
   (def-without-linum-mode "browse-kill-ring-previous")
 )
 
-;;;###autoload
-(defun browse-kill-ring-face-settings ()
-  "Face settings for `browse-kill-ring'."
-  (setq browse-kill-ring-separator-face 'font-lock-comment-delimiter-face))
+;; ;;;###autoload
+;; (defun browse-kill-ring-face-settings ()
+;;   "Face settings for `browse-kill-ring'."
+;;   (setq browse-kill-ring-separator-face 'font-lock-comment-delimiter-face))
 
 (provide 'xy-rc-browse-kill-ring)

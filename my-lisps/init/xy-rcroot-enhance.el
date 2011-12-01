@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-01 Thu 14:34 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-01 Thu 17:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -220,8 +220,6 @@
 (eval-after-load "browse-kill-ring"
   '(progn
      (browse-kill-ring-settings)
-     ;; (browse-kill-ring-face-settings) ;; TODO: will be added to
-                                         ;; my own color theme
      (eal-define-keys
       'browse-kill-ring-mode-map
       `(("RET" browse-kill-ring-insert-and-quit)
