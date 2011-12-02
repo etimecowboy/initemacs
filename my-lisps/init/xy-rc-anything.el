@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-11-26 Sat 02:47 xin on p6t>
+;; Time-stamp:<2011-12-02 Fri 14:48 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -45,8 +45,7 @@
      anything-c-source-bookmarks
 
      ;; Command:
-     ;; BUG: minibuffer conflicts with icicle, and cause emacs to
-     ;; crash in Linux ? maybe `session'
+     ;; BUG: Conflicts with `session.el'. Emacs would crashes.
      anything-c-source-minibuffer-history
      anything-c-source-emacs-commands
 
@@ -55,7 +54,6 @@
      anything-c-source-occur
 
      ;; System:
-     ;; BUG: cause Emacs to crash in Linux
      anything-c-source-kill-ring
      anything-c-source-emacs-process
      )
@@ -72,7 +70,7 @@
   ;; (require 'anything-config)
   ;; (require 'anything-grep)
   (require 'anything-startup)
-  (require 'anything-auto-install) ;; BUG: with git repo
+  (require 'anything-auto-install) ;; BUG: NOT work in Emacs 24
   (require 'descbinds-anything)
   (require 'anything-gtags)
   (require 'anything-menu)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-11-30 Wed 07:38 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-02 Fri 14:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -31,8 +31,8 @@
 ;;   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
 ;;   (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
 
-;; BUG: does not work
 ;; 处理html输出时auto-fill带来的多余空格
+;; NOTE: It makes html file less readable
 ;;;###autoload
 (defun xy/org-html-chinese-no-extra-space
   (&optional html-file-name)
@@ -45,29 +45,23 @@ minibuffer."
   (let ((done nil)
         tmp thisdone html-file pos
         (end-style
-         ".*\\([^
--~]\\)[ \t]*$")
-        (beginning-style "^[ \t]*[^
--~]"))
+         ".*\\([^-~]\\)[ \t]*$")
+        (beginning-style "^[ \t]*[^-~]"))
     (if html-file-name
         (setq html-file html-file-name)
-      (setq html-file (read-file-name "html file to
-process:"))
+      (setq html-file (read-file-name "html file to process:"))
       ;; check file
       (if (or (not (file-exists-p html-file))
               (file-directory-p html-file)
-              (not (string-match ".+\\.html"
-                                 html-file)))
-          (error "Error: %s is not a valid
-filename" html-file)
+              (not (string-match ".+\\.html" html-file)))
+          (error "Error: %s is not a valid filename" html-file)
         (save-excursion
           (with-current-buffer
               (find-file-noselect html-file)
             (beginning-of-buffer)
             (while (not done)
               (setq thisdone nil)
-              ;; check to ensure at least two lines
-              left
+              ;; check to ensure at least two lines left
               (end-of-line)
               (if (= (point) (point-max))
                   (setq done t)
@@ -81,8 +75,7 @@ filename" html-file)
                       (setq pos (match-end 1))
                       (next-logical-line)
                       (beginning-of-line)
-                      ;; check the first char in this
-                      line
+                      ;; check the first char in this line
                       (when (and (not
                                   (looking-at "[ \t]*$"))
                                  (looking-at beginning-style))
@@ -957,7 +950,7 @@ save -ascii %s ans")
 
   ;;------------------------------------------------------------------
   (define-key org-mode-map (kbd "C-c t") 'timestamp)
-
+  (define-key org-mode-map (kbd "C-c h") 'xy/org-html-chinese-no-extra-space)
   )
 
 (provide 'xy-rc-org)
