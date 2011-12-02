@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-01 Thu 22:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-02 Fri 14:07 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1249,7 +1249,10 @@ The process is:
   (xy/recompile-dir (concat my-local-lisp-path "/company-0.5"))
   (xy/recompile-dir (concat my-local-lisp-path "/dictionary-1.8.7"))
   (xy/recompile-dir (concat my-local-lisp-path "/yasnippet-0.6.1"))
-  (xy/recompile-dir (concat my-local-lisp-path "/ecb_snap-20110605"))
+  ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled
+  ;; with cedet. Just activate ecb without byte-compiled lisps, then
+  ;; run `M-x ecb-byte-compile'.
+  ;; (xy/recompile-dir (concat my-local-lisp-path "/ecb_snap-20110605"))
   (xy/recompile-dir (concat my-local-lisp-path "/magit-1.0.0"))
   ;; NOTE: Do it in `xy-rcroot-env.el'?
   (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
