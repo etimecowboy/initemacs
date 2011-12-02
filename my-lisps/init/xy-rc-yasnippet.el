@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
+;; Time-stamp:<2011-12-02 Fri 13:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,20 +42,22 @@
 ;;;###autoload
 (defun yasnippet-settings ()
   "settings for `yasnippet'."
+  (setq yas/trigger-key "<tab>")
   (setq yas/root-directory
         (concat my-emacs-path "/yasnippet/snippets"))
 
   ;; org mode TAB binding problem hack
-  ;; (add-hook 'org-mode-hook
-  ;;           #'(lambda ()
-  ;;               (setq yas/fallback-behavior
-  ;;                     `(apply ,(lookup-key org-mode-map [tab])))
-  ;;               (local-set-key [tab] 'yas/expand)))
-  ;; (setq yas/trigger-key "<tab>")
   (add-hook 'org-mode-hook
-            (lambda ()
-              (org-set-local 'yas/trigger-key "<tab>")
-              (define-key yas/keymap "<tab>" 'yas/next-field-group)))
+            #'(lambda ()
+                (setq yas/fallback-behavior
+                      `(apply ,(lookup-key org-mode-map [tab])))
+                (local-set-key [tab] 'yas/expand)))
+
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;             (org-set-local 'yas/trigger-key "<tab>")
+  ;;             (define-key yas/keymap "<tab>" 'yas/next-field-group)))
+
   ;; A workaround is to inhibit flyspell overlays
   ;; while the snippet is active:
   (add-hook 'flyspell-incorrect-hook
