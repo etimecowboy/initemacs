@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-11-30 Wed 17:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 05:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,7 +26,6 @@
 (partial-completion-mode 1)
 
 ;;--------------------------------------------------------------------
-
 ;;** ido
 ;; interactively do things with buffers and files
 ;; NOTE: From Emacs-22 it is a part of Emacs
@@ -39,7 +38,6 @@
      (ido-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** icomplete
 ;; minibuffer中输入部分命令就可以使用补全
 ;; (define-key minibuffer-local-completion-map
@@ -65,7 +63,6 @@
 ;;    ("L"   count-brf-lines)))
 
 ;;--------------------------------------------------------------------
-
 ;;** smex
 ;; Smex is a M-x enhancement for Emacs. Built on top of Ido, it
 ;; provides a convenient interface to your recently and most
@@ -80,7 +77,6 @@
      ))
 
 ;;--------------------------------------------------------------------
-
 ;;** ido+smex
 ;; NOTE: NEVER start both icy-mode and ido+smex. One is enough
 ;;;###autoload
@@ -107,7 +103,6 @@
 (setq save-abbrevs nil)
 
 ;;--------------------------------------------------------------------
-
 ;;** hippie-expand
 (global-set-key (kbd "M-/") 'hippie-expand)
 (eval-after-load "hippie-exp"
@@ -115,7 +110,6 @@
      (hippie-expand-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** auto-complete settings
 (eval-after-load "auto-complete"
   '(progn
@@ -134,7 +128,6 @@
      ))
 
 ;;--------------------------------------------------------------------
-
 ;;** company settings
 ;; It is a modular in-buffer completion mechanism.
 ;; (require 'company)
@@ -149,7 +142,6 @@
 ;;   'company-mode)
 
 ;;--------------------------------------------------------------------
-
 ;;** template settings
 ;; (require 'template)
 ;; (eal-define-keys
@@ -162,7 +154,6 @@
 ;; (template-initialize)
 
 ;;--------------------------------------------------------------------
-
 ;;** auto-insert
 ;; 用template, 自动插入一些文件模板
 ;; (auto-insert-mode 1)
@@ -171,7 +162,6 @@
      (auto-insert-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** yasnippet
 ;; 超强的snippet
 (eval-after-load "yasnippet"
@@ -196,24 +186,11 @@
 ;; System-wide completion
 
 (add-hook 'after-init-hook 'icy-mode)
-(defun icicle-keys ()
-  "icicle-mode的按键设置."
-  (define-key minibuffer-local-completion-map
-    (kbd "SPC") 'minibuffer-complete-word)
-  (define-key minibuffer-local-completion-map
-    (kbd "C-w") 'backward-kill-word-or-kill-region)
-  (define-key minibuffer-local-completion-map
-    (kbd "C-k") 'kill-line)
-  ;; (define-key minibuffer-local-completion-map
-  ;;     [Tab] 'icicle-apropos)
-  )
-(add-hook 'icicle-mode-hook 'icicle-keys t)
 (eval-after-load "icicles"
   '(progn
      (icicles-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** apropos-mode
 ;; (with icicles?) completion
 ;; (eal-define-keys

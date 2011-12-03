@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-02 Fri 23:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 05:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -36,7 +36,6 @@
 ;;   (add-to-list 'default-frame-alist '(width . 95)))
 
 ;;--------------------------------------------------------------------
-
 ;;** Frame title
 ;; ;; Set frame title display: filename @ process
 ;; ;; (setq frame-title-format "%f @ %s")
@@ -54,7 +53,6 @@
 ;; ;;         (:eval (or (buffer-file-name) (buffer-name)))))
 
 ;;--------------------------------------------------------------------
-
 ;;** Transparent frame
 ;; REF: http://www.emacswiki.org/emacs/TransparentEmacs
 ;; BUG: not work in Windows 7, nor in Linux with gnome 3
@@ -67,29 +65,28 @@
 ;;   (global-set-key (kbd "C-x W t") 'toggle-transparency))
 
 ;;---------------------------------------------------------------------
-
 ;;** Resize frame and window
-;;*** fit-frame and autofit-frame
+;;*** fit-frame
 ;; NOTE:
 ;;      - `fit-frame.el':     resizes a frame in order to  fit a frame
 ;;                            to its buffers.
 ;;      - `autofit-frame.el': do it automatically. May be annoying. I
 ;;                            don't like it.
 ;; (require 'fit-frame)
-;; (require 'autofit-frame)
 ;; (add-hook 'after-make-frame-functions 'fit-frame)
 ;; (add-hook 'temp-buffer-show-hook
 ;;           'fit-frame-if-one-window 'append)
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
 (global-set-key (kbd "S-<f5>") 'xy/fit-frame)
+(global-set-key (kbd "<f5>") 'revert-buffer)
 
 ;;  Add menu-bar items
-;; (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
-;; (define-key global-map [menu-bar frames]
-;;   (cons "Frames" menu-bar-frames-menu))
-;; (define-key menu-bar-frames-menu [fit-frame]
-;;   '("Fit This Frame" . fit-frame))
+(defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
+(define-key global-map [menu-bar frames]
+  (cons "Frames" menu-bar-frames-menu))
+(define-key menu-bar-frames-menu [fit-frame]
+  '("Fit This Frame" . fit-frame))
 
 ;;*** thumb-frm
 ;;  Shrink frames to a thumbnail size and restore them again.
@@ -142,7 +139,6 @@ the mode-line."
 ;; (global-set-key [f6] 'xy/window-number-toggle)
 
 ;;--------------------------------------------------------------------
-
 ;;** Windmove
 (global-set-key (kbd "C-S-<left>")  'windmove-left)
 (global-set-key (kbd "C-S-<up>")    'windmove-up)
@@ -151,7 +147,6 @@ the mode-line."
 (setq windmove-wrap-around t)
 
 ;;--------------------------------------------------------------------
-
 ;;** buffer-move
 ;; swap buffers without typing C-x b on each window
 ;; (require 'buffer-move)
@@ -165,12 +160,10 @@ the mode-line."
 (global-set-key (kbd "M-S-<right>")  'buf-move-right)
 
 ;;--------------------------------------------------------------------
-
 ;;** Winner mode for window splits
 (winner-mode 1)
 
 ;;--------------------------------------------------------------------
-
 ;;** Windresize
 (global-set-key (kbd "M-<f5>") 'windresize)
 
@@ -255,7 +248,6 @@ the mode-line."
 ;; (when is-after-emacs-23 (display-battery-mode -1))
 
 ;;--------------------------------------------------------------------
-
 ;;** diminish
 ;; Removing or abbreviating minor mode indicators
 (eval-after-load "filladapt" '(diminish 'filladapt-mode))
@@ -283,13 +275,11 @@ the mode-line."
 (eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
 
 ;;--------------------------------------------------------------------
-
 ;;** modeline-posn
 ;; Display number of characters in a selected region
 (require 'modeline-posn)
 
 ;;--------------------------------------------------------------------
-
 ;;** mode-line-frame
 ;; offers a frame to show various information
 ;; (require 'mode-line-frame)
@@ -327,26 +317,26 @@ the mode-line."
 ;; (require 'facemenu+)
 
 ;;--------------------------------------------------------------------
-
 ;;** tool-bar
 ;; No tool bar as default
 (tool-bar-mode -1)
 
 ;; toggle tool-bar display
-(global-set-key [C-f10] 'tool-bar-mode)
+(global-set-key (kbd "C-<f10>") 'tool-bar-mode)
 
 ;;*** tool-bar+
 ;; improved tool bar; broken
 ;; (try-require 'tool-bar+)
 
 ;;--------------------------------------------------------------------
-
 ;;** scroll-bar
 ;; No scroll bar as default
 (scroll-bar-mode -1)
+(setq scroll-step 1
+      scroll-margin 3
+      scroll-conservatively 10000)
 
 ;;--------------------------------------------------------------------
-
 ;;** tabbar
 ;; tab style buffer switch
 ;; (require 'tabbar)
@@ -375,13 +365,11 @@ the mode-line."
 (setq x-stretch-cursor t)
 
 ;;--------------------------------------------------------------------
-
 ;;** bar-cursor
 ;; 光标由方块变成一个小长条
 ;; (require 'bar-cursor)
 
 ;;--------------------------------------------------------------------
-
 ;;** cursor-change
 ;; 智能的改变光标形状
 ;; REF: http://emacser.com/cursor-change.htm
@@ -419,11 +407,6 @@ the mode-line."
 (when (not window-system)
   (xterm-mouse-mode 1))
 
-;; 防止页面滚动时跳动,scroll-margin 3
-;; 可以在靠近屏幕边沿3行时就开始滚动,可以很好的看到上下文
-(setq scroll-margin 3
-      scroll-conservatively 10000)
-
 ;;====================================================================
 ;;* 所有关于括号的配置
 
@@ -435,7 +418,6 @@ the mode-line."
 ;;      (paren-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** mic-paren
 ;; An extension and replacement to the packages `paren.el' and
 ;; `stig-paren.el' for Emacs
@@ -447,7 +429,6 @@ the mode-line."
      (mic-paren-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** rainbow-delimiters
 ;; With this package, the delimiters all get different colors based on
 ;; their nesting level. It works wonderfully well
@@ -467,7 +448,6 @@ the mode-line."
 ;;      (rainbow-delimiters-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** highlight-parentheses
 ;; 用颜色配对括号
 ;; (require 'highlight-parentheses)
@@ -488,7 +468,6 @@ the mode-line."
     (highlight-parentheses-mode 1)))
 
 ;;--------------------------------------------------------------------
-
 ;;** autopair
 ;; 自动给你加上括号
 ;; NOTE: autopair-global-mode cause problem with auctex, so use hooks
@@ -531,7 +510,6 @@ the mode-line."
      ))
 
 ;;--------------------------------------------------------------------
-
 ;;** smart-hl
 ;; 像Eclipse那样双击高亮当前字符串
 ;; NOTE: A part of codepilot which is removed.
@@ -539,7 +517,6 @@ the mode-line."
 ;; (require 'smart-hl)
 
 ;;--------------------------------------------------------------------
-
 ;;** highlight-symbol
 ;; 像Eclipse那样高亮光标处单词
 ;; (require 'highlight-symbol)
@@ -560,7 +537,6 @@ the mode-line."
    ("C-c M-p" highlight-symbol-prev-in-defun)))
 
 ;;--------------------------------------------------------------------
-
 ;;** zjl-hl
 ;; use CEDET semantic to highlight function calls
 (eval-after-load "zjl-hl"
@@ -576,7 +552,6 @@ the mode-line."
 ;; (require 'generic-x)
 
 ;;--------------------------------------------------------------------
-
 ;;** color-theme
 ;; fancy themes for emacs
 ;; REF: http://emacser.com/color-theme.htm
@@ -594,12 +569,10 @@ the mode-line."
 ;;    ("."   find-symbol-at-point)))
 
 ;;--------------------------------------------------------------------
-
 ;;** doremi
 ;; (eval-after-load "icicles" `(doremi-settings))
 
 ;;--------------------------------------------------------------------
-
 ;;** palette
 ;; emacs 的调色板
 ;; (defvar facemenup-palette-change-face-bg nil

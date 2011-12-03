@@ -5,7 +5,7 @@
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Maintainer: Xin Yang
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-11-30 Wed 07:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 14:33 xin on P6T-WIN7>
 ;; Keywords:
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -36,7 +36,6 @@
 ;; http://www.yourdictionary.com/curlicue
 ;; http://dictionary.reference.com/browse/curlicue (AHD, Random House, WordNet, ...)
 ;; http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=curlicue (OpenSource Dicts)
-
 ;;;###autoload
 (defun lookup-word-definition ()
   "Look up the current word's definition in a browser.
@@ -57,7 +56,6 @@ If a region is active (a phrase), lookup that phrase."
     ))
 
 ;;--------------------------------------------------------------------
-
 ;; The following is a example of looking up Wikipedia.
 ;; Here are some example urls for some reference lookup sites.
 ;; Perl       http://perldoc.perl.org/search.html?q=‹SearchWord›
@@ -66,7 +64,6 @@ If a region is active (a phrase), lookup that phrase."
 ;; AHK        http://www.autohotkey.com/docs/commands/‹SearchWord›.htm
 ;; Wikipedia  http://en.wikipedia.org/wiki/‹SearchWord›
 ;; Google     http://www.google.com/search?q=‹SearchWord›
-
 ;;;###autoload
 (defun lookup-wikipedia ()
   "Look up the word under cursor in Wikipedia.
@@ -85,7 +82,6 @@ to browser. If a region is active (a phrase), lookup that phrase."
     ))
 
 ;;--------------------------------------------------------------------
-
 ;; REF: http://blog.tuxicity.se/?p=32
 ;; by Johan Andersson
 ;; Two of my most frequently used tools when programming are Emacs and
@@ -93,7 +89,6 @@ to browser. If a region is active (a phrase), lookup that phrase."
 ;; why I created this (simple) function that googles a region. Just
 ;; select the region you want to google and then do M-x google-region
 ;; (or preferably bind a key to it).
-
 ;;;###autoload
 (defun google-region (beg end)
   "Google the selected region."

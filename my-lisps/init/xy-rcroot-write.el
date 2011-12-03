@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-11-30 Wed 18:46 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 05:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,10 +54,9 @@
      (auctex-settings)
      (eal-define-keys
       'LaTeX-mode-map
-      `(("M-c `" TeX-next-error))))) ;; C-c ` conflict with icy-mode
+      `(("M-c `" TeX-next-error))))) ;; BUG: C-c ` conflict with icy-mode
 
 ;;--------------------------------------------------------------------
-
 ;;** reftex
 ;; reference
 (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
@@ -69,7 +68,6 @@
      (reftex-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** cdlatex, tex writing tools
 ;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
 ;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
@@ -90,10 +88,10 @@
 
 ;;====================================================================
 ;;* pdftools
-
 ;; Save current buffer as a pdf file
 ;; Should be used with `ps2pdf', which usually comes with a tex
 ;; distribution
+
 (autoload 'pdf-save-buffer "pdftools.el"
   "Save buffer as a pdf file." t)
 (autoload 'pdf-save-buffer-with-faces "pdftools.el"

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-11-27 Sun 16:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 01:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,20 +33,34 @@
   "settings of icicles."
 
   (icicle-ido-like-mode 1)
-  (setq icicle-download-dir my-local-lisp-path)
-  (setq icicle-incremental-completion-flag 'alwasys)
-  (setq icicle-incremental-completion-delay 0)
-  (setq icicle-highlight-input-completion-failure-delay 0)
-  (setq icicle-buffers-ido-like-flag t)
-  (setq icicle-anything-transform-candidates-flag t)
-  (setq icicle-change-sort-order-completion-flag t)
-  (setq icicle-file-sort (quote icicle-last-modified-first-p))
-  (setq icicle-files-ido-like-flag t)
-  (setq icicle-default-cycling-mode 'apropos)
-  (setq icicle-max-candidates 20)
-  (setq icicle-Completions-window-max-height 5)
-  (setq icicle-Completions-text-scale-decrease 1.0)
-  (setq icicle-candidate-width-factor 100))
+  (setq icicle-download-dir my-local-lisp-path
+        icicle-incremental-completion-flag 'alwasys
+        icicle-incremental-completion-delay 0
+        icicle-highlight-input-completion-failure-delay 0
+        icicle-buffers-ido-like-flag t
+        icicle-anything-transform-candidates-flag t
+        icicle-change-sort-order-completion-flag t
+        icicle-file-sort 'icicle-last-modified-first-p
+        icicle-files-ido-like-flag t
+        icicle-default-cycling-mode 'apropos
+        icicle-max-candidates 20
+        icicle-Completions-window-max-height 5
+        icicle-Completions-text-scale-decrease 1.0
+        icicle-candidate-width-factor 100)
+
+  (defun icicle-keys ()
+    "icicle-mode的按键设置."
+    (define-key minibuffer-local-completion-map
+      (kbd "SPC") 'minibuffer-complete-word)
+    (define-key minibuffer-local-completion-map
+      (kbd "C-w") 'backward-kill-word-or-kill-region)
+    (define-key minibuffer-local-completion-map
+      (kbd "C-k") 'kill-line)
+    ;; (define-key minibuffer-local-completion-map
+    ;;     [Tab] 'icicle-apropos)
+    )
+  (add-hook 'icicle-mode-hook 'icicle-keys t)
+  )
 
 (provide 'xy-rc-icicles)
 

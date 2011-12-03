@@ -27,6 +27,7 @@
       (set-frame-parameter nil 'alpha '(85 50))
     (set-frame-parameter nil 'alpha '(100 100))))
 
+;;--------------------------------------------------------------------
 ;; A general transparency function:
 ;; Set transparency of emacs
 ;;;###autoload

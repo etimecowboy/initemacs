@@ -5,7 +5,7 @@
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Maintainer: Xin Yang
 ;; Created: 29 Jan 2011
-;; Time-stamp:<2011-01-30 Sun 02:18 xin on P6T>
+;; Time-stamp:<2011-12-03 Sat 14:41 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -23,15 +23,11 @@
 
 (require 'cl)
 (require 'desktop)
-
-
-(require 'desktop)
 (require 'recent-jump)
 
 (defvar rjs-line-threshold 1 "*The line threshold of a big-jump")
 (defvar rjs-column-threshold 1 "*The column threshold of a big-jump")
 (defvar rjs-ring-length 10000 "*The length of `rjs-ring'")
-
 (defvar rjs-ring (make-ring rjs-ring-length) "存放光标所经过的位置的环")
 (defvar rjs-index 0 "`recent-jump-small-backward'的时候当前位置在`rjs-ring'中的序号")
 (defvar rjs-position-before nil "以前光标所在的位置")
@@ -41,7 +37,6 @@
     recent-jump-forward
     recent-jump-small-backward
     recent-jump-small-forward))
-
 (defvar rjs-mode-line-format " RJS" "*Mode line format of `recent-jump-small-mode'.")
 
 ;;;###autoload

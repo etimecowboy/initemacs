@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-flymake.el'
-;; Time-stamp:<2011-11-30 Wed 07:00 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 06:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,7 +52,7 @@
   (defadvice flymake-goto-next-error (after display activate)
     (message (get-char-property (point) 'help-echo)))
 
-  (when (executable-find "pdflatex") ;;"texify")
+  (when (executable-find "pdflatex") ;; HACK: "texify")
     (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.tex\\'" flymake-simple-tex-init))
     (add-to-list 'flymake-allowed-file-name-masks
@@ -160,6 +160,7 @@
              "/I../.." "/I../../include" "/I../../inc"
              "/I../../common" "/I../../public"
              "/EHsc" "/W4" (concat "/Fo" (getenv "TEMP") "\\null.obj") "/c"))))
+
   (defvar flymake-cxx-file-arguments
     '(("g++" ("-I.." "-I../include" "-I../inc" "-I../common" "-I../public"
               "-I../.." "-I../../include" "-I../../inc"
@@ -172,8 +173,7 @@
       ("cl" ("/I.." "/I../include" "/I../inc" "/I../common" "/I../public"
              "/I../.." "/I../../include" "/I../../inc"
              "/I../../common" "/I../../public"
-             "/EHsc" "/W4" (concat "/Fo" (getenv "TEMP") "\\null.obj")
-    "/c"))))
+             "/EHsc" "/W4" (concat "/Fo" (getenv "TEMP") "\\null.obj") "/c"))))
 
   (defun flymake-get-compile (arguments)
     (let ((compile nil))

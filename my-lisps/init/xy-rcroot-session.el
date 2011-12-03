@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-11-30 Wed 06:08 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 06:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -32,7 +32,6 @@
      (winpoint-settings)))
 
 ;;-----------------------------------------------------------------------
-
 ;;** Bookmark
 ;; * ‘C-x r m’ – set a bookmark at the current location (e.g. in a file)
 ;; * ‘C-x r b’ – jump to a bookmark
@@ -99,7 +98,6 @@
      (recentf-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** save-place
 ;; Save point places in buffers
 (setq-default save-place t)
@@ -107,8 +105,7 @@
   '(progn
      (saveplace-settings)))
 
-;;-----------------------------------------------------------------------
-
+;;--------------------------------------------------------------------
 ;;** savehist
 ;; (require 'savehist)
 ;; (setq-default save-place-file (concat my-var-path "/savehist-"
@@ -120,8 +117,16 @@
   '(progn
      (savehist-settings)))
 
-;;---------------------------------------------------------------------
+;;--------------------------------------------------------------------
+;;** filecache
+(eval-after-load "filecache"
+  '(progn (file-cache-add-directory-list load-path)
+          (file-cache-add-directory-list user-include-dirs)
+          (file-cache-add-directory "/usr/include")
+          (file-cache-add-directory-recursively "/usr/include/c++")
+          (file-cache-add-directory-recursively "/usr/local/include")))
 
+;;--------------------------------------------------------------------
 ;;** windows and revive
 ;; Workspace store and recover
 ;; windows.el
@@ -141,7 +146,6 @@
 ;; (define-key ctl-x-map "K" 'wipe)
 
 ;;--------------------------------------------------------------------
-
 ;;** session
 ;; ;; session.el can remember more information.
 ;; (add-hook 'after-init-hook ;; 'session-start)

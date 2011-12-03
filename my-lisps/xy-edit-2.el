@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-11-30 Wed 05:53 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 14:27 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -33,7 +33,6 @@
     (goto-char buf-point)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun rgb-window-vertical-to-horizontal ()
   "Switches from a vertical split to a horizontal split."
@@ -47,7 +46,6 @@
     (goto-char buf-point)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun insert-prior-line-char ()
   "Insert the same character as in the prior line. Space if none."
@@ -61,7 +59,6 @@
     (insert char)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun insert-sequence-symbol (key)
   "Insert the name of the function that key chord executes."
@@ -69,7 +66,6 @@
   (insert (symbol-name (key-binding key))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun insert-sequence-key (key)
   "Inserts a keystroke suitable for use in fcns like global-set-key"
@@ -77,7 +73,6 @@
   (insert (format "(kbd \"%s\")" (key-description key))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun search-word-at-mouseclick (event)
   "Performs a nonincremental-search-forward starting from the

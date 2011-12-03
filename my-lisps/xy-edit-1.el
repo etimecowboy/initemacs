@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-11-30 Wed 05:53 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 14:26 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -33,7 +33,6 @@
 ;; (def-redo-command redo 'redo 'undo)
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro def-action-on-area-command (fun-name action mark-area doc)
   `(defun ,fun-name ()
@@ -44,7 +43,6 @@
        (call-interactively ,action))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun backward-kill-word-or-kill-region ()
   "`mark-active'时, 剪切选择的区域, 平时向后删除word, 和bash下面一样."
@@ -60,7 +58,6 @@
       (call-interactively 'backward-kill-word))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun mark-whole-sexp (&optional not-whole)
 ;;   "Mark whole sexp.
@@ -77,22 +74,18 @@
 ;;         (forward-sexp)))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun kill-whole-sexp (&optional not-whole)
 ;;   "Kill whole sexp.
-
 ;; If NOT-WHOLE is non-nil, do not kill whole sexp."
 ;;   (interactive)
 ;;   (mark-whole-sexp not-whole)
 ;;   (backward-kill-word-or-kill-region))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun copy-sexp (&optional not-whole)
 ;;   "Copy whole sexp.
-
 ;; If NOT-WHOLE is non-nil, do not copy whole sexp."
 ;;   (interactive)
 ;;   (save-excursion
@@ -101,7 +94,6 @@
 ;;         (copy-region (region-beginning) (region-end)))))
 
 ;;-------------------------------------------------------------------
-
 ;;;###autoload
 (defun my-kill-word ()
   "删除一个单词, 当光标处于单词中间时也删除整个单词, 这是与`kill-word'
@@ -111,7 +103,6 @@
   (backward-kill-word-or-kill-region))
 
 ;;-------------------------------------------------------------------
-
 ;;;###autoload
 (defun mark-function ()
   "Mark function."
@@ -125,7 +116,6 @@
     (lisp-mark-function))))
 
 ;;-------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro def-action-on-function-command (fun-name action action-str)
   `(defun ,fun-name ()
@@ -136,7 +126,6 @@
        (call-interactively ,action))))
 
 ;;-------------------------------------------------------------------
-
 ;;;###autoload
 (defun comment-function (&optional arg)
   "Comment function."
@@ -146,7 +135,6 @@
     (comment-region (region-beginning) (region-end) arg)))
 
 ;;-------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun kill-whole-paragraph (&optional arg)
 ;;   "Kill whole paragraph."
@@ -157,7 +145,6 @@
 ;;     (call-interactively 'kill-region)))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun copy-whole-paragraph (&optional arg)
 ;;   "Copy whole paragraph."
@@ -171,7 +158,6 @@
 ;;     (call-interactively 'copy-region)))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun copy-cur-line ()
 ;;   "拷贝当前行"
@@ -180,7 +166,6 @@
 ;;     (copy-region-as-kill-nomark (line-beginning-position) end)))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun copy-lines (&optional number)
 ;;   "从当前行开始拷贝NUMBER行"
@@ -198,7 +183,6 @@
 ;;         (call-interactively 'copy-region-as-kill-nomark)))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun copy-line-left ()
 ;;   "拷贝当前行光标后面的文字"
@@ -207,7 +191,6 @@
 ;;    (point) (min (1+ (line-end-position)) (point-max))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun smart-copy ()
 ;;   "智能拷贝, 如果`mark-active'的话, 则`copy-region', 否则`copy-lines'"
@@ -217,7 +200,6 @@
 ;;     (call-interactively 'copy-lines)))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun copy-region-and-paste ()
 ;;   "拷贝region并且粘贴到region后"
@@ -226,7 +208,6 @@
 ;;   (call-interactively 'yank))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun which-copy ()
 ;;   "如果`mark-active'的话, 则`copy-region-and-paste', 否则
@@ -235,7 +216,6 @@
 ;;   (if mark-active (copy-region-and-paste) (copy-line-left)))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun insert-cur-line ()
 ;;   "拷贝当前行并粘贴进当前buffer"
@@ -248,7 +228,6 @@
 ;;   (end-of-line))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun insert-cur-sexp ()
 ;;   "拷贝当前sexp并粘贴进当前buffer"
@@ -257,7 +236,6 @@
 ;;   (call-interactively 'yank))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun copy-sentence ()
   "拷贝sentence"
@@ -267,7 +245,6 @@
     (call-interactively 'copy-region-as-kill-nomark)))
 
 ;;--------------------------------------------------------------------
-
 ;; 删除当前光标到行首的字符
 ;;;###autoload
 (defun del-to-begin (&optional arg)
@@ -279,7 +256,6 @@
      (1+ (line-beginning-position)) (point))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun lisp-mark-function (&optional allow-extend)
   "`mark-defun'有时候会多mark一个空白行, 这个函数就是解决这个bug的"
@@ -293,7 +269,6 @@
         (forward-line))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun case-trans ()
   "大小写转换当前字符"
@@ -308,7 +283,6 @@
           (insert-char char 1)))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun comment (&optional arg)
 ;;   "如果`mark-active'的话,就`comment-region',否则注释光标所在行"
@@ -320,7 +294,6 @@
 ;;       (funcall fun (line-beginning-position) (line-end-position)))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun uncomment (&optional arg)
 ;;   "如果`mark-active'的话,就`uncomment-region',否则取消注释光标所在行"
@@ -328,7 +301,6 @@
 ;;   (comment (not arg)))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun mark-invisible-region ()
 ;;   "Mark invisible region."
@@ -346,7 +318,6 @@
 ;;         (cua--activate-rectangle))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun c-electric-backspace-kill ()
   "If `mark-active', run `kill-region', otherwise run
@@ -357,7 +328,6 @@
     (call-interactively 'c-electric-backspace)))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun delete-blank-lines-region (beg end)
 ;;   "Execute `delete-blank-lines' in region."
@@ -380,11 +350,9 @@
 ;;         (delete-blank-lines)))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun smart-delete-blank-lines (&optional no-region)
 ;;   "Smart `delete-blank-lines'.
-
 ;; If NO-REGION is non-nil, always execute `delete-blank-lines',
 ;; otherwise, if `mark-active', execute `delete-blank-lines-region',
 ;; and execute `delete-blank-lines' if there no mark."
@@ -394,11 +362,9 @@
 ;;     (call-interactively 'delete-blank-lines-region)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun smart-home (&optional home)
   "Goto home.
-
 If HOME is negative, call `beginning-of-line-text',
 otherwise call `move-beginning-of-line'."
   (interactive "P")
@@ -412,7 +378,6 @@ otherwise call `move-beginning-of-line'."
       (move-beginning-of-line 1))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun smart-kill ()
 ;;   "If `mark-active', call `kill-region', otherwise call
@@ -423,7 +388,6 @@ otherwise call `move-beginning-of-line'."
 ;;     (call-interactively 'kill-whole-line)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun smart-indent ()
   "If `mark-active', call `indent-region', otherwise indent all buffer."
@@ -434,7 +398,6 @@ otherwise call `move-beginning-of-line'."
     (call-interactively 'indent-region)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun fill-paragraph-justify (region)
   "Run `fill-paragraph' with argument justify t."
@@ -442,7 +405,6 @@ otherwise call `move-beginning-of-line'."
   (fill-paragraph 'full region))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun count-brf-lines (&optional is-fun)
 ;;   "显示当前buffer或region或函数的行数和字符数"
@@ -474,14 +436,12 @@ otherwise call `move-beginning-of-line'."
 ;;               (setq max (point-max))))
 ;;           (message "narrow下buffer内共有%d行, %d个字符, 非narrow下buffer内共有%d行, %d个字符"
 ;;                    (count-lines nmin nmax) (- nmax nmin) (count-lines min max) (- max min)))))))
-
 ;; (eal-define-keys-commonly
 ;;  global-map
 ;;  `(("C-x l" count-brf-lines)
 ;;    ("C-x L" (lambda () (interactive) (count-brf-lines t)))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun switch-to-scratch ()
   "切换到*scratch*"
@@ -493,7 +453,6 @@ otherwise call `move-beginning-of-line'."
 ;; (global-set-key (kbd "C-x s") 'switch-to-scratch)
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun copy-file-name (&optional full)
   "Copy file name of current-buffer.
@@ -504,15 +463,14 @@ If FULL is t, copy full file name."
         (setq file (expand-file-name file)))
     (kill-new file)
     (message "File `%s' copied." file)))
-
 ;; (eal-define-keys-commonly
 ;;  `(emacs-lisp-mode-map lisp-interaction-mode-map
 ;;    sh-mode-map c-mode-base-map text-mode-map
 ;;    ruby-mode-map html-mode-map python-mode-map
 ;;    java-mode-map conf-javaprop-mode-map conf-space-mode-map)
 ;;  `(("C-c M-C" copy-file-name)))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 ;; 关于mark的一些设置，使你非常方便的选择region
 ;;;###autoload
 (defun mark-command (&optional no-record)
@@ -526,6 +484,7 @@ if NO-RECORD is non-nil, do not record last-region."
     (if (interactive-p)
         (call-interactively command)
       (funcall command))))
+
 ;;;###autoload
 (defmacro def-mark-move-command (command)
   "Make definition of command which first `mark-command' and then move."
@@ -550,6 +509,7 @@ that, execute `" command "'.")
      (call-interactively (intern ,command))
      (if mark-active
          (setq last-region-end (point)))))
+
 ;;;###autoload
 (defun wcy-mark-some-thing-at-point()
   "这个功能就是根据光标的所在位置，智能的选择一块区域，也就
@@ -586,13 +546,11 @@ that, execute `" command "'.")
       (goto-char goto-point))))
 
 ;;--------------------------------------------------------------------
-
 ;; 矩形区域操作
 ;;;###autoload
 (defun rm-mark-command ()
   "如果是CUA mode, 则执行`cua-set-rectangle-mark',
 否则执行`rm-set-mark'"
-
   (interactive)
   (setq last-region-beg (point))
   (setq last-region-is-rect t)
@@ -601,6 +559,7 @@ that, execute `" command "'.")
       (call-interactively 'cua-set-rectangle-mark)
     (try-require 'rect-mark)
     (call-interactively 'rm-set-mark)))
+
 ;; ;;;###autoload
 ;; (defun copy-region (beg end)
 ;;   "根据`mark-active'和`rm-mark-active'来决定是执行
@@ -617,4 +576,5 @@ that, execute `" command "'.")
 ;;         (call-interactively 'rm-kill-ring-save)
 ;;       ;; BUG: cannot find  `copy-region-as-kill-nomark'
 ;;       (copy-region-as-kill-nomark beg end))))
+
 (provide 'xy-edit-1)

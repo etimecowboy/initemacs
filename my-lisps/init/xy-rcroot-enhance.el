@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-02 Fri 22:53 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 06:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,7 +34,6 @@
 (setq save-interprogram-paste-before-kill t) ;; Save paster
 
 ;;--------------------------------------------------------------------
-
 ;;** ffap, finding Files and URLs at point
 ;; REF: http://www.gnu.org/software/emacs/manual/html_node/emacs/
 ;; FFAP.html#index-ffap-3860
@@ -44,17 +43,6 @@
      (ffap-settings)))
 
 ;;--------------------------------------------------------------------
-
-;;** filecache
-;; (eval-after-load "filecache"
-;;   '(progn (file-cache-add-directory-list load-path)
-;;           (file-cache-add-directory-list user-include-dirs)
-;;           (file-cache-add-directory "/usr/include")
-;;           (file-cache-add-directory-recursively "/usr/include/c++")
-;;           (file-cache-add-directory-recursively "/usr/local/include")))
-
-;;--------------------------------------------------------------------
-
 ;;** linum
 (am-add-hooks
  `(find-file-hook
@@ -85,7 +73,6 @@
      (linum-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** time-stamp
 ;; maintain last change time stamps
 ;; (`Time-stamp: <>' occurring within the first 8 lines)
@@ -96,7 +83,6 @@
      (time-stamp-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** flyspell
 (setq text-mode-hook 'flyspell-mode)
 (eval-after-load 'flyspell
@@ -104,7 +90,6 @@
      (flyspell-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** Calendar
 ;; Emacs 中有日历，而且可以称之为一个系统，因为其中除了最常用的日历之外，
 ;; 还有其他的近十种历法，其中有日记、约会提醒、纪念日提示以及节假日提示等
@@ -134,21 +119,18 @@
      (calendar-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** Diary
 (eval-after-load "diary-lib"
   '(progn
      (diary-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** appt
 (eval-after-load "appt"
   '(progn
      (appt-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** tramp
 ;; 以另一用户编辑文件, 或者编辑远程主机文件
 (global-set-key (kbd "C-c C-R") 'sudo-edit-current-file)
@@ -157,14 +139,12 @@
      (tramp-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** term-mode
 (eval-after-load "term"
   '(progn
      (term-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** Shell/eshell-mode
 ;;(define-key shell-mode-map "\M-m" 'shell-add-to-history)
 ;; Backgrounding a process in shell mode
@@ -288,14 +268,14 @@ from tradition chinese to simple chinese" t)
       'linkd-map
       `(("<mouse-4>" nil)
         ("C-c ," nil)))))
-;; (am-add-hooks
-;;  `(lisp-mode-hook emacs-lisp-mode-hook
-;;    c-mode-hook c++-mode-hook
-;;    sh-mode-hook vhdl-mode-hook
-;;    verilog-mode-hook org-mode-hook
-;;    LaTeX-mode-hook latex-mode-hook
-;;    matlab-mode-hook)
-;;  `xy/linkd-start)
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook
+   c-mode-hook c++-mode-hook cc-mode-hook
+   sh-mode-hook vhdl-mode-hook
+   verilog-mode-hook org-mode-hook
+   LaTeX-mode-hook latex-mode-hook
+   matlab-mode-hook)
+ 'xy/linkd-start)
 
 ;;====================================================================
 ;;* ascii

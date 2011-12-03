@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-02 Fri 23:08 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 05:42 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -145,9 +145,7 @@
                            (second *emacs-load-start*)))))
 
 ;;--------------------------------------------------------------------
-
 ;;** Manual installed lisps
-
 ;; Small/single lisps from emacswiki and other places
 (xy/load-autoload my-local-lisp-path)
 (message "* ---[ my local lisps installed at %ds ]---"
@@ -378,9 +376,7 @@
 ;;      (info+-face-settings))) ;; TODO: will be added to my theme
 
 ;;--------------------------------------------------------------------
-
 ;;** Man
-
 (global-set-key (kbd "S-<f1>") 'man-follow)
 (eal-define-keys
  `(c-mode-base-map sh-mode-map)
@@ -420,9 +416,7 @@
     (woman-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** help
-
 (global-set-key (kbd "C-x H") 'goto-help-buffer)
 (eval-after-load "help-mode"
   '(progn
@@ -490,9 +484,7 @@
 ;;    (,(if window-system "C-x C-/" "C-x C-_") describe-symbol-sb)))
 
 ;;--------------------------------------------------------------------
-
 ;;** log
-
 ;;*** mwe-log-commands
 ;; This add-on can be used to demo Emacs to an audience.  When
 ;; activated, keystrokes get logged into a designated buffer, along
@@ -516,7 +508,6 @@
       "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 
 ;;--------------------------------------------------------------------
-
 ;;** System encodings
 (set-language-environment 'UTF-8)
 ;; NOTE: `default-buffer-file-coding-system' is an obsolete variable
@@ -538,9 +529,7 @@
   (setq default-process-coding-system '(utf-8-unix . utf-8-unix)))
 
 ;;--------------------------------------------------------------------
-
 ;;** Fonts
-
 ;; Use scalable fonts
 (setq scalable-fonts-allowed t)
 
@@ -548,15 +537,17 @@
 ;; REF: http://emacser.com/torture-emacs.htm
 ;; TODO: set font for each frame seperately
 (xy/set-font-default)
-;; (am-add-hooks
-;;  `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
-;;    c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
-;;    matlab-mode-hook)
-;;  'xy/set-font-prog)
-;; (am-add-hooks
-;;  `(LaTeX-mode-hook latex-mode-hook tex-mode-hook
-;;    muse-mode-hook org-mode-hook)
-;;  'xy/set-font-write)
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
+   c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
+   matlab-mode-hook)
+ 'xy/set-font-prog)
+(am-add-hooks
+ `(LaTeX-mode-hook latex-mode-hook tex-mode-hook
+   muse-mode-hook w3m-mode-hook
+   ;; org-mode-hook ;; NOTE: not to bother me when capturing notes
+   gnus-startup-hook mew-summary-mode-hook)
+ 'xy/set-font-write)
 (global-set-key (kbd "C-x F d") 'xy/set-font-default)
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
 (global-set-key (kbd "C-x F p") 'xy/set-font-prog)
@@ -570,15 +561,12 @@
  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease))
 
 ;;--------------------------------------------------------------------
-
 ;;** Chinese input method
 ;; NOTE: 现在 Emacs 下没什么好的中文输入法，还是用操作系统自带的输入法。
 ;;       除非不在图形系统下，才用 Emacs 内置的输入法或 eim。
-
 ;;*** eim
 ;; another Emacs input-method
 ;; REF: http://www.emacswiki.org/emacs/InputMethods
-
 ;;   Basic usage:
 ;;   - `M-x set-input-method': switch to a new input method.
 ;;   - `C-h C-\' or `C-h I': describe the current input method.
@@ -646,7 +634,6 @@
     (package-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** auto-install
 ;; BUG: Conflict with auctex's `style/url.el'
 ;; (require 'auto-install)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-12-03 Sat 00:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 05:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,14 +35,12 @@
 (setq tab-always-indent 'complete)
 
 ;;--------------------------------------------------------------------
-
 ;;** ethan-wspace
 ;; REF: https://github.com/glasserc/ethan-wspace
 (when (try-require 'ethan-wspace)
   (global-ethan-wspace-mode 1))
 
 ;;--------------------------------------------------------------------
-
 ;;** ws-trim
 ;; automatically trims whitespace on edited lines. With a low
 ;; `ws-trim-level' it is complementary to `ethan-wspace', and may be
@@ -72,7 +70,6 @@
 ;;    ("M-."   recent-jump-small-forward)))
 
 ;;--------------------------------------------------------------------
-
 ;;** dot-mode
 ;; 模拟vi的点(.)命令
 ;; (try-require 'dot-mode)
@@ -83,7 +80,6 @@
 ;;                   (message "Dot mode activated.")))
 
 ;;--------------------------------------------------------------------
-
 ;;** Incremental search
 (eval-after-load "isearch"
   '(progn
@@ -105,7 +101,6 @@
 ;;   global-map `(("C-x M-s" isearch-forward-cur-word)))
 
 ;;--------------------------------------------------------------------
-
 ;;** my own replace face
 ;; (eval-after-load "replace"
 ;;   '(progn
@@ -138,7 +133,6 @@
 ;; (define-key global-map (kbd "C-x M-l") 'wcy-mark-some-thing-at-point)
 
 ;;--------------------------------------------------------------------
-
 ;;** 矩形区域操作
 ;; (eal-define-keys-commonly
 ;;   global-map
@@ -148,7 +142,6 @@
 (am-def-active-fun rm-mark-active rm-mark-active)
 
 ;;--------------------------------------------------------------------
-
 ;;** CUA model settings
 ;; CUA的矩阵区域操作特别方便
 ;; (setq use-cua t)
@@ -174,7 +167,6 @@
 ;; (if is-before-emacs-21 (require 'table "table-for-21"))
 
 ;;--------------------------------------------------------------------
-
 ;;** artist
 ;; 非常强大的文本画图的工具
 ;; (global-set-kbd "C-x M-A" 'artist-mode)
@@ -191,7 +183,6 @@
      ))
 
 ;;--------------------------------------------------------------------
-
 ;;** palette
 ;; provides a general color palette that you can use to
 ;; examine color properties or choose colors.

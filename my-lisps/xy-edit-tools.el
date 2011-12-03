@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-12-03 Sat 00:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 14:31 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -35,7 +35,6 @@
 ;;       (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
 
 ;;---------------------------------------------------------------------
-
 ;;** 切换 major mode，可以记住上次的选择
 ;;;###autoload
 (defun major-mode-heuristic (symbol)
@@ -60,7 +59,6 @@
     (setq switch-major-mode-last-mode last-mode)))
 
 ;;--------------------------------------------------------------------
-
 ;;** 显示`major-mode'及`mode-name'"
 ;;;###autoload
 (defun get-mode-name ()
@@ -69,7 +67,6 @@
   (message "major-mode is %s, mode-name is %s" major-mode mode-name))
 
 ;;----------------------------------------------------------------------
-
 ;;** 插入日期时间
 ;; insert the variations of date formats (ISO and european formats)
 ;; REF: http://www.emacswiki.org/emacs/InsertingTodaysDate
@@ -85,7 +82,6 @@
   (insert (format-time-string "[%Y-%m-%d %a %H:%M]")))
 
 ;;--------------------------------------------------------------------
-
 ;;** 模仿vim 的 % 命令
 ;; 王垠的解决方案，如果在括号上按下 % 则跳转到匹配的括号处，否则输入一
 ;; 个 %
@@ -99,7 +95,6 @@
 ;;         (t (self-insert-command (or arg 1)))))
 
 ;;--------------------------------------------------------------------
-
 ;;** 查看GBK编码文件
 ;;;###autoload
 (defun gbk-revert ()
@@ -108,7 +103,6 @@
   (revert-buffer-with-coding-system 'gbk-dos))
 
 ;;--------------------------------------------------------------------
-
 ;;** 存盘前查看改动了哪些地方
 ;; 比较一下buffer里的内容与文件系统里老文件的不同
 ;; REF: http://www.bookshelf.jp/soft/meadow_44.html#SEC661
@@ -161,7 +155,6 @@
     (ediff-buffers orig-buf buf)))
 
 ;;--------------------------------------------------------------------
-
 ;; REF: http://emacsblog.org/2007/09/30/quick-tip-spaces-instead-of-tabs/
 ;; BUG: NOT work
 ;; ;;;###autoload
@@ -202,6 +195,7 @@
             ((string-match "[\]})>]" prev-char)
              (indent-region (progn (backward-sexp 1) (point)) pos nil))))))
 
+;;--------------------------------------------------------------------
 ;; NOTE: use meteor's goto-match-paren instead
 ;; ;;;###autoload
 ;; (defun goto-paren ()
@@ -209,9 +203,11 @@
 ;;   (interactive)
 ;;   (cond
 ;;    ((looking-at "[ \t]*[[\"({]") (forward-sexp) (backward-char))
-;;    ((or (looking-at "[]\")}]") (looking-back "[]\")}][ \t]*")) (if (< (point) (point-max)) (forward-char)) (backward-sexp))
+;;    ((or (looking-at "[]\")}]") (looking-back "[]\")}][ \t]*"))
+;;      (if (< (point) (point-max)) (forward-char)) (backward-sexp))
 ;;    (t (message "找不到匹配的括号"))))
 
+;;--------------------------------------------------------------------
 ;;;###autoload
 (defun generate-tag-table ()
   "Generate tag tables under current directory(Linux)."
@@ -224,21 +220,25 @@
        (concat "find " dir " -name \"" exp "\" | xargs etags ")
        (buffer-name)))))
 
-
+;;--------------------------------------------------------------------
 ;;;###autoload
 (defun copy-current-fun-name ()
   "Copy current function name."
   (interactive)
   (kill-new (which-function)))
 
+;;--------------------------------------------------------------------
 ;;;###autoload
 (defun skeleton-c-mode-left-brace (arg)
   (interactive "P")
   (if  (c-in-literal (c-most-enclosing-brace (c-parse-state)))
       (self-insert-command 1)
     ;; auto insert complex things.
-    (let* ((current-line (delete-and-extract-region (line-beginning-position) (line-end-position)))
-           (lines (and arg (mark t) (delete-and-extract-region (mark t) (point))))
+    (let* ((current-line (delete-and-extract-region
+                          (line-beginning-position)
+                          (line-end-position)))
+           (lines (and arg (mark t)
+                       (delete-and-extract-region (mark t) (point))))
            (after-point (make-marker)))
        ;;; delete extra blank begin and after the LINES
       (setq lines (and lines
@@ -296,8 +296,7 @@
 ;;      ;; looks better.
 ;;      (message (concat "Wrote " (buffer-file-name))))))
 
-;;---------------------------------------------------------------------------
-
+;;--------------------------------------------------------------------
 ;; Remove any extra spaces caused by indentation when killing the
 ;; newline between.
 ;; REF: http://www.emacswiki.org/emacs/AutoIndentation
@@ -314,7 +313,6 @@
     (kill-line arg)))
 
 ;;--------------------------------------------------------------------
-
 ;; merge a line with the line before it.
 ;; REF:
 ;; http://blog.jdhuntington.com/2011/01/emacs-elisp-snipped-jlhjoinlin.html

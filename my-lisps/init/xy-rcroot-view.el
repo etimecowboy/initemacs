@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-12-02 Fri 23:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 05:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,7 +28,6 @@
 ;; (toggle-read-only t)
 
 ;;--------------------------------------------------------------------
-
 ;;** view-mode settings
 ;; (eal-define-keys
 ;;  'view-mode-map
@@ -58,7 +57,6 @@
      (view-mode-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** doc-view
 ;; 把pdf,ps,dvi文件转换为png格式, 在Emacs里面浏览
 (eval-after-load "doc-view"
@@ -66,14 +64,12 @@
      (doc-view-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** log-view
 ;; (eval-after-load "log-view"
 ;;   '(progn
 ;;     (log-view-face-settings))) ;; TODO: to my theme
 
 ;;--------------------------------------------------------------------
-
 ;;** Emaci
 ;; Emacs才是世界上最强大的IDE － 用Emaci阅读文件
 ;; REF: http://emacser.com/emaci.htm
@@ -111,7 +107,6 @@
    ("M-S" normal-edit)))
 
 ;;--------------------------------------------------------------------
-
 ;;** hexl-mode
 (add-to-list 'auto-mode-alist
              '("\\.\\(exe\\|vsd\\|so\\|dll\\)$" . hexl-mode))
@@ -137,7 +132,6 @@
      (diff-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** ediff
 (global-set-key (kbd "C-x D") 'ediff)
 ;; (defun ediff-keys ()
@@ -195,7 +189,6 @@
 ;; (eval-after-load "grep" `(grep-settings))
 
 ;;--------------------------------------------------------------------
-
 ;;** full-ack
 ;; ack is a tool like grep, designed for programmers with large trees
 ;; of heterogeneous source code.
@@ -221,7 +214,6 @@
 ;; (eval-after-load "full-ack" `(full-ack-settings))
 
 ;;--------------------------------------------------------------------
-
 ;;** color-moccur
 ;; With color-moccur, you can search a regexp in all buffers. And you
 ;; can search files like grep(-find) without grep (and find) command.
@@ -246,7 +238,6 @@
 ;; (global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
 
 ;;--------------------------------------------------------------------
-
 ;;** ioccur
 ;; incremental occur, more convenient and faster than OccurMode,
 ;; which lists all lines of the current buffer that match a regexp.

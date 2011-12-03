@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-12-03 Sat 00:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 14:21 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -33,7 +33,6 @@
 ;;         (setq list (cdr list))))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun find-dotemacs-file ()
 ;;   "Open .emacs file"
@@ -51,8 +50,6 @@
 ;;                    "~/.emacs"))))
 
 ;;--------------------------------------------------------------------
-
-
 ;;;###autoload
 (defun move-line-up (p)
   "Move current line up, copy from crazycool@smth"
@@ -67,7 +64,6 @@
     (move-to-column c)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun move-line-down (p)
   "Move current line down, copy from crazycool@smth"
@@ -82,7 +78,6 @@
     (move-to-column c)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun format-region ()
   "Format region, if no region actived, format current buffer.
@@ -108,7 +103,6 @@ Like eclipse's Ctrl+Alt+F."
         (indent-region start (point-max) nil)))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun cxx-file-p (file)
   (let ((file-extension (file-name-extension file)))
@@ -119,7 +113,6 @@ Like eclipse's Ctrl+Alt+F."
                :test 'string=))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun format-cxx-file (file)
   "Format a c/c++ file."
@@ -139,7 +132,6 @@ Like eclipse's Ctrl+Alt+F."
     (message "%s isn't a c++ file" file)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun format-cxx-directory (dirname)
   "Format all c/c++ file in a directory."
@@ -156,7 +148,6 @@ Like eclipse's Ctrl+Alt+F."
                 (format-cxx-file x)))))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun grep-current-dir (&optional prompt wd)
 ;;   "Run `grep' to find current word in current directory."
@@ -177,7 +168,6 @@ Like eclipse's Ctrl+Alt+F."
 ;;         (grep cmd)))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun grep-todo-current-dir ()
   "Run `grep' to find 'TODO' in current directory."
@@ -185,7 +175,6 @@ Like eclipse's Ctrl+Alt+F."
   (grep-current-dir nil "TODO|BUG|FIXME"))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun moccur-word-all-buffers (regexp)
 ;;   "Run `multi-occur' to find regexp in all buffers."
@@ -199,7 +188,6 @@ Like eclipse's Ctrl+Alt+F."
 ;;       (multi-occur buffers regexp))))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun moccur-all-buffers (&optional prompt)
 ;;   "Run `multi-occur' to find current word in all buffers."
@@ -210,7 +198,6 @@ Like eclipse's Ctrl+Alt+F."
 ;;     (moccur-word-all-buffers word)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun moccur-todo-all-buffers ()
   "Run `multi-occur' to find 'TODO' in all buffers."
@@ -219,7 +206,6 @@ Like eclipse's Ctrl+Alt+F."
    "\\<\\([Tt][Oo][Dd][Oo]\\|[Bb][Uu][Gg]\\|[Ff][Ii][Xx][Mm][Ee]\\)\\>"))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun switch-to-other-buffer ()
 ;;   "Switch to (other-buffer)."
@@ -233,7 +219,6 @@ Like eclipse's Ctrl+Alt+F."
 ;;     (pulse-momentary-highlight-one-line (point))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun mark-current-line ()
   "Put point at beginning of this line, mark at end."
@@ -243,7 +228,6 @@ Like eclipse's Ctrl+Alt+F."
   (move-end-of-line 1))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun mark-current-line-mouse (ev)
   "Mark current line with a mouse click. EV is the mouse event."
@@ -252,7 +236,6 @@ Like eclipse's Ctrl+Alt+F."
   (mark-current-line))
 
 ;;--------------------------------------------------------------------
-
 ;; ;;;###autoload
 ;; (defun goto-match-paren (arg)
 ;; "Go to the matching parenthesis if on parenthesis, otherwise insert %.
@@ -263,7 +246,6 @@ Like eclipse's Ctrl+Alt+F."
 ;; (t (self-insert-command (or arg 1)))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 ;; (defun goto-match-paren (arg)
 (defun goto-paren (arg)

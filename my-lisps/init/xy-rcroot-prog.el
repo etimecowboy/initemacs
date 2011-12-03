@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-03 Sat 00:28 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 06:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -30,7 +30,6 @@
  `(("RET" newline-and-indent)))
 
 ;;--------------------------------------------------------------------
-
 ;;** align
 (eal-define-keys-commonly
  global-map
@@ -38,7 +37,6 @@
    ("C-x A r"   align-regexp)))
 
 ;;--------------------------------------------------------------------
-
 ;;** auto-fill
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
@@ -51,7 +49,6 @@
      (simple-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** hungry-delete-mode
 ;; (autoload 'turn-on-hungry-delete-mode "hungry-delete"
 ;;   "Turns on hungry delete mode if the buffer is appropriate." t nil)
@@ -89,7 +86,6 @@
      (hide-region-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** outline
 ;; outline-mode, structural editing
 ;; (eal-define-keys
@@ -98,7 +94,6 @@
 ;;    ("C-c u"   outline-up-heading)))
 
 ;;------------------------------------------------------------------
-
 ;;** hide-show
 ;; a minor mode similar to outline-mode.
 ;; It hides and shows blocks of text.
@@ -106,7 +101,7 @@
 ;; multi-line comment blocks.
 ;; REF: http://www.emacswiki.org/emacs/HideShow
 (am-add-hooks
- `(c-mode-common-hook java-mode-hook
+ `(c-mode-common-hook cpp-mode-hook cc-mode-hook java-mode-hook
    lisp-mode-hook emacs-lisp-mode-hook)
    'hs-minor-mode)
 
@@ -122,8 +117,6 @@
      (define-key hs-minor-mode-map (kbd "M-S-<f6>") 'hs-show-all)
      ))
 
-;;--------------------------------------------------------------------
-
 ;;*** hideshow-org
 ;; The extension makes hideshow.el’s functionality behave like org-mode’s.
 ;; REF: - https://github.com/secelis/hideshow-org
@@ -138,7 +131,6 @@
 ;;      (hideshow-org-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** outline-org-like
 ;; org-like code folding
 ;; REF:
@@ -155,7 +147,7 @@
             (define-key outline-minor-mode-map (kbd "S-<f6>") 'outline-cycle)
             ))
 (am-add-hooks
- `(c-mode-common-hook java-mode-hook
+ `(c-mode-common-hook cpp-mode-hook cc-mode-hook java-mode-hook
    lisp-mode-hook emacs-lisp-mode-hook
    vhdl-mode-hook verilog-mode-hook)
  (lambda ()
@@ -163,7 +155,6 @@
    (outline-org-mode 1)))
 
 ;;--------------------------------------------------------------------
-
 ;;** orgstruct-mode
 ;; universal cycling keys
 ;; BUG: not working in elisp code
@@ -190,7 +181,6 @@
 ;; (find-function-setup-keys)
 
 ;;--------------------------------------------------------------------
-
 ;;** describe-symbol and find-symbol
 ;; (eal-define-keys
 ;;  `(emacs-lisp-mode-map lisp-interaction-mode-map
@@ -218,7 +208,6 @@
 ;;    (,(if window-system "C-x C-/" "C-x C-_") describe-symbol)))
 
 ;;--------------------------------------------------------------------
-
 ;;** which-func
 ;; 用来显示当前光标在哪个函数
 (which-func-mode 1)
@@ -228,7 +217,6 @@
      (which-func-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** imenu
 ;; (require 'imenu)
 ;; Add an Imenu index to the menu bar in any mode that supports Imenu.
@@ -243,6 +231,18 @@
   '(progn
     (imenu-tree-settings)))
 (global-set-key (kbd "C-S-<f7>") 'imenu-tree)
+
+;;--------------------------------------------------------------------
+;;** etags
+(defadvice find-tag (before tags-file-name-advice activate)
+  "Find TAGS file in ./ or ../ or ../../ dirs"
+  (let ((list (mapcar 'expand-file-name '("./TAGS" "../TAGS" "../../TAGS"))))
+    (while list
+      (if (file-exists-p (car list))
+          (progn
+            (setq tags-file-name (car list))
+            (setq list nil))
+        (setq list (cdr list))))))
 
 ;;====================================================================
 ;;* Shell script development settings
@@ -303,7 +303,6 @@
 ;;     (lisp-mode-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** eldoc
 ;; 显示变量, 函数的声明，可用在很多语言中(c)
 (am-add-hooks
@@ -336,7 +335,6 @@
         ("C-c S"      sourcepair-load)))))
 
 ;;--------------------------------------------------------------------
-
 ;;** ifdef
 ;; (eal-define-keys
 ;;  'c-mode-base-map
@@ -346,7 +344,6 @@
 ;;     (ifdef-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** hide-ifdef
 ;; c中隐藏ifdef
 ;; (autoload 'hide-ifdef-block "hideif"
@@ -388,7 +385,6 @@
      ))
 
 ;;--------------------------------------------------------------------
-
 ;;** c-includes
 ;; (require 'c-includes)
 (eval-after-load "c-includes"
@@ -396,7 +392,6 @@
      (c-includes-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** sourcepair
 ;; 可以在cpp与h文件之间切换
 (autoload 'sourcepair-load "sourcepair"
@@ -407,7 +402,6 @@ buffer."  t)
      (sourcepair-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** codepilot
 ;; someone else's c/c++ development environment
 
@@ -425,7 +419,6 @@ buffer."  t)
 ;;     (codepilot-settings-4-emaci)))
 
 ;;--------------------------------------------------------------------
-
 ;;** kde-emacs
 ;; 一个方便开发c的工具
 ;; ;; 包中定义了C-j 为goto-line, 还设置了c-style
@@ -454,7 +447,6 @@ buffer."  t)
 ;;     (kde-emacs-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** snavigator
 ;; (try-require 'sn)
 ;; (eal-define-keys
@@ -465,7 +457,6 @@ buffer."  t)
 ;;    ("C-c M-F" copy-current-fun-name)))
 
 ;;--------------------------------------------------------------------
-
 ;;** xrefactory settings
 ;; (require 'xrefactory)
 ;; ;; 查找定义
@@ -550,31 +541,6 @@ buffer."  t)
 ;;     (doxymacs-settings)))
 
 ;;====================================================================
-;;* IDE settings
-
-;;** CEDET settings
-(eval-after-load "cedet"
-  '(progn
-     (cedet-settings)))
-
-;;--------------------------------------------------------------------
-
-;;** ECB settings
-(eval-after-load "ecb"
-  '(progn
-     (ecb-settings)))
-
-;;--------------------------------------------------------------------
-
-;;* eclim settings
-
-;; 把Eclipse的功能带给Emacs
-;; (require 'eclim)
-;; (dolist (hook (list 'c-mode-common-hook 'lisp-mode-hook
-;;                     'emacs-lisp-mode-hook 'java-mode-hook))
-;;   (add-hook hook 'eclim-mode))
-
-;;====================================================================
 ;;* Compiler settings
 
 ;;** autoconf-mode settings
@@ -586,7 +552,6 @@ buffer."  t)
 ;;   `(autoconf-mode-settings))
 
 ;;--------------------------------------------------------------------
-
 ;;** flymake
 ;; 动态检查语法错误
 (autoload 'flymake-find-file-hook "flymake" "" t)
@@ -602,7 +567,6 @@ buffer."  t)
      ))
 
 ;;--------------------------------------------------------------------
-
 ;;** ahei 的智能编译
 ;; (require 'my-smart-compile)
 ;; (defalias 'cpl 'compile)
@@ -668,8 +632,7 @@ buffer."  t)
 ;;       `(("'" switch-to-other-buffer)
 ;;         ("o" other-window)))))
 
-;;----------------------------------------------------------------------
-
+;;--------------------------------------------------------------------
 ;;** edebug
 ;; (eal-define-keys-commonly
 ;;  global-map
@@ -685,8 +648,7 @@ buffer."  t)
 ;;   (interactive)
 ;;   (setq edebug-global-break-condition nil))
 
-;;---------------------------------------------------------------------
-
+;;--------------------------------------------------------------------
 ;;** gdb
 ;; (eal-define-keys
 ;;  'c-mode-base-map
@@ -707,11 +669,39 @@ buffer."  t)
 ;;    ("M-C"   capitalize-word)
 ;;    ("C-c m" make)))
 
+(defadvice gdb (before ecb-deactivate activate)
+  "if ecb activated, deactivate it."
+  (when (and (boundp 'ecb-minor-mode) ecb-minor-mode)
+    (ecb-deactivate)))
+
 (eval-after-load "gdb-ui"
   '(progn
      (gud-settings)))
 ;; (eval-after-load "gdb-mi"
 ;;   '(progn
 ;;     (gud-settings)))
+
+;;====================================================================
+;;* IDE settings
+
+;;** CEDET settings
+(eval-after-load "cedet"
+  '(progn
+     (cedet-settings)))
+
+;;--------------------------------------------------------------------
+;;** ECB settings
+(eval-after-load "ecb"
+  '(progn
+     (ecb-settings)))
+
+;;--------------------------------------------------------------------
+;;** eclim settings
+;; 把Eclipse的功能带给Emacs
+;; (require 'eclim)
+;; (dolist (hook (list 'c-mode-common-hook 'lisp-mode-hook
+;;                     'emacs-lisp-mode-hook 'java-mode-hook))
+;;   (add-hook hook 'eclim-mode))
+
 
 (provide 'xy-rcroot-prog)

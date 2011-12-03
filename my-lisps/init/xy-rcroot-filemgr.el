@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-11-30 Wed 18:39 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 05:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -22,7 +22,6 @@
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 ;;--------------------------------------------------------------------
-
 ;;** ibuffer
 (eval-after-load "ibuffer"
   '(progn
@@ -30,7 +29,6 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;;--------------------------------------------------------------------
-
 ;;** uniquify
 ;; 可以为重名的 buffer 在前面加上其父目录的名字来让名字区分开来，
 ;; 而不是单纯的加一个没有太多意义的序号
@@ -120,7 +118,6 @@
 ;;    ("C-c B"       gud-remove)))
 
 ;;--------------------------------------------------------------------
-
 ;;** dired-details+, 更多文件信息
 ;; ;;;###autoload
 ;; (defun dired-details+-settings ()
@@ -130,7 +127,6 @@
 ;;      (dired-details+-settings))
 
 ;;--------------------------------------------------------------------
-
 ;;** dired+, 增强的 dired
 ;; (eval-after-load "dired+"
 ;;   '(progn
@@ -138,7 +134,6 @@
 ;;      (dired+-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** dired-x，忽略不感兴趣的文件
 ;; (autoload 'dired-omit-mode "dired-x"
 ;;   "Toggle Dired-Omit mode. With numeric ARG, enable Dired-Omit mode
@@ -167,7 +162,6 @@
 ;;      (dired-x-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** dired-lis
 ;; (eal-define-keys
 ;;  'isearch-mode-map
@@ -180,14 +174,12 @@
 ;;      (dired-lis-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** image-dired
 (eval-after-load "image-dired"
   '(progn
     (image-dired-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** thumbs
 ;; Thumbnails previewer for images files
 (eval-after-load "thumbs"
@@ -195,7 +187,6 @@
      (thumbs-settings)))
 
 ;;--------------------------------------------------------------------
-
 ;;** Sunrise commander; file manager
 ;; BUG: NOT work properly with other dired lisps. Removed.
 ;; Check http://www.emacswiki.org/emacs/Sunrise_Commander_Tips
@@ -215,7 +206,6 @@
 ;; (try-require 'sunrise-x-tree)
 
 ;;--------------------------------------------------------------------
-
 ;;** open-with
 ;; open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
@@ -246,7 +236,6 @@
 (setq auto-revert-check-vc-info t)
 
 ;;--------------------------------------------------------------------
-
 ;;** git settings
 
 ;;*** git.el
