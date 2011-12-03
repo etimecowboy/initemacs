@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-12-02 Fri 14:48 xin on p6t>
+;; Time-stamp:<2011-12-02 Fri 23:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,7 +16,8 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; TODO: write a function to find emacs config files and org files
+;; TODO: write an anything function to find emacs config files and org
+;; files
 
 ;;;###autoload
 (defun xy/my-anything ()
@@ -64,7 +65,7 @@
   "settings for `anything'."
 
   ;;NOTE: anything-config will use <f5> as the prefix key, this
-  ;;conflicts with your own emacs <f5> key bindings.
+  ;; conflicts with your own emacs <f5> key bindings.
   ;; The following 6 are included in `anything-startup'
   ;; (require 'anything-match-plugin)
   ;; (require 'anything-config)

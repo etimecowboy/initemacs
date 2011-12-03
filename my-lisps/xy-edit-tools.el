@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-12-01 Thu 06:28 xin on P6T>
+;; Time-stamp:<2011-12-03 Sat 00:01 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -89,13 +89,14 @@
 ;;** 模仿vim 的 % 命令
 ;; 王垠的解决方案，如果在括号上按下 % 则跳转到匹配的括号处，否则输入一
 ;; 个 %
-;;;###autoload
-(defun match-paren (arg)
-  "Go to the matching paren if on a paren; otherwise insert %."
-  (interactive "p")
-  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))))
+;; NOTE: replaced by Meteor Liu's `goto-paren'
+;; ;;;###autoload
+;; (defun match-paren (arg)
+;;   "Go to the matching paren if on a paren; otherwise insert %."
+;;   (interactive "p")
+;;   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+;;         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+;;         (t (self-insert-command (or arg 1)))))
 
 ;;--------------------------------------------------------------------
 

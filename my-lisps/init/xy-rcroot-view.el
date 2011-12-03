@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-11-30 Wed 18:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-02 Fri 23:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,8 +20,8 @@
 ;;* View files
 
 ;; Revisit files in GBK encoding
-(global-set-key (kbd "S-<f5>") 'revert-buffer)
-(global-set-key (kbd "C-<f5>") 'gbk-revert)
+;; (global-set-key (kbd "S-<f5>") 'revert-buffer)
+(global-set-key (kbd "M-S-<f5>") 'gbk-revert)
 
 ;; Allow to view read-only files
 (setq view-read-only t)

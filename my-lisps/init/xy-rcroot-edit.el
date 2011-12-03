@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-11-30 Wed 05:59 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 00:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -237,7 +237,7 @@
    ;;    ("M-K" kill-line)
    ;;    ("C-k" smart-kill)
    ;;    ("C-\\" delete-indentation)
-   ("C-x M-m"             mark-invisible-region)
+   ;; ("C-x M-m"             mark-invisible-region)
    ("M-U"                 del-to-begin)
    ("C-^"                 case-trans)
    ;;    ("C-6" case-trans)
@@ -256,21 +256,27 @@
    ("C-M-a"               mark-whole-buffer)
    ("C-k"                 kill-and-join-forward)
    ("C-M-6"               jlh-join-lines)
-   ("%"                   match-paren)
+   ;; ("%"                   match-paren)
+   ("%"                   goto-paren)
    ("C-c F f"             iy-go-to-char)
    ("C-c F b"             iy-go-to-char-backward)
-   ("C-c F c"             iy-go-to-char-continue)
-   ("C-c F a"             iy-go-to-char-continue-backward)
    ("M-,"                 recent-jump-small-backward)
    ("M-."                 recent-jump-small-forward)
    ("C-x M-s"             isearch-forward-cur-word)
-   ("C-x M-l"             wcy-mark-some-thing-at-point)
+   ("C-'"                 wcy-mark-some-thing-at-point)
    ("C-x \\"              rm-mark-command)
    ;; ("M-w"                 copy-region)
    ("M-|"                 ywb-hippie-expand-filename)
    ("C-x M-M"             switch-major-mode)
    ("M-;"                 qiang-comment-dwim-line)
    ("M-k"                 qiang-copy-line)
+   ;; Meteor Liu's functions
+   ("C-S-n"               move-line-down)
+   ("C-S-p"               move-line-up)
+   ("C-c C-x f"           format-region)
+   ("C-c C-x F"           format-cxx-file)
+   ;; ("M-S-<f7>"         moccur-word-all-buffers)
+   ("C-x M-l"             mark-current-line)
    ))
 
 ;; (eal-define-keys

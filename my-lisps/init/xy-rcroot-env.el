@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-11-30 Wed 18:38 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-02 Fri 23:08 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -467,11 +467,11 @@
            completion-list-mode-map
            help-mode-map
            debugger-mode-map)
- `(("M-<f3>"   describe-symbol-at-point)
+ `(("C-<f3>"   describe-symbol-at-point)
    ;; ("C-c M-v" describe-variable-at-point)
    ;; ("C-c M-f" describe-function-at-point)
    ;; ("C-M-<f3>" describe-face-at-point)
-   ("C-<f3>"   find-symbol-at-point)
+   ("M-<f3>"   find-symbol-at-point)
    ;; ("C-c C-h" find-symbol-go-back)
    ;; ("C-c M-V" find-symbol-var-at-point)
    ;; ("C-c M-F" find-symbol-fun-at-point)

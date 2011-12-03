@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-11-30 Wed 05:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 00:03 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -17,7 +17,7 @@
 (require 'cl)
 
 ;;====================================================================
-;;* From meteor liu (刘欣)
+;;* From Meteor Liu (刘欣)
 ;; REF: https://github.com/meteor1113/dotemacs/blob/master/init-basic.el
 
 ;; ;;;###autoload
@@ -182,32 +182,32 @@ Like eclipse's Ctrl+Alt+F."
 (defun grep-todo-current-dir ()
   "Run `grep' to find 'TODO' in current directory."
   (interactive)
-  (grep-current-dir nil "TODO|BUG"))
+  (grep-current-dir nil "TODO|BUG|FIXME"))
 
 ;;--------------------------------------------------------------------
 
-;;;###autoload
-(defun moccur-word-all-buffers (regexp)
-  "Run `multi-occur' to find regexp in all buffers."
-  (if (= 0 (length regexp))
-      (message "Regexp is blank.")
-    (let ((buffers (buffer-list)))
-      (dolist (buffer buffers)
-        (let ((pos (string-match " *\\*" (buffer-name buffer))))
-          (when (and pos (= 0 pos))
-            (setq buffers (remq buffer buffers)))))
-      (multi-occur buffers regexp))))
+;; ;;;###autoload
+;; (defun moccur-word-all-buffers (regexp)
+;;   "Run `multi-occur' to find regexp in all buffers."
+;;   (if (= 0 (length regexp))
+;;       (message "Regexp is blank.")
+;;     (let ((buffers (buffer-list)))
+;;       (dolist (buffer buffers)
+;;         (let ((pos (string-match " *\\*" (buffer-name buffer))))
+;;           (when (and pos (= 0 pos))
+;;             (setq buffers (remq buffer buffers)))))
+;;       (multi-occur buffers regexp))))
 
 ;;--------------------------------------------------------------------
 
-;;;###autoload
-(defun moccur-all-buffers (&optional prompt)
-  "Run `multi-occur' to find current word in all buffers."
-  (interactive "P")
-  (let ((word (grep-tag-default)))
-    (when (or prompt (= (length word) 0))
-      (setq word (read-regexp "List lines matching regexp" word)))
-    (moccur-word-all-buffers word)))
+;; ;;;###autoload
+;; (defun moccur-all-buffers (&optional prompt)
+;;   "Run `multi-occur' to find current word in all buffers."
+;;   (interactive "P")
+;;   (let ((word (grep-tag-default)))
+;;     (when (or prompt (= (length word) 0))
+;;       (setq word (read-regexp "List lines matching regexp" word)))
+;;     (moccur-word-all-buffers word)))
 
 ;;--------------------------------------------------------------------
 
@@ -216,21 +216,21 @@ Like eclipse's Ctrl+Alt+F."
   "Run `multi-occur' to find 'TODO' in all buffers."
   (interactive)
   (moccur-word-all-buffers
-   "\\<\\([Tt][Oo][Dd][Oo]\\|[Bb][Uu][Gg]\\)\\>"))
+   "\\<\\([Tt][Oo][Dd][Oo]\\|[Bb][Uu][Gg]\\|[Ff][Ii][Xx][Mm][Ee]\\)\\>"))
 
 ;;--------------------------------------------------------------------
 
-;;;###autoload
-(defun switch-to-other-buffer ()
-  "Switch to (other-buffer)."
-  (interactive)
-  (switch-to-buffer (other-buffer)))
-(defadvice switch-to-other-buffer (after pulse-advice activate)
-  "After switch-to-other-buffer, pulse the line the cursor lands on."
-  (when (and (boundp 'pulse-command-advice-flag)
-             pulse-command-advice-flag
-             (interactive-p))
-    (pulse-momentary-highlight-one-line (point))))
+;; ;;;###autoload
+;; (defun switch-to-other-buffer ()
+;;   "Switch to (other-buffer)."
+;;   (interactive)
+;;   (switch-to-buffer (other-buffer)))
+;; (defadvice switch-to-other-buffer (after pulse-advice activate)
+;;   "After switch-to-other-buffer, pulse the line the cursor lands on."
+;;   (when (and (boundp 'pulse-command-advice-flag)
+;;              pulse-command-advice-flag
+;;              (interactive-p))
+;;     (pulse-momentary-highlight-one-line (point))))
 
 ;;--------------------------------------------------------------------
 
@@ -267,15 +267,15 @@ Like eclipse's Ctrl+Alt+F."
 ;;;###autoload
 ;; (defun goto-match-paren (arg)
 (defun goto-paren (arg)
-  "Go to the matching if on (){}[], similar to vi style of % "
+  "Go to the matching if on (){}[]<>, similar to vi style of % "
   (interactive "p")
   ;; first, check for "outside of bracket" positions expected by
   ;; forward-sexp, etc.
-  (cond ((looking-at "[\[\(\{]") (forward-sexp))
-        ((looking-back "[\]\)\}]" 1) (backward-sexp))
+  (cond ((looking-at "[\[\(\{\<]") (forward-sexp))
+        ((looking-back "[\]\)\}\>]" 1) (backward-sexp))
         ;; now, try to succeed from inside of a bracket
-        ((looking-at "[\]\)\}]") (forward-char) (backward-sexp))
-        ((looking-back "[\[\(\{]" 1) (backward-char) (forward-sexp))
+        ((looking-at "[\]\)\}\>]") (forward-char) (backward-sexp))
+        ((looking-back "[\[\(\{\<]" 1) (backward-char) (forward-sexp))
         (t nil)))
 
 ;;--------------------------------------------------------------------

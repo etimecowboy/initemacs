@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-11-30 Wed 18:27 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 00:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -116,10 +116,10 @@
      (hs-minor-mode-settings)
      ;; (define-key hs-minor-mode-map (kbd "C-c @ C-h") 'hs-hide-block)
      ;; (define-key hs-minor-mode-map (kbd "C-c @ C-w") 'hs-show-block)
-     (define-key hs-minor-mode-map (kbd "S-<f6>") 'hs-toggle-hiding)
+     (define-key hs-minor-mode-map (kbd "<f6>") 'hs-toggle-hiding)
      (define-key hs-minor-mode-map (kbd "C-<f6>") 'hs-hide-level)
      (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
-     (define-key hs-minor-mode-map (kbd "C-S-<f6>") 'hs-show-all)
+     (define-key hs-minor-mode-map (kbd "M-S-<f6>") 'hs-show-all)
      ))
 
 ;;--------------------------------------------------------------------
@@ -152,7 +152,7 @@
 (add-hook 'outline-minor-mode-hook
           (lambda ()
             (require 'outline-magic)
-            (define-key outline-minor-mode-map (kbd "<f6>") 'outline-cycle)
+            (define-key outline-minor-mode-map (kbd "S-<f6>") 'outline-cycle)
             ))
 (am-add-hooks
  `(c-mode-common-hook java-mode-hook
@@ -242,7 +242,7 @@
 (eval-after-load "imenu-tree"
   '(progn
     (imenu-tree-settings)))
-(global-set-key (kbd "C-M-<f7>") 'imenu-tree)
+(global-set-key (kbd "C-S-<f7>") 'imenu-tree)
 
 ;;====================================================================
 ;;* Shell script development settings
