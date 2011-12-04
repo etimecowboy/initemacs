@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-11-28 Mon 17:31 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 03:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,42 +33,37 @@
   (semantic-load-enable-code-helpers)
   ;; (semantic-load-enable-gaudy-code-helpers)
   ;; (semantic-load-enable-excessive-code-helpers)
-  (global-semantic-decoration-mode 1)
-
-  (require 'semantic-decorate-include nil 'noerror)
-
-  (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
-
+  ;; (emantic-load-enable-semantic-debugging-helpers)
   (if window-system
       (semantic-load-enable-semantic-debugging-helpers)
-    (progn (global-semantic-show-unmatched-syntax-mode 1)
-           (global-semantic-show-parser-state-mode 1)))
-  (ignore-errors (semantic-load-enable-primary-exuberent-ctags-support))
+    (progn
+      (global-semantic-highlight-edits-mode -1)
+      (global-semantic-show-unmatched-syntax-mode 1)
+      (global-semantic-show-parser-state-mode 1)))
+  (global-semantic-decoration-mode 1)
+  ;; (ignore-errors (semantic-load-enable-primary-exuberent-ctags-support))
+
+  (require 'semantic-decorate-include nil 'noerror)
+  (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
 
   ;;------------------------------------------------------------------
-
   ;; srecode
-  (global-srecode-minor-mode 1)
+  (global-srecode-minor-mode -1)
 
   ;;------------------------------------------------------------------
-
   ;; ede
   (global-ede-mode 1)
-
   (when (executable-find "global")
     (semanticdb-enable-gnu-global-databases 'c-mode)
     (semanticdb-enable-gnu-global-databases 'c++-mode)
     (setq ede-locate-setup-options '(ede-locate-global ede-locate-base)))
 
   ;;------------------------------------------------------------------
-
   ;; senator
   ;; (global-senator-minor-mode -1)
 
   ;;------------------------------------------------------------------
-
   ;; More settings about semantic
-
   (require 'semantic-c nil 'noerror)
   ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
 
@@ -90,6 +85,17 @@
   ;;   (define-key c-mode-base-map "\C-c " 'semantic-ia-complete-symbol))
   ;; (define-key c-mode-base-map (kbd "M-n") 'semantic-ia-complete-symbol-menu)
 
+  (require 'semantic/bovine/el nil 'noerror)
+  (require 'semantic/analyze/refs)      ; for semantic-ia-fast-jump
+  (defadvice push-mark (around semantic-mru-bookmark activate)
+    "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark'.
+If `semantic-mru-bookmark-mode' is active, also push a tag onto
+the mru bookmark stack."
+    (semantic-mrub-push semantic-mru-bookmark-ring
+                        (point)
+                        'mark)
+    ad-do-it)
+
   (defun semantic-ia-fast-jump-back ()
     (interactive)
     (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
@@ -107,6 +113,12 @@
     (if back
         (semantic-ia-fast-jump-back)
       (semantic-ia-fast-jump (point))))
+
+  (defun semantic-ia-fast-jump-mouse (ev)
+    "semantic-ia-fast-jump with a mouse click. EV is the mouse event."
+    (interactive "e")
+    (mouse-set-point ev)
+    (semantic-ia-fast-jump (point)))
 
   (when (and window-system
              (> emacs-major-version 21)
@@ -133,7 +145,6 @@
             ("mm" . ("h")))))
 
   ;;------------------------------------------------------------------
-
   ;; speedbar
   (setq speedbar-use-images t
         speedbar-track-mouse-flag nil
@@ -149,7 +160,6 @@
 
 
   ;;------------------------------------------------------------------
-
   ;; pulse
   ;; 实现Emacs的淡入淡出效果, is a part of cedet
   ;; REF: http://emacser.com/pulse.htm
@@ -160,7 +170,6 @@
        (pulse-settings)))
 
   ;;------------------------------------------------------------------
-
   ;; zjl-hl, use semantic to highlight functions
   ;; (require 'zjl-hl)
   ;; (zjl-hl-enable-global-all-modes)

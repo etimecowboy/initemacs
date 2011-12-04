@@ -1,11 +1,11 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
-;; File name:    `xy-rc-winpoint.el'
-;; Time-stamp:<2011-12-03 Sat 21:48 xin on P6T-WIN7>
+;; File name:    `xy-rc-windmove.el'
+;; Time-stamp:<2011-12-03 Sat 21:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
-;; Description:  My `winpoint.el' settings
+;; Description:  My `windmove.el' settings
 ;;    ___ _ __ ___   __ _  ___ ___
 ;;   / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;  |  __/ | | | | | (_| | (__\__ \
@@ -18,8 +18,8 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun winpoint-settings ()
-  "Settings of `winpoint.el'."
-  (setq winpoint-non-restore-buffer-list '("*Group*")))
+(defun windmove-settings ()
+  "Settings of `windmove.el'."
+  (setq windmove-wrap-around t))
 
-(provide 'xy-rc-winpoint)
+(provide 'xy-rc-windmove)

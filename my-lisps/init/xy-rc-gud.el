@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gud.el'
-;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
+;; Time-stamp:<2011-12-03 Sat 21:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -90,47 +90,33 @@
 (defun gud-settings ()
   "Settings of `gud.el'."
 
-  ;; 退出gdb的时候关闭gdb对应的buffer
-  ;;(add-hook 'gdb-mode-hook 'kill-buffer-when-shell-command-exit)
-  ;; 显示gdb的鼠标提示
-  ;; (gud-tooltip-mode 1))
-  ;; 显示工具栏方便调试
-  ;; (add-hook 'gdb-mode-hook
-  ;;             '(lambda ()
-  ;;                ;; 退出gdb的时候关闭gdb对应的buffer
-  ;;                (kill-buffer-when-shell-command-exit)
-  ;;                (when window-system
-  ;;                  ;; 显示工具栏方便调试
-  ;;                  (toolbar-mode 1))))
+  (require 'gdb-ui nil 'noerror)
+  (require 'gdb-mi nil 'noerror)
 
-  ;; 退出gdb的时候关闭gdb对应的buffer
-  (add-hook 'gdb-mode-hook 'kill-buffer-when-shell-command-exit)
-  ;; 显示工具栏方便调试
-  (when window-system
-    (tool-bar-mode 1))
-  ;; 在一个新的 Frame 中调试
-  (setq gdb-same-frame -1)
-  ;; 多窗口的布局
-  (setq gdb-many-windows t)
-  ;; 输入输出单独用一个 Window
-  (setq gdb-use-separate-io-buffer t)
-  ;; 监视变量的 speedbar 自动弹出
-  (setq gdb-speedbar-auto-raise t)
-  ;; 显示gdb的鼠标提示
-  (gud-tooltip-mode 1)
+  (setq gdb-same-frame -1            ;; 在一个新的 Frame 中调试
+        gdb-many-windows t           ;; 多窗口的布局
+        gdb-use-separate-io-buffer t ;; 输入输出单独用一个 Window
+        gdb-speedbar-auto-raise t)   ;; 监视变量的 speedbar 自动弹出
 
-  ;; (defadvice gdb (before ecb-deactivate activate)
-  ;;   "if ecb activated, deactivate it."
-  ;;   (when (and (boundp 'ecb-minor-mode) ecb-minor-mode)
-  ;;     (ecb-deactivate)))
+  (defadvice gdb (before ecb-deactivate activate)
+    "if ecb activated, deactivate it."
+    (when (and (boundp 'ecb-minor-mode) ecb-minor-mode)
+      (ecb-deactivate)))
 
   ;; (add-hook 'gdb-mode-hook 'gdb-tooltip-hook)
-  (add-hook 'gdb-mode-hook (lambda () (gud-tooltip-mode 1)))
+  (add-hook 'gdb-mode-hook
+            (lambda ()
+              (tool-bar-mode 1)    ;; 显示工具栏方便调试
+              (gud-tooltip-mode 1) ;; 显示gdb的鼠标提示
+              ;; 退出gdb的时候关闭gdb对应的buffer
+              (kill-buffer-when-shell-command-exit)
+              ))
+
   (defadvice gud-kill-buffer-hook (after gud-tooltip-mode activate)
     "After gdb killed, disable gud-tooltip-mode."
-    (gud-tooltip-mode -1))
+    (gud-tooltip-mode -1)
+    (tool-bar-mode -1))
 
-  ;; ;; (gud-tooltip-mode t)
   ;; (define-key c-mode-base-map [f5] 'gdb)
   ;; (eval-after-load "gud"
   ;;   '(progn

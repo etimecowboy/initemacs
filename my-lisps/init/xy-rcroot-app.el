@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-03 Sat 05:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 21:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -118,33 +118,25 @@
 ;;* Window settings
 
 ;;** window-number
-;; assign a number to a window
 (autoload 'window-number-mode "window-number"
   "A global minor mode that enables selection of windows according to
 numbers with the C-x C-j prefix.  Another mode,
-`window-number-meta-mode' enables the use of the M- prefix."
-  t)
+`window-number-meta-mode' enables the use of the M- prefix." t)
 (autoload 'window-number-meta-mode "window-number"
   "A global minor mode that enables use of the M- prefix to select
 windows, use `window-number-mode' to display the window numbers in
-the mode-line."
-  t)
-
-;; (defun xy/window-number-toggle ()
-;;   "Toggle window number display and quick switch."
-;;   (interactive)
-;;   (window-number-mode) ;; C-c C-j
-;;   ;; (window-number-meta-mode)
-;;   )
-;; (global-set-key [f6] 'xy/window-number-toggle)
+the mode-line." t)
+(global-set-key (kbd "M-S-<f5>") 'window-number-meta-toggle)
 
 ;;--------------------------------------------------------------------
 ;;** Windmove
+(eval-after-load "windmove"
+  '(progn
+     (windmove-settings)))
 (global-set-key (kbd "C-S-<left>")  'windmove-left)
 (global-set-key (kbd "C-S-<up>")    'windmove-up)
 (global-set-key (kbd "C-S-<right>") 'windmove-right)
 (global-set-key (kbd "C-S-<down>")  'windmove-down)
-(setq windmove-wrap-around t)
 
 ;;--------------------------------------------------------------------
 ;;** buffer-move

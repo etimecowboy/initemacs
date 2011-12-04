@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-02 Fri 14:07 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 03:29 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -123,27 +123,39 @@
 ;;--------------------------------------------------------------------
 
 ;;** c/c++ include dir
-
 (Windows
  (defvar user-include-dirs
-   '(".." "../include" "../inc" "../common" "../public"
+   '(;; User header files
+     "." "./include" "./inc" "./common" "./public"
+     ".." "../include" "../inc" "../common" "../public"
      "../.." "../../include" "../../inc" "../../common" "../../public"
-     ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include"
-     ;; "C:/Program Files/Microsoft Visual Studio/VC98/MFC/Include"
-     ;; "D:/Microsoft Visual Studio 9.0/VC/include"
-     ;; "D:/Microsoft Visual Studio 9.0/VC/atlmfc/include"
+     ;; GCC header files
      "E:/program/MinGW/include"
+     "E:/program/MinGW/include/sys"
+     "E:/program/MinGW/include/ddk"
+     "E:/program/MinGW/include/gdiplus"
+     "E:/program/MinGW/include/GL"
+     "E:/program/MinGW/include/libltdl"
+     "E:/program/MinGW/include/sys"
      "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include"
+     "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include/c++"
+     "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include/c++/backward"
      "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include-fixed"
-     "D:/WpdPack/Include"
+     "E:/program/MinGW/lib/gcc/mingw32/4.5.2/finclude"
+     ;; MSYS header files
      ;; "E:/program/MinGW/msys/1.0/include"
-     ;; "E:/program/MinGW/msys/1.0/include/w32api"
+     ;; VC 6 header files
+     ;; "D:/Microsoft Visual Studio/VC98/Include"
+     ;; "D:/Microsoft Visual Studio/VC98/MFC/Include"
+     ;; VC 10 header files
+     ;; "D:/Microsoft Visual Studio 10.0/VC/include"
+     ;; Winpcap headers
+     "D:/WpdPack/Include"
      )
    "User include dirs for c/c++ mode")
  (defvar c-preprocessor-symbol-files
-   '(
-     ;; "C:/MinGW/include/c++/3.4.5/mingw32/bits/c++config.h"
-     ;; "C:/Program Files/Microsoft Visual Studio/VC98/Include/xstddef"
+   '(;; "E:/program/MinGW/lib/gcc/mingw32/4.5.2/include/c++/bits/c++0x_warning.h"
+     ;; "D:/Microsoft Visual Studio/VC98/Include/xstddef"
      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/yvals.h"
      ;; "C:/Program Files/Microsoft Visual Studio 10.0/VC/include/crtdefs.h"
      )
@@ -151,7 +163,9 @@
 
 (GNULinux
  (defvar user-include-dirs
-   '(".." "../include" "../inc" "../common" "../public"
+   '(;; User header files
+     "." "./include" "./inc" "./common" "./public"
+     ".." "../include" "../inc" "../common" "../public"
      "../.." "../../include" "../../inc" "../../common" "../../public"
      "/usr/include" "/usr/local/include")
    "User include dirs for c/c++ mode")

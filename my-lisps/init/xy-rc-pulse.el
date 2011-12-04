@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-pulse.el'
-;; Time-stamp:<2011-11-28 Mon 17:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 03:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,35 +19,65 @@
 ;;;###autoload
 (defun pulse-settings ()
   "Settings for `pulse'."
+  (setq pulse-command-advice-flag t) ;; (if window-system 1 nil)
+  ;; (pulse-toggle-integration-advice t)
+  ;; (pulse-toggle-integration-advice (if window-system 1 -1))
 
-  (defadvice exchange-point-and-mark-nomark (after pulse-advice activate)
+  (defadvice goto-line (after pulse-advice activate)
+    "Cause the line that is `goto'd to pulse when the cursor gets there."
+    (when (and pulse-command-advice-flag (interactive-p))
+      (pulse-momentary-highlight-one-line (point))))
+  (defadvice exchange-point-and-mark (after pulse-advice activate)
     "Cause the line that is `goto'd to pulse when the cursor gets there."
     (when (and pulse-command-advice-flag (interactive-p)
                (> (abs (- (point) (mark))) 400))
       (pulse-momentary-highlight-one-line (point))))
-
+  (defadvice find-tag (after pulse-advice activate)
+    "After going to a tag, pulse the line the cursor lands on."
+    (when (and pulse-command-advice-flag (interactive-p))
+      (pulse-momentary-highlight-one-line (point))))
+  (defadvice tags-search (after pulse-advice activate)
+    "After going to a hit, pulse the line the cursor lands on."
+    (when (and pulse-command-advice-flag (interactive-p))
+      (pulse-momentary-highlight-one-line (point))))
+  (defadvice tags-loop-continue (after pulse-advice activate)
+    "After going to a hit, pulse the line the cursor lands on."
+    (when (and pulse-command-advice-flag (interactive-p))
+      (pulse-momentary-highlight-one-line (point))))
+  (defadvice pop-tag-mark (after pulse-advice activate)
+    "After going to a hit, pulse the line the cursor lands on."
+    (when (and pulse-command-advice-flag (interactive-p))
+      (pulse-momentary-highlight-one-line (point))))
+  (defadvice imenu-default-goto-function (after pulse-advice activate)
+    "After going to a tag, pulse the line the cursor lands on."
+    (when pulse-command-advice-flag
+      (pulse-momentary-highlight-one-line (point))))
+  (defadvice cua-exchange-point-and-mark (after pulse-advice activate)
+    "Cause the line that is `goto'd to pulse when the cursor gets there."
+    (when (and pulse-command-advice-flag (interactive-p)
+               (> (abs (- (point) (mark))) 400))
+      (pulse-momentary-highlight-one-line (point))))
   (defadvice switch-to-buffer (after pulse-advice activate)
-    "Cause the current line of new buffer to pulse when the cursor gets there."
+    "After switch-to-buffer, pulse the line the cursor lands on."
     (when (and pulse-command-advice-flag (interactive-p))
       (pulse-momentary-highlight-one-line (point))))
-
+  (defadvice previous-buffer (after pulse-advice activate)
+    "After previous-buffer, pulse the line the cursor lands on."
+    (when (and pulse-command-advice-flag (interactive-p))
+      (pulse-momentary-highlight-one-line (point))))
+  (defadvice next-buffer (after pulse-advice activate)
+    "After next-buffer, pulse the line the cursor lands on."
+    (when (and pulse-command-advice-flag (interactive-p))
+      (pulse-momentary-highlight-one-line (point))))
   (defadvice ido-switch-buffer (after pulse-advice activate)
-    "Cause the current line of new buffer to pulse when the cursor gets there."
+    "After ido-switch-buffer, pulse the line the cursor lands on."
     (when (and pulse-command-advice-flag (interactive-p))
       (pulse-momentary-highlight-one-line (point))))
-
-  (defadvice visit-.emacs (after pulse-advice activate)
-    "Cause the current line of .emacs buffer to pulse when the cursor gets there."
-    (when (and pulse-command-advice-flag (interactive-p))
-      (pulse-momentary-highlight-one-line (point))))
-
   (defadvice beginning-of-buffer (after pulse-advice activate)
-    "Cause the current line of buffer to pulse when the cursor gets there."
+    "After beginning-of-buffer, pulse the line the cursor lands on."
     (when (and pulse-command-advice-flag (interactive-p))
       (pulse-momentary-highlight-one-line (point))))
-
-  (pulse-toggle-integration-advice t)
-  ;; (pulse-toggle-integration-advice (if window-system 1 -1))
+  (add-hook 'next-error-hook 'pulse-line-hook-function)
   )
 
 ;;;###autoload

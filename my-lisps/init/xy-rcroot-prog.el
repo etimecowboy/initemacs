@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-03 Sat 06:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-03 Sat 21:00 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -404,7 +404,6 @@ buffer."  t)
 ;;--------------------------------------------------------------------
 ;;** codepilot
 ;; someone else's c/c++ development environment
-
 ;; (setq codepilot-dir (concat my-local-lisp-path "codepilot"))
 ;; (try-require 'mycutil)
 ;; ;;;###autoload
@@ -413,7 +412,6 @@ buffer."  t)
 ;;   (emaci-add-key-definition
 ;;    "[" 'cp-pb-where-we-are
 ;;    '(memq major-mode dev-modes)))
-
 ;; (eval-after-load "emaci"
 ;;   '(progn
 ;;     (codepilot-settings-4-emaci)))
@@ -423,25 +421,20 @@ buffer."  t)
 ;; 一个方便开发c的工具
 ;; ;; 包中定义了C-j 为goto-line, 还设置了c-style
 ;; (require 'kde-emacs-core)
-
 ;; (autoload 'agulbra-make-member "kde-emacs-utils"
 ;;   "make a skeleton member function in the .cpp or .cc file" t)
-
 ;; (eal-define-keys
 ;;  'c++-mode-map
 ;;  `(("C-c C-b" agulbra-make-member)))
-
 ;; ;;;###autoload
 ;; (defun kde-emacs-settings ()
 ;;   "Settings for `kde-emacs'."
 ;;   (setq magic-keys-mode nil)
 ;;   (setq kde-tab-behavior 'indent)
-
 ;;   (am-add-hooks
 ;;    `(java-mode-hook)
 ;;    (lambda ()
 ;;      (c-set-style "kde-c++"))))
-
 ;; (eval-after-load "kde-emacs-core"
 ;;   '(progn
 ;;     (kde-emacs-settings)))
@@ -469,14 +462,12 @@ buffer."  t)
 ;; (global-set-key (kbd "C-c x ,") 'xref-previous-reference)
 ;; ;; 下一个引用
 ;; (global-set-key (kbd "C-c x .") 'xref-next-reference)
-
 ;; ;;;###autoload
 ;; (defun xref-settings ()
 ;;   "settings for `xref'."
 ;;   (defvar xref-current-project nil)
 ;;   (defvar xref-key-binding 'global)
 ;;   (setq exec-path (cons (concat my-local-lisp-path "xref") exec-path)))
-
 ;; (eval-after-load "xref"
 ;;   '(progn
 ;;     (xref-settings)))
@@ -525,17 +516,14 @@ buffer."  t)
 
 ;; Key bindings:
 ;; \\{doxymacs-mode-map}" t)
-
 ;; (am-add-hooks
 ;;  `(c-mode-common-hook php-mode-hook)
 ;;  (lambda ()
 ;;    (doxymacs-mode 1)
 ;;    (doxymacs-font-lock)))
-
 ;; ;;;###autoload
 ;; (defun doxymacs-settings ()
 ;;   "Settings for `doxymacs'.")
-
 ;; (eval-after-load "doxymacs"
 ;;   '(progn
 ;;     (doxymacs-settings)))
@@ -555,7 +543,7 @@ buffer."  t)
 ;;** flymake
 ;; 动态检查语法错误
 (autoload 'flymake-find-file-hook "flymake" "" t)
-(add-hook 'find-file-hook 'flymake-find-file-hook)
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
 (eval-after-load "flymake"
   '(progn
      (flymake-settings)
@@ -668,11 +656,6 @@ buffer."  t)
 ;;    ("M-c"   gud-cont)
 ;;    ("M-C"   capitalize-word)
 ;;    ("C-c m" make)))
-
-(defadvice gdb (before ecb-deactivate activate)
-  "if ecb activated, deactivate it."
-  (when (and (boundp 'ecb-minor-mode) ecb-minor-mode)
-    (ecb-deactivate)))
 
 (eval-after-load "gdb-ui"
   '(progn
