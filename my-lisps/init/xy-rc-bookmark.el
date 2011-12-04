@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-bookmark.el'
-;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,6 +25,8 @@
   (setq bookmark-default-file (concat my-var-path "/bookmark-"
                                       user-login-name "@"
                                       system-name "@"
-                                      system-configuration)))
+                                      system-configuration))
+  (message "* ---[ bookmark configuration is complete ]---")
+  )
 
 (provide 'xy-rc-bookmark)

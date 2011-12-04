@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-git.el'
-;; Time-stamp:<2011-11-26 Sat 02:57 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,6 +28,7 @@
 ;;;###autoload
 (defun git-settings ()
   "Settings of `git.el'."
+  (message "* ---[ git configuration is complete ]---")
 )
 
 (provide 'xy-rc-git)

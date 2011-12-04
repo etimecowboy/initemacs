@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-diary.el'
-;; Time-stamp:<2011-11-26 Sat 02:54 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun diary-settings ()
   "Settings of `diary'."
-
   (setq diary-file (concat my-emacs-path "/diary/diary"))
   ;; create an empty diary file (if it does not exist yet)
   (unless (file-exists-p diary-file)
@@ -43,11 +42,11 @@
 
   ;; allow `#includes' in diary-file
   (add-hook 'list-diary-entries-hook 'include-other-diary-files)
-
   ;; Mark today when display
   (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-
   (add-hook 'diary-hook 'appt-make-list)
+
+  (message "* ---[ diary configuration is complete ]---")
   )
 
 (provide 'xy-rc-diary)

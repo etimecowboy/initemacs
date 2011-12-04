@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-browse-kill-ring.el'
-;; Time-stamp:<2011-12-02 Fri 22:51 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:10 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -55,6 +55,7 @@
 
   (def-without-linum-mode "browse-kill-ring-forward")
   (def-without-linum-mode "browse-kill-ring-previous")
+  (message "* ---[ browse-kill-ring configuration is complete ]---")
 )
 
 ;;;###autoload

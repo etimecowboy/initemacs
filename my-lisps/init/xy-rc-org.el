@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-02 Fri 14:54 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -951,7 +951,9 @@ save -ascii %s ans")
   ;;------------------------------------------------------------------
   (define-key org-mode-map (kbd "C-c t") 'timestamp)
   (define-key org-mode-map (kbd "C-c h") 'xy/org-html-chinese-no-extra-space)
-  )
+
+  (message "* ---[ org configuration is complete ]---")
+)
 
 (provide 'xy-rc-org)
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-log-view.el'
-;; Time-stamp:<2011-11-26 Sat 03:00 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:27 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,14 +16,15 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;###autoload
-(defun log-view-face-settings ()
-  "Face settings for `log-view'."
-  (if is-before-emacs-21
-      (progn
-        (set-face-foreground 'log-view-file-face "green")
-        (set-face-foreground 'log-view-message-face "yellow"))
-    (setq log-view-file-face 'darkgreen-face)
-    (setq log-view-message-face 'darkyellow-face)))
+;; ;;;###autoload
+;; (defun log-view-face-settings ()
+;;   "Face settings for `log-view'."
+;;   (if is-before-emacs-21
+;;       (progn
+;;         (set-face-foreground 'log-view-file-face "green")
+;;         (set-face-foreground 'log-view-message-face "yellow"))
+;;     (setq log-view-file-face 'darkgreen-face)
+;;     (setq log-view-message-face 'darkyellow-face))
+;; )
 
 (provide 'xy-rc-log-view)

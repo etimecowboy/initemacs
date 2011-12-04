@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-install.el'
-;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,6 +20,8 @@
 (defun auto-install-settings ()
   "Settings of `auto-install.el'."
   (setq auto-install-save-confirm nil)
-  (setq auto-install-directory my-local-lisp-path))
+  (setq auto-install-directory my-local-lisp-path)
+  (message "* ---[ auto-install configuration is complete ]---")
+)
 
 (provide 'xy-rc-auto-install)

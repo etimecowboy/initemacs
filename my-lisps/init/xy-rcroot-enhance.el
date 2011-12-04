@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-03 Sat 06:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:10 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -216,7 +216,6 @@
         ("U"   scroll-down)
         ("u"   View-scroll-half-page-backward)
         ("o"   other-window)))))
-
 (global-set-key (kbd "C-=") 'browse-kill-ring)
 
 ;;====================================================================

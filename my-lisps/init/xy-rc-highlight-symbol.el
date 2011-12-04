@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-highlight-symbol.el'
-;; Time-stamp:<2011-11-28 Mon 16:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,7 +64,6 @@ DIR has to be 1 or -1."
 ;;;###autoload
 (defun highlight-symbol-settings ()
   "Settings for `highlight-symbol'."
-
   (setq highlight-symbol-idle-delay 0.5)
   ;; I bind "C-x w" to `copy-sexp'
   (eal-define-keys
@@ -85,18 +84,21 @@ DIR has to be 1 or -1."
        lisp-interaction-mode-hook java-mode-hook
        c-mode-common-hook text-mode-hook ruby-mode-hook
        html-mode-hook sh-mode-hook Info-mode-hook perl-mode-hook)
-     'highlight-symbol-mode-on)))
+     'highlight-symbol-mode-on))
 
-;;;###autoload
-(defun highlight-symbol-face-settings ()
-  "Face settings for `highlight-symbol'."
-  (custom-set-faces
-   '(highlight-symbol-face
-     ((((type tty))
-       :background "white" :foreground "black")
-      (((class color) (background dark))
-       :background "gray30" :foreground "#AD0DE2FAFFFF")
-      (((class color) (background light))
-       :background "gray90")))))
+  (message "* ---[ highlight-symbol configuration is complete ]---")
+)
+
+;; ;;;###autoload
+;; (defun highlight-symbol-face-settings ()
+;;   "Face settings for `highlight-symbol'."
+;;   (custom-set-faces
+;;    '(highlight-symbol-face
+;;      ((((type tty))
+;;        :background "white" :foreground "black")
+;;       (((class color) (background dark))
+;;        :background "gray30" :foreground "#AD0DE2FAFFFF")
+;;       (((class color) (background light))
+;;        :background "gray90")))))
 
 (provide 'xy-rc-highlight-symbol)

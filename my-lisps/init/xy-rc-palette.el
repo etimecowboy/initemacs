@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-palette.el'
-;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -93,10 +93,10 @@
 ;;;###autoload
 (defun palette-settings ()
   "settings of `palette'."
-
   (require 'facemenu+)
-
-  ;; (add-hook 'palette-mode-hook 'blink-cursor-mode-disable)
+  (add-hook 'palette-mode-hook
+            (progn
+              (link-cursor-mode -1)))
 
   (defmacro def-palette-move-command (move-command speed)
     "Make definition of command which palette move quickly."
@@ -111,15 +111,16 @@
      ("palette-up"    7)
      ("palette-left"  7)
      ("palette-right" 7)))
-
-  (add-to-list 'delete-frame-functions 'kill-palette-buffers))
-
-  ;; (if window-system
-  ;;     (let ((font (car (x-list-fonts "-outline-Courier New-normal-normal-normal-mono-6-*-*-*-c-*-iso8859-1" nil nil 1))))
-  ;;       (if font
-  ;;           (setq palette-font font))))
-
-  ;; (defvar facemenup-palette-change-face-bg nil "Face background be changed or not.")
-  ;; (defvar facemenup-last-face-color nil "Last face color used.")
+  (add-to-list 'delete-frame-functions 'kill-palette-buffers)
+  (message "* ---[ palette configuration is complete ]---")
+)
 
 (provide 'palette-settings)
+
+;; (if window-system
+;;     (let ((font (car (x-list-fonts "-outline-Courier New-normal-normal-normal-mono-6-*-*-*-c-*-iso8859-1" nil nil 1))))
+;;       (if font
+;;           (setq palette-font font))))
+
+;; (defvar facemenup-palette-change-face-bg nil "Face background be changed or not.")
+;; (defvar facemenup-last-face-color nil "Last face color used.")

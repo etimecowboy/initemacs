@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-moccur.el'
-;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -77,17 +77,18 @@
 ;;;###autoload
 (defun moccur-settings ()
   "Settings for `moccur'."
-(require 'moccur-edit)
+  (require 'moccur-edit)
+  (message "* ---[ moccur configuration is complete ]---")
   )
 
-;;;###autoload
-(defun moccur-face-settings ()
-  "Face settings for `color-moccur'."
-  (set-face-foreground 'moccur-current-line-face "red")
-  (set-face-background 'moccur-current-line-face "blue")
-  (custom-set-faces '(moccur-face
-                      ((((type tty)) :bold t :foreground "red")
-                       (t :bold nil :foreground "red"))))
-  (set-face-background 'moccur-face "white"))
+;; ;;;###autoload
+;; (defun moccur-face-settings ()
+;;   "Face settings for `color-moccur'."
+;;   (set-face-foreground 'moccur-current-line-face "red")
+;;   (set-face-background 'moccur-current-line-face "blue")
+;;   (custom-set-faces '(moccur-face
+;;                       ((((type tty)) :bold t :foreground "red")
+;;                        (t :bold nil :foreground "red"))))
+;;   (set-face-background 'moccur-face "white"))
 
 (provide 'xy-rc-color-moccur)

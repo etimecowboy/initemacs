@@ -1,7 +1,7 @@
 ;;   -*- Mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-imenu.el'
-;; Time-stamp:<2011-11-30 Wed 18:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,6 @@
 ;;;###autoload
 (defun imenu-settings ()
   "Settings for `imenu'."
-
   (try-require 'imenu+)
 
   (defvar text-imenu-generic-expression
@@ -62,6 +61,8 @@
               ;; (make-local-variable imenu-generic-expression)
               (setq imenu-generic-expression
                     sql-imenu-generic-expression)))
+
+  (message "* ---[ imenu configuration is complete ]---")
   )
 
 (provide 'xy-rc-imenu)

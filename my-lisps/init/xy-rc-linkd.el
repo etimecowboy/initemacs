@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-linkd.el'
-;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun xy/linkd-start ()
   "Start linkd."
-
   (interactive)
   (require 'linkd)
   (linkd-mode 1)
@@ -31,11 +30,13 @@
   "settings for `linkd'."
   (setq linkd-use-icons t)
   (setq linkd-icons-directory
-    (concat my-local-image-path "/linkd")))
+    (concat my-local-image-path "/linkd"))
+  (message "* ---[ linkd configuration is complete ]---")
+)
 
-;;;###autoload
-(defun linkd-face-settings ()
-  "face settings for `linkd'."
-  (set-face-foreground 'linkd-generic-link "yellow"))
+;; ;;;###autoload
+;; (defun linkd-face-settings ()
+;;   "face settings for `linkd'."
+;;   (set-face-foreground 'linkd-generic-link "yellow"))
 
 (provide 'xy-rc-linkd)

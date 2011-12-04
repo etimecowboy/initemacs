@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-time-stamp.el'
-;; Time-stamp:<2011-11-26 Sat 03:03 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,8 +24,8 @@
    ;; End of a time stamp
    (setq time-stamp-end "\n")
    ;; format of the string inserted by `M-x time-stamp'
-   (setq time-stamp-format "<%Y-%02m-%02d %3a %02H:%02M %u on %s>"))
-;;`YYYY-MM-DD Weekday HH:MM user on system'
-;; See `system-time-locale' for non-numeric formatted items of time
+   (setq time-stamp-format "<%Y-%02m-%02d %3a %02H:%02M %u on %s>")
+   (message "* ---[ time-stamp configuration is complete ]---")
+)
 
 (provide 'xy-rc-time-stamp)

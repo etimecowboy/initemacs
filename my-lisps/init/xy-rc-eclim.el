@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-eclim.el'
-;; Time-stamp:<2011-11-26 Sat 02:55 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,8 @@
 ;;;###autoload
 (defun eclim-settings ()
   "Settings for `eclim'."
-
-  (setq eclim-auto-save t))
+  (setq eclim-auto-save t)
+  (message "* ---[ eclim configuration is complete ]---")
+)
 
 (provide 'xy-rc-eclim)

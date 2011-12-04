@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-verilog.el'
-;; Time-stamp:<2011-11-26 Sat 03:04 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,6 @@
 ;;;###autoload
 (defun verilog-mode-settings ()
   "settings for `verilog-mode'."
-
   (setq verilog-mode-hook 'verilog-set-compile-command linum-mode)
 
   ;; (autoload 'verilog-mode "verilog-mode" "Verilog mode" t )
@@ -45,6 +44,9 @@
         verilog-auto-endcomments         t
         verilog-minimum-comment-distance 40
         verilog-indent-begin-after-if    t
-        verilog-auto-lineup              'all))
+        verilog-auto-lineup              'all)
+
+  (message "* ---[ verilog-mode configuration is complete ]---")
+)
 
 (provide 'xy-rc-verilog)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c.el'
-;; Time-stamp:<2011-11-29 Tue 01:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -139,16 +139,12 @@
   ;; 这不是一个好办法，也可以把它加载到c-mode-hook or c++-mode-hook中
   (setq c/c++-hightligh-included-files-timer (run-with-idle-timer 0.5 t 'c/c++-hightligh-included-files))
 
-  ;; c中隐藏ifdef
-  (require 'hideif)
+  (require 'hideif)      ;; c中隐藏ifdef
+  (require 'ifdef)       ;; 为不同层次的ifdef着色
+  (require 'c-includes)  ;; 快速include
+  (require 'xcscope)     ;; 在 C 源代码中快速跳转，查找变量，函数
 
-  ;; 为不同层次的ifdef着色
-  (require 'ifdef)
-
-  ;; 快速include
-  (require 'c-includes)
-
-  ;; 在 C 源代码中快速跳转，查找变量，函数
-  (require 'xcscope))
+  (message "* ---[ C/C++ development configuration is complete ]---")
+)
 
 (provide 'xy-rc-c)

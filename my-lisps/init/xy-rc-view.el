@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-view.el'
-;; Time-stamp:<2011-11-26 Sat 03:04 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,11 +17,20 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
+(defun previous-line-or-backward-button ()
+  "`major-mode'为`help-mode'时, 执行`backward-button', 否则执行`previous-line'."
+  (interactive)
+  (if (equal major-mode 'help-mode)
+      (call-interactively 'backward-button)
+    (call-interactively 'previous-line)))
+
+;;;###autoload
 (defun view-mode-settings ()
   "settings for `view-mode'."
-  (defface view-mode-mode-line-face
-    '((((type tty pc)) :bold t :background "red" :foreground "white") (t (:background "red" :foreground "white")))
-    "Face used highlight `view-mode-line-format'.")
+  ;; (defface view-mode-mode-line-face
+  ;;   '((((type tty pc)) :bold t :background "red" :foreground "white")
+  ;;     (t (:background "red" :foreground "white")))
+  ;;   "Face used highlight `view-mode-line-format'.")
 
   (defvar view-mode-line-format
     (propertize "View"
@@ -37,11 +46,6 @@
          `((view-mode " ") (view-mode ,view-mode-line-format))
          (delq (assq 'view-mode minor-mode-alist) minor-mode-alist) ))
 
-  (defun previous-line-or-backward-button ()
-    "`major-mode'为`help-mode'时, 执行`backward-button', 否则执行`previous-line'."
-    (interactive)
-    (if (equal major-mode 'help-mode)
-        (call-interactively 'backward-button)
-      (call-interactively 'previous-line))))
+  (message "* ---[ view-mode configuration is complete ]---"))
 
 (provide 'xy-rc-view)

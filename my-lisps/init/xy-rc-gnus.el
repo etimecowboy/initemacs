@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-11-30 Wed 06:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,7 +26,6 @@
 ;;;###autoload
 (defun gnus-settings ()
   "Settings of `gnus'."
-
   ;; Set Gnus directorys
   (setq gnus-init-file (concat my-local-lisp-path "/xy-rc-gnus.el") ;gnus设置文件
         gnus-default-directory "~/emacs/gnus"   ;默认目录
@@ -686,9 +685,10 @@ archive
    (when (try-require 'org-mime)
      (add-hook 'message-mode-hook
                (lambda ()
-                 (local-set-key "\C-c\M-o" 'org-mime-htmlize)))
-     )
-   )
+                 (local-set-key "\C-c\M-o" 'org-mime-htmlize))))
+
+   (message "* ---[ gnus configuration is complete ]---")
+)
 
 ;;----------------------------------------------------------------------
 

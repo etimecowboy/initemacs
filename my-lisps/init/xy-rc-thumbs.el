@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-thumbs.el'
-;; Time-stamp:<2011-11-28 Mon 15:34 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 18:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,6 +29,8 @@
   (setq thumbs-relief 0)
   (setq thumbs-thumbsdir-auto-clean t)
   (setq thumbs-temp-dir
-        (concat my-var-path "/thumbs")))
+        (concat my-var-path "/thumbs"))
+  (message "* ---[ thumbs configuration is complete ]---")
+)
 
 (provide 'xy-rc-thumbs)

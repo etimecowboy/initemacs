@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-isearch.el'
-;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -90,18 +90,18 @@
 ;;;###autoload
 (defun isearch-settings ()
   "settings for `isearch'."
+  (setq-default case-fold-search t) ;; 搜索时不区分大小写
+  (message "* ---[ isearch configuration is complete ]---")
+)
 
-  ;; 搜索时不区分大小写
-  (setq-default case-fold-search t))
-
-;;;###autoload
-(defun isearch-face-settings ()
-  "Face settings for `isearch'."
-  (set-face-foreground 'isearch "red")
-  (set-face-background 'isearch "blue")
-  (when (not is-before-emacs-21)
-    (set-face-foreground 'lazy-highlight "black")
-    (set-face-background 'lazy-highlight "white"))
-  (custom-set-faces '(isearch-fail ((((class color)) (:background "red"))))))
+;; ;;;###autoload
+;; (defun isearch-face-settings ()
+;;   "Face settings for `isearch'."
+;;   (set-face-foreground 'isearch "red")
+;;   (set-face-background 'isearch "blue")
+;;   (when (not is-before-emacs-21)
+;;     (set-face-foreground 'lazy-highlight "black")
+;;     (set-face-background 'lazy-highlight "white"))
+;;   (custom-set-faces '(isearch-fail ((((class color)) (:background "red"))))))
 
 (provide 'xy-rc-isearch)

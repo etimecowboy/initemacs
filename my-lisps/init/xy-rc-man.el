@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-man.el'
-;; Time-stamp:<2011-11-28 Mon 15:04 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:29 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,13 +29,14 @@
   (setq Man-fontify-manpage-flag t)
   ;; (setq Man-overstrike-face 'bold)
   (setq Man-width 67)
+  (message "* ---[ Man configuration is complete ]---")
 )
 
-;;;###autoload
-(defun man-face-settings ()
-  "Face settings for `man'."
-  (setq Man-overstrike-face 'yellow-face)
-  (setq Man-underline-face 'underline-green-face)
-  (setq Man-reverse-face 'red-face))
+;; ;;;###autoload
+;; (defun man-face-settings ()
+;;   "Face settings for `man'."
+;;   (setq Man-overstrike-face 'yellow-face)
+;;   (setq Man-underline-face 'underline-green-face)
+;;   (setq Man-reverse-face 'red-face))
 
 (provide 'xy-rc-man)

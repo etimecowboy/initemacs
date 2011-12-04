@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hippie-expand.el'
-;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,6 @@
 ;;;###autoload
 (defun ywb-hippie-expand-filename ()
   "自动补全文件名."
-
   (interactive)
   (let ((hippie-expand-try-functions-list
          '(try-complete-file-name
@@ -60,6 +59,9 @@
               try-expand-all-abbrevs
               try-expand-list
               try-expand-line
-              try-expand-whole-kill)))))
+              try-expand-whole-kill))))
+
+  (message "* ---[ hippie-expand configuration is complete ]---")
+)
 
 (provide 'xy-rc-hippie-expand)

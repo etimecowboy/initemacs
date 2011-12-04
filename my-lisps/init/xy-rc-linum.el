@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-linum.el'
-;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,21 +19,21 @@
 ;;;###autoload
 (defun linum-settings ()
   "settings for `linum'."
-
   (unless is-after-emacs-23
     (require 'linum "linum-for-22"))
   ;; linum+
   ;; REF: http://emacser.com/linum-plus.htm
   (require 'linum+)
+  (message "* ---[ linum configuration is complete ]---")
 )
 
-;;;###autoload
-(defun linum-face-settings ()
-  "Face settings for `linum'."
-  (custom-set-faces
-   '(linum
-     ((((background dark))
-       :foreground "cyan")
-      (t :foreground "gray")))))
+;; ;;;###autoload
+;; (defun linum-face-settings ()
+;;   "Face settings for `linum'."
+;;   (custom-set-faces
+;;    '(linum
+;;      ((((background dark))
+;;        :foreground "cyan")
+;;       (t :foreground "gray")))))
 
 (provide 'xy-rc-linum)

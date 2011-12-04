@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-grep.el'
-;; Time-stamp:<2011-11-26 Sat 02:57 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -80,12 +80,13 @@ SYMBOL should be one of `grep-command', `grep-template',
 (defun grep-settings ()
   "settings for `grep'."
   (set-default-grep-command)
-
   (defvar grep-ignore-case nil "When run `grep' ignore case or not.")
-
   (when grep-ignore-case
     (if is-after-emacs-23
         (grep-apply-setting 'grep-command "grep -inH -e ")
-      (setq grep-command "grep -inH -e "))))
+      (setq grep-command "grep -inH -e ")))
+
+  (message "* ---[ grep configuration is complete ]---")
+)
 
 (provide 'xy-rc-grep)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-replace.el'
-;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,22 +16,21 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;###autoload
-(defun replace-face-settings ()
-  "Face settings for `replace'."
-
-  (custom-set-faces
-   '(match
-     ((((class color) (min-colors 88) (background light))
-       :background "yellow1")
-      (((class color) (min-colors 88) (background dark))
-       :background "RoyalBlue3" :foreground "cyan")
-      (((class color) (min-colors 8) (background light))
-       :background "yellow" :foreground "black")
-      (((class color) (min-colors 8) (background dark))
-       :background "blue" :foreground "white")
-      (((type tty) (class mono))
-       :inverse-video t)
-      (t :background "gray")))))
+;; ;;;###autoload
+;; (defun replace-face-settings ()
+;;   "Face settings for `replace'."
+;;   (custom-set-faces
+;;    '(match
+;;      ((((class color) (min-colors 88) (background light))
+;;        :background "yellow1")
+;;       (((class color) (min-colors 88) (background dark))
+;;        :background "RoyalBlue3" :foreground "cyan")
+;;       (((class color) (min-colors 8) (background light))
+;;        :background "yellow" :foreground "black")
+;;       (((class color) (min-colors 8) (background dark))
+;;        :background "blue" :foreground "white")
+;;       (((type tty) (class mono))
+;;        :inverse-video t)
+;;       (t :background "gray")))))
 
 (provide 'xy-rc-replace)

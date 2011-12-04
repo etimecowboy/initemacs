@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-artist.el'
-;; Time-stamp:<2011-11-26 Sat 02:49 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -51,6 +51,9 @@
   (am-def-active-fun highlight-symbol-mode highlight-symbol-mode-active)
 
   (add-hook 'artist-mode-init-hook 'artist-mode-init-hook-settings)
-  (add-hook 'artist-mode-exit-hook 'artist-mode-exit-hook-settings))
+  (add-hook 'artist-mode-exit-hook 'artist-mode-exit-hook-settings)
+
+  (message "* ---[ artist configuration is complete ]---")
+)
 
 (provide 'xy-rc-artist)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sh.el'
-;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,31 +16,30 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-
 ;;;###autoload
 (defun sh-mode-settings ()
   "settings for `sh-mode'."
   (font-lock-add-keywords
    'sh-mode
    '(("\\<\\(local\\|let\\)\\>" . font-lock-keyword-face)))
-  ;; (xy/set-font-default)
-  )
+  (message "* ---[ sh-mode configuration is complete ]---")
+)
 
-;;;###autoload
-  (defun sh-mode-face-settings ()
-    "Face settings for `sh-mode'."
-    (custom-set-faces
-     '(sh-heredoc
-       ((((min-colors 88) (class color)
-          (background dark))
-         (:foreground "deeppink"))
-        (((class color)
-          (background dark))
-         (:foreground "deeppink"))
-        (((class color)
-          (background light))
-         (:foreground "tan1" ))
-        (t
-         (:weight bold))))))
+;; ;;;###autoload
+;;   (defun sh-mode-face-settings ()
+;;     "Face settings for `sh-mode'."
+;;     (custom-set-faces
+;;      '(sh-heredoc
+;;        ((((min-colors 88) (class color)
+;;           (background dark))
+;;          (:foreground "deeppink"))
+;;         (((class color)
+;;           (background dark))
+;;          (:foreground "deeppink"))
+;;         (((class color)
+;;           (background light))
+;;          (:foreground "tan1" ))
+;;         (t
+;;          (:weight bold))))))
 
 (provide 'xy-rc-sh)

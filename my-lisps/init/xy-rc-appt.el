@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
-;; Time-stamp:<2011-11-26 Sat 02:49 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -62,6 +62,8 @@
   ;; turn appointment checking on
   ;; (appt-activate 1)
   (unless (daemonp) (appt-activate 1))
+
+  (message "* ---[ appt configuration is complete ]---")
  )
 
 (provide 'xy-rc-appt)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-full-ack.el'
-;; Time-stamp:<2011-11-26 Sat 02:57 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,6 +36,8 @@
   (setq ack-context 0)
   (setq ack-executable (executable-find "ack-grep"))
   (setq ack-heading nil)
-  (setq ack-prompt-for-directory t))
+  (setq ack-prompt-for-directory t)
+  (message "* ---[ full-ack configuration is complete ]---")
+)
 
 (provide 'xy-rc-full-ack)

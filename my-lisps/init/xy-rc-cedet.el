@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-12-04 Sun 03:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -41,13 +41,14 @@
       (global-semantic-show-unmatched-syntax-mode 1)
       (global-semantic-show-parser-state-mode 1)))
   (global-semantic-decoration-mode 1)
+  ;; (semantic-idle-completions-mode 1)
   ;; (ignore-errors (semantic-load-enable-primary-exuberent-ctags-support))
 
   (require 'semantic-decorate-include nil 'noerror)
   (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
 
   ;;------------------------------------------------------------------
-  ;; srecode
+  ;; srecode, use yasnippet as my code template
   (global-srecode-minor-mode -1)
 
   ;;------------------------------------------------------------------
@@ -56,14 +57,16 @@
   (when (executable-find "global")
     (semanticdb-enable-gnu-global-databases 'c-mode)
     (semanticdb-enable-gnu-global-databases 'c++-mode)
-    (setq ede-locate-setup-options '(ede-locate-global ede-locate-base)))
+    (setq ede-locate-setup-options
+          '(ede-locate-global ede-locate-base)))
 
   ;;------------------------------------------------------------------
-  ;; senator
-  ;; (global-senator-minor-mode -1)
+  ;; senator, included in
+  ;; `semantic-load-enable-semantic-debugging-helpers'
+  ;; (global-senator-minor-mode 1)
 
   ;;------------------------------------------------------------------
-  ;; More settings about semantic
+  ;; C/C++ related settings
   (require 'semantic-c nil 'noerror)
   ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
 
@@ -125,6 +128,8 @@ the mru bookmark stack."
              (require 'semantic-tag-folding nil 'noerror))
     (global-semantic-tag-folding-mode 1))
 
+  ;;------------------------------------------------------------------
+  ;; eassist
   (when (require 'eassist nil 'noerror)
     (setq eassist-header-switches
           '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
@@ -176,6 +181,7 @@ the mru bookmark stack."
 
   ;;------------------------------------------------------------------
 
+  (message "* ---[ cedet configuration is complete ]---")
  )
 
 (provide 'xy-rc-cedet)

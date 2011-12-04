@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-zjl-hl.el'
-;; Time-stamp:<2011-11-26 Sat 03:05 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,12 +20,13 @@
 (defun zjl-hl-settings ()
   "Settings for `zjl-hl'."
   (setq zjl-hl-c++-mode-enable-flag t)
-  (zjl-hl-enable-global-all-modes))
+  (zjl-hl-enable-global-all-modes)
+  (message "* ---[ zjl-hl configuration is complete ]---")
+)
 
 ;;;###autoload
 (defun zjl-hl-face-settings ()
   "Face settings for `zjl-hl'."
-
   (custom-set-faces
    ;; '(zjl-elisp-hl-function-call-face
    ;;      ((((class grayscale) (background light))
@@ -75,8 +76,6 @@
    '(zjl-hl-parameters-reference-face
      ((((class color) (background dark))
        (:foreground "Yellow" :weight bold))))))
-
-
 
   ;; (custom-set-faces
   ;;  '(zjl-hl-function-call-face

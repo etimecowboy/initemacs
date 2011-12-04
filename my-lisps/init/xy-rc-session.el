@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun session-settings ()
   "Settings for `session'."
-
   ;; BUG: this setq seems to cause problem when recovering last point
   ;;      position.
   ;; (setq session-initialize '(session menus))
@@ -36,6 +35,9 @@
 
   (setq session-globals-max-size 100)
   (setq session-globals-max-string 40960)
-  (setq session-registers-max-string 2048))
+  (setq session-registers-max-string 2048)
+
+  (message "* ---[ session configuration is complete ]---")
+)
 
 (provide 'xy-rc-session)

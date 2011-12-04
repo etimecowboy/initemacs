@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-babel.el'
-;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:08 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,6 +21,7 @@
   "Settings of `babel.el'."
   (setq babel-preferred-from-language "English") ;首选的翻译语言
   (setq babel-preferred-to-language "Chinese") ;首选的目标语言
+  (message "* ---[ babel configuration is complete ]---")
 )
 
 (provide 'xy-babel)

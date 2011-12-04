@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-rainbow-delimiters.el'
-;; Time-stamp:<2011-11-29 Tue 01:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun rainbow-delimiters-settings ()
   "Settings for `rainbow-delimiters'."
-
   ;; (setq-default frame-background-mode 'dark)
   ;; (custom-set-faces
   ;;  '(rainbow-delimiters-depth-1-face ((((background dark)) (:foreground "grey30"))))
@@ -32,7 +31,6 @@
   ;;  '(rainbow-delimiters-depth-8-face ((((background dark)) (:foreground "darkgreen"))))
   ;;  '(rainbow-delimiters-depth-9-face ((((background dark)) (:foreground "yellow"))))
   ;;  '(rainbow-delimiters-unmatched-face ((((background dark)) (:foreground "red")))))
-
   (setq rainbow-html-colors t
         rainbow-x-colors t
         rainbow-html-colors-alist
@@ -584,7 +582,8 @@
           ("Yellow3" . "#cdcd00")
           ("Yellow4" . "#8b8b00")
           ("YellowGreen" . "#9acd32")))
-  )
 
+  (message "* ---[ rainbow-delimiters configuration is complete ]---")
+)
 
 (provide 'xy-rc-rainbow-delimiters)

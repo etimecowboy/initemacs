@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-imenu-tree.el'
-;; Time-stamp:<2011-11-30 Wed 18:18 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,6 +38,7 @@
   "Settings for `imenu-tree'."
   ;; (add-hook 'imenu-tree 'imenu-tree-expand)
   (setq imenu-tree-auto-update t)
+  (message "* ---[ imenu-tree configuration is complete ]---")
 )
 
 (provide 'xy-rc-imenu-tree)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-c-includes.el'
-;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,8 +19,9 @@
 ;;;###autoload
 (defun c-includes-settings ()
   "Settings of `c-includes.el'."
-
     (setq c-includes-binding t)
-    (setq c-includes-path ffap-c-path))
+    (setq c-includes-path ffap-c-path)
+    (message "* ---[ c-includes configuration is complete ]---")
+)
 
 (provide 'xy-rc-c-includes)

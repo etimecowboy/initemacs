@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-flymake.el'
-;; Time-stamp:<2011-12-03 Sat 06:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,12 +19,10 @@
 ;;;###autoload
 (defun flymake-settings ()
   "Settings for `flymake'."
-
   (setq flymake-allowed-file-name-masks '())
   (setq flymake-gui-warnings-enabled nil)
   (setq flymake-log-level 0)
   (setq flymake-no-changes-timeout 5.0)
-
   (setq flymake-master-file-dirs
         '("." "./src" "../src" "../../src"
           "./source" "../source" "../../source"
@@ -303,7 +301,8 @@ checked via master file compilation."
   ;;  "-interaction=nonstopmode"
   ;; file-name))
 
-  )
+  (message "* ---[ flymake configuration is complete ]---")
+)
 
 
 ;; ahei's settings

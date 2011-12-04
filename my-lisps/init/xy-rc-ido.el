@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-11-30 Wed 17:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:12 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -58,7 +58,6 @@
 ;;;###autoload
 (defun ido-settings ()
   "settings for `ido'."
-
   ;; (If is-before-emacs-21
   ;;     (setq read-buffer-function 'ido-read-buffer)
   ;;   (ido-everywhere t)
@@ -96,7 +95,10 @@
 
  (when (try-require 'idomenu)
    (global-set-key (kbd "C-c g") 'idomenu)
-  ))
+  )
+
+ (message "* ---[ ido configuration is complete ]---")
+ )
 
 ;; ;;;###autoload
 ;; (defun ido-face-settings ()

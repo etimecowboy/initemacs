@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2011-11-27 Sun 01:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:37 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,7 +29,6 @@
 ;;;###autoload
 (defun package-settings ()
   "settings of `package.el'."
-
   (setq-default package-user-dir
       (expand-file-name (convert-standard-filename
                  my-local-lisp-path)))
@@ -55,6 +54,8 @@
   (package-initialize)
   (when (not package-archive-contents)
     (package-refresh-contents))
-  )
+
+  (message "* ---[ package configuration is complete ]---")
+)
 
 (provide 'xy-rc-package)

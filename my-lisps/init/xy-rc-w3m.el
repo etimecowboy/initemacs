@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-11-27 Sun 22:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 18:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -201,7 +201,6 @@
 ;;;###autoload
 (defun w3m-settings ()
   "Settings for `w3m'."
-
   (setq w3m-command-arguments '("-cookie" "-F"))
   ;; Make this comment if you have no a proper proxy
   ;; (setq w3m-command-arguments-alist
@@ -243,21 +242,22 @@
 
   (setq w3m-default-display-inline-images nil)
   (setq-default w3m-display-inline-images nil)
-  (setq w3m-image-default-background "")
-  (setq w3m-add-tab-number t)
-  (setq w3m-display-inline-image t)
-  (setq w3m-favicon-use-cache-file t)
-  (setq w3m-fill-column 100)
-  (setq w3m-keep-cache-size 500)
-  (setq w3m-new-session-in-background t)
-  (setq w3m-new-session-url "about:blank")
-  (setq w3m-prefer-cache t)
 
-  (setq w3m-use-ange-ftp t)
-  (setq w3m-use-cookies t)
-  (setq w3m-use-favicon nil)
-  (setq w3m-use-mule-ucs t)
-  (setq w3m-view-this-url-new-session-in-background t)
+  (setq w3m-image-default-background ""
+        w3m-add-tab-number t
+        w3m-display-inline-image t
+        w3m-favicon-use-cache-file t
+        w3m-fill-column 100
+        w3m-keep-cache-size 500
+        w3m-new-session-in-background t
+        w3m-new-session-url "about:blank"
+        w3m-prefer-cache t)
+
+  (setq w3m-use-ange-ftp t
+        w3m-use-cookies t
+        w3m-use-favicon nil
+        w3m-use-mule-ucs t
+        w3m-view-this-url-new-session-in-background t)
 
   ;; (require 'w3m)
   ;; (require 'w3m-symbol)
@@ -294,7 +294,9 @@
      ("C-x W w"      w3m-weather)
      ("C-c l"        w3m-copy-current-url)
      ))
-  )
+
+  (message "* ---[ w3m configuration is complete ]---")
+)
 
 (provide 'xy-rc-w3m)
 

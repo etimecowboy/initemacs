@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-12-03 Sat 01:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:10 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,7 +31,6 @@
 ;;;###autoload
 (defun icicles-settings ()
   "settings of icicles."
-
   (icicle-ido-like-mode 1)
   (setq icicle-download-dir my-local-lisp-path
         icicle-incremental-completion-flag 'alwasys
@@ -60,6 +59,8 @@
     ;;     [Tab] 'icicle-apropos)
     )
   (add-hook 'icicle-mode-hook 'icicle-keys t)
+
+  (message "* ---[ icicles configuration is complete ]---")
   )
 
 (provide 'xy-rc-icicles)

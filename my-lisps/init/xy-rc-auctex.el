@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-11-26 Sat 02:50 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -109,6 +109,9 @@
   (LaTeX-preview-setup)
   ;; Picture scale
   (setq preview-scale-function 1.5)
+
+  (message "* ---[ auctex configuration is complete ]---")
+
 )
 
 (provide 'xy-rc-auctex)

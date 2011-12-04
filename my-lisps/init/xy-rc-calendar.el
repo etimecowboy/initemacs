@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-calendar.el'
-;; Time-stamp:<2011-12-01 Thu 16:11 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:16 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -142,6 +142,8 @@
     ;;               ;; cal-china-x-priority2-holidays
     ;;               ))
     ;; )
+
+  (message "* ---[ calendar configuration is complete ]---")
   )
 
 (provide 'xy-rc-calendar)

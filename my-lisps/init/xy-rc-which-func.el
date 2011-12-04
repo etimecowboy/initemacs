@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-which-func.el'
-;; Time-stamp:<2011-12-01 Thu 16:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 18:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,9 @@
   (setq which-func-modes
         '(emacs-lisp-mode cc-mode c-mode c++-mode perl-mode cperl-mode
           python-mode makefile-mode sh-mode fortran-mode f90-mode
-          ada-mode diff-mode vhdl-mode verilog-mode)))
+          ada-mode diff-mode vhdl-mode verilog-mode))
+  (message "* ---[ which-func configuration is complete ]---")
+)
 
 ;; ;;;###autoload
 ;; (defun which-func-face-settings ()

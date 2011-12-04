@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-tramp.el'
-;; Time-stamp:<2011-11-26 Sat 03:03 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,12 +35,13 @@
 ;;;###autoload
 (defun tramp-settings ()
   "Settings of `tramp'."
-
   ;; (require 'tramp)
   (setq tramp-default-method "pscp")
   (setq tramp-verbose 10)
   (setq tramp-chunksize 500)
   (setq tramp-persistency-file-name
-        (concat my-var-path "/tramp")))
+        (concat my-var-path "/tramp"))
+  (message "* ---[ tramp configuration is complete ]---")
+)
 
 (provide 'xy-rc-tramp)

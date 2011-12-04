@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-woman.el'
-;; Time-stamp:<2011-11-26 Sat 03:04 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,17 +27,20 @@
   (defun woman-mode-hook-settings ()
     "Settings for `woman-mode'."
     (setq truncate-lines nil))
-  (am-add-hooks 'woman-mode-hook 'woman-mode-hook-settings))
+  (am-add-hooks 'woman-mode-hook 'woman-mode-hook-settings)
 
-;;;###autoload
-(defun woman-face-settings ()
-  "Face settings for `woman'."
-  (set-face-foreground 'woman-italic "green")
-  (set-face-foreground 'woman-bold "red")
-  (custom-set-faces
-   '(woman-bold
-     ((((class color)) :foreground "red" :bold nil))))
-  (set-face-foreground 'woman-addition "yellow")
-  (set-face-foreground 'woman-unknown "blue"))
+  (message "* ---[ woman configuration is complete ]---")
+)
+
+;; ;;;###autoload
+;; (defun woman-face-settings ()
+;;   "Face settings for `woman'."
+;;   (set-face-foreground 'woman-italic "green")
+;;   (set-face-foreground 'woman-bold "red")
+;;   (custom-set-faces
+;;    '(woman-bold
+;;      ((((class color)) :foreground "red" :bold nil))))
+;;   (set-face-foreground 'woman-addition "yellow")
+;;   (set-face-foreground 'woman-unknown "blue"))
 
 (provide 'xy-rc-woman)

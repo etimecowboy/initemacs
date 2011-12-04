@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-windmove.el'
-;; Time-stamp:<2011-12-03 Sat 21:46 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 18:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,6 +20,8 @@
 ;;;###autoload
 (defun windmove-settings ()
   "Settings of `windmove.el'."
-  (setq windmove-wrap-around t))
+  (setq windmove-wrap-around t)
+  (message "* ---[ windmove configuration is complete ]---")
+)
 
 (provide 'xy-rc-windmove)

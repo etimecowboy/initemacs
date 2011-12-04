@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hideif.el'
-;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:57 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -56,10 +56,11 @@
 ;;;###autoload
 (defun hideif-settings()
   "Settings for hideif.el"
-
   (setq hide-ifdef-env
         '((GNU_LINUX . t)
           (__GNUC__ . t)
-          (__cplusplus . t))))
+          (__cplusplus . t)))
+  (message "* ---[ hideif configuration is complete ]---")
+)
 
 (provide 'xy-rc-hideif)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-11-29 Tue 01:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -333,6 +333,8 @@
   ;;                 (intern-soft (concat mode-name "-map")))
   ;;        (define-key (symbol-value (am-intern mode-name "-map"))
   ;;           (kbd "C-c A") 'xy/ac-start)))))
+
+  (message "* ---[ auto-complete configuration is complete ]---")
 )
 
 

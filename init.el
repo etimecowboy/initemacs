@@ -1,7 +1,7 @@
-;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*- 
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2011-11-26 Sat 15:31 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 18:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,13 +23,12 @@
 ;; Startup time
 (defvar *emacs-load-start* (current-time))
 
-;; Add ~/.emacs.d/my-lisp to Emacs lisp load path 
+;; Add ~/.emacs.d/my-lisp to Emacs lisp load path
 (add-to-list 'load-path "~/.emacs.d/my-lisps")
 (add-to-list 'load-path "~/.emacs.d/my-lisps/init")
 
 ;; Load environment settings
 ;; (require 'xy-rcroot-env)
-;;(@file :file-name "xy-rcroot-env.el" :to "~/.emacs.d/my-lisps/init/xy-rcroot-env.el" :display "source")
 (load "xy-rcroot-env")
 (message "* ---[ `xy-rcroot-env.el' loaded at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)

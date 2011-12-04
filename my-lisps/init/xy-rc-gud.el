@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gud.el'
-;; Time-stamp:<2011-12-03 Sat 21:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 18:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -89,7 +89,6 @@
 ;;;###autoload
 (defun gud-settings ()
   "Settings of `gud.el'."
-
   (require 'gdb-ui nil 'noerror)
   (require 'gdb-mi nil 'noerror)
 
@@ -137,6 +136,8 @@
   ;;      (define-key gud-minor-mode-map [C-S-f10] 'gud-jump)
   ;;      (define-key gud-minor-mode-map [f11] 'gud-step)
   ;;      (define-key gud-minor-mode-map [C-f11] 'gud-finish)))
-   )
+
+  (message "* ---[ gud configuration is complete ]---")
+  )
 
 (provide 'xy-rc-gud)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emaci.el'
-;; Time-stamp:<2011-11-29 Tue 01:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,6 +15,26 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+;;;###autoload
+(defun switch-major-mode-with-emaci ()
+  "Run `switch-major-mode' with `emaci-mode'."
+  (interactive)
+  (let ((emaci emaci-mode))
+    (call-interactively 'switch-major-mode)
+    (emaci-mode (if emaci 1 -1))))
+
+;;;###autoload
+(defun emaci-settings ()
+  "settings for `emaci'."
+  ;; (setq emaci-brief-key-defs
+  ;;       (append emaci-brief-key-defs
+  ;;               `(("]" goto-paren))))
+  ;; (emaci-bind-brief-keys)
+  (message "* ---[ emaci configuration is complete ]---")
+)
+
+(provide 'xy-rc-emaci)
 
 ;; ;;;###autoload
 ;; (defun emacs-lisp-mode-settings-4-emaci ()
@@ -35,23 +55,3 @@
 ;; (eval-after-load "emaci"
 ;;   '(progn
 ;;     (emacs-lisp-mode-settings-4-emaci)))
-
-;;;###autoload
-(defun emaci-settings ()
-  "settings for `emaci'."
-
-  ;; (setq emaci-brief-key-defs
-  ;;       (append emaci-brief-key-defs
-  ;;               `(("]" goto-paren))))
-  ;; (emaci-bind-brief-keys)
-)
-
-;;;###autoload
-(defun switch-major-mode-with-emaci ()
-  "Run `switch-major-mode' with `emaci-mode'."
-  (interactive)
-  (let ((emaci emaci-mode))
-    (call-interactively 'switch-major-mode)
-    (emaci-mode (if emaci 1 -1))))
-
-(provide 'xy-rc-emaci)

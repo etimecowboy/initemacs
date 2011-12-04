@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-paren.el'
-;; Time-stamp:<2011-11-26 Sat 03:01 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,15 +18,17 @@
 
 ;;;###autoload
 (defun paren-settings ()
-  "Settings for `paren'.")
+  "Settings for `paren'."
+  (message "* ---[ paren configuration is complete ]---")
+)
 
-;;;###autoload
-(defun paren-face-settings ()
-  "Face settings for `paren'."
-  (unless is-before-emacs-21
-    ;; 括号颜色设置
-    (set-face-background 'show-paren-match "magenta")
-    (set-face-foreground 'show-paren-match "yellow")
-    (set-face-background 'show-paren-mismatch "red")))
+;; ;;;###autoload
+;; (defun paren-face-settings ()
+;;   "Face settings for `paren'."
+;;   (unless is-before-emacs-21
+;;     ;; 括号颜色设置
+;;     (set-face-background 'show-paren-match "magenta")
+;;     (set-face-foreground 'show-paren-match "yellow")
+;;     (set-face-background 'show-paren-mismatch "red")))
 
 (provide 'xy-rc-paren)

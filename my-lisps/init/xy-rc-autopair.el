@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-autopair.el'
-;; Time-stamp:<2011-11-26 Sat 02:52 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -48,6 +48,9 @@
   (eal-eval-by-modes
    modes-use-self-opening
    (lambda (mode)
-     (change-autopair-insert-opening))))
+     (change-autopair-insert-opening)))
+
+  (message "* ---[ autopair configuration is complete ]---")
+)
 
 (provide 'xy-rc-autopair)

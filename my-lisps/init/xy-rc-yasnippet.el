@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-12-02 Fri 13:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 18:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -67,6 +67,9 @@
 
   ;; (yasnippet-unbind-trigger-key)
   (add-hook 'after-save-hook 'yasnippet-reload-after-save)
-  (yas/load-directory yas/root-directory))
+  (yas/load-directory yas/root-directory)
+
+  (message "* ---[ yasnippet configuration is complete ]---")
+)
 
 (provide 'xy-rc-yasnippet)

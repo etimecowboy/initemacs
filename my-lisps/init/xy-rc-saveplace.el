@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-saveplace.el'
-;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,6 +23,8 @@
   (setq-default save-place-file (concat my-var-path "/saveplace-"
                                         user-login-name "@"
                                         system-name "@"
-                                        system-configuration)))
+                                        system-configuration))
+  (message "* ---[ saveplace configuration is complete ]---")
+)
 
 (provide 'xy-rc-saveplace)

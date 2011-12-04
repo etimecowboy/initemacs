@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ecb.el'
-;; Time-stamp:<2011-12-01 Thu 21:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,7 @@
   (xy/cedet-start)
   (require 'ecb-autoloads)
   (ecb-activate)
-  (ecb-layout-switch "leftright-analyse")
+  (ecb-layout-switch "left-analyse")
 )
 
 ;;;###autoload
@@ -42,6 +42,7 @@
   (GNULinux
    (setq ecb-source-path
          '("~/work" "~/Dropbox/phdwork")))
+  (message "* ---[ ecb configuration is complete ]---")
   )
 
 (provide 'xy-rc-ecb)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-eshell.el'
-;; Time-stamp:<2011-11-26 Sat 02:46 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun eshell-settings ()
   "Settings for `term'."
-
   ;; (add-hook 'eshell-preoutput-filter-functions
   ;;           'ansi-color-filter-apply)
 
@@ -79,6 +78,8 @@
        (require 'em-term)
        (require 'em-cmpl)
        (setenv "PAGER" "cat")))
-)
+
+  (message "* ---[ eshell configuration is complete ]---")
+  )
 
 (provide 'xy-rc-eshell)

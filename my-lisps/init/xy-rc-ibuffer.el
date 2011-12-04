@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-11-26 Sat 02:58 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun ibuffer-settings ()
   "Settings of `ibuffer'."
-
   ;; ibuffer, advanced replacement for the `buffer-menu
   ;; (if is-before-emacs-21 (require 'ibuffer-for-21))
 
@@ -28,7 +27,6 @@
   ;; (require 'select-buffer)
 
   (setq ibuffer-default-sorting-mode '(major-mode))
-
 
   ;; REF: http://www.emacswiki.org/emacs/IbufferMode
   ;; Use human readable Size column instead of original one
@@ -136,7 +134,7 @@
             (lambda ()
               (ibuffer-switch-to-saved-filter-groups "default")))
 
-
+  (message "* ---[ ibuffer configuration is complete ]---")
   )
 
 (provide 'xy-rc-ibuffer)

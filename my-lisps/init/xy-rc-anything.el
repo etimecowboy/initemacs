@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-12-02 Fri 23:33 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 16:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -138,6 +138,7 @@
                                   anything-c-source-emacs-functions-with-abbrevs
                                   anything-c-source-info-emacs))))))
 
+  (message "* ---[ anything configuration is complete ]---")
   )
 
 (provide 'xy-rc-anything)

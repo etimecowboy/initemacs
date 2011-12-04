@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-uniquify.el'
-;; Time-stamp:<2011-11-26 Sat 03:03 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,8 @@
 ;;;###autoload
 (defun uniquify-settings ()
   "Settings of `uniquify.el'."
-
-  (setq uniquify-buffer-name-style 'forward))
+  (setq uniquify-buffer-name-style 'forward)
+  (message "* ---[ uniquify configuration is complete ]---")
+)
 
 (provide 'xy-rc-uniquify)

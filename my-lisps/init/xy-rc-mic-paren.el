@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mic-paren.el'
-;; Time-stamp:<2011-11-26 Sat 03:00 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,13 +20,15 @@
 (defun mic-paren-settings ()
   "Settings for `mic-paren'."
   ;; (paren-activate)
-  (setq paren-message-show-linenumber 'absolute))
+  (setq paren-message-show-linenumber 'absolute)
+  (message "* ---[ mic-paren configuration is complete ]---")
+)
 
-;;;###autoload
-(defun mic-paren-face-settings ()
-  "Face settings for `mic-paren'."
-  (set-face-background 'paren-face-match "magenta")
-  (set-face-foreground 'paren-face-match "yellow")
-  (set-face-background 'paren-face-mismatch "red"))
+;; ;;;###autoload
+;; (defun mic-paren-face-settings ()
+;;   "Face settings for `mic-paren'."
+;;   (set-face-background 'paren-face-match "magenta")
+;;   (set-face-foreground 'paren-face-match "yellow")
+;;   (set-face-background 'paren-face-mismatch "red"))
 
 (provide 'xy-rc-mic-paren)

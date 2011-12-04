@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-doc-view.el'
-;; Time-stamp:<2011-11-26 Sat 02:54 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,8 +19,9 @@
 ;;;###autoload
 (defun doc-view-settings ()
   "settings for `doc-view'."
-
   (setq doc-view-conversion-refresh-interval 3)
-  (setq doc-view-continuous t))
+  (setq doc-view-continuous t)
+  (message "* ---[ doc-view configuration is complete ]---")
+)
 
 (provide 'xy-rc-doc-view)

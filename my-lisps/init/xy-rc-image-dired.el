@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
-;; File name:    `xy-image-dired+.el'
-;; Time-stamp:<2011-11-26 Sat 02:59 xin on p6t>
+;; File name:    `xy-image-dired.el'
+;; Time-stamp:<2011-12-04 Sun 17:13 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun image-dired-settings ()
   "Settings for `dired'."
-
   (setq image-dired-dir (concat my-var-path "/image-dired"))
   (GNULinux
    (setq image-dired-main-image-directory "~/Pictures"))
@@ -41,6 +40,8 @@
           "tiff" "TIFF" "tif"  "TIF"  "xbm" "XBM"
           "xpm"  "XPM"  "pbm"  "PBM"  "pgm" "PGM"
           "ppm"  "PPM"  "pnm"  "PNM"
-          "svg"  "SVG"  "eps"  "EPS")))
+          "svg"  "SVG"  "eps"  "EPS"))
+  (message "* ---[ image-dired configuration is complete ]---")
+)
 
-(provide 'xy-image-dired+)
+(provide 'xy-image-dired)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-pulse.el'
-;; Time-stamp:<2011-12-04 Sun 03:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:42 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -78,12 +78,12 @@
     (when (and pulse-command-advice-flag (interactive-p))
       (pulse-momentary-highlight-one-line (point))))
   (add-hook 'next-error-hook 'pulse-line-hook-function)
-  )
+  (message "* ---[ pulse configuration is complete ]---")
+)
 
 ;;;###autoload
 (defun pulse-face-settings ()
   "Face settings for `pulse'."
-
   (custom-set-faces
    '(pulse-highlight-start-face
      ((((class color) (min-colors 88) (background dark)) :background "#AAAA33")

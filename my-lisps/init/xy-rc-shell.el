@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-shell.el'
-;; Time-stamp:<2011-11-26 Sat 03:02 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,23 +16,20 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
+;;;###autoload
 (defun shell-settings ()
   "Settings for `term'."
-
   ;; Remove ^M characters
   ;; (add-hook 'comint-output-filter-functions
   ;;          'comint-strip-ctrl-m)
-
-  ;; Use ansi-color in shell and eshell mode
-  (require 'ansi-color)
+  (require 'ansi-color) ;; Use ansi-color in shell and eshell mode
   ;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-  ;; Press tab for completions
-  (require 'shell-completion)
-
+  (require 'shell-completion) ;; Press tab for completions
   ;; Add command of `shell-command', `shell-command-on-region',
   ;; `compile', `grep', and `background' to shell history file
+  (require 'shell-history)
 
-  (require 'shell-history))
+  (message "* ---[ shell-mode configuration is complete ]---")
+)
 
 (provide 'xy-rc-shell)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-11-26 Sat 02:54 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:29 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -182,7 +182,6 @@ which is options for `diff'."
 ;;;###autoload
 (defun dired-settings ()
   "Settings for `dired'."
-
   ;; (setq truncate-lines t)
   (setq dired-kept-versions 1)
   (setq dired-recursive-deletes t)  ; 可以递归的删除目录
@@ -200,7 +199,6 @@ which is options for `diff'."
   ;; (require 'wuxch-dired "my-wuxch-dired")
   ;; (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
 
-  ;; (require 'thumb-frm)
   (require 'dired-details)
   (dired-details-install)
   (require 'dired-details+)
@@ -246,6 +244,8 @@ which is options for `diff'."
   (add-hook 'dired-lood-hook 'his-dired-sort)
 
   ;; (def-redo-command dired-redo 'dired-redo 'dired-undo)
+
+  (message "* ---[ dired configuration is complete ]---")
   )
 
 (provide 'xy-rc-dired)

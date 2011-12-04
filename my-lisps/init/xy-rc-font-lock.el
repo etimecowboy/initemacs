@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-12-02 Fri 15:05 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,23 +19,25 @@
 ;;;###autoload
 (defun font-lock-settings ()
   "Settings for `font-lock'."
-  (progn
-    ;; 增加自定义关键字
-    (dolist (mode '(c-mode c++-mode java-mode lisp-mode emacs-lisp-mode
-                           lisp-interaction-mode sh-mode sgml-mode
-                           sh-mode vhdl-mode verilog-mode latex-mode
-                           LaTeX-mode tex-mode TeX-mode c-mode cc-mode))
-      (font-lock-add-keywords
-       mode
-       '(("\\<\\(BUG\\|TODO\\|HACK\\|NOTE\\|REF\\|DEBUG\\|FIXME\\)"
-          1 font-lock-warning-face prepend)
-         ;; BUG: 这里引起语法高亮失效
-         ;; ("\\<\\(and\\|or\\|not\\)\\>" . font-lock-keyword-face)
-         ;; ("(\\|)" . beautiful-blue-face)
-         ;; ("\\[\\|]" . yellow-face)
-         ;; ("<\\|>" . cyan-face)
-         ;; ("{\\|}" . green-face)
-         )))))
+  ;; 增加自定义关键字
+  (dolist (mode '(c-mode c++-mode java-mode lisp-mode emacs-lisp-mode
+                         lisp-interaction-mode sh-mode sgml-mode
+                         sh-mode vhdl-mode verilog-mode latex-mode
+                         LaTeX-mode tex-mode TeX-mode c-mode cc-mode))
+    (font-lock-add-keywords
+     mode
+     '(("\\<\\(BUG\\|TODO\\|HACK\\|NOTE\\|REF\\|DEBUG\\|FIXME\\)"
+        1 font-lock-warning-face prepend)
+       ;; BUG: 这里引起语法高亮失效
+       ;; ("\\<\\(and\\|or\\|not\\)\\>" . font-lock-keyword-face)
+       ;; ("(\\|)" . beautiful-blue-face)
+       ;; ("\\[\\|]" . yellow-face)
+       ;; ("<\\|>" . cyan-face)
+       ;; ("{\\|}" . green-face)
+       )
+     ))
+  (message "* ---[ font-lock configuration is complete ]---")
+)
 
 ;; NOTE: moved to my `color-theme-xy.el'
 ;; ;;;###autoload

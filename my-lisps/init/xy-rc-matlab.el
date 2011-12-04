@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-matlab.el'
-;; Time-stamp:<2011-11-26 Sat 03:00 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 17:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,17 +34,17 @@
   ;; (defun my-matlab-shell-mode-hook ()
   ;; '())
   ;; (add-hook 'matlab-shell-mode-hook 'my-matlab-shell-mode-hook)
+  (message "* ---[ matlab configuration is complete ]---")
 )
 
-;;;###autoload
-(defun matlab-face-settings ()
-  "Face settings of `matlab-emacs'."
+;; ;;;###autoload
+;; (defun matlab-face-settings ()
+;;   "Face settings of `matlab-emacs'."
 
-  (custom-set-faces
-   '(matlab-cross-function-variable-face
-        ((t (:foreground "cornflower blue" :slant italic :weight bold))))
-   '(matlab-nested-function-keyword-face
-        ((t (:foreground "Yellow" :slant italic))))))
-;;--------------------------------------------------------------------
+;;   (custom-set-faces
+;;    '(matlab-cross-function-variable-face
+;;         ((t (:foreground "cornflower blue" :slant italic :weight bold))))
+;;    '(matlab-nested-function-keyword-face
+;;         ((t (:foreground "Yellow" :slant italic))))))
 
 (provide 'xy-rc-matlab)

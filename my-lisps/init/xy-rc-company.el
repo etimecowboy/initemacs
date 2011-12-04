@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-company.el'
-;; Time-stamp:<2011-11-26 Sat 02:53 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,6 +25,7 @@
   (setq company-begin-commands '(self-insert-command))
   (define-key company-mode-map
     (kbd "M-RET") 'company-expand-top)
+  (message "* ---[ company configuration is complete ]---")
 )
 
 (provide 'xy-rc-company)

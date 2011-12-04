@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-windows.el'
-;; Time-stamp:<2011-11-26 Sat 03:04 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 18:16 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,6 @@
 ;;;###autoload
 (defun windows-start ()
   "Start windows desktop."
-
   ;; The default prefix is conflict with Org, so swith it.
   (setq win:switch-prefix "\C-c\C-v")
   (define-key global-map win:switch-prefix nil)
@@ -30,7 +29,6 @@
 ;;;###autoload
 (defun windows-settings ()
   "Settings of `windows.el'."
-
   ;; Remove frame number in `global-mode-string'
   (delete 'win:mode-string global-mode-string)
   ;; set configuration file location.
@@ -38,6 +36,7 @@
                                        user-login-name "@"
                                        system-name "@"
                                        system-configuration))
-  )
+  (message "* ---[ windows configuration is complete ]---")
+)
 
 (provide 'xy-rc-windows)

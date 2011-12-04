@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emms.el'
-;; Time-stamp:<2011-11-26 Sat 02:55 xin on p6t>
+;; Time-stamp:<2011-12-04 Sun 16:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun xy/emms-start ()
   "Initial emms"
-
   (interactive)
   ;; (when (not (featurep 'emms-setup))
   (require 'emms-setup)
@@ -45,12 +44,12 @@
   (setq emms-source-file-default-directory emms-directory) ;设定默认的播放目录
   (emms-standard)
   (emms-default-players)
-    ;; (setq emms-repeat-playlist t)
-    ;; (require 'emms-mode-line)
-    ;; (emms-mode-line 1)
-    ;; (emms-mode-line-blank)
-    ;; (require 'emms-playing-time)
-    ;; (emms-playing-time 1)
+  ;; (setq emms-repeat-playlist t)
+  ;; (require 'emms-mode-line)
+  ;; (emms-mode-line 1)
+  ;; (emms-mode-line-blank)
+  ;; (require 'emms-playing-time)
+  ;; (emms-playing-time 1)
 )
 
 ;; ;;;###autoload
@@ -289,6 +288,8 @@
   ;; 设定 mplayer 支持的格式
   ;; (emms-player-set emms-player-mplayer 'regex
   ;;                    "\\.ogg\\|\\.mp3\\|\\.wav\\|\\.mpg\\|\\.mpeg\\|\\.wmv\\|\\.wma\\|\\.mov\\|\\.avi\\|\\.divx\\|\\.ogm\\|\\.asf\\|\\.mkv\\|http://\\|mms://\\|\\.rm\\|\\.rmvb\\|\\.mp4\\|\\.flac\\|\\.vob\\|\\.m4a\\|\\.ape\\|\\.mpc")
+
+  (message "* ---[ emms configuration is complete ]---")
 )
 
 (provide 'xy-rc-emms)

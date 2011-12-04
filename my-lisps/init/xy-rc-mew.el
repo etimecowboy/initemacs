@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-11-26 Sat 20:52 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-04 Sun 17:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,6 @@
 ;;;###autoload
 (defun mew-settings ()
   "Settings of `Mew'."
-
   ;; 编码设置，用 utf-8 发送邮件
   ;; NOTE: 经测试好像不需要。全英文时 Mew 用 ascii 编码，有中文时用
   ;; UTF-8
@@ -315,8 +314,9 @@
   (when (try-require 'org-mime)
     (add-hook 'mew-draft-mode-hook
               (lambda ()
-                (local-set-key "\C-c\M-o" 'org-mime-htmlize)))
-    )
-  )
+                (local-set-key "\C-c\M-o" 'org-mime-htmlize))))
+
+  (message "* ---[ mew configuration is complete ]---")
+)
 
 (provide 'xy-rc-mew)
