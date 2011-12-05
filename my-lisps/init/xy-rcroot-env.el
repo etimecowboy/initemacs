@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-05 Mon 04:27 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 07:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -527,17 +527,17 @@
 ;; REF: http://emacser.com/torture-emacs.htm
 ;; TODO: set font for each frame seperately
 (xy/set-font-default)
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
-   c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
-   matlab-mode-hook)
- 'xy/set-font-prog)
-(am-add-hooks
- `(LaTeX-mode-hook latex-mode-hook tex-mode-hook
-   muse-mode-hook w3m-mode-hook Info-mode-hook
-   ;; org-mode-hook ;; NOTE: not to bother me when capturing notes
-   gnus-startup-hook mew-summary-mode-hook)
- 'xy/set-font-write)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
+;;    c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
+;;    matlab-mode-hook)
+;;  'xy/set-font-prog)
+;; (am-add-hooks
+;;  `(LaTeX-mode-hook latex-mode-hook tex-mode-hook
+;;    muse-mode-hook w3m-mode-hook Info-mode-hook
+;;    ;; org-mode-hook ;; NOTE: not to bother me when capturing notes
+;;    gnus-startup-hook mew-summary-mode-hook)
+;;  'xy/set-font-write)
 (global-set-key (kbd "C-x F d") 'xy/set-font-default)
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
 (global-set-key (kbd "C-x F p") 'xy/set-font-prog)

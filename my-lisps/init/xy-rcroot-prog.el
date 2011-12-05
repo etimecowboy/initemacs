@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-03 Sat 21:00 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 09:59 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -316,9 +316,14 @@
 
 ;;====================================================================
 ;;* c/c++ development settings
-
 ;; NOTE: C include directories' list are defined in `xy-util.el'
+(add-to-list 'auto-mode-alist '("\\.c"   . c-mode))
+(add-to-list 'auto-mode-alist '("\\.hch" . c-mode)) ;; Handle-C
+(add-to-list 'auto-mode-alist '("\\.hcc" . c-mode)) ;; Handle-C
+(add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.c++$" . c++-mode))
 
+;;--------------------------------------------------------------------
 ;;** cc-mode
 (eval-after-load "cc-mode"
   '(progn
@@ -330,22 +335,27 @@
         ("C-c M-e"   end-of-defun)
         ("C-c M-F"   copy-current-fun-name)
         ;; ifdef settings
-        ("C-c I"     mark-ifdef)
-        ;; sourcepair,可以在cpp与h文件之间切换
-        ("C-c S"      sourcepair-load)))))
+        ;; ("C-c I"     mark-ifdef)
+        ;; hide-ifdef
+        ("C-c w"     hide-ifdef-block)
+        ("C-c W"     hide-ifdefs)
+        ("C-c M-i"   show-ifdef-block)
+        ("C-c M-I"   show-ifdefs)
+        ;; c-includes
+        ("C-c C-i"   c-includes-current-file)
+        ("C-c I"     c-includes)
+        ;; sourcepair BUG: not working
+        ;; ("C-c S"     sourcepair-load)
+        ))))
 
 ;;--------------------------------------------------------------------
 ;;** ifdef
-;; (eal-define-keys
-;;  'c-mode-base-map
-;;  `(("C-c I" mark-ifdef)))
-;; (eval-after-load "ifdef"
-;;   '(progn
-;;     (ifdef-settings)))
+(eval-after-load "ifdef"
+  '(progn
+    (ifdef-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** hide-ifdef
-;; c中隐藏ifdef
 ;; (autoload 'hide-ifdef-block "hideif"
 ;;   "Hide the ifdef block (true or false part) enclosing or before the cursor."
 ;;   t)
@@ -371,19 +381,6 @@
   '(progn
      (hideif-settings)))
 
-(eval-after-load "cc-mode"
-  '(progn
-     (dolist (hook '(c-mode-common-hook))
-       (add-hook hook 'hide-ifdef-mode))
-     ;; (dolist (map (list c-mode-base-map))
-     ;;   (eal-define-keys-commonly
-     ;;    map
-     ;;    `(("C-c w"   hide-ifdef-block)
-     ;;      ("C-c W"   hide-ifdefs)
-     ;;      ("C-c M-i" show-ifdef-block)
-     ;;      ("C-c M-I" show-ifdefs))))))
-     ))
-
 ;;--------------------------------------------------------------------
 ;;** c-includes
 ;; (require 'c-includes)
@@ -393,7 +390,6 @@
 
 ;;--------------------------------------------------------------------
 ;;** sourcepair
-;; 可以在cpp与h文件之间切换
 (autoload 'sourcepair-load "sourcepair"
   "Load the corresponding C/C++ header or source file for the current
 buffer."  t)
@@ -402,7 +398,8 @@ buffer."  t)
      (sourcepair-settings)))
 
 ;;--------------------------------------------------------------------
-;;** codepilot
+;; ;;** codepilot
+;; REF: https://github.com/brianjcj/mylisp
 ;; someone else's c/c++ development environment
 ;; (setq codepilot-dir (concat my-local-lisp-path "codepilot"))
 ;; (try-require 'mycutil)
@@ -417,7 +414,7 @@ buffer."  t)
 ;;     (codepilot-settings-4-emaci)))
 
 ;;--------------------------------------------------------------------
-;;** kde-emacs
+;; ;; ** kde-emacs
 ;; 一个方便开发c的工具
 ;; ;; 包中定义了C-j 为goto-line, 还设置了c-style
 ;; (require 'kde-emacs-core)

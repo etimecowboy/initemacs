@@ -1,10 +1,10 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
-;; File name:    `xy-rc-c-includes.el'
-;; Time-stamp:<2011-12-05 Mon 09:31 xin on P6T-WIN7>
+;; File name:    `xy-rc-ifdef.el'
+;; Time-stamp:<2011-12-05 Mon 08:12 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
-;; Description:  My `c-includes.el' settings
+;; Description:  My `ifdef.el' settings
 ;;    ___ _ __ ___   __ _  ___ ___
 ;;   / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;  |  __/ | | | | | (_| | (__\__ \
@@ -16,11 +16,12 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
-(defun c-includes-settings ()
-  "Settings of `c-includes.el'."
-    (setq c-includes-binding t)
-    (setq c-includes-path user-include-dirs)
-    (message "* ---[ c-includes configuration is complete ]---")
+(defun ifdef-settings ()
+  "Settings of `ifdef.el'."
+  (eal-define-keys
+   'c-mode-base-map
+   `(("C-c I" mark-ifdef)))
+  (message "* ---[ ifdef configuration is complete ]---")
 )
 
-(provide 'xy-rc-c-includes)
+(provide 'xy-rc-ifdef)

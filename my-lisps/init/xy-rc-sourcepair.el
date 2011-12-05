@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sourcepair.el'
-;; Time-stamp:<2011-12-04 Sun 17:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 09:31 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,8 +19,7 @@
 ;;;###autoload
 (defun sourcepair-settings ()
   "Settings for `sourcepair'."
-  (setq sourcepair-source-path '( "." "../src"))
-  ;; (setq sourcepair-header-path user-head-file-dir)
+  (setq sourcepair-source-path '( "." "../src" "../../src"))
   (setq sourcepair-header-path user-include-dirs)
   (setq sourcepair-recurse-ignore
         '("CVS" "bin" "lib" "Obj" "Debug" "Release" ".svn" ".git"))

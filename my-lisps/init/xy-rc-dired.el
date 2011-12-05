@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-12-04 Sun 16:29 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 06:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -226,19 +226,19 @@ which is options for `diff'."
   ;; wdired提供修改文件名的一种非常方便方法。它把dired-mode当作一般的
   ;; 文本处理，这样无论是修改一个文件，还是批量修改文件都不是一般的爽。
   ;; wdired has been a part of GNU Emacs since Emacs 23
-  (if is-before-emacs-21 (require 'wdired "wdired-for-21"))
-    ;; (require 'wdired "wdired"))
+  ;; (if is-before-emacs-21 (require 'wdired "wdired-for-21"))
+  (require 'wdired)
 
   ;; 让你能够在dired-mode里面使用只对文件名部分执行i-search
   ;; (require 'dired-isearch "my-dired-isearch")
 
-  (defun dired-mode-hook-settings ()
-    "Settings for `dired-mode-hook'."
-    ;; (dired-keys)
-    (setq mode-line-buffer-identification
-          (propertized-buffer-identification "%b")))
+  ;; (defun dired-mode-hook-settings ()
+  ;;   "Settings for `dired-mode-hook'."
+  ;;   ;; (dired-keys)
+  ;;   (setq mode-line-buffer-identification
+  ;;         (propertized-buffer-identification "%b")))
+  ;; (add-hook 'dired-mode-hook 'dired-mode-hook-settings)
 
-  (add-hook 'dired-mode-hook 'dired-mode-hook-settings)
   (add-hook 'dired-mode-hook 'dired-omit-mode)
   (add-hook 'dired-after-readin-hook 'his-dired-sort)
   (add-hook 'dired-lood-hook 'his-dired-sort)
