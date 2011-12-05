@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-12-04 Sun 17:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 04:44 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,7 +42,7 @@
         icicle-file-sort 'icicle-last-modified-first-p
         icicle-files-ido-like-flag t
         icicle-default-cycling-mode 'apropos
-        icicle-max-candidates 20
+        icicle-max-candidates 200
         icicle-Completions-window-max-height 5
         icicle-Completions-text-scale-decrease 1.0
         icicle-candidate-width-factor 100)

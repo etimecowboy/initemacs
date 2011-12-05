@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-12-03 Sat 14:31 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 02:12 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -95,12 +95,18 @@
 ;;         (t (self-insert-command (or arg 1)))))
 
 ;;--------------------------------------------------------------------
-;;** 查看GBK编码文件
+;;** 查看不同编码的文件
 ;;;###autoload
 (defun gbk-revert ()
   "Revert current buffer with gbk-dos encoding."
   (interactive)
   (revert-buffer-with-coding-system 'gbk-dos))
+
+;;;###autoload
+(defun dos-revert ()
+  "Revert current buffer with utf-8-dos encoding."
+  (interactive)
+  (revert-buffer-with-coding-system 'utf-8-dos))
 
 ;;--------------------------------------------------------------------
 ;;** 存盘前查看改动了哪些地方

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-03 Sat 05:42 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 04:27 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -65,15 +65,9 @@
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-
-;;--------------------------------------------------------------------
-
 ;; Image (icon) files
 (fni/add-to-image-load-path my-local-image-path
                             'with-subdirs 'recursive)
-
-;;--------------------------------------------------------------------
-
 ;; Exec binaries
 (add-to-list 'exec-path my-local-exec-path)
 (Windows
@@ -84,15 +78,11 @@
   (add-to-list 'exec-path (concat my-local-exec-path "/lin64"))))
 (Laptop
  (add-to-list 'exec-path (concat my-local-exec-path "/lin32")))
-
-;;--------------------------------------------------------------------
-
 ;; Info files
 ;; NOTE: auto-customised by setting `Info-additional-directory-list'
 ;;   (add-to-list 'Info-additional-directory-list "~/.emacs.d/info")
 ;; But seems not working
 (add-to-list 'Info-default-directory-list my-local-info-path)
-
 ;; Man files
 ;; NOTE: additional manual(man) pathes are added in `woman-settings'
 
@@ -544,7 +534,7 @@
  'xy/set-font-prog)
 (am-add-hooks
  `(LaTeX-mode-hook latex-mode-hook tex-mode-hook
-   muse-mode-hook w3m-mode-hook
+   muse-mode-hook w3m-mode-hook Info-mode-hook
    ;; org-mode-hook ;; NOTE: not to bother me when capturing notes
    gnus-startup-hook mew-summary-mode-hook)
  'xy/set-font-write)

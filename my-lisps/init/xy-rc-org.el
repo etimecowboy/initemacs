@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-04 Sun 17:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 03:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -355,11 +355,12 @@ minibuffer."
   ;;   new-time)))
 
   ;; `todochiku' display pop-up notification in window-system
-  (when (try-require 'todochiku)
+  ;; (when (try-require 'xy-todochiku)
     (setq org-show-notification-handler
           '(lambda (notification)
              (todochiku-message "org-mode notification" notification
-                                (todochiku-icon 'emacs)))))
+                                (todochiku-icon 'emacs))))
+    ;; )
 
   ;;------------------------------------------------------------------
   ;; Custom ageda views

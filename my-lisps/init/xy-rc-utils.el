@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-04 Sun 03:29 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 05:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -61,7 +61,6 @@
   (string-match "linux" (prin1-to-string system-type)))
 
 ;;--------------------------------------------------------------------
-
 ;;** System marcos
 
 ;;*** Machine name --- which machine are we using?
@@ -121,7 +120,6 @@
        (when (boundp 'aquamacs-version) aquamacs-version)))
 
 ;;--------------------------------------------------------------------
-
 ;;** c/c++ include dir
 (Windows
  (defvar user-include-dirs
@@ -175,7 +173,6 @@
    "Preprocessor symbol files for cedet"))
 
 ;;--------------------------------------------------------------------
-
 ;;** Jump to some directory, open some config files
 
 ;;;###autoload
@@ -266,7 +263,6 @@ argument is not nil."
           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun fni/add-to-image-load-path
   (this-directory &optional with-subdirs recursive)
@@ -300,12 +296,8 @@ third argument is not nil."
           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
-
 (defvar missing-packages-list nil
   "List of packages that `try-require' can't find.")
-
-;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun try-require (feature)
   "Attempt to load a library or module. Return true if the library
@@ -329,7 +321,6 @@ just add the package to a list of missing packages."
        (add-to-list 'missing-packages-list feature 'append)) nil)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun my-make-directory-yes-or-no (dir)
   "Ask user to create the DIR, if it does not already exist."
@@ -372,7 +363,6 @@ LOCAL. HOOKS can be one list or just a hook."
     (add-hook hooks function append local)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun am-intern (&rest strings)
   "`intern' use STRINGS."
@@ -385,14 +375,12 @@ LOCAL. HOOKS can be one list or just a hook."
      strings))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun am-variable-is-t (symbol)
   "Return SYMBOL's value is t or not."
   (and (boundp symbol) (symbol-value symbol)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro am-def-active-fun (symbol &optional fun-name)
   "Make definition of function judge variable is active or not."
@@ -401,7 +389,6 @@ LOCAL. HOOKS can be one list or just a hook."
      (am-variable-is-t ',symbol)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun am-forward-word-or-to-word ()
   "`forward-word' or `forward-to-word'.
@@ -417,7 +404,6 @@ is at next line, then rollback and excute `forward-word'"
       (forward-to-word 1))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro am-with-temp-mode (mode &rest body)
   "Create a temporary buffer with mode MODE, and evaluate BODY there
@@ -427,7 +413,6 @@ like `progn'. See also `with-temp-buffer'."
      ,@body))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun am-equal-ignore-case (str1 str2)
   "STR1 equal ignore case to STR2 or not."
@@ -469,7 +454,6 @@ like `progn'. See also `with-temp-buffer'."
   "*Modes for develop.")
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun execute-command-on-file (file command)
   "对FILE执行命令COMMAND"
@@ -486,7 +470,6 @@ like `progn'. See also `with-temp-buffer'."
     (shell-command command)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun execute-command-on-current-file (command)
   "对当前buffer执行命令COMMAND, 如果该buffer对应文件的话, 再执行
@@ -502,7 +485,6 @@ like `progn'. See also `with-temp-buffer'."
         (revert-buffer-no-confirm))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun execute-command-on-current-dir (command)
   "对当前目录执行命令COMMAND."
@@ -517,7 +499,6 @@ like `progn'. See also `with-temp-buffer'."
         (revert-buffer-no-confirm))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro def-execute-command-on-file-command (command)
   "Make definition of command which execute command on file."
@@ -528,7 +509,6 @@ like `progn'. See also `with-temp-buffer'."
      (execute-command-on-file file ,command)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro def-execute-command-on-current-file-command (command)
   "Make definition of command which execute command on current file."
@@ -539,7 +519,6 @@ like `progn'. See also `with-temp-buffer'."
      (execute-command-on-current-file ,command)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro def-execute-command-on-current-dir-command (command)
   "Make definition of command which execute command on current
@@ -551,7 +530,6 @@ directory."
      (execute-command-on-current-dir ,command)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro define-kbd (keymap key def)
   `(define-key ,keymap (kbd ,key) ,def))
@@ -568,7 +546,6 @@ directory."
 ;; (defalias 'define-key-list 'eal-define-keys-commonly)
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun apply-args-list-to-fun (fun-list args-list)
   "Apply args list to function FUN-LIST.
@@ -582,7 +559,6 @@ symbol."
         (apply-args-to-fun fun-list args)))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun apply-args-to-fun (fun args)
   "Apply args to function FUN."
@@ -591,7 +567,6 @@ symbol."
     (eval `(,fun ,args))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun kill-buffer-when-shell-command-exit ()
   "Close current buffer when `shell-command' exit."
@@ -605,7 +580,6 @@ symbol."
            (kill-buffer (process-buffer proc))))))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun list-colors-display-htm (&optional list)
   "Create HTML page which lists all the defined colors."
@@ -645,7 +619,6 @@ symbol."
               "</html>"))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun html-color (string)
   "Convert colors names to rgb(n1,n2,n3) strings."
@@ -655,7 +628,6 @@ symbol."
           (/ (nth 2 (x-color-values string)) 256)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro def-command-max-window (command)
   "Make definition of command which after execute command COMMAND
@@ -668,7 +640,6 @@ execute `delete-other-windows'."
      (delete-other-windows)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun delete-current-window (&optional frame)
   "Delete window which showing current buffer."
@@ -681,7 +652,6 @@ execute `delete-other-windows'."
     (delete-windows-on (current-buffer) frame)))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defmacro def-turn-on (command &optional is-on)
   "Make definition of command whose name is COMMAND-on when IS-ON is t
@@ -693,7 +663,6 @@ and COMMAND-off when IS-ON is nil."
        (funcall ',(intern command) ,(if is-on 1 -1)))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun unset-key (keymap key)
   "Remove binding of KEY in map KEYMAP.
@@ -704,35 +673,66 @@ KEY is a string or vector representing a sequence of keystrokes."
 ;;* Emacs auto font selection for different OS
 ;; REF: http://emacser.com/torture-emacs.htm
 
-;;** 判断某个字体在系统中是否安装
 ;;;###autoload
 (defun qiang-font-existsp (font)
+  "判断某个字体在系统中是否安装"
   (when window-system
-    (if (null (x-list-fonts font))
-      nil t)))
-    ;; (if (null (list-fonts font) nil t))))
-;;--------------------------------------------------------------------
+    (if (null (x-list-fonts font)) nil t)))
 
-;;** 按顺序找到一个字体列表( list ) 中第一个已经安装可用的字体
-(defvar font-list
-  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
-;; (require 'cl) ;; find-if is in common list package
-(find-if #'qiang-font-existsp font-list)
+;; Example: 按顺序找到一个字体列表( list ) 中第一个已经安装可用的字体
+;; (defvar font-list
+;;   '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
+;; ;; (require 'cl) ;; find-if is in common list package
+;; (find-if #'qiang-font-existsp font-list)
 
 ;;--------------------------------------------------------------------
-
-;;** 产生带上 font size 信息的 font 描述文本
 ;;;###autoload
 (defun qiang-make-font-string (font-name font-size)
+  "产生带上 font size 信息的 font 描述文本"
   (if (and (stringp font-size)
            (equal ":" (string (elt font-size 0))))
       (format "%s%s" font-name font-size)
     (format "%s %s" font-name font-size)))
 
 ;;--------------------------------------------------------------------
+;;;###autoload
+(defun qiang-set-font (english-fonts
+                       english-font-size
+                       chinese-fonts
+                       &optional chinese-font-size)
+  "自动为不同字符集设置字体
 
-;;** 自动设置字体函数,
-;; REF: http://emacser.com/torture-emacs.htm
+english-font-size could be set to \":pixelsize=18\" or a integer.
+If set/leave chinese-font-size to nil, it will follow english-font-size"
+  (require 'cl)                       ; for find if
+  (let ((en-font (qiang-make-font-string
+                  (find-if #'qiang-font-existsp english-fonts)
+                  english-font-size))
+        (zh-font
+         (font-spec :family (find-if #'qiang-font-existsp chinese-fonts)
+                    :size chinese-font-size)))
+    ;; Set the default English font
+    ;; NOTE: The following 2 method cannot make the font settig work
+    ;; in new frames.
+    ;; (set-default-font "Consolas:pixelsize=18")
+    ;; (add-to-list 'default-frame-alist '(font . "Consolas:pixelsize=18"))
+    ;; We have to use set-face-attribute
+    (message "Set English Font to %s" en-font)
+    (set-face-attribute
+     'default nil :font en-font)
+    ;; Set Chinese font
+    ;; NOTE: Do not use 'unicode charset, it will cause the english
+    ;; font invalid
+    (message "Set Chinese Font to %s" zh-font)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font) charset zh-font))))
+
+;; Example:
+;; (qiang-set-font
+;;  '("Consolas" "Monaco" "DejaVu Sans Mono" "Monospace"
+;;    "Courier New" "Courier") ":pixelsize=14"
+;;    '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
+;;      "黑体" "新宋体" "宋体") 16)
 ;; 设置字体 Emacs 会优先选用 Concolas + “雅黑”的组合。
 ;; 如果“雅黑”没有装的话，就使用“文泉驿等宽正黑”，依此类推。
 ;; 这份字体配置不用改动就能在不同的操作系统字体环境下面使用。
@@ -741,46 +741,8 @@ KEY is a string or vector representing a sequence of keystrokes."
 ;; 对不齐。 测试：
 ;;       1234567890
 ;;       一二三四五
-;;;###autoload
-(defun qiang-set-font (english-fonts
-                       english-font-size
-                       chinese-fonts
-                       &optional chinese-font-size)
-  "english-font-size could be set to \":pixelsize=18\" or a integer.
-If set/leave chinese-font-size to nil, it will follow english-font-size"
-  (require 'cl)                         ; for find if
-  (let ((en-font (qiang-make-font-string
-                  (find-if #'qiang-font-existsp english-fonts)
-                  english-font-size))
-        (zh-font
-         (font-spec :family (find-if #'qiang-font-existsp chinese-fonts)
-                    :size chinese-font-size)))
-
-    ;; Set the default English font
-    ;;
-    ;; The following 2 method cannot make the font settig work in new
-    ;; frames.
-    ;; (set-default-font "Consolas:pixelsize=18")
-    ;; (add-to-list 'default-frame-alist '(font . "Consolas:pixelsize=18"))
-    ;; We have to use set-face-attribute
-    (message "Set English Font to %s" en-font)
-    (set-face-attribute
-     'default nil :font en-font)
-
-    ;; Set Chinese font
-    ;; Do not use 'unicode charset, it will cause the english font invalid
-    (message "Set Chinese Font to %s" zh-font)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font) charset zh-font))))
-
-;; (qiang-set-font
-;;  '("Consolas" "Monaco" "DejaVu Sans Mono" "Monospace"
-;;    "Courier New" "Courier") ":pixelsize=14"
-;;    '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
-;;      "黑体" "新宋体" "宋体") 16)
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/set-font-default ()
   "My default Emacs font setting."
@@ -795,7 +757,6 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     (set-default-font "Monospace 11")))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/set-font-prog ()
   "My default Emacs font setting."
@@ -810,7 +771,6 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     (set-default-font "Monospace 9")))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/set-font-write ()
   "My Emacs font setting for writing articles."
@@ -833,7 +793,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
    args "`cond-emacs-xemacs' must return exactly one element"))
 
 ;;--------------------------------------------------------------------
-
+;;;###autoload
 (defun cond-emacs-xemacs-macfn (args &optional msg)
   (if (atom args) args
     (and (eq (car args) :@) (null msg) ; (:@ ...spliced...)
@@ -855,7 +815,6 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
             (t (nconc (nreverse code) args))))))
 
 ;;--------------------------------------------------------------------
-
 ;; Emacs/XEmacs-compatibility `defun': remove interactive "_" for
 ;; Emacs, use existing functions when they are `fboundp', provide
 ;; shortcuts if they are known to be defined in a specific Emacs
@@ -907,13 +866,11 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
                            'ignore))))))))))
 
 ;;--------------------------------------------------------------------
-
 (when (>= 21 emacs-major-version)
   (defalias 'move-beginning-of-line 'beginning-of-line)
   (defalias 'move-end-of-line       'end-of-line))
 
 ;;--------------------------------------------------------------------
-
 ;; 定义一些emacs 21没有的函数
 (when is-before-emacs-21
     '(progn
@@ -1016,7 +973,6 @@ directories starting with a `.'."
           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/update-all-autoloads
   (this-directory &optional with-subdirs recursive)
@@ -1093,7 +1049,6 @@ directories starting with a `.'."
           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/install-all-lisps
   (this-directory &optional with-subdirs recursive)
@@ -1180,7 +1135,6 @@ directories starting with a `.'."
           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/load-autoload (this-directory)
   "Install all the lisps in THIS-DIRECTORY.
@@ -1217,7 +1171,6 @@ The process is:
                  generated-autoload-file)))))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/done ()
   "Make Emacs frame invisible, just like the `emacs --daemon'"
@@ -1226,7 +1179,6 @@ The process is:
   (make-frame-invisible nil t))
 
 ;;--------------------------------------------------------------------
-
 ;;;###autoload
 (defun xy/emacs-build ()
   "Compile my Emacs configurations, local lisps, and generate
@@ -1271,7 +1223,5 @@ The process is:
   ;; NOTE: Do it in `xy-rcroot-env.el'?
   (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
   )
-
-;;------------------
 
 (provide 'xy-rc-utils)

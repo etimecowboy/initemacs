@@ -1,5 +1,5 @@
 ;;; todochiku.el - A mode for interfacing with Growl, Snarl, and the like.
-(defconst todochiku-version "0.0.8")
+(defconst todochiku-version "0.0.8.1")
 
 ;; Copyright (c)2008 Jonathan Arkell. (by)(nc)(sa)  Some rights reserved.
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
@@ -67,20 +67,20 @@
 ;; Make sure you have snarl/growl/libnotify installed, and load this file from your .Emacs
 ;; i.e. (load-file "~/.emacs-cfg/todochiku.el")
 ;;
-;; If you have an external notification program, you can use that. 
+;; If you have an external notification program, you can use that.
 ;; use customize-group todochiku, and make sure you set the todochiku-command.
 ;;
 ;; If you do not have an external notification program, there is basic support
 ;; for similar notifications using the message window and/or tooltips.
 ;; See todochiku-message-too and todochiku-tooltip-too.
-; 
+;
 ;; For icon support, customize the todochiku-icons-directory variable.  I have
 ;; a directory of png icons available at
 ;; http://bunny.jonnay.net/todochiku-icons.tar.gz
 ;; In the future, the downloading and installing of this directory will be
 ;; automagickal.
 
-;; interactive commands: 
+;; interactive commands:
 ;; todochiku-in - do a todochiku.  This is a great way to set up a reminder
 ;;                for yourself.
 
@@ -97,6 +97,9 @@
 ;; - Build better backend support.
 
 ;;; CHANGELOG:
+;; v0.0.8.1 - Based on `todochiku-growl-win.el'
+;;          - Fixed argument format so it works with Growl for windows
+;;          - (by Xin Yang)
 ;; V0.0.8 - Fixed broken `todochiku-icons-directory' definition that made it impossible to change through Customize.
 ;; V0.0.7b - Added support for sticky messages for libnotify and growl.
 ;; V0.0.7  - Added YaOddMuse interface
@@ -108,13 +111,13 @@
 ;; V0.0.4 - Added initial icon support.  Right now it kinds sucks
 ;;          Becuase it takes too much configuration.
 ;;        - Fixed the comment about todochiku being growl in
-;;          japanese.  Doh.  I coulda sworn the 'ro' was a 'chi'. 
+;;          japanese.  Doh.  I coulda sworn the 'ro' was a 'chi'.
 ;; v0.0.3 - Added growl.el interface
 ;;        - Added rcirc notify when you are mentioned in IRC (from Brian Templetons growl.el)
 ;; v0.0.2 - fixed to use growl properly
 ;;        - set the debug constent to false (duh)
 ;;        - added some system checks around command and arguments
-;;        - 
+;;        -
 ;; v0.0.1 - first release
 ;;
 ;;; BUGS:
@@ -126,8 +129,10 @@
   "Todochiku (とどろく), send growl/snarl/libnotify notifications from within emacs."
   :group 'external)
 
-(defcustom todochiku-command 
-  (case system-type 
+(defcustom todochiku-command
+  (case system-type
+    ;; HACK: use growl-for-windows instead of snarl
+    ;; (windows-nt "C:/Program Files/full phat/Snarl/exrras/sncmd/snarl_command.exe")
     (windows-nt "C:/Program Files/full phat/Snarl/exrras/sncmd/snarl_command.exe")
     (darwin "/usr/local/bin/growlnotify")
     (t "notify-send"))
@@ -173,19 +178,19 @@ Whether or not to display todochiku-messages as a tooltip."
 
 (defcustom todochiku-icons
   '((default   . "announcements.png")
-	(alert     . "alert.png")
-	(bell      . "bell.png")
-	(compile   . "binary.png")
-	(irc       . "chat.png")
-	(check     . "clean.png")
-	(emacs     . "emacs_32.png")
-	(star      . "favorites.png")
-	(social    . "groupevent.png")
-	(alarm     . "kalarm.png")
-	(music     . "kbemusedsrv.png")
-	(mail      . "kmail.png")
-	(term      . "terminal.png")
-	(package   . "zip.png"))
+    (alert     . "alert.png")
+    (bell      . "bell.png")
+    (compile   . "binary.png")
+    (irc       . "chat.png")
+    (check     . "clean.png")
+    (emacs     . "emacs_32.png")
+    (star      . "favorites.png")
+    (social    . "groupevent.png")
+    (alarm     . "kalarm.png")
+    (music     . "kbemusedsrv.png")
+    (mail      . "kmail.png")
+    (term      . "terminal.png")
+    (package   . "zip.png"))
   "An alist containing an icon name, and a path to the icon.
 The PNG format seems to be most compatable.  This is done in
 an a-list so that elisp developers have a set of icons that
@@ -210,13 +215,13 @@ This is really only useful if you use the appt package (i.e. from planner mode).
 
 (defface todochiku-message-face
   '((default
-	  :forground "black"
-	  :background "white"
-	  :box (:line-width 2 :color "grey40")))
+      :forground "black"
+      :background "white"
+      :box (:line-width 2 :color "grey40")))
   "This is the text that is displayed in the message window on a notification."
   :group 'todochiku)
 
-
+;;;###autoload
 (defun todochiku-message (title message icon &optional sticky)
   "Send a message via growl, snarl, etc.
 If you don't wnat to set a title or icon, just use an ampty string \"\"
@@ -225,85 +230,98 @@ as an argument.
 `icon' is a path to a PNG image that is displayed with the notification.
 you can use `todochiku-icon' to figure out which icon you want to display.
 
-See the variable `todochiku-icons' for a list of available icons." 
+See the variable `todochiku-icons' for a list of available icons."
   (if todochiku-debug (message "Sent todochiku message.  Title:%s Message:%30s... Icon:%s Sticky:%s" title message icon sticky))
   (when (not (string= todochiku-command ""))
-		(apply 'start-process 
-			   "todochiku" 
-			   nil 
-			   todochiku-command 
-			   (todochiku-get-arguments title message icon sticky)))
+        (apply 'start-process
+               "todochiku"
+               nil
+               todochiku-command
+               (todochiku-get-arguments title message icon sticky)))
   (when todochiku-tooltip-too
-		(let ((tooltip-frame-parameters '((name . "todochiku")
-										  (internal-border-width . 4)
-										  (border-width . 2)
-										  (left . 0)
-										  (top . 0))))
-		  (tooltip-show message)))
+        (let ((tooltip-frame-parameters '((name . "todochiku")
+                                          (internal-border-width . 4)
+                                          (border-width . 2)
+                                          (left . 0)
+                                          (top . 0))))
+          (tooltip-show message)))
   (when (or (string= todochiku-command "")
-			todochiku-message-too)
-		(message "%s" (propertize message 'face 'todochiku-message-face))))
+            todochiku-message-too)
+        (message "%s" (propertize message 'face 'todochiku-message-face))))
 
 (defun growl (title message)
   "Alias for `todochiku-message'."
-  (todochiku-message title message ""))
+  (interactive "sTitle: \nsMessage: ")
+  (todochiku-message title message 'emacs))
 
 ;;*JasonMcBrayer backend
+;;;###autoload
 (defun todochiku-get-arguments (title message icon sticky)
   "Gets todochiku arguments.
 This would be better done through a customization probably."
   (case system-type
-    ('windows-nt (list "/M" title message icon))
+    ;; HACK: use `growl for windows' instead of `Snarl'
+    ;; ('windows-nt (list "/M" title message icon))
+    ('windows-nt (list (format "/t:\"%s\"" title)
+                       (format "/i:\"%s\"" (todochiku-icon icon))
+                       message)) ;; BUG: NOT working (if sticky "/s:sticky")
     ('darwin (list title (if sticky "-s" "") "-m" message "--image" icon ))
     (t (list "-i" icon "-t"
              (if sticky "0" (int-to-string (* 1000 todochiku-timeout)))
              title message))))
 
+;;;###autoload
 (defun todochiku-icon (icon)
   "Pull out an actual icon from the variable `todochiku-icons'."
-  (expand-file-name (concat todochiku-icons-directory "/" (cdr (assoc icon todochiku-icons)))))
+  (if (symbolp icon)
+      (expand-file-name (concat todochiku-icons-directory "/" (cdr (assoc icon todochiku-icons))))
+    icon))
 
+;;;###autoload
 (defun todochiku-in (message mins)
   "Send a todochiku message in a set ammount of time. Can take a prefix arg for the number of mins to wait."
   (interactive "sMessage: \nNTime to wait: ")
   (run-at-time (* mins 60)
-			   nil
-			   'todochiku-message
-			   "Todohiku Timer"
-			   message
-			   (todochiku-icon 'bell)))
+               nil
+               'todochiku-message
+               "Todohiku Timer"
+               message
+               (todochiku-icon 'bell)))
 
+;;;###autoload
 (defun todochiku-appt-disp-window (min-to-app new-time appt-msg)
   "A helper function to interface with appt-disp-window-function."
   (todochiku-message (concat "Appt in " min-to-app)
-					 (concat appt-msg "\n" min-to-app " Mins\n" new-time)
-					 (todochiku-icon 'alarm))
+                     (concat appt-msg "\n" min-to-app " Mins\n" new-time)
+                     (todochiku-icon 'alarm))
   (if todochiku-display-appts-in-window-too
-	  (appt-disp-window min-to-app new-time appt-msg)))
+      (appt-disp-window min-to-app new-time appt-msg)))
 
 (if todochiku-appts
-	(setq appt-disp-window-function 'todochiku-appt-disp-window))
-
-;;* external 
-(if todochiku-compile-message
-	(add-hook 'compilation-mode-hook
-			  (lambda ()
-				(add-to-list 'compilation-finish-functions
-							 (lambda (buf finish) (todochiku-message "Compilation Finished" finish (todochiku-icon 'compile)))))))
+    (setq appt-disp-window-function 'todochiku-appt-disp-window))
 
 ;;* external
+(if todochiku-compile-message
+    (add-hook 'compilation-mode-hook
+              (lambda ()
+                (add-to-list 'compilation-finish-functions
+                             (lambda (buf finish) (todochiku-message "Compilation Finished" finish (todochiku-icon 'compile)))))))
+
+;;* external
+;;;###autoload
 (defun growl-rcirc-print-hook (process sender response target text)
   (when (and (string-match (rcirc-nick process) text)
              (not (string= (rcirc-nick process) sender))
              (not (string= (rcirc-server process) sender)))
-		(growl "You Were Mentioned"
-			   (format "You were mentioned by %s in %s" sender target))))
+        (growl "You Were Mentioned"
+               (format "You were mentioned by %s in %s" sender target))))
 
 (eval-after-load 'rcirc
-				 '(add-hook 'rcirc-print-hooks 'growl-rcirc-print-hook))
+                 '(add-hook 'rcirc-print-hooks 'growl-rcirc-print-hook))
 
 
 ;;* external
+;;;###autoload
 (defun yaoddmuse-todochiku (msg)
   "Hook into yaoddmuses notification system."
   (todochiku-message "YaOddMuse" msg (todochiku-icon 'social)))
@@ -316,12 +334,11 @@ This would be better done through a customization probably."
 ;;   :type '(boolean))
 
 ;; (if todochiku-on-message
-;; 	(defadvice 'message
-;; 	  '(after todochiku-on-message-advice)
-;; 	  (todochiku-message "Emacs Message" (apply 'format args) "")))
+;;     (defadvice 'message
+;;       '(after todochiku-on-message-advice)
+;;       (todochiku-message "Emacs Message" (apply 'format args) "")))
 
 ;; We basically provide the same thing as growl.el
 (provide 'growl)
 
-(provide 'todochiku)
-
+(provide 'xy-todochiku)

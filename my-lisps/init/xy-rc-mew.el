@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-04 Sun 17:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 03:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -266,7 +266,7 @@
   (setq mew-arrivedmail-pending 0)
   ;; todochiku 新邮件通知
   (when window-system
-    (when (try-require 'todochiku)
+    ;; (when (try-require 'xy-todochiku)
       (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
         "Use Todochiku to pop-up a notification, if new Mail arrives"
         (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
@@ -284,8 +284,9 @@
               ((= arg 0)
                (if (> mew-arrivedmail-pending 0)
                    (setq mew-arrivedmail-pending 0)))))
-      (message "[ todochiku for mew setting is OK ! ]")
-      ))
+      ;; (message "[ todochiku for mew setting is OK ! ]")
+      ;; )
+    )
 
   ;; auto complete email address in various fields
   (defvar mew-field-completion-switch

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-03 Sat 21:49 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 04:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -89,7 +89,10 @@
   '("Fit This Frame" . fit-frame))
 
 ;;*** thumb-frm
-;;  Shrink frames to a thumbnail size and restore them again.
+;; Shrink frames to a thumbnail size and restore them again.
+;; BUG: Info-mode conflict with thumb-frm when doing isearch or mouse
+;; click on info links. However, it is easy to fix when you
+;; `fit-frame' (`M-x xy/fit-frame' or S-<f5>)
 ;; (require 'thumb-frm)
 ;; (define-key special-event-map [iconify-frame]
 ;;             'thumfr-thumbify-frame-upon-event)

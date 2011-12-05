@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-04 Sun 16:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 03:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -186,8 +186,8 @@
 ;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix).
 ;; It can also do standard messages (in the minibuffer) and pop up a
 ;;tooltip.
-;; (require 'todochiku)
-(eval-after-load "todochiku"
+;; (require 'xy-todochiku)
+(eval-after-load "xy-todochiku"
   '(progn
      (todochiku-settings)))
 
