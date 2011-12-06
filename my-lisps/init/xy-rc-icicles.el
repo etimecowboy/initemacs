@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-12-05 Mon 04:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 22:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,7 +34,7 @@
   (icicle-ido-like-mode 1)
   (setq icicle-download-dir my-local-lisp-path
         icicle-incremental-completion-flag 'alwasys
-        icicle-incremental-completion-delay 0
+        icicle-incremental-completion-delay 0.5
         icicle-highlight-input-completion-failure-delay 0
         icicle-buffers-ido-like-flag t
         icicle-anything-transform-candidates-flag t

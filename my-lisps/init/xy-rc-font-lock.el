@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-12-06 Tue 02:48 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 19:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,6 +19,9 @@
 ;;;###autoload
 (defun font-lock-settings ()
   "Settings for `font-lock'."
+  (setq  font-lock-maximum-decoration t
+         font-lock-support-mode 'jit-lock-mode)
+
   ;; 增加自定义关键字
   (dolist (mode '(c-mode c++-mode java-mode lisp-mode emacs-lisp-mode
                          lisp-interaction-mode sh-mode sgml-mode

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-12-05 Mon 06:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 22:31 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -179,58 +179,34 @@ which is options for `diff'."
   (split-window-horizontally)
   (follow-mode t))
 
+;; REF: (@url :file-name "http://superuser.com/questions/176627/in-emacs-dired-how-can-i-run-a-command-on-multiple-marked-files" :display "Post")
+;;;###autoload
+(defun mrc-dired-do-command (command)
+  "Run COMMAND on marked files. Any files not already open will be
+opened. After this command has been run, any buffers it's modified
+will remain open and unsaved."
+  (interactive "CRun on marked files M-x ")
+  (save-window-excursion
+    (mapc (lambda (filename)
+            (find-file filename)
+            (call-interactively command))
+          (dired-get-marked-files))))
+
 ;;;###autoload
 (defun dired-settings ()
   "Settings for `dired'."
   ;; (setq truncate-lines t)
   (setq dired-kept-versions 1)
   (setq dired-recursive-deletes t)  ; 可以递归的删除目录
-  (setq dired-recursive-copies t) ; 可以递归的进行拷贝
+  (setq dired-recursive-copies t)   ; 可以递归的进行拷贝
   ;; (define-prefix-command 'dired-slash-map)
-  ;; (setq dired-dwim-target t)
+  (setq dired-dwim-target t)
   ;; (add-hook 'dired-mode-hook
   ;;             (lambda ()
   ;;               (define-key dired-mode-map (kbd "<return>")
   ;;                 'dired-find-alternate-file)
   ;;               (define-key dired-mode-map (kbd "^")
   ;;                 (lambda () (interactive) (find-alternate-file "..")))))
-
-  ;; (require 'dired-x)
-  ;; (require 'wuxch-dired "my-wuxch-dired")
-  ;; (require 'wuxch-dired-copy-paste "my-wuxch-dired-copy-paste")
-
-  (require 'dired-details)
-  (dired-details-install)
-  (require 'dired-details+)
-
-  ;; (require 'dired+)
-
-  ;; (require 'dired-isearch)
-  ;; (define-key dired-mode-map (kbd "C-s") 'dired-isearch-forward)
-  ;; (define-key dired-mode-map (kbd "C-r") 'dired-isearch-backward)
-  ;; (define-key dired-mode-map (kbd "ESC C-s") 'dired-isearch-forward-regexp)
-  ;; (define-key dired-mode-map (kbd "ESC C-r") 'dired-isearch-backward-regexp)
-
-  ;; Emacs 23 has builtin Isearch of filenames in Dired:
-  ;; M-s f C-s   – ‘dired-isearch-filenames’: Isearch only among filenames.
-  ;; M-s f C-M-s – ‘dired-isearch-filenames-regexp’: Same, but regexp search.
-  ;; M-s a C-M-s – ‘dired-do-isearch-regexp’: Isearch the marked files.
-  ;; (require 'dired-lis)
-
-  ;; Use a single frame for visiting a sub-directory
-  ;; (require 'dired-single)
-
-  ;; dired中用T就把一个目录压缩为一个.tar.gz文件
-  (require 'dired-tar)
-
-  ;; wdired提供修改文件名的一种非常方便方法。它把dired-mode当作一般的
-  ;; 文本处理，这样无论是修改一个文件，还是批量修改文件都不是一般的爽。
-  ;; wdired has been a part of GNU Emacs since Emacs 23
-  ;; (if is-before-emacs-21 (require 'wdired "wdired-for-21"))
-  (require 'wdired)
-
-  ;; 让你能够在dired-mode里面使用只对文件名部分执行i-search
-  ;; (require 'dired-isearch "my-dired-isearch")
 
   ;; (defun dired-mode-hook-settings ()
   ;;   "Settings for `dired-mode-hook'."
@@ -239,13 +215,67 @@ which is options for `diff'."
   ;;         (propertized-buffer-identification "%b")))
   ;; (add-hook 'dired-mode-hook 'dired-mode-hook-settings)
 
-  (add-hook 'dired-mode-hook 'dired-omit-mode)
   (add-hook 'dired-after-readin-hook 'his-dired-sort)
-  (add-hook 'dired-lood-hook 'his-dired-sort)
-
+  (add-hook 'dired-load-hook 'his-dired-sort)
   ;; (def-redo-command dired-redo 'dired-redo 'dired-undo)
 
-  (message "* ---[ dired configuration is complete ]---")
-  )
+  ;;==================================================================
+  ;; GNU Emacs features for dired
+
+  ;; (when (try-require 'dired-isearch) ;; 只对文件名isearch
+  ;;   NOTE: Emacs 23 has builtin Isearch of filenames in Dired:
+  ;;     M-s f C-s   – `dired-isearch-filenames'
+  ;;     M-s f C-M-s – `dired-isearch-filenames-regexp'
+  ;;     M-s a C-M-s – `dired-do-isearch-regexp'
+  ;;   (define-key dired-mode-map (kbd "C-s")
+  ;;     'dired-isearch-forward)
+  ;;   (define-key dired-mode-map (kbd "C-r")
+  ;;     'dired-isearch-backward)
+  ;;   (define-key dired-mode-map (kbd "ESC C-s")
+  ;;     'dired-isearch-forward-regexp)
+  ;;   (define-key dired-mode-map (kbd "ESC C-r")
+  ;;     'dired-isearch-backward-regexp))
+
+  ;;------------------------------------------------------------------
+  (require 'dired-x) ;; 忽略不感兴趣的文件
+  (add-hook 'dired-mode-hook
+            (function (lambda ()
+                        (dired-omit-mode 1)
+                        )))
+  (eval-after-load "dired-x"
+    '(progn
+       (dired-x-settings)))
+
+  ;;------------------------------------------------------------------
+  (require 'wdired) ;; 以文件形式修改dired buffer,
+                    ;; 批量修改文件名很方便
+                    ;; wdired has been a part of GNU Emacs 23
+
+  ;;==================================================================
+  ;; Contrib features
+
+  (when (try-require 'dired-details) ;; 简略文件信息
+    (dired-details-install)          ;; use `(' and `)' to switch
+    ;; (try-require 'dired-details+)
+    )
+
+  ;;------------------------------------------------------------------
+  ;; (try-require 'dired-single) ;; Use a single frame for visiting a
+  ;;                             ;; sub-directory
+
+  ;;------------------------------------------------------------------
+  (try-require 'dired-tar) ;; T: 把一个目录压缩为一个.tar.gz文件
+
+  ;;------------------------------------------------------------------
+  (when (try-require 'dired+) ;; dired大补,
+    ;; TODO: do a research and add more configurations.
+    ;; (toggle-dired-find-file-reuse-dir 1)
+    ;; (eval-after-load "dired+"
+    ;;   '(progn
+    ;;     (dired+-settings)))
+    (define-key ctl-x-map   "d" 'diredp-dired-files)
+    (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window))
+
+  (message "* ---[ dired configuration is complete ]---"))
 
 (provide 'xy-rc-dired)

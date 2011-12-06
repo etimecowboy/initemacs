@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-06 Tue 08:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 21:34 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -316,11 +316,11 @@
 ;;====================================================================
 ;;* c/c++ development settings
 ;; NOTE: C include directories' list are defined in `xy-util.el'
-(add-to-list 'auto-mode-alist '("\\.c"   . c-mode))
+;; (add-to-list 'auto-mode-alist '("\\.c"   . c-mode))
 (add-to-list 'auto-mode-alist '("\\.hch" . c-mode)) ;; Handle-C
 (add-to-list 'auto-mode-alist '("\\.hcc" . c-mode)) ;; Handle-C
-(add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.c++$" . c++-mode))
+;; (add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
+;; (add-to-list 'auto-mode-alist '("\\.c++$" . c++-mode))
 
 ;;--------------------------------------------------------------------
 ;;** cc-mode
@@ -329,10 +329,10 @@
      (cc-mode-settings)
      (eal-define-keys
       `(c-mode-base-map)
-      `(("C-c H"     c-electric-backspace)
-        ("C-c M-a"   beginning-of-defun)
-        ("C-c M-e"   end-of-defun)
-        ("C-c M-F"   copy-current-fun-name)
+      `(("C-c C <backspace>"     c-electric-backspace)
+        ("C-c C C-a"   beginning-of-defun)
+        ("C-c C C-e"   end-of-defun)
+        ("C-c C M-w"   copy-current-fun-name)
         ;; ifdef settings
         ;; ("C-c I"     mark-ifdef)
         ;; hide-ifdef
@@ -341,8 +341,8 @@
         ;; ("C-c M-i"   show-ifdef-block)
         ;; ("C-c M-I"   show-ifdefs)
         ;; c-includes
-        ("C-c C-i"   c-includes-current-file)
-        ("C-c I"     c-includes)
+        ("C-c C i"     c-includes-current-file)
+        ("C-c C I"     c-includes)
         ;; sourcepair BUG: not working
         ;; ("C-c S"     sourcepair-load)
         ))))

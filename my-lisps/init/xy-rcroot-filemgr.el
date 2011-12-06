@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-06 Tue 07:59 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 20:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -49,129 +49,27 @@
  global-map
  `(("C-x d" dired-jump)))
 
-(eal-define-keys-commonly
- dired-mode-map
+(eal-define-keys
+ 'dired-mode-map
     `(("C-c C-x 3" dired-two-columns)
-      ("C-t"   dired-omit-mode)
-      ;; ("M-b s" dired-sort-by-size)
-      ;; ("M-b x" dired-sort-by-extension)
-      ;; ("M-b t" dired-sort-by-time)
-      ;; ("M-b n" dired-sort-by-name)
-      ("M-q"   ywb-dired-quickview)
-      ))
-;;  `(;; ("C-h"         dired-up-directory-same-buffer)
-;;    ;; ("<backspace>" dired-up-directory-same-buffer)
-;;    ;; ("'"           switch-to-other-buffer)
-;;    ;; ("/"           dired-slash-map)
-;;    ;; ("/m"          ywb-dired-filter-regexp)
-;;    ;; ("/."          ywb-dired-filter-extension)
-;;    ;; ("C-q"         ywb-dired-quickview)
-;;    ;; ("r"           wdired-change-to-wdired-mode)
-;;    ;; ("C-s"         dired-lis-isearch-forward-always?)
-;;    ;; ("C-r"         dired-lis-isearch-backward-always?)
-;;    ;; ("ESC C-s"     dired-lis-isearch-forward-regexp-always?)
-;;    ;; ("ESC C-r"     dired-lis-isearch-backward-regexp-always?)
-;;    ;; 让dired只使用一个buffer
-;;    ;; ("RET"         dired-lis-find-file-reuse-dir-buffer)
-;;    ;; ("<return>"    dired-lis-find-file-reuse-dir-buffer)
-;;    ;; ("M"           wuxch-mark-all-files-directories)
-;;    ;; ("g"           revert-buffer)
-;;    ;; ("M-o"         dired-omit-mode)
-;;    ;; ("M-Y"         dired-redo)
-;;    ;; ("C-k"         dired-do-delete)
-;;    ;; ("M-s"         dired-lis-off)
-;;    ;; ("q"           dired-lis-on)
-;;    ;; ("M"           dired-unmark)
-
-;;    ("1"           delete-other-windows)
-;;    ("2"           split-window-vertically)
-;;    ("3"           split-window-horizontally)
-;;    ("o"           other-window)
-
-;;    ("j"           wuxch-dired-next-line)
-;;    ("k"           wuxch-dired-previous-line)
-;;    ("SPC"         dired-scroll-half-page-forward)
-;;    ("u"           dired-scroll-half-page-backward)
-;;    ("d"           dired-scroll-up)
-;;    ("w"           dired-scroll-down)
-;;    ("M->"         wuxch-dired-goto-last-line)
-;;    ("M-<"         wuxch-dired-goto-first-line)
-
-;;    ("M-w"         wuxch-dired-copy)
-;;    ("C-y"         wuxch-dired-paste)
-;;    ("M-k"         wuxch-dired-cut)
-
-;;    ("c"           dired-do-copy)
-;;    ("E"           dired-ediff)
-;;    ("t"           sb-toggle-keep-buffer)
-;;    ("M-m"         dired-unmark-backward)
-;;    ("C-c M-m"     dired-create-directory)
-
-;;    ("C-c C-m"     make-sb)
-;;    ("C-c m"       make-check-sb)
-;;    ("C-c M"       make-clean-sb)
-;;    ("C-c c"       compile-buffer-sb)
-;;    ("C-c r"       run-program-sb)
-;;    ("C-c C"       smart-compile-sb)
-;;    ("C-c g"       gdb)
-;;    ("C-c b"       gud-break)
-;;    ("C-c B"       gud-remove)))
-
-;;--------------------------------------------------------------------
-;;** dired-details+, 更多文件信息
-;; ;;;###autoload
-;; (defun dired-details+-settings ()
-;;   "Settings for `dired-details+'.")
-;; (eval-after-load "dired-details+"
-;;   '(progn
-;;      (dired-details+-settings))
-
-;;--------------------------------------------------------------------
-;;** dired+, 增强的 dired
-;; (eval-after-load "dired+"
-;;   '(progn
-;;      (dired+-face-settings)
-;;      (dired+-settings)))
-
-;;--------------------------------------------------------------------
-;;** dired-x，忽略不感兴趣的文件
-;; (autoload 'dired-omit-mode "dired-x"
-;;   "Toggle Dired-Omit mode. With numeric ARG, enable Dired-Omit mode
-;; if ARG is positive, disable otherwise. Enabling and disabling is
-;; buffer-local. If enabled, \"uninteresting\" files are not listed.
-;; Uninteresting files are those whose filenames match regexp
-;; `dired-omit-files', plus those ending with extensions in
-;; `dired-omit-extensions'."
-;;   t)
-;; (am-add-hooks
-;;  `(dired-mode-hook)
-;;  'dired-omit-mode)
-;; ;;;###autoload
-;; (defun dired-x-settings ()
-;;   "Settings for `dired-x'."
-;;   ;; (unless is-before-emacs-21
-;;   ;;   (setq dired-omit-files
-;;          (concat dired-omit-files
-;;                  "\\|^\\.\\|^semantic.cache$\\|^CVS$"))
-;;   ;;   (if mswin
-;;   ;;       (setq dired-omit-files (concat dired-omit-files "\\|^_"))))
-;;   ;; (setq dired-omit-size-limit 1000000)
-;; )
-;; (eval-after-load "dired-x"
-;;   '(progn
-;;      (dired-x-settings)))
-
-;;--------------------------------------------------------------------
-;;** dired-lis
-;; (eal-define-keys
-;;  'isearch-mode-map
-;;  `(("C-h" dired-lis-isearch-up-directory)))
-;; ;;;###autoload
-;; (defun dired-lis-settings ()
-;;   "Settings for `dired-lis'.")
-;; (eval-after-load "dired-lis"
-;;   '(progn
-;;      (dired-lis-settings)))
+      ;; ("M-b s"    dired-sort-by-size)
+      ;; ("M-b x"    dired-sort-by-extension)
+      ;; ("M-b t"    dired-sort-by-time)
+      ;; ("M-b n"    dired-sort-by-name)
+      ("M-o"       dired-omit-mode)
+      ("E"         dired-ediff)
+      ("C-M-/"     dired-undo
+      ;; ("C-M-?"     dired-redo)
+      ("C-M-k"     dired-do-delete)
+      ("M-q"       ywb-dired-quickview)
+      ("/m"        ywb-dired-filter-regexp)
+      ("/."        ywb-dired-filter-extension)
+      ;; ("M->"       wuxch-dired-goto-last-line)
+      ;; ("M-<"       wuxch-dired-goto-first-line)
+      ;; ("M-w"       wuxch-dired-copy)
+      ;; ("C-y"       wuxch-dired-paste)
+      ;; ("M-k"       wuxch-dired-cut)
+      )))
 
 ;;--------------------------------------------------------------------
 ;;** image-dired

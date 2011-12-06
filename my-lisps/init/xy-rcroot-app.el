@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-06 Tue 07:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 19:24 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -505,6 +505,10 @@ the mode-line." t)
      ))
 
 ;;--------------------------------------------------------------------
+;;** hi-lock
+(global-hi-lock-mode 1)
+
+;;--------------------------------------------------------------------
 ;;** smart-hl
 ;; 像Eclipse那样双击高亮当前字符串
 ;; NOTE: A part of codepilot which is removed.
@@ -556,14 +560,17 @@ the mode-line." t)
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
-     (color-theme-settings)))
-;; (eal-define-keys-commonly
-;;  color-theme-mode-map
-;;  `(("'"   switch-to-other-buffer)
-;;    ("u"   View-scroll-half-page-backward)
-;;    ("SPC" scroll-up)
-;;    ("1"   delete-other-windows)
-;;    ("."   find-symbol-at-point)))
+     (color-theme-settings)
+     ;; (color-theme-xy-dark)
+     (color-theme-solarized-dark)
+     ;; (color-theme-zenburn)
+     (eal-define-keys-commonly
+      color-theme-mode-map
+      `(("'"   switch-to-other-buffer)
+        ("u"   View-scroll-half-page-backward)
+        ("SPC" scroll-up)
+        ("1"   delete-other-windows)
+        ("."   find-symbol-at-point)))))
 
 ;;--------------------------------------------------------------------
 ;;** doremi
