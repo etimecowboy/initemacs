@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-05 Mon 03:07 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,8 +35,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** ffap, finding Files and URLs at point
-;; REF: http://www.gnu.org/software/emacs/manual/html_node/emacs/
-;; FFAP.html#index-ffap-3860
+;; REF: (@url :file-name "http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860" :display "emacs manual")
 (ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
 (eval-after-load "ffap"
   '(progn
@@ -262,11 +261,18 @@ from tradition chinese to simple chinese" t)
       'linkd-overlay-map
       `(("n"        linkd-next-link)
         ("p"        linkd-previous-link)
-        ("<return>" linkd-follow-at-point)))
+        ("<return>" linkd-follow-at-point)
+        ("e"        linkd-edit-link-at-point)))
      (eal-define-keys
       'linkd-map
       `(("<mouse-4>" nil)
-        ("C-c ," nil)))))
+        ("C-c ," nil)))
+     (eal-define-keys-commonly
+      global-map
+      `(("C-x L t" linkd-insert-tag)
+        ("C-x L s" linkd-insert-star)
+        ("C-x L l" linkd-insert-link)))))
+
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
    c-mode-hook c++-mode-hook cc-mode-hook

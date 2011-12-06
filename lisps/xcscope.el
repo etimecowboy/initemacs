@@ -1052,10 +1052,18 @@ nil (meaning, \"no flags\").")
 (make-variable-buffer-local 'cscope-search-list)
 
 
-(defvar cscope-searched-dirs nil
-  "The list of database directories already searched.")
-(make-variable-buffer-local 'cscope-searched-dirs)
+;; HACK2: http://www.emacswiki.org/emacs/CScopeAndEmacs#toc4
+;;   Fix a bug causing databases to be skipped over when using
+;;   `cscope-database-regexps' if they are contained in the same
+;;   directory. I emailed Darryl Okahata with the patch but I do not
+;;   know if he is still reachable.
 
+;; (defvar cscope-searched-dirs nil
+;;   "The list of database directories already searched.")
+;; (make-variable-buffer-local 'cscope-searched-dirs)
+(defvar cscope-searched-databases nil
+   "The list of databases already searched.")
+(make-variable-buffer-local 'cscope-searched-databases)
 
 (defvar cscope-filter-func nil
   "Internal variable for holding the filter function to use (if any) when
@@ -2136,17 +2144,24 @@ using the mouse."
                     (progn
                       ;; Handle the case where `cscope-directory' is really
                       ;; a full path name to a cscope database.
-                      (setq base-database-file-name
+                      ;; HACK2: (setq base-database-file-name
+                      (setq database-file cscope-directory
+                            base-database-file-name
                             (file-name-nondirectory cscope-directory)
                             cscope-directory
                             (file-name-directory cscope-directory))
-                      ))
+                      )
+                  ;; HACK2: Else set database-file to default name
+                  (setq database-file (concat cscope-directory base-database-file-name)))
                 (setq cscope-directory
                       (file-name-as-directory cscope-directory))
-                (if (not (member cscope-directory cscope-searched-dirs))
+                ;; (if (not (member cscope-directory cscope-searched-dirs))
+                (if (not (member database-file cscope-searched-databases))
                     (progn
-                      (setq cscope-searched-dirs (cons cscope-directory
-                                                       cscope-searched-dirs)
+                      ;; (setq cscope-searched-dirs (cons cscope-directory
+                      ;;                                  cscope-searched-dirs)
+                      (setq cscope-searched-databases (cons database-file
+                                                            cscope-searched-databases)
                             done t)
                       ))
                 )
@@ -2169,8 +2184,10 @@ using the mouse."
         (if cscope-command-args
             (setq options (append options cscope-command-args)))
         (setq database-file (concat cscope-directory base-database-file-name)
-              cscope-searched-dirs (cons cscope-directory
-                                         cscope-searched-dirs)
+              ;; cscope-searched-dirs (cons cscope-directory
+              ;;                            cscope-searched-dirs)
+              cscope-searched-databases (cons database-file
+                                              cscope-searched-databases)
               )
 
         ;; The database file and the directory containing the database file
@@ -2264,7 +2281,8 @@ SENTINEL-FUNC are optional process filter and sentinel, respectively."
       (setq default-directory directory
             cscope-start-directory nil
             cscope-search-list (cscope-find-info directory)
-            cscope-searched-dirs nil
+            ;; cscope-searched-dirs nil
+            cscope-searched-databases nil
             cscope-command-args args
             cscope-filter-func filter-func
             cscope-sentinel-func sentinel-func

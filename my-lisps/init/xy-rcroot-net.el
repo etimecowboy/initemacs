@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-11-30 Wed 18:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 08:00 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -116,7 +116,7 @@
 ;;* google-maps-el
 
 ;; Emacs中的谷歌地图
-;; REF: http://emacser.com/emacs-google-map.htm
+;; REF: (@url :file-name "http://emacser.com/emacs-google-map.htm" :display "emacswiki")
 ;; (require 'google-maps)
 ;; (eal-define-keys
 ;;  'google-maps-static-mode-map

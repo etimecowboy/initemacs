@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cc.el'
-;; Time-stamp:<2011-12-05 Mon 10:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-05 Mon 14:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My C/C++/Java development settings
@@ -107,6 +107,7 @@
   (require 'c-includes)  ;; 快速include
   ;; (require 'sourcepiar)  ;; 可以在cpp与h文件之间切换
   (require 'xcscope)     ;; 在 C 源代码中快速跳转，查找变量，函数
+  (require 'xcscope+)
   (message "* ---[ c-mode configuration is complete ]---")
   )
 
@@ -119,6 +120,7 @@
   (hide-ifdef-mode 1)
   (require 'c-includes)  ;; 快速include
   (require 'xcscope)     ;; 在 C 源代码中快速跳转，查找变量，函数
+  (require 'xcscope+)
   ;; (setq tab-width 4 indent-tabs-mode nil)
   ;; (c-set-style "stroustrup")
   ;; (defalias 'cpp-mode 'c++-mode)

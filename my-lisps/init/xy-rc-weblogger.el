@@ -6,7 +6,7 @@
 ;;        ("weblog" . "1")))))
 
 ;; ;; 用weblogger写WordPress博客
-;; ;; http://emacser.com/weblogger.htm
+;; ;; REF: (@url :file-name "http://emacser.com/weblogger.htm" :display "emacser")
 
 ;; (require 'weblogger)
 

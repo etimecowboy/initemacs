@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-05 Mon 03:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,12 +17,12 @@
 (require 'xy-rc-utils)
 
 ;; REF:
-;;   - http://everyjoe.com/technology/using-mew-as-a-mail-client/?utm_source=everyjoe&utm_medium=web&utm_campaign=b5hubs_migration
-;;   - http://www.mew.org/pipermail/mew-int/2009-July/002217.html
-;;   - http://baiyhome.spaces.live.com/blog/cns!6CC0192DC1074113!256.entry
-;;   - http://bigclean.is-programmer.com/posts/18038.html
-;;   - http://www.zeuux.com/blog/content/2858/
-;;   - http://zerodoo.appspot.com/emacs.mew.1.0001.htm
+;;   - (@url :file-name "http://everyjoe.com/technology/using-mew-as-a-mail-client/?utm_source=everyjoe&utm_medium=web&utm_campaign=b5hubs_migration" :display "1")
+;;   - (@url :file-name "http://www.mew.org/pipermail/mew-int/2009-July/002217.html" :display "2")
+;;   - (@url :file-name "http://baiyhome.spaces.live.com/blog/cns!6CC0192DC1074113!256.entry" :display "3")
+;;   - (@url :file-name "http://bigclean.is-programmer.com/posts/18038.html" :display "4")
+;;   - (@url :file-name "http://www.zeuux.com/blog/content/2858/" :display "5")
+;;   - (@url :file-name "http://zerodoo.appspot.com/emacs.mew.1.0001.htm" :display "6")
 
 ;;;###autoload
 (defun mew-settings ()
@@ -58,7 +58,7 @@
         'mew-send-hook))
 
   ;; Windows 下使用 mew
-  ;; [[http://hi.baidu.com/ahnuzfm/blog/item/7cc0208696774d3467096e17.html]]
+  ;; REF: (@url :file-name "http://hi.baidu.com/ahnuzfm/blog/item/7cc0208696774d3467096e17.html" :display "baidu")
   ;; set ssl program for different environment
   ;; mew 在 windows 的安装可以参考我的笔记。
   ;; (GNULinux
@@ -240,18 +240,19 @@
      '(utf-translate-cjk t)))
   (if (fboundp 'utf-translate-cjk-mode)
       (utf-translate-cjk-mode 1))
-;;-------------------------------------------
-;; 参考这里 http://zerodoo.appspot.com/emacs.mew.1.0001.html
-;;-------------------------------------------
+
+  ;;------------------------------------------------------------------
+  ;; REF: (@url :file-name "http://zerodoo.appspot.com/emacs.mew.1.0001.html" :display "Post")
+
   (setq mew-charset-m17n "utf-8")
   (setq mew-internal-utf-8p t)
+  ;; (setq mew-passwd-timer-unit 60) ; 60 minutes = 1 hour
+  ;; (setq mew-passwd-lifetime 24)   ; timer-unit x 24 = 24 hours
+  (set-default 'mew-decode-quoted 't)
+  (setq mew-arrivedmail-pending 0)
 
-;; biff设置（新邮件通知）
-;; 首先要下载biff.el这个文件，在.emacs中加入
-;; (try-require 'biff)
-;; Biff
+  ;; biff（新邮件通知）
   (setq mew-use-cached-passwd t);;必须
-
   (when (try-require 'biff)
     (setq mew-use-biff t)
     (setq mew-use-biff-bell t)
@@ -259,14 +260,9 @@
     ;; (setq mew-pop-biff-interval 3)
     ;; (message "[ biff setting is OK ! ]")
     )
-
-  ;; (setq mew-passwd-timer-unit 60) ; 60 minutes = 1 hour
-  ;; (setq mew-passwd-lifetime 24)   ; timer-unit x 24 = 24 hours
-  (set-default 'mew-decode-quoted 't)
-  (setq mew-arrivedmail-pending 0)
   ;; todochiku 新邮件通知
   (when window-system
-    ;; (when (try-require 'xy-todochiku)
+    (when (try-require 'xy-todochiku)
       (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
         "Use Todochiku to pop-up a notification, if new Mail arrives"
         (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
@@ -283,10 +279,7 @@
               ;; play a sound-file
               ((= arg 0)
                (if (> mew-arrivedmail-pending 0)
-                   (setq mew-arrivedmail-pending 0)))))
-      ;; (message "[ todochiku for mew setting is OK ! ]")
-      ;; )
-    )
+                   (setq mew-arrivedmail-pending 0)))))))
 
   ;; auto complete email address in various fields
   (defvar mew-field-completion-switch
@@ -301,15 +294,15 @@
       ("Config:"    . mew-complete-config)))
 
   ;; news groups
-  (setq mew-nntp-header-only t
-        mew-nntp-port "119"
-        mew-nntp-ssl nil
-        mew-nntp-server "news.virginmedia.com"
-        mew-nntp-newsgroup "-cn.bbs.comp.emacs"
-        mew-nntp-size 1000
-        ;; mew-nntp-user "Allen Yang"
-        mew-nntp-msgid-user "etimecowboy"
-        mew-nntp-msgid-domain "gmail.com")
+  ;; (setq mew-nntp-header-only t
+  ;;       mew-nntp-port "119"
+  ;;       mew-nntp-ssl nil
+  ;;       mew-nntp-server "news.virginmedia.com"
+  ;;       mew-nntp-newsgroup "-cn.bbs.comp.emacs"
+  ;;       mew-nntp-size 1000
+  ;;       ;; mew-nntp-user "Allen Yang"
+  ;;       mew-nntp-msgid-user "etimecowboy"
+  ;;       mew-nntp-msgid-domain "gmail.com")
 
    ;; org-mime for mew
   (when (try-require 'org-mime)

@@ -13,7 +13,7 @@
 
 ;; Easily set/toggle frame transparency
 ;; REF: Transparent Emacs
-;;      http://www.emacswiki.org/emacs/TransparentEmacs
+;;      (@url :file-name "http://www.emacswiki.org/emacs/TransparentEmacs" :display "Source")
 
 
 ;;; Code:

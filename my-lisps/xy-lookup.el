@@ -5,14 +5,14 @@
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Maintainer: Xin Yang
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-12-03 Sat 14:33 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 08:11 xin on P6T-WIN7>
 ;; Keywords:
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
 ;;; Commentary:
 
 
-;; REF: http://xahlee.org/emacs/emacs_lookup_ref.html
+;; REF: (@url :file-name "http://xahlee.org/emacs/emacs_lookup_ref.html" :display "Source")
 ;; use emacs as a dictionary application, that allows you to lookup
 ;; the definitions of a word under cursor, or any general reference
 ;; such as Wikipedia, Google, or lookup documentation of computer
@@ -82,7 +82,7 @@ to browser. If a region is active (a phrase), lookup that phrase."
     ))
 
 ;;--------------------------------------------------------------------
-;; REF: http://blog.tuxicity.se/?p=32
+;; REF: (@url :file-name "http://blog.tuxicity.se/?p=32" :display "Source")
 ;; by Johan Andersson
 ;; Two of my most frequently used tools when programming are Emacs and
 ;; Firefox. And much of the time in Firefox I spend on Google. That’s

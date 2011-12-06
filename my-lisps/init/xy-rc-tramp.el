@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-tramp.el'
-;; Time-stamp:<2011-12-04 Sun 18:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,7 +16,7 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; REF: http://nflath.com/2009/08/tramp/
+;; REF: (@url :file-name "http://nflath.com/2009/08/tramp/" :display "Post")
 ;;;### autoload
 ;; (defun sudo-edit (&optional arg)
 ;;   "Prompt for a filename and then open that file as sudo."
@@ -24,8 +24,6 @@
 ;;   (if arg
 ;;       (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
 ;;     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
-
-;; REF: http://nflath.com/2009/08/tramp/
 ;;;###autoload
 (defun sudo-edit-current-file ()
   "Open the current file as sudo without prompting"

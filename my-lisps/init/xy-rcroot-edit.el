@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-12-04 Sun 18:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:45 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,7 +36,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** ethan-wspace
-;; REF: https://github.com/glasserc/ethan-wspace
+;; REF: (@url :file-name "https://github.com/glasserc/ethan-wspace" :display "Source")
 (when (try-require 'ethan-wspace)
   (global-ethan-wspace-mode 1))
 
@@ -186,8 +186,8 @@
 ;;** palette
 ;; provides a general color palette that you can use to
 ;; examine color properties or choose colors.
-;; REF: Emacs配色的超级武器：Icicles，Color Palette和DoReMi
-;;      http://emacser.com/icicles-doremi-palette.htm
+;; Emacs配色的超级武器：Icicles，Color Palette和DoReMi
+;; REF: (@url :file-name "http://emacser.com/icicles-doremi-palette.htm" :display "emacser")
 
 ;;====================================================================
 ;;* Keyboard bindings

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emms.el'
-;; Time-stamp:<2011-12-04 Sun 16:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -99,12 +99,8 @@
   (define-key emms-playlist-mode-map [double-mouse-1]
   'emms-playlist-mode-play-current-track)
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
-  ;; Official example
-  ;; REF: http://www.gnu.org/software/emms/configs/xwl-emms.el
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;------------------------------------------------------------------
+  ;; REF: (@url :file-name "http://www.gnu.org/software/emms/configs/xwl-emms.el" :display "Official example")
 
   ;; Track Show Format (for playlist buffer)
   (setq emms-last-played-format-alist
@@ -187,12 +183,9 @@
   (setq emms-track-description-function
           'xwl-emms-track-description-function)
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
-  ;; from emacswiki `init-emms.el'
-  ;; REF: http://www.emacswiki.org/emacs/init-emms.el
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;------------------------------------------------------------------
+  ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/init-emms.el" :display "from emacswiki `init-emms.el'")
 
   (emms-devel) ;选择开发者模式
   ;; (require 'emms-extension)

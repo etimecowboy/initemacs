@@ -1,7 +1,7 @@
 ;;   -*- Mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-imenu.el'
-;; Time-stamp:<2011-12-04 Sun 17:15 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,12 +16,11 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; REF: http://www.emacswiki.org/emacs/ImenuMode
-
 ;;;###autoload
 (defun try-to-add-imenu ()
   (condition-case nil (imenu-add-to-menubar "Imenu") (error nil)))
 
+;; REF: (@url :file-name "http://www.emacswiki.org/emacs/ImenuMode" :display "emacswiki")
 ;;;###autoload
 (defun imenu-settings ()
   "Settings for `imenu'."

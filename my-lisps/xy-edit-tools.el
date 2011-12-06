@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-12-05 Mon 02:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 08:09 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -69,7 +69,7 @@
 ;;----------------------------------------------------------------------
 ;;** 插入日期时间
 ;; insert the variations of date formats (ISO and european formats)
-;; REF: http://www.emacswiki.org/emacs/InsertingTodaysDate
+;; REF: (@url :file-name "http://www.emacswiki.org/emacs/InsertingTodaysDate" :display "Source")
 ;;;###autoload
 (defun date (arg)
   (interactive "P")
@@ -111,7 +111,7 @@
 ;;--------------------------------------------------------------------
 ;;** 存盘前查看改动了哪些地方
 ;; 比较一下buffer里的内容与文件系统里老文件的不同
-;; REF: http://www.bookshelf.jp/soft/meadow_44.html#SEC661
+;; REF: (@url :file-name "http://www.bookshelf.jp/soft/meadow_44.html#SEC661" :display "Source")
 ;;;###autoload
 (defun diff-with-original (ediff)
   "Examin diff of current buffer with original file.
@@ -161,7 +161,7 @@
     (ediff-buffers orig-buf buf)))
 
 ;;--------------------------------------------------------------------
-;; REF: http://emacsblog.org/2007/09/30/quick-tip-spaces-instead-of-tabs/
+;; REF: (@url :file-name "http://emacsblog.org/2007/09/30/quick-tip-spaces-instead-of-tabs/" :display "Source")
 ;; BUG: NOT work
 ;; ;;;###autoload
 ;; (defun my-show-tabs ()
@@ -305,7 +305,7 @@
 ;;--------------------------------------------------------------------
 ;; Remove any extra spaces caused by indentation when killing the
 ;; newline between.
-;; REF: http://www.emacswiki.org/emacs/AutoIndentation
+;; REF: (@url :file-name "http://www.emacswiki.org/emacs/AutoIndentation" :display "Source")
 ;;;###autoload
 (defun kill-and-join-forward (&optional arg)
   "If at end of line, join with following; otherwise kill line.
@@ -320,8 +320,7 @@
 
 ;;--------------------------------------------------------------------
 ;; merge a line with the line before it.
-;; REF:
-;; http://blog.jdhuntington.com/2011/01/emacs-elisp-snipped-jlhjoinlin.html
+;; REF: (@url :file-name "http://blog.jdhuntington.com/2011/01/emacs-elisp-snipped-jlhjoinlin.html" :display "Source")
 ;;;###autoload
 (defun jlh-join-lines (arg)
   "Join this line to the line above n times
@@ -334,7 +333,7 @@ to running 'delete-indentation (aka 'join-line)."
 
 ;;====================================================================
 ;;* From pluskid (星黎殿)
-;; REF: http://lifegoo.pluskid.org/wiki/index.html
+;; REF: (@url :file-name "http://lifegoo.pluskid.org/wiki/index.html" :display "Source")
 
 ;;** 在 Emacs 里面使用 Stardict
 ;; 调用 stardict 的命令行接口来查辞典

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-05 Mon 03:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -90,7 +90,7 @@ minibuffer."
                     (next-logical-line))))
             (save-buffer)))))))
 
-;; REF: http://orgmode.org/worg/org-hacks.html#sec-1-3-1
+;; REF: (@url :file-name "http://orgmode.org/worg/org-hacks.html#sec-1-3-1" :display "worg")
 ;;;###autoload
 (defun org-transpose-table-at-point ()
   "Transpose orgmode table at point, eliminate hlines"
@@ -924,7 +924,7 @@ save -ascii %s ans")
   ;; Contrib lisps
 
   ;; org-mime
-  ;; REF: http://orgmode.org/worg/org-contrib/org-mime.html
+  ;; REF: (@url :file-name "http://orgmode.org/worg/org-contrib/org-mime.html" :display "worg")
   (when (try-require 'org-mime)
     ;; (setq org-mime-library 'mml)
     (add-hook 'org-mode-hook

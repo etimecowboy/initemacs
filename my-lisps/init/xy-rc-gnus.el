@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-04 Sun 16:52 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -98,7 +98,7 @@
                 (nntp-port-number 119))))
 
   ;; gnus-notify+
-  ;; REF: http://www.emacswiki.org/emacs/gnus-notify%2B.el
+  ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/gnus-notify%2B.el" :display "emacswiki")
   ;; 邮件新闻通知
   (require 'gnus-notify+)
 
@@ -110,7 +110,7 @@
   ;;       '((1 . cn-gb-2312) (2 . big5) (3 . gbk) (4 . utf-8)))
   ;; (setq gnus-newsgroup-ignored-charsets '(unknown-8bit x-unknown iso-8859-1 gb18030 x-gbk))
 
-  ;; REF: http://www.lirui.name/post/144.html
+  ;; REF: (@url :file-name "http://www.lirui.name/post/144.html" :display "Post")
   ;; (set-language-environment 'Chinese-GB)
   ;; (setq gnus-default-charset 'chinese-iso-8bit
   ;;       gnus-group-name-charset-group-alist '((".*" . cn-gb-2312))
@@ -519,7 +519,7 @@ archive
   ;;                   :leave t)))
 
   ;; Sending
-  ;; REF: [[http://ejd.posterous.com/send-email-through-gmail-with-gnu-emacs]]
+  ;; REF: (@url :file-name "http://ejd.posterous.com/send-email-through-gmail-with-gnu-emacs" :display "Post")
   ;; NOTE: In linux environment,You will need starttls which is now
   ;;       (included in emacs release), which is used to set up the
   ;;       SSL encrypted connection to the GMail server.
@@ -549,7 +549,7 @@ archive
   ;;     smtpmail-smtp-server "smtp.gmail.com"
   ;;     smtpmail-smtp-service 587))
 
-  ;; REF: http://www.emacswiki.org/emacs/GnusMSMTP
+  ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/GnusMSMTP" :display "emacswiki")
   ;; (Windows
   ;;  (setq
   ;;     message-send-mail-function 'message-send-mail-with-sendmail
@@ -582,9 +582,10 @@ archive
    ;; )
 
    ;; Windows 下 gnus 收发 gmail 邮件
-   ;; [[http://hi.baidu.com/kton/blog/item/4fb26159f8ae312c2934f047.html]]
-   ;; [[http://deebo.posterous.com/setting-up-emacs-gnus-on-windows-to-read-gmai]]
-   ;; [[http://www.mail-archive.com/info-gnus-english@gnu.org/msg08606.html]]
+   ;; REF:
+   ;;     - (@url :file-name "http://hi.baidu.com/kton/blog/item/4fb26159f8ae312c2934f047.html" :display "1")
+   ;;     - (@url :file-name "http://deebo.posterous.com/setting-up-emacs-gnus-on-windows-to-read-gmai" :display "2")
+   ;;     - (@url :file-name "http://www.mail-archive.com/info-gnus-english@gnu.org/msg08606.html" :display "3")
 
    ;; 多窗口处理
    ;;

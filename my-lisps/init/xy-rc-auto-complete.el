@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-12-04 Sun 16:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -69,20 +69,11 @@
   (define-key ac-mode-map  [(control tab)] 'auto-complete)
 
   ;;---------------------------------------------------------------------------
-
-  ;; ;; ac-dabbrev
-  ;; NOTE: has been moved into `auto-complete.el'
-  ;; (require 'ac-dabbrev)
-  ;; (setq ac-sources
-  ;;         (append 'ac-source-dabbrev ac-sources))
-
-  ;;----------------------------------------------------------------------------
-
   ;; ac-math
   ;; provides three sources, one for LaTeX command completion, one for
   ;; LaTeX math symbols and the another one for Unicode input of math
   ;; characters.
-  ;; REF: http://code.google.com/p/ac-math/
+  ;; REF: (@url :file-name "http://code.google.com/p/ac-math/" :display "Official website")
   (require 'ac-math)
   (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of latex-mode
 
@@ -96,7 +87,6 @@
   (ac-flyspell-workaround)
 
   ;;-----------------------------------------------------------------------------
-
   ;; Clang
   ;; The AC sources for Clang. Combine the power of AC, `Clang' and
   ;; `Yasnippet'.
@@ -110,7 +100,6 @@
   (add-hook 'cc-mode-hook 'my-ac-cc-mode-setup)
 
   ;;-----------------------------------------------------------------------------
-
   ;; ;; ac-company
   ;; ;; NOTE: NOT working
   ;; ;; Use Company Backends for Auto-Complete.

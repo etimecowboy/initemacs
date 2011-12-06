@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-05 Mon 04:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -54,7 +54,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** Transparent frame
-;; REF: http://www.emacswiki.org/emacs/TransparentEmacs
+;; REF: (@url :file-name "http://www.emacswiki.org/emacs/TransparentEmacs" :display "emacswiki")
 ;; BUG: not work in Windows 7, nor in Linux with gnome 3
 ;; (when (and is-after-emacs-23 window-system) ; from emacs-22
 
@@ -79,7 +79,7 @@
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
 (global-set-key (kbd "S-<f5>") 'xy/fit-frame)
-(global-set-key (kbd "<f5>") 'revert-buffer)
+(global-set-key (kbd "C-c <f5>") 'revert-buffer)
 
 ;;  Add menu-bar items
 (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
@@ -367,7 +367,7 @@ the mode-line." t)
 ;;--------------------------------------------------------------------
 ;;** cursor-change
 ;; 智能的改变光标形状
-;; REF: http://emacser.com/cursor-change.htm
+;; REF: (@url :file-name "http://emacser.com/cursor-change.htm" :display "emacser")
 ;; (when (try-require 'cursor-change)
 ;;   (cursor-change-mode 1))
 ;; (cursor-change-mode 1)
@@ -517,19 +517,21 @@ the mode-line." t)
 ;; (require 'highlight-symbol)
 (eval-after-load "highlight-symbol"
   '(progn
-     (highlight-symbol-face-settings)
+     ;; (highlight-symbol-face-settings)
      (highlight-symbol-settings)))
 
+;; NOTE: C-x H has been binded to `goto-help-buffer'
 (eal-define-keys
  `(emacs-lisp-mode-map lisp-interaction-mode-map java-mode-map
-   c-mode-base-map text-mode-map ruby-mode-map html-mode-map)
- `(("C-c M-H" highlight-symbol-at-point)
-   ("C-c M-R" highlight-symbol-remove-all)
-   ("C-c M-N" highlight-symbol-next)
-   ("C-c M-P" highlight-symbol-prev)
-   ("C-c r"   highlight-symbol-query-replace)
-   ("C-c M-n" highlight-symbol-next-in-defun)
-   ("C-c M-p" highlight-symbol-prev-in-defun)))
+   c-mode-base-map c++-mode-map perl-mode-map
+   org-mode-map text-mode-map ruby-mode-map html-mode-map)
+ `(("C-c H m" highlight-symbol-at-point)
+   ("C-c H d" highlight-symbol-remove-all)
+   ("C-c H n" highlight-symbol-next)
+   ("C-c H p" highlight-symbol-prev)
+   ("C-c H r" highlight-symbol-query-replace)
+   ("C-c H N" highlight-symbol-next-in-defun)
+   ("C-c H P" highlight-symbol-prev-in-defun)))
 
 ;;--------------------------------------------------------------------
 ;;** zjl-hl
@@ -549,7 +551,7 @@ the mode-line." t)
 ;;--------------------------------------------------------------------
 ;;** color-theme
 ;; fancy themes for emacs
-;; REF: http://emacser.com/color-theme.htm
+;; REF: (@url :file-name "http://emacser.com/color-theme.htm" :display "emacser")
 ;; (require 'color-theme-autoloads)
 (require 'color-theme)
 (eval-after-load "color-theme"

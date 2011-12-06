@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-12-04 Sun 16:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,6 +25,7 @@
 
   (interactive)
   (require 'anything)
+  (require 'anything-config)
   (anything-other-buffer
    '(;; Buffer:
      anything-c-source-buffers
@@ -63,7 +64,6 @@
 ;;;###autoload
 (defun anything-settings ()
   "settings for `anything'."
-
   ;;NOTE: anything-config will use <f5> as the prefix key, this
   ;; conflicts with your own emacs <f5> key bindings.
   ;; The following 6 are included in `anything-startup'
@@ -71,15 +71,16 @@
   ;; (require 'anything-config)
   ;; (require 'anything-grep)
   (require 'anything-startup)
-  (require 'anything-auto-install) ;; BUG: NOT work in Emacs 24
+  ;; (require 'anything-auto-install) ;; BUG: NOT work in Emacs 24
   (require 'descbinds-anything)
   (require 'anything-gtags)
   (require 'anything-menu)
   (require 'anything-show-completion)
   ;; (require 'anything-ipa)
 
-  ;; NOTE: a workaround to fix the Emacs crash with `anything'
-  ;; REF: http://permalink.gmane.org/gmane.emacs.anything/256
+  ;; NOTE: a workaround to fix the Emacs crash with `anything' (not
+  ;; tested yet)
+  ;; REF: (@url :file-name "http://permalink.gmane.org/gmane.emacs.anything/256" :display "Mail-list post")
   ;; (setq anything-idle-delay 1.1)
   ;; (setq anything-input-idle-delay 1.1)
 
@@ -102,7 +103,7 @@
              :sources
              '( anything-c-source-buffers               ;; buffers
                 anything-c-source-recentf               ;; recent files
-              anything-c-source-file-cache
+                anything-c-source-file-cache
                 anything-c-source-bookmarks             ;; bookmarks
                 anything-c-source-files-in-current-dir+ ;; current dir
                 anything-c-source-locate))))            ;; use 'locate'

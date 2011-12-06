@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-05 Mon 07:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -147,7 +147,7 @@
 ;; Packages with version numbers are stable releases, while
 ;; packages without version numbers are development versions
 
-;; REF: http://code.google.com/p/dea/
+;; REF: (@url :file-name "http://code.google.com/p/dea/" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/dea"))
 (message "* ---[ dea lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -158,7 +158,7 @@
 ;; NOTE: These packages are closly related. They are widely used by
 ;; Japanese developers which produced `mew', `wanderlust', `w3m' and
 ;; etc.
-;; REF: https://github.com/wanderlust
+;; REF: (@url :file-name "https://github.com/wanderlust" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/apel"))
 (message "* ---[ apel lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -179,13 +179,13 @@
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
-;; REF: http://mailcrypt.sourceforge.net/
+;; REF: (@url :file-name "http://mailcrypt.sourceforge.net/" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/mailcrypt-3.5.8"))
 (message "* ---[ mailcrypt lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
-;; REF: http://tats.haun.org/mule-ucs/
+;; REF: (@url :file-name "http://tats.haun.org/mule-ucs/" :display "Source")
 ;; (require 'un-define) ;; NOTE: The first thing the manual says to
                         ;; include it in the init.el
 ;; (xy/install-all-lisps
@@ -196,7 +196,7 @@
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-;; REF: http://repo.or.cz/w/anything-config.git
+;; REF: (@url :file-name "http://repo.or.cz/w/anything-config.git" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/anything-config"))
 (xy/load-autoload (concat my-local-lisp-path "/anything-config/extensions"))
 (xy/load-autoload (concat my-local-lisp-path "/anything-config/contrib"))
@@ -208,7 +208,7 @@
 ;; NOTE: auctex are patched by myself to make it works in my system.
 ;; (the latex style file `url.el' of auctex conflicts with the
 ;; standard `url.el')
-;; REF: http://www.gnu.org/s/auctex/
+;; REF: (@url :file-name "http://www.gnu.org/s/auctex/" :display "Source")
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
 (xy/load-autoload (concat my-local-lisp-path "/auctex-11.86-mypatched"))
@@ -217,8 +217,8 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: http://cx4a.org/software/auto-complete/
-;;      https://github.com/m2ym/auto-complete
+;; REF: (@url :file-name "http://cx4a.org/software/auto-complete/" :display "Source")
+;;      (@url :file-name "https://github.com/m2ym/auto-complete" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/auto-complete"))
 (message "* ---[ auto-complete installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -231,7 +231,7 @@
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-;; REF: http://cc-mode.sourceforge.net/
+;; REF: (@url :file-name "http://cc-mode.sourceforge.net/" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/cc-mode-5.32"))
 (message "* ---[ cc-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -241,9 +241,9 @@
 ;; NOTE: CEDET can be installed by its `cedet-built.el' script, and
 ;; will be load when `M-x xy/cedet-start' which is a function write
 ;; by myself.
-;; REF: http://cedet.sourceforge.net/
+;; REF: (@url :file-name "http://cedet.sourceforge.net/" :display "Source")
 
-;; REF: https://github.com/bogolisk/egg
+;; REF: (@url :file-name "https://github.com/bogolisk/egg" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/egg"))
 (message "* ---[ egg lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -251,51 +251,50 @@
                            (second *emacs-load-start*)))))
 
 ;; NOTE: seems no one is maitaining this package
-;; REF: https://github.com/viogus/eim
-;;      http://ywb-codes.googlecode.com/svn/trunk/emacs/eim
-;; svn co http://ywb-codes.googlecode.com/svn/trunk/emacs/eim
+;; REF: - (@url :file-name "https://github.com/viogus/eim" :display "Source")
+;;      - (@url :file-name "http://ywb-codes.googlecode.com/svn/trunk/emacs/eim" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/eim-2.4"))
 (message "* ---[ eim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: https://launchpad.net/ibus.el
+;; REF: (@url :file-name "https://launchpad.net/ibus.el" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/ibus-el-0.2.1"))
 (message "* ---[ ibus-el lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: http://matlab-emacs.sourceforge.net/
+;; REF: (@url :file-name "http://matlab-emacs.sourceforge.net/" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/matlab-emacs"))
 (message "* ---[ matlab-emacs lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: http://www.mew.org/en/
+;; REF: (@url :file-name "http://www.mew.org/en/" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/mew-6.4"))
 (message "* ---[ mew lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: http://orgmode.org/
+;; REF: (@url :file-name "http://orgmode.org/" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/org-7.7"))
 (message "* ---[ org installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: https://github.com/punchagan/org2blog
+;; REF: (@url :file-name "https://github.com/punchagan/org2blog" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/org2blog"))
 (message "* ---[ org2blog lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: http://emacs-w3m.namazu.org/index-en.html
+;; REF: (@url :file-name "http://emacs-w3m.namazu.org/index-en.html" :display "Source")
 ;; BUG: current cvs version has a bug when compiling
 (xy/load-autoload (concat my-local-lisp-path "/w3m"))
 (message "* ---[ w3m lisps installed at %ds ]---"
@@ -317,8 +316,8 @@
                            (second *emacs-load-start*)))))
 
 ;; NOTE: Another scheme for managing Emacs configurations
-;; REF: - http://www.emacswiki.org/emacs/DotEmacsModular
-;;      - http://www.emacswiki.org/emacs/elinstall
+;; REF: - (@url :file-name "http://www.emacswiki.org/emacs/DotEmacsModular" :display "emacswiki")
+;;      - (@url :file-name "http://www.emacswiki.org/emacs/elinstall" :display "emacswiki")
 ;; (autoload 'my-site-start "my-site-start" nil t)
 ;; (my-site-start "~/.emacs.d/site-start.d/")
 ;; NOTE: el-get is another apporach
@@ -524,8 +523,7 @@
 (setq scalable-fonts-allowed t)
 
 ;;*** Emacs auto font selection for different OS
-;; REF: http://emacser.com/torture-emacs.htm
-;; TODO: set font for each frame seperately
+;; REF: (@url :file-name "http://emacser.com/torture-emacs.htm" :display "emacser")
 (xy/set-font-default)
 ;; (am-add-hooks
 ;;  `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
@@ -556,7 +554,7 @@
 ;;       除非不在图形系统下，才用 Emacs 内置的输入法或 eim。
 ;;*** eim
 ;; another Emacs input-method
-;; REF: http://www.emacswiki.org/emacs/InputMethods
+;; REF: (@url :file-name "http://www.emacswiki.org/emacs/InputMethods" :display "emacswiki")
 ;;   Basic usage:
 ;;   - `M-x set-input-method': switch to a new input method.
 ;;   - `C-h C-\' or `C-h I': describe the current input method.
@@ -589,7 +587,7 @@
 
 ;;*** ibus-el
 ;; IBus client for GNU Emacs
-;; REF:  http://www11.atwiki.jp/s-irie/pages/21.html
+;; REF:  (@url :file-name "http://www11.atwiki.jp/s-irie/pages/21.html" :display "Source")
 (GNULinux
  (require 'ibus)
  ;; Turn on ibus-mode automatically after loading .emacs

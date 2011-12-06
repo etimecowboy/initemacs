@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp:<2011-12-03 Sat 14:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 08:08 xin on P6T-WIN7>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -18,7 +18,7 @@
 
 ;;====================================================================
 ;;* From Meteor Liu (刘欣)
-;; REF: https://github.com/meteor1113/dotemacs/blob/master/init-basic.el
+;; REF: (@url :file-name "https://github.com/meteor1113/dotemacs/blob/master/init-basic.el" :display "Source")
 
 ;; ;;;###autoload
 ;; (defadvice find-tag (before tags-file-name-advice activate)

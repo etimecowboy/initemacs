@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-12-04 Sun 17:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 08:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,7 +28,7 @@
 
   (setq ibuffer-default-sorting-mode '(major-mode))
 
-  ;; REF: http://www.emacswiki.org/emacs/IbufferMode
+  ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/IbufferMode" :display "emacswiki")
   ;; Use human readable Size column instead of original one
   (define-ibuffer-column size-h
     (:name "Size" :inline t)

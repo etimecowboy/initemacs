@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-05 Mon 05:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -14,9 +14,8 @@
 ;;--------------------------------------------------------------------
 
 (require 'cl)
-;; 利用`eval-after-load'加快启动速度的库
-;; 用eval-after-load避免不必要的elisp包的加载
-;; REF: http://emacser.com/eval-after-load.htm
+;; REF: (@url :file-name "http://emacser.com/eval-after-load.htm" :display "emacser")
+;; 利用`eval-after-load'加快启动速度的库，避免不必要的elisp包的加载
 ;; (require 'eval-after-load)
 
 ;;====================================================================
@@ -147,8 +146,8 @@
      ;; "D:/Microsoft Visual Studio/VC98/MFC/Include"
      ;; VC 10 header files
      ;; "D:/Microsoft Visual Studio 10.0/VC/include"
-     ;; Winpcap headers
-     "D:/WpdPack/Include"
+     ;; Winpcap headers, better to be copied to project directory
+     ;; "D:/WpdPack/Include"
      )
    "User include dirs for c/c++ mode")
  (defvar c-preprocessor-symbol-files
@@ -228,7 +227,7 @@
 
 ;;====================================================================
 ;;* F.Niessen's utilities in his .emacs
-;; REF: http://www.mygooglest.com/fni/dot-emacs.html
+;; REF: (@url :file-name "http://www.mygooglest.com/fni/dot-emacs.html" :display "Website")
 
 ;;;###autoload
 (defun fni/add-to-load-path
@@ -671,7 +670,7 @@ KEY is a string or vector representing a sequence of keystrokes."
 
 ;;====================================================================
 ;;* Emacs auto font selection for different OS
-;; REF: http://emacser.com/torture-emacs.htm
+;; REF: (@url :file-name "http://emacser.com/torture-emacs.htm" :display "emacser")
 
 ;;;###autoload
 (defun qiang-font-existsp (font)

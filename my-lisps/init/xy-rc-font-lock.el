@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-12-04 Sun 16:48 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 02:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,8 @@
   (dolist (mode '(c-mode c++-mode java-mode lisp-mode emacs-lisp-mode
                          lisp-interaction-mode sh-mode sgml-mode
                          sh-mode vhdl-mode verilog-mode latex-mode
-                         LaTeX-mode tex-mode TeX-mode c-mode cc-mode))
+                         LaTeX-mode tex-mode TeX-mode c-mode cc-mode
+                         perl-mode))
     (font-lock-add-keywords
      mode
      '(("\\<\\(BUG\\|TODO\\|HACK\\|NOTE\\|REF\\|DEBUG\\|FIXME\\)"

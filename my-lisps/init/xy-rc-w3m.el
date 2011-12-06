@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-12-04 Sun 18:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 07:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -149,8 +149,7 @@
 ;; NOTE: there are already `w3m-external-view-current-url' and
 ;; `w3m-external-view-this-url' functions.
 ;; ;; Some functions to open links in external program
-;; ;; REF:
-;; ;; http://sachachua.com/blog/2008/09/emacs-w3m-open-pages-in-external-browsers/
+;; ;; REF: (@url :file-name "http://sachachua.com/blog/2008/09/emacs-w3m-open-pages-in-external-browsers/" :display "Post")
 ;; ;;;###autoload
 ;; (defun wicked/w3m-open-current-page-in-browser ()
 ;;   "Open the current URL in external browser."

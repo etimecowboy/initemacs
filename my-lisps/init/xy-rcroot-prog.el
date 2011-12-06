@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-05 Mon 09:59 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 08:16 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -99,7 +99,7 @@
 ;; It hides and shows blocks of text.
 ;; In particular, HideShow hides balanced-expression code blocks and
 ;; multi-line comment blocks.
-;; REF: http://www.emacswiki.org/emacs/HideShow
+;; REF: (@url :file-name "http://www.emacswiki.org/emacs/HideShow" :display "emacswiki")
 (am-add-hooks
  `(c-mode-common-hook cpp-mode-hook cc-mode-hook java-mode-hook
    lisp-mode-hook emacs-lisp-mode-hook)
@@ -119,8 +119,8 @@
 
 ;;*** hideshow-org
 ;; The extension makes hideshow.el’s functionality behave like org-mode’s.
-;; REF: - https://github.com/secelis/hideshow-org
-;;      - http://gnufool.blogspot.com/2009/03/make-hideshow-behave-more-like-org-mode.html
+;; REF: - (@url :file-name "https://github.com/secelis/hideshow-org" :display "Source")
+;;      - (@url :file-name "http://gnufool.blogspot.com/2009/03/make-hideshow-behave-more-like-org-mode.html" :display "Post")
 ;; NOTE: the default <TAB> key conflicts with `icicles' and
 ;;       `yasnippet'
 ;; (add-hook 'hs-minor-mode
@@ -133,9 +133,8 @@
 ;;--------------------------------------------------------------------
 ;;** outline-org-like
 ;; org-like code folding
-;; REF:
-;; http://www.cnblogs.com/bamanzi/archive/2011/10/09/emacs-outline-org-like.html
-;; http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el
+;; REF: - (@url :file-name "http://www.cnblogs.com/bamanzi/archive/2011/10/09/emacs-outline-org-like.html" :display "Post")
+;;      - (@url :file-name "http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el" :display "Source")
 ;; (require 'outline)
 ;; (require 'outline-magic)
 ;; (add-hook 'outline-mode-hook
@@ -337,10 +336,10 @@
         ;; ifdef settings
         ;; ("C-c I"     mark-ifdef)
         ;; hide-ifdef
-        ("C-c w"     hide-ifdef-block)
-        ("C-c W"     hide-ifdefs)
-        ("C-c M-i"   show-ifdef-block)
-        ("C-c M-I"   show-ifdefs)
+        ;; ("C-c w"     hide-ifdef-block)
+        ;; ("C-c W"     hide-ifdefs)
+        ;; ("C-c M-i"   show-ifdef-block)
+        ;; ("C-c M-I"   show-ifdefs)
         ;; c-includes
         ("C-c C-i"   c-includes-current-file)
         ("C-c I"     c-includes)
@@ -399,7 +398,7 @@ buffer."  t)
 
 ;;--------------------------------------------------------------------
 ;; ;;** codepilot
-;; REF: https://github.com/brianjcj/mylisp
+;; REF: (@url :file-name "https://github.com/brianjcj/mylisp" :display "Source")
 ;; someone else's c/c++ development environment
 ;; (setq codepilot-dir (concat my-local-lisp-path "codepilot"))
 ;; (try-require 'mycutil)
@@ -468,6 +467,19 @@ buffer."  t)
 ;; (eval-after-load "xref"
 ;;   '(progn
 ;;     (xref-settings)))
+
+;;--------------------------------------------------------------------
+;;** xcscope
+(eval-after-load "xcscope"
+  '(progn
+     (xcscope-settings)))
+
+;;--------------------------------------------------------------------
+;;** ctags
+;; TODO: try `ctags.el' and `ctags-update.el' in the future, and
+;; make a comparison with the `xcscope.el' (ctags vs cscope)
+;; REF:
+;;     - (@url :file-name "http://stackoverflow.com/questions/934233/cscope-or-ctags-why-choose-one-over-the-other" :display "cscope vs ctags")
 
 ;;====================================================================
 ;;* vhdl development settings

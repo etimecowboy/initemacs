@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-12-03 Sat 05:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 08:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -72,7 +72,7 @@
 ;;--------------------------------------------------------------------
 ;;** Emaci
 ;; Emacs才是世界上最强大的IDE － 用Emaci阅读文件
-;; REF: http://emacser.com/emaci.htm
+;; REF: (@url :file-name "http://emacser.com/emaci.htm" :display "emacser")
 ;; (require 'emaci)
 (eval-after-load "emaci"
   '(progn
