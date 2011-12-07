@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired-x.el'
-;; Time-stamp:<2011-12-06 Tue 22:22 xin on p6t>
+;; Time-stamp:<2011-12-06 Tue 23:56 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,14 +27,13 @@
   ;;                "\\|^\\.\\|^semantic.cache$\\|^CVS$"))
   ;;   (if mswin
   ;;       (setq dired-omit-files (concat dired-omit-files "\\|^_"))))
-  ;; (setq dired-omit-size-limit 1000000)
+  (setq dired-omit-size-limit 1000000)
 
   ;;------------------------------------------------------------------
   ;; Omitting Git-ignored files in Emacs dired
   ;; REF: - (@url :file-name "http://newartisans.com/2008/08/omitting-git-ignored-files-in-emacs-dired/" :display "Post")
   ;;      - (@url :file-name "https://github.com/jwiegley/git-scripts/blob/master/git-dired.el" :display "Source")
   ;; (defvar dired-omit-regexp-orig (symbol-function 'dired-omit-regexp))
-
   ;; (defun dired-omit-regexp ()
   ;;   (let ((file (expand-file-name ".git"))
   ;;         parent-dir)
@@ -74,8 +73,8 @@
   ;;               "\\|")
   ;;              "\\)")))
   ;;       (funcall dired-omit-regexp-orig))))
-  ;;------------------------------------------------------------------
 
+  ;;------------------------------------------------------------------
   (message "* ---[ dired-x configuration is complete ]---")
 )
 

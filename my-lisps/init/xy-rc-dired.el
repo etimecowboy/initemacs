@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-12-06 Tue 22:31 xin on p6t>
+;; Time-stamp:<2011-12-07 Wed 00:09 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -216,7 +216,7 @@ will remain open and unsaved."
   ;; (add-hook 'dired-mode-hook 'dired-mode-hook-settings)
 
   (add-hook 'dired-after-readin-hook 'his-dired-sort)
-  (add-hook 'dired-load-hook 'his-dired-sort)
+  (add-hook 'dired-lood-hook 'his-dired-sort)
   ;; (def-redo-command dired-redo 'dired-redo 'dired-undo)
 
   ;;==================================================================
@@ -238,8 +238,15 @@ will remain open and unsaved."
 
   ;;------------------------------------------------------------------
   (require 'dired-x) ;; 忽略不感兴趣的文件
+  ;; (add-hook 'dired-load-hook
+  ;;           (function (lambda ()
+  ;;                       (load "dired-x")
+  ;;                       ;; Set global variables here.  For example:
+  ;;                       (setq dired-guess-shell-gnutar "gtar")
+  ;;                       )))
   (add-hook 'dired-mode-hook
             (function (lambda ()
+                        ;; Set buffer-local variables here.  For example:
                         (dired-omit-mode 1)
                         )))
   (eval-after-load "dired-x"
@@ -254,27 +261,27 @@ will remain open and unsaved."
   ;;==================================================================
   ;; Contrib features
 
-  (when (try-require 'dired-details) ;; 简略文件信息
-    (dired-details-install)          ;; use `(' and `)' to switch
-    ;; (try-require 'dired-details+)
-    )
+  (when (try-require 'dired-details+) ;; 简略文件信息
+    ;; (dired-details-install)        ;; use `(' and `)' to switch
+    (setq dired-details-initially-hide nil)))
 
   ;;------------------------------------------------------------------
   ;; (try-require 'dired-single) ;; Use a single frame for visiting a
   ;;                             ;; sub-directory
 
   ;;------------------------------------------------------------------
-  (try-require 'dired-tar) ;; T: 把一个目录压缩为一个.tar.gz文件
+  (try-require 'dired-tar) ;; `T' 把一个目录压缩为一个.tar.gz文件
 
   ;;------------------------------------------------------------------
-  (when (try-require 'dired+) ;; dired大补,
+  (when (try-require 'dired+) ;; dired大补
     ;; TODO: do a research and add more configurations.
     ;; (toggle-dired-find-file-reuse-dir 1)
     ;; (eval-after-load "dired+"
     ;;   '(progn
     ;;     (dired+-settings)))
-    (define-key ctl-x-map   "d" 'diredp-dired-files)
-    (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window))
+    ;; (define-key ctl-x-map   "d" 'diredp-dired-files)
+    ;; (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window)
+    )
 
   (message "* ---[ dired configuration is complete ]---"))
 

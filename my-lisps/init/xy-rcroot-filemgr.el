@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-06 Tue 20:19 xin on p6t>
+;; Time-stamp:<2011-12-06 Tue 23:35 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -57,19 +57,19 @@
       ;; ("M-b t"    dired-sort-by-time)
       ;; ("M-b n"    dired-sort-by-name)
       ("M-o"       dired-omit-mode)
-      ("E"         dired-ediff)
-      ("C-M-/"     dired-undo
+      ;; ("E"         dired-ediff)
+      ;; ("C-M-/"     dired-undo
       ;; ("C-M-?"     dired-redo)
       ("C-M-k"     dired-do-delete)
       ("M-q"       ywb-dired-quickview)
-      ("/m"        ywb-dired-filter-regexp)
-      ("/."        ywb-dired-filter-extension)
+      ;; ("/m"        ywb-dired-filter-regexp)
+      ;; ("/."        ywb-dired-filter-extension)
       ;; ("M->"       wuxch-dired-goto-last-line)
       ;; ("M-<"       wuxch-dired-goto-first-line)
       ;; ("M-w"       wuxch-dired-copy)
       ;; ("C-y"       wuxch-dired-paste)
       ;; ("M-k"       wuxch-dired-cut)
-      )))
+      ))
 
 ;;--------------------------------------------------------------------
 ;;** image-dired

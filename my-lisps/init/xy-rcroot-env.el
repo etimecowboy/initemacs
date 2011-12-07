@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-06 Tue 21:59 xin on p6t>
+;; Time-stamp:<2011-12-06 Tue 23:11 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -625,35 +625,9 @@
 ;;--------------------------------------------------------------------
 ;;** auto-install
 ;; BUG: Conflict with auctex's `style/url.el'
-;; (require 'auto-install)
-(autoload 'auto-install-from-buffer "auto-install"
-  "Install the elisp file in the current buffer." nil t)
-(autoload 'auto-install-from-url "auto-install"
-  "Install an elisp file from a given url." nil t)
-(autoload 'auto-install-from-emacswiki "auto-install"
-  "Install an elisp file from EmacsWiki.org." nil t)
-(autoload 'auto-install-from-gist "auto-install"
-  "Install an elisp file from gist.github.com." nil t)
-(autoload 'auto-install-from-library "auto-install"
-  "Update an elisp LIBRARY." nil t)
-(autoload 'auto-install-from-directory "auto-install"
-  "Update elisp files under DIRECTORY from EmacsWiki." nil t)
-(autoload 'auto-install-from-dired "auto-install"
-  "Update dired marked elisp files from EmacsWiki.org." nil t)
-(autoload 'auto-install-update-emacswiki-package-name "auto-install"
-  "Update the list of elisp package names from `EmacsWiki'." nil t)
-(autoload 'auto-install-dired-mark-files "auto-install"
-  "Mark dired files that contain at `EmacsWiki.org'." nil t)
-(autoload 'auto-install-batch "auto-install"
-  "Batch install many files (libraries) in some extension." nil t)
-(autoload 'auto-install-batch-edit "auto-install"
-  "Edit auto-install-batch-list.el" nil t)
 (eval-after-load "auto-install"
   '(progn
     (auto-install-settings)))
-(eal-define-keys-commonly
- dired-mode-map
- `(("C-i"    auto-install-from-dired)))
 
 ;;====================================================================
 ;;* Emacs server

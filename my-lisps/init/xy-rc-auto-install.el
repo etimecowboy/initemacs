@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-install.el'
-;; Time-stamp:<2011-12-04 Sun 16:07 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-06 Tue 23:10 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,6 +15,15 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+;;;###autoload
+(defun xy/auto-install-start ()
+  "Start to use auto-install."
+  (interactive)
+  (require 'auto-install)
+  (eal-define-keys
+   'dired-mode-map
+   `(("C-i"    auto-install-from-dired))))
 
 ;;;###autoload
 (defun auto-install-settings ()
