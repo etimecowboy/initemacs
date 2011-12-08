@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2010-12-02 09:51:01 Thursday by taoshanwen>
+;; Time-stamp: <2011-02-18 14:29:30 Friday by taoshanwen>
 
 (require 'eval-after-load)
 
@@ -23,6 +23,11 @@
 
 (defvar c-modes '(c-mode c++-mode awk-mode java-mode) "*C modes.")
 (defvar dev-modes (append c-modes '(python-mode perl-mode makefile-gmake-mode)) "*Modes for develop.")
+
+(defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
+(if is-before-emacs-21
+    (setq makefile-mode-map-list '(makefile-mode-map))
+  (setq makefile-mode-map-list '(makefile-gmake-mode-map makefile-automake-mode-map)))
 
 ;;;###autoload
 (defun execute-command-on-file (file command)

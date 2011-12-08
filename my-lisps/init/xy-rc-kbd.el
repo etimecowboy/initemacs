@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-08 Thu 10:58 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 17:57 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,18 +21,19 @@
 
 
 ;;* Pint moving related, faster = better
+;; prefix key C-x J
 (eal-define-keys-commonly
  global-map
  `(;; `windmove.el'
-   ;; ("M-c j" windmove-left)
-   ;; ("M-c l" windmove-right)
-   ;; ("M-c i" windmove-up)
-   ;; ("M-c k" windmove-down)
+   ;; ("C-x C-j j" windmove-left)
+   ;; ("C-x C-j l" windmove-right)
+   ;; ("C-x C-j i" windmove-up)
+   ;; ("C-x C-j k" windmove-down)
    ;; `fit-frame'
-   ;; (global-set-key (kbd "S-<f5>") 'xy/fit-frame)
-   ;; (global-set-key (kbd "C-c <f5>") 'revert-buffer)
-   ))
-
+   ;; ("C-x C-j f" xy/fit-frame)
+   ;; ("C-x C-j r" revert-buffer)
+   ;; `thumb-frm'
+))
 
 ;; 参照 ahei 的设置
 ;; (apply-args-list-to-fun

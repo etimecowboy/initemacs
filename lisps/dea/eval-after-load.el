@@ -3,7 +3,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: eval-after-load, autoload
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/eval-after-load.el
-;; Time-stamp: <2010-12-02 12:21:32 Thursday by taoshanwen>
+;; Time-stamp: <2011-04-28 15:41:47 Thursday by taoshanwen>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -98,15 +98,18 @@
     "org"
     "org-agenda"
     "python"
+    ("python-mode"     nil                     py-mode-map)
     "groovy-mode"
     "nxml-mode"
     "perl-mode"
+    "cperl-mode"
     "artist"
     "calendar"
     "outline"
     "google-maps-static"
     "flymake"
     "ezbl"
+    "markdown-mode"
     ("speedbar"        speedbar-mode          speedbar-key-map)
     ("speedbar"        speedbar-mode          speedbar-file-key-map)
     ("yasnippet"       nil                    yas/keymap)

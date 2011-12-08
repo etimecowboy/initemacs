@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-08 Thu 10:57 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 17:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -73,19 +73,9 @@
 ;;      - `autofit-frame.el': do it automatically. May be annoying. I
 ;;                            don't like it.
 ;; (require 'fit-frame)
-;; (add-hook 'after-make-frame-functions 'fit-frame)
-;; (add-hook 'temp-buffer-show-hook
-;;           'fit-frame-if-one-window 'append)
-;; (global-set-key [vertical-line down-mouse-1]
-;;                 'fit-frame-or-mouse-drag-vertical-line)
-
-
-;;  Add menu-bar items
-(defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
-(define-key global-map [menu-bar frames]
-  (cons "Frames" menu-bar-frames-menu))
-(define-key menu-bar-frames-menu [fit-frame]
-  '("Fit This Frame" . fit-frame))
+(eval-after-load "fit-frame"
+  '(progn
+     (fit-frame-settings)))
 
 ;;*** thumb-frm
 ;; Shrink frames to a thumbnail size and restore them again.

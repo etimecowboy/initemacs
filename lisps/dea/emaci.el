@@ -5,7 +5,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: emacs vi
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/emaci.el
-;; Time-stamp: <2010-11-26 14:34:25 Friday by taoshanwen>
+;; Time-stamp: <2010-12-01 11:40:29 Wednesday by taoshanwen>
 
 ;; This file is  free software; you can redistribute  it and/or modify
 ;; it under the  terms of the GNU General  Public License as published
@@ -82,7 +82,8 @@
     ,(if (>= emacs-major-version 21) 'grep-mode-map)
     color-theme-mode-map
     semantic-symref-results-mode-map
-    chart-map)
+    chart-map
+    cflow-mode-map)
   "List used for `emaci-bind-modes-keys'.
 
 Element of this list either a list whose first element is load file,
@@ -155,6 +156,8 @@ a command."
  emaci-mode-map
  `(("a"       move-beginning-of-line)
    ("e"       move-end-of-line)
+   ("c"       emaci-forward-to-char)
+   ("C"       emaci-backward-to-char)
    ("j"       next-line)
    ("k"       previous-line)
    ("h"       backward-char)
@@ -319,6 +322,26 @@ if that value is non-nil.  \\<emaci-mode-map>"
   "Turn off function `emaci-mode'."
   (interactive)
   (emaci-mode -1))
+
+;;;###autoload
+(defun emaci-forward-to-char (n char)
+  "Move forward to Nth occurence of CHAR.
+Typing CHAR again will move forwad to the next Nth occurence of CHAR."
+  (interactive "p\ncForward to char: ")
+  (search-forward (string char) nil nil n)
+  (while (char-equal (read-char) char)
+    (search-forward (string char) nil nil n))
+  (setq unread-command-events (list last-input-event)))
+
+;;;###autoload
+(defun emaci-backward-to-char (n char)
+  "Move backward to Nth occurence of CHAR.
+Typing CHAR again will move backward to the next Nth occurence of CHAR."
+  (interactive "p\ncBackward to char: ")
+  (search-backward (string char) nil nil n)
+  (while (char-equal (read-char) char)
+    (search-backward (string char) nil nil n))
+  (setq unread-command-events (list last-input-event)))
 
 (emaci-bind-brief-keys)
 

@@ -63,8 +63,7 @@
 
 (defun paren-position-goto-next-cpp ()
   "Goto next c pre-processing symbol."
-)
-
+  )
 (defun paren-position-goto-else ()
   "Goto #else."
-  (interactive))
+  (interactive)
