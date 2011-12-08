@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-12-06 Tue 07:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 06:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,6 @@
 ;;;###autoload
 (defun xy/my-anything ()
   "My anything."
-
   (interactive)
   (require 'anything)
   (require 'anything-config)
@@ -31,7 +30,6 @@
      anything-c-source-buffers
      ;; anything-c-source-buffers+
      ;; anything-c-source-buffer-not-found
-
      ;; File:
      anything-c-source-file-name-history
      anything-c-source-recentf
@@ -42,19 +40,15 @@
      ;; anything-c-source-locate
      anything-c-source-ffap-line
      anything-c-source-ffap-guesser
-
      ;; Bookmark:
      anything-c-source-bookmarks
-
      ;; Command:
      ;; BUG: Conflicts with `session.el'. Emacs would crashes.
      anything-c-source-minibuffer-history
      anything-c-source-emacs-commands
-
      ;; Buffer Contents:
      anything-c-source-imenu
      anything-c-source-occur
-
      ;; System:
      anything-c-source-kill-ring
      anything-c-source-emacs-process
@@ -86,6 +80,8 @@
 
   (setq anything-c-adaptive-history-file
         (concat my-var-path "/anything-c-adaptive-history"))
+  (unless (file-exists-p anything-c-adaptive-history-file)
+    (shell-command (concat "touch " anything-c-adaptive-history-file)))
 
   ;; (setq anything-grep-alist
   ;;     '(("buffers" ("egrep -Hin %s $buffers" "/"))
@@ -99,14 +95,15 @@
           (lambda() (interactive)
             (anything
              :prompt "Switch to: "
-             :candidate-number-limit 10                 ;; up to 10 of each
+             :candidate-number-limit 10
              :sources
-             '( anything-c-source-buffers               ;; buffers
-                anything-c-source-recentf               ;; recent files
+             '( anything-c-source-buffers
+                anything-c-source-recentf
                 anything-c-source-file-cache
-                anything-c-source-bookmarks             ;; bookmarks
-                anything-c-source-files-in-current-dir+ ;; current dir
-                anything-c-source-locate))))            ;; use 'locate'
+                anything-c-source-bookmarks
+                anything-c-source-files-in-current-dir+
+                anything-c-source-locate)))) ;; FIXME: windows locate32
+                                             ;;        not working!
 
   (global-set-key (kbd "C-<f1>")  ;; i -> info
            (lambda () (interactive)
@@ -139,8 +136,7 @@
                                   anything-c-source-emacs-functions-with-abbrevs
                                   anything-c-source-info-emacs))))))
 
-  (message "* ---[ anything configuration is complete ]---")
-  )
+  (message "* ---[ anything configuration is complete ]---"))
 
 (provide 'xy-rc-anything)
 

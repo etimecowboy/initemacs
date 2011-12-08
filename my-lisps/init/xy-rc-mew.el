@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-06 Tue 07:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:25 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,8 +38,8 @@
       (concat my-emacs-path "/mew"))
   (setq mew-mail-path
       (concat my-emacs-path "/mew"))
-  (setq mew-rc-file
-      (concat my-own-lisp-path "/xy-rc-mew.el"))
+  ;; (setq mew-rc-file
+  ;;     (concat my-own-lisp-path "/xy-rc-mew.el"))
   (setq mew-save-dir
       (concat my-emacs-path "/mew"))
 
@@ -267,16 +267,16 @@
         "Use Todochiku to pop-up a notification, if new Mail arrives"
         (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
                (setq mew-arrivedmail-pending arg)
+               ;; NOTE: replace sndplay with your favorite command to
+               ;; play a sound-file
                ;; (start-process-shell-command
                ;;  "biff-bark"
                ;;  "*Messages*"
-               ;;  (format (concat "cscript " fj/tool-path "/newmail.vbs %d") arg))
+               ;;  (format (concat "cscript "
+               ;;                  fj/tool-path "/newmail.vbs %d") arg))
                (todochiku-message "emacs mew"
                                   (format "New mail (%d) arrived." arg)
-                                  (todochiku-icon 'mail))
-               )
-              ;; replace sndplay with your favorite command to
-              ;; play a sound-file
+                                  (todochiku-icon 'mail)))
               ((= arg 0)
                (if (> mew-arrivedmail-pending 0)
                    (setq mew-arrivedmail-pending 0)))))))

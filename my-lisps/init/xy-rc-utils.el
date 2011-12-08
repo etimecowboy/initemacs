@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-06 Tue 07:39 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 05:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1221,6 +1221,7 @@ The process is:
   (xy/recompile-dir (concat my-local-lisp-path "/magit-1.0.0"))
   ;; NOTE: Do it in `xy-rcroot-env.el'?
   (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
+  (load-dot-emacs-file)
   )
 
 (provide 'xy-rc-utils)

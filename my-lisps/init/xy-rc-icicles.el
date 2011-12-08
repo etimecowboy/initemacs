@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-12-06 Tue 22:02 xin on p6t>
+;; Time-stamp:<2011-12-08 Thu 00:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,7 +15,6 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
-
 
 ;;;###autoload
 (defun xy/icy-start ()
@@ -32,20 +31,43 @@
 (defun icicles-settings ()
   "settings of icicles."
   (icicle-ido-like-mode 1)
-  (setq icicle-download-dir my-local-lisp-path
-        icicle-incremental-completion-flag 'alwasys
-        icicle-incremental-completion-delay 0.5
+  (setq icicle-download-dir                         my-local-lisp-path
+        icicle-Completions-display-min-input-chars  2
+        icicle-WYSIWYG-Completions-flag             "MMMM"
+        icicle-bookmark-refresh-cache-flag          t
+        icicle-completions-format                   nil
+        icicle-help-in-mode-line-delay              10
+        icicle-hide-non-matching-lines-flag         t
+        icicle-highlight-historical-candidates-flag t
+        icicle-highlight-saved-candidates-flag      t
+        icicle-image-files-in-Completions           t
+        icicle-incremental-completion-flag          'always
+        icicle-incremental-completion-threshold     50
+        icicle-incremental-completion-delay         2.0
         icicle-highlight-input-completion-failure-delay 0
-        icicle-buffers-ido-like-flag t
-        icicle-anything-transform-candidates-flag t
-        icicle-change-sort-order-completion-flag t
-        icicle-file-sort 'icicle-last-modified-first-p
-        icicle-files-ido-like-flag t
-        icicle-default-cycling-mode 'apropos
-        icicle-max-candidates 200
-        icicle-Completions-window-max-height 5
-        icicle-Completions-text-scale-decrease 1.0
-        icicle-candidate-width-factor 100)
+        icicle-inter-candidates-min-spaces          2
+        icicle-list-nth-parts-join-string           " | "
+        icicle-max-candidates                       50
+        icicle-move-Completions-frame               nil
+        icicle-show-Completions-initially-flag      t
+        icicle-show-multi-completion-flag           t
+        ;; icicle-special-candidate-regexp             nil
+        ;; icicle-transform-function                   nil
+        icicle-buffers-ido-like-flag                t
+        icicle-anything-transform-candidates-flag   nil
+        icicle-change-sort-order-completion-flag    t
+        icicle-file-sort                            'icicle-last-modified-first-p
+        icicle-files-ido-like-flag                  t
+        icicle-default-cycling-mode                 'apropos
+        icicle-C-l-uses-completion-flag             t
+        icicle-Completions-window-max-height        5
+        icicle-Completions-text-scale-decrease      0.75
+        icicle-candidate-width-factor               80
+   )
+
+  (add-hook 'org-mode-hook
+            '(lambda ()
+               (setq org-completion-use-ido nil)))
 
   (defun icicle-keys ()
     "icicle-mode的按键设置."
@@ -60,8 +82,7 @@
     )
   (add-hook 'icicle-mode-hook 'icicle-keys t)
 
-  (message "* ---[ icicles configuration is complete ]---")
-  )
+  (message "* ---[ icicles configuration is complete ]---"))
 
 (provide 'xy-rc-icicles)
 

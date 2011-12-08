@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-image-dired.el'
-;; Time-stamp:<2011-12-04 Sun 17:13 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,11 +29,15 @@
                 user-login-name "@"
                 system-name "@"
                 system-configuration))
+  (unless (file-exists-p image-dired-db-file)
+    (shell-command (concat "touch " image-dired-db-file)))
   (setq image-dired-temp-image-file
         (concat image-dired-dir "/image-dired_temp-"
                 user-login-name "@"
                 system-name "@"
                 system-configuration))
+  (unless (file-exists-p image-dired-temp-image-file)
+    (shell-command (concat "touch " image-dired-temp-image-file)))
   (setq image-file-name-extensions
         '("png"  "PNG"  "jpeg" "JPEG" "jpg" "JPG"
           "gif"  "GIF"  "bmp"  "BMP"
@@ -41,7 +45,6 @@
           "xpm"  "XPM"  "pbm"  "PBM"  "pgm" "PGM"
           "ppm"  "PPM"  "pnm"  "PNM"
           "svg"  "SVG"  "eps"  "EPS"))
-  (message "* ---[ image-dired configuration is complete ]---")
-)
+  (message "* ---[ image-dired configuration is complete ]---"))
 
 (provide 'xy-image-dired)

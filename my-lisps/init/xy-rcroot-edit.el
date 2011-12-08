@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-12-06 Tue 07:45 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 09:56 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -188,106 +188,5 @@
 ;; examine color properties or choose colors.
 ;; Emacs配色的超级武器：Icicles，Color Palette和DoReMi
 ;; REF: (@url :file-name "http://emacser.com/icicles-doremi-palette.htm" :display "emacser")
-
-;;====================================================================
-;;* Keyboard bindings
-
-;; 参照 ahei 的设置
-;; (apply-args-list-to-fun
-;;  'def-action-on-area-command
-;;  `((copy-function        'copy-region   'mark-function     "Copy function.")
-;;    (kill-function        'kill-region   'mark-function     "Kill function.")
-;;    (indent-function      'indent-region 'mark-function     "Indent function.")
-;;    (indent-paragraph     'indent-region 'mark-paragraph    "Indent paragraph.")
-;;    (copy-whole-buffer    'copy-region   'mark-whole-buffer "Copy whole buffer.")
-;;    (kill-whole-buffer    'kill-region   'mark-whole-buffer "Kill whole buffer.")
-;;    (indent-whole-buffer  'indent-region 'mark-whole-buffer "Indent whole buffer.")))
-
-;; (eal-define-keys
-;;  (append
-;;   makefile-mode-map-list
-;;   `(c-mode-base-map emacs-lisp-mode-map lisp-interaction-mode-map
-;;     conf-javaprop-mode-map html-mode-map tcl-mode-map
-;;     autoconf-mode-map perl-mode-map nxml-mode-map python-mode-map))
-;;  `(("C-c C-c" comment)))
-
-(eal-define-keys-commonly
- global-map
- `(
-   ;;    ("M-k" kill-whole-paragraph)
-   ;;    ("M-C-k" kill-paragraph)
-   ;;    ("M-C" copy-whole-paragraph)
-   ;;    ("C-x c" copy-whole-buffer)
-   ;;    ("C-x C" kill-whole-buffer)
-   ;;    ("M-W" which-copy)
-   ;;    ("M-w" smart-copy)
-   ;;    ("C-x M-w" insert-cur-line)
-   ;;    ("C-x M-W" insert-cur-sexp)
-   ("C-M-w"               copy-sentence)
-   ;;    ;; 删除整行
-   ;;    ("M-K" kill-line)
-   ;;    ("C-k" smart-kill)
-   ;;    ("C-\\" delete-indentation)
-   ;; ("C-x M-m"             mark-invisible-region)
-   ("M-U"                 del-to-begin)
-   ("C-^"                 case-trans)
-   ;;    ("C-6" case-trans)
-   ("C-w"                 backward-kill-word-or-kill-region)
-   ;;    ("C-x S" mark-whole-sexp)
-   ;;    ("C-x W" kill-whole-sexp)
-   ;;    ("C-x w" copy-sexp)
-   ("M-d"                 my-kill-word)
-   ;;    ("C-x TAB" indent-whole-buffer)
-   ;;    ("C-h" c-electric-backspace-kill)
-   ;;    ("M-m" beginning-of-line-text)
-   ("C-M-\\"              smart-indent)
-   ("M-q"                 fill-paragraph)
-   ("<escape> SPC"        just-one-space)
-   ("C-a"                 smart-home)
-   ("C-M-a"               mark-whole-buffer)
-   ("C-k"                 kill-and-join-forward)
-   ("C-M-6"               jlh-join-lines)
-   ;; ("%"                   match-paren)
-   ("%"                   goto-paren)
-   ("C-c F f"             iy-go-to-char)
-   ("C-c F b"             iy-go-to-char-backward)
-   ("M-,"                 recent-jump-small-backward)
-   ("M-."                 recent-jump-small-forward)
-   ("C-x M-s"             isearch-forward-cur-word)
-   ("C-'"                 wcy-mark-some-thing-at-point)
-   ("C-x \\"              rm-mark-command)
-   ;; ("M-w"                 copy-region)
-   ("M-|"                 ywb-hippie-expand-filename)
-   ("C-x M-M"             switch-major-mode)
-   ("M-;"                 qiang-comment-dwim-line)
-   ("M-k"                 qiang-copy-line)
-   ;; Meteor Liu's functions
-   ("C-S-n"               move-line-down)
-   ("C-S-p"               move-line-up)
-   ("C-c C-x f"           format-region)
-   ("C-c C-x F"           format-cxx-file)
-   ;; ("M-S-<f7>"         moccur-word-all-buffers)
-   ("C-x M-l"             mark-current-line)
-   ))
-
-;; (eal-define-keys
-;;  'c-mode-base-map
-;;  `(("C-c f" copy-function)
-;;    ("C-c F" kill-function)
-;;    ("C-c C" comment-function)
-;;    ("C-M-h" mark-function)))
-
-;; (eal-define-keys
-;;  `(emacs-lisp-mode-map lisp-interaction-mode-map)
-;;  `(("C-M-h" mark-function)
-;;    ("C-c D"  edebug-defun)
-;;    ("C-c C-d" eval-defun)
-;;    ("C-c B"  eval-buffer)
-;;    ("C-c f" copy-function)
-;;    ("C-c F" kill-function)
-;;    ("C-c C-q" indent-function)
-;;    ("C-c C" comment-function)))
-
-;;------------------------------------------------------------------
 
 (provide 'xy-rcroot-edit)

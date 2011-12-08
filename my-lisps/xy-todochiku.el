@@ -97,9 +97,9 @@
 ;; - Build better backend support.
 
 ;;; CHANGELOG:
-;; v0.0.8.1 - Based on `todochiku-growl-win.el'
+;; v0.0.8.1 - Based on `todochiku.el' in EmacsWiki (@url :file-name "http://www.emacswiki.org/emacs/todochiku.el" :display "Source")
 ;;          - Fixed argument format so it works with Growl for windows
-;;          - (by Xin Yang)
+;;          - (by Justin Heyes-Jones) REF: (@url :file-name "http://justinsboringpage.blogspot.com/2009/09/making-emacs-growl.html" :display "Post: Making emacs growl")
 ;; V0.0.8 - Fixed broken `todochiku-icons-directory' definition that made it impossible to change through Customize.
 ;; V0.0.7b - Added support for sticky messages for libnotify and growl.
 ;; V0.0.7  - Added YaOddMuse interface
@@ -133,7 +133,7 @@
   (case system-type
     ;; HACK: use growl-for-windows instead of snarl
     ;; (windows-nt "C:/Program Files/full phat/Snarl/exrras/sncmd/snarl_command.exe")
-    (windows-nt "C:/Program Files/full phat/Snarl/exrras/sncmd/snarl_command.exe")
+    (windows-nt "D:/Growl/growlnotify.exe")
     (darwin "/usr/local/bin/growlnotify")
     (t "notify-send"))
   "Path to command for sending growl-like messages.
@@ -164,7 +164,8 @@ Whether or not to display todochiku-messages as a tooltip."
   :group 'todochiku)
 
 (defcustom todochiku-icons-directory
-  "~/.emacs-cfg/todochiku-icons"
+  ;; "~/.emacs-cfg/todochiku-icons"
+  "~/.emacs.d/icons/todochiku" ;; HACK: change to my icon path
   "Path to the todochiku icons directory."
   :type 'directory
   :group 'todochiku)
@@ -326,7 +327,7 @@ This would be better done through a customization probably."
   "Hook into yaoddmuses notification system."
   (todochiku-message "YaOddMuse" msg (todochiku-icon 'social)))
 
-(todochiku-message "Emacs" "Todochiku (growl for emacs) is ready." (todochiku-icon 'check))
+;; (todochiku-message "Emacs" "Todochiku (growl for emacs) is ready." (todochiku-icon 'check))
 
 ;; This idea doesn't quite work, and given that message is a C function, it might not be that smart anyway
 ;; (defcustom todochiku-on-message nil

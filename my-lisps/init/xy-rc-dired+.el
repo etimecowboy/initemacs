@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired+.el'
-;; Time-stamp:<2011-12-06 Tue 22:50 xin on p6t>
+;; Time-stamp:<2011-12-08 Thu 01:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,8 +20,8 @@
 (defun dired+-settings ()
   "Settings for `dired+'."
   ;; (toggle-dired-find-file-reuse-dir 1)
-  (message "* ---[ dired+ configuration is complete ]---")
-  )
+  (diredp-prompt-for-bookmark-prefix-flag nil)
+  (message "* ---[ dired+ configuration is complete ]---"))
 
 ;; ;;;###autoload
 ;; (defun dired+-face-settings ()

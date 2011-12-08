@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-url.el'
-;; Time-stamp:<2011-12-04 Sun 18:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:45 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,8 +19,8 @@
 ;;;###autoload
 (defun url-settings ()
   "Settings of `url.el'."
-  (setq url-configuration-directory
-        (concat my-var-path "/url"))
+  (setq-default url-configuration-directory
+                (concat my-var-path "/url"))
   (setq url-privacy-level (quote high))
   (message "* ---[ url configuration is complete ]---")
 )

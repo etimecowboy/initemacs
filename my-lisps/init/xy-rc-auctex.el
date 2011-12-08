@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-12-04 Sun 16:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 05:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -57,7 +57,7 @@
                (flyspell-mode 1)
                (turn-on-reftex)
                (turn-on-cdlatex)
-               ;; (autopair-mode -1)
+               (autopair-mode -1)
                ;; (xy/yas-start)
                ;; (xy/linkd-start)
                ;; (xy/set-font-write)
@@ -71,7 +71,7 @@
              (flyspell-mode 1)
              (turn-on-reftex)
              (turn-on-cdlatex)
-             ;; (autopair-mode -1)
+             (autopair-mode -1)
              ;; (xy/yas-start)
              ;; (xy/linkd-start)
              ;; (xy/set-font-write)
@@ -110,8 +110,6 @@
   ;; Picture scale
   (setq preview-scale-function 1.5)
 
-  (message "* ---[ auctex configuration is complete ]---")
-
-)
+  (message "* ---[ auctex configuration is complete ]---"))
 
 (provide 'xy-rc-auctex)

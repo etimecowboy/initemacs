@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-06 Tue 07:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -27,7 +27,8 @@
 (defun gnus-settings ()
   "Settings of `gnus'."
   ;; Set Gnus directorys
-  (setq gnus-init-file (concat my-local-lisp-path "/xy-rc-gnus.el") ;gnus设置文件
+  (setq ;; gnus-init-file nil
+        ;; (concat my-local-lisp-path "/xy-rc-gnus.el") ;gnus设置文件
         gnus-default-directory "~/emacs/gnus"   ;默认目录
         gnus-home-directory "~/emacs/gnus"      ;主目录
         gnus-dribble-directory "~/emacs/gnus"   ;恢复目录

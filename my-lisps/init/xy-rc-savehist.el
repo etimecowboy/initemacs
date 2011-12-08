@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-savehist.el'
-;; Time-stamp:<2011-12-04 Sun 17:47 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:38 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,10 +20,12 @@
 ;;;###autoload
 (defun savehist-settings ()
   "Settings of `savehist.el'."
-  (setq-default save-place-file (concat my-var-path "/savehist-"
-                                        user-login-name "@"
-                                        system-name "@"
-                                        system-configuration))
+  (setq-default savehist-file (concat my-var-path "/savehist-"
+                                      user-login-name "@"
+                                      system-name "@"
+                                      system-configuration))
+  (unless (file-exists-p savehist-file)
+    (shell-command (concat "touch " savehist-file)))
   (message "* ---[ savehist configuration is complete ]---")
 )
 

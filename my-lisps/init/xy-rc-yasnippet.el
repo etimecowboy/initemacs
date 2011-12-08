@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-12-04 Sun 18:18 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 05:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,21 +42,10 @@
 ;;;###autoload
 (defun yasnippet-settings ()
   "settings for `yasnippet'."
-  (setq yas/trigger-key "<tab>")
+  (setq yas/trigger-key "C-c <tab>") ;; tab is widely-used by
+                                     ;; ido/icicles/org
   (setq yas/root-directory
         (concat my-emacs-path "/yasnippet/snippets"))
-
-  ;; org mode TAB binding problem hack
-  (add-hook 'org-mode-hook
-            #'(lambda ()
-                (setq yas/fallback-behavior
-                      `(apply ,(lookup-key org-mode-map [tab])))
-                (local-set-key [tab] 'yas/expand)))
-
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda ()
-  ;;             (org-set-local 'yas/trigger-key "<tab>")
-  ;;             (define-key yas/keymap "<tab>" 'yas/next-field-group)))
 
   ;; A workaround is to inhibit flyspell overlays
   ;; while the snippet is active:
@@ -69,7 +58,21 @@
   (add-hook 'after-save-hook 'yasnippet-reload-after-save)
   (yas/load-directory yas/root-directory)
 
-  (message "* ---[ yasnippet configuration is complete ]---")
-)
+  (message "* ---[ yasnippet configuration is complete ]---"))
 
 (provide 'xy-rc-yasnippet)
+
+;;------------------------------------------------------------------
+;; NOTE: I changed `yas/trigger-key', this hack is not used now
+;; org mode TAB binding problem hack
+;; (add-hook 'org-mode-hook
+;;           #'(lambda ()
+;;               (setq yas/fallback-behavior
+;;                     `(apply ,(lookup-key org-mode-map [tab])))
+;;               (local-set-key [tab] 'yas/expand)))
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (org-set-local 'yas/trigger-key "<tab>")
+;;             (define-key yas/keymap "<tab>"
+;;                   'yas/next-field-group)))
+;;------------------------------------------------------------------

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emms.el'
-;; Time-stamp:<2011-12-06 Tue 07:05 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 05:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,26 +22,27 @@
   (interactive)
   ;; (when (not (featurep 'emms-setup))
   (require 'emms-setup)
+  ;; FIXME: try to move these config to emms-settings
   ;; (require 'emms-extension)
-  (setq emms-directory (concat my-emacs-path "/emms")) ;设置EMMS的目录
-  (setq emms-history-file                              ;播放列表历史记录
-        (concat emms-directory "/emms-history-"
-                user-login-name "@"
-                system-name "@"
-                system-configuration))
-  (setq emms-cache-file                                ;缓存文件
-        (concat emms-directory "/emms-cache-"
-                user-login-name "@"
-                system-name "@"
-                system-configuration))
-  (setq emms-stream-bookmarks-file
-        (concat emms-directory "/emms-streams"))       ;网络电台保存文件
-  (setq emms-score-file                                ;分数文件
-        (concat emms-directory "/emms-scores-"
-                user-login-name "@"
-                system-name "@"
-                system-configuration))
-  (setq emms-source-file-default-directory emms-directory) ;设定默认的播放目录
+  ;; (setq emms-directory (concat my-emacs-path "/emms")) ;设置EMMS的目录
+  ;; (setq emms-history-file                              ;播放列表历史记录
+  ;;       (concat emms-directory "/emms-history-"
+  ;;               user-login-name "@"
+  ;;               system-name "@"
+  ;;               system-configuration))
+  ;; (setq emms-cache-file                                ;缓存文件
+  ;;       (concat emms-directory "/emms-cache-"
+  ;;               user-login-name "@"
+  ;;               system-name "@"
+  ;;               system-configuration))
+  ;; (setq emms-stream-bookmarks-file
+  ;;       (concat emms-directory "/emms-streams"))       ;网络电台保存文件
+  ;; (setq emms-score-file                                ;分数文件
+  ;;       (concat emms-directory "/emms-scores-"
+  ;;               user-login-name "@"
+  ;;               system-name "@"
+  ;;               system-configuration))
+  ;; (setq emms-source-file-default-directory emms-directory) ;设定默认的播放目录
   (emms-standard)
   (emms-default-players)
   ;; (setq emms-repeat-playlist t)
@@ -188,29 +189,38 @@
   ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/init-emms.el" :display "from emacswiki `init-emms.el'")
 
   (emms-devel) ;选择开发者模式
-  ;; (require 'emms-extension)
-  ;; 设置 emms 编码系统
-  (emms-i18n-set-default-coding-system 'gbk-dos 'utf-8-unix)
+  (emms-i18n-set-default-coding-system ;; 设置 emms 编码系统
+   'gbk-dos 'utf-8-unix)
   ;; 目录
-  (setq emms-directory (concat my-emacs-path "/emms")) ;设置EMMS的目录
-  (setq emms-history-file                              ;播放列表历史记录
+  (setq emms-directory ;设置EMMS的目录
+        (concat my-emacs-path "/emms"))
+  (setq emms-history-file          ;播放列表历史记录
         (concat emms-directory "/emms-history-"
                 user-login-name "@"
                 system-name "@"
                 system-configuration))
-  (setq emms-cache-file                                ;缓存文件
+  (unless (file-exists-p emms-history-file)
+    (shell-command (concat "touch " emms-history-file)))
+  (setq emms-cache-file            ;缓存文件
         (concat emms-directory "/emms-cache-"
                 user-login-name "@"
                 system-name "@"
                 system-configuration))
-  (setq emms-stream-bookmarks-file
-        (concat emms-directory "/emms-streams"))       ;网络电台保存文件
-  (setq emms-score-file                                ;分数文件
+  (unless (file-exists-p emms-cache-file)
+    (shell-command (concat "touch " emms-cache-file)))
+  (setq emms-stream-bookmarks-file ;网络电台保存文件
+        (concat emms-directory "/emms-streams"))
+  (unless (file-exists-p emms-stream-bookmarks-file)
+    (shell-command (concat "touch " emms-stream-bookmarks-file)))
+  (setq emms-score-file            ;分数文件
         (concat emms-directory "/emms-scores-"
                 user-login-name "@"
                 system-name "@"
                 system-configuration))
-  (setq emms-source-file-default-directory emms-directory) ;设定默认的播放目录
+  (unless (file-exists-p emms-score-file)
+    (shell-command (concat "touch " emms-score-file)))
+  (setq emms-source-file-default-directory ;设定默认的播放目录
+        emms-directory)
   ;; 播放设置
   ;; (add-hook 'emms-player-finished-hook 'emms-random)         ;当播放完当前的歌曲时随机选择下一首歌曲
   (setq emms-playlist-default-major-mode 'emms-playlist-mode)   ;设定EMMS用播放列表的主模式

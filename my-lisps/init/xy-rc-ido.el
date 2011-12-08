@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-12-04 Sun 17:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:22 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,14 +16,20 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
+;; NOTE: NEVER use both icy-mode and ido/smex. They are different in the
+;;way of using minibuffer, and conflicts with each other.
 ;;;###autoload
-(defmacro def-ido-enter-command (command)
-  "Make definition of command which execute some command in ido."
-  `(defun ,(am-intern "ido-enter-" command) ()
-     ,(concat "Drop into `" command "' from file switching.")
-     (interactive)
-     (setq ido-exit (quote ,(intern command)))
-     (exit-minibuffer)))
+(defun xy/ido-start ()
+  "Start ido completion."
+  (interactive)
+  (when (featurep 'icicles)
+    (icy-mode -1))
+  (require 'ido)
+  ;; (require 'smex)
+  (ido-mode 1)
+  ;; (smex-initialize-ido)
+  ;; (smex-initialize)
+  )
 
 ;;;###autoload
 (defun ido-up-directory-clean-text ()
@@ -58,19 +64,20 @@
 ;;;###autoload
 (defun ido-settings ()
   "settings for `ido'."
+
   ;; (If is-before-emacs-21
   ;;     (setq read-buffer-function 'ido-read-buffer)
   ;;   (ido-everywhere t)
   ;;   (setq ido-define-mode-map-hook 'ido-setup-hook))
 
-  (setq-default ido-everywhere t)
-  ;; (require 'ido-ubiquitous)
-  ;; (ido-ubiquitous t)
-  (setq-default ido-save-directory-list-file
+  (setq ido-save-directory-list-file
                 (concat my-var-path "/ido-last-"
                           user-login-name "@"
                           system-name "@"
                           system-configuration))
+  (unless (file-exists-p ido-save-directory-list-file)
+    (shell-command (concat "touch " ido-save-directory-list-file)))
+  (setq ido-everywhere t)
   (setq ido-enable-last-directory-history t) ; remember last used dirs
   (setq ido-max-work-directory-list 50)      ; should be enough
   (setq ido-max-work-file-list      50)      ; remember many
@@ -83,62 +90,34 @@
   (setq ido-use-url-at-point t)
   (setq ido-enable-flex-matching t)
   (setq ido-max-prospects 8)
-  (setq ido-confirm-unique-completion t) ; wait for RET, even with;
-                                        ; unique completion
+  (setq ido-confirm-unique-completion t)
   (setq ido-create-new-buffer 'always)
   (setq ido-default-buffer-method  (quote selected-window))
-  ;; when using ido, the confirmation is rather annoying...
-  ;; (setq confirm-nonexistent-file-or-buffer nil)
+  (setq confirm-nonexistent-file-or-buffer t)
 
-  ;; (require 'ido-ubiquitous)
-  ;; (ido-ubiquitous-mode 1)
+  (defmacro def-ido-enter-command (command)
+    "Make definition of command which execute some command in ido."
+    `(defun ,(am-intern "ido-enter-" command) ()
+       ,(concat "Drop into `" command "' from file switching.")
+       (interactive)
+       (setq ido-exit (quote ,(intern command)))
+       (exit-minibuffer)))
 
- (when (try-require 'idomenu)
-   (global-set-key (kbd "C-c g") 'idomenu)
-  )
+  (add-hook 'org-mode-hook
+            '(lambda ()
+               (setq org-completion-use-ido t)))
 
- (message "* ---[ ido configuration is complete ]---")
- )
+  ;;==================================================================
+  ;; Other ido plugins
 
-;; ;;;###autoload
-;; (defun ido-face-settings ()
-;;   "Face settings for `ido'."
-;;   (if is-before-emacs-21
-;;       (progn
-;;         (custom-set-faces
-;;          '(ido-first-match-face
-;;            ((((type tty pc)) :foreground "yellow")
-;;             (t :bold nil :foreground "yellow"))))
-;;         (custom-set-faces
-;;          '(ido-only-match
-;;            ((((class color)) (:bold nil :foreground "green"))))))
+  (when (try-require 'ido-ubiquitous)
+    ;; (ido-ubiquitous)
+    (ido-ubiquitous-mode 1))
 
-;;     (custom-set-faces
-;;      '(ido-first-match
-;;        ((((type tty pc)) :foreground "yellow")
-;;         (t :bold nil :foreground "yellow"))))
-;;     (custom-set-faces
-;;      '(ido-only-match
-;;        ((((class color)) (:bold nil :foreground "green")))))))
+  ;;------------------------------------------------------------------
+  (when (try-require 'idomenu)
+    (global-set-key (kbd "C-c g") 'idomenu))
+
+  (message "* ---[ ido configuration is complete ]---"))
 
 (provide 'xy-rc-ido)
-
-
-;; (let ((map
-;;        (unless is-before-emacs-21
-;;          (setq ido-mode-map ido-completion-map)))))
-;; (eal-define-keys-commonly
-;;  map
-;;  `(("M-."   ido-next-match-dir)
-;;    ("M-,"   ido-prev-match-dir)
-;;    ("C-h"   ido-delete-backward-updir)
-;;    ("M-h"   ido-up-directory)
-;;    ("M-H"   ido-up-directory-clean-text)
-;;    ("C-M-h" ido-goto-home)
-;;    ("C-r"   ido-goto-root)
-;;    ("C-u"   ido-clean-text)
-;;    ("M-b"   backward-word)
-;;    ("C-w"   ido-delete-backward-word-updir)
-;;    ;; ("C-v"   ido-enter-svn-status-hide)
-;;    ("C-n"   ido-next-match)
-;;    ("C-p"   ido-prev-match)))

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-recentf.el'
-;; Time-stamp:<2011-12-04 Sun 17:45 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -41,6 +41,8 @@
                           user-login-name "@"
                           system-name "@"
                           system-configuration))
+  (unless (file-exists-p recentf-save-file)
+    (shell-command (concat "touch " recentf-save-file)))
   (setq recentf-exclude '("bbdb" "gnus" "mew" "w3m" "gtd"))
   (setq recentf-menu-open-all-flag t)
   (setq recentf-max-saved-items 100)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-06 Tue 21:34 xin on p6t>
+;; Time-stamp:<2011-12-08 Thu 08:43 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -42,7 +42,8 @@
  `(lisp-mode-hook emacs-lisp-mode-hook
    cperl-mode-hook cc-mode-hook
    LaTeX-mode-hook latex-mode-hook
-   matlab-mode-hook org-mode-hook)
+   matlab-mode-hook org-mode-hook
+   mew-draft-mode-hook)
  'turn-on-auto-fill)
 (eval-after-load "simple"
   '(progn
@@ -62,28 +63,108 @@
 ;;     ;; (hurn-on-hungry-delete-mode)
 ;;     (hungry-delete-mode 1)))
 
+;;--------------------------------------------------------------------
+;;** paren-mode
+;; (show-paren-mode 1)
+;; (eval-after-load "paren"
+;;   '(progn
+;;      ;; (paren-face-settings)
+;;      (paren-settings)))
+
+;;--------------------------------------------------------------------
+;;** mic-paren
+;; An extension and replacement to the packages `paren.el' and
+;; `stig-paren.el' for Emacs
+;; (require 'mic-paren)
+(paren-activate)
+(eval-after-load "mic-paren"
+  '(progn
+     ;; (mic-paren-face-settings)
+     (mic-paren-settings)))
+
+;;--------------------------------------------------------------------
+;;** rainbow-delimiters
+;; With this package, the delimiters all get different colors based on
+;; their nesting level. It works wonderfully well
+;; NOTE: It takes a lot of computation resource, so I disabled it.
+;; (require 'rainbow-delimiters)
+;; (am-add-hooks
+;;  `(find-file-hook
+;;    help-mode-hook Man-mode-hook log-view-mode-hook
+;;    compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
+;;    browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
+;;    inferior-ruby-mode-hook custom-mode-hook Info-mode-hook
+;;    svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
+;;    apropos-mode-hook)
+;;  'rainbow-delimiters-mode)
+;; (eval-after-load "rainbow-delimiters"
+;;   '(progn
+;;      (rainbow-delimiters-settings)))
+
+;;--------------------------------------------------------------------
+;;** highlight-parentheses
+;; (require 'highlight-parentheses)
+(eval-after-load "highlight-parentheses"
+  `(progn
+     (highlight-parentheses-settings)))
+(am-add-hooks
+ `(find-file-hook help-mode-hook Man-mode-hook log-view-mode-hook
+                  custom-mode-hook Info-mode-hook compilation-mode-hook
+                  svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
+                  browse-kill-ring-mode-hook completion-list-mode-hook
+                  apropos-mode-hook hs-hide-hook inferior-ruby-mode-hook
+                  gdb-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+                  lisp-mode-hook c-mode-common-hook cc-mode-hook vhdl-mode-hook
+                  verilog-mode-hook matlab-mode-hook LaTeX-mode-hook latex-mode-hook)
+ '(lambda ()
+    (require 'highlight-parentheses)
+    (highlight-parentheses-mode 1)))
+
+;;--------------------------------------------------------------------
+;;** autopair
+;; NOTE: autopair-mode conflicts with `auctex'/`cdlatex', and
+;; `yasnippet', need to use hooks to disable it in these modes.
+(when (try-require 'autopair)
+  (autopair-global-mode 1)
+  (eval-after-load "autopair"
+    '(autopair-settings)))
+
+;; (am-add-hooks
+;;  `( org-mode-hook LaTeX-mode-hook latex-mode-hook cc-mode-hook
+;;                   c-mode-common-hook vhdl-mode-hook verilog-mode-hook)
+;;  '(lambda ()
+;;     (autopair-mode -1))))
+;; (am-add-hooks
+;;  `(lisp-interaction-mode-hook lisp-mode-hook emacs-lisp-mode-hook
+;;    cperl-mode-hook cc-mode-hook c-mode-common-hook
+;;    vhdl-mode-hook verilog-mode-hook matlab-mode-hook
+;;    ;; org-mode-hook text-mode-hook
+;;    )
+;;  '(lambda ()
+;;     (require 'autopair)
+;;     (autopair-mode 1)))
+
+
 ;;====================================================================
 ;;* Code folding
 
 ;;** hide-region
-;; 代码区域折叠
-;; (require 'hide-region)
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook
-   cperl-mode-hook cc-mode-hook
-   vhdl-mode-hook verilog-mode-hook
-   matlab-mode-hook
-   ;; org-mode-hook text-mode-hook
-   )
- '(lambda ()
-    (require 'hide-region)))
-(eal-define-keys-commonly
- global-map
- `(("C-x M-r" hide-region-hide)
-   ("C-x M-R" hide-region-unhide)))
-(eval-after-load "hide-region"
-  '(progn
-     (hide-region-settings)))
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook
+;;    cperl-mode-hook cc-mode-hook
+;;    vhdl-mode-hook verilog-mode-hook
+;;    matlab-mode-hook
+;;    ;; org-mode-hook text-mode-hook
+;;    )
+;;  '(lambda ()
+;;     (require 'hide-region)))
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("C-x M-r" hide-region-hide)
+;;    ("C-x M-R" hide-region-unhide)))
+;; (eval-after-load "hide-region"
+;;   '(progn
+;;      (hide-region-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** outline
@@ -111,7 +192,7 @@
      (hs-minor-mode-settings)
      ;; (define-key hs-minor-mode-map (kbd "C-c @ C-h") 'hs-hide-block)
      ;; (define-key hs-minor-mode-map (kbd "C-c @ C-w") 'hs-show-block)
-     (define-key hs-minor-mode-map (kbd "<f6>") 'hs-toggle-hiding)
+     (define-key hs-minor-mode-map (kbd "S-<f6>") 'hs-toggle-hiding)
      (define-key hs-minor-mode-map (kbd "C-<f6>") 'hs-hide-level)
      (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
      (define-key hs-minor-mode-map (kbd "M-S-<f6>") 'hs-show-all)
@@ -143,7 +224,7 @@
 (add-hook 'outline-minor-mode-hook
           (lambda ()
             (require 'outline-magic)
-            (define-key outline-minor-mode-map (kbd "S-<f6>") 'outline-cycle)
+            (define-key outline-minor-mode-map (kbd "<f6>") 'outline-cycle)
             ))
 (am-add-hooks
  `(c-mode-common-hook cpp-mode-hook cc-mode-hook java-mode-hook
@@ -280,6 +361,17 @@
 ;;  `(("C-c M-a" beginning-of-defun)
 ;;    ("C-c M-e" end-of-defun)))
 
+;; (eal-define-keys
+;;  `(emacs-lisp-mode-map lisp-interaction-mode-map)
+;;  `(("C-M-h" mark-function)
+;;    ("C-c D"  edebug-defun)
+;;    ("C-c C-d" eval-defun)
+;;    ("C-c B"  eval-buffer)
+;;    ("C-c f" copy-function)
+;;    ("C-c F" kill-function)
+;;    ("C-c C-q" indent-function)
+;;    ("C-c C" comment-function)))
+
 (eval-after-load "emacs-lisp-mode"
   '(progn
      (emacs-lisp-mode-settings)))
@@ -346,6 +438,12 @@
         ;; sourcepair BUG: not working
         ;; ("C-c S"     sourcepair-load)
         ))))
+;; (eal-define-keys
+;;  'c-mode-base-map
+;;  `(("C-c f" copy-function)
+;;    ("C-c F" kill-function)
+;;    ("C-c C" comment-function)
+;;    ("C-M-h" mark-function)))
 
 ;;--------------------------------------------------------------------
 ;;** ifdef

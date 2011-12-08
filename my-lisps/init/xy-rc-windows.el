@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-windows.el'
-;; Time-stamp:<2011-12-04 Sun 18:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,6 +36,8 @@
                                        user-login-name "@"
                                        system-name "@"
                                        system-configuration))
+  (unless (file-exists-p win:configuration-file)
+    (shell-command (concat "touch " win:configuration-file)))
   (message "* ---[ windows configuration is complete ]---")
 )
 

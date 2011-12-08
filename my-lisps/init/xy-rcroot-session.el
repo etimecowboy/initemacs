@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-12-06 Tue 22:22 xin on p6t>
+;; Time-stamp:<2011-12-08 Thu 04:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -87,11 +87,6 @@
 ;;* Save Emacs session information
 
 ;;** recentf
-;; (setq-default recentf-save-file
-;;               (concat my-var-path "/recentf-"
-;;                       user-login-name "@"
-;;                       system-name "@"
-;;                       system-configuration))
 (recentf-mode 1)
 (eval-after-load "recentf"
   '(progn
@@ -107,11 +102,6 @@
 
 ;;--------------------------------------------------------------------
 ;;** savehist
-;; (require 'savehist)
-;; (setq-default save-place-file (concat my-var-path "/savehist-"
-;;                                       user-login-name "@"
-;;                                       system-name "@"
-;;                                       system-configuration))
 (savehist-mode 1)
 (eval-after-load "savehist"
   '(progn

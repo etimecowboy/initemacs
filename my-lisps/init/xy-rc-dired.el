@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-12-07 Wed 00:09 xin on p6t>
+;; Time-stamp:<2011-12-08 Thu 02:29 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -263,25 +263,28 @@ will remain open and unsaved."
 
   (when (try-require 'dired-details+) ;; 简略文件信息
     ;; (dired-details-install)        ;; use `(' and `)' to switch
-    (setq dired-details-initially-hide nil)))
+    (add-hook 'dired-mode-hook
+              '(lambda ()
+                (setq dired-details-initially-hide t))))
 
   ;;------------------------------------------------------------------
   ;; (try-require 'dired-single) ;; Use a single frame for visiting a
   ;;                             ;; sub-directory
 
   ;;------------------------------------------------------------------
-  (try-require 'dired-tar) ;; `T' 把一个目录压缩为一个.tar.gz文件
+  (GNULinux
+    (try-require 'dired-tar)) ;; `T' 把目录压缩为.tar.gz文件
 
   ;;------------------------------------------------------------------
-  (when (try-require 'dired+) ;; dired大补
-    ;; TODO: do a research and add more configurations.
-    ;; (toggle-dired-find-file-reuse-dir 1)
-    ;; (eval-after-load "dired+"
-    ;;   '(progn
-    ;;     (dired+-settings)))
-    ;; (define-key ctl-x-map   "d" 'diredp-dired-files)
-    ;; (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window)
-    )
+  ;; (when (try-require 'dired+) ;; dired大补
+  ;;   ;; TODO: do a research and add more configurations.
+  ;;   (toggle-dired-find-file-reuse-dir 1)
+  ;;   (eval-after-load "dired+"
+  ;;     '(progn
+  ;;       (dired+-settings)))
+  ;;   (define-key ctl-x-map   "d" 'diredp-dired-files)
+  ;;   (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window)
+  ;;   )
 
   (message "* ---[ dired configuration is complete ]---"))
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-revive.el'
-;; Time-stamp:<2011-12-04 Sun 17:47 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,6 +24,8 @@
                                           user-login-name "@"
                                           system-name "@"
                                           system-configuration))
+  (unless (file-exists-p revive:configuration-file)
+    (shell-command (concat "touch " revive:configuration-file)))
   ;; Automatically save window configuration when quit emacs
   ;; (add-hook 'kill-emacs-hook 'save-current-configuration)
   (message "* ---[ revive configuration is complete ]---")

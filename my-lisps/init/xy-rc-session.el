@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-12-04 Sun 17:49 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,11 +22,12 @@
   ;; BUG: this setq seems to cause problem when recovering last point
   ;;      position.
   ;; (setq session-initialize '(session menus))
-  (setq session-save-file (concat my-var-path "/session-"
-                                  user-login-name "@"
-                                  system-name "@"
-                                  system-configuration))
-
+  (setq-default session-save-file (concat my-var-path "/session-"
+                                          user-login-name "@"
+                                          system-name "@"
+                                          system-configuration))
+  (unless (file-exists-p session-save-file)
+    (shell-command (concat "touch " session-save-file)))
   ;; OrgMode org-mark-ring is a circular object.
   ;; Don't recursively display gtd files in session list
   (add-to-list 'session-globals-exclude 'org-mark-ring)

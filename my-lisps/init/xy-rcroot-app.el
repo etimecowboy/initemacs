@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-06 Tue 19:24 xin on p6t>
+;; Time-stamp:<2011-12-08 Thu 10:57 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -78,8 +78,7 @@
 ;;           'fit-frame-if-one-window 'append)
 ;; (global-set-key [vertical-line down-mouse-1]
 ;;                 'fit-frame-or-mouse-drag-vertical-line)
-(global-set-key (kbd "S-<f5>") 'xy/fit-frame)
-(global-set-key (kbd "C-c <f5>") 'revert-buffer)
+
 
 ;;  Add menu-bar items
 (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
@@ -136,10 +135,6 @@ the mode-line." t)
 (eval-after-load "windmove"
   '(progn
      (windmove-settings)))
-(global-set-key (kbd "C-S-<left>")  'windmove-left)
-(global-set-key (kbd "C-S-<up>")    'windmove-up)
-(global-set-key (kbd "C-S-<right>") 'windmove-right)
-(global-set-key (kbd "C-S-<down>")  'windmove-down)
 
 ;;--------------------------------------------------------------------
 ;;** buffer-move
@@ -211,11 +206,6 @@ the mode-line." t)
 ;; emacs lock
 ;; (autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
 
-;; hl-line
-;; Higligh current line
-;; (setq hl-line-face 'underline) ; for highlight-symbol
-;; (global-hl-line-mode 1) ; (if window-system 1 -1)
-
 ;;====================================================================
 ;;* mode-line settings
 
@@ -231,13 +221,17 @@ the mode-line." t)
               (propertized-buffer-identification "%b"))
 
 ;; Display time and date
-(if (not window-system)
-    (progn
-      (setq display-time-day-and-date t)
-      (display-time-mode 1))
-  (progn
-    (setq display-time-day-and-date nil)
-    (display-time-mode -1)))
+;; NOTE: with the use of `maxframe.el', the maximized frame takes the
+;; whole monitor, so I have to display the time.
+;; (if (not window-system)
+;;     (progn
+;;       (setq display-time-day-and-date t)
+;;       (display-time-mode 1))
+;;   (progn
+;;     (setq display-time-day-and-date nil)
+;;     (display-time-mode -1)))
+(setq display-time-day-and-date t)
+(display-time-mode 1)
 
 ;; Display battery infomation, after Emacs-22
 ;; (when is-after-emacs-23 (display-battery-mode -1))
@@ -282,6 +276,7 @@ the mode-line." t)
 
 ;;====================================================================
 ;;* mini-buffer settings
+
 ;; 可以递归的使用minibuffer
 (setq enable-recursive-minibuffers t)
 ;; 当你在shell、telnet、w3m等模式下时，加密显出你的密码
@@ -403,97 +398,6 @@ the mode-line." t)
   (xterm-mouse-mode 1))
 
 ;;====================================================================
-;;* 所有关于括号的配置
-
-;;** paren-mode
-;; (show-paren-mode 1)
-;; (eval-after-load "paren"
-;;   '(progn
-;;      ;; (paren-face-settings)
-;;      (paren-settings)))
-
-;;--------------------------------------------------------------------
-;;** mic-paren
-;; An extension and replacement to the packages `paren.el' and
-;; `stig-paren.el' for Emacs
-;; (require 'mic-paren)
-(paren-activate)
-(eval-after-load "mic-paren"
-  '(progn
-     ;; (mic-paren-face-settings)
-     (mic-paren-settings)))
-
-;;--------------------------------------------------------------------
-;;** rainbow-delimiters
-;; With this package, the delimiters all get different colors based on
-;; their nesting level. It works wonderfully well
-;; NOTE: It takes a lot of computation resource, so I disabled it.
-;; (require 'rainbow-delimiters)
-;; (am-add-hooks
-;;  `(find-file-hook
-;;    help-mode-hook Man-mode-hook log-view-mode-hook
-;;    compilation-mode-hook gdb-mode-hook lisp-interaction-mode-hook
-;;    browse-kill-ring-mode-hook completion-list-mode-hook hs-hide-hook
-;;    inferior-ruby-mode-hook custom-mode-hook Info-mode-hook
-;;    svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
-;;    apropos-mode-hook)
-;;  'rainbow-delimiters-mode)
-;; (eval-after-load "rainbow-delimiters"
-;;   '(progn
-;;      (rainbow-delimiters-settings)))
-
-;;--------------------------------------------------------------------
-;;** highlight-parentheses
-;; 用颜色配对括号
-;; (require 'highlight-parentheses)
-(eval-after-load "highlight-parentheses"
-  `(progn
-     (highlight-parentheses-settings)))
-(am-add-hooks
- `(find-file-hook help-mode-hook Man-mode-hook log-view-mode-hook
-   custom-mode-hook Info-mode-hook compilation-mode-hook
-   svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
-   browse-kill-ring-mode-hook completion-list-mode-hook
-   apropos-mode-hook hs-hide-hook inferior-ruby-mode-hook
-   gdb-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-   lisp-mode-hook c-mode-common-hook cc-mode-hook vhdl-mode-hook
-   verilog-mode-hook matlab-mode-hook LaTeX-mode-hook latex-mode-hook)
- '(lambda ()
-    (require 'highlight-parentheses)
-    (highlight-parentheses-mode 1)))
-
-;;--------------------------------------------------------------------
-;;** autopair
-;; 自动给你加上括号
-;; NOTE: autopair-global-mode cause problem with auctex, so use hooks
-;; with other modes.
-;; (autopair-global-mode 1)
-
-;; (require 'autopair)
-;; (eval-after-load "autopair"
-;;   '(autopair-settings))
-(am-add-hooks
- `(lisp-interaction-mode-hook lisp-mode-hook emacs-lisp-mode-hook
-   cperl-mode-hook cc-mode-hook c-mode-common-hook c-mode-hook
-   vhdl-mode-hook verilog-mode-hook matlab-mode-hook
-   ;; org-mode-hook text-mode-hook
-   )
- '(lambda ()
-    (require 'autopair)
-    (autopair-mode 1)))
-
-;; ;; 输入左大花扩号自动补齐右大花括号
-;; (eal-define-keys
-;;  `(c-mode-base-map awk-mode-map)
-;;  `(("{" skeleton-c-mode-left-brace)))
-
-;; Global key bindings
-(eal-define-keys-commonly
- global-map
- `(("C-M-]" ywb-indent-accoding-to-paren)
-   ("\C-]"  goto-paren)))
-
-;;====================================================================
 ;;* Syntax highlighting
 
 ;;** font-lock
@@ -505,19 +409,27 @@ the mode-line." t)
      ))
 
 ;;--------------------------------------------------------------------
-;;** hi-lock
-(global-hi-lock-mode 1)
+;;** hl-line
+;; Higligh current line
+;; (setq hl-line-face 'underline)
+;; (global-hl-line-mode 1) ; (if window-system 1 -1)
 
 ;;--------------------------------------------------------------------
-;;** smart-hl
-;; 像Eclipse那样双击高亮当前字符串
-;; NOTE: A part of codepilot which is removed.
-;;       Use highlight-symbol-mode instead.
-;; (require 'smart-hl)
+;;** hi-lock
+(global-hi-lock-mode 1)
+(eal-define-keys
+ 'hi-lock-map
+ `(("C-c H l" highlight-lines-matching-regexp)
+   ("C-c H f" hi-lock-find-patterns)
+   ("C-c H x" highlight-regexp)
+   ("C-c H h" highlight-phrase)
+   ("C-c H u" unhighlight-regexp)
+   ("C-c H w" hi-lock-write-interactive-patterns)
+   ("C-c H a" hi-lock-show-all)))
 
 ;;--------------------------------------------------------------------
 ;;** highlight-symbol
-;; 像Eclipse那样高亮光标处单词
+;; 像Eclipse那样高亮光标处单词, 基于hi-lock，方便但是不能保存高亮设置
 ;; (require 'highlight-symbol)
 (eval-after-load "highlight-symbol"
   '(progn
@@ -531,11 +443,18 @@ the mode-line." t)
    org-mode-map text-mode-map ruby-mode-map html-mode-map)
  `(("C-c H m" highlight-symbol-at-point)
    ("C-c H d" highlight-symbol-remove-all)
-   ("C-c H n" highlight-symbol-next)
-   ("C-c H p" highlight-symbol-prev)
+   ("C-c H n" highlidght-symbol-next)
+   ("C-c H p" highldight-symbol-prev)
    ("C-c H r" highlight-symbol-query-replace)
    ("C-c H N" highlight-symbol-next-in-defun)
    ("C-c H P" highlight-symbol-prev-in-defun)))
+
+;;--------------------------------------------------------------------
+;;** smart-hl
+;; 像Eclipse那样双击高亮当前字符串
+;; NOTE: A part of codepilot which is removed.
+;;       Use highlight-symbol-mode instead.
+;; (require 'smart-hl)
 
 ;;--------------------------------------------------------------------
 ;;** zjl-hl

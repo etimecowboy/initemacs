@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-12-06 Tue 07:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -39,6 +39,8 @@
 
   (setq ac-comphist-file
         (concat my-emacs-path "/auto-complete/ac-comphist"))
+  (unless (file-exists-p ac-comphist-file)
+    (shell-command (concat "touch " ac-comphist-file)))
 
   ;; (ac-config-default)
   ;; In `auto-complete-config.el'

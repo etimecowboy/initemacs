@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-06 Tue 07:46 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 07:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,7 +36,9 @@
 ;;--------------------------------------------------------------------
 ;;** ffap, finding Files and URLs at point
 ;; REF: (@url :file-name "http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860" :display "emacs manual")
-(ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f
+(ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f, can be fixed
+                ;;      by (setq ffap-require-prefix t)
+                ;;      (Has been added to `ffap-settings')
 (eval-after-load "ffap"
   '(progn
      (ffap-settings)))
@@ -65,7 +67,7 @@
                 (eq major-mode 'TeX-mode)
                 (eq major-mode 'tex-mode))
       (linum-mode 1))))
-(global-set-key (kbd "S-<f6>") 'linum-mode)
+(global-set-key (kbd "<f6> l") 'linum-mode)
 (eval-after-load 'linum
   '(progn
      ;; (linum-face-settings) ;; TODO: will be added to my theme
@@ -117,14 +119,10 @@
   '(progn
      (calendar-settings)))
 
-;;--------------------------------------------------------------------
-;;** Diary
 (eval-after-load "diary-lib"
   '(progn
      (diary-settings)))
 
-;;--------------------------------------------------------------------
-;;** appt
 (eval-after-load "appt"
   '(progn
      (appt-settings)))

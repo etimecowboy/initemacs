@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-12-06 Tue 07:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -209,8 +209,8 @@
   ;;           ;; Use the proxy server to visit any foreign urls.
   ;;         ("" "-o" "http_proxy=http://your_proxy:80/")))
   (setq w3m-default-directory "~/emacs/w3m")
-  (setq w3m-init-file
-        (concat my-own-lisp-path "/init/xy-rc-w3m.el"))
+  ;; (setq w3m-init-file
+  ;;       (concat my-own-lisp-path "/init/xy-rc-w3m.el"))
   (setq w3m-icon-directory
         (concat my-local-image-path "/w3m"))
   (setq w3m-default-save-directory

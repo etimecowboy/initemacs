@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-06 Tue 08:00 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 07:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,9 +19,10 @@
 ;;====================================================================
 ;;* url
 
-(eval-after-load "w3m"
+(eval-after-load "url"
   '(progn
-     (w3m-settings)))
+     (url-settings)))
+
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
@@ -146,21 +147,22 @@
 
 ;;====================================================================
 ;;* emms
+
 ;; Emacs 音乐播放器
-;; (autoload 'emms "emms-playlist-mode" nil t)
-;; (autoload 'emms-browser "emms-browser" nil t)
 (eval-after-load "emms-playlist-mode"
   '(progn
      (emms-settings)))
 (eal-define-keys-commonly
  dired-mode-map
- `(("|"    emms-add-dired)
-   ("`"    emms-play-dired)))
+ `(("C-x a"    emms-add-dired)
+   ("C-x p"    emms-play-dired)))
 (eal-define-keys-commonly
  global-map
- `(("C-x E b" emms-browser)
+ `(("C-x E e" xy/emms-start)
+   ("C-x E b" emms-browser)
    ("C-x E f" emms-play-file)
    ("C-x E l" emms-play-playlist)
+   ("C-x E s" emms-playlist-save)
    ("C-x E d" emms-play-directory)
    ("C-x E m" emms-playlist-mode-go)
    ("C-x E p" emms-playlist-mode-go-popup)
@@ -168,10 +170,11 @@
    ("C-x E t" emms-add-directory-tree)
    ("C-x E <up>"      emms-start)
    ("C-x E <down>"    emms-pause)
-   ;; ("C-x E S-<left>"  emms-previous)
-   ;; ("C-x E S-<right>" emms-next)
+   ("C-x E <left>"    emms-previous)
+   ("C-x E <right>"   emms-next)
    ;; ("C-x E <right>"   emms-seek-forward)
    ;; ("C-x E <left>"    emms-seek-backward)
+   ;; BUG: Only works in Linux with `amixer' installed
    ("C-x E +"  emms-volume-raise)
    ("C-x E -"  emms-volume-lower)))
 

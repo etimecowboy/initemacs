@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-woman.el'
-;; Time-stamp:<2011-12-04 Sun 18:17 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:55 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,6 +21,8 @@
   "Settings for `woman-mode'."
   (add-to-list 'woman-manpath "~/.emacs.d/man")
   (setq woman-cache-filename (concat my-var-path "/wmncach"))
+  (unless (file-exists-p woman-cache-filename)
+    (shell-command (concat "touch " woman-cache-filename)))
   (setq woman-use-own-frame t)
   (setq woman-fill-column 100)
 
@@ -29,8 +31,7 @@
     (setq truncate-lines nil))
   (am-add-hooks 'woman-mode-hook 'woman-mode-hook-settings)
 
-  (message "* ---[ woman configuration is complete ]---")
-)
+  (message "* ---[ woman configuration is complete ]---"))
 
 ;; ;;;###autoload
 ;; (defun woman-face-settings ()

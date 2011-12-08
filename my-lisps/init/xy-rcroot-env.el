@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-06 Tue 23:11 xin on p6t>
+;; Time-stamp:<2011-12-08 Thu 10:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -664,27 +664,14 @@
 ;;;###autoload
 (defun xy/server-start ()
   "My version of starting emacs-server"
-
   (interactive)
   (server-force-delete)
   ;; (setq server-auth-dir (concat my-var-path "/server"))
   (server-start))
 
 ;;====================================================================
-;;* Global keybindings for visiting some files/directory
+;;* Emacs key bindings
 
-(eal-define-keys-commonly
- global-map
- `(("C-x G r" load-dot-emacs-file)
-   ("C-x G i" open-init-dot-el-file)))
-
-(eal-define-keys-commonly
- global-map
- `(("C-x G l" goto-my-local-lisp-dir)
-   ("C-x G m" goto-my-own-lisp-dir)
-   ("C-x G e" goto-my-emacs-dir)
-   ("C-x G h" goto-my-home-dir)
-   ("C-x G o" goto-my-org-source-dir)
-   ("C-x G t" goto-my-org-latex-dir)))
+(require 'xy-rc-kbd)
 
 (provide 'xy-rcroot-env)

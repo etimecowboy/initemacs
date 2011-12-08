@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-smex.el'
-;; Time-stamp:<2011-12-04 Sun 17:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 03:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,6 +16,20 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
+;; NOTE: NEVER use both icy-mode and ido/smex. They are different in the
+;;way of using minibuffer, and conflicts with each other.
+;;;###autoload
+(defun xy/smex-start ()
+  "Start ido completion."
+  (interactive)
+  (when (featurep 'icicles)
+    (icy-mode -1))
+  ;; (require 'ido)
+  (require 'smex)
+  ;; (ido-mode 1)
+  ;; (smex-initialize-ido)
+  (smex-initialize))
+
 ;;;###autoload
 (defun smex-settings ()
   "Settings of `smex.el'."
@@ -24,7 +38,8 @@
                           user-login-name "@"
                           system-name "@"
                           system-configuration))
-  (message "* ---[ smex configuration is complete ]---")
-)
+  (unless (file-exists-p smex-save-file)
+    (shell-command (concat "touch " smex-save-file)))
+  (message "* ---[ smex configuration is complete ]---"))
 
 (provide 'xy-rc-smex)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-06 Tue 07:34 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 10:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -122,10 +122,16 @@ minibuffer."
         (concat my-emacs-path "/org"))
   (setq org-default-notes-file
         (concat org-directory "/gtd/Notes.org"))
+  (unless (file-exists-p org-default-notes-file)
+    (shell-command (concat "touch " org-default-notes-file)))
   (setq org-combined-agenda-icalendar-file
         (concat org-directory "/org.ics"))
+  (unless (file-exists-p org-combined-agenda-icalendar-file)
+    (shell-command (concat "touch " org-combined-agenda-icalendar-file)))
   (setq org-id-locations-file
         (concat org-directory "/org-id-locations"))
+  (unless (file-exists-p org-id-locations-file)
+    (shell-command (concat "touch " org-id-locations-file)))
 
   ;;------------------------------------------------------------------
   ;; Loaded modules
@@ -324,6 +330,8 @@ minibuffer."
   (setq org-clock-persist t)
   (setq org-clock-persist-file
         (concat org-directory "/org-clock-save"))
+  (unless (file-exists-p org-clock-persist-file)
+    (shell-command (concat "touch " org-clock-persist-file)))
   (setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
   (setq org-clock-report-include-clocking-task t)
   (setq org-clock-persist-query-save t)
@@ -355,12 +363,14 @@ minibuffer."
   ;;   new-time)))
 
   ;; `todochiku' display pop-up notification in window-system
-  ;; (when (try-require 'xy-todochiku)
-    (setq org-show-notification-handler
-          '(lambda (notification)
-             (todochiku-message "org-mode notification" notification
-                                (todochiku-icon 'emacs))))
-    ;; )
+  ;; NOTE: May do the job twice with (@file :file-name "xy-rc-appt.el" :to "appt-disp-window-function" :display "`appt-disp-window-function'")
+  ;;       May be deleted to use just one
+  ;; (when window-system
+  ;;   (when (try-require 'xy-todochiku)
+  ;;     (setq org-show-notification-handler
+  ;;           '(lambda (notification)
+  ;;              (todochiku-message "org-mode notification" notification
+  ;;                                 (todochiku-icon 'emacs))))))
 
   ;;------------------------------------------------------------------
   ;; Custom ageda views
@@ -432,25 +442,25 @@ minibuffer."
                      (org-agenda-todo-list-sublevel t)
                      (org-agenda-timeline-show-empty-dates nil)))
 
-            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-                       ((org-agenda-overriding-header
-                         "1. Urgent & Important Tasks Scheduled for Today")
-                        (org-tags-match-list-sublevels t)))
+            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+            ;;            ((org-agenda-overriding-header
+            ;;              "1. Urgent & Important Tasks Scheduled for Today")
+            ;;             (org-tags-match-list-sublevels t)))
 
-            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-                       ((org-agenda-overriding-header
-                         "2. Urgent & NOT Important Tasks Scheduled for Today")
-                        (org-tags-match-list-sublevels t)))
+            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+            ;;            ((org-agenda-overriding-header
+            ;;              "2. Urgent & NOT Important Tasks Scheduled for Today")
+            ;;             (org-tags-match-list-sublevels t)))
 
-            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-                       ((org-agenda-overriding-header
-                         "3. NOT Urgent & Important Tasks Scheduled for Today")
-                        (org-tags-match-list-sublevels t)))
+            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+            ;;            ((org-agenda-overriding-header
+            ;;              "3. NOT Urgent & Important Tasks Scheduled for Today")
+            ;;             (org-tags-match-list-sublevels t)))
 
-            (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-                       ((org-agenda-overriding-header
-                         "4. NOT Urgent & NOT Important Tasks Scheduled for Today")
-                        (org-tags-match-list-sublevels t)))
+            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
+            ;;            ((org-agenda-overriding-header
+            ;;              "4. NOT Urgent & NOT Important Tasks Scheduled for Today")
+            ;;             (org-tags-match-list-sublevels t)))
 
             (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\""
                        ((org-agenda-overriding-header
@@ -539,9 +549,14 @@ minibuffer."
         (concat org-directory "/gtd/mobile"))
   (setq org-mobile-encryption-tempfile
         (concat org-directory "/orgtmpcrypt"))
+  (unless (file-exists-p org-mobile-encryption-tempfile)
+    (shell-command (concat "touch " org-mobile-encryption-tempfile)))
   (setq org-mobile-files org-agenda-files)
   (setq org-mobile-inbox-for-pull
         (concat org-directory "/gtd/from-mobile.org"))
+  (unless (file-exists-p org-mobile-inbox-for-pull)
+    (shell-command (concat "touch " org-mobile-inbox-for-pull)))
+
  ;;-------------------------------------------------------------------
   ;; Agenda view export C-x C-w
   (setq org-agenda-exporter-settings
@@ -946,8 +961,10 @@ save -ascii %s ans")
   ;; Add the following in one of your Org file.
   ;;   * Weather
   ;;   %%(org-google-weather "New York" "en-gb")
-  (try-require 'google-weather)
-  (try-require 'org-google-weather)
+  (when (try-require 'org-google-weather)
+    (eval-after-load "org-google-weather"
+      '(progn
+         (org-google-weather-settings))))
 
   ;;------------------------------------------------------------------
   (define-key org-mode-map (kbd "C-c t") 'timestamp)

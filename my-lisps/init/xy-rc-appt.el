@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
-;; Time-stamp:<2011-12-04 Sun 16:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-07 Wed 21:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,51 +19,33 @@
 ;;;###autoload
 (defun appt-settings ()
   "Settings of `appt'."
-
   ;; (add-hook 'diary-hook 'appt-make-list)
   ;; (setq appt-display-format 'window)
   ;; (setq appt-display-diary nil)
 
   (setq appt-time-msg-list nil)
-
   (setq appt-audible t)
-
-  ;; use echo notification when in terminal
   (setq appt-display-format 'echo)
-
-  ;; warn 15 min in advance
-  (setq appt-message-warning-time 15)  ; 12
-
-  ;; number of minutes to wait between checking the appointment list
-  (setq appt-display-interval 5)  ; 3
-
+  (setq appt-message-warning-time 15)
+  (setq appt-display-interval 5)
   (setq appt-display-duration (* 365 24 60 60))
-
-  ;; show in the modeline
   (setq appt-display-mode-line t)
 
-  ;; (setq appt-disp-window-function (function rgr/org-display))
-
+  ;; REF: (@url :file-name "http://lists.gnu.org/archive/html/emacs-orgmode/2009-11/msg00236.html" :display "Post@emacs-orgmode")
+  ;; NOTE: May do the job twice with (@file :file-name "xy-rc-org.el" :to "org-show-notification-handler" :display "`org-show-notification-handler'")
   (when window-system
-    (setq appt-display-format 'window)
-    (setq appt-disp-window-function (function todochiku-appt-disp-window)))
+    (when (try-require 'xy-todochiku)
+      (setq appt-display-format 'window)
 
-  ;; (setq appt-disp-window-function (function rgr/org-display))
-  ;; ;; FIXME Check `notify-send' (in `libnotify-bin' Ubuntu package) is installed
-  ;; (defun rgr/org-display (min-to-app new-time msg)
-  ;;   (shell-command
-  ;;    (concat "notify-send "
-  ;;            "-i /usr/share/icons/gnome/32x32/status/appointment-soon.png "
-  ;;            "'Appointment' "
-  ;;            "'" msg "'")))
-  ;; ;; TODO For Windows users: use `todochicku.el' and the snarl
-  ;; notifier
+      (defun xy/appt-display (min-to-app new-time msg)
+        (todochiku-message "appt notification" msg
+                           (todochiku-icon 'emacs)))
+
+      (setq appt-disp-window-function (function xy/appt-display))))
 
   ;; turn appointment checking on
-  ;; (appt-activate 1)
   (unless (daemonp) (appt-activate 1))
 
-  (message "* ---[ appt configuration is complete ]---")
- )
+  (message "* ---[ appt configuration is complete ]---"))
 
 (provide 'xy-rc-appt)

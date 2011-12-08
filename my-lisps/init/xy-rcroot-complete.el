@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-05 Mon 10:10 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 02:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,11 +31,26 @@
 ;; NOTE: From Emacs-22 it is a part of Emacs
 ;; (if is-before-emacs-21
 ;;     (require 'ido "ido-for-21"))
-;; (ido-mode 1)
+;; (add-hook 'after-init-hook 'xy/ido-start)
 (eval-after-load 'ido
   '(progn
-     ;; (ido-face-settings)
-     (ido-settings)))
+     (ido-settings)
+     ;; (eal-define-keys
+     ;;  'ido-mode-map
+     ;;  `(("M-."   ido-next-match-dir)
+     ;;    ("M-,"   ido-prev-match-dir)
+     ;;    ("C-h"   ido-delete-backward-updir)
+     ;;    ("M-h"   ido-up-directory)
+     ;;    ("M-H"   ido-up-directory-clean-text)
+     ;;    ("C-M-h" ido-goto-home)
+     ;;    ("C-r"   ido-goto-root)
+     ;;    ("C-u"   ido-clean-text)
+     ;;    ("M-b"   backward-word)
+     ;;    ("C-w"   ido-delete-backward-word-updir)
+     ;;    ;; ("C-v"   ido-enter-svn-status-hide)
+     ;;    ("C-n"   ido-next-match)
+     ;;    ("C-p"   ido-prev-match)))
+  ))
 
 ;;--------------------------------------------------------------------
 ;;** icomplete
@@ -69,20 +84,23 @@
 ;; frequently used commands. And to all the other commands, too.
 ;; (require 'smex)
 ;; (smex-initialize)
+;; (add-hook 'after-init-hook 'xy/smex-start)
 (eval-after-load 'smex
   '(progn
      (smex-settings)
      (global-set-key (kbd "M-x") 'smex)
      (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+     (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
      ))
 
 ;;--------------------------------------------------------------------
 ;;** ido+smex
-;; NOTE: NEVER start both icy-mode and ido+smex. One is enough
+;; Use both ido and smex
+;; NOTE: NEVER use both icy-mode and ido/smex. They are different in
+;;       the way of using minibuffer, and conflicts with each other.
 ;;;###autoload
 (defun xy/ido+smex-start ()
-  "Start ido and smex mini-buffer completion."
-
+  "Start ido completion."
   (interactive)
   (when (featurep 'icicles)
     (icy-mode -1))
@@ -91,9 +109,8 @@
   (ido-mode 1)
   ;; (smex-initialize-ido)
   (smex-initialize)
-  (add-hook 'org-mode-hook
-            '(lambda ()
-               (setq org-completion-use-ido t))))
+  )
+(add-hook 'after-init-hook 'xy/ido+smex-start)
 
 ;;====================================================================
 ;;* Buffer auto complete
@@ -185,7 +202,7 @@
 ;;* icicles
 ;; System-wide completion
 
-(add-hook 'after-init-hook 'icy-mode)
+;; (add-hook 'after-init-hook 'icy-mode)
 (eval-after-load "icicles"
   '(progn
      (icicles-settings)))
