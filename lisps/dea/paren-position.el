@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2009-11-13 16:53:29 Friday by ahei>
+;; Time-stamp:<2011-12-08 Thu 19:34 xin on p6t>
 
 (defgroup paren-position nil
   "Paren position group."
@@ -66,4 +66,4 @@
   )
 (defun paren-position-goto-else ()
   "Goto #else."
-  (interactive)
+  (interactive))

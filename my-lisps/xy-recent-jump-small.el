@@ -5,7 +5,7 @@
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Maintainer: Xin Yang
 ;; Created: 29 Jan 2011
-;; Time-stamp:<2011-12-03 Sat 14:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 19:41 xin on p6t>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -23,7 +23,7 @@
 
 (require 'cl)
 (require 'desktop)
-(require 'recent-jump)
+(require 'xy-recent-jump)
 
 (defvar rjs-line-threshold 1 "*The line threshold of a big-jump")
 (defvar rjs-column-threshold 1 "*The column threshold of a big-jump")
