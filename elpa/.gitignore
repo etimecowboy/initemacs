@@ -1,0 +1,8 @@
+/cedet
+# ELPA `package.el' package lists
+/archives
+archive-contents
+builtin-packages
+#/w3m
+#/egg
+#/mew

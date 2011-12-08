@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-08 Thu 03:25 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 21:09 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -86,7 +86,8 @@
   (setq mew-highlight-body-regex-comment "^[;#?%]+.*")
   (setq mew-prog-imls-arg-list '("--thread=yes" "--indent=2"))
   ;; (setq mew-use-highlight-mouse-line t)
-  (setq mew-icon-directory "~/.emacs.d/icons/mew")
+  (setq mew-icon-directory ;; "~/.emacs.d/icons/mew")
+        (concat my-local-image-path "/mew"))
 
   ;; html邮件相关设置（使用w3m）
   (setq mew-mime-multipart-alternative-list '("text/html" "text/plain" "*."))
@@ -104,12 +105,12 @@
     (setq mew-w3m-auto-insert-image t)
     )
 
-  ;; set signature
-  ;; (setq mew-signature-file "~/.emacs.d/var/mew/signature")
-  ;; (setq mew-signature-as-lastpart t)
-  ;; (setq mew-signature-insert-last t)
-  ;; (add-hook 'mew-before-cite-hook 'mew-header-goto-body)
-  ;; (add-hook 'mew-draft-mode-newdraft-hook 'mew-draft-insert-signature)
+  ;; set signature ;; NOTE: use different signature for different accout
+  ;; (setq mew-signature-file (concat mew-mail-path "/sig/siguwe"))
+  (setq mew-signature-as-lastpart t)
+  (setq mew-signature-insert-last t)
+  (add-hook 'mew-before-cite-hook 'mew-header-goto-body)
+  (add-hook 'mew-draft-mode-newdraft-hook 'mew-draft-insert-signature)
 
   ;; Summary page settings
   ;; unread mark

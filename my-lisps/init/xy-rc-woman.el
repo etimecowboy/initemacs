@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-woman.el'
-;; Time-stamp:<2011-12-08 Thu 03:55 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 21:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,7 @@
 ;;;###autoload
 (defun woman-settings ()
   "Settings for `woman-mode'."
-  (add-to-list 'woman-manpath "~/.emacs.d/man")
+  (add-to-list 'woman-manpath my-local-man-path)
   (setq woman-cache-filename (concat my-var-path "/wmncach"))
   (unless (file-exists-p woman-cache-filename)
     (shell-command (concat "touch " woman-cache-filename)))

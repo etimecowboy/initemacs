@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-08 Thu 10:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 21:11 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -708,7 +708,7 @@ minibuffer."
   ;;     You can view the result directly in Emacs with C-c C-o
   ;;     in the block.
 
-  (setq org-ditaa-jar-path "~/.emacs.d/bin/ditaa0_9.jar")
+  (setq org-ditaa-jar-path (concat my-local-exec-path "/ditaa0_9.jar"))
   ;; (try-require 'org-babel-init)
   ;; (try-require 'org-babel-ditaa)
   ;; (try-require 'org-babel-dot)

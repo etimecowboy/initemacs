@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-12-08 Thu 05:01 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 22:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,18 +16,9 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;--------------------------------------------------------------------
-
-;; ;;;###autoload
-;; (defun auctex-start ()
-;;   "Start auctex tex writing IDE"
-
-;;   (interactive)
-;;   (load "auctex.el" nil t t)
-;;   (load "preview-latex.el" nil t t)
-;;   ;; (require 'auctex)
-;;   ;; (require 'preview-latex))
-;; )
+;; NOTE:
+;; GNU Emacs `url.el' and auctex's `style/url.el' have the same name.
+;; You MUST NOT put auctex's `style/url.el' in a load-path.
 
 ;;;###autoload
 (defun auctex-settings ()
@@ -40,7 +31,6 @@
   (setq-default LaTeX-math-mode t)
   (setq-default TeX-fold-mode t)
   (setq-default TeX-PDF-mode t)
-  ;; (autopair-global-mode -1)
 
   ;; load reftex
   ;; (require 'reftex)

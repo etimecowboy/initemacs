@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-08 Thu 08:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-08 Thu 22:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -123,12 +123,11 @@
 ;;--------------------------------------------------------------------
 ;;** autopair
 ;; NOTE: autopair-mode conflicts with `auctex'/`cdlatex', and
-;; `yasnippet', need to use hooks to disable it in these modes.
+;; `yasnippet'. Need to use hooks to disable it in these modes.
 (when (try-require 'autopair)
-  (autopair-global-mode 1)
-  (eval-after-load "autopair"
-    '(autopair-settings)))
-
+  (autopair-global-mode 1))
+(eval-after-load "autopair"
+  '(autopair-settings))
 ;; (am-add-hooks
 ;;  `( org-mode-hook LaTeX-mode-hook latex-mode-hook cc-mode-hook
 ;;                   c-mode-common-hook vhdl-mode-hook verilog-mode-hook)
@@ -143,7 +142,6 @@
 ;;  '(lambda ()
 ;;     (require 'autopair)
 ;;     (autopair-mode 1)))
-
 
 ;;====================================================================
 ;;* Code folding
