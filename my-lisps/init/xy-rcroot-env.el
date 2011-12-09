@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-08 Thu 23:14 xin on p6t>
+;; Time-stamp:<2011-12-09 Fri 02:57 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -60,6 +60,7 @@
 
 ;; Load pathes
 ;; NOTE: add all = very slow
+(fni/add-to-load-path my-emacswiki-lisp-path)
 (fni/add-to-load-path my-local-lisp-path 'with-subdirs 'recursive)
 (fni/add-to-load-path my-own-lisp-path 'with-subdirs 'recursive)
 (message "* ---[ load-path added at %ds ]---"
@@ -137,14 +138,24 @@
 
 ;;--------------------------------------------------------------------
 ;;** Manual installed lisps
-;; Small/single lisps from emacswiki and other places
+;;*** Small/single lisps installed
+
+;; Download from emacswiki, via `auto-install'
+(xy/load-autoload my-emacswiki-lisp-path)
+(message "* ---[ my local lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; Seperately collected/downloaded lisps
 (xy/load-autoload my-local-lisp-path)
 (message "* ---[ my local lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; Multiple-file packages
+;;--------------------------------------------------------------------
+;;*** Bigger packages
 ;; Packages with version numbers are stable releases, while
 ;; packages without version numbers are development versions
 

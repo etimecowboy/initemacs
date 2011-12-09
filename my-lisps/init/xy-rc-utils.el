@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-08 Thu 22:39 xin on p6t>
+;; Time-stamp:<2011-12-09 Fri 02:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,6 +28,8 @@
   "Name of directory where additional Emacs Lisp files reside.")
 (defvar my-elpa-lisp-path "~/.emacs.d/elpa"
   "Name of directory where ELPA Emacs Lisp files reside.")
+(defvar my-emacswiki-lisp-path "~/.emacs.d/emacswiki"
+  "Name of directory where lisps downloaded from EmacsWiki.")
 (defvar my-own-lisp-path "~/.emacs.d/my-lisps"
   "Name of directory where my own Emacs Lisp files reside.")
 (defvar my-init-lisp-path "~/.emacs.d/my-lisps/init"
@@ -1186,9 +1188,11 @@ The process is:
 (defun xy/emacs-build ()
   "Compile my Emacs configurations, local lisps, and generate
  autoloads for them."
-
   (interactive)
   (setq debug-on-error t)
+  ;;------------------------------------------------------------------
+  (xy/install-all-lisps my-emacswiki-lisp-path)
+  ;;------------------------------------------------------------------
   (xy/install-all-lisps my-local-lisp-path)
   (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
   (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
@@ -1215,22 +1219,25 @@ The process is:
   (xy/install-all-lisps (concat my-local-lisp-path "/themes"))
   (xy/install-all-lisps (concat my-local-lisp-path "/ibus-el-0.2.1"))
   (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete"))
+  ;;------------------------------------------------------------------
   ;; (xy/recompile-dir (concat my-elpa-lisp-path "/company-0.5"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/dictionary-1.8.7"))
   ;; (xy/recompile-dir (concat my-elpa-lisp-path "/yasnippet-0.6.1"))
+  (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.0.0"))
+  ;;------------------------------------------------------------------
   ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled
   ;; with cedet. Just activate ecb without byte-compiled lisps, then
   ;; run `M-x ecb-byte-compile'.
   ;; Current ECB do not support cedet version 1.0, has been hacked by
   ;; me
-  ;; (xy/recompile-dir (concat my-elpa-lisp-path
-  ;; "/ecb_snap-20110605"))
   ;; CEDET
   ;; (load "cedet-build")
   ;; (cedet-build)
-  (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.0.0"))
-  ;; NOTE: Do it in `xy-rcroot-env.el'?
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;; "/ecb_snap-20110605"))
+  ;;------------------------------------------------------------------
   (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
+  ;;------------------------------------------------------------------
   (load-dot-emacs-file))
 
 (provide 'xy-rc-utils)

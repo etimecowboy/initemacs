@@ -2,8 +2,8 @@
 ;;; <plaintext>
 ;;; revive.el: Resume Emacs.
 ;;; (c) 1994-2003 by HIROSE Yuuji [yuuji@gentei.org]
-;;; $Id: revive.el,v 2.19 2008/05/13 01:19:16 yuuji Exp $
-;;; Last modified Tue May 13 10:18:52 2008 on firestorm
+;;; $Id: revive.el,v 2.19 2008/05/13 01:19:16 yuuji Exp yuuji $
+;;; Last modified Wed May  4 07:25:06 2011 on firestorm
 
 ;;;[[[   NOTICE íçà” NOTICE íçà” NOTICE íçà” NOTICE íçà” NOTICE íçà”   ]]]
 ;;;--------------------------------------------------------------------------
@@ -226,7 +226,7 @@
 ;;;							yuuji@gentei.org
 
 (defconst revive:version
-  "$Id: revive.el,v 2.19 2008/05/13 01:19:16 yuuji Exp $"
+  "$Id: revive.el,v 2.19 2008/05/13 01:19:16 yuuji Exp yuuji $"
   "Version of revive.el")
 
 (defconst revive:version-prefix ";;;")
@@ -277,7 +277,7 @@
 		 (throw 'found nil)))))
 	(error "Unexpected window configuration."))
     (setq curwin win wlist (list win))
-    (while (not (eq curwin (setq win (next-window win))))
+    (while (not (eq curwin (setq win (next-window win "w/o mini"))))
       (setq wlist (append wlist (list win)))) ;use append to preserve order
     wlist))
 
@@ -891,7 +891,7 @@ Configuration should be saved by save-current-configuration."
 (provide 'revive)
 
 
-;; $Id: revive.el,v 2.19 2008/05/13 01:19:16 yuuji Exp $
+;; $Id: revive.el,v 2.19 2008/05/13 01:19:16 yuuji Exp yuuji $
 ;; $Log: revive.el,v $
 ;; Revision 2.19  2008/05/13 01:19:16  yuuji
 ;; Add below to revive:save-variables-global-default.
