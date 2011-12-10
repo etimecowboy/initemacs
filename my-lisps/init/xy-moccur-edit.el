@@ -1,7 +1,7 @@
-c;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-moccur-edit.el'
-;; Time-stamp:<2011-12-10 Sat 00:42 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 05:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None

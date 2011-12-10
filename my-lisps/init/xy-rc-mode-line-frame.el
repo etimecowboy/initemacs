@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mode-line-frame.el'
-;; Time-stamp:<2011-12-09 Fri 20:53 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 04:23 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,13 +64,13 @@
 (defun mode-line-frame-settings ()
   "Settings of `mode-line-frame.el'."
   (setq mode-line-frame-format mode-line-format)
-  (setq mode-line-frame-parameters '((title . "Operation")
-                                     (name . "operation-frame")
+  (setq mode-line-frame-parameters '((title . "mode-line")
+                                     (name . "mode-line-frame")
                                      (cursor-type . nil)
                                      (minibuffer . 1)
                                      (mode-line . 1)
                                      (width . 100)
-                                     (height . 2)))
+                                     (height . 10)))
   (message "* ---[ mode-line-frame configuration is complete ]---"))
 
 (provide 'xy-rc-mode-line-frame)

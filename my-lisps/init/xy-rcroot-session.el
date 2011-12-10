@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-12-08 Thu 04:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-10 Sat 08:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,8 +49,6 @@
 ;;         keeping the bookmark list open
 ;; * ‘C-o’ – switch to the current bookmark in another window
 ;; * ‘r’ – rename the current bookmark
-(setq bookmark-save-flag 1)
-(require 'bookmark)
 (eval-after-load "bookmark"
   '(progn
      (bookmark-settings)))
@@ -87,25 +85,25 @@
 ;;* Save Emacs session information
 
 ;;** recentf
-(recentf-mode 1)
 (eval-after-load "recentf"
   '(progn
      (recentf-settings)))
+(recentf-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** save-place
 ;; Save point places in buffers
-(setq-default save-place t)
 (eval-after-load "saveplace"
   '(progn
      (saveplace-settings)))
+(setq-default save-place t)
 
 ;;--------------------------------------------------------------------
 ;;** savehist
-(savehist-mode 1)
 (eval-after-load "savehist"
   '(progn
      (savehist-settings)))
+(savehist-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** filecache

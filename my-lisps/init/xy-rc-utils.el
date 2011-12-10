@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-09 Fri 23:21 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 05:59 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -185,6 +185,18 @@
   "Goto `my-local-lisp-path'."
   (interactive)
   (dired my-local-lisp-path))
+
+;;;###autoload
+(defun goto-my-elpa-lisp-dir ()
+  "Goto `my-elpa-lisp-path'."
+  (interactive)
+  (dired my-elpa-lisp-path))
+
+;;;###autoload
+(defun goto-my-emacswiki-lisp-dir ()
+  "Goto `my-emacswiki-lisp-path'."
+  (interactive)
+  (dired my-emacswiki-lisp-path))
 
 ;;;###autoload
 (defun goto-my-own-lisp-dir ()
@@ -1213,7 +1225,7 @@ The process is:
   (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
   (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
   (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.4"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
+  ;; (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
   (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
   (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
   (xy/install-all-lisps (concat my-local-lisp-path "/themes"))
@@ -1224,6 +1236,7 @@ The process is:
   (xy/recompile-dir (concat my-elpa-lisp-path "/dictionary-1.8.7"))
   ;; (xy/recompile-dir (concat my-elpa-lisp-path "/yasnippet-0.6.1"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.0.0"))
+  (xy/recompile-dir (concat my-elpa-lisp-path "/org-20111209"))
   ;;------------------------------------------------------------------
   ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled
   ;; with cedet. Just activate ecb without byte-compiled lisps, then

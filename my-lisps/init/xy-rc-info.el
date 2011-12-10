@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-info.el'
-;; Time-stamp:<2011-12-08 Thu 21:12 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 03:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,46 +23,7 @@
    'def-command-max-window `("info"))
   ;; With `info+.el', you can merge an Info node with its subnodes into
   ;; the same buffer, by calling `Info-merge-subnodes' (bound to `+'),
-  (require 'info+)
+  (try-require 'info+)
   (message "* ---[ info configuration is complete ]---"))
-
-;; ;;;###autoload
-;; (defun info-face-settings ()
-;;   "Face settings for `info'."
-;;   (unless is-before-emacs-21
-;;     (set-face-foreground 'info-menu-star "red")
-;;     (set-face-background 'info-menu-star "yellow"))
-;;   (custom-set-faces
-;;    '(info-header-node
-;;      ((((class color) (background dark)) (:foreground "red")))))
-;;   (custom-set-faces
-;;    '(info-title-1
-;;      ((((type tty pc) (class color) (background dark))
-;;        :foreground "yellow" :weight bold)
-;;       (t :foreground "yellow"))))
-;;   (custom-set-faces
-;;    '(info-title-2
-;;      ((((type tty pc) (class color) (background dark))
-;;        :foreground "yellow" :weight bold)
-;;       (t :foreground "lightblue"))))
-;;   (custom-set-faces
-;;    '(info-title-3
-;;      ((((type tty pc) (class color) (background dark))
-;;        :foreground "yellow" :weight bold)
-;;       (t :foreground "violetred1"))))
-;;   (custom-set-faces
-;;    '(info-title-4
-;;      ((((type tty pc) (class color) (background dark))
-;;        :foreground "yellow" :weight bold)
-;;       (t :foreground "green"))))
-;;   (custom-set-faces
-;;    '(info-menu-header
-;;      ((((type tty pc)) :underline t :weight bold)
-;;       (t :inherit nil :foreground "coral2" :bold nil))))
-
-;;   (custom-set-faces
-;;    '(info-xref
-;;      ((((type tty)) :inherit link)
-;;       (t :foreground "#165ACBD1FFFF" :underline t)))))
 
 (provide 'xy-rc-info)

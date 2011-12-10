@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-09 Fri 02:57 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 06:32 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -292,11 +292,11 @@
                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "http://orgmode.org/" :display "Source")
-(xy/load-autoload (concat my-local-lisp-path "/org-7.7"))
-(message "* ---[ org installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (xy/load-autoload (concat my-local-lisp-path "/org-7.7"))
+;; (message "* ---[ org installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "https://github.com/punchagan/org2blog" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/org2blog"))
@@ -339,10 +339,9 @@
 ;;** Info
 (apply-args-list-to-fun
  'def-command-max-window `("info"))
-(global-set-key (kbd "C-<f1>") 'info-max-window)
+(global-set-key (kbd "C-<f1>") 'info)
 (eval-after-load "info"
   '(progn
-     ;; (info-face-settings) ;; TODO: will be added to my theme
      (info-settings)
      (eal-define-keys
       'Info-mode-map
@@ -350,30 +349,24 @@
         ("k"         previous-line)
         ("h"         backward-char)
         ("l"         forward-char)
-        ("J"         emaci-roll-down)
-        ("K"         emaci-roll-up)
+        ;; ("J"         emaci-roll-down)
+        ;; ("K"         emaci-roll-up)
         ("f"         am-forward-word-or-to-word)
         ("/"         describe-symbol-at-point)
         ("U"         Info-up)
         ("u"         View-scroll-half-page-backward)
         ("Q"         kill-this-buffer)
         ("o"         other-window)
-        ("S-SPC"     View-scroll-half-page-backward)
-        ("SPC"       View-scroll-half-page-forward)
+        ;; ("S-SPC"     View-scroll-half-page-backward)
+        ;; ("SPC"       View-scroll-half-page-forward)
         ("C-h"       Info-up)
         ("N"         Info-next-reference)
         ("P"         Info-prev-reference)
-        ("'"         switch-to-other-buffer)
         ("."         find-symbol-at-point)
         ("<mouse-4>" mwheel-scroll)
         ("<mouse-5>" mwheel-scroll)
         ("C-c ,"     Info-history-back)
         ("C-c ."     Info-history-forward)))))
-
-;;*** info+
-;; (eval-after-load "info+"
-;;   '(progn
-;;      (info+-face-settings))) ;; TODO: will be added to my theme
 
 ;;--------------------------------------------------------------------
 ;;** Man

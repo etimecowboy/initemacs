@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-10 Sat 01:53 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 05:11 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -66,43 +66,42 @@
 
 ;;---------------------------------------------------------------------
 ;;** Resize frame and window
-;;*** fit-frame
-(require 'fit-frame)
-;; (eval-after-load "fit-frame"
-;;   '(progn
-;;      (fit-frame-settings)))
-(add-hook 'after-make-frame-functions 'fit-frame)
 
-;;*** auto-fit-frame
-(require 'autofit-frame)
-
-;;*** thumb-frm
-;; BUG: Info-mode conflict with thumb-frm when doing isearch or mouse
-;; click on info links. So I have to load `thumb-frm'
-(require 'thumb-frm)
-
-;;*** maxframe
-;; NOTE: not very stable with two or more monitors,
-;;       so use system function is better.
-;; ;; (eval-after-load "maxframe"
-;;   '(progn
-;;      (maxframe-settings)))
+(when window-system
+  (require 'fit-frame)
+  ;; (eval-after-load "fit-frame"
+  ;;   '(progn
+  ;;      (fit-frame-settings)))
+  (add-hook 'after-make-frame-functions 'fit-frame)
+  (require 'autofit-frame)
+  (require 'thumb-frm)
+  ;; (require 'maxframe) ;; NOTE: not very stable with two or more
+                         ;; monitors, so use system function is better.
+  ;; ;; (eval-after-load "maxframe"
+  ;;   '(progn
+  ;;      (maxframe-settings)))
+)
 
 ;;====================================================================
 ;;* Window settings
 
 ;;** window-number
-(autoload 'window-number-mode "window-number"
-  "A global minor mode that enables selection of windows according to
-numbers with the C-x C-j prefix.  Another mode,
-`window-number-meta-mode' enables the use of the M- prefix." t)
-(autoload 'window-number-meta-mode "window-number"
-  "A global minor mode that enables use of the M- prefix to select
-windows, use `window-number-mode' to display the window numbers in
-the mode-line." t)
+;; (autoload 'window-number-mode "window-number"
+;;   "A global minor mode that enables selection of windows according to
+;; numbers with the C-x C-j prefix.  Another mode,
+;; `window-number-meta-mode' enables the use of the M- prefix." t)
+;; (autoload 'window-number-meta-mode "window-number"
+;;   "A global minor mode that enables use of the M- prefix to select
+;; windows, use `window-number-mode' to display the window numbers in
+;; the mode-line." t)
+;; (add-hook 'org-mode-hook
+;;           '(lambda ()
+;;              (window-number-meta-mode t)))
+(when (try-require 'window-number)
+  (window-number-meta-mode 1))
 
 ;;--------------------------------------------------------------------
-;;** Windmove
+;;** windmove
 ;; NOTE: not fast enough, use `window-number.el'
 (eval-after-load "windmove"
   '(progn
@@ -127,48 +126,22 @@ the mode-line." t)
 ;;====================================================================
 ;;* Buffer settings
 
-;; Wrap line dynamically
-(global-visual-line-mode 1)
+(global-visual-line-mode 1) ;; Wrap line dynamically
 (setq visual-line-fringe-indicators '(nil right-curly-arrow))
 (setq word-wrap t)
-
-;; Display buffer boudaries
-(setq-default indicate-buffer-boundaries 'left)
-
-;; Indicate empty lines
-(setq-default indicate-empty-lines t)
-
-;; Do not display starup welcome screen
-(setq inhibit-startup-screen t)
-
-;; Use visible bell instead of bell sound
-(setq visible-bell t)
-
-;; Display key strokes quickly
-(setq-default echo-keystrokes 0.1)
-
-;; Prefer pixmap icons
-;; (setq chart-face-use-pixmaps t)
-
-;; Use "y-or-n" instead of "yes-or-no"
+(setq-default
+ indicate-buffer-boundaries 'left)    ;; Display buffer boudaries
+(setq-default indicate-empty-lines t) ;; Indicate empty lines
+(setq inhibit-startup-screen t) ;; Do not display starup welcome screen
+(setq visible-bell t) ;; Use visible bell instead of bell sound
+(setq-default echo-keystrokes 0.1)    ;; Display key strokes quickly
+;; (setq chart-face-use-pixmaps t)    ;; Prefer pixmap icons
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; 关闭buffer的时候, 如果该buffer有对应的进程存在, 不提示
-(delq 'process-kill-buffer-query-function
-      kill-buffer-query-functions)
-
-;; automatically display images
-(auto-image-file-mode 1)
-
-;; automatically refresh buffer
-(global-auto-revert-mode 1)
-
-;; Delete extra white spaces at the end of a sentence
+(fset 'yes-or-no-p 'y-or-n-p)   ;; Use "y-or-n" instead of "yes-or-no"
+(auto-image-file-mode 1)        ;; automatically display images
+(global-auto-revert-mode 1)     ;; automatically refresh buffer
 (setq sentence-end-double-space nil)
-
-;; Do not redraw on reenter
-(setq no-redraw-on-reenter t)
+(setq no-redraw-on-reenter t)   ;; Do not redraw on reenter
 
 ;; emacs lock
 ;; (autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
@@ -182,10 +155,8 @@ the mode-line." t)
 (size-indication-mode 1) ;; Display the current location in the file
 (setq-default mode-line-buffer-identification
               (propertized-buffer-identification "%b"))
-(setq display-time-day-and-date t) ;; Display time and date
-;; (display-time-mode 1) ;; NOTE: with the use of `maxframe.el', the
-                      ;; maximized frame takes the whole monitor, so I
-                      ;; have to display the time.
+;; (setq display-time-day-and-date t) ;; Display time and date
+;; (display-time-mode 1)
 ;; (when is-after-emacs-23
 ;;   (display-battery-mode -1)) ;; battery infomation is not necessary
 
@@ -194,22 +165,17 @@ the mode-line." t)
 ;; Removing or abbreviating minor mode indicators
 (eval-after-load "filladapt" '(diminish 'filladapt-mode))
 (eval-after-load "icicles" '(diminish 'icicle-mode))
-(eval-after-load "highlight-symbol"
-  '(diminish 'highlight-symbol-mode))
-(eval-after-load "highlight-parentheses"
-  '(diminish 'highlight-parentheses-mode))
+(eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
+(eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "linkd" '(diminish 'linkd-mode))
 (eval-after-load "simple" '(diminish 'global-visual-line-mode))
 (eval-after-load "simple" '(diminish 'visual-line-mode))
 (eval-after-load "abbrev" '(diminish 'abbrev-mode))
-;; (eval-after-load "auto-complete" '(diminish 'auto-complete-mode))
 (eval-after-load "flyspell" '(diminish 'flyspell-mode))
 (eval-after-load "autopair" '(diminish 'autopair-mode))
 (eval-after-load "hideshow" '(diminish 'hs-minor-mode))
-;; (eval-after-load "yasnippet" '(diminish 'yas/minor-mode))
 (eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
-(eval-after-load "xy-recent-jump-small"
-  '(diminish 'recent-jump-small-mode))
+(eval-after-load "xy-recent-jump-small" '(diminish 'recent-jump-small-mode))
 (eval-after-load "ibus" '(diminish 'ibus-mode))
 (eval-after-load "outline" '(diminish 'outline-minor-mode))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
@@ -218,8 +184,7 @@ the mode-line." t)
 
 ;;--------------------------------------------------------------------
 ;;** modeline-posn
-;; Display number of characters in a selected region
-(require 'modeline-posn)
+;; (require 'modeline-posn)  ;; Display number of characters in region
 
 ;;--------------------------------------------------------------------
 ;;** hide-mode-line
@@ -232,7 +197,7 @@ the mode-line." t)
 ;;--------------------------------------------------------------------
 ;;** mode-line-frame
 ;; offers a frame to show various information
-;; Just call `xy/seperate-line-frame' to use it.
+;; Just call `xy/separate-line-frame' to use it.
 (eval-after-load "mode-line-frame"
   '(progn
      (mode-line-frame-settings)))
@@ -240,11 +205,10 @@ the mode-line." t)
 ;;====================================================================
 ;;* mini-buffer settings
 
-(setq enable-recursive-minibuffers t) ;; 可以递归的使用minibuffer
-;; 当你在shell、telnet、w3m等模式下时，加密显出你的密码
+(setq enable-recursive-minibuffers t)
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)
-(minibuffer-electric-default-mode t)
+;; (minibuffer-electric-default-mode t) ;; ido or icicles
 
 ;;====================================================================
 ;;* Vaious bar settings

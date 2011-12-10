@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-10 Sat 01:45 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 06:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,8 +21,7 @@
 
 
 ;;====================================================================
-;;* Pint/frame/window operation, faster = better
-;; prefix key C-x J
+;;* Point/frame/window operation, faster = better
 (eal-define-keys-commonly
  global-map
  `(;; `fit-frame.el'
@@ -38,7 +37,7 @@
    ("C-S-<down>" windmove-down)
    ;;----------------------------------
    ;; `window-number.el'
-   ("M-<f5>"  window-number-meta-toggle)
+   ;; ("M-<f5>"  window-number-meta-mode)
    ;;----------------------------------
    ;; `buffer-move.el'
    ("M-S-<up>"    buf-move-up)
@@ -146,6 +145,8 @@
  global-map
  `(("C-x G l" goto-my-local-lisp-dir)
    ("C-x G m" goto-my-own-lisp-dir)
+   ("C-x G p" goto-my-elpa-lisp-dir)
+   ("C-x G a" goto-my-emacswiki-lisp-dir)
    ("C-x G e" goto-my-emacs-dir)
    ("C-x G h" goto-my-home-dir)
    ("C-x G o" goto-my-org-source-dir)

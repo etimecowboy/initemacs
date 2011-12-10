@@ -75,12 +75,27 @@ where the symbol 'file' is replaced by the file to be opened."
         (setq oa (car assocs)
               assocs (cdr assocs))
         (when (save-match-data (string-match (car oa) file))
+          ;; (let ((params (mapcar (lambda (x) (if (eq x 'file) file x))
+          ;;                       (nth 2 oa))))
+          ;;   (when (or (not openwith-confirm-invocation)
+          ;;             (y-or-n-p (format "%s %s? " (cadr oa)
+          ;;                               (mapconcat #'identity params " "))))
+          ;;     (apply #'start-process "openwith-process" nil (cadr oa) params)
+          ;;     (kill-buffer nil)
+          ;;     ;; inhibit further actions
+          ;;     (error "Opened %s in external program"
+          ;;            (file-name-nondirectory file))))))))
+          ;; HACK: For Windows using `w32-shell-execute'
+          ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/Sunrise_Commander_Tips" :display "emacswiki")
           (let ((params (mapcar (lambda (x) (if (eq x 'file) file x))
                                 (nth 2 oa))))
             (when (or (not openwith-confirm-invocation)
                       (y-or-n-p (format "%s %s? " (cadr oa)
                                         (mapconcat #'identity params " "))))
-              (apply #'start-process "openwith-process" nil (cadr oa) params)
+              (if (and (fboundp 'w32-shell-execute)
+                       (string= "open" (nth 1 oa)))
+                  (w32-shell-execute "open" file)
+                (apply #'start-process "openwith-process" nil (cadr oa) params))
               (kill-buffer nil)
               ;; inhibit further actions
               (error "Opened %s in external program"

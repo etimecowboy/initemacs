@@ -248,7 +248,7 @@ in order to expand or compress the tonal range displayed."
            ;;  ((t (:foreground ,cyan :background ,base03))))
            ;;---------------------------------------------------------
            ;; HACK: my org
-           ;; (org-agenda-clocking ((t (:background ,blue))))
+           ;; (org-agenda-clocking ((t (:background ,violet))))
            ;; (org-agenda-column-dateline ((t (:background ,base00 ))))
            ;; (org-agenda-current-time ((t (:background ,base3 :foreground ,blue :weight ,bold))))
            ;; (org-agenda-date ((t (:foreground ,blue))))
@@ -267,8 +267,8 @@ in order to expand or compress the tonal range displayed."
            ;; (org-checkbox-statistics-todo ((t (:weight ,bold :foreground ,red))))
            ;; (org-clock-overlay ((t (:background ,blue))))
            ;; (org-code ((t (:foreground ,base00))))
-           ;; (org-column ((t (:background ,base01))))
-           ;; (org-column-title ((t (:background ,base00 :underline t :weight ,bold))))
+           (org-column ((t (:background ,base02))))
+           (org-column-title ((t (:background ,base2 :underline t :weight ,bold))))
            ;; (org-date ((t (:foreground ,cyan :underline t))))
 
            ;; (org-document-info ((t (:foreground ,base0))))
