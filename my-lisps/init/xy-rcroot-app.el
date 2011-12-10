@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-08 Thu 17:49 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 01:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -18,6 +18,7 @@
 ;;====================================================================
 ;;* Frame settings
 
+;; TODO: create my own frame layout
 ;;** Default frame layout
 ;; (when window-system
 ;;   ;; Initial fram layout
@@ -42,7 +43,6 @@
 ;; (setq frame-title-format
 ;;       `(,(user-login-name) "@" ,(system-name) "     "
 ;;         global-mode-string "     %f" ))
-;; ;; 在标题栏显示登陆名称和文件名
 ;; ;; NOTE: `windows.el' and `revive.el' overwirte title
 ;; ;; (setq frame-title-format
 ;; ;;       '((:eval
@@ -67,44 +67,26 @@
 ;;---------------------------------------------------------------------
 ;;** Resize frame and window
 ;;*** fit-frame
-;; NOTE:
-;;      - `fit-frame.el':     resizes a frame in order to  fit a frame
-;;                            to its buffers.
-;;      - `autofit-frame.el': do it automatically. May be annoying. I
-;;                            don't like it.
-;; (require 'fit-frame)
-(eval-after-load "fit-frame"
-  '(progn
-     (fit-frame-settings)))
+(require 'fit-frame)
+;; (eval-after-load "fit-frame"
+;;   '(progn
+;;      (fit-frame-settings)))
+(add-hook 'after-make-frame-functions 'fit-frame)
+
+;;*** auto-fit-frame
+(require 'autofit-frame)
 
 ;;*** thumb-frm
-;; Shrink frames to a thumbnail size and restore them again.
 ;; BUG: Info-mode conflict with thumb-frm when doing isearch or mouse
-;; click on info links. However, it is easy to fix when you
-;; `fit-frame' (`M-x xy/fit-frame' or S-<f5>)
-;; (require 'thumb-frm)
-;; (define-key special-event-map [iconify-frame]
-;;             'thumfr-thumbify-frame-upon-event)
-;; (global-set-key [(shift mouse-3)]
-;;                 'thumfr-toggle-thumbnail-frame)
-;; (global-set-key [(shift control mouse-3)]
-;;                 'thumfr-thumbify-other-frames)
-(global-set-key [(shift meta ?z)]
-                'thumfr-thumbify-other-frames)
-(global-set-key [(shift control ?p)]
-                'thumfr-fisheye-previous-frame)
-(global-set-key [(shift control ?n)]
-                'thumfr-fisheye-next-frame)
-(global-set-key [(shift control ?z)]
-                ;;'thumfr-really-iconify-or-deiconify-frame)
-                'thumfr-toggle-thumbnail-frame)
+;; click on info links. So I have to load `thumb-frm'
+(require 'thumb-frm)
 
 ;;*** maxframe
-(eval-after-load "maxframe"
-  '(progn
-     (maxframe-settings)))
-(global-set-key (kbd "C-<f5>") 'maximize-frame)
-(global-set-key (kbd "C-S-<f5>") 'restore-frame)
+;; NOTE: not very stable with two or more monitors,
+;;       so use system function is better.
+;; ;; (eval-after-load "maxframe"
+;;   '(progn
+;;      (maxframe-settings)))
 
 ;;====================================================================
 ;;* Window settings
@@ -118,10 +100,10 @@ numbers with the C-x C-j prefix.  Another mode,
   "A global minor mode that enables use of the M- prefix to select
 windows, use `window-number-mode' to display the window numbers in
 the mode-line." t)
-(global-set-key (kbd "M-S-<f5>") 'window-number-meta-toggle)
 
 ;;--------------------------------------------------------------------
 ;;** Windmove
+;; NOTE: not fast enough, use `window-number.el'
 (eval-after-load "windmove"
   '(progn
      (windmove-settings)))
@@ -134,10 +116,6 @@ the mode-line." t)
 (autoload 'buf-move-down "buffer-move" nil t)
 (autoload 'buf-move-left "buffer-move" nil t)
 (autoload 'buf-move-right "buffer-move" nil t)
-(global-set-key (kbd "M-S-<up>")     'buf-move-up)
-(global-set-key (kbd "M-S-<down>")   'buf-move-down)
-(global-set-key (kbd "M-S-<left>")   'buf-move-left)
-(global-set-key (kbd "M-S-<right>")  'buf-move-right)
 
 ;;--------------------------------------------------------------------
 ;;** Winner mode for window splits
@@ -145,7 +123,6 @@ the mode-line." t)
 
 ;;--------------------------------------------------------------------
 ;;** Windresize
-(global-set-key (kbd "M-<f5>") 'windresize)
 
 ;;====================================================================
 ;;* Buffer settings
@@ -199,32 +176,18 @@ the mode-line." t)
 ;;====================================================================
 ;;* mode-line settings
 
-;; Do not display mode-line in non-selected windows
-(setq-default mode-line-in-non-selected-windows 1)
-
-;; Display column number
-(column-number-mode 1)
-
-;; Display the current location in the file
-(size-indication-mode 1)
+(setq-default ;; Display mode-line the same in non-selected windows
+ mode-line-in-non-selected-windows nil)
+(column-number-mode 1) ;; Display column number
+(size-indication-mode 1) ;; Display the current location in the file
 (setq-default mode-line-buffer-identification
               (propertized-buffer-identification "%b"))
-
-;; Display time and date
-;; NOTE: with the use of `maxframe.el', the maximized frame takes the
-;; whole monitor, so I have to display the time.
-;; (if (not window-system)
-;;     (progn
-;;       (setq display-time-day-and-date t)
-;;       (display-time-mode 1))
-;;   (progn
-;;     (setq display-time-day-and-date nil)
-;;     (display-time-mode -1)))
-(setq display-time-day-and-date t)
-(display-time-mode 1)
-
-;; Display battery infomation, after Emacs-22
-;; (when is-after-emacs-23 (display-battery-mode -1))
+(setq display-time-day-and-date t) ;; Display time and date
+;; (display-time-mode 1) ;; NOTE: with the use of `maxframe.el', the
+                      ;; maximized frame takes the whole monitor, so I
+                      ;; have to display the time.
+;; (when is-after-emacs-23
+;;   (display-battery-mode -1)) ;; battery infomation is not necessary
 
 ;;--------------------------------------------------------------------
 ;;** diminish
@@ -259,34 +222,38 @@ the mode-line." t)
 (require 'modeline-posn)
 
 ;;--------------------------------------------------------------------
+;;** hide-mode-line
+;; REF: (@url :file-name "http://webonastick.com/emacs-lisp/hide-mode-line.el" :display "Source")
+;; NOTE: NOT good for me, cause no screen sapce can be saved
+;; (autoload 'hide-mode-line "hide-mode-line" nil t)
+;; (hide-mode-line)
+;; Don't show mode-line, after all mode-line configureation is done
+
+;;--------------------------------------------------------------------
 ;;** mode-line-frame
 ;; offers a frame to show various information
-;; (require 'mode-line-frame)
-;; (mode-line-frame-create)
+;; Just call `xy/seperate-line-frame' to use it.
+(eval-after-load "mode-line-frame"
+  '(progn
+     (mode-line-frame-settings)))
 
 ;;====================================================================
 ;;* mini-buffer settings
 
-;; 可以递归的使用minibuffer
-(setq enable-recursive-minibuffers t)
+(setq enable-recursive-minibuffers t) ;; 可以递归的使用minibuffer
 ;; 当你在shell、telnet、w3m等模式下时，加密显出你的密码
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)
-;; (minibuffer-electric-default-mode t)
+(minibuffer-electric-default-mode t)
 
 ;;====================================================================
 ;;* Vaious bar settings
 
 ;;** menu-bar
-;; No menu bar as default
-(menu-bar-mode -1)
-
-;; Toggle menua display
-(global-set-key (kbd "M-<f10>") 'menu-bar-mode)
+(menu-bar-mode -1) ;; No menu bar as default
 
 ;;*** menua-bar+
-;; improved menu
-;; (try-require 'menu-bar+)
+(try-require 'menu-bar+)
 
 ;;*** facemenu+
 ;; This library enhances the "Text Properties" menu.  It adds menu
@@ -298,15 +265,10 @@ the mode-line." t)
 
 ;;--------------------------------------------------------------------
 ;;** tool-bar
-;; No tool bar as default
 (tool-bar-mode -1)
 
-;; toggle tool-bar display
-(global-set-key (kbd "C-<f10>") 'tool-bar-mode)
-
 ;;*** tool-bar+
-;; improved tool bar; broken
-;; (try-require 'tool-bar+)
+(try-require 'tool-bar+)
 
 ;;--------------------------------------------------------------------
 ;;** scroll-bar
@@ -338,10 +300,7 @@ the mode-line." t)
 ;;====================================================================
 ;;* Point (cursor) settings
 
-;;光标不闪烁
 (blink-cursor-mode 1)
-
-;; Draw block cursor
 (setq x-stretch-cursor t)
 
 ;;--------------------------------------------------------------------
@@ -365,23 +324,12 @@ the mode-line." t)
 (mouse-avoidance-mode 'jump)
 (setq mouse-drag-copy-region nil)
 (setq mouse-wheel-progressive-speed t)
-(setq mouse-wheel-scroll-amount
-      '(5
-        ((shift) . 1)
-        ((control))))
-;;(setq mouse-autoselect-window 1.0)
+(setq mouse-wheel-scroll-amount '(5 ((shift) . 1) ((control))))
+;;(setq mouse-autoselect-window 1.0) ;; don't auto select
 
 (eval-after-load "mouse-drag"
   '(progn
      (setq mouse-throw-with-scroll-bar nil)))
-
-(eal-define-keys-commonly
- global-map
- `(("<S-down-mouse-1>" mouse-drag-drag)
-   ;; ("<down-mouse-1>"  mouse-drag-region-sb)
-   ("<down-mouse-1>"  mouse-drag-region)
-   ;; 使终端支持鼠标
-   ("C-x T"            xterm-mouse-mode)))
 
 ;; Mouse support in terminal
 (when (not window-system)
@@ -394,19 +342,15 @@ the mode-line." t)
 (global-font-lock-mode 1)
 (eval-after-load "font-lock"
   '(progn
-     (font-lock-settings)
-     ;; (font-lock-face-settings)
-     ))
+     (font-lock-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** hl-line
-;; Higligh current line
-;; (setq hl-line-face 'underline)
 ;; (global-hl-line-mode 1) ; (if window-system 1 -1)
 
 ;;--------------------------------------------------------------------
 ;;** hi-lock
-(global-hi-lock-mode 1)
+;; (global-hi-lock-mode 1)
 (eal-define-keys
  'hi-lock-map
  `(("C-c H l" highlight-lines-matching-regexp)
@@ -488,10 +432,6 @@ the mode-line." t)
 ;;--------------------------------------------------------------------
 ;;** palette
 ;; emacs 的调色板
-;; (defvar facemenup-palette-change-face-bg nil
-;;   "Face background be changed or not.")
-;; (defvar facemenup-last-face-color nil
-;;   "Last face color used.")
 ;; (eval-after-load "palette"
 ;;   '(progn
 ;;      (palette-settings)
@@ -514,7 +454,6 @@ the mode-line." t)
 ;;         ("m"     palette-pick-background-at-point)
 ;;         ("C"     palette-copy-current-color)
 ;;         ("C-x k" palette-quit-restore-bg-fg)))))
-
 ;; (eal-define-keys-commonly
 ;;  global-map
 ;;  `(("C-x P" palette)

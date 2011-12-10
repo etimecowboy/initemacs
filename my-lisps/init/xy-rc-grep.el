@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-grep.el'
-;; Time-stamp:<2011-12-04 Sun 16:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-10 Sat 00:28 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -85,8 +85,6 @@ SYMBOL should be one of `grep-command', `grep-template',
     (if is-after-emacs-23
         (grep-apply-setting 'grep-command "grep -inH -e ")
       (setq grep-command "grep -inH -e ")))
-
-  (message "* ---[ grep configuration is complete ]---")
-)
+  (message "* ---[ grep configuration is complete ]---"))
 
 (provide 'xy-rc-grep)

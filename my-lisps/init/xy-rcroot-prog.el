@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-08 Thu 22:55 xin on p6t>
+;; Time-stamp:<2011-12-09 Fri 21:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -75,7 +75,7 @@
 ;;** mic-paren
 ;; An extension and replacement to the packages `paren.el' and
 ;; `stig-paren.el' for Emacs
-;; (require 'mic-paren)
+(require 'mic-paren)
 (paren-activate)
 (eval-after-load "mic-paren"
   '(progn

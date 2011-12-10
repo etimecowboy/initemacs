@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-12-08 Thu 06:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-09 Fri 05:38 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,13 +64,13 @@
   ;; (require 'anything-match-plugin)
   ;; (require 'anything-config)
   ;; (require 'anything-grep)
-  (require 'anything-startup)
-  ;; (require 'anything-auto-install) ;; BUG: NOT work in Emacs 24
-  (require 'descbinds-anything)
-  (require 'anything-gtags)
-  (require 'anything-menu)
-  (require 'anything-show-completion)
-  ;; (require 'anything-ipa)
+  (try-require 'anything-startup)
+  (try-require 'anything-auto-install) ;; BUG: NOT work in Emacs 24
+  (try-require 'descbinds-anything)
+  (try-require 'anything-gtags)
+  (try-require 'anything-menu)
+  (try-require 'anything-show-completion)
+  ;; (try-require 'anything-ipa)
 
   ;; NOTE: a workaround to fix the Emacs crash with `anything' (not
   ;; tested yet)

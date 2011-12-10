@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-09 Fri 02:20 xin on p6t>
+;; Time-stamp:<2011-12-09 Fri 23:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1023,7 +1023,7 @@ directories starting with a `.'."
                      srcfile generated-autoload-file)
                     (file-newer-than-file-p
                      dstfile generated-autoload-file))
-                (setq update-flag t))
+                (setq update-flag (or update-flag t)))
             (setq files (cdr files))))
 
         (if update-flag

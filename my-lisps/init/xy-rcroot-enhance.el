@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-09 Fri 00:42 xin on p6t>
+;; Time-stamp:<2011-12-09 Fri 22:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -275,7 +275,7 @@ from tradition chinese to simple chinese" t)
 ;;  `(lisp-mode-hook emacs-lisp-mode-hook
 ;;    c-mode-hook c++-mode-hook cc-mode-hook
 ;;    sh-mode-hook vhdl-mode-hook
-;;    verilog-mode-hook org-mode-hook
+;;    verilog-mode-hook ;; org-mode-hook
 ;;    LaTeX-mode-hook latex-mode-hook
 ;;    matlab-mode-hook)
 ;;  'xy/linkd-start)

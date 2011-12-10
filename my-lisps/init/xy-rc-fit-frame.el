@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-fit-frame.el'
-;; Time-stamp:<2011-12-08 Thu 16:17 xin on p6t>
+;; Time-stamp:<2011-12-09 Fri 23:51 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,14 +16,6 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
-
-;;;###autoload
-(defun xy/fit-frame ()
-  "My fix of the `fit-frame'."
-  (interactive)
-  (when (try-require 'fit-frame)
-    (when (try-require 'thumb-frm)
-      (fit-frame))))
 
 ;;;###autoload
 (defun fit-frame-settings ()

@@ -53,7 +53,6 @@
 ;;* Emacs generated customization
 
 (setq custom-file (concat my-init-lisp-path "/xy-rcroot-auto.el"))
-(load custom-file)
 
 ;;====================================================================
 ;;* Search pathes

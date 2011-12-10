@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-palette.el'
-;; Time-stamp:<2011-12-04 Sun 17:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-10 Sat 01:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -94,6 +94,10 @@
 (defun palette-settings ()
   "settings of `palette'."
   (require 'facemenu+)
+  (defvar facemenup-palette-change-face-bg nil
+    "Face background be changed or not.")
+  (defvar facemenup-last-face-color nil
+    "Last face color used.")
   (add-hook 'palette-mode-hook
             (progn
               (link-cursor-mode -1)))
@@ -112,8 +116,7 @@
      ("palette-left"  7)
      ("palette-right" 7)))
   (add-to-list 'delete-frame-functions 'kill-palette-buffers)
-  (message "* ---[ palette configuration is complete ]---")
-)
+  (message "* ---[ palette configuration is complete ]---"))
 
 (provide 'palette-settings)
 

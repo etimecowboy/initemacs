@@ -1,11 +1,11 @@
 ;;; mic-paren.el --- advanced highlighting of matching parentheses
 
 ;;; Copyright (C) 2008 Thien-Thi Nguyen
-;;; Copyright (C) 1997 Mikael Sjödin (mic@docs.uu.se)
+;;; Copyright (C) 1997 Mikael SjÃ¶din (mic@docs.uu.se)
 
 ;; Version: 3.8
 ;; Released: 2008-04-30
-;; Author: Mikael Sjödin (mic@docs.uu.se)
+;; Author: Mikael SjÃ¶din (mic@docs.uu.se)
 ;;         Klaus Berndl  <berndl@sdm.de>
 ;; Maintainer: ttn
 ;; Keywords: languages, faces, parenthesis, matching

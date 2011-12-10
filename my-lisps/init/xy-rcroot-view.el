@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-12-06 Tue 08:04 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-10 Sat 00:52 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -217,34 +217,29 @@
 ;;** color-moccur
 ;; With color-moccur, you can search a regexp in all buffers. And you
 ;; can search files like grep(-find) without grep (and find) command.
-;; (require 'color-moccur)
-;; (eal-define-keys-commonly
-;;  'global-map
-;;  `(("C-x C-u" occur-by-moccur-displn)
-;;    ("C-x M-U" occur-by-moccur-at-point-displn)))
-;; (eal-define-keys
-;;  'isearch-mode-map
-;;  `(("C-x P" isearch-moccur-displn)))
 (autoload 'moccur-grep-find "color-moccur" nil t)
-(autoload 'occur-by-moccur-displn "color-moccur" nil t)
-(autoload 'occur-by-moccur-at-point-displn "color-moccur" nil t)
 (eval-after-load "color-moccur"
   '(progn
-     ;; (moccur-face-settings) ;; TODO: to my theme
      (moccur-settings)))
 (global-set-key (kbd "C-<f7>") 'moccur-grep-find)
-;; (global-set-key [C-f7] 'dmoccur)
-;; (global-set-key (kbd "C-x O f") 'occur-by-moccur-displn)
-;; (global-set-key (kbd "C-x O p") 'occur-by-moccur-at-point-displn)
+
+;;*** moccur-edit
+;; moccur-edit provides to edit moccur buffer of color-moccur.el and
+;; to apply the changes to the file.
+;; You can start editing the names of the files by typing "C-c C-i" or
+;; "C-x C-q".
+;; Use C-c C-f when finished or C-c C-k to abort or C-c C-r to remove
+;; the changes in the region.
+(eval-after-load "moccur-edit"
+  '(progn
+     (moccur-edit-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** ioccur
-;; incremental occur, more convenient and faster than OccurMode,
-;; which lists all lines of the current buffer that match a regexp.
-;; This is ahei's ioccur which uses anything, not the emacswiki one.
-(autoload 'ioccur "ioccur" "Incremental occur by ahei." t)
+;; This package provide similar functionality as occur but is
+;; incremental, (without `anything')
+;; REF: (@url :file-name "http://mercurial.intuxication.org/hg/ioccur" :display "Source")
+(autoload 'ioccur "ioccur" "Incremental occur" t)
 (global-set-key (kbd "M-<f7>") 'ioccur)
-
-;;--------------------------------------------------------------------
 
 (provide 'xy-rcroot-view)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-08 Thu 17:57 xin on p6t>
+;; Time-stamp:<2011-12-10 Sat 01:45 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,39 +20,60 @@
 ;;* F-keys
 
 
-;;* Pint moving related, faster = better
+;;====================================================================
+;;* Pint/frame/window operation, faster = better
 ;; prefix key C-x J
 (eal-define-keys-commonly
  global-map
- `(;; `windmove.el'
-   ;; ("C-x C-j j" windmove-left)
-   ;; ("C-x C-j l" windmove-right)
-   ;; ("C-x C-j i" windmove-up)
-   ;; ("C-x C-j k" windmove-down)
-   ;; `fit-frame'
-   ;; ("C-x C-j f" xy/fit-frame)
-   ;; ("C-x C-j r" revert-buffer)
-   ;; `thumb-frm'
-))
+ `(;; `fit-frame.el'
+   ("S-<f5>" fit-frame)
+   ;;------------------------------------
+   ;; `windresize.el'
+   ("C-<f5>" windresize)
+   ;;------------------------------------
+   ;; `windmove.el'
+   ("C-S-<left>" windmove-left)
+   ("C-S-<right>" windmove-right)
+   ("C-S-<up>" windmove-up)
+   ("C-S-<down>" windmove-down)
+   ;;----------------------------------
+   ;; `window-number.el'
+   ("M-<f5>"  window-number-meta-toggle)
+   ;;----------------------------------
+   ;; `buffer-move.el'
+   ("M-S-<up>"    buf-move-up)
+   ("M-S-<down>"  buf-move-down)
+   ("M-S-<left>"  buf-move-left)
+   ("M-S-<right>" buf-move-right)
+   ;;----------------------------------
+   ;; `thumb-frm.el'
+   ;; (define-key special-event-map [iconify-frame]
+   ;;             'thumfr-thumbify-frame-upon-event)
+   ;; (global-set-key [(shift mouse-3)]
+   ;;                 'thumfr-toggle-thumbnail-frame)
+   ;; (global-set-key [(shift control mouse-3)]
+   ;;                 'thumfr-thumbify-other-frames)
+   ("M-S-z" thumfr-thumbify-other-frames)
+   ("C-S-p" thumfr-fisheye-previous-frame)
+   ("C-S-n" thumfr-fisheye-next-frame)
+   ("C-S-z" thumfr-toggle-thumbnail-frame)
+            ;;'thumfr-really-iconify-or-deiconify-frame)
+   ;;------------------------------------
+   ("C-c <f5>" revert-buffer)
+   ("M-<f10>"  menu-bar-mode)
+   ("C-<f10>"  tool-bar-mode)
+   ))
 
-;; 参照 ahei 的设置
-;; (apply-args-list-to-fun
-;;  'def-action-on-area-command
-;;  `((copy-function        'copy-region   'mark-function     "Copy function.")
-;;    (kill-function        'kill-region   'mark-function     "Kill function.")
-;;    (indent-function      'indent-region 'mark-function     "Indent function.")
-;;    (indent-paragraph     'indent-region 'mark-paragraph    "Indent paragraph.")
-;;    (copy-whole-buffer    'copy-region   'mark-whole-buffer "Copy whole buffer.")
-;;    (kill-whole-buffer    'kill-region   'mark-whole-buffer "Kill whole buffer.")
-;;    (indent-whole-buffer  'indent-region 'mark-whole-buffer "Indent whole buffer.")))
+;;====================================================================
+;;* Mouse
 
-;; (eal-define-keys
-;;  (append
-;;   makefile-mode-map-list
-;;   `(c-mode-base-map emacs-lisp-mode-map lisp-interaction-mode-map
-;;     conf-javaprop-mode-map html-mode-map tcl-mode-map
-;;     autoconf-mode-map perl-mode-map nxml-mode-map python-mode-map))
-;;  `(("C-c C-c" comment)))
+(eal-define-keys-commonly
+ global-map
+ `(("<S-down-mouse-1>" mouse-drag-drag)
+   ("<down-mouse-1>"  mouse-drag-region)))
+
+;;====================================================================
+;;* Edit shortcuts
 
 (eal-define-keys-commonly
  global-map
@@ -118,7 +139,7 @@
 
 (eal-define-keys-commonly
  global-map
- `(("C-x G r" load-dot-emacs-file)
+ `(("C-x G b" xy/emacs-build)
    ("C-x G i" open-init-dot-el-file)))
 
 (eal-define-keys-commonly
@@ -129,8 +150,5 @@
    ("C-x G h" goto-my-home-dir)
    ("C-x G o" goto-my-org-source-dir)
    ("C-x G t" goto-my-org-latex-dir)))
-
-
-
 
 (provide 'xy-rc-kbd)

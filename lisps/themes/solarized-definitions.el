@@ -133,7 +133,7 @@ in order to expand or compress the tonal range displayed."
            (menu ((t (:foreground ,base0 :background ,base02))))
            (minibuffer-prompt ((t (:foreground ,blue))))
            (mode-line
-            ((t (:foreground ,base1 :background ,base02
+            ((t (:foreground ,base1 :background ,base02 :height 0.8
                              :box (:line-width 1 :color ,base1)))))
            (mode-line-buffer-id ((t (:foreground ,base1))))
            (mode-line-inactive
@@ -209,9 +209,10 @@ in order to expand or compress the tonal range displayed."
            (font-lock-warning-face ((t (:foreground ,red :weight ,bold))))
            (font-lock-doc-face ((t (:foreground ,cyan :slant ,italic))))
            (font-lock-color-constant-face ((t (:foreground ,green))))
-           ;; (font-lock-comment-delimiter-face
-           ;;  ((t (:foreground ,base01 :weight ,bold))))
-           (font-lock-comment-delimiter-face ((t (:foreground ,orange :weight ,bold)))) ;; HACK:
+           (font-lock-comment-delimiter-face
+            ((t (:foreground ,base01 :weight ,bold))))
+           ;; (font-lock-comment-delimiter-face ((t (:foreground
+           ;; ,orange :weight ,bold)))) ;; HACK: This is too colorful?
            (font-lock-doc-string-face ((t (:foreground ,green))))
            (font-lock-preprocessor-face ((t (:foreground ,orange))))
            (font-lock-reference-face ((t (:foreground ,cyan))))
