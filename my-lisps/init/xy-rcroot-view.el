@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-12-10 Sat 00:52 xin on p6t>
+;; Time-stamp:<2011-12-11 Sun 22:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,61 +19,51 @@
 ;;====================================================================
 ;;* View files
 
-;; Revisit files in GBK encoding
-;; (global-set-key (kbd "S-<f5>") 'revert-buffer)
-(global-set-key (kbd "M-S-<f5>") 'gbk-revert)
-
 ;; Allow to view read-only files
 (setq view-read-only t)
 ;; (toggle-read-only t)
 
 ;;--------------------------------------------------------------------
 ;;** view-mode settings
-;; (eal-define-keys
-;;  'view-mode-map
-;;  `(("U"           View-scroll-page-backward)
-;;    ("/"           describe-symbol-at-point)
-;;    ("\C-j"        goto-line)
-;;    ("'"           switch-to-other-buffer)
-;;    ("m"           back-to-indentation)
-;;    ("p"           previous-line-or-backward-button)
-;;    ("Q"           delete-current-window)
-;;    ("L"           count-brf-lines)
-;;    ("1"           delete-other-windows)
-;;    ("t"           sb-toggle-keep-buffer)
-;;    ("<backspace>" c-electric-backspace)
-;;    ("u"           View-scroll-half-page-backward)
-;;    ("S-SPC"       View-scroll-half-page-backward)
-;;    ("SPC"         View-scroll-half-page-forward)
-;;    ("w"           scroll-down)
-;;    ("d"           scroll-up)
-;;    (","           find-symbol-go-back)
-;;    ("1"           delete-other-windows)
-;;    ("2"           split-window-vertically)
-;;    ("3"           split-window-horizontally)
-;;    ("B"           eval-buffer)))
 (eval-after-load "view"
   '(progn
-     (view-mode-settings)))
+     (view-mode-settings)
+     ;; (eal-define-keys
+     ;;  'view-mode-map
+     ;;  `(("U"           View-scroll-page-backward)
+     ;;    ("/"           describe-symbol-at-point)
+     ;;    ("\C-j"        goto-line)
+     ;;    ("'"           switch-to-other-buffer)
+     ;;    ("m"           back-to-indentation)
+     ;;    ("p"           previous-line-or-backward-button)
+     ;;    ("Q"           delete-current-window)
+     ;;    ("L"           count-brf-lines)
+     ;;    ("1"           delete-other-windows)
+     ;;    ("t"           sb-toggle-keep-buffer)
+     ;;    ("<backspace>" c-electric-backspace)
+     ;;    ("u"           View-scroll-half-page-backward)
+     ;;    ("S-SPC"       View-scroll-half-page-backward)
+     ;;    ("SPC"         View-scroll-half-page-forward)
+     ;;    ("w"           scroll-down)
+     ;;    ("d"           scroll-up)
+     ;;    (","           find-symbol-go-back)
+     ;;    ("1"           delete-other-windows)
+     ;;    ("2"           split-window-vertically)
+     ;;    ("3"           split-window-horizontally)
+     ;;    ("B"           eval-buffer)))
+     ))
 
 ;;--------------------------------------------------------------------
 ;;** doc-view
-;; 把pdf,ps,dvi文件转换为png格式, 在Emacs里面浏览
-(eval-after-load "doc-view"
-  '(progn
-     (doc-view-settings)))
+(eval-after-load "doc-view" '(doc-view-settings))
 
 ;;--------------------------------------------------------------------
 ;;** log-view
-;; (eval-after-load "log-view"
-;;   '(progn
-;;     (log-view-face-settings))) ;; TODO: to my theme
 
 ;;--------------------------------------------------------------------
 ;;** Emaci
 ;; Emacs才是世界上最强大的IDE － 用Emaci阅读文件
 ;; REF: (@url :file-name "http://emacser.com/emaci.htm" :display "emacser")
-;; (require 'emaci)
 (eval-after-load "emaci"
   '(progn
      (emaci-settings)
@@ -82,29 +72,16 @@
       `(("/" describe-symbol-at-point)
         ("'" switch-to-other-buffer)
         ("L" count-brf-lines)
-        ;; ("t" sb-toggle-keep-buffer)
         ("]" goto-paren)))))
 
-(defun read-only ()
-  "Read-only mode."
-  (interactive)
-  (emaci-mode-on)
-  (view-mode t))
-
-(defun normal-edit ()
-  "Normal edit mode."
-  (interactive)
-  (View-quit)
-  (emaci-mode-off))
-
-;; (add-hook 'find-file-hook 'read-only)
 (eal-define-keys-commonly
  global-map
- ;; `(("C-x q" switch-major-mode-with-emaci)
- ;; ("M-s" emaci-mode-on)
- ;; ("M-S" emaci-mode-off)))
- `(("M-s" read-only)
-   ("M-S" normal-edit)))
+ `(("C-x q" switch-major-mode-with-emaci)
+   ("M-s"   emaci-read-only)
+   ("M-S"   emaci-normal-edit)
+   ;; ("M-s" emaci-mode-on)
+   ;; ("M-S" emaci-mode-off)
+   ))
 
 ;;--------------------------------------------------------------------
 ;;** hexl-mode
@@ -115,61 +92,60 @@
 ;;* Compare buffers/files
 
 ;;** diff
-;; (eal-define-keys
-;;  'diff-mode-map
-;;  `(("C-k" diff-hunk-kill)
-;;    ("SPC" scroll-up)
-;;    ("'"   switch-to-other-buffer)
-;;    ("Q"   kill-this-buffer)
-;;    ("u"   View-scroll-half-page-backward)))
-;; (eal-define-keys
-;;  'diff-mode-shared-map
-;;  `(("k" previous-line)
-;;    ("K" roll-up)))
 (eval-after-load "diff-mode"
   '(progn
-     ;; (diff-face-settings) ;; TODO: to my theme
-     (diff-settings)))
+     (diff-settings)
+     ;; (eal-define-keys
+     ;;  'diff-mode-map
+     ;;  `(("C-k" diff-hunk-kill)
+     ;;    ("SPC" scroll-up)
+     ;;    ("'"   switch-to-other-buffer)
+     ;;    ("Q"   kill-this-buffer)
+     ;;    ("u"   View-scroll-half-page-backward)))
+     ;; (eal-define-keys
+     ;;  'diff-mode-shared-map
+     ;;  `(("k" previous-line)
+     ;;    ("K" roll-up)))
+     ))
 
 ;;--------------------------------------------------------------------
 ;;** ediff
 (global-set-key (kbd "C-x D") 'ediff)
-;; (defun ediff-keys ()
-;;   (interactive)
-;;   "`ediff-mode'的按键设置"
-;;   (define-prefix-command 'ediff-R-map)
-;;   (define-key-list
-;;     ediff-mode-map
-;;     `(("# w" ediff+-toggle-ignore-whitespace)
-;;       ("u"   ediff-update-diffs)
-;;       ("/"   ediff-toggle-help)
-;;       ("c"   ediff-inferior-compare-regions)
-;;       ("f"   ediff-jump-to-difference)
-;;       ("j"   ediff+-previous-line)
-;;       ("k"   ediff-scroll-vertically)
-;;       ("R"   ediff-R-map)
-;;       ("R a" ediff-toggle-read-only)
-;;       ("R b" ediff-toggle-read-only)
-;;       ("o"   other-window)
-;;       ("A"   ediff+-goto-buffer-a)
-;;       ("B"   ediff+-goto-buffer-b))))
-;; (add-hook 'ediff-keymap-setup-hook 'ediff-keys)
 (eval-after-load "ediff"
   '(progn
-     ;; (ediff-face-settings) ;; TODO: to my theme
-     (ediff-settings)))
+     (ediff-settings)
+     ;; (defun ediff-keys ()
+     ;;   (interactive)
+     ;;   "`ediff-mode'的按键设置"
+     ;;   (define-prefix-command 'ediff-R-map)
+     ;;   (define-key-list
+     ;;     ediff-mode-map
+     ;;     `(("# w" ediff+-toggle-ignore-whitespace)
+     ;;       ("u"   ediff-update-diffs)
+     ;;       ("/"   ediff-toggle-help)
+     ;;       ("c"   ediff-inferior-compare-regions)
+     ;;       ("f"   ediff-jump-to-difference)
+     ;;       ("j"   ediff+-previous-line)
+     ;;       ("k"   ediff-scroll-vertically)
+     ;;       ("R"   ediff-R-map)
+     ;;       ("R a" ediff-toggle-read-only)
+     ;;       ("R b" ediff-toggle-read-only)
+     ;;       ("o"   other-window)
+     ;;       ("A"   ediff+-goto-buffer-a)
+     ;;       ("B"   ediff+-goto-buffer-b))))
+     ;; (add-hook 'ediff-keymap-setup-hook 'ediff-keys)
+     ))
 
 ;;====================================================================
 ;;* Grep related settings
 
 ;;** Use grep in Emacs
-;; (unless is-before-emacs-21
-;;   (eal-define-keys-commonly
-;;    global-map
-;;    `(("C-x F"   find-grep-in-current-dir)
-;;      ("C-x f"   find-grep-in-dir)
-;;      ("C-x M-f" find-grep-current-word-in-current-dir)
-;;      ("C-x M-F" find-grep-current-word)))
+  (eal-define-keys-commonly
+   global-map
+   `(("C-x G f"   find-grep-in-current-dir)
+     ("C-x G F"   find-grep-in-dir)
+     ("C-x M-f"   find-grep-current-word-in-current-dir)
+     ("C-x M-F"   find-grep-current-word)))
 ;;   (eal-define-keys
 ;;    'grep-mode-map
 ;;    `(("q"     bury-buffer)
@@ -179,7 +155,7 @@
 ;;      (">"     end-of-buffer)
 ;;      ("'"     switch-to-other-buffer)
 ;;      ("u"     scroll-down)
-;;      ("S-SPC" View-scroll-half-page-backward)
+;;      ("S-SPC" Global-scroll-half-page-backward)
 ;;      ("SPC"   View-scroll-half-page-forward)
 ;;      ("/"     describe-symbol-at-point)
 ;;      ("t"     sb-toggle-keep-buffer)
@@ -218,9 +194,7 @@
 ;; With color-moccur, you can search a regexp in all buffers. And you
 ;; can search files like grep(-find) without grep (and find) command.
 (autoload 'moccur-grep-find "color-moccur" nil t)
-(eval-after-load "color-moccur"
-  '(progn
-     (moccur-settings)))
+(eval-after-load "color-moccur" '(moccur-settings))
 (global-set-key (kbd "C-<f7>") 'moccur-grep-find)
 
 ;;*** moccur-edit
@@ -230,9 +204,7 @@
 ;; "C-x C-q".
 ;; Use C-c C-f when finished or C-c C-k to abort or C-c C-r to remove
 ;; the changes in the region.
-(eval-after-load "moccur-edit"
-  '(progn
-     (moccur-edit-settings)))
+(eval-after-load "moccur-edit" '(moccur-edit-settings))
 
 ;;--------------------------------------------------------------------
 ;;** ioccur

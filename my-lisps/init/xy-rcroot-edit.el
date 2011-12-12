@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-12-08 Thu 09:56 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 05:56 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,8 +31,8 @@
 (loop for x downfrom 50 to 1 do
       (setq tab-stop-list (cons (* x tab-width) tab-stop-list)))
 (setq-default indent-tabs-mode nil)
-;; 先格式化再补全
-(setq tab-always-indent 'complete)
+;; tab补全的模式
+(setq-default tab-always-indent t)
 
 ;;--------------------------------------------------------------------
 ;;** ethan-wspace
@@ -102,14 +102,13 @@
 
 ;;--------------------------------------------------------------------
 ;;** my own replace face
-;; (eval-after-load "replace"
-;;   '(progn
-;;      (replace-face-settings)))
+;; (eval-after-load "replace" '(replace-settings))
 
 ;;====================================================================
 ;;* Fast select regions
 
 (transient-mark-mode 1)
+(delete-selection-mode 1)
 (apply-args-list-to-fun
  'def-remember-command
  `("previous-line" "next-line"
@@ -145,9 +144,7 @@
 ;;** CUA model settings
 ;; CUA的矩阵区域操作特别方便
 ;; (setq use-cua t)
-;; (eval-after-load "cua-base"
-;;   (progn
-;;     (cua-settings)))
+;; (eval-after-load "cua-base" '(cua-settings))
 
 ;;--------------------------------------------------------------------
 
@@ -169,18 +166,17 @@
 ;;--------------------------------------------------------------------
 ;;** artist
 ;; 非常强大的文本画图的工具
-;; (global-set-kbd "C-x M-A" 'artist-mode)
+(global-set-kbd "C-x A d" 'artist-mode)
 (eval-after-load "artist"
   '(progn
      (artist-settings)
-     ;; (eal-define-keys
-     ;;  'artist-mode-map
-     ;;  `(("C-c l"   artist-select-op-line)
-     ;;    ("C-c r"   artist-select-op-rectangle)
-     ;;    ("C-c M-c" artist-select-op-copy-rectangle)
-     ;;    ("C-c M-w" artist-select-op-cut-rectangle)
-     ;;    ("C-c M-p" artist-select-op-paste)))
-     ))
+     (eal-define-keys
+      'artist-mode-map
+      `(("C-c l"   artist-select-op-line)
+        ("C-c r"   artist-select-op-rectangle)
+        ("C-c M-c" artist-select-op-copy-rectangle)
+        ("C-c M-w" artist-select-op-cut-rectangle)
+        ("C-c M-p" artist-select-op-paste)))))
 
 ;;--------------------------------------------------------------------
 ;;** palette

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-paren.el'
-;; Time-stamp:<2011-12-04 Sun 17:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 05:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,8 +19,8 @@
 ;;;###autoload
 (defun paren-settings ()
   "Settings for `paren'."
-  (message "* ---[ paren configuration is complete ]---")
-)
+  (setq show-paren-style 'expression)
+  (message "* ---[ paren configuration is complete ]---"))
 
 ;; ;;;###autoload
 ;; (defun paren-face-settings ()

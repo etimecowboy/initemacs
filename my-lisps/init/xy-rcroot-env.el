@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-10 Sat 06:32 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 05:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -72,7 +72,12 @@
 ;; Exec binaries
 (add-to-list 'exec-path my-local-exec-path)
 (Windows
- (add-to-list 'exec-path (concat my-local-exec-path "/win32")))
+ (add-to-list 'exec-path (concat my-local-exec-path "/win32"))
+ ;; (add-to-list 'exec-path (concat my-local-exec-path
+ ;;                                 "/win32/aspell/bin"))
+ (add-to-list 'exec-path
+              (concat my-local-exec-path "/win32/hunspell"))
+)
 ;; NOTE: Linux don't need it
 (HomeDesktop
  (GNULinux
@@ -319,7 +324,9 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;;** My own lisps (including init files and my own hacks)
+;;** My own lisps
+;; Include init files and my own hacks, make sure they are installed
+;; at last to make my hacks work.
 (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
 (message "* ---[ Emacswiki lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -337,9 +344,6 @@
 ;;* Emacs help system customisation
 
 ;;** Info
-(apply-args-list-to-fun
- 'def-command-max-window `("info"))
-(global-set-key (kbd "C-<f1>") 'info)
 (eval-after-load "info"
   '(progn
      (info-settings)
@@ -365,18 +369,17 @@
         ("."         find-symbol-at-point)
         ("<mouse-4>" mwheel-scroll)
         ("<mouse-5>" mwheel-scroll)
-        ("C-c ,"     Info-history-back)
-        ("C-c ."     Info-history-forward)))))
+        ("<backspace>"   Info-history-back)
+        ("<S-backspace>" Info-history-forward)))))
+
+(apply-args-list-to-fun
+ 'def-command-max-window `("info"))
+(global-set-key (kbd "C-<f1>") 'info)
 
 ;;--------------------------------------------------------------------
 ;;** Man
-(global-set-key (kbd "S-<f1>") 'man-follow)
-(eal-define-keys
- `(c-mode-base-map sh-mode-map)
- `(("C-c /" man-current-word)))
 (eval-after-load "man"
   '(progn
-     ;; (man-face-settings) ;; TODO: will be added to my theme
      (man-settings)
      (eal-define-keys
       'Man-mode-map
@@ -400,20 +403,19 @@
         ("."     set-mark-command)
         ("g"     emaci-g)
         ("'"     switch-to-other-buffer)))))
+(global-set-key (kbd "S-<f1>") 'man-follow)
+(eal-define-keys
+ `(c-mode-base-map sh-mode-map)
+ `(("C-c /" man-current-word)))
 
 ;;*** woman settings
+(eval-after-load "woman" '(woman-settings))
 (global-set-key (kbd "M-<f1>") 'woman)
-(eval-after-load "woman"
-  '(progn
-    ;; (woman-face-settings) ;; TODO: will be added to my theme
-    (woman-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** help
-(global-set-key (kbd "C-x H") 'goto-help-buffer)
 (eval-after-load "help-mode"
   '(progn
-     ;; (help-mode-face-settings) ;; TODO: to my theme
      (help-mode-settings)
      (eal-define-keys
       'help-mode-map
@@ -432,6 +434,7 @@
         ("SPC" scroll-up)
         ("."   find-symbol-at-point)
         ("/"   describe-symbol-at-point)))))
+;; (global-set-key (kbd "C-x H") 'goto-help-buffer)
 
 ;;*** help+
 ;; (require 'help+)
@@ -575,6 +578,7 @@
 ;;      把 py.txt, otherpy.txt,  pychr.txt 用軟件轉成了繁體，然後重新
 ;;   打開 emacs。這樣使用軟件自動轉換肯定是不精確的，有些地方會出現錯
 ;;   誤。比如"碼表"被搞成了"碼錶"。
+(eval-after-load "eim" '(eim-settings))
 (autoload 'eim-use-package "eim" "The eim input method" t)
 ;; (register-input-method
 ;;  "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
@@ -585,9 +589,6 @@
 ;; (setq input-activate nil)
 ;; (add-hook 'find-file-hook
 ;;           (lambda ()(if (eq input-activate t) (toggle-input-method))))
-(eval-after-load "eim"
-  '(progn
-     (eim-settings)))
 
 ;;*** ibus-el
 ;; IBus client for GNU Emacs
@@ -601,7 +602,8 @@
  ;; Use C-/ for Undo command
  (ibus-define-common-key ?\C-/ nil)
  ;; Change cursor color depending on IBus status
- (setq ibus-cursor-color '("red" "blue" "limegreen")))
+ ;; (setq ibus-cursor-color '("red" "blue" "limegreen"))
+)
 
 ;;====================================================================
 ;;* Emacs lisp management
@@ -620,17 +622,18 @@
 ;;   "Display a list of packages.
 ;; Fetches the updated list of packages before displaying.
 ;; The list is displayed in a buffer named `*Packages*'." nil t)
+(eval-after-load "package" '(package-settings))
 (require 'package)
-(eval-after-load "package"
-  '(progn
-    (package-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** auto-install
-(require 'auto-install)
 (eval-after-load "auto-install"
   '(progn
-    (auto-install-settings)))
+     (auto-install-settings)
+     (eal-define-keys
+      'dired-mode-map
+      `(("C-i"    auto-install-from-dired)))))
+(require 'auto-install)
 
 ;;====================================================================
 ;;* Emacs server
@@ -659,18 +662,22 @@
 ;; (if is-after-emacs-23
 ;;     (progn
 ;; (server-force-delete)
-(setq-default server-auth-dir (concat my-var-path "/server"))
+;; (setq-default server-auth-dir (concat my-var-path "/server"))
 ;; (server-start)
 ;; (global-set-key (kbd "C-x C-c") 'xy/done)
 ;; ))
 
-;;;###autoload
-(defun xy/server-start ()
-  "My version of starting emacs-server"
-  (interactive)
-  (server-force-delete)
-  ;; (setq server-auth-dir (concat my-var-path "/server"))
-  (server-start))
+(setq-default server-auth-dir (concat my-var-path "/server"))
+;; (if (not (eq t (server-running-p server-name)))
+;;     (server-start))
+
+;; ;;;###autoload
+;; (defun xy/server-start ()
+;;   "My version of starting emacs-server"
+;;   (interactive)
+;;   (server-force-delete)
+;;   ;; (setq server-auth-dir (concat my-var-path "/server"))
+;;   (server-start))
 
 ;;====================================================================
 ;;* Emacs key bindings

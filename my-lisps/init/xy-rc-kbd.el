@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-10 Sat 06:01 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 05:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -59,8 +59,14 @@
             ;;'thumfr-really-iconify-or-deiconify-frame)
    ;;------------------------------------
    ("C-c <f5>" revert-buffer)
+   ("C-x <f5>" gbk-revert)
    ("M-<f10>"  menu-bar-mode)
    ("C-<f10>"  tool-bar-mode)
+   ;;------------------------------------
+   ;; changing font size
+   ("C-+" text-scale-increase)
+   ("C--" text-scale-decrease)
+   ("C-0" text-scale-normal-size)
    ))
 
 ;;====================================================================

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-10 Sat 09:19 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 06:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -15,21 +15,22 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; ;; BibTeX related
+;; BibTeX related
 ;; ;;;###autoload
-;; ;; (defun org-mode-reftex-setup ()
-;; ;;   (require 'reftex)
-;; ;;   (require 'reftex-parse)
-;; ;;   (and (buffer-file-name)
-;; ;;        (file-exists-p (buffer-file-name))
-;; ;;        (reftex-parse-all)))
 ;; (defun org-mode-reftex-setup ()
-;;   (load-library "reftex")
+;;   (require 'reftex)
+;;   (require 'reftex-parse)
 ;;   (and (buffer-file-name)
 ;;        (file-exists-p (buffer-file-name))
-;;        (reftex-parse-all))
-;;   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
-;;   (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
+;;        (reftex-parse-all)))
+;;;###autoload
+(defun org-mode-reftex-setup ()
+  (load-library "reftex")
+  (and (buffer-file-name)
+       (file-exists-p (buffer-file-name))
+       (reftex-parse-all))
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+  (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
 
 ;; 处理html输出时auto-fill带来的多余空格
 ;; NOTE: It makes html file less readable
@@ -180,6 +181,8 @@ If html-file-name is not given, read it from minibuffer."
   ;; Enable inline image display.
   ;; But may breaks access to emacs from an Android phone
   (setq org-startup-with-inline-images t)
+  (setq org-startup-folded nil)
+  (setq org-cycle-include-plain-lists t)
 
   ;;==================================================================
   ;; GTD system settings
@@ -296,8 +299,8 @@ If html-file-name is not given, read it from minibuffer."
            ;; children that are not CHECKED
 
   (setq org-enforce-todo-dependencies
-        t)   ;; Block TODO items from changing state to DONE while
-             ;; they have children that are not DONE
+        nil)   ;; Block TODO items from changing state to DONE while
+               ;; they have children that are not DONE
 
   (setq org-stuck-projects ;; Define stuck projects
         '("+proj/!-TODO-SOMEDAY"
@@ -376,7 +379,7 @@ If html-file-name is not given, read it from minibuffer."
   ;; NOTE: May do the job twice with (@file :file-name "xy-rc-appt.el" :to "appt-disp-window-function" :display "`appt-disp-window-function'")
   ;;       May be deleted to use just one
   ;; (when window-system
-  ;;   (when (try-require 'xy-todochiku)
+  ;;   (when (try-require 'todochiku)
   ;;     (setq org-show-notification-handler
   ;;           '(lambda (notification)
   ;;              (todochiku-message "org-mode notification" notification
@@ -440,6 +443,12 @@ If html-file-name is not given, read it from minibuffer."
                          "Un-finished Tasks of Yesterday or Earlier (Re-Schedule them first!)")
                         (org-tags-match-list-sublevels t)))
 
+
+            (tags-todo "TODO=\"WAITING\""
+                        ((org-agenda-overriding-header
+                          "You are WAITING on")
+                         (org-tags-match-list-sublevels nil)))
+
             (agenda ""
                     ((org-agenda-ndays 1)
                      (org-agenda-deadline-warning-days 30)
@@ -501,6 +510,12 @@ If html-file-name is not given, read it from minibuffer."
                          "Un-Scheduled Tasks (Schedule Them if Possible)")
                         (org-tags-match-list-sublevels nil)))
             ))
+
+          ("@" "Tasks Working on" tags-todo
+             "TODO=\"STARTED\"|TODO=\"WAITING\""
+             ((org-agenda-overriding-header
+               "Your are Working on These Tasks")
+              (org-tags-match-list-sublevels t)))
 
           ("n" "Recent Notes NOT Refiled" tags
              "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
@@ -577,6 +592,22 @@ If html-file-name is not given, read it from minibuffer."
           ;; (org-agenda-remove-tags t)
           (org-agenda-add-entry-text-maxlines 5)
           (htmlize-output-type 'css)))
+
+  ;; (setq org-agenda-custom-commands
+  ;;       '(("X" agenda "" nil ("~/emacs/org/gtd/agenda.html" "~/emacs/org/gtd/agenda.pdf"))
+  ;;         ("Y" alltodo "" nil ("~/emacs/org/gtd/todo.html" "~/emacs/org/gtd/todo.txt" "~/emacs/org/gtd/todo.pdf"))
+  ;;         ("p" "Agenda and PhD-related tasks"
+  ;;          ((agenda "")
+  ;;           (tags-todo "phd")
+  ;;           (tags "learn"))
+  ;;          nil
+  ;;          ("~/emacs/gtd/phd.html"))
+  ;;         ("g" "Agenda and Geek-related tasks"
+  ;;          ((agenda)
+  ;;           (tags-todo "geek")
+  ;;           (tags "geek"))
+  ;;          nil
+  ;;          ("~/emacs/org/gtd/geek.html"))))
 
   ;;==================================================================
   ;; Capture, refile & archive settings
@@ -689,9 +720,11 @@ If html-file-name is not given, read it from minibuffer."
   (add-hook 'org-mode-hook
             '(lambda ()
                ;; BUG: org-mobile
-               ;; (org-mode-reftex-setup)
-               ;; (turn-on-org-cdlatex)
                (turn-on-auto-fill)
+               (org-mode-reftex-setup)
+               (turn-on-org-cdlatex)
+               (when (featurep 'flyspell) (flyspell-mode 1))
+               (when (featurep 'autopair) (autopair-mode -1))
                ;; (xy/yas-start)
                ;; (xy/linkd-start)
                ;; (xy/set-font-write)
@@ -971,17 +1004,14 @@ save -ascii %s ans")
   ;; Add the following in one of your Org file.
   ;;   * Weather
   ;;   %%(org-google-weather "New York" "en-gb")
-  (when (try-require 'org-google-weather)
-    (eval-after-load "org-google-weather"
-      '(progn
-         (org-google-weather-settings))))
+  (eval-after-load "org-google-weather" '(org-google-weather-settings))
+  (try-require 'org-google-weather)
 
   ;;------------------------------------------------------------------
   (define-key org-mode-map (kbd "C-c t") 'timestamp)
   (define-key org-mode-map (kbd "C-c h") 'xy/org-html-chinese-no-extra-space)
 
-  (message "* ---[ org configuration is complete ]---")
-)
+  (message "* ---[ org configuration is complete ]---"))
 
 (provide 'xy-rc-org)
 
@@ -1116,11 +1146,3 @@ save -ascii %s ans")
 ;;   (org-defkey org-columns-map "k" 'previous-line)
 ;;   (define-key org-columns-map "f" (key-binding (kbd "M-f")))
 ;;   (define-key org-columns-map "b" (key-binding (kbd "M-b"))))
-
-;; (eval-after-load "org"
-;;   '(progn
-;;     (org-settings)))
-
-;; (eval-after-load "org-colview"
-;;   '(progn
-;;     (org-colview-settings)))

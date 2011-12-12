@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-highlight-symbol.el'
-;; Time-stamp:<2011-12-04 Sun 17:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-10 Sat 15:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -74,9 +74,7 @@ DIR has to be 1 or -1."
    'emaci-mode-map
    `(("p" emaci-p)))
 
-  (eval-after-load "emaci"
-    '(progn
-       (highlight-symbol-settings-4-emaci)))
+  (eval-after-load "emaci" '(highlight-symbol-settings-4-emaci))
 
   (when window-system
     (am-add-hooks

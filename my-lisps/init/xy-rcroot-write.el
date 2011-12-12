@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-12-08 Thu 22:34 xin on p6t>
+;; Time-stamp:<2011-12-11 Sun 10:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,80 +18,63 @@
 
 ;;====================================================================
 ;;* muse
-
-;; (eval-after-load "muse-mode"
-;;   '(progn
-;;     (muse-settings)))
+;; (eval-after-load "muse-mode" '(muse-settings))
 
 ;;====================================================================
 ;;* org
-
 (add-to-list 'auto-mode-alist
              '("\\.\\(org\\|org_archive\\)$" . org-mode))
-(eval-after-load "org"
-  '(progn
-     (org-settings)))
-(eval-after-load "org-agenda"
-  '(progn
-     (org-settings)))
-(eval-after-load "org-capture"
-  '(progn
-     (org-settings)))
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-;; (global-set-key (kbd "C-c b") 'org-iswitchb)
-(global-set-key (kbd "C-c c") 'org-capture)
+(eval-after-load "org" '(org-settings))
+(eval-after-load "org-agenda" '(org-settings))
+(eval-after-load "org-capture" '(org-settings))
+(eal-define-keys-commonly
+ global-map
+ `(("C-c l" org-store-link)
+   ("C-c a" org-agenda)
+   ("C-c b" org-ido-switchb)
+   ("C-c c" org-capture)))
 
 ;;====================================================================
 ;;* auctex
-
-;; (load "auctex.el" nil t t)
-;; (load "preview-latex.el" nil t t)
-;; (add-hook 'LaTeX-mode-hook 'auctex-start)
-;; (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 (eval-after-load "latex"
   '(progn
      (auctex-settings)
      (eal-define-keys
-      'LaTeX-mode-map
-      `(("M-c `" TeX-next-error))))) ;; BUG: C-c ` conflict with icy-mode
+      '(LaTeX-mode-map latex-mode-map)
+      `(("M-c `" TeX-next-error))))) ;; default C-c ` conflict with icy-mode
+;; (load "auctex.el" nil t t)
+;; (load "preview-latex.el" nil t t)
+;; (add-hook 'LaTeX-mode-hook 'auctex-start)
+;; (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 
 ;;--------------------------------------------------------------------
 ;;** reftex
 ;; reference
+(eval-after-load "reftex" '(reftex-settings))
 (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
 (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" t)
 (autoload 'reftex-citation "reftex-cite" "Make citation" t)
 (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
-(eval-after-load "reftex"
-  '(progn
-     (reftex-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** cdlatex, tex writing tools
+;; (eval-after-load "cdlatex" 'cdlatex-settings))
 ;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
 ;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
-;; (eval-after-load "cdlatex"
-;;   '(progn
-;;     (cdlatex-settings)))
 
 ;;====================================================================
 ;;* txt2tags
-
 ;; convert plain text files to various formats
-;; (require 't2t-mode)
 (setq auto-mode-alist
       (append (list '("\\.t2t$" . t2t-mode))
               (if (boundp 'auto-mode-alist) auto-mode-alist)))
 (autoload  't2t-mode "txt2tags-mode" "Txt2tags Mode" t)
-(provide 'xy-rcroot-write)
 
 ;;====================================================================
 ;;* pdftools
 ;; Save current buffer as a pdf file
 ;; Should be used with `ps2pdf', which usually comes with a tex
 ;; distribution
-
 (autoload 'pdf-save-buffer "pdftools.el"
   "Save buffer as a pdf file." t)
 (autoload 'pdf-save-buffer-with-faces "pdftools.el"

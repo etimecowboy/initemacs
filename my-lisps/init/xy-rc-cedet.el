@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-12-06 Tue 07:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-11 Sun 10:59 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -44,7 +44,7 @@
   ;; (semantic-idle-completions-mode 1)
   ;; (ignore-errors (semantic-load-enable-primary-exuberent-ctags-support))
 
-  (require 'semantic-decorate-include nil 'noerror)
+  (require 'semantic-decorate-include)
   (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
 
   ;;------------------------------------------------------------------
@@ -67,7 +67,7 @@
 
   ;;------------------------------------------------------------------
   ;; C/C++ related settings
-  (require 'semantic-c nil 'noerror)
+  (require 'semantic-c)
   ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
 
   (when (executable-find "gcc")
@@ -88,7 +88,7 @@
   ;;   (define-key c-mode-base-map "\C-c " 'semantic-ia-complete-symbol))
   ;; (define-key c-mode-base-map (kbd "M-n") 'semantic-ia-complete-symbol-menu)
 
-  (require 'semantic/bovine/el nil 'noerror)
+  (require 'semantic/bovine/el)
   (require 'semantic/analyze/refs)      ; for semantic-ia-fast-jump
   (defadvice push-mark (around semantic-mru-bookmark activate)
     "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark'.
@@ -130,7 +130,7 @@ the mru bookmark stack."
 
   ;;------------------------------------------------------------------
   ;; eassist
-  (when (require 'eassist nil 'noerror)
+  (when (try-require 'eassist )
     (setq eassist-header-switches
           '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
             ("hh" . ("cc" "CC" "cpp" "cxx" "c++" "C"))
@@ -163,26 +163,18 @@ the mru bookmark stack."
        (define-key speedbar-key-map (kbd ";") 'speedbar-up-directory)
        (define-key speedbar-key-map (kbd "f") 'speedbar-edit-line)))
 
-
   ;;------------------------------------------------------------------
   ;; pulse
-  ;; 实现Emacs的淡入淡出效果, is a part of cedet
-  ;; REF: (@url :file-name "http://emacser.com/pulse.htm" :display "Emacser")
   (require 'pulse)
-  (eval-after-load "pulse"
-    '(progn
-       (pulse-face-settings)
-       (pulse-settings)))
 
   ;;------------------------------------------------------------------
   ;; zjl-hl, use semantic to highlight functions
-  ;; (require 'zjl-hl)
   ;; (zjl-hl-enable-global-all-modes)
+  ;; (require 'zjl-hl)
 
   ;;------------------------------------------------------------------
 
-  (message "* ---[ cedet configuration is complete ]---")
- )
+  (message "* ---[ cedet configuration is complete ]---"))
 
 (provide 'xy-rc-cedet)
 

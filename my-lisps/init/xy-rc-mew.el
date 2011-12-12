@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-08 Thu 21:09 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 01:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -263,7 +263,7 @@
     )
   ;; todochiku 新邮件通知
   (when window-system
-    (when (try-require 'xy-todochiku)
+    (when (try-require 'todochiku)
       (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
         "Use Todochiku to pop-up a notification, if new Mail arrives"
         (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))

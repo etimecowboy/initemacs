@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-12-10 Sat 08:42 xin on p6t>
+;; Time-stamp:<2011-12-11 Sun 20:51 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,11 +25,9 @@
 ;; same as in the other window, not as it was before we switched away.
 ;; This mode tries to work around this problem by storing and
 ;; restoring per-window positions for each buffer.
+(eval-after-load "winpoint" '(winpoint-settings))
 (require 'winpoint)
 (window-point-remember-mode 1)
-(eval-after-load "winpoint"
-  '(progn
-     (winpoint-settings)))
 
 ;;-----------------------------------------------------------------------
 ;;** Bookmark
@@ -49,98 +47,77 @@
 ;;         keeping the bookmark list open
 ;; * ‘C-o’ – switch to the current bookmark in another window
 ;; * ‘r’ – rename the current bookmark
-(eval-after-load "bookmark"
-  '(progn
-     (bookmark-settings)))
+(eval-after-load "bookmark" '(bookmark-settings))
 
 ;;*** Bookmark+
-;; (require 'bookmark+)
+(require 'bookmark+)
 
 ;;*** bm
 ;; provides visible, buffer local, bookmarks and the ability
 ;; to jump forward and backward to the next bookmark.
-;; (require 'bm)
-;; or
-;; (autoload 'bm-toggle   "bm" "Toggle bookmark in current buffer." t)
-;; (autoload 'bm-next     "bm" "Goto bookmark."                     t)
-;; (autoload 'bm-previous "bm" "Goto previous bookmark."            t)
-
-;;   M$ Visual Studio key setup.
-(global-set-key (kbd "<f2>") 'bm-toggle)
-(global-set-key (kbd "<C-f2>") 'bm-next)
-(global-set-key (kbd "<S-f2>") 'bm-previous)
-;;
-;;   Click on fringe to toggle bookmarks, and use mouse wheel to move
-;;   between them.
-;; (global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
-;; (global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
-(global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
-;;
-;;   If you would like the markers on the right fringe instead of the
-;;   left, add the following to line:
-;;
-;;   (setq bm-marker 'bm-marker-right)
+(autoload 'bm-toggle   "bm" "Toggle bookmark in current buffer." t)
+(autoload 'bm-next     "bm" "Goto bookmark."                     t)
+(autoload 'bm-previous "bm" "Goto previous bookmark."            t)
+(eal-define-keys-commonly
+ global-map
+ `(;; M$ Visual Studio key setup.
+   ("<f2>"                      bm-toggle)
+   ("C-<f2>"                    bm-next)
+   ("S-<f2>"                    bm-previous)
+   ;; Click on fringe to toggle bookmarks, and use mouse wheel to move
+   ;; between them. If you would like the markers on the right fringe
+   ;; instead of the left, add the following to line:
+   ;; (setq bm-marker 'bm-marker-right)
+   ("<left-fringe> <mouse-5>"   bm-next-mouse)
+   ("<left-fringe> <mouse-4>"   bm-previous-mouse)
+   ("<left-fringe> <mouse-1>"   bm-toggle-mouse)))
 
 ;;====================================================================
 ;;* Save Emacs session information
 
 ;;** recentf
-(eval-after-load "recentf"
-  '(progn
-     (recentf-settings)))
+;; Save recent openned files
+(eval-after-load "recentf" '(recentf-settings))
 (recentf-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** save-place
 ;; Save point places in buffers
-(eval-after-load "saveplace"
-  '(progn
-     (saveplace-settings)))
+(eval-after-load "saveplace" '(saveplace-settings))
 (setq-default save-place t)
 
 ;;--------------------------------------------------------------------
 ;;** savehist
-(eval-after-load "savehist"
-  '(progn
-     (savehist-settings)))
+(eval-after-load "savehist" '(savehist-settings))
 (savehist-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** filecache
-(eval-after-load "filecache"
-  '(progn (file-cache-add-directory-list load-path)
-          (file-cache-add-directory-list user-include-dirs)
-          (file-cache-add-directory "/usr/include")
-          (file-cache-add-directory-recursively "/usr/include/c++")
-          (file-cache-add-directory-recursively "/usr/local/include")))
+(eval-after-load "filecache" '(filecache-settings))
 
 ;;--------------------------------------------------------------------
 ;;** windows and revive
 ;; Workspace store and recover
-;; windows.el
-(eval-after-load "windows"
-  '(progn
-     (windows-settings)))
-(add-hook 'after-init-hook 'windows-start)
-(define-key ctl-x-map "C" 'see-you-again)
-(define-key ctl-x-map "S" 'win-save-all-configurations)
-(define-key ctl-x-map "V" 'resume-windows)
-;; revive.el
-(eval-after-load "revive"
-  '(progn
-     (revive-settings)))
-;; And define favorite keys to those functions.
-;; (define-key ctl-x-map "F" 'resume)
-;; (define-key ctl-x-map "K" 'wipe)
+(eval-after-load "windows" '(windows-settings))
+(eval-after-load "revive" '(revive-settings))
+(eal-define-keys-commonly
+ global-map
+ `(("C-c w q" see-you-again)
+   ("C-c w a" win-save-all-configurations)
+   ("C-c w f" resume-windows)
+   ("C-c w s" save-current-configuration)
+   ("C-c w r" resume)
+   ("C-c w k" wipe)))
+;; Automatically save window configuration when quit emacs
+(add-hook 'kill-emacs-hook 'save-current-configuration)
+(win:startup-with-window)
 
 ;;--------------------------------------------------------------------
 ;;** session
-;; ;; session.el can remember more information.
+;; session.el can remember more information.
+;; (eval-after-load "session" '(session-settings))
 ;; (add-hook 'after-init-hook ;; 'session-start)
 ;;           'session-initialize)
-;; (eval-after-load "session"
-;;   '(progn
-;;     (session-settings)))
 
 (provide 'xy-rcroot-session)
 

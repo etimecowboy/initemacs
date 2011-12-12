@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-12-08 Thu 22:54 xin on p6t>
+;; Time-stamp:<2011-12-11 Sun 21:59 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -41,31 +41,31 @@
   (add-hook 'LaTeX-mode-hook
             '(lambda ()
                (turn-on-auto-fill)
-               (outline-minor-mode 1)
-               (cdlatex-mode 1)
-               (reftex-mode 1)
-               (flyspell-mode 1)
-               (turn-on-reftex)
-               (turn-on-cdlatex)
-               (autopair-mode -1)
+               (when (featurep 'flyspell) (flyspell-mode 1))
+               (when (featurep 'outline) (outline-minor-mode 1))
+               (when (featurep 'cdlatex) (cdlatex-mode 1))
+               (when (featurep 'reftex) (reftex-mode 1))
+               ;; (turn-on-reftex)
+               ;; (turn-on-cdlatex)
+               (when (featurep 'autopair) (autopair-mode -1))
                ;; (xy/yas-start)
                ;; (xy/linkd-start)
                ;; (xy/set-font-write)
                ))
   (add-hook 'latex-mode-hook
             '(lambda ()
-             (turn-on-auto-fill)
-             (outline-minor-mode 1)
-             (cdlatex-mode 1)
-             (reftex-mode 1)
-             (flyspell-mode 1)
-             (turn-on-reftex)
-             (turn-on-cdlatex)
-             (autopair-mode -1)
-             ;; (xy/yas-start)
-             ;; (xy/linkd-start)
-             ;; (xy/set-font-write)
-             ))
+               (turn-on-auto-fill)
+               (when (featurep 'flyspell) (flyspell-mode 1))
+               (when (featurep 'outline) (outline-minor-mode 1))
+               (when (featurep 'cdlatex) (cdlatex-mode 1))
+               (when (featurep 'reftex) (reftex-mode 1))
+               ;; (turn-on-reftex)
+               ;; (turn-on-cdlatex)
+               (when (featurep 'autopair) (autopair-mode -1))
+               ;; (xy/yas-start)
+               ;; (xy/linkd-start)
+               ;; (xy/set-font-write)
+               ))
 
   ;; (require 'tex-mik)
   ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")

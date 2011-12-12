@@ -1,7 +1,7 @@
 !;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-apropos.el'
-;; Time-stamp:<2011-12-07 Wed 09:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 05:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None

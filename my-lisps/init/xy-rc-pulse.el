@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-pulse.el'
-;; Time-stamp:<2011-12-04 Sun 17:42 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-11 Sun 10:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,6 @@
   (setq pulse-command-advice-flag t) ;; (if window-system 1 nil)
   ;; (pulse-toggle-integration-advice t)
   ;; (pulse-toggle-integration-advice (if window-system 1 -1))
-
   (defadvice goto-line (after pulse-advice activate)
     "Cause the line that is `goto'd to pulse when the cursor gets there."
     (when (and pulse-command-advice-flag (interactive-p))
@@ -78,8 +77,7 @@
     (when (and pulse-command-advice-flag (interactive-p))
       (pulse-momentary-highlight-one-line (point))))
   (add-hook 'next-error-hook 'pulse-line-hook-function)
-  (message "* ---[ pulse configuration is complete ]---")
-)
+  (message "* ---[ pulse configuration is complete ]---"))
 
 ;;;###autoload
 (defun pulse-face-settings ()

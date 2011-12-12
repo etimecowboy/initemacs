@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-12-08 Thu 02:29 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 07:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -197,8 +197,8 @@ will remain open and unsaved."
   "Settings for `dired'."
   ;; (setq truncate-lines t)
   (setq dired-kept-versions 1)
-  (setq dired-recursive-deletes t)  ; 可以递归的删除目录
-  (setq dired-recursive-copies t)   ; 可以递归的进行拷贝
+  (setq dired-recursive-deletes 'top)  ; 可以递归的删除目录
+  (setq dired-recursive-copies 'always)   ; 可以递归的进行拷贝
   ;; (define-prefix-command 'dired-slash-map)
   (setq dired-dwim-target t)
   ;; (add-hook 'dired-mode-hook
@@ -219,72 +219,42 @@ will remain open and unsaved."
   (add-hook 'dired-lood-hook 'his-dired-sort)
   ;; (def-redo-command dired-redo 'dired-redo 'dired-undo)
 
-  ;;==================================================================
-  ;; GNU Emacs features for dired
-
-  ;; (when (try-require 'dired-isearch) ;; 只对文件名isearch
-  ;;   NOTE: Emacs 23 has builtin Isearch of filenames in Dired:
-  ;;     M-s f C-s   – `dired-isearch-filenames'
-  ;;     M-s f C-M-s – `dired-isearch-filenames-regexp'
-  ;;     M-s a C-M-s – `dired-do-isearch-regexp'
-  ;;   (define-key dired-mode-map (kbd "C-s")
-  ;;     'dired-isearch-forward)
-  ;;   (define-key dired-mode-map (kbd "C-r")
-  ;;     'dired-isearch-backward)
-  ;;   (define-key dired-mode-map (kbd "ESC C-s")
-  ;;     'dired-isearch-forward-regexp)
-  ;;   (define-key dired-mode-map (kbd "ESC C-r")
-  ;;     'dired-isearch-backward-regexp))
-
   ;;------------------------------------------------------------------
-  (require 'dired-x) ;; 忽略不感兴趣的文件
+  (require 'dired-x)
+  (require 'wdired)
+  (dired-omit-mode 1)
+  (try-require 'dired-details+)
+  ;; ;; (try-require 'dired-single)
+  (try-require 'dired-tar)
+  (try-require 'dired+)
+  ;; (when (try-require 'dired+)
+  ;;   (define-key ctl-x-map   "d"
+  ;;     'diredp-dired-files)
+  ;;   (define-key ctl-x-4-map "d"
+  ;;     'diredp-dired-files-other-window))
+  ;; (when (try-require 'openwith) (openwith-mode 1))
+
   ;; (add-hook 'dired-load-hook
   ;;           (function (lambda ()
-  ;;                       (load "dired-x")
-  ;;                       ;; Set global variables here.  For example:
-  ;;                       (setq dired-guess-shell-gnutar "gtar")
-  ;;                       )))
-  (add-hook 'dired-mode-hook
-            (function (lambda ()
-                        ;; Set buffer-local variables here.  For example:
-                        (dired-omit-mode 1)
-                        )))
-  (eval-after-load "dired-x"
-    '(progn
-       (dired-x-settings)))
-
-  ;;------------------------------------------------------------------
-  (require 'wdired) ;; 以文件形式修改dired buffer,
-                    ;; 批量修改文件名很方便
-                    ;; wdired has been a part of GNU Emacs 23
-
-  ;;==================================================================
-  ;; Contrib features
-
-  (when (try-require 'dired-details+) ;; 简略文件信息
-    ;; (dired-details-install)        ;; use `(' and `)' to switch
-    (add-hook 'dired-mode-hook
-              '(lambda ()
-                (setq dired-details-initially-hide t))))
-
-  ;;------------------------------------------------------------------
-  ;; (try-require 'dired-single) ;; Use a single frame for visiting a
-  ;;                             ;; sub-directory
-
-  ;;------------------------------------------------------------------
-  (GNULinux
-    (try-require 'dired-tar)) ;; `T' 把目录压缩为.tar.gz文件
-
-  ;;------------------------------------------------------------------
-  ;; (when (try-require 'dired+) ;; dired大补
-  ;;   ;; TODO: do a research and add more configurations.
-  ;;   (toggle-dired-find-file-reuse-dir 1)
-  ;;   (eval-after-load "dired+"
-  ;;     '(progn
-  ;;       (dired+-settings)))
-  ;;   (define-key ctl-x-map   "d" 'diredp-dired-files)
-  ;;   (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window)
-  ;;   )
+  ;;                       (require 'dired-x)
+  ;;                       (require 'wdired))))
+  ;; (add-hook 'dired-mode-hook
+  ;;           (function (lambda ()
+  ;;                       (dired-omit-mode 1))))
+  ;; (add-hook 'dired-load-hook
+  ;;           (function (lambda ()
+  ;;                       (try-require 'dired-details+)
+  ;;                       ;; (try-require 'dired-single)
+  ;;                       (try-require 'dired-tar)
+  ;;                       (when (try-require 'dired+)
+  ;;                         (define-key ctl-x-map   "d"
+  ;;                           'diredp-dired-files)
+  ;;                         (define-key ctl-x-4-map "d"
+  ;;                           'diredp-dired-files-other-window)))))
+  ;; (add-hook 'dired-mode-hook
+  ;;           (function (lambda ()
+  ;;                       (when (featurep 'openwith)
+  ;;                         (openwith-mode 1)))))
 
   (message "* ---[ dired configuration is complete ]---"))
 

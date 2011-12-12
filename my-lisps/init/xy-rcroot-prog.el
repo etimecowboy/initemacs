@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-09 Fri 21:26 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 07:08 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -21,33 +21,31 @@
 
 (setq-default comment-column 40) ;; set comment alignment position
 
+;;--------------------------------------------------------------------
 ;;** Auto indent
 (eal-define-keys
  `(lisp-mode-map emacs-lisp-mode-map lisp-interaction-mode-map
-   sh-mode-map ,(if (not is-before-emacs-21) 'awk-mode-map)
-   java-mode-map ruby-mode-map c-mode-base-map tcl-mode-map
-   python-mode-map perl-mode-map)
+   sh-mode-map ruby-mode-map tcl-mode-map python-mode-map
+   perl-mode-map)
  `(("RET" newline-and-indent)))
 
 ;;--------------------------------------------------------------------
 ;;** align
 (eal-define-keys-commonly
  global-map
- `(("C-x A a"   align)
+ `(("C-x A n"   align)
    ("C-x A r"   align-regexp)))
 
 ;;--------------------------------------------------------------------
 ;;** auto-fill
+(eval-after-load "simple" '(simple-settings))
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
-   cperl-mode-hook cc-mode-hook
-   LaTeX-mode-hook latex-mode-hook
-   matlab-mode-hook org-mode-hook
-   mew-draft-mode-hook)
+                  cperl-mode-hook cc-mode-hook
+                  LaTeX-mode-hook latex-mode-hook
+                  matlab-mode-hook org-mode-hook
+                  mew-draft-mode-hook)
  'turn-on-auto-fill)
-(eval-after-load "simple"
-  '(progn
-     (simple-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** hungry-delete-mode
@@ -55,38 +53,31 @@
 ;;   "Turns on hungry delete mode if the buffer is appropriate." t nil)
 ;; (am-add-hooks
 ;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-map
-;;   sh-mode-map cperl-mode-hook cc-mode-hook
-;;   vhdl-mode-map verilog-mode-map
-;;   matlab-mode-hook)
-;;  '(lambda ()
-;;     (require 'hungry-delete)
-;;     ;; (hurn-on-hungry-delete-mode)
-;;     (hungry-delete-mode 1)))
+;;    sh-mode-map cperl-mode-hook c-common-mode-hook vhdl-mode-map
+;;    verilog-mode-map matlab-mode-hook)
+;;  'turn-on-hungry-delete-mode)
 
 ;;--------------------------------------------------------------------
 ;;** paren-mode
+(eval-after-load "paren" '(paren-settings))
 ;; (show-paren-mode 1)
-;; (eval-after-load "paren"
-;;   '(progn
-;;      ;; (paren-face-settings)
-;;      (paren-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** mic-paren
 ;; An extension and replacement to the packages `paren.el' and
 ;; `stig-paren.el' for Emacs
+(eval-after-load "mic-paren" '(mic-paren-settings))
 (require 'mic-paren)
 (paren-activate)
-(eval-after-load "mic-paren"
-  '(progn
-     ;; (mic-paren-face-settings)
-     (mic-paren-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** rainbow-delimiters
 ;; With this package, the delimiters all get different colors based on
-;; their nesting level. It works wonderfully well
+;; their nesting level.
 ;; NOTE: It takes a lot of computation resource, so I disabled it.
+;; (eval-after-load "rainbow-delimiters"
+;;   '(progn
+;;      (rainbow-delimiters-settings)))
 ;; (require 'rainbow-delimiters)
 ;; (am-add-hooks
 ;;  `(find-file-hook
@@ -97,25 +88,15 @@
 ;;    svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
 ;;    apropos-mode-hook)
 ;;  'rainbow-delimiters-mode)
-;; (eval-after-load "rainbow-delimiters"
-;;   '(progn
-;;      (rainbow-delimiters-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** highlight-parentheses
-;; (require 'highlight-parentheses)
 (eval-after-load "highlight-parentheses"
-  `(progn
-     (highlight-parentheses-settings)))
+  '(highlight-parentheses-settings))
 (am-add-hooks
- `(find-file-hook help-mode-hook Man-mode-hook log-view-mode-hook
-                  custom-mode-hook Info-mode-hook compilation-mode-hook
-                  svn-log-edit-mode-hook package-menu-mode-hook dired-mode-hook
-                  browse-kill-ring-mode-hook completion-list-mode-hook
-                  apropos-mode-hook hs-hide-hook inferior-ruby-mode-hook
-                  gdb-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-                  lisp-mode-hook c-mode-common-hook cc-mode-hook vhdl-mode-hook
-                  verilog-mode-hook matlab-mode-hook LaTeX-mode-hook latex-mode-hook)
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+   sh-mode-hook cperl-mode-hook c-common-mode-hook
+   vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
  '(lambda ()
     (require 'highlight-parentheses)
     (highlight-parentheses-mode 1)))
@@ -124,29 +105,22 @@
 ;;** autopair
 ;; NOTE: autopair-mode conflicts with `auctex'/`cdlatex', and
 ;; `yasnippet'. Need to use hooks to disable it in these modes.
-(when (try-require 'autopair)
-  (autopair-global-mode 1))
-(eval-after-load "autopair"
-  '(autopair-settings))
-;; (am-add-hooks
-;;  `( org-mode-hook LaTeX-mode-hook latex-mode-hook cc-mode-hook
-;;                   c-mode-common-hook vhdl-mode-hook verilog-mode-hook)
-;;  '(lambda ()
-;;     (autopair-mode -1))))
-;; (am-add-hooks
-;;  `(lisp-interaction-mode-hook lisp-mode-hook emacs-lisp-mode-hook
-;;    cperl-mode-hook cc-mode-hook c-mode-common-hook
-;;    vhdl-mode-hook verilog-mode-hook matlab-mode-hook
-;;    ;; org-mode-hook text-mode-hook
-;;    )
-;;  '(lambda ()
-;;     (require 'autopair)
-;;     (autopair-mode 1)))
+(eval-after-load "autopair" '(autopair-settings))
+(require 'autopair)
+(autopair-global-mode 1)
+(am-add-hooks
+ `(org-mode-hook latex-mode-hook c-mode-common-hook vhdl-mode-hook
+                 verilog-mode-hook)
+ '(lambda ()
+    (when (featurep 'autopair) (autopair-mode -1))))
 
 ;;====================================================================
 ;;* Code folding
 
 ;;** hide-region
+;; (eval-after-load "hide-region"
+;;   '(progn
+;;      (hide-region-settings)))
 ;; (am-add-hooks
 ;;  `(lisp-mode-hook emacs-lisp-mode-hook
 ;;    cperl-mode-hook cc-mode-hook
@@ -160,9 +134,6 @@
 ;;  global-map
 ;;  `(("C-x M-r" hide-region-hide)
 ;;    ("C-x M-R" hide-region-unhide)))
-;; (eval-after-load "hide-region"
-;;   '(progn
-;;      (hide-region-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** outline
@@ -172,29 +143,48 @@
 ;;  `(("C-M-h"   outline-mark-subtree)
 ;;    ("C-c u"   outline-up-heading)))
 
+;;--------------------------------------------------------------------
+;;*** outline-org-like
+;; org-like code folding
+;; REF: - (@url :file-name "http://www.cnblogs.com/bamanzi/archive/2011/10/09/emacs-outline-org-like.html" :display "Post")
+;;      - (@url :file-name "http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el" :display "Source")
+(add-hook 'outline-minor-mode-hook
+          (lambda ()
+            (when (try-require 'outline-magic)
+              (setq indent-tabs-mode nil)
+              (setq tab-always-indent t)
+              (define-key outline-minor-mode-map (kbd "<f6>")
+                'outline-cycle))))
+(am-add-hooks
+ `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
+                      vhdl-mode-hook verilog-mode-hook)
+ '(lambda ()
+    (when (try-require 'outline-org-like)
+      (outline-org-mode 1))))
+
 ;;------------------------------------------------------------------
-;;** hide-show
+;;** hideshow
 ;; a minor mode similar to outline-mode.
 ;; It hides and shows blocks of text.
 ;; In particular, HideShow hides balanced-expression code blocks and
 ;; multi-line comment blocks.
 ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/HideShow" :display "emacswiki")
-(am-add-hooks
- `(c-mode-common-hook cpp-mode-hook cc-mode-hook java-mode-hook
-   lisp-mode-hook emacs-lisp-mode-hook)
-   'hs-minor-mode)
-
 (eval-after-load "hideshow"
   '(progn
-     ;; (hs-minor-mode-face-settings) ;; TODO: to my theme
      (hs-minor-mode-settings)
      ;; (define-key hs-minor-mode-map (kbd "C-c @ C-h") 'hs-hide-block)
      ;; (define-key hs-minor-mode-map (kbd "C-c @ C-w") 'hs-show-block)
-     (define-key hs-minor-mode-map (kbd "S-<f6>") 'hs-toggle-hiding)
-     (define-key hs-minor-mode-map (kbd "C-<f6>") 'hs-hide-level)
-     (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
-     (define-key hs-minor-mode-map (kbd "M-S-<f6>") 'hs-show-all)
+     ;; (define-key hs-minor-mode-map (kbd "S-<f6>") 'hs-toggle-hiding)
+     ;; (define-key hs-minor-mode-map (kbd "C-<f6>") 'hs-hide-level)
+     ;; (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
+     ;; (define-key hs-minor-mode-map (kbd "M-S-<f6>") 'hs-show-all)
      ))
+(am-add-hooks
+ `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
+                      vhdl-mode-hook verilog-mode-hook)
+ '(lambda ()
+    (when (try-require 'hideshow)
+      (hs-minor-mode t))))
 
 ;;*** hideshow-org
 ;; The extension makes hideshow.el’s functionality behave like org-mode’s.
@@ -202,35 +192,13 @@
 ;;      - (@url :file-name "http://gnufool.blogspot.com/2009/03/make-hideshow-behave-more-like-org-mode.html" :display "Post")
 ;; NOTE: the default <TAB> key conflicts with `icicles' and
 ;;       `yasnippet'
-;; (add-hook 'hs-minor-mode
-;;           (lambda ()
-;;             (require 'hideshow-org)))
-;; (eval-after-load "hideshow-org"
-;;   '(progn
-;;      (hideshow-org-settings)))
-
-;;--------------------------------------------------------------------
-;;** outline-org-like
-;; org-like code folding
-;; REF: - (@url :file-name "http://www.cnblogs.com/bamanzi/archive/2011/10/09/emacs-outline-org-like.html" :display "Post")
-;;      - (@url :file-name "http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el" :display "Source")
-;; (require 'outline)
-;; (require 'outline-magic)
-;; (add-hook 'outline-mode-hook
-;;           (lambda ()
-;;             (require 'outline-cycle)))
-(add-hook 'outline-minor-mode-hook
+;; (eval-after-load "hideshow-org" '(hideshow-org-settings))
+(add-hook 'hs-minor-mode-hook
           (lambda ()
-            (require 'outline-magic)
-            (define-key outline-minor-mode-map (kbd "<f6>") 'outline-cycle)
-            ))
-(am-add-hooks
- `(c-mode-common-hook cpp-mode-hook cc-mode-hook java-mode-hook
-   lisp-mode-hook emacs-lisp-mode-hook
-   vhdl-mode-hook verilog-mode-hook)
- (lambda ()
-   (require 'outline-org-like)
-   (outline-org-mode 1)))
+            (when (try-require 'hideshow-org)
+              (setq indent-tabs-mode nil)
+              (setq tab-always-indent t)
+              (hs-org/minor-mode t))))
 
 ;;--------------------------------------------------------------------
 ;;** orgstruct-mode
@@ -288,94 +256,76 @@
 ;;--------------------------------------------------------------------
 ;;** which-func
 ;; 用来显示当前光标在哪个函数
+(eval-after-load "which-func" '(which-func-settings))
 (which-func-mode 1)
-(eval-after-load "which-func"
-  '(progn
-     ;; (which-func-face-settings) ;; TODO: to my theme
-     (which-func-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** imenu
-;; (require 'imenu)
-;; Add an Imenu index to the menu bar in any mode that supports Imenu.
-(add-hook 'font-lock-mode-hook 'try-to-add-imenu)
-(eval-after-load "imenu"
-  '(progn
-    (imenu-settings)))
+(eval-after-load "imenu" '(imenu-settings))
+(add-hook 'font-lock-mode-hook ;; Add an Imenu index to the menu bar
+                               ;; in any mode that supports Imenu.
+          'try-to-add-imenu)
 
 ;;*** imenu-tree
-;; (require 'imenu-tree)
-(eval-after-load "imenu-tree"
-  '(progn
-    (imenu-tree-settings)))
+(eval-after-load "imenu-tree" '(imenu-tree-settings))
 (global-set-key (kbd "C-S-<f7>") 'imenu-tree)
 
 ;;--------------------------------------------------------------------
 ;;** etags
-(defadvice find-tag (before tags-file-name-advice activate)
-  "Find TAGS file in ./ or ../ or ../../ dirs"
-  (let ((list (mapcar 'expand-file-name '("./TAGS" "../TAGS" "../../TAGS"))))
-    (while list
-      (if (file-exists-p (car list))
-          (progn
-            (setq tags-file-name (car list))
-            (setq list nil))
-        (setq list (cdr list))))))
+(eval-after-load "etags" '(etags-settings))
 
 ;;====================================================================
 ;;* Shell script development settings
-
+(eval-after-load "sh-script" '(sh-mode-settings))
 ;; (eal-define-keys
 ;;  'sh-mode-map
 ;;  `(("<"       self-insert-command)
 ;;    ("C-c M-c" sh-case)
 ;;    ("C-c C-c" comment)
 ;;    ("C-c g"   bashdb)))
-(eval-after-load "sh-script"
-  '(progn
-     ;; (sh-mode-face-settings) ;; TODO: to my theme
-     (sh-mode-settings)))
 
 ;;====================================================================
 ;;* Windows DOS batch script programming
-
-(autoload 'batch-mode "batch-mode")
+(autoload 'batch-mode "batch-mode" t)
 (add-to-list 'auto-mode-alist '("\\.bat$" . batch-mode))
 
 ;;====================================================================
 ;;* Emacs-lisp development settings
-
-;; (eval-after-load "lisp-mode"
-;;   '(progn
-;;     (lisp-interaction-mode-settings)))
-;; (eal-define-keys
-;;  'lisp-interaction-mode-map
-;;  `(("C-j" goto-line)
-;;    ("M-j" eval-print-last-sexp)))
-
-;; ;; emacs-lisp-mode settings
-;; (eal-define-keys
-;;  `emacs-lisp-mode-map
-;;  `(("C-c M-a" beginning-of-defun)
-;;    ("C-c M-e" end-of-defun)))
-
-;; (eal-define-keys
-;;  `(emacs-lisp-mode-map lisp-interaction-mode-map)
-;;  `(("C-M-h" mark-function)
-;;    ("C-c D"  edebug-defun)
-;;    ("C-c C-d" eval-defun)
-;;    ("C-c B"  eval-buffer)
-;;    ("C-c f" copy-function)
-;;    ("C-c F" kill-function)
-;;    ("C-c C-q" indent-function)
-;;    ("C-c C" comment-function)))
-
 (eval-after-load "emacs-lisp-mode"
   '(progn
-     (emacs-lisp-mode-settings)))
+     (emacs-lisp-mode-settings)
+     (eal-define-keys
+      `emacs-lisp-mode-map
+      `(("C-c M-a"             beginning-of-defun)
+        ("C-c M-e"             end-of-defun)
+        ("C-M-h"               mark-function)
+        ("C-c D"               edebug-defun)
+        ("C-c C-d"             eval-defun)
+        ("C-c B"               eval-buffer)
+        ("C-c f"               copy-function)
+        ("C-c F"               kill-function)
+        ("C-c C-q"             indent-function)
+        ("C-c C"               comment-function))) ))
 (eval-after-load "lisp-mode"
   '(progn
-     (lisp-mode-settings)))
+     (lisp-mode-settings)
+     (eal-define-keys
+      `(lisp-mode-map lisp-interaction-mode-map)
+      `(("C-j"                 goto-line)
+        ("M-j"                 eval-print-last-sexp)
+        ("C-M-h"               mark-function)
+        ("C-c D"               edebug-defun)
+        ("C-c C-d"             eval-defun)
+        ("C-c B"               eval-buffer)
+        ("C-c f"               copy-function)
+        ("C-c F"               kill-function)
+        ("C-c C-q"             indent-function)
+        ("C-c C"               comment-function)))))
+
+;; auto compile elisp files after save, do so only if there's exists
+;; a byte-compiled file ;; BUG: removed, it is cause resursive loading
+;; sometimes.
+;; (add-hook 'after-save-hook 'auto-recompile-el-buffer)
 
 ;; BUG: lisp-interaction-mode error
 ;; Debugger entered--Lisp error: (error "Invalid function:
@@ -394,23 +344,19 @@
 ;;--------------------------------------------------------------------
 ;;** eldoc
 ;; 显示变量, 函数的声明，可用在很多语言中(c)
+(eval-after-load "eldoc" '(eldoc-settings))
 (am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook
-   lisp-interaction-mode-hook cperl-mode-hook)
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook)
  'turn-on-eldoc-mode)
-(eval-after-load "eldoc"
-  '(progn
-     ;; (eldoc-face-settings) ;; TODO: to my theme
-     (eldoc-settings)))
 
 ;;====================================================================
 ;;* c/c++ development settings
 ;; NOTE: C include directories' list are defined in `xy-util.el'
 ;; (add-to-list 'auto-mode-alist '("\\.c"   . c-mode))
-(add-to-list 'auto-mode-alist '("\\.hch" . c-mode)) ;; Handle-C
-(add-to-list 'auto-mode-alist '("\\.hcc" . c-mode)) ;; Handle-C
 ;; (add-to-list 'auto-mode-alist '("\\.cpp$" . c++-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.c++$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hch" . c-mode)) ;; Handle-C
+(add-to-list 'auto-mode-alist '("\\.hcc" . c-mode)) ;; Handle-C
 
 ;;--------------------------------------------------------------------
 ;;** cc-mode
@@ -419,10 +365,15 @@
      (cc-mode-settings)
      (eal-define-keys
       `(c-mode-base-map)
-      `(("C-c C <backspace>"     c-electric-backspace)
-        ("C-c C C-a"   beginning-of-defun)
-        ("C-c C C-e"   end-of-defun)
-        ("C-c C M-w"   copy-current-fun-name)
+      `(("C-c <backspace>"     c-electric-backspace)
+        ("C-c M-a"             beginning-of-defun)
+        ("C-c M-e"             end-of-defun)
+        ("C-M-h"               mark-function)
+        ("C-c M-w"             copy-current-fun-name)
+        ("C-c f"               copy-function)
+        ("C-c F"               kill-function)
+        ("C-c C-q"             indent-function)
+        ("C-c C"               comment-function)
         ;; ifdef settings
         ;; ("C-c I"     mark-ifdef)
         ;; hide-ifdef
@@ -431,66 +382,46 @@
         ;; ("C-c M-i"   show-ifdef-block)
         ;; ("C-c M-I"   show-ifdefs)
         ;; c-includes
-        ("C-c C i"     c-includes-current-file)
-        ("C-c C I"     c-includes)
+        ;; ("C-c C i"     c-includes-current-file)
+        ;; ("C-c C I"     c-includes)
         ;; sourcepair BUG: not working
         ;; ("C-c S"     sourcepair-load)
         ))))
-;; (eal-define-keys
-;;  'c-mode-base-map
-;;  `(("C-c f" copy-function)
-;;    ("C-c F" kill-function)
-;;    ("C-c C" comment-function)
-;;    ("C-M-h" mark-function)))
 
 ;;--------------------------------------------------------------------
 ;;** ifdef
-(eval-after-load "ifdef"
-  '(progn
-    (ifdef-settings)))
+(eval-after-load "ifdef" '(ifdef-settings))
 
 ;;--------------------------------------------------------------------
 ;;** hide-ifdef
+(eval-after-load "hideif" '(hideif-settings))
 ;; (autoload 'hide-ifdef-block "hideif"
 ;;   "Hide the ifdef block (true or false part) enclosing or before the cursor."
 ;;   t)
-
 ;; (autoload 'hide-ifdefs "hideif"
 ;;   "Hide the contents of some #ifdefs.
 ;; Assume that defined symbols have been added to `hide-ifdef-env'.
 ;; The text hidden is the text that would not be included by the C
 ;; preprocessor if it were given the file with those symbols defined.
-
 ;; ;; Turn off hiding by calling `show-ifdefs'."
 ;;   t)
-
 ;; (autoload 'show-ifdef-block "hideif"
 ;;   "Show the ifdef block (true or false part) enclosing or before the cursor."
 ;;   t)
-
 ;; (autoload 'show-ifdefs "hideif"
 ;;   "Cancel the effects of `hide-ifdef': show the contents of all #ifdefs."
 ;;   t)
 
-(eval-after-load "hideif"
-  '(progn
-     (hideif-settings)))
-
 ;;--------------------------------------------------------------------
 ;;** c-includes
-;; (require 'c-includes)
-(eval-after-load "c-includes"
-  '(progn
-     (c-includes-settings)))
+(eval-after-load "c-includes" '(c-includes-settings))
 
 ;;--------------------------------------------------------------------
 ;;** sourcepair
-(autoload 'sourcepair-load "sourcepair"
-  "Load the corresponding C/C++ header or source file for the current
-buffer."  t)
-(eval-after-load "sourcepair"
-  '(progn
-     (sourcepair-settings)))
+(eval-after-load "sourcepair" '(sourcepair-settings))
+;; (autoload 'sourcepair-load "sourcepair"
+;;   "Load the corresponding C/C++ header or source file for the current
+;; buffer."  t)
 
 ;;--------------------------------------------------------------------
 ;; ;;** codepilot
@@ -566,9 +497,7 @@ buffer."  t)
 
 ;;--------------------------------------------------------------------
 ;;** xcscope
-(eval-after-load "xcscope"
-  '(progn
-     (xcscope-settings)))
+(eval-after-load "xcscope" '(xcscope-settings))
 
 ;;--------------------------------------------------------------------
 ;;** ctags
@@ -576,36 +505,26 @@ buffer."  t)
 ;; make a comparison with the `xcscope.el' (ctags vs cscope)
 ;; REF:
 ;;     - (@url :file-name "http://stackoverflow.com/questions/934233/cscope-or-ctags-why-choose-one-over-the-other" :display "cscope vs ctags")
+;; (eval-after-load "ctags" '(ctags-settings))
 
 ;;====================================================================
 ;;* vhdl development settings
-
-(eval-after-load "vhdl"
-  '(progn
-     ;; (vhdl-mode-face-settings)
-     (vhdl-mode-settings)))
+(eval-after-load "vhdl" '(vhdl-mode-settings))
 
 ;;====================================================================
 ;;* verilog development settings
-
-(eval-after-load "verilog"
-  '(progn
-     ;; (verilog-mode-face-settings)
-     (verilog-mode-settings)))
+(eval-after-load "verilog" '(verilog-mode-settings))
 
 ;;====================================================================
 ;;* Matlab development settings
-
+(eval-after-load "matlab" '(matlab-settings))
 ;; (require 'matlab-load)
-(eval-after-load "matlab"
-  '(progn
-     ;; (matlab-face-settings) ;; TODO: to my theme
-     (matlab-settings)))
 
 ;;====================================================================
 ;;* Documentation settings
 
 ;;** doxygen
+;; (eval-after-load "doxymacs" '(doxymacs-settings))
 ;; (require 'doxymacs-settings)
 ;; (autoload 'doxymacs-mode "doxymacs"
 ;;   ;; All of the following text shows up in the "mode help" (C-h m)
@@ -626,38 +545,27 @@ buffer."  t)
 ;;  (lambda ()
 ;;    (doxymacs-mode 1)
 ;;    (doxymacs-font-lock)))
-;; ;;;###autoload
-;; (defun doxymacs-settings ()
-;;   "Settings for `doxymacs'.")
-;; (eval-after-load "doxymacs"
-;;   '(progn
-;;     (doxymacs-settings)))
 
 ;;====================================================================
 ;;* Compiler settings
 
 ;;** autoconf-mode settings
+;; (eval-after-load "autoconf-mode" '(autoconf-mode-settings))
 ;; (require 'autoconf-mode-settings)
-;; ;;;###autoload
-;; (defun autoconf-mode-settings ()
-;;   "Settings for `autoconf-mode'.")
-;; (eval-after-load "autoconf-mode"
-;;   `(autoconf-mode-settings))
 
 ;;--------------------------------------------------------------------
 ;;** flymake
 ;; 动态检查语法错误
 (autoload 'flymake-find-file-hook "flymake" "" t)
-;; (add-hook 'find-file-hook 'flymake-find-file-hook)
 (eval-after-load "flymake"
   '(progn
      (flymake-settings)
-     ;; (eal-define-keys
-     ;;  'flymake-mode-map
-     ;;  `(("C-c N"   flymake-goto-next-error-disp)
-     ;;     ("C-c P"   flymake-goto-prev-error-disp)
-     ;;     ("C-c M-w" flymake-display-current-warning/error)))
-     ))
+     (eal-define-keys
+      'flymake-mode-map
+      `(("C-c N"   flymake-goto-next-error-disp)
+        ("C-c P"   flymake-goto-prev-error-disp)
+        ("C-c M-w" flymake-display-current-warning/error))) ))
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
 
 ;;--------------------------------------------------------------------
 ;;** ahei 的智能编译
@@ -727,15 +635,13 @@ buffer."  t)
 
 ;;--------------------------------------------------------------------
 ;;** edebug
+;; (eval-after-load "edebug"
+;;   '(progn
+;;      (define-key edebug-mode-map (kbd "C-c C-d") nil)))
 ;; (eal-define-keys-commonly
 ;;  global-map
 ;;  `(("C-x M-E" toggle-debug-on-error)
 ;;    ("C-x Q"   toggle-debug-on-quit)))
-
-;; (eval-after-load "edebug"
-;;   '(progn
-;;      (define-key edebug-mode-map (kbd "C-c C-d") nil)))
-
 ;; (defun edebug-clear-global-break-condition ()
 ;;   "Clear `edebug-global-break-condition'."
 ;;   (interactive)
@@ -762,26 +668,18 @@ buffer."  t)
 ;;    ("M-C"   capitalize-word)
 ;;    ("C-c m" make)))
 
-(eval-after-load "gdb-ui"
-  '(progn
-     (gud-settings)))
-;; (eval-after-load "gdb-mi"
-;;   '(progn
-;;     (gud-settings)))
+(eval-after-load "gdb-ui" '(gud-settings))
+;; (eval-after-load "gdb-mi" '(gud-settings))
 
 ;;====================================================================
 ;;* IDE settings
 
 ;;** CEDET settings
-(eval-after-load "cedet"
-  '(progn
-     (cedet-settings)))
+(eval-after-load "cedet" '(cedet-settings))
 
 ;;--------------------------------------------------------------------
 ;;** ECB settings
-(eval-after-load "ecb"
-  '(progn
-     (ecb-settings)))
+(eval-after-load "ecb" '(ecb-settings))
 
 ;;--------------------------------------------------------------------
 ;;** eclim settings
@@ -790,6 +688,5 @@ buffer."  t)
 ;; (dolist (hook (list 'c-mode-common-hook 'lisp-mode-hook
 ;;                     'emacs-lisp-mode-hook 'java-mode-hook))
 ;;   (add-hook hook 'eclim-mode))
-
 
 (provide 'xy-rcroot-prog)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-flyspell.el'
-;; Time-stamp:<2011-12-04 Sun 16:47 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 02:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,19 +24,15 @@
     (setq beg (1+ beg)))
   (= beg end))
 
+;;TODO: try hunspell instead of aspell
 ;;;###autoload
 (defun flyspell-settings ()
   "settings of `flyspell.el'."
-  (setq ispell-program-name "aspell")
-  (setq ispell-dictionary "british")
-  ;;(ispell-change-dictionary "british" t)
-  ;;(ispell-change-dictionary "english" t)
   (setq flyspell-delay 1)
   (setq flyspell-issue-welcome-flag nil)
   ;; 令flyspell按照相近程度补齐
   (setq flyspell-sort-corrections nil)
   (add-hook 'flyspell-incorrect-hook 'my-flyspell-ignore-uppercase)
-  (message "* ---[ flyspell configuration is complete ]---")
-)
+  (message "* ---[ flyspell configuration is complete ]---"))
 
 (provide 'xy-rc-flyspell)

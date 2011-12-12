@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-09 Fri 22:19 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 06:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,15 +36,14 @@
 ;;--------------------------------------------------------------------
 ;;** ffap, finding Files and URLs at point
 ;; REF: (@url :file-name "http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html#index-ffap-3860" :display "emacs manual")
+(eval-after-load "ffap" '(ffap-settings))
 (ffap-bindings) ;; BUG: conflict with `ido.el' C-x C-f, can be fixed
                 ;;      by (setq ffap-require-prefix t)
                 ;;      (Has been added to `ffap-settings')
-(eval-after-load "ffap"
-  '(progn
-     (ffap-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** linum
+(eval-after-load 'linum '(linum-settings))
 (am-add-hooks
  `(find-file-hook
    log-view-mode-hook chart-mode-hook
@@ -67,28 +66,27 @@
                 (eq major-mode 'TeX-mode)
                 (eq major-mode 'tex-mode))
       (linum-mode 1))))
-(global-set-key (kbd "<f6> l") 'linum-mode)
-(eval-after-load 'linum
-  '(progn
-     ;; (linum-face-settings) ;; TODO: will be added to my theme
-     (linum-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** time-stamp
 ;; maintain last change time stamps
-;; (`Time-stamp: <>' occurring within the first 8 lines)
+;; (`Time-stamp:<>' occurring within the first 8 lines)
 ;; in files edited by Emacs
+(eval-after-load "time-stamp" '(time-stamp-settings))
 (add-hook 'write-file-hooks 'time-stamp)
-(eval-after-load "time-stamp"
-  '(progn
-     (time-stamp-settings)))
+
+;;** ispell
+;; 其他拼写检查的基础
+(eval-after-load "ispell" '(ispell-settings))
 
 ;;--------------------------------------------------------------------
 ;;** flyspell
-(setq text-mode-hook 'flyspell-mode)
-(eval-after-load 'flyspell
-  '(progn
-     (flyspell-settings)))
+(eval-after-load 'flyspell '(flyspell-settings))
+(am-add-hooks
+ `(text-mode-hook org-mode-hook latex-mode-hook
+   message-mode-hook mew-draft-mode-hook)
+ '(lambda ()
+    (flyspell-mode 1)))
 
 ;;--------------------------------------------------------------------
 ;;** Calendar
@@ -115,31 +113,20 @@
 ;; i a    加入周年纪念（anniversary），比如生日等
 ;; d    察看当前日期的diary
 ;; -----------------------------------------------
-(eval-after-load "calendar"
-  '(progn
-     (calendar-settings)))
-
-(eval-after-load "diary-lib"
-  '(progn
-     (diary-settings)))
-
-(eval-after-load "appt"
-  '(progn
-     (appt-settings)))
+(eval-after-load "calendar" '(calendar-settings))
+(eval-after-load "diary-lib" '(diary-settings))
+(eval-after-load "appt" '(appt-settings))
 
 ;;--------------------------------------------------------------------
 ;;** tramp
 ;; 以另一用户编辑文件, 或者编辑远程主机文件
-(global-set-key (kbd "C-c C-R") 'sudo-edit-current-file)
-(eval-after-load "tramp"
-  '(progn
-     (tramp-settings)))
+(eval-after-load "tramp" '(tramp-settings))
+(GNULinux
+ (global-set-key (kbd "C-c C-R") 'sudo-edit-current-file))
 
 ;;--------------------------------------------------------------------
 ;;** term-mode
-(eval-after-load "term"
-  '(progn
-     (term-settings)))
+(eval-after-load "term" '(term-settings))
 
 ;;--------------------------------------------------------------------
 ;;** Shell/eshell-mode
@@ -157,43 +144,32 @@
 
 ;;====================================================================
 ;;* undo-tree
-
 (require 'undo-tree)
 (global-undo-tree-mode)
 
 ;;====================================================================
 ;;* list-processes+
-
 ;; 查看Emacs内进程
 (autoload 'list-processes+ "list-processes+"
   "Enhanced `list-processes'" t)
 
 ;;====================================================================
 ;;* command-frequence
-
 ;; 统计命令使用频率
 ;; (autoload 'command-frequence "command-frequence"
 ;;   "Emacs command frequence statistics" t)
 
 ;;====================================================================
 ;;* todochiku
-
 ;; notification tool.
 ;; It started life interfacing with Growl (OS X, http://growl.info/),
 ;; Snarl (Win 32, http://www.fullphat.net/) and libnotify (linux/unix).
 ;; It can also do standard messages (in the minibuffer) and pop up a
 ;;tooltip.
-;; (require 'xy-todochiku)
-(eval-after-load "xy-todochiku"
-  '(progn
-     (todochiku-settings)))
+(eval-after-load "todochiku" '(todochiku-settings))
 
 ;;====================================================================
 ;;* browse-kill-ring
-
-;; 查看循环剪贴板的内容
-;; (autoload 'browse-kill-ring "browse-kill-ring"
-;;   "Check contents in the kill ring" t)
 (eval-after-load "browse-kill-ring"
   '(progn
      (browse-kill-ring-settings)
@@ -217,7 +193,6 @@
 
 ;;====================================================================
 ;;* kill-ring-search
-
 ;; Search the kill ring in the minibuffer.
 ;; (autoload 'kill-ring-search "kill-ring-search"
 ;;  "Search the kill ring in the minibuffer."
@@ -226,7 +201,6 @@
 
 ;;====================================================================
 ;;* copyright
-
 ;; (GNUEmacs
 ;;  ;; update the copyright notice in current buffer
 ;;  (when (try-require 'copyright)
@@ -235,7 +209,6 @@
 
 ;;====================================================================
 ;;* Hanconvert
-
 ;; 自动在简体中文和繁体中文间转换.
 (autoload 'hanconvert-region "hanconvert"
   "Convert a region from simple chinese to tradition chinese or
@@ -243,18 +216,15 @@ from tradition chinese to simple chinese" t)
 
 ;;====================================================================
 ;;* htmlize
-
 ;; 把文件或buffer彩色输出成html
-;; (require 'htmlize)
+(eval-after-load "htmlize" '(htmlize-settings))
 
 ;;====================================================================
 ;;* inkd
-
 ;; 在各种 text 文档间提供链接
 (eval-after-load "linkd"
   '(progn
      (linkd-settings)
-     ;; (linkd-face-settings) ;; TODO: will be add to my theme
      (eal-define-keys
       'linkd-overlay-map
       `(("n"        linkd-next-link)
@@ -282,7 +252,6 @@ from tradition chinese to simple chinese" t)
 
 ;;====================================================================
 ;;* ascii
-
 ;; ascii表查询
 ;; (autoload 'ascii-on        "ascii"
 ;;   "Turn on ASCII code display."   t)
@@ -296,7 +265,6 @@ from tradition chinese to simple chinese" t)
 
 ;;====================================================================
 ;;* multi-term
-
 ;; a mode based on term.el, for managing multiple terminal buffers
 (eval-after-load "multi-term"
   '(progn
@@ -317,10 +285,13 @@ from tradition chinese to simple chinese" t)
 ;; pop up a window for shell
 (autoload 'shell-pop "shell-pop" "Pop-up a shell" t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(eval-after-load "shell-pop"
-  '(progn
-     (shell-pop-settings)))
+(eval-after-load "shell-pop" '(shell-pop-settings))
 (global-set-key (kbd "<f9>") 'shell-pop)
 
-
 (provide 'xy-rcroot-enhance)
+;;* hanspell
+(eval-after-load "rw-hunspell" '(rw-hunspell-settings))
+(eval-after-load "rw-ispell" '(rw-ispell-settings))
+(require 'rw-language-and-country-codes)
+(require 'rw-ispell)
+(require 'rw-hunspell)

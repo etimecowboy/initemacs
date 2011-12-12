@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
-;; Time-stamp:<2011-12-07 Wed 21:58 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 01:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,7 +34,7 @@
   ;; REF: (@url :file-name "http://lists.gnu.org/archive/html/emacs-orgmode/2009-11/msg00236.html" :display "Post@emacs-orgmode")
   ;; NOTE: May do the job twice with (@file :file-name "xy-rc-org.el" :to "org-show-notification-handler" :display "`org-show-notification-handler'")
   (when window-system
-    (when (try-require 'xy-todochiku)
+    (when (try-require 'todochiku)
       (setq appt-display-format 'window)
 
       (defun xy/appt-display (min-to-app new-time msg)

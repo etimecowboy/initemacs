@@ -3,7 +3,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: eval-after-load, autoload
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/eval-after-load.el
-;; Time-stamp: <2011-04-28 15:41:47 Thursday by taoshanwen>
+;; Time-stamp:<2011-12-12 Mon 07:03 xin on P6T-WIN7>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -127,7 +127,12 @@
     ("auto-complete"   nil                    ac-mode-map)
     ("list-processes+" nil                    list-processes-mode-map)
     ("semantic-decoration-on-include" nil semantic-decoration-on-include-map)
-    ("semantic-symref-list" semantic-symref-results-mode semantic-symref-results-mode-map))
+    ("semantic-symref-list" semantic-symref-results-mode semantic-symref-results-mode-map)
+    ("ido-mode"        ido-mode               ido-mode-map) ;; HACK: add ido-mode
+    ("matlab-mode"     matlab-mode            matlab-mode-map) ;; HACK: add matlab-mode
+    ("vhdl-mode"       vhdl-mode              vhdl-mode-map) ;; HACK: add vhdl-mode
+    ("verilog-mode"    verilog-mode           verilog-mode-map) ;; HACK: add verilog-mode
+    )
   "*List used to find load file by mode or map.
 
 Every element of list is or a list consisted by load file, mode and map,

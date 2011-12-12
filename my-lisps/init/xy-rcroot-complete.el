@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-09 Fri 00:43 xin on p6t>
+;; Time-stamp:<2011-12-11 Sun 14:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -34,7 +34,7 @@
 ;; (add-hook 'after-init-hook 'xy/ido-start)
 (eval-after-load 'ido
   '(progn
-     (ido-settings)
+     (ido-settings)))
      ;; (eal-define-keys
      ;;  'ido-mode-map
      ;;  `(("M-."   ido-next-match-dir)
@@ -49,49 +49,42 @@
      ;;    ("C-w"   ido-delete-backward-word-updir)
      ;;    ;; ("C-v"   ido-enter-svn-status-hide)
      ;;    ("C-n"   ido-next-match)
-     ;;    ("C-p"   ido-prev-match)))
-  ))
+     ;;    ("C-p"   ido-prev-match)))))
 
 ;;--------------------------------------------------------------------
 ;;** icomplete
 ;; minibuffer中输入部分命令就可以使用补全
-;; (define-key minibuffer-local-completion-map
-;;   (kbd "SPC") 'minibuffer-complete-word)
-;; (icomplete-mode 1)
 ;; (eval-after-load "icomplete"
 ;;   '(prog
-;;     (icomplete-settings)))
-;; (eval-after-load 'my-icomplete+
-;;   '(prog
-;;     (icomplete+-face-settings)))
-;; completion-list-mode settings
-;; (eal-define-keys
-;;  'completion-list-mode-map
-;;  `(("SPC" scroll-up)
-;;    ("u"   scroll-down)
-;;    ("n"   next-completion)
-;;    ("p"   previous-completion)
-;;    ("<"   beginning-of-buffer)
-;;    (">"   end-of-buffer)
-;;    ("."   set-mark-command)
-;;    ("'"   switch-to-other-buffer)
-;;    ("L"   count-brf-lines)))
+;;     (icomplete-settings)
+;;     (eal-define-keys
+;;      'completion-list-mode-map
+;;      `(("SPC" scroll-up)
+;;        ("u"   scroll-down)
+;;        ("n"   next-completion)
+;;        ("p"   previous-completion)
+;;        ("<"   beginning-of-buffer)
+;;        (">"   end-of-buffer)
+;;        ("."   set-mark-command)
+;;        ("'"   switch-to-other-buffer)
+;;        ("L"   count-brf-lines)))
+;;     (define-key minibuffer-local-completion-map (kbd "SPC")
+;;       'minibuffer-complete-word)))
+;; (icomplete-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** smex
 ;; Smex is a M-x enhancement for Emacs. Built on top of Ido, it
 ;; provides a convenient interface to your recently and most
 ;; frequently used commands. And to all the other commands, too.
-;; (require 'smex)
-;; (smex-initialize)
-;; (add-hook 'after-init-hook 'xy/smex-start)
 (eval-after-load 'smex
   '(progn
      (smex-settings)
-     (global-set-key (kbd "M-x") 'smex)
-     (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-     (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-     ))
+     (eal-define-keys-commonly
+      global-map
+      `(("M-x" smex)
+        ("M-X" smex-major-mode-commands)
+        ("C-c M-x" execute-extended-command)))))
 
 ;;--------------------------------------------------------------------
 ;;** ido+smex
@@ -108,8 +101,7 @@
   (require 'smex)
   (ido-mode 1)
   ;; (smex-initialize-ido)
-  (smex-initialize)
-  )
+  (smex-initialize))
 (add-hook 'after-init-hook 'xy/ido+smex-start)
 
 ;;====================================================================
@@ -134,24 +126,21 @@
      ;; 不让回车的时候执行`ac-complete', 因为当你输入完一个
      ;; 单词的时候, 很有可能补全菜单还在, 这时候你要回车的话,
      ;; 必须要干掉补全菜单, 很麻烦, 用M-j来执行`ac-complete'
-     ;; (eal-define-keys-commonly
-     ;;  ac-complete-mode-map
-     ;;  `(("<return>"   nil)
-     ;;     ("RET"        nil)
-     ;;     ;; ("M-j"        ac-complete)
-     ;;     ;; ("<C-return>" ac-complete)
-     ;;     ("M-n"        ac-next)
-     ;;     ("M-p"        ac-previous)))
+     (eal-define-keys
+      'ac-complete-mode-map
+      `(("<return>"   nil)
+         ("RET"        nil)
+         ;; ("M-j"        ac-complete)
+         ;; ("<C-return>" ac-complete)
+         ("M-n"        ac-next)
+         ("M-p"        ac-previous)))
      ))
 
 ;;--------------------------------------------------------------------
 ;;** company settings
 ;; It is a modular in-buffer completion mechanism.
-;; (require 'company)
-(autoload 'company-mode "company" nil t)
-(eval-after-load "company"
-  '(progn
-     (company-settings)))
+;; (autoload 'company-mode "company" nil t)
+;; (eval-after-load "company" '(company-settings))
 ;; (am-add-hooks
 ;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
 ;;    java-mode-hook lisp-interaction-mode-hook sh-mode-hook
@@ -173,10 +162,8 @@
 ;;--------------------------------------------------------------------
 ;;** auto-insert
 ;; 用template, 自动插入一些文件模板
+;; (eval-after-load "autoinsert" '(auto-insert-settings))
 ;; (auto-insert-mode 1)
-(eval-after-load "autoinsert"
-  '(progn
-     (auto-insert-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** yasnippet
@@ -201,32 +188,26 @@
 ;;====================================================================
 ;;* icicles
 ;; System-wide completion
-
+(eval-after-load "icicles" '(icicles-settings))
 ;; (add-hook 'after-init-hook 'icy-mode)
-(eval-after-load "icicles"
-  '(progn
-     (icicles-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** apropos-mode
 ;; (with icicles?) completion
-;; (eal-define-keys
-;;  'apropos-mode-map
-;;  `(("u" scroll-down)
-;;    ("1" delete-other-windows)
-;;    ("n" forward-button)
-;;    ("p" backward-button)))
-;; (eval-after-load "apropos"
-;;   '(progn
-;;      (apropos-face-settings)))
+(eval-after-load "apropos"
+  '(progn
+     ;; (apropos-settings)
+     (eal-define-keys
+      'apropos-mode-map
+      `(("u" scroll-down)
+        ("1" delete-other-windows)
+        ("n" forward-button)
+        ("p" backward-button)))))
 
 ;;====================================================================
 ;;* anything
 ;; Quicksilver for Emacs
-
-(eval-after-load 'anything
-  '(progn
-     (anything-settings)))
-(global-set-key (kbd "C-c i") 'xy/my-anything) ;; old <f7>
+(eval-after-load 'anything '(anything-settings))
+(global-set-key (kbd "C-c i") 'xy/my-anything)
 
 (provide 'xy-rcroot-complete)

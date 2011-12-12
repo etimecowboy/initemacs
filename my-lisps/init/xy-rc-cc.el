@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cc.el'
-;; Time-stamp:<2011-12-05 Mon 14:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-11 Sun 22:31 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My C/C++/Java development settings
@@ -72,8 +72,7 @@
   (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
   ;;------------------------------------------------------------------
-  (message "* ---[ cc-mode configuration is complete ]---")
-)
+  (message "* ---[ cc-mode configuration is complete ]---"))
 
 ;; Customizations for all modes in CC Mode.
 ;;;###autoload
@@ -83,7 +82,7 @@
   ;; other customizations
   (setq tab-width 8
         ;; this will make sure spaces are used instead of tabs
-        indent-tabs-mode nil)
+        indent-tabs-mode -1)
   ;; (setq-default c-electric-flag nil) ;; for newbies to cc-mode
   (c-toggle-electric-state 1)
   ;; (auto-newline-mode 1)
@@ -95,7 +94,7 @@
   (require 'filladapt)
   (c-setup-filladapt)
   (filladapt-mode 1)
-  )
+  (message "* ---[ c-common-mode configuration is complete ]---") )
 
 ;; Customizations for c-mode
 ;;;###autoload
@@ -108,8 +107,7 @@
   ;; (require 'sourcepiar)  ;; 可以在cpp与h文件之间切换
   (require 'xcscope)     ;; 在 C 源代码中快速跳转，查找变量，函数
   (require 'xcscope+)
-  (message "* ---[ c-mode configuration is complete ]---")
-  )
+  (message "* ---[ c-mode configuration is complete ]---"))
 
 ;; Customizations for c++-mode
 ;;;###autoload
@@ -125,8 +123,7 @@
   ;; (c-set-style "stroustrup")
   ;; (defalias 'cpp-mode 'c++-mode)
   ;; (define-key c++-mode-map [f3] 'replace-regexp)
-  (message "* ---[ c++-mode configuration is complete ]---")
-  )
+  (message "* ---[ c++-mode configuration is complete ]---"))
 
 (provide 'xy-rc-cc)
 

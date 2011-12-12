@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-12-09 Fri 05:38 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 00:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,8 +16,7 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; TODO: write an anything function to find emacs config files and org
-;; files
+;; TODO: write an anything function to find emacs config files
 
 ;;;###autoload
 (defun xy/my-anything ()
@@ -102,8 +101,8 @@
                 anything-c-source-file-cache
                 anything-c-source-bookmarks
                 anything-c-source-files-in-current-dir+
-                anything-c-source-locate)))) ;; FIXME: windows locate32
-                                             ;;        not working!
+                anything-c-source-locate))))
+  ;; BUG: windows locate32 not working!, console mode chinese encoding error.
 
   (global-set-key (kbd "C-<f1>")  ;; i -> info
            (lambda () (interactive)

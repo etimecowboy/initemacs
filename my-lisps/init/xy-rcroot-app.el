@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-10 Sat 05:11 xin on p6t>
+;; Time-stamp:<2011-12-11 Sun 22:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -66,21 +66,15 @@
 
 ;;---------------------------------------------------------------------
 ;;** Resize frame and window
-
+(eval-after-load "fit-frame" '(fit-frame-settings))
+(eval-after-load "maxframe"  '(maxframe-settings))
 (when window-system
   (require 'fit-frame)
-  ;; (eval-after-load "fit-frame"
-  ;;   '(progn
-  ;;      (fit-frame-settings)))
   (add-hook 'after-make-frame-functions 'fit-frame)
   (require 'autofit-frame)
   (require 'thumb-frm)
-  ;; (require 'maxframe) ;; NOTE: not very stable with two or more
-                         ;; monitors, so use system function is better.
-  ;; ;; (eval-after-load "maxframe"
-  ;;   '(progn
-  ;;      (maxframe-settings)))
-)
+  ;; (require 'maxframe) ;; NOTE: not stable with two or more monitors
+  )
 
 ;;====================================================================
 ;;* Window settings
@@ -103,9 +97,7 @@
 ;;--------------------------------------------------------------------
 ;;** windmove
 ;; NOTE: not fast enough, use `window-number.el'
-(eval-after-load "windmove"
-  '(progn
-     (windmove-settings)))
+(eval-after-load "windmove" '(windmove-settings))
 
 ;;--------------------------------------------------------------------
 ;;** buffer-move
@@ -198,9 +190,7 @@
 ;;** mode-line-frame
 ;; offers a frame to show various information
 ;; Just call `xy/separate-line-frame' to use it.
-(eval-after-load "mode-line-frame"
-  '(progn
-     (mode-line-frame-settings)))
+(eval-after-load "mode-line-frame" '(mode-line-frame-settings))
 
 ;;====================================================================
 ;;* mini-buffer settings
@@ -290,23 +280,15 @@
 (setq mouse-wheel-progressive-speed t)
 (setq mouse-wheel-scroll-amount '(5 ((shift) . 1) ((control))))
 ;;(setq mouse-autoselect-window 1.0) ;; don't auto select
-
-(eval-after-load "mouse-drag"
-  '(progn
-     (setq mouse-throw-with-scroll-bar nil)))
-
-;; Mouse support in terminal
-(when (not window-system)
-  (xterm-mouse-mode 1))
+(setq mouse-throw-with-scroll-bar nil)
+(when (not window-system) (xterm-mouse-mode 1)) ;; Mouse in terminal
 
 ;;====================================================================
 ;;* Syntax highlighting
 
 ;;** font-lock
+(eval-after-load "font-lock" '(font-lock-settings))
 (global-font-lock-mode 1)
-(eval-after-load "font-lock"
-  '(progn
-     (font-lock-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** hl-line
@@ -328,7 +310,6 @@
 ;;--------------------------------------------------------------------
 ;;** highlight-symbol
 ;; 像Eclipse那样高亮光标处单词, 基于hi-lock，方便但是不能保存高亮设置
-;; (require 'highlight-symbol)
 (eval-after-load "highlight-symbol"
   '(progn
      ;; (highlight-symbol-face-settings)
@@ -354,6 +335,17 @@
 ;;       Use highlight-symbol-mode instead.
 ;; (require 'smart-hl)
 
+;;------------------------------------------------------------------
+;; pulse
+;; 实现Emacs的淡入淡出效果, is a part of cedet
+;; REF: (@url :file-name "http://emacser.com/pulse.htm" :display "Emacser")
+;; BUG: face-settings seem not working
+(eval-after-load "pulse"
+  '(progn
+     (pulse-face-settings)
+     (pulse-settings)))
+(require 'pulse)
+
 ;;--------------------------------------------------------------------
 ;;** zjl-hl
 ;; use CEDET semantic to highlight function calls
@@ -373,8 +365,6 @@
 ;;** color-theme
 ;; fancy themes for emacs
 ;; REF: (@url :file-name "http://emacser.com/color-theme.htm" :display "emacser")
-;; (require 'color-theme-autoloads)
-(require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
      (color-theme-settings)
@@ -388,6 +378,7 @@
         ("SPC" scroll-up)
         ("1"   delete-other-windows)
         ("."   find-symbol-at-point)))))
+(require 'color-theme)
 
 ;;--------------------------------------------------------------------
 ;;** doremi
@@ -396,32 +387,32 @@
 ;;--------------------------------------------------------------------
 ;;** palette
 ;; emacs 的调色板
-;; (eval-after-load "palette"
-;;   '(progn
-;;      (palette-settings)
-;;      (eal-define-keys
-;;       'palette-mode-map
-;;       `(("j"     palette-down)
-;;         ("k"     palette-up)
-;;         ("h"     palette-left)
-;;         ("l"     palette-right)
-;;         ("J"     palette-down-quickly)
-;;         ("K"     palette-up-quickly)
-;;         ("H"     palette-left-quickly)
-;;         ("L"     palette-right-quickly)
-;;         ("r"     palette-face-restore-bg-fg)
-;;         ("f"     palette-set-face-changed-to-foreground)
-;;         ("b"     palette-set-face-changed-to-background)
-;;         ("B"     facemenup-face-bg-restore)
-;;         ("F"     facemenup-face-fg-restore)
-;;         ("d"     palette-disply-which-in-changine)
-;;         ("m"     palette-pick-background-at-point)
-;;         ("C"     palette-copy-current-color)
-;;         ("C-x k" palette-quit-restore-bg-fg)))))
-;; (eal-define-keys-commonly
-;;  global-map
-;;  `(("C-x P" palette)
-;;    ("C-x M-F" facemenup-palette-face-fg-at-point)
-;;    ("C-x M-B" facemenup-palette-face-bg-at-point)))
+(eval-after-load "palette"
+  '(progn
+     (palette-settings)
+     (eal-define-keys
+      'palette-mode-map
+      `(("j"     palette-down)
+        ("k"     palette-up)
+        ("h"     palette-left)
+        ("l"     palette-right)
+        ("J"     palette-down-quickly)
+        ("K"     palette-up-quickly)
+        ("H"     palette-left-quickly)
+        ("L"     palette-right-quickly)
+        ("r"     palette-face-restore-bg-fg)
+        ("f"     palette-set-face-changed-to-foreground)
+        ("b"     palette-set-face-changed-to-background)
+        ("B"     facemenup-face-bg-restore)
+        ("F"     facemenup-face-fg-restore)
+        ("d"     palette-disply-which-in-changine)
+        ("m"     palette-pick-background-at-point)
+        ("C"     palette-copy-current-color)
+        ("C-x k" palette-quit-restore-bg-fg)))))
+(eal-define-keys-commonly
+ global-map
+ `(("C-x P p" palette)
+   ("C-x P f" facemenup-palette-face-fg-at-point)
+   ("C-x P b" facemenup-palette-face-bg-at-point)))
 
 (provide 'xy-rcroot-app)

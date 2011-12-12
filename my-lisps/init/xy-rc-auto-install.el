@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-install.el'
-;; Time-stamp:<2011-12-09 Fri 02:16 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 03:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,9 +21,6 @@
   "Settings of `auto-install.el'."
   (setq auto-install-save-confirm nil)
   (setq auto-install-directory my-emacswiki-lisp-path)
-  (eal-define-keys
-   'dired-mode-map
-   `(("C-i"    auto-install-from-dired)))
   (message "* ---[ auto-install configuration is complete ]---"))
 
 (provide 'xy-rc-auto-install)

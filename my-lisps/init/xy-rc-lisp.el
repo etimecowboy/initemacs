@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-lisp.el'
-;; Time-stamp:<2011-12-04 Sun 17:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 05:47 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -41,8 +41,7 @@
   ;;     ;; (turn-on-eldoc-mode)
   ;;     ;; (turn-on-hungry-delete-mode)
 
-  (message "* ---[ lisp-mode configuration is complete ]---")
-)
+  (message "* ---[ lisp-mode configuration is complete ]---"))
 
 ;;;###autoload
 (defun emacs-lisp-mode-settings ()
@@ -62,7 +61,6 @@
   ;;              ;; (xy/yas-start)
   ;;              ;; (xy/linkd-start)))
 
-  (message "* ---[ emacs-lisp-mode configuration is complete ]---")
-)
+  (message "* ---[ emacs-lisp-mode configuration is complete ]---"))
 
 (provide 'xy-rc-lisp)

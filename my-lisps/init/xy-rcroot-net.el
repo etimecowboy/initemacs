@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-08 Thu 07:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 04:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,18 +18,12 @@
 
 ;;====================================================================
 ;;* url
-
-(eval-after-load "url"
-  '(progn
-     (url-settings)))
+(eval-after-load "url" '(url-settings))
 
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
 ;;====================================================================
-;;* w3m
-
-;; (require 'w3m-load)
 ;; Use external program as the default web browser
 ;; (Windows
 ;;   (setq browse-url-browser-function
@@ -38,13 +32,10 @@
 ;;   (setq browse-url-browser-function
 ;;         'browse-url-default-browser))
 
-;; Use w3m as the default web browser
-(setq browse-url-browser-function 'w3m-browse-url)
 
-(eval-after-load "w3m"
-  '(progn
-     (w3m-settings)))
-
+;;====================================================================
+;;* w3m
+(eval-after-load "w3m" '(w3m-settings))
 (eal-define-keys-commonly
  global-map
  `(("C-x W n"     w3m-goto-url-new-session)
@@ -53,34 +44,25 @@
    ("<f8>"        browse-url)
    ("S-<f8>"      lookup-word-definition)
    ("C-<f8>"      lookup-wikipedia)
-   ("M-<f8>"      google-region)
-   ))
+   ("M-<f8>"      google-region)))
+;; Use w3m as the default web browser
+(setq browse-url-browser-function 'w3m-browse-url)
 
 ;;====================================================================
 ;;* erc
-
-;; (eval-after-load "erc"
-;;   '(progn
-;;      (erc-settings)))
+;; (eval-after-load "erc" '(erc-settings))
 
 ;;====================================================================
 ;;* weblogger
-
-;; (eval-after-load "weblogger"
-;;   '(progn
-;;     (weblogger-settings)))
+;; (eval-after-load "weblogger" '(weblogger-settings))
 
 ;;====================================================================
 ;;* org2blog
-
 ;; use publish org to HTML then use xml-rpc to blog
-(eval-after-load "org2blog"
-  '(progn
-     (org2blog-settings)))
+(eval-after-load "org2blog" '(org2blog-settings))
 
 ;;====================================================================
 ;;* babel
-
 ;; 网络翻译接口
 (autoload 'babel "babel"
    "Use a web translation service to translate the message MSG." t)
@@ -90,17 +72,13 @@
   "Use a web translation service to translate MSG, returning a string." t)
 (autoload 'babel-buffer "babel"
   "Use a web translation service to translate the current buffer." t)
-(eval-after-load "babel"
-  '(progn
-     (babel-settings)))
-;; Key binds
+(eval-after-load "babel" '(babel-settings))
 ;; (global-set-key [f12] 'babel)
-;; (global-set-key [C-f12] 'babel-region)
-(global-set-key (kbd "S-<f12>") 'babel-buffer)
+(global-set-key (kbd "S-<f12>") 'babel-region)
+;; (global-set-key (kbd "S-<f12>") 'babel-buffer)
 
 ;;====================================================================
 ;;* dictionary
-
 ;; Web dictionary via dictd
 ;; (require 'dictionary-autoloads)
 ;; (global-set-key "\C-cS" 'dictionary-search)
@@ -110,15 +88,14 @@
 
 ;;====================================================================
 ;;* eagle
-
 ;; twitter client
 
 ;;====================================================================
 ;;* google-maps-el
-
-;; Emacs中的谷歌地图
 ;; REF: (@url :file-name "http://emacser.com/emacs-google-map.htm" :display "emacswiki")
-;; (require 'google-maps)
+;; (eval-after-load "google-maps"
+;;   '(progn
+;;     (google-maps-settings)))
 ;; (eal-define-keys
 ;;  'google-maps-static-mode-map
 ;;  `(("t"   sb-toggle-keep-buffer)
@@ -129,33 +106,30 @@
 ;;    ("3"   split-window-horizontally)
 ;;    ("o"   other-window)
 ;;    ("C-t" google-maps-static-set-maptype)))
-
-;; (defun google-maps-settings ()
-;;   "Settings for `google-maps'.")
-
-;; (eval-after-load "google-maps"
-;;   '(progn
-;;     (google-maps-settings)))
+;; (require 'google-maps)
 
 ;;====================================================================
 ;;* cn-weather
-
-;; 查询天气预报
 ;; (require 'cn-weather)
 ;; (defalias 'weather 'cn-weather-today)
 ;; (defalias 'weather-tomorrow 'cn-weather-forecast)
 
 ;;====================================================================
 ;;* emms
-
 ;; Emacs 音乐播放器
 (eval-after-load "emms-playlist-mode"
   '(progn
-     (emms-settings)))
+     (emms-settings)
+     (eal-define-keys
+     'emms-playlist-mode-map
+      `(("<space>" emms-pause)
+        ("<double-mouse-1>" emms-pause)))))
+
 (eal-define-keys-commonly
  dired-mode-map
  `(("C-x a"    emms-add-dired)
    ("C-x p"    emms-play-dired)))
+
 (eal-define-keys-commonly
  global-map
  `(("C-x E e" xy/emms-start)
@@ -180,22 +154,16 @@
 
 ;;====================================================================
 ;;* gnus
-
-;; news reader and email reader
-(eval-after-load "gnus"
-  '(progn
-     (gnus-settings)))
+;; 新闻组阅读
+(eval-after-load "gnus" '(gnus-settings))
 
 ;;====================================================================
 ;;* mew
-
 ;; email client
+(eval-after-load "mew" '(mew-settings))
+(setq mail-user-agent 'mew-user-agent) ;; set mew as emacs email agent
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)
 (autoload 'mew-user-agent-compose "mew" nil t)
-(setq mail-user-agent 'mew-user-agent)
-(eval-after-load "mew"
-  '(progn
-     (mew-settings)))
 
 (provide 'xy-rcroot-net)

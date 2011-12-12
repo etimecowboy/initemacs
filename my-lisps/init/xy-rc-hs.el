@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-hs.el'
-;; Time-stamp:<2011-12-04 Sun 17:08 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-10 Sat 15:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -87,12 +87,9 @@
      `(("s" toggle-fold)
        ("S" toggle-fold-all))))
 
-  (eval-after-load "emaci"
-    '(progn
-       (hs-minor-mode-4-emaci-settings)))
+  (eval-after-load "emaci" '(hs-minor-mode-4-emaci-settings))
 
-  (message "* ---[ hideshow configuration is complete ]---")
-  )
+  (message "* ---[ hideshow configuration is complete ]---"))
 
 ;; ;;;###autoload
 ;; (defun hs-minor-mode-face-settings ()

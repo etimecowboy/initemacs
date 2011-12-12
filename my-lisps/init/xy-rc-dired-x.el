@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired-x.el'
-;; Time-stamp:<2011-12-06 Tue 23:56 xin on p6t>
+;; Time-stamp:<2011-12-12 Mon 04:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,20 +19,14 @@
 ;;;###autoload
 (defun dired-x-settings ()
   "Settings of `dired-x.el'."
-  ;;------------------------------------------------------------------
-  ;; ahei's settings
-  ;; (unless is-before-emacs-21
-  ;;   (setq dired-omit-files
-  ;;        (concat dired-omit-files
-  ;;                "\\|^\\.\\|^semantic.cache$\\|^CVS$"))
-  ;;   (if mswin
-  ;;       (setq dired-omit-files (concat dired-omit-files "\\|^_"))))
+
   (setq dired-omit-size-limit 1000000)
 
   ;;------------------------------------------------------------------
   ;; Omitting Git-ignored files in Emacs dired
   ;; REF: - (@url :file-name "http://newartisans.com/2008/08/omitting-git-ignored-files-in-emacs-dired/" :display "Post")
   ;;      - (@url :file-name "https://github.com/jwiegley/git-scripts/blob/master/git-dired.el" :display "Source")
+  ;; BUG: cause a lot of trouble, not good
   ;; (defvar dired-omit-regexp-orig (symbol-function 'dired-omit-regexp))
   ;; (defun dired-omit-regexp ()
   ;;   (let ((file (expand-file-name ".git"))
@@ -74,8 +68,15 @@
   ;;              "\\)")))
   ;;       (funcall dired-omit-regexp-orig))))
 
-  ;;------------------------------------------------------------------
-  (message "* ---[ dired-x configuration is complete ]---")
-)
+  (message "* ---[ dired-x configuration is complete ]---"))
 
 (provide 'xy-rc-dired-x)
+
+;;------------------------------------------------------------------
+;; ahei's settings
+;; (unless is-before-emacs-21
+;;   (setq dired-omit-files
+;;        (concat dired-omit-files
+;;                "\\|^\\.\\|^semantic.cache$\\|^CVS$"))
+;;   (if mswin
+;;       (setq dired-omit-files (concat dired-omit-files "\\|^_"))))

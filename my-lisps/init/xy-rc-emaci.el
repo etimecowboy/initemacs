@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emaci.el'
-;; Time-stamp:<2011-12-04 Sun 16:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-11 Sun 10:12 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,14 +25,27 @@
     (emaci-mode (if emaci 1 -1))))
 
 ;;;###autoload
+(defun read-only ()
+  "Read-only mode."
+  (interactive)
+  (emaci-mode-on)
+  (view-mode t))
+
+;;;###autoload
+(defun normal-edit ()
+  "Normal edit mode."
+  (interactive)
+  (View-quit)
+  (emaci-mode-off))
+
+;;;###autoload
 (defun emaci-settings ()
   "settings for `emaci'."
-  ;; (setq emaci-brief-key-defs
-  ;;       (append emaci-brief-key-defs
-  ;;               `(("]" goto-paren))))
-  ;; (emaci-bind-brief-keys)
-  (message "* ---[ emaci configuration is complete ]---")
-)
+  (setq emaci-brief-key-defs
+        (append emaci-brief-key-defs
+                `(("]" goto-paren))))
+  (emaci-bind-brief-keys)
+  (message "* ---[ emaci configuration is complete ]---"))
 
 (provide 'xy-rc-emaci)
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-12-06 Tue 08:11 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 04:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -88,6 +88,7 @@
                      (name . "^\\*Compile-Log\\*$")
                      (name . "^\\*Completions\\*$")
                      (name . "^\\*WoMan-Log\\*$")
+                     (name . "^\\*Backtrace\\*$")
                      (mode . Custom-mode)
                      (mode . help-mode)
                      (mode . Info-mode)

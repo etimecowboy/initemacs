@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-10 Sat 05:59 xin on p6t>
+;; Time-stamp:<2011-12-11 Sun 11:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -437,8 +437,6 @@ like `progn'. See also `with-temp-buffer'."
 
 ;;====================================================================
 ;;* From util.el used by ahei, written by taoshanwen
-
-;; (require 'eval-after-load)
 
 (defvar mswin  (equal window-system 'w32)
   "Non-nil means windows system.")
@@ -1203,8 +1201,6 @@ The process is:
   (interactive)
   (setq debug-on-error t)
   ;;------------------------------------------------------------------
-  (xy/install-all-lisps my-emacswiki-lisp-path)
-  ;;------------------------------------------------------------------
   (xy/install-all-lisps my-local-lisp-path)
   (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
   (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
@@ -1248,6 +1244,8 @@ The process is:
   ;; (cedet-build)
   ;; (xy/recompile-dir (concat my-elpa-lisp-path
   ;; "/ecb_snap-20110605"))
+  ;;------------------------------------------------------------------
+  (xy/install-all-lisps my-emacswiki-lisp-path)
   ;;------------------------------------------------------------------
   (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
   ;;------------------------------------------------------------------

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emms.el'
-;; Time-stamp:<2011-12-08 Thu 05:28 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 00:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,86 +20,79 @@
 (defun xy/emms-start ()
   "Initial emms"
   (interactive)
-  ;; (when (not (featurep 'emms-setup))
-  (require 'emms-setup)
-  ;; FIXME: try to move these config to emms-settings
-  ;; (require 'emms-extension)
-  ;; (setq emms-directory (concat my-emacs-path "/emms")) ;设置EMMS的目录
-  ;; (setq emms-history-file                              ;播放列表历史记录
-  ;;       (concat emms-directory "/emms-history-"
-  ;;               user-login-name "@"
-  ;;               system-name "@"
-  ;;               system-configuration))
-  ;; (setq emms-cache-file                                ;缓存文件
-  ;;       (concat emms-directory "/emms-cache-"
-  ;;               user-login-name "@"
-  ;;               system-name "@"
-  ;;               system-configuration))
-  ;; (setq emms-stream-bookmarks-file
-  ;;       (concat emms-directory "/emms-streams"))       ;网络电台保存文件
-  ;; (setq emms-score-file                                ;分数文件
-  ;;       (concat emms-directory "/emms-scores-"
-  ;;               user-login-name "@"
-  ;;               system-name "@"
-  ;;               system-configuration))
-  ;; (setq emms-source-file-default-directory emms-directory) ;设定默认的播放目录
-  (emms-standard)
-  (emms-default-players)
-  ;; (setq emms-repeat-playlist t)
-  ;; (require 'emms-mode-line)
-  ;; (emms-mode-line 1)
-  ;; (emms-mode-line-blank)
-  ;; (require 'emms-playing-time)
-  ;; (emms-playing-time 1)
-)
+  (require 'emms-setup))
 
-;; ;;;###autoload
-;; (defadvice emms (before emms-start activate)
-;;   "Initial emms first."
-;;   (emms-start))
+;;;###autoload
+(defun xwl-emms-track-description-function (track)
+  "Return a description of the current track."
+  (let* ((name (emms-track-name track))
+         (type (emms-track-type track))
+         (short-name (file-name-nondirectory name))
+         (play-count (or (emms-track-get track 'play-count) 0))
+         (last-played (or (emms-track-get track 'last-played) '(0 0 0)))
+         (empty "..."))
+    (prog1
+        (case (emms-track-type track)
+          ((file url)
+           (let* ((artist (or (emms-track-get track 'info-artist) empty))
+                  (year (emms-track-get track 'info-year))
+                  (playing-time (or (emms-track-get track 'info-playing-time) 0))
+                  (min (/ playing-time 60))
+                  (sec (% playing-time 60))
+                  (album (or (emms-track-get track 'info-album) empty))
+                  (tracknumber (emms-track-get track 'info-tracknumber))
+                  (short-name (file-name-sans-extension
+                               (file-name-nondirectory name)))
+                  (title (or (emms-track-get track 'info-title) short-name))
 
-;; ;;;###autoload
-;; (defun emms-browser-start ()
-;;   "Show the emms browser."
-;;   (interactive)
-;;   ;; (emms-start)
-;;   (if (or (null emms-playlist-buffer)
-;;           (not (buffer-live-p emms-playlist-buffer)))
-;;       (call-interactively 'emms-browser)))
+                  ;; last track
+                  (ltrack xwl-emms-playlist-last-track)
+                  (lartist (or (and ltrack (emms-track-get ltrack 'info-artist))
+                               empty))
+                  (lalbum (or (and ltrack (emms-track-get ltrack 'info-album))
+                              empty))
 
-;; ;;;###autoload
-;; (defun emms-play-file-start ()
-;;   "Switch to the current emms-playlist buffer, and query for a directory tree."
-;;   (interactive)
-;;   ;; (emms-start)
-;;   (call-interactively 'emms-play-file))
+                  (same-album-p (and (not (string= lalbum empty))
+                                     (string= album lalbum))))
+             (format "%10s  %3d   %-20s%-60s%-35s%-15s%s"
+                     (emms-last-played-format-date last-played)
+                     play-count
+                     artist
 
-;; ;;;###autoload
-;; (defun emms-play-playlist-start ()
-;;   "Switch to the current emms-playlist buffer, and query for a directory tree."
-;;   (interactive)
-;;   ;; (emms-start)
-;;   (call-interactively 'emms-play-playlist))
+                     ;; Combine indention, tracknumber, title.
+                     (concat
+                      (if same-album-p ; indention by album
+                          (setq xwl-emms-playlist-last-indent
+                                (concat " " xwl-emms-playlist-last-indent))
+                        (setq xwl-emms-playlist-last-indent "\\")
+                        "")
+                      (if (and tracknumber ; tracknumber
+                               (not (zerop (string-to-number tracknumber))))
+                          (format "%02d." (string-to-number tracknumber))
+                        "")
+                      title        ; title
+                      )
 
-;; ;;;###autoload
-;; (defun emms-play-directory-start ()
-;;   "Switch to the current emms-playlist buffer, and query for a directory tree."
-;;   (interactive)
-;;   ;; (emms-start)
-;;   (if (or (null emms-playlist-buffer)
-;;           (not (buffer-live-p emms-playlist-buffer)))
-;;       (call-interactively 'emms-play-directory))
-;;   (emms-playlist-mode-go))
+                     ;; album
+                     (cond ((string= album empty) empty)
+                           ;; (same-album-p "  ")
+                           (t (concat "ã€Š" album "ã€‹")))
+
+                     (or year empty)
+                     (if (or (> min 0)  (> sec 0))
+                         (format "%02d:%02d" min sec)
+                       empty))))
+          ((url)
+           (concat (symbol-name type) ":" name))
+          (t
+           (format "%-3d%s"
+                   play-count
+                   (concat (symbol-name type) ":" name))))
+      (setq xwl-emms-playlist-last-track track))))
 
 ;;;###autoload
 (defun emms-settings ()
   "Settings of `emms.el'."
-
-  ;; (emms-start)
-  (define-key emms-playlist-mode-map (kbd "SPC") 'emms-pause)
-  (define-key emms-playlist-mode-map [double-mouse-1]
-  'emms-playlist-mode-play-current-track)
-
   ;;------------------------------------------------------------------
   ;; REF: (@url :file-name "http://www.gnu.org/software/emms/configs/xwl-emms.el" :display "Official example")
 
@@ -113,74 +106,6 @@
 
   (setq xwl-emms-playlist-last-track nil)
   (setq xwl-emms-playlist-last-indent "\\")
-
-  (defun xwl-emms-track-description-function (track)
-      "Return a description of the current track."
-      (let* ((name (emms-track-name track))
-             (type (emms-track-type track))
-             (short-name (file-name-nondirectory name))
-             (play-count (or (emms-track-get track 'play-count) 0))
-             (last-played (or (emms-track-get track 'last-played) '(0 0 0)))
-             (empty "..."))
-        (prog1
-            (case (emms-track-type track)
-              ((file url)
-               (let* ((artist (or (emms-track-get track 'info-artist) empty))
-                      (year (emms-track-get track 'info-year))
-                      (playing-time (or (emms-track-get track 'info-playing-time) 0))
-                      (min (/ playing-time 60))
-                      (sec (% playing-time 60))
-                      (album (or (emms-track-get track 'info-album) empty))
-                      (tracknumber (emms-track-get track 'info-tracknumber))
-                      (short-name (file-name-sans-extension
-                                   (file-name-nondirectory name)))
-                      (title (or (emms-track-get track 'info-title) short-name))
-
-                      ;; last track
-                      (ltrack xwl-emms-playlist-last-track)
-                      (lartist (or (and ltrack (emms-track-get ltrack 'info-artist))
-                                   empty))
-                      (lalbum (or (and ltrack (emms-track-get ltrack 'info-album))
-                                  empty))
-
-                      (same-album-p (and (not (string= lalbum empty))
-                                         (string= album lalbum))))
-                 (format "%10s  %3d   %-20s%-60s%-35s%-15s%s"
-                         (emms-last-played-format-date last-played)
-                         play-count
-                         artist
-
-                         ;; Combine indention, tracknumber, title.
-                         (concat
-                          (if same-album-p ; indention by album
-                              (setq xwl-emms-playlist-last-indent
-                                    (concat " " xwl-emms-playlist-last-indent))
-                            (setq xwl-emms-playlist-last-indent "\\")
-                            "")
-                          (if (and tracknumber ; tracknumber
-                                   (not (zerop (string-to-number tracknumber))))
-                              (format "%02d." (string-to-number tracknumber))
-                            "")
-                          title        ; title
-                          )
-
-                         ;; album
-                         (cond ((string= album empty) empty)
-                               ;; (same-album-p "  ")
-                               (t (concat "ã€Š" album "ã€‹")))
-
-                         (or year empty)
-                         (if (or (> min 0)  (> sec 0))
-                             (format "%02d:%02d" min sec)
-                           empty))))
-              ((url)
-               (concat (symbol-name type) ":" name))
-              (t
-               (format "%-3d%s"
-                       play-count
-                       (concat (symbol-name type) ":" name))))
-          (setq xwl-emms-playlist-last-track track))))
-
   (setq emms-track-description-function
           'xwl-emms-track-description-function)
 
@@ -188,9 +113,11 @@
   ;;------------------------------------------------------------------
   ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/init-emms.el" :display "from emacswiki `init-emms.el'")
 
+  ;; (require 'emms-extension)
   (emms-devel) ;选择开发者模式
-  (emms-i18n-set-default-coding-system ;; 设置 emms 编码系统
-   'gbk-dos 'utf-8-unix)
+  (emms-standard)
+  (emms-default-players)
+  (emms-i18n-set-default-coding-system 'gbk-dos 'utf-8-unix)
   ;; 目录
   (setq emms-directory ;设置EMMS的目录
         (concat my-emacs-path "/emms"))
@@ -222,7 +149,6 @@
   (setq emms-source-file-default-directory ;设定默认的播放目录
         emms-directory)
   ;; 播放设置
-  ;; (add-hook 'emms-player-finished-hook 'emms-random)         ;当播放完当前的歌曲时随机选择下一首歌曲
   (setq emms-playlist-default-major-mode 'emms-playlist-mode)   ;设定EMMS用播放列表的主模式
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track) ;设定音轨初始化信息
   (setq emms-player-next-function 'emms-next)                                ;修复该死的播放完后的BUG
@@ -230,7 +156,12 @@
   (setq emms-history-start-playing t)
   (setq emms-playlist-sort-function       ;设置播放列表用自然的方法排序: 艺术家 -> 专辑 -> 序号
         'emms-playlist-sort-by-natural-order)
+  ;; (require 'emms-mode-line)
+  ;; (emms-mode-line 1)
+  ;; (emms-mode-line-blank)
   (emms-mode-line-disable)                    ;不在Mode-line上显示歌曲信息
+  ;; (require 'emms-playing-time)
+  ;; (emms-playing-time 1)
   (setq emms-playing-time-display-format "")  ;不显示歌曲播放时间
   (when (fboundp 'emms-cache) (emms-cache 1)) ;设置EMMS缓存
   (GNULinux
@@ -244,10 +175,11 @@
   (setq emms-source-file-directory-tree-function ;设定更快和灵活的文件目录查找模式
         'emms-source-file-directory-tree-find)
   (setq emms-show-format "%s")                 ;设置 `emms-show' 的显示格式
+  ;; (add-hook 'emms-player-finished-hook 'emms-random) ;当播放完当前的歌曲时随机选择下一首歌曲
   ;; 歌词设置
-  (require 'emms-lyrics)
-  ;; (ad-activate 'emms-lyrics-find-lyric)       ;自动下载歌词
-  ;; (setq emms-lyrics-dir my-lyrics-directory)   ;EMMS的歌词目录
+  ;; (require 'emms-lyrics)
+  (ad-activate 'emms-lyrics-find-lyric)       ;自动下载歌词
+  (setq emms-lyrics-dir (concat my-emacs-path "/emms/lyrics"))   ;EMMS的歌词目录
   (setq emms-lyrics-dir emms-directory)
   (setq emms-lyrics-display-format "%s")       ;设置歌词显示格式
   (setq emms-lyrics-scroll-timer-interval 1.0) ;歌词滚动延迟
@@ -272,7 +204,7 @@
   ;;         'lazycat/emms-info-track-description)
 
   ;; EMMS 浏览器
-  (require 'emms-browser)
+  ;; (require 'emms-browser)
   ;; (emms-browser-make-filter               ;显示所有
   ;;  "EVERYTHING" 'ignore)
   ;; (emms-browser-set-filter                ;设置默认的为显示所有
@@ -292,7 +224,6 @@
   ;; (emms-player-set emms-player-mplayer 'regex
   ;;                    "\\.ogg\\|\\.mp3\\|\\.wav\\|\\.mpg\\|\\.mpeg\\|\\.wmv\\|\\.wma\\|\\.mov\\|\\.avi\\|\\.divx\\|\\.ogm\\|\\.asf\\|\\.mkv\\|http://\\|mms://\\|\\.rm\\|\\.rmvb\\|\\.mp4\\|\\.flac\\|\\.vob\\|\\.m4a\\|\\.ape\\|\\.mpc")
 
-  (message "* ---[ emms configuration is complete ]---")
-)
+  (message "* ---[ emms configuration is complete ]---"))
 
 (provide 'xy-rc-emms)

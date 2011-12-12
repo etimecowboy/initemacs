@@ -342,4 +342,4 @@ This would be better done through a customization probably."
 ;; We basically provide the same thing as growl.el
 (provide 'growl)
 
-(provide 'xy-todochiku)
+(provide 'todochiku)

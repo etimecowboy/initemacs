@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-diary.el'
-;; Time-stamp:<2011-12-04 Sun 16:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-11 Sun 20:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,7 +36,6 @@
   ;; when I do `M-x diary')
   (add-hook 'diary-display-hook 'fancy-diary-display)
 
-  ;; TODO: Sort each day's diary entries by their time of day?
   (add-hook 'diary-display-hook 'sort-diary-entries)
   (add-hook 'list-diary-entries-hook 'sort-diary-entries t)
 
@@ -46,7 +45,6 @@
   (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
   (add-hook 'diary-hook 'appt-make-list)
 
-  (message "* ---[ diary configuration is complete ]---")
-  )
+  (message "* ---[ diary configuration is complete ]---"))
 
 (provide 'xy-rc-diary)
