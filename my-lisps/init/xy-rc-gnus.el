@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-08 Thu 03:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 12:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -409,7 +409,8 @@ archive
   ;; Use it.
   ;;(setq gnus-outgoing-message-group "nnml:SendMails")
 
-  ;; 自动保存发送的帖子
+  ;; TODO: Refine Gnus settings
+  ;; 自动保存发送的帖子 BUG: 保存的文本都加密过了，如何查看？
   (defun MySent ()
     (if (message-news-p)
         "nnml:sent_news"

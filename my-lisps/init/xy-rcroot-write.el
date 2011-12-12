@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-12-11 Sun 10:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 21:16 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,10 +29,11 @@
 (eval-after-load "org-capture" '(org-settings))
 (eal-define-keys-commonly
  global-map
- `(("C-c l" org-store-link)
-   ("C-c a" org-agenda)
-   ("C-c b" org-ido-switchb)
-   ("C-c c" org-capture)))
+ `(("C-c l"   org-store-link)
+   ("C-c a"   org-agenda)
+   ("C-c b"   org-ido-switchb)
+   ("C-c c"   org-capture)
+   ("C-c M-w" tzz-copy-region-with-mode-property)))
 
 ;;====================================================================
 ;;* auctex

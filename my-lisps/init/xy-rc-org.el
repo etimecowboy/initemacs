@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-12 Mon 06:52 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 09:59 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -31,6 +31,26 @@
        (reftex-parse-all))
   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
   (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
+
+;; REF: (@url :file-name "http://permalink.gmane.org/gmane.emacs.gnus.general/78422" :display "auto-format code block for org")
+;;;###autoload
+(defun tzz-copy-region-with-mode-property (beg end)
+  (interactive "r")
+  (let ((text (buffer-substring beg end))
+        (mode (symbol-name major-mode)))
+    (with-temp-buffer
+      (insert text)
+      (goto-char (point-min))
+      (insert "#+begin_src"
+              (if (string-match "\\(.+\\)-mode" mode)
+                  (concat " " (match-string 1 mode))
+                "")
+              "\n")
+      (goto-char (point-max))
+      (insert "\n"
+              "#+end_src"
+              "\n")
+      (copy-region-as-kill (point-min) (point-max)))))
 
 ;; 处理html输出时auto-fill带来的多余空格
 ;; NOTE: It makes html file less readable
