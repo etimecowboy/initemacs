@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-12-12 Mon 05:44 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 00:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,8 +42,6 @@
 ;;;###autoload
 (defun yasnippet-settings ()
   "settings for `yasnippet'."
-  (setq yas/trigger-key "C-c <tab>") ;; tab is widely-used by
-                                     ;; ido/icicles/org/outline/hideshow
   ;; 2011-07-29 yasnippet. Make the “yas/minor-mode”'s expansion
   ;; behavior to take input word including hyphen.
   (setq yas/key-syntaxes '("w_" "w_." "^ ")) ; default is '("w" "w_"

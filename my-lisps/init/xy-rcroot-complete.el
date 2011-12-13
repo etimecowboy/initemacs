@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-11 Sun 14:41 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 00:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -170,6 +170,8 @@
 (eval-after-load "yasnippet"
   '(progn
      (yasnippet-settings)
+     ;; tab is widely-used by ido/icicles/org/indent/outline/hideshow
+     (setq yas/trigger-key "C-c <tab>")
      (eal-define-keys
       'yas/keymap
       `(("M-j"     yas/next-field-or-maybe-expand)

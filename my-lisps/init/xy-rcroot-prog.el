@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-12 Mon 21:15 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 00:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -153,7 +153,7 @@
             (when (try-require 'outline-magic)
               (setq indent-tabs-mode nil)
               (setq tab-always-indent t)
-              (define-key outline-minor-mode-map (kbd "C-c <tab>")
+              (define-key outline-minor-mode-map (kbd "<f6>")
                 'outline-cycle))))
 (am-add-hooks
  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook

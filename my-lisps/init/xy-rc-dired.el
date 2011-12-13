@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-12-12 Mon 07:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 22:02 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -220,13 +220,13 @@ will remain open and unsaved."
   ;; (def-redo-command dired-redo 'dired-redo 'dired-undo)
 
   ;;------------------------------------------------------------------
+  (try-require 'dired+)
   (require 'dired-x)
   (require 'wdired)
   (dired-omit-mode 1)
   (try-require 'dired-details+)
   ;; ;; (try-require 'dired-single)
   (try-require 'dired-tar)
-  (try-require 'dired+)
   ;; (when (try-require 'dired+)
   ;;   (define-key ctl-x-map   "d"
   ;;     'diredp-dired-files)

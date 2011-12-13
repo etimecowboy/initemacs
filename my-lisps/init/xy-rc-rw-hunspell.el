@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-rw-hunspell.el'
-;; Time-stamp:<2011-12-12 Mon 06:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 00:35 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,9 @@
 (defun rw-hunspell-settings ()
   "Settings of `rw-hunspell.el'."
   (GNULinux
-   (setq rw-hunspell-dicpath-list '("/usr/share/hunspell")))
+   (setq rw-hunspell-dicpath-list
+         (quote
+          ("/usr/share/hunspell"))))
   (Windows
    (setq rw-hunspell-dicpath-list
          (quote

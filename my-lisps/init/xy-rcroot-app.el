@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-11 Sun 22:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-12 Mon 22:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -207,7 +207,7 @@
 (menu-bar-mode -1) ;; No menu bar as default
 
 ;;*** menua-bar+
-(try-require 'menu-bar+)
+;; (require 'menu-bar+)
 
 ;;*** facemenu+
 ;; This library enhances the "Text Properties" menu.  It adds menu
