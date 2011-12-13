@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-12 Mon 22:44 xin on p6t>
+;; Time-stamp:<2011-12-13 Tue 00:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -378,7 +378,8 @@
         ("SPC" scroll-up)
         ("1"   delete-other-windows)
         ("."   find-symbol-at-point)))))
-(require 'color-theme)
+(if window-system
+    (require 'color-theme))
 
 ;;--------------------------------------------------------------------
 ;;** doremi

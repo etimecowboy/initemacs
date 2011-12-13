@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-12 Mon 05:39 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 01:08 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -35,11 +35,13 @@
 ;; (setq debug-on-quit t)
 
 ;; Compilation message
-;; (setq compilation-auto-jump-to-first-error t)
-;; (setq compilation-scroll-output t)
+(setq compilation-auto-jump-to-first-error t)
+(setq compilation-scroll-output nil)
 
-;; (setq max-specpdl-size 40000)
-;; (setq max-lisp-eval-depth 40000)
+(setq max-specpdl-size 4000)  ;; BUG: in nw mode, Emacs 23.3 report a
+;; error in spite of how large the value is. It may related to an
+;; Emacs bug.
+(setq max-lisp-eval-depth 4000)
 
 ;; try to improve slow performance on windows.
 (Windows (setq w32-get-true-file-attributes nil))
