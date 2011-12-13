@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-12 Mon 04:28 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 10:13 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -155,7 +155,11 @@
 ;;====================================================================
 ;;* gnus
 ;; 新闻组阅读
-(eval-after-load "gnus" '(gnus-settings))
+(eval-after-load "gnus"
+  '(progn
+     (gnus-settings)
+     (define-key gnus-summary-mode-map (kbd "<f6>")
+       'my-archive-article)))
 
 ;;====================================================================
 ;;* mew

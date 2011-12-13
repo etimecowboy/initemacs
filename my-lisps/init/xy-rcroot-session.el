@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-12-11 Sun 20:51 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 10:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -50,7 +50,8 @@
 (eval-after-load "bookmark" '(bookmark-settings))
 
 ;;*** Bookmark+
-(require 'bookmark+)
+(eval-after-load "bookmark+" '(bookmark+-settings))
+;; (require 'bookmark+)
 
 ;;*** bm
 ;; provides visible, buffer local, bookmarks and the ability

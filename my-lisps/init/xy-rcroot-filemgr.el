@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-12 Mon 07:18 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 11:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -93,19 +93,24 @@
 ;; thumbs, Thumbnails previewer for images files
 (eval-after-load "thumbs" '(thumbs-settings))
 
-(add-hook 'dired-load-hook
-          (function (lambda ()
-                      (load "dired+")
-                      (load "dired-x")
-                      (load "wdired")
-                      (load "dired-tar")
-                      (load "dired-details+")
-                      ;; (load 'dired-single)
-                      (load "openwith")
-                      )))
+(require 'dired+)
+(require 'dired-details+)
+(require 'dired-tar)
+
+;; (add-hook 'dired-load-hook
+;;           (function (lambda ()
+;;                       (load "dired+")
+;;                       (load "dired-x")
+;;                       (load "wdired")
+;;                       (load "dired-tar")
+;;                       (load "dired-details+")
+;;                       ;; (load 'dired-single)
+;;                       (load "openwith")
+;;                       )))
 (add-hook 'dired-mode-hook
           (function (lambda ()
                       (dired-omit-mode 1)
+                      ;; (dired-details-install)
                       (define-key ctl-x-map   "d"
                         'diredp-dired-files)
                       (define-key ctl-x-4-map "d"
@@ -114,6 +119,7 @@
 (GNULinux
  (add-hook 'dired-mode-hook
            (function (lambda ()
+                       (require 'openwith)
                        (openwith-mode 1)))))
 
 ;;--------------------------------------------------------------------
