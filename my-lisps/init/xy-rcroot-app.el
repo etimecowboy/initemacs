@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-13 Tue 00:53 xin on p6t>
+;; Time-stamp:<2011-12-13 Tue 03:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -66,15 +66,15 @@
 
 ;;---------------------------------------------------------------------
 ;;** Resize frame and window
-(eval-after-load "fit-frame" '(fit-frame-settings))
-(eval-after-load "maxframe"  '(maxframe-settings))
 (when window-system
+  (eval-after-load "fit-frame" '(fit-frame-settings))
+  (eval-after-load "maxframe"  '(maxframe-settings))
   (require 'fit-frame)
   (add-hook 'after-make-frame-functions 'fit-frame)
   (require 'autofit-frame)
   (require 'thumb-frm)
   ;; (require 'maxframe) ;; NOTE: not stable with two or more monitors
-  )
+  (global-set-key (kbd "S-<f5>") 'fit-frame))
 
 ;;====================================================================
 ;;* Window settings

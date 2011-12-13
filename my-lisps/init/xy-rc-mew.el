@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-12 Mon 01:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 02:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,7 +64,7 @@
   ;; (GNULinux
   ;;   (setq mew-prog-ssl "stunnel"))
   (Windows
-   (setq mew-prog-ssl "D:/stunnel/stunnel.exe"))
+   (setq mew-prog-ssl "~/.emacs.d/bin/win32/stunnel/stunnel.exe"))
 
   (setq mew-ssl-verify-level 0)
   ;; cache the password

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-12 Mon 05:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 03:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,7 @@
 (eal-define-keys-commonly
  global-map
  `(;; `fit-frame.el'
-   ("S-<f5>" fit-frame)
+   ;; ("S-<f5>" fit-frame)
    ;;------------------------------------
    ;; `windresize.el'
    ("C-<f5>" windresize)

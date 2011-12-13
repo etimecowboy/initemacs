@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-13 Tue 01:08 xin on p6t>
+;; Time-stamp:<2011-12-13 Tue 02:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,20 +28,21 @@
 ;;* Debug Emacs init
 
 ;; Set a large message log file for checking
-(setq message-log-max 10000)
+(setq message-log-max 100000)
 
 ;; Debug errors
 (setq debug-on-error t)
 ;; (setq debug-on-quit t)
 
 ;; Compilation message
-(setq compilation-auto-jump-to-first-error t)
-(setq compilation-scroll-output nil)
+;; (setq compilation-auto-jump-to-first-error t)
+;; (setq compilation-scroll-output t)
 
-(setq max-specpdl-size 4000)  ;; BUG: in nw mode, Emacs 23.3 report a
+(setq max-specpdl-size 80000)  ;; BUG: in nw mode, Emacs 23.3 report a
 ;; error in spite of how large the value is. It may related to an
-;; Emacs bug.
-(setq max-lisp-eval-depth 4000)
+;; Emacs bug. Moreover, if the size set too large, it cause a error in
+;; Windows.
+(setq max-lisp-eval-depth 40000)
 
 ;; try to improve slow performance on windows.
 (Windows (setq w32-get-true-file-attributes nil))
@@ -79,6 +80,8 @@
  ;;                                 "/win32/aspell/bin"))
  (add-to-list 'exec-path
               (concat my-local-exec-path "/win32/hunspell"))
+ (add-to-list 'exec-path
+              (concat my-local-exec-path "/win32/stunnel"))
 )
 ;; NOTE: Linux don't need it
 (HomeDesktop

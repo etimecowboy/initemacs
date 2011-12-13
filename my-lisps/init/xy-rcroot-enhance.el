@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-13 Tue 00:44 xin on p6t>
+;; Time-stamp:<2011-12-13 Tue 04:00 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -296,3 +296,8 @@ from tradition chinese to simple chinese" t)
 (require 'rw-ispell)
 (Windows
  (require 'rw-hunspell))
+
+;;====================================================================
+;;* wcheck-mode
+;; TODO: make wcheck-mode working
+;; (eval-after-load "wcheck-mode" '(wcheck-mode-settings))
