@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-12-12 Mon 21:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 08:57 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,7 +24,12 @@
 ;;* org
 (add-to-list 'auto-mode-alist
              '("\\.\\(org\\|org_archive\\)$" . org-mode))
-(eval-after-load "org" '(org-settings))
+(eval-after-load "org"
+  '(progn
+     (org-settings)
+     (eal-define-keys
+      'org-mode-map
+      `(("C-c C-x C-h" xy/org-html-chinese-no-extra-space)))))
 (eval-after-load "org-agenda" '(org-settings))
 (eval-after-load "org-capture" '(org-settings))
 (eal-define-keys-commonly
@@ -37,16 +42,14 @@
 
 ;;====================================================================
 ;;* auctex
-(eval-after-load "latex"
+(eval-after-load "auctex"
   '(progn
      (auctex-settings)
      (eal-define-keys
-      '(LaTeX-mode-map latex-mode-map)
-      `(("M-c `" TeX-next-error))))) ;; default C-c ` conflict with icy-mode
-;; (load "auctex.el" nil t t)
-;; (load "preview-latex.el" nil t t)
-;; (add-hook 'LaTeX-mode-hook 'auctex-start)
-;; (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
+      'latex-mode-map
+      `(("M-c `" TeX-next-error)))
+     )) ;; default C-c ` conflict with icy-mode
+(eval-after-load "preview-latex" '(preview-latex-settings))
 
 ;;--------------------------------------------------------------------
 ;;** reftex

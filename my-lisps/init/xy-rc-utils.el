@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-11 Sun 11:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 05:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1224,9 +1224,9 @@ The process is:
   ;; (xy/install-all-lisps (concat my-local-lisp-path "/org-7.7"))
   (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
   (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/themes"))
   (xy/install-all-lisps (concat my-local-lisp-path "/ibus-el-0.2.1"))
   (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete"))
+  (xy/install-all-lisps "~/.emacs.d/themes")
   ;;------------------------------------------------------------------
   ;; (xy/recompile-dir (concat my-elpa-lisp-path "/company-0.5"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/dictionary-1.8.7"))

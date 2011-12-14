@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-13 Tue 03:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 06:33 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,7 +52,7 @@
    ;;                 'thumfr-toggle-thumbnail-frame)
    ;; (global-set-key [(shift control mouse-3)]
    ;;                 'thumfr-thumbify-other-frames)
-   ("M-S-z" thumfr-thumbify-other-frames)
+   ("C-M-z" thumfr-thumbify-other-frames)
    ("C-S-p" thumfr-fisheye-previous-frame)
    ("C-S-n" thumfr-fisheye-next-frame)
    ("C-S-z" thumfr-toggle-thumbnail-frame)

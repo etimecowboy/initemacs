@@ -1,5 +1,4 @@
-E:
-cd xin\.emacs.d\my-lisps
+cd E:\xin\.emacs.d\my-lisps
 rm loaddefs*
 rm *.elc
 cd init
@@ -15,6 +14,9 @@ cd ..\..\emacswiki
 rm loaddefs*
 rm *.elc
 cd ..\elpa
+rm loaddefs*
+rm *.elc
+cd ..\themes
 rm loaddefs*
 rm *.elc
 cd E:\xin

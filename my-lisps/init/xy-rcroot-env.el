@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-13 Tue 02:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 05:48 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -315,16 +315,17 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: (@url :file-name "http://emacs-w3m.namazu.org/index-en.html" :display "Source")
-;; BUG: current cvs version has a bug when compiling
-(xy/load-autoload (concat my-local-lisp-path "/w3m"))
-(message "* ---[ w3m lisps installed at %ds ]---"
+(add-to-list 'load-path "~/.emacs.d/themes")
+(xy/load-autoload "~/.emacs.d/themes")
+(message "* ---[ theme lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-(xy/load-autoload (concat my-local-lisp-path "/themes"))
-(message "* ---[ theme lisps installed at %ds ]---"
+;; REF: (@url :file-name "http://emacs-w3m.namazu.org/index-en.html" :display "Source")
+;; BUG: current cvs version has a bug when compiling
+(xy/load-autoload (concat my-local-lisp-path "/w3m"))
+(message "* ---[ w3m lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))

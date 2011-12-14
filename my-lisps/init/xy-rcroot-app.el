@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-13 Tue 03:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 06:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -70,8 +70,8 @@
   (eval-after-load "fit-frame" '(fit-frame-settings))
   (eval-after-load "maxframe"  '(maxframe-settings))
   (require 'fit-frame)
-  (add-hook 'after-make-frame-functions 'fit-frame)
-  (require 'autofit-frame)
+  ;; (add-hook 'after-make-frame-functions 'fit-frame)
+  ;; (require 'autofit-frame)
   (require 'thumb-frm)
   ;; (require 'maxframe) ;; NOTE: not stable with two or more monitors
   (global-set-key (kbd "S-<f5>") 'fit-frame))
@@ -378,8 +378,7 @@
         ("SPC" scroll-up)
         ("1"   delete-other-windows)
         ("."   find-symbol-at-point)))))
-(if window-system
-    (require 'color-theme))
+(if window-system (require 'color-theme))
 
 ;;--------------------------------------------------------------------
 ;;** doremi

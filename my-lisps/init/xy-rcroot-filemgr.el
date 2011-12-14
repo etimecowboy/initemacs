@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-13 Tue 11:30 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 09:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -61,7 +61,8 @@
         ;; ("M-<"       wuxch-dired-goto-first-line)
         ;; ("M-w"       wuxch-dired-copy)
         ;; ("C-y"       wuxch-dired-paste)
-        ;; ("M-k"       wuxch-dired-cut)
+        ;; ("M-k"       wuxch-dired-cut
+        ("X"         mrc-dired-do-command)
         ))))
 
 ;;*** GNU Emacs features for dired
@@ -95,6 +96,7 @@
 
 (require 'dired+)
 (require 'dired-details+)
+(dired-details-install)
 (require 'dired-tar)
 
 ;; (add-hook 'dired-load-hook
@@ -111,10 +113,11 @@
           (function (lambda ()
                       (dired-omit-mode 1)
                       ;; (dired-details-install)
-                      (define-key ctl-x-map   "d"
-                        'diredp-dired-files)
-                      (define-key ctl-x-4-map "d"
-                        'diredp-dired-files-other-window)
+                      (dired-details-toggle 1)
+                      ;; (define-key ctl-x-map   "d"
+                      ;;   'diredp-dired-files)
+                      ;; (define-key ctl-x-4-map "d"
+                      ;;   'diredp-dired-files-other-window)
                       )))
 (GNULinux
  (add-hook 'dired-mode-hook

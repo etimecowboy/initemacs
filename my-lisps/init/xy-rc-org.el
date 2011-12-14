@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-12 Mon 09:59 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 11:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -11,26 +11,20 @@
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
 ;;--------------------------------------------------------------------
+;; TODO: Divide org-settings into a few more funtions for org-agenda,
+;; org-capture and so on.
 
 (require 'cl)
 (require 'xy-rc-utils)
 
-;; BibTeX related
-;; ;;;###autoload
-;; (defun org-mode-reftex-setup ()
-;;   (require 'reftex)
-;;   (require 'reftex-parse)
-;;   (and (buffer-file-name)
-;;        (file-exists-p (buffer-file-name))
-;;        (reftex-parse-all)))
+;; REF: (@url :file-name "http://www.mfasold.net/blog/2009/02/using-emacs-org-mode-to-draft-papers/" :display "Post")
 ;;;###autoload
 (defun org-mode-reftex-setup ()
-  (load-library "reftex")
+  (require 'reftex)
+  (turn-on-reftex)
   (and (buffer-file-name)
        (file-exists-p (buffer-file-name))
-       (reftex-parse-all))
-  (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
-  (define-key org-mode-map (kbd "C-c (") 'reftex-reference))
+       (reftex-parse-all)))
 
 ;; REF: (@url :file-name "http://permalink.gmane.org/gmane.emacs.gnus.general/78422" :display "auto-format code block for org")
 ;;;###autoload
@@ -643,31 +637,31 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-capture-templates
           '(("p" "Add a PhD Task----->Day Planner"
              entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
-             "** TODO [#A] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
+             "** TODO [#A] %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("l" "Add a Life Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
-             "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       0:30\n   :Score:           0\n   :END:"
+             "** TODO [#B] %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("g" "Add a Geek Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
-             "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n   :PROPERTIES:\n   :Importance:      B\n   :Effort:       2:00\n   :Score:           0\n   :END:"
+             "** TODO [#C] %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("s" "Add a Learn Task--->Day Planner"
              entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
-             "** TODO [#C] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      A\n   :Effort:       2:00\n   :Score:           0\n   :END:"
+             "** TODO [#C] %?\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
           ("m" "Add a Misc Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
-             "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n   :PROPERTIES:\n   :Importance:      C\n   :Effort:       1:00\n   :Score:           0\n   :END:"
+             "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("n" "Write a Notes"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
-             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("i" "Record an Idea"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
-             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n   :PROPERTIES:\n   :Importance:       A\n   :END:"
+             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
              ))
 
@@ -728,6 +722,22 @@ If html-file-name is not given, read it from minibuffer."
           ("" "marvosym" t) ("" "wasysym" t) ("" "latexsym" t)
           ("" "amssymb" t) ("" "hyperref" nil) "\\tolerance=1000"))
 
+  (unless (boundp 'org-export-latex-classes)
+    (setq org-export-latex-classes nil))
+  (add-to-list 'org-export-latex-classes
+               '("article"
+                 "\\documentclass{article}"
+                 ("\\section{%s}" . "\\section{%s}")
+                 ("\\subsection{%s}" . "\\subsection{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
+  ;; (add-to-list 'org-export-latex-classes
+  ;;              '("article"
+  ;;                "\\documentclass{article}"
+  ;;                ("\\section{%s}" . "\\section*{%s}")))
+
+
   ;; latex to pdf command list
   ;; (setq org-latex-to-pdf-process
   ;;   '(("pdflatex -interaction nonstopmode %b"
@@ -743,8 +753,8 @@ If html-file-name is not given, read it from minibuffer."
                (turn-on-auto-fill)
                (org-mode-reftex-setup)
                (turn-on-org-cdlatex)
-               (when (featurep 'flyspell) (flyspell-mode 1))
-               (when (featurep 'autopair) (autopair-mode -1))
+               (flyspell-mode 1)
+               (autopair-mode -1)
                ;; (xy/yas-start)
                ;; (xy/linkd-start)
                ;; (xy/set-font-write)

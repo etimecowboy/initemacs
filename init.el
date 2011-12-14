@@ -24,7 +24,7 @@
 (defvar *emacs-load-start* (current-time))
 
 ;; Add ~/.emacs.d/my-lisp to Emacs lisp load path
-(add-to-list 'load-path "~/.emacs.d/my-lisps")
+;; (add-to-list 'load-path "~/.emacs.d/my-lisps")
 (add-to-list 'load-path "~/.emacs.d/my-lisps/init")
 
 ;; Load environment settings

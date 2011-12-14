@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-xcscope.el'
-;; Time-stamp:<2011-12-06 Tue 04:51 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 12:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -15,6 +15,14 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+;; Fix the bug of `cscope-bury-buffer'
+;;;###autoload
+(defun cscope-bury-buffer ()
+  "Clean up cscope, if necessary, and bury the buffer."
+  (interactive)
+  (other-window 1)
+  (delete-other-windows))
 
 ;;;###autoload
 (defun xcscope-settings ()
@@ -31,6 +39,7 @@
   (Windows
    (setq cscope-indexing-script
          "cscope-indexer.bat"))
+  ;; (define-key cscope-list-entry-mode-map (kbd "q") 'xy/cscope-quit)
   (message "* ---[ xcscope configuration is complete ]---")
 )
 

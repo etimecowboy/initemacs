@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-12-11 Sun 21:59 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 19:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -21,9 +21,21 @@
 ;; You MUST NOT put auctex's `style/url.el' in a load-path.
 
 ;;;###autoload
+(defun xy/auctex-start ()
+  "Settings of `auctex'."
+  (interactive)
+  (load "auctex.el" nil t t)
+  (load "preview-latex.el" nil t t)
+  ;; (require 'auctex)
+  ;; (require 'preview-latex)
+  (revert-buffer)
+)
+
+;;;###autoload
 (defun auctex-settings ()
   "Settings of `auctex'."
-
+  (require 'tex-site)
+  (require 'font-latex)
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil) ;; project support
@@ -33,39 +45,36 @@
   (setq-default TeX-PDF-mode t)
 
   ;; load reftex
-  ;; (require 'reftex)
-
+  (require 'reftex)
   ;; load cd-latex
-  ;; (require 'cdlatex)
+  (require 'cdlatex)
 
   (add-hook 'LaTeX-mode-hook
             '(lambda ()
                (turn-on-auto-fill)
-               (when (featurep 'flyspell) (flyspell-mode 1))
-               (when (featurep 'outline) (outline-minor-mode 1))
-               (when (featurep 'cdlatex) (cdlatex-mode 1))
-               (when (featurep 'reftex) (reftex-mode 1))
-               ;; (turn-on-reftex)
-               ;; (turn-on-cdlatex)
-               (when (featurep 'autopair) (autopair-mode -1))
+               (flyspell-mode 1)
+               ;; (outline-minor-mode 1)
+               (turn-on-reftex)
+               (turn-on-cdlatex)
+               (autopair-mode -1)
                ;; (xy/yas-start)
                ;; (xy/linkd-start)
                ;; (xy/set-font-write)
                ))
-  (add-hook 'latex-mode-hook
-            '(lambda ()
-               (turn-on-auto-fill)
-               (when (featurep 'flyspell) (flyspell-mode 1))
-               (when (featurep 'outline) (outline-minor-mode 1))
-               (when (featurep 'cdlatex) (cdlatex-mode 1))
-               (when (featurep 'reftex) (reftex-mode 1))
-               ;; (turn-on-reftex)
-               ;; (turn-on-cdlatex)
-               (when (featurep 'autopair) (autopair-mode -1))
-               ;; (xy/yas-start)
-               ;; (xy/linkd-start)
-               ;; (xy/set-font-write)
-               ))
+  ;; (add-hook 'latex-mode-hook
+  ;;           '(lambda ()
+  ;;              (turn-on-auto-fill)
+  ;;              (when (featurep 'flyspell) (flyspell-mode 1))
+  ;;              (when (featurep 'outline) (outline-minor-mode 1))
+  ;;              (when (try-require 'cdlatex) (cdlatex-mode 1))
+  ;;              (when (try-require 'reftex) (reftex-mode 1))
+  ;;              ;; (turn-on-reftex)
+  ;;              ;; (turn-on-cdlatex)
+  ;;              (when (featurep 'autopair) (autopair-mode -1))
+  ;;              ;; (xy/yas-start)
+  ;;              ;; (xy/linkd-start)
+  ;;              ;; (xy/set-font-write)
+  ;;              ))
 
   ;; (require 'tex-mik)
   ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
@@ -94,12 +103,16 @@
   ;; (defvar BIBINPUTS
   ;;   '("\\.bib$" "$BSTINPUTS" "$BIBINPUTS")) ; bibtex files.
   ;; (setenv "BIBINPUTS" "jabref")
+  (message "* ---[ auctex configuration is complete ]---"))
 
+;;;###autoload
+(defun preview-latex-settings ()
+  "Settings of `preview-latex'."
+  (require 'preview)
   ;; preview-latex, preview latex output in Emacs
   (LaTeX-preview-setup)
   ;; Picture scale
   (setq preview-scale-function 1.5)
-
-  (message "* ---[ auctex configuration is complete ]---"))
+  (message "* ---[ preview-latex configuration is complete ]---"))
 
 (provide 'xy-rc-auctex)

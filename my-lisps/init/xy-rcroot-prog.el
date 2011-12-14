@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-13 Tue 00:42 xin on p6t>
+;; Time-stamp:<2011-12-14 Wed 11:35 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -143,6 +143,7 @@
 ;;  `(("C-M-h"   outline-mark-subtree)
 ;;    ("C-c u"   outline-up-heading)))
 
+
 ;;--------------------------------------------------------------------
 ;;*** outline-org-like
 ;; org-like code folding
@@ -157,7 +158,8 @@
                 'outline-cycle))))
 (am-add-hooks
  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
-                      vhdl-mode-hook verilog-mode-hook)
+                      vhdl-mode-hook verilog-mode-hook
+                      latex-mode-hook tex-mode-hook)
  '(lambda ()
     (when (try-require 'outline-org-like)
       (outline-org-mode 1))))
@@ -262,9 +264,9 @@
 ;;--------------------------------------------------------------------
 ;;** imenu
 (eval-after-load "imenu" '(imenu-settings))
-(add-hook 'font-lock-mode-hook ;; Add an Imenu index to the menu bar
-                               ;; in any mode that supports Imenu.
-          'try-to-add-imenu)
+;; (add-hook 'font-lock-mode-hook ;; Add an Imenu index to the menu bar
+;;                                ;; in any mode that supports Imenu.
+;;           'try-to-add-imenu)
 
 ;;*** imenu-tree
 (eval-after-load "imenu-tree" '(imenu-tree-settings))

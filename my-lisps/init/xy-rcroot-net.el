@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-13 Tue 10:13 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 09:24 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,14 +24,16 @@
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
 
 ;;====================================================================
-;; Use external program as the default web browser
-;; (Windows
-;;   (setq browse-url-browser-function
-;;         'browse-url-default-windows-browser))
-;; (GNULinux
-;;   (setq browse-url-browser-function
-;;         'browse-url-default-browser))
-
+;; Use external program as the default web browser in X-window
+(if window-system
+    (progn
+      (Windows
+       (setq browse-url-browser-function
+             'browse-url-default-windows-browser))
+      (GNULinux
+       (setq browse-url-browser-function
+             'browse-url-default-browser)))
+  (setq browse-url-browser-function 'w3m-browse-url))
 
 ;;====================================================================
 ;;* w3m
@@ -46,7 +48,7 @@
    ("C-<f8>"      lookup-wikipedia)
    ("M-<f8>"      google-region)))
 ;; Use w3m as the default web browser
-(setq browse-url-browser-function 'w3m-browse-url)
+;; (setq browse-url-browser-function 'w3m-browse-url)
 
 ;;====================================================================
 ;;* erc

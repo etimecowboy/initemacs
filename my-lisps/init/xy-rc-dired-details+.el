@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired-details+.el'
-;; Time-stamp:<2011-12-13 Tue 11:28 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-13 Tue 22:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,7 +19,6 @@
 ;;;###autoload
 (defun dired-details+-settings ()
   "Settings of `dired-details+.el'."
-  (dired-details-install)        ;; use `(' and `)' to switch
   (setq-default dired-details-initially-hide t)
   (message "* ---[ dired-details+ configuration is complete ]---"))
 
