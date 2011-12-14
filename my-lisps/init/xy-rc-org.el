@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-14 Wed 11:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 13:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -303,7 +303,14 @@ If html-file-name is not given, read it from minibuffer."
                (if (string= state "SOMEDAY") (org-schedule t))
                ;; Automatically schedule the task to today after change
                ;; the state to NEXT
-               (if (string= state "NEXT") (org-schedule nil "+0"))))
+               (if (string= state "NEXT") (org-schedule nil "+0"))
+               (when window-system
+                 (when (try-require 'todochiku)
+                   (if (string= state "DONE")
+                       (todochiku-message "Emacs Org"
+                                          "Task DONE, Great Work!"
+                                          (todochiku-icon 'check)))))
+               ))
 
   ;; Treat adding item as state change
   (setq org-treat-insert-todo-heading-as-state-change t)
@@ -637,23 +644,23 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-capture-templates
           '(("p" "Add a PhD Task----->Day Planner"
              entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
-             "** TODO [#A] %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
+             "** TODO %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("l" "Add a Life Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
-             "** TODO [#B] %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
+             "** TODO %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("g" "Add a Geek Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
-             "** TODO [#C] %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
+             "** TODO %?\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("s" "Add a Learn Task--->Day Planner"
              entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
-             "** TODO [#C] %?\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
+             "** TODO %?\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
           ("m" "Add a Misc Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
-             "** TODO [#B] %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
+             "** TODO %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("n" "Write a Notes"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")

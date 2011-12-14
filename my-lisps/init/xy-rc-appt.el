@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
-;; Time-stamp:<2011-12-12 Mon 01:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-14 Wed 12:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,8 +38,8 @@
       (setq appt-display-format 'window)
 
       (defun xy/appt-display (min-to-app new-time msg)
-        (todochiku-message "appt notification" msg
-                           (todochiku-icon 'emacs)))
+        (todochiku-message "Emacs appointment" msg
+                           (todochiku-icon 'alarm)))
 
       (setq appt-disp-window-function (function xy/appt-display))))
 
