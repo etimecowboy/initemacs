@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-14 Wed 05:48 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-15 Thu 15:35 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -585,31 +585,25 @@
 ;;   打開 emacs。這樣使用軟件自動轉換肯定是不精確的，有些地方會出現錯
 ;;   誤。比如"碼表"被搞成了"碼錶"。
 (eval-after-load "eim" '(eim-settings))
-(autoload 'eim-use-package "eim" "The eim input method" t)
-;; (register-input-method
-;;  "eim-wb" "utf-8" 'eim-use-package "eim-wb" "eim-wb" "wb.txt")
-(register-input-method
- "eim-py" "utf-8"
- 'eim-use-package "eim-py" "eim-py" (concat my-emacs-path "/eim/py.txt"))
-(setq default-input-method "eim-py")
-;; (setq input-activate nil)
-;; (add-hook 'find-file-hook
-;;           (lambda ()(if (eq input-activate t) (toggle-input-method))))
+(when (require 'eim-extra nil 'noerror)
+  (global-set-key ";" 'eim-insert-ascii))
+  ;; (global-set-key "C-\\" 'toggle-input-method))
 
 ;;*** ibus-el
+;; NOTE: ibus 太不好用了。放弃。
 ;; IBus client for GNU Emacs
 ;; REF:  (@url :file-name "http://www11.atwiki.jp/s-irie/pages/21.html" :display "Source")
-(GNULinux
- (require 'ibus)
- ;; Turn on ibus-mode automatically after loading .emacs
- (add-hook 'after-init-hook 'ibus-mode-on)
- ;; Use C-SPC for Set Mark command
- ;; (ibus-define-common-key ?\C-\s nil)
- ;; Use C-/ for Undo command
- (ibus-define-common-key ?\C-/ nil)
- ;; Change cursor color depending on IBus status
- ;; (setq ibus-cursor-color '("red" "blue" "limegreen"))
-)
+;; (GNULinux
+;;  (require 'ibus)
+;;  ;; Turn on ibus-mode automatically after loading .emacs
+;;  (add-hook 'after-init-hook 'ibus-mode-on)
+;;  ;; Use C-SPC for Set Mark command
+;;  ;; (ibus-define-common-key ?\C-\s nil)
+;;  ;; Use C-/ for Undo command
+;;  (ibus-define-common-key ?\C-/ nil)
+;;  ;; Change cursor color depending on IBus status
+;;  ;; (setq ibus-cursor-color '("red" "blue" "limegreen"))
+;; )
 
 ;;====================================================================
 ;;* Emacs lisp management
