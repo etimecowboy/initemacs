@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-15 Thu 15:29 xin on p6t>
+;; Time-stamp:<2011-12-15 Thu 18:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -218,7 +218,7 @@
 
   ;;==================================================================
   ;; 语言环境设定
-  (setq gnus-default-charset 'gbk)
+  (setq gnus-default-charset 'utf-8)
   (add-to-list 'gnus-group-charset-alist
                '("\\(^\\|:\\)cn\\>\\|\\<chinese\\>" gbk))
   (setq gnus-summary-show-article-charset-alist
@@ -315,7 +315,7 @@
   ;;       sc-nested-citation-p nil
   ;;       sc-preferred-header-style 4
   ;;       sc-use-only-preference-p nil)
-  ;; (add-hook 'mail-citation-hook 'sc-cite-original)
+  (add-hook 'mail-citation-hook 'sc-cite-original)
 
   ;;==================================================================
   ;; 阅读设置
