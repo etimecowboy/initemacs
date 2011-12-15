@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-14 Wed 09:02 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-15 Thu 11:16 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -68,8 +68,13 @@
 ;;*** GNU Emacs features for dired
 ;; 对特定文件简略显示
 (eval-after-load "dired-x" '(dired-x-settings))
+;; (require 'dired-x)
+(add-hook 'dired-mode-hook
+          (function (lambda ()
+                      (dired-omit-mode 1))))
+
 ;; 以文件形式修改dired buffer,  has been a part of GNU Emacs since 23
-;; (eval-after-load "wdired" '(wdired-settings))
+;; (require 'wdired)
 ;; 只对文件名isearch
 ;;   NOTE: Emacs 23 has builtin Isearch of filenames in Dired:
 ;;     M-s f C-s   – `dired-isearch-filenames'
@@ -78,26 +83,28 @@
 ;; (eval-after-load "dired-isearch" '(dired-isearch-settings))
 
 ;;*** Contrib features for dired
-;; 简略文件列表信息
-(eval-after-load "dired-details+" '(dired-details+-settings))
+;; TODO: do a research and add more configurations.
+(eval-after-load "dired+" '(dired+-settings)) ;; dired大补
+(require 'dired+)
+
 ;; Use a single frame for visiting a sub-directory
 ;; (eval-after-load "dired-single" (dired-single-settings))
 ;; `T' 把目录压缩为.tar.gz文件
-;; (eval-after-load "dired-tar" '(dired-tar-settings))
-;; TODO: do a research and add more configurations.
-(eval-after-load "dired+" '(dired+-settings)) ;; dired大补
+(require 'dired-tar)
+
 ;; open-with, open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
-(eval-after-load "openwith" '(openwith-settings))
-;; image-dired
-(eval-after-load "image-dired" '(image-dired-settings))
-;; thumbs, Thumbnails previewer for images files
-(eval-after-load "thumbs" '(thumbs-settings))
+(GNULinux
+ (eval-after-load "openwith" '(openwith-settings))
+ (require 'openwith)
+ (add-hook 'dired-mode-hook
+           (function (lambda ()
+                       (openwith-mode 1)))))
 
-(require 'dired+)
+;; 简略文件列表信息
+;; (eval-after-load "dired-details" '(dired-details-settings))
+(require 'dired-details)
 (require 'dired-details+)
-(dired-details-install)
-(require 'dired-tar)
 
 ;; (add-hook 'dired-load-hook
 ;;           (function (lambda ()
@@ -109,21 +116,22 @@
 ;;                       ;; (load 'dired-single)
 ;;                       (load "openwith")
 ;;                       )))
-(add-hook 'dired-mode-hook
-          (function (lambda ()
-                      (dired-omit-mode 1)
-                      ;; (dired-details-install)
-                      (dired-details-toggle 1)
+
+;; (add-hook 'dired-mode-hook
+;;           (function (lambda ()
+;;                       (dired-omit-mode 1)
+                      ;; (dired-details-toggle 1)
                       ;; (define-key ctl-x-map   "d"
                       ;;   'diredp-dired-files)
                       ;; (define-key ctl-x-4-map "d"
                       ;;   'diredp-dired-files-other-window)
-                      )))
-(GNULinux
- (add-hook 'dired-mode-hook
-           (function (lambda ()
-                       (require 'openwith)
-                       (openwith-mode 1)))))
+                      ;; )))
+
+;; image-dired
+(eval-after-load "image-dired" '(image-dired-settings))
+
+;; thumbs, Thumbnails previewer for images files
+(eval-after-load "thumbs" '(thumbs-settings))
 
 ;;--------------------------------------------------------------------
 ;;** Sunrise commander; file manager
