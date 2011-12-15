@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-14 Wed 11:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-15 Thu 04:16 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -95,8 +95,8 @@
   '(highlight-parentheses-settings))
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-   sh-mode-hook cperl-mode-hook c-common-mode-hook
-   vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
+                  sh-mode-hook cperl-mode-hook c-common-mode-hook
+                  vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
  '(lambda ()
     (require 'highlight-parentheses)
     (highlight-parentheses-mode 1)))
@@ -106,13 +106,13 @@
 ;; NOTE: autopair-mode conflicts with `auctex'/`cdlatex', and
 ;; `yasnippet'. Need to use hooks to disable it in these modes.
 (eval-after-load "autopair" '(autopair-settings))
-(require 'autopair)
-(autopair-global-mode 1)
 (am-add-hooks
- `(org-mode-hook latex-mode-hook c-mode-common-hook vhdl-mode-hook
-                 verilog-mode-hook)
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+                  sh-mode-hook cperl-mode-hook c-common-mode-hook
+                  vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
  '(lambda ()
-    (when (featurep 'autopair) (autopair-mode -1))))
+    (require 'autopair)
+    (autopair-mode 1)))
 
 ;;====================================================================
 ;;* Code folding

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-13 Tue 10:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-15 Thu 10:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -196,6 +196,53 @@
   (setq gnus-newsgroup-ignored-charsets
         '(unknown-8bit x-unknown x-gbk gb18030))
 
+  ;;设置发送风格
+  (setq gnus-posting-styles
+        '(
+          ;; all
+          (".*"
+           (name "Allen Yang")
+           (address "etimecowboy@gmail.com")
+           ;; (face (gnus-convert-png-to-face (concat gnus-home-directory
+           ;;                                         "/cock32.png")))
+           ;; (organization "your-pc-name")
+           ;;            (signature "
+           ;; oooOOOOoo...
+           ;; >  Life is too short ! ...")
+           (eval (setq mm-coding-system-priorities
+                       '(iso-8859-1 gb2312 gbk gb18030 utf-8)))
+           ;;(body "")
+           )
+          ;;cn.bbs.com
+          ("^cn\\.bbs"
+           (name "日积月累")
+           (address "etimecowboy@gmail.com")
+           ;; (face (gnus-convert-png-to-face (concat gnus-home-directory
+           ;;                                         "/cock32.png")))
+           ;;            (organization "your-pc-name")
+           (signature "
+;;
+;; >  日积月累，水滴穿石")
+           (eval (setq mm-coding-system-priorities
+                       '(iso-8859-1 gb2312 gbk gb18030 utf-8)))
+           ;;(body "")
+           )
+          ;;tw
+          ("^tw\\.comp"
+           (name "日積月累")
+           (address  "etimecowboy@gmail.com")
+           ;; (face (gnus-convert-png-to-face (concat gnus-home-directory
+           ;;                                         "/cock32.png")))
+           ;;            (organization "your-pc-name")
+           (signature "
+;;
+;; >  日積月累，水滴穿石")
+           (eval (setq mm-coding-system-priorities
+                       '(iso-8859-1 big5 utf-8)))
+           ;;(body "")
+           )
+          ))
+
   ;; 显示阅读设置
   (setq mm-text-html-renderer 'w3m) ;用W3M显示HTML格式的邮件
   ;; (setq mm-text-html-renderer nil)  ;调用外部浏览器
@@ -296,11 +343,10 @@
         gnus-generate-tree-function 'gnus-generate-horizontal-tree ;生成水平树
         gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject) ;聚集函数根据标题聚集
 
-  ;;------------------------------------------------------------------
-  ;; 时间显示
-
-  (add-hook 'gnus-article-prepare-hook ; 将邮件的发出时间转换为本地时间
-            'gnus-article-date-local)
+  (add-hook 'gnus-article-prepare-hook
+            (lambda ()
+              (gnus-article-fill-long-lines)
+              (gnus-article-date-local)))  ; 将邮件的发出时间转换为本地时间
   (add-hook 'gnus-select-group-hook    ; 跟踪组的时间轴
             'gnus-group-set-timestamp)
   (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)  ; 新闻组分组
@@ -319,9 +365,7 @@
   ;; (add-hook 'gnus-group-catchup-group-hook 'gnus-notify+) ;当清理当前组后
   ;; (add-hook 'mail-notify-pre-hook 'gnus-notify+) ;更新邮件时
 
-  ;;------------------------------------------------------------------
-  ;; 斑纹化
-  (setq gnus-summary-stripe-regexp        ;设置斑纹化匹配的正则表达式
+  (setq gnus-summary-stripe-regexp
         (concat "^[^"
                 gnus-sum-thread-tree-vertical
                 "]*"))
@@ -351,7 +395,7 @@
   ;;           \\|^X-Newsreader:\\|^User-Agent:\\|^X-Mailer:
   ;;           \\|Line:\\|Lines:\\|Content-Type:\\|NNTP-Posting-Host\\)")))
   ;; (add-hook 'gnus-startup-hook
-  ;;             '(lambda ()
+ ;;             '(lambda ()
   ;;                (setq gnus-visible-headers
   ;;                      (concat "^User-Agent:\\|^Content-Type:\\|"
   ;;                              "Content-Transfer-Encoding:\\|"
@@ -411,6 +455,8 @@
         '((not gnus-thread-sort-by-date)
           (not gnus-thread-sort-by-number)))
 
+
+  ;;==================================================================
   ;; Message replying
   (setq gnus-confirm-mail-reply-to-news t
         message-kill-buffer-on-exit t
@@ -422,10 +468,25 @@
   ;;          (gnus-face-from-file "~/.emacs.d/me.jpg")
   ;;          (organization "University of Manitoba")
   ;;          (signature "http://www.cnliufeng.com/"))))
-  (add-hook 'gnus-article-prepare-hook
+
+  (add-hook 'message-mode-hook
             (lambda ()
-              (gnus-article-fill-long-lines)
-              (gnus-article-date-local)))
+              (auto-fill-mode 1)
+              (set-fill-column 64)
+              (auto-image-file-mode 1)
+              (setq mm-inline-large-images t)
+              (add-to-list 'mm-attachment-override-types "image/*")))
+
+  ;;引用设置：不要原来的签名，引用全文
+  (setq message-cite-function 'message-cite-original-without-signature)
+  (add-hook 'mail-citation-hook 'sc-cite-original)
+
+  ;; multimedia content reading
+  (eval-after-load "mm-decode"
+    '(progn
+       (add-to-list 'mm-discouraged-alternatives "text/html")
+       (add-to-list 'mm-discouraged-alternatives "text/richtext")
+       (setq mm-inline-large-images t)))
 
   ;;==================================================================
   ;; 新闻存档
@@ -505,75 +566,6 @@ archive
   ;;              (stringp gnus-newsgroup-name))
   ;;         gnus-newsgroup-name)
   ;;        (t ted-default-gcc-group)))
-
-  ;;==================================================================
-  ;; message 设置
-
-  (add-hook 'message-mode-hook
-            (lambda ()
-              (auto-fill-mode 1)
-              (set-fill-column 64)
-              (auto-image-file-mode 1)
-              (setq mm-inline-large-images t)
-              (add-to-list 'mm-attachment-override-types "image/*")))
-
-  ;;引用设置：不要原来的签名，引用全文
-  (setq message-cite-function 'message-cite-original-without-signature)
-  (add-hook 'mail-citation-hook 'sc-cite-original)
-
-  ;; multimedia content reading
-  (eval-after-load "mm-decode"
-    '(progn
-       (add-to-list 'mm-discouraged-alternatives "text/html")
-       (add-to-list 'mm-discouraged-alternatives "text/richtext")
-       (setq mm-inline-large-images t)))
-
-  ;;设置发送风格
-  (setq gnus-posting-styles
-        '(
-          ;; all
-          (".*"
-           (name "Allen Yang")
-           (address "etimecowboy@gmail.com")
-           ;; (face (gnus-convert-png-to-face (concat gnus-home-directory
-           ;;                                         "/cock32.png")))
-           ;; (organization "your-pc-name")
-           ;;            (signature "
-           ;; oooOOOOoo...
-           ;; >  Life is too short ! ...")
-           (eval (setq mm-coding-system-priorities
-                       '(iso-8859-1 gb2312 gbk gb18030 utf-8)))
-           ;;(body "")
-           )
-          ;;cn.bbs.com
-          ("^cn\\.bbs"
-           (name "日积月累")
-           (address "etimecowboy@gmail.com")
-           ;; (face (gnus-convert-png-to-face (concat gnus-home-directory
-           ;;                                         "/cock32.png")))
-           ;;            (organization "your-pc-name")
-           (signature "
-;;
-;; >  日积月累，水滴穿石")
-           (eval (setq mm-coding-system-priorities
-                       '(iso-8859-1 gb2312 gbk gb18030 utf-8)))
-           ;;(body "")
-           )
-          ;;tw
-          ("^tw\\.comp"
-           (name "日積月累")
-           (address  "etimecowboy@gmail.com")
-           ;; (face (gnus-convert-png-to-face (concat gnus-home-directory
-           ;;                                         "/cock32.png")))
-           ;;            (organization "your-pc-name")
-           (signature "
-;;
-;; >  日積月累，水滴穿石")
-           (eval (setq mm-coding-system-priorities
-                       '(iso-8859-1 big5 utf-8)))
-           ;;(body "")
-           )
-          ))
 
   ;;==================================================================
   ;; 发送设置
@@ -664,7 +656,7 @@ archive
   ;; gnus-notify+
   ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/gnus-notify%2B.el" :display "emacswiki")
   ;; 邮件新闻通知
-  (try-require 'gnus-notify+)
+  ;; (try-require 'gnus-notify+)
 
   ;;------------------------------------------------------------------
   ;; org-mime

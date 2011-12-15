@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-14 Wed 13:30 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-15 Thu 09:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -13,6 +13,7 @@
 ;;--------------------------------------------------------------------
 ;; TODO: Divide org-settings into a few more funtions for org-agenda,
 ;; org-capture and so on.
+;; 中文测试
 
 (require 'cl)
 (require 'xy-rc-utils)
@@ -299,8 +300,10 @@ If html-file-name is not given, read it from minibuffer."
   (add-hook 'org-after-todo-state-change-hook
             '(lambda ()
                ;; Automaticaly remove the scheduled date/time after
-               ;; change the state to SOMEDAY
-               (if (string= state "SOMEDAY") (org-schedule t))
+               ;; change the state to SOMEDAY TODO
+               (if (or (string= state "SOMEDAY")
+                       (string= state "TODO"))
+                   (org-schedule t))
                ;; Automatically schedule the task to today after change
                ;; the state to NEXT
                (if (string= state "NEXT") (org-schedule nil "+0"))
@@ -745,6 +748,7 @@ If html-file-name is not given, read it from minibuffer."
   ;;                ("\\section{%s}" . "\\section*{%s}")))
 
 
+  ;; BUG: not work
   ;; latex to pdf command list
   ;; (setq org-latex-to-pdf-process
   ;;   '(("pdflatex -interaction nonstopmode %b"
@@ -761,7 +765,7 @@ If html-file-name is not given, read it from minibuffer."
                (org-mode-reftex-setup)
                (turn-on-org-cdlatex)
                (flyspell-mode 1)
-               (autopair-mode -1)
+               ;; (autopair-mode -1)
                ;; (xy/yas-start)
                ;; (xy/linkd-start)
                ;; (xy/set-font-write)

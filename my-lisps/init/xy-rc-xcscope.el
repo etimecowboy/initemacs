@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-xcscope.el'
-;; Time-stamp:<2011-12-14 Wed 12:20 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-15 Thu 05:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -17,12 +17,25 @@
 (require 'xy-rc-utils)
 
 ;; Fix the bug of `cscope-bury-buffer'
+;; ;;;###autoload
+;; (defun cscope-bury-buffer ()
+;;   "Clean up cscope, if necessary, and bury the buffer."
+;;   (interactive)
+;;   (other-window 1)
+;;   (delete-other-windows))
+
 ;;;###autoload
 (defun cscope-bury-buffer ()
   "Clean up cscope, if necessary, and bury the buffer."
   (interactive)
-  (other-window 1)
-  (delete-other-windows))
+  (let ()
+    (if overlay-arrow-position
+        (set-marker overlay-arrow-position nil))
+    ;; (setq overlay-arrow-position nil
+    ;;       overlay-arrow-string nil)
+    ;; (bury-buffer (get-buffer cscope-output-buffer-name))
+    (bury-buffer)
+    (delete-window)))
 
 ;;;###autoload
 (defun xcscope-settings ()
