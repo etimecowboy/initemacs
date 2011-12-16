@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-16 Fri 05:17 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 10:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -32,6 +32,7 @@
         gnus-agent-directory "~/emacs/gnus/news/agent"    ;代理目录
         gnus-cache-directory "~/emacs/gnus/news/cache"    ;缓存目录
         gnus-cache-active-file "~/emacs/gnus/news/cache/active" ;缓存激活文件
+        gnus-newsgroup-maximum-articles 1000    ;最大的文章获取量，避免内存消耗过大
         message-directory "~/emacs/gnus/mail"   ;邮件的存储目录
         message-auto-save-directory "~/emacs/gnus/mail/drafts" ;自动保存的目录
         mail-source-directory "~/emacs/gnus/mail"  ;邮件的源目录

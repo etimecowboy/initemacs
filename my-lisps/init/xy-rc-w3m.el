@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-12-16 Fri 02:46 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 11:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -263,14 +263,14 @@
   ;; (require 'w3m-buffer)
   ;; (require 'w3m-antenna)
   ;; (require 'w3m-dtree)
+
   (try-require 'mime-w3m)
   (when (try-require 'octet)
     (octet-mime-setup))
+
   (GNULinux  ;; BUG: cause w3m to crash in Windows 7
-   (when (try-require 'w3m-lnum)
-     (w3m-lnum-mode 1)))
-  (when (try-require 'w3m-fb)
-    (w3m-fb-mode 1))
+     (w3m-lnum-mode 1))
+  (w3m-fb-mode 1)
 
   (autoload 'w3m-weather "w3m-weather" "Display weather report." t)
   (autoload 'org-w3m-copy-for-org-mode "org-w3m"
@@ -293,8 +293,7 @@
      ("C-c l"        w3m-copy-current-url)
      ))
 
-  (message "* ---[ w3m configuration is complete ]---")
-)
+  (message "* ---[ w3m configuration is complete ]---"))
 
 (provide 'xy-rc-w3m)
 
