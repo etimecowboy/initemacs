@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-12-13 Tue 00:41 xin on p6t>
+;; Time-stamp:<2011-12-16 Fri 10:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -16,14 +16,14 @@
 (require 'cl)
 (require 'xy-rc-utils)
 
-;;;###autoload
-(defun xy/yas-start ()
-  "Start yasnippet."
-  (interactive)
-  (require 'yasnippet)
-  ;; BUG: if (yas/minor-mode-on), there will be a conflict between
-  ;; `xy/yas-start' and `xy/ac-start' functions
-  (yas/minor-mode 1))
+;; ;;;###autoload
+;; (defun xy/yas-start ()
+;;   "Start yasnippet."
+;;   (interactive)
+;;   (require 'yasnippet)
+;;   ;; BUG: if (yas/minor-mode-on), there will be a conflict between
+;;   ;; `xy/yas-start' and `xy/ac-start' functions
+;;   (yas/minor-mode 1))
 
 ;;;###autoload
 (defun yasnippet-unbind-trigger-key ()

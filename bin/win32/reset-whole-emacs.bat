@@ -20,4 +20,4 @@ cd ..\themes
 rm loaddefs*
 rm *.elc
 cd E:\xin
-emacs --debug-init
+emacs -nw --debug-init

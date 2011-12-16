@@ -4,4 +4,4 @@ rm *.elc
 cd .\init
 rm loaddefs*
 rm *.elc
-emacs --debug-init
+emacs -nw --debug-init

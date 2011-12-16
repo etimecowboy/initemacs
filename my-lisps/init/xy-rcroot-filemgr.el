@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-16 Fri 02:53 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 10:29 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -179,8 +179,7 @@
 ;;*** git.el
 
 ;;*** egg
-;; (global-set-key [S-f11] 'xy/egg-start)
-(eval-after-load "egg" '(egg-settings))
+;; (eval-after-load "egg" '(egg-settings))
 
 ;;*** magit
 ;; Project range git

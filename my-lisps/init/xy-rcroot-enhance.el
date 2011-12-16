@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-16 Fri 09:37 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 10:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -222,6 +222,7 @@ from tradition chinese to simple chinese" t)
 ;;====================================================================
 ;;* inkd
 ;; 在各种 text 文档间提供链接
+(autoload 'linkd-mode "linkd" nil t)
 (eval-after-load "linkd"
   '(progn
      (linkd-settings)
@@ -248,7 +249,7 @@ from tradition chinese to simple chinese" t)
    verilog-mode-hook ;; org-mode-hook
    LaTeX-mode-hook
    matlab-mode-hook)
- 'xy/linkd-start)
+ '(lambda () (linkd-mode 1)))
 
 ;;====================================================================
 ;;* ascii
@@ -266,6 +267,7 @@ from tradition chinese to simple chinese" t)
 ;;====================================================================
 ;;* multi-term
 ;; a mode based on term.el, for managing multiple terminal buffers
+(autoload 'multi-term "multi-term" nil t)
 (eval-after-load "multi-term"
   '(progn
      (multi-term-settings)
@@ -277,7 +279,7 @@ from tradition chinese to simple chinese" t)
      ;;  'text-mode-map
      ;;  `(("M-J"   switch-term-and-text)
      ;;    ("M-L"   enter-term-mode)))))
-(global-set-key (kbd "C-x T") 'xy/multi-term-start)
+(global-set-key (kbd "C-x T") 'multi-term)
 
 ;;====================================================================
 ;;* shell-pop

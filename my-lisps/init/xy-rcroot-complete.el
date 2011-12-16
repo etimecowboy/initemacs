@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-16 Fri 09:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 10:23 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -175,6 +175,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** yasnippet
+(autoload 'yas/minor-mode "yasnippet" nil t)
 (eval-after-load "yasnippet"
   '(progn
      (yasnippet-settings)
@@ -193,7 +194,8 @@
    cc-mode-hook c-mode-hook c++-mode-hook
    sh-mode-hook ;; vhdl-mode-hook verilog-mode-hook
    org-mode-hook LaTeX-mode-hook matlab-mode-hook)
- `xy/yas-start)
+ '(lambda ()
+    (yas/minor-mode 1)))
 
 ;;====================================================================
 ;;* icicles
