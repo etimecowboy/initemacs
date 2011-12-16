@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-15 Thu 11:16 xin on p6t>
+;; Time-stamp:<2011-12-16 Fri 02:53 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -127,11 +127,11 @@
                       ;;   'diredp-dired-files-other-window)
                       ;; )))
 
-;; image-dired
-(eval-after-load "image-dired" '(image-dired-settings))
-
-;; thumbs, Thumbnails previewer for images files
-(eval-after-load "thumbs" '(thumbs-settings))
+(when window-system
+  ;; image-dired
+  (eval-after-load "image-dired" '(image-dired-settings))
+  ;; thumbs, Thumbnails previewer for images files
+  (eval-after-load "thumbs" '(thumbs-settings)))
 
 ;;--------------------------------------------------------------------
 ;;** Sunrise commander; file manager

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-12-12 Mon 05:56 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 09:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,8 +37,9 @@
 ;;--------------------------------------------------------------------
 ;;** ethan-wspace
 ;; REF: (@url :file-name "https://github.com/glasserc/ethan-wspace" :display "Source")
-(when (try-require 'ethan-wspace)
-  (global-ethan-wspace-mode 1))
+;; (autoload 'ethan-wspace-mode "ethan-wspace" nil t)
+(require 'ethan-wspace)
+(global-ethan-wspace-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** ws-trim
@@ -46,8 +47,8 @@
 ;; `ws-trim-level' it is complementary to `ethan-wspace', and may be
 ;; useful to encourage you to delete whitespace organically. Hopefully
 ;; ethan-wspace will grow similar functionality soon.
-;; (when (try-require 'ws-trim)
-;;    (gloabl-ws-trim-mode 1))
+;; (require 'ws-trim)
+;; (gloabl-ws-trim-mode 1) ;NOTE: too agressive
 
 ;;====================================================================
 ;;* Fast point move

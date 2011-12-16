@@ -12,6 +12,8 @@
 
 
 (eval-when-compile    (require 'color-theme))
+
+;;;###autoload
 (defun color-theme-colorful-obsolescence ()
   "Color theme by Scott Jaderholm."
   (interactive)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-15 Thu 04:16 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 09:55 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -91,6 +91,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** highlight-parentheses
+(autoload 'highlight-parentheses-mode "highlight-parentheses" nil t)
 (eval-after-load "highlight-parentheses"
   '(highlight-parentheses-settings))
 (am-add-hooks
@@ -98,21 +99,19 @@
                   sh-mode-hook cperl-mode-hook c-common-mode-hook
                   vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
  '(lambda ()
-    (require 'highlight-parentheses)
     (highlight-parentheses-mode 1)))
 
 ;;--------------------------------------------------------------------
 ;;** autopair
 ;; NOTE: autopair-mode conflicts with `auctex'/`cdlatex', and
 ;; `yasnippet'. Need to use hooks to disable it in these modes.
+(autoload 'autopair-mode "autopair" nil t)
 (eval-after-load "autopair" '(autopair-settings))
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
                   sh-mode-hook cperl-mode-hook c-common-mode-hook
                   vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
- '(lambda ()
-    (require 'autopair)
-    (autopair-mode 1)))
+ '(lambda () (autopair-mode 1)))
 
 ;;====================================================================
 ;;* Code folding
@@ -143,26 +142,25 @@
 ;;  `(("C-M-h"   outline-mark-subtree)
 ;;    ("C-c u"   outline-up-heading)))
 
-
 ;;--------------------------------------------------------------------
-;;*** outline-org-like
-;; org-like code folding
+;;*** outline 插件
 ;; REF: - (@url :file-name "http://www.cnblogs.com/bamanzi/archive/2011/10/09/emacs-outline-org-like.html" :display "Post")
 ;;      - (@url :file-name "http://code.google.com/p/bamanzi-misc/source/browse/trunk/_emacs.d/lisp/outline-org-like.el" :display "Source")
+(autoload 'outline-cycle "outline-magic" nil t)
 (add-hook 'outline-minor-mode-hook
           (lambda ()
-            (when (try-require 'outline-magic)
               (setq indent-tabs-mode nil)
               (setq tab-always-indent t)
               (define-key outline-minor-mode-map (kbd "<f6>")
-                'outline-cycle))))
-(am-add-hooks
- `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
-                      vhdl-mode-hook verilog-mode-hook
-                      latex-mode-hook tex-mode-hook)
- '(lambda ()
-    (when (try-require 'outline-org-like)
-      (outline-org-mode 1))))
+                'outline-cycle)))
+
+(autoload 'outline-org-mode "outline-org-like" nil t)
+;; (am-add-hooks
+;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
+;;                       vhdl-mode-hook verilog-mode-hook
+;;                       latex-mode-hook tex-mode-hook)
+;;  '(lambda ()
+;;       (outline-org-mode 1)))
 
 ;;------------------------------------------------------------------
 ;;** hideshow
@@ -171,6 +169,7 @@
 ;; In particular, HideShow hides balanced-expression code blocks and
 ;; multi-line comment blocks.
 ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/HideShow" :display "emacswiki")
+(autoload 'hs-minor-mode "hideshow" nil t)
 (eval-after-load "hideshow"
   '(progn
      (hs-minor-mode-settings)
@@ -184,9 +183,7 @@
 (am-add-hooks
  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
                       vhdl-mode-hook verilog-mode-hook)
- '(lambda ()
-    (when (try-require 'hideshow)
-      (hs-minor-mode t))))
+ '(lambda () (hs-minor-mode 1)))
 
 ;;*** hideshow-org
 ;; The extension makes hideshow.el’s functionality behave like org-mode’s.
@@ -194,13 +191,13 @@
 ;;      - (@url :file-name "http://gnufool.blogspot.com/2009/03/make-hideshow-behave-more-like-org-mode.html" :display "Post")
 ;; NOTE: the default <TAB> key conflicts with `icicles' and
 ;;       `yasnippet'
+(autoload 'hs-org/minor-mode "hideshow-org" nil t)
 ;; (eval-after-load "hideshow-org" '(hideshow-org-settings))
 (add-hook 'hs-minor-mode-hook
           (lambda ()
-            (when (try-require 'hideshow-org)
-              (setq indent-tabs-mode nil)
               (setq tab-always-indent t)
-              (hs-org/minor-mode t))))
+              ;; (indent-tabs-mode -1)
+              (hs-org/minor-mode 1)))
 
 ;;--------------------------------------------------------------------
 ;;** orgstruct-mode

@@ -14,6 +14,8 @@
 
 (eval-when-compile
   (require 'color-theme))
+
+;;;###autoload
 (defun color-theme-wombat+ ()
   "Color theme by Lars Nielsen, Emacsified by Peter Severin and Scott Jaderholm."
   (interactive)

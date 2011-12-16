@@ -19,6 +19,7 @@
 ;;
 ;; All patches welcome
 
+;;;###autoload
 (defun color-theme-blackboard ()
   "Color theme by JD Huntington, based off the TextMate Blackboard theme, created 2008-11-27"
   (interactive)

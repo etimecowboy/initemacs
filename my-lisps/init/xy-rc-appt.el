@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
-;; Time-stamp:<2011-12-14 Wed 12:40 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 03:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,15 +33,13 @@
 
   ;; REF: (@url :file-name "http://lists.gnu.org/archive/html/emacs-orgmode/2009-11/msg00236.html" :display "Post@emacs-orgmode")
   ;; NOTE: May do the job twice with (@file :file-name "xy-rc-org.el" :to "org-show-notification-handler" :display "`org-show-notification-handler'")
-  (when window-system
+  ;; (when window-system
     (when (try-require 'todochiku)
       (setq appt-display-format 'window)
-
       (defun xy/appt-display (min-to-app new-time msg)
         (todochiku-message "Emacs appointment" msg
                            (todochiku-icon 'alarm)))
-
-      (setq appt-disp-window-function (function xy/appt-display))))
+      (setq appt-disp-window-function (function xy/appt-display)))
 
   ;; turn appointment checking on
   (unless (daemonp) (appt-activate 1))

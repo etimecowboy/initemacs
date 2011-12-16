@@ -30,6 +30,7 @@
 ;; color theme (requires http://www.emacswiki.org/cgi-bin/wiki?ColorTheme )
 (require 'color-theme)
 
+;;;###autoload
 (defun color-theme-eclipse ()
   "Customize Sitaramv NT theme like Eclipse default color.
 Black foreground on white background.

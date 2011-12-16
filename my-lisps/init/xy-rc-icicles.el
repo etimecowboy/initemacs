@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-12-08 Thu 00:58 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 02:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,7 +40,6 @@
         icicle-hide-non-matching-lines-flag         t
         icicle-highlight-historical-candidates-flag t
         icicle-highlight-saved-candidates-flag      t
-        icicle-image-files-in-Completions           t
         icicle-incremental-completion-flag          'always
         icicle-incremental-completion-threshold     50
         icicle-incremental-completion-delay         2.0
@@ -65,9 +64,12 @@
         icicle-candidate-width-factor               80
    )
 
+  (if window-system
+      (setq icicle-image-files-in-Completions           t)
+    (setq icicle-image-files-in-Completions nil))
+
   (add-hook 'org-mode-hook
-            '(lambda ()
-               (setq org-completion-use-ido nil)))
+            '(setq org-completion-use-ido nil))
 
   (defun icicle-keys ()
     "icicle-mode的按键设置."

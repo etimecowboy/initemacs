@@ -10,6 +10,8 @@
 ;; This theme is based on Active from jEdit, but it has many original faces.
 
 (eval-when-compile    (require 'color-theme))
+
+;;;###autoload
 (defun color-theme-active ()
   "Color theme Active inspired by jEdit theme of the same name emacsified by Scott Jaderholm."
   (interactive)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-12-08 Thu 03:52 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 02:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -244,7 +244,6 @@
 
   (setq w3m-image-default-background ""
         w3m-add-tab-number t
-        w3m-display-inline-image t
         w3m-favicon-use-cache-file t
         w3m-fill-column 100
         w3m-keep-cache-size 500

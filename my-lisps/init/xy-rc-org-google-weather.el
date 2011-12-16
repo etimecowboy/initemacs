@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org-google-weather.el'
-;; Time-stamp:<2011-12-07 Wed 22:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 03:03 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,9 @@
 (defun org-google-weather-settings ()
   "Settings of `org-google-weather.el'."
   (setq org-google-weather-cache-time 3600)
-  (setq org-google-weather-display-icon-p t)
+  (if window-system
+      (setq org-google-weather-display-icon-p t)
+    (setq org-google-weather-display-icon-p nil))
   (setq org-google-weather-format "%i %C: %c, [%l,%h] %s")
   (setq org-google-weather-icon-alist
         (quote ((chance_of_rain . "weather-showers-scattered.png")

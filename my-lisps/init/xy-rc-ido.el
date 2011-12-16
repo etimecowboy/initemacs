@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-12-09 Fri 04:55 xin on p6t>
+;; Time-stamp:<2011-12-16 Fri 03:49 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -106,17 +106,6 @@
   (add-hook 'org-mode-hook
             '(lambda ()
                (setq org-completion-use-ido t)))
-
-  ;;==================================================================
-  ;; Other ido plugins
-
-  (when (try-require 'ido-ubiquitous)
-    ;; (ido-ubiquitous)
-    (ido-ubiquitous-mode 1))
-
-  ;;------------------------------------------------------------------
-  (when (try-require 'idomenu)
-    (global-set-key (kbd "C-c g") 'idomenu))
 
   (message "* ---[ ido configuration is complete ]---"))
 

@@ -34,6 +34,7 @@
 
 (require 'color-theme)
 
+;;;###autoload
 (defun color-theme-tango ()
   "A color theme based on Tango Palette."
   (interactive)

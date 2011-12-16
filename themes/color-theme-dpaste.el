@@ -32,6 +32,7 @@
 (eval-when-compile
   (require 'color-theme))
 
+;;;###autoload
 (defun color-theme-dpaste ()
   "Dpaste color theme for GNU Emacs."
   (interactive)

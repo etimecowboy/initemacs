@@ -32,6 +32,7 @@
 ;; color theme (requires http://www.emacswiki.org/cgi-bin/wiki?ColorTheme )
 (require 'color-theme)
 
+;;;###autoload
 (defun color-theme-github ()
   "Github color theme for GNU Emacs."
   (interactive)

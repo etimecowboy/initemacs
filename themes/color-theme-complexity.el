@@ -34,6 +34,7 @@
 
 ;;; Code:
 
+;;;###autoload
 (defun color-theme-complexity ()
   (interactive)
   (color-theme-install

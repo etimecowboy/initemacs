@@ -31,6 +31,7 @@
 
 ;;; Code:
 
+;;;###autoload
 (defun color-theme-dg ()
   (interactive)
   (color-theme-install

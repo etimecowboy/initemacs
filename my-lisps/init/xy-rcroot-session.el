@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-12-13 Tue 10:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 03:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -90,7 +90,9 @@
 ;;--------------------------------------------------------------------
 ;;** savehist
 (eval-after-load "savehist" '(savehist-settings))
-(savehist-mode 1)
+(if window-system        ;BUG: cause error in terminal ---
+    (savehist-mode 1)    ;(wrong-type-argument listp ido-file-history)
+  (savehist-mode -1))
 
 ;;--------------------------------------------------------------------
 ;;** filecache

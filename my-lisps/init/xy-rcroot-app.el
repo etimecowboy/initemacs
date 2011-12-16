@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-14 Wed 15:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 10:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -94,8 +94,8 @@
 ;; (add-hook 'org-mode-hook
 ;;           '(lambda ()
 ;;              (window-number-meta-mode t)))
-(when (try-require 'window-number)
-  (window-number-meta-mode 1))
+(require 'window-number)
+(window-number-meta-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** windmove
@@ -133,7 +133,9 @@
 ;; (setq chart-face-use-pixmaps t)    ;; Prefer pixmap icons
 ;; (defalias 'yes-or-no-p 'y-or-n-p)
 (fset 'yes-or-no-p 'y-or-n-p)   ;; Use "y-or-n" instead of "yes-or-no"
-(auto-image-file-mode 1)        ;; automatically display images
+(if window-system
+    (auto-image-file-mode 1)        ;; automatically display images
+  (auto-image-file-mode -1))
 (global-auto-revert-mode 1)     ;; automatically refresh buffer
 (setq sentence-end-double-space nil)
 (setq no-redraw-on-reenter t)   ;; Do not redraw on reenter
@@ -225,7 +227,7 @@
 (tool-bar-mode -1)
 
 ;;*** tool-bar+
-(try-require 'tool-bar+)
+(require 'tool-bar+)
 
 ;;--------------------------------------------------------------------
 ;;** scroll-bar
@@ -269,9 +271,7 @@
 ;;** cursor-change
 ;; 智能的改变光标形状
 ;; REF: (@url :file-name "http://emacser.com/cursor-change.htm" :display "emacser")
-;; (when (try-require 'cursor-change)
-;;   (cursor-change-mode 1))
-;; (cursor-change-mode 1)
+(autoload 'cursor-change-mode "cursor-change" nil t)
 
 ;;====================================================================
 ;;* Mouse settings
@@ -370,18 +370,25 @@
 ;; REF: (@url :file-name "http://emacser.com/color-theme.htm" :display "emacser")
 (eval-after-load "color-theme"
   '(progn
-     (color-theme-settings)
-     ;; (color-theme-xy-dark)
-     (color-theme-solarized-dark)
-     ;; (color-theme-zenburn)
-     (eal-define-keys-commonly
-      color-theme-mode-map
-      `(("'"   switch-to-other-buffer)
-        ("u"   View-scroll-half-page-backward)
-        ("SPC" scroll-up)
-        ("1"   delete-other-windows)
-        ("."   find-symbol-at-point)))))
-(if window-system (require 'color-theme))
+     (color-theme-settings)))
+     ;; ;; (color-theme-xy-dark)
+     ;; ;; (color-theme-solarized-dark)
+     ;; ;; (color-theme-zenburn)
+     ;; (if window-system
+     ;;     (color-theme-solarized-dark))
+     ;;   ;; (color-theme-xy-dark))
+     ;; (eal-define-keys-commonly
+     ;;  color-theme-mode-map
+     ;;  `(("'"   switch-to-other-buffer)
+     ;;    ("u"   View-scroll-half-page-backward)
+     ;;    ("SPC" scroll-up)
+     ;;    ("1"   delete-other-windows)
+     ;;    ("."   find-symbol-at-point)))))
+
+(when window-system ;; It may makes terminal too bright
+    '(progn
+       (require 'color-theme)
+       (color-theme-solarized-dark)))
 
 ;;--------------------------------------------------------------------
 ;;** doremi

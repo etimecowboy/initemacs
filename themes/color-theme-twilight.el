@@ -22,6 +22,7 @@
 ;; Thanks to Travis Jeffery for ido-mode and fixes to the minibuffer-prompt to fit in with the rest of the theme
 ;;
 
+;;;###autoload
 (defun color-theme-twilight ()
   "Color theme by Marcus Crafter, based off the TextMate Twilight theme, created 2008-04-18"
   (interactive)

@@ -52,6 +52,7 @@
 ;;; Code:
 
 
+;;;###autoload
 (defun color-theme-vim-insert-mode ()
   "Color theme by Michael Soulier, created 2003-03-26."
   (interactive)

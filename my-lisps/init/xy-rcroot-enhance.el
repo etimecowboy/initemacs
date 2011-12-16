@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-13 Tue 19:33 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 09:37 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -145,7 +145,7 @@
 ;;====================================================================
 ;;* undo-tree
 (require 'undo-tree)
-(global-undo-tree-mode)
+(global-undo-tree-mode t)
 
 ;;====================================================================
 ;;* list-processes+

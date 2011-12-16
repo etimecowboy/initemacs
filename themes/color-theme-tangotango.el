@@ -36,6 +36,7 @@
 (eval-when-compile
   (require 'color-theme))
 
+;;;###autoload
 (defun color-theme-tangotango ()
   "A color theme based on Tango Palette colors."
   ;; Color codes :

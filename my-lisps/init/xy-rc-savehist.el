@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-savehist.el'
-;; Time-stamp:<2011-12-11 Sun 21:18 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 03:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,6 @@
                                       system-configuration))
   (unless (file-exists-p savehist-file)
     (shell-command (concat "touch " savehist-file)))
-  (message "* ---[ savehist configuration is complete ]---")
-)
+  (message "* ---[ savehist configuration is complete ]---"))
 
 (provide 'xy-rc-savehist)

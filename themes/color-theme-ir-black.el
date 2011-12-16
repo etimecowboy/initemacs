@@ -6,6 +6,8 @@
 ;; Package-Requires: ((color-theme "6.6.1"))
 
 (require 'color-theme)
+
+;;;###autoload
 (defun color-theme-ir-black ()
   (interactive)
 

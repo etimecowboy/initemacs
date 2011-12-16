@@ -51,6 +51,7 @@
   (require 'color-theme))
 
 
+;;;###autoload
 (defun color-theme-railscasts ()
   (interactive)
   (color-theme-install

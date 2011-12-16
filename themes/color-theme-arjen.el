@@ -33,6 +33,7 @@
 
 (require 'color-theme)
 
+;;;###autoload
 (defun color-theme-arjen ()
   "Color theme by awiersma, created 2001-08-27."
   (interactive)

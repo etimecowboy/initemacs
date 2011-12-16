@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-15 Thu 06:11 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 09:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -50,6 +50,14 @@
      ;;    ;; ("C-v"   ido-enter-svn-status-hide)
      ;;    ("C-n"   ido-next-match)
      ;;    ("C-p"   ido-prev-match)))))
+
+;;--------------------------------------------------------------------
+;;*** Other ido plugins
+(require 'ido-ubiquitous)
+(ido-ubiquitous-mode 1)
+
+(autoload 'idomenu "idomenu" nil t)
+(global-set-key (kbd "C-c g") 'idomenu)
 
 ;;--------------------------------------------------------------------
 ;;** icomplete

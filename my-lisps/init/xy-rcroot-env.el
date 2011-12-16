@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-15 Thu 15:35 xin on p6t>
+;; Time-stamp:<2011-12-16 Fri 09:42 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -584,10 +584,13 @@
 ;;      把 py.txt, otherpy.txt,  pychr.txt 用軟件轉成了繁體，然後重新
 ;;   打開 emacs。這樣使用軟件自動轉換肯定是不精確的，有些地方會出現錯
 ;;   誤。比如"碼表"被搞成了"碼錶"。
-(eval-after-load "eim" '(eim-settings))
-(when (require 'eim-extra nil 'noerror)
-  (global-set-key ";" 'eim-insert-ascii))
-  ;; (global-set-key "C-\\" 'toggle-input-method))
+(eval-after-load "eim"
+  '(progn
+     (eim-settings)
+     (when (require 'eim-extra nil 'noerror)
+       (global-set-key ";" 'eim-insert-ascii))))
+(require 'eim)
+;; (global-set-key "C-\\" 'toggle-input-method))
 
 ;;*** ibus-el
 ;; NOTE: ibus 太不好用了。放弃。
@@ -633,7 +636,7 @@
      (eal-define-keys
       'dired-mode-map
       `(("C-i"    auto-install-from-dired)))))
-(require 'auto-install)
+;; (require 'auto-install) ;; NOTE: load it when you want to use it.
 
 ;;====================================================================
 ;;* Emacs server

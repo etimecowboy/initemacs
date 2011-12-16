@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-15 Thu 18:42 xin on p6t>
+;; Time-stamp:<2011-12-16 Fri 05:17 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -220,7 +220,7 @@
   ;; 语言环境设定
   (setq gnus-default-charset 'utf-8)
   (add-to-list 'gnus-group-charset-alist
-               '("\\(^\\|:\\)cn\\>\\|\\<chinese\\>" gbk))
+               '("\\(^\\|:\\)cn\\>\\|\\<chinese\\>" gb2312)) ;; gbk))
   (setq gnus-summary-show-article-charset-alist
         '((1 . utf-8)
           (2 . big5)
@@ -270,7 +270,7 @@
            ;;          (organization "your-pc-name")
            (signature "
 ;;
-;; >  日积月累，水滴穿石")
+;; >  。。。。。用水滴穿石的精神消灭一切困难")
            (eval (setq mm-coding-system-priorities
                        '(iso-8859-1 gb2312 gbk gb18030 utf-8)))
            ;;(body "")
@@ -284,7 +284,7 @@
            ;;          (organization "your-pc-name")
            (signature "
 ;;
-;; >  日積月累，水滴穿石")
+;; >  。。。。。用水水滴穿石的精神消滅一切苦難")
            (eval (setq mm-coding-system-priorities
                        '(iso-8859-1 big5 utf-8)))
            ;;(body "")
@@ -295,9 +295,10 @@
             (lambda ()
               (auto-fill-mode 1)
               (set-fill-column 64)
-              (auto-image-file-mode 1)
-              (setq mm-inline-large-images t)
-              (add-to-list 'mm-attachment-override-types "image/*")))
+              (if window-system
+                    (auto-image-file-mode 1)
+                  (auto-image-file-mode -1))))
+
 
   ;;引用设置：不要原来的签名，引用全文
   (setq message-cite-function 'message-cite-original-without-signature)
@@ -337,13 +338,10 @@
     '(progn
        (add-to-list 'mm-discouraged-alternatives "text/html")
        (add-to-list 'mm-discouraged-alternatives "text/richtext")
-       (setq mm-inline-large-images t)
-       (setq mm-attachment-override-types '("image/.*"))))
-
-  ;; (setq mm-inline-large-images t)   ;显示内置图片
-  ;; (auto-image-file-mode t)          ;自动加载图片
-  ;; ;; Inline images?
-  ;; (setq mm-attachment-override-types '("image/.*"))
+       (if window-system
+           (setq mm-inline-large-images t)
+         (setq mm-inline-large-images nil))
+       (add-to-list 'mm-attachment-override-types "image/*")))
 
   ;;==================================================================
   ;; Summary 显示设置

@@ -54,7 +54,7 @@
 
 
 
-
+;;;###autoload
 (defun color-theme-emacs-revert-theme ()
   "Color subtheme, created 2008-07-17."
   (interactive)

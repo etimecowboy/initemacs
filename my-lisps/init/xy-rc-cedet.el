@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-12-11 Sun 10:59 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 02:29 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -151,8 +151,10 @@ the mru bookmark stack."
 
   ;;------------------------------------------------------------------
   ;; speedbar
-  (setq speedbar-use-images t
-        speedbar-track-mouse-flag nil
+  (if window-system
+      (setq speedbar-use-images t)
+    (setq speedbar-use-images nil))
+  (setq speedbar-track-mouse-flag nil
         speedbar-update-flag nil
         speedbar-show-unknown-files t
         speedbar-directory-unshown-regexp

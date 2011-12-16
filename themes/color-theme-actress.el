@@ -39,6 +39,7 @@
 ;; color theme (requires http://www.emacswiki.org/cgi-bin/wiki?ColorTheme )
 (require 'color-theme)
 
+;;;###autoload
 (defun color-theme-actress ()
   "Actress color theme for GNU Emacs."
   (interactive)

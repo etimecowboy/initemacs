@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-13 Tue 02:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 02:42 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -101,9 +101,11 @@
   (when (try-require 'mew-w3m)
     (setq mew-use-w3m-minor-mode 1)
     (add-hook 'mew-message-hook 'mew-w3m-minor-mode-setter)
-    (define-key mew-summary-mode-map "T" 'mew-w3m-view-inline-image)
-    (setq mew-w3m-auto-insert-image t)
-    )
+    (if window-system
+        (progn
+          (define-key mew-summary-mode-map "T" 'mew-w3m-view-inline-image)
+          (setq mew-w3m-auto-insert-image t))
+      (setq mew-w3m-auto-insert-image nil)))
 
   ;; set signature ;; NOTE: use different signature for different accout
   ;; (setq mew-signature-file (concat mew-mail-path "/sig/siguwe"))
@@ -262,7 +264,7 @@
     ;; (message "[ biff setting is OK ! ]")
     )
   ;; todochiku 新邮件通知
-  (when window-system
+  ;; (when window-system
     (when (try-require 'todochiku)
       (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
         "Use Todochiku to pop-up a notification, if new Mail arrives"
@@ -280,7 +282,7 @@
                                   (todochiku-icon 'mail)))
               ((= arg 0)
                (if (> mew-arrivedmail-pending 0)
-                   (setq mew-arrivedmail-pending 0)))))))
+                   (setq mew-arrivedmail-pending 0))))))
 
   ;; auto complete email address in various fields
   (defvar mew-field-completion-switch
