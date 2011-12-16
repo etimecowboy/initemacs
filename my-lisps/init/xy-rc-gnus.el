@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-16 Fri 10:52 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 12:56 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,7 +28,7 @@
         gnus-startup-file "~/emacs/gnus/newsrc" ;初始文件
         gnus-directory "~/emacs/gnus/news"      ;新闻组的存储目录
         gnus-article-save-directory "~/emacs/gnus/news"  ;文章保存目录
-        gnus-kill-files-directory "~/emacs/gnus/news" ;文件删除目录
+        gnus-kill-files-directory "~/emacs/gnus/news"    ;文件删除目录
         gnus-agent-directory "~/emacs/gnus/news/agent"    ;代理目录
         gnus-cache-directory "~/emacs/gnus/news/cache"    ;缓存目录
         gnus-cache-active-file "~/emacs/gnus/news/cache/active" ;缓存激活文件
@@ -381,7 +381,9 @@
   ;; 主题设置
   (setq gnus-use-trees t               ;联系老的标题
         gnus-tree-minimize-window nil  ;用最小窗口显示
-        gnus-fetch-old-headers 'some   ;抓取老的标题以联系线程
+        gnus-fetch-old-headers  nil    ;不取老的标题
+        ;;NOTE: 对于文章巨多的一些组，任何获取老标题的企图都会消耗大量
+        ;;内存而导致emacs崩溃。
         gnus-generate-tree-function
              'gnus-generate-horizontal-tree   ;生成水平树
         gnus-summary-thread-gathering-function
