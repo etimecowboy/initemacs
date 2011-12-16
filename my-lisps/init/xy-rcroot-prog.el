@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-16 Fri 09:55 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 12:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -41,11 +41,11 @@
 (eval-after-load "simple" '(simple-settings))
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook
-                  cperl-mode-hook cc-mode-hook
-                  LaTeX-mode-hook latex-mode-hook
-                  matlab-mode-hook org-mode-hook
-                  mew-draft-mode-hook)
- 'turn-on-auto-fill)
+                  c-common-mode-hook
+                  LaTeX-mode-hook
+                  matlab-mode-hook
+                  org-mode-hook
+                  mew-draft-mode-hook) 'turn-on-auto-fill)
 
 ;;--------------------------------------------------------------------
 ;;** hungry-delete-mode

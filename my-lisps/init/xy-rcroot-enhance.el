@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-16 Fri 10:34 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 12:43 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -45,27 +45,10 @@
 ;;** linum
 (eval-after-load 'linum '(linum-settings))
 (am-add-hooks
- `(find-file-hook
-   log-view-mode-hook chart-mode-hook
-   hs-hide-hook
-   svn-log-edit-mode-hook package-menu-mode-hook
-   apropos-mode-hook svn-log-view-mode-hook
-   diff-mode-hook emacs-lisp-mode-hook html-mode-hook
-   data-debug-hook debugger-mode-hook
-   semantic-symref-results-mode-hook sh-mode-hook
-   matlab-mode-hook matlab-shell-mode-hook)
- '(lambda()
-    (unless (or (eq major-mode 'image-mode)
-                (eq major-mode 'org-mode)
-                (eq major-mode 'custom-mode)
-                (eq major-mode 'lisp-interaction-mode)
-                (eq major-mode 'fundamental-mode)
-                (eq major-mode 'text-mode)
-                (eq major-mode 'LaTeX-mode)
-                (eq major-mode 'latex-mode)
-                (eq major-mode 'TeX-mode)
-                (eq major-mode 'tex-mode))
-      (linum-mode 1))))
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+                  sh-mode-hook cperl-mode-hook c-common-mode-hook
+                  vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
+ '(lambda () (linum-mode 1)))
 
 ;;--------------------------------------------------------------------
 ;;** time-stamp
