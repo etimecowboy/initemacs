@@ -3,7 +3,7 @@
 ;; Author    : Xin Yang
 ;; Based On  : Manoj Srivastava's `color-theme-manoj.el'---
 ;; http://orgmode.org/worg/color-themes/color-theme-manoj.el
-;; Time-stamp:<2011-12-01 Thu 17:51 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 10:11 xin on P6T-WIN7>
 ;;--------------------------------------------------------------------
 
 ;; ;;;###autoload
@@ -491,6 +491,7 @@
   ;; ;; (color-theme-manoj-xy-egg)
   ;; (color-theme-manoj-xy-org)
 
+  (require 'color-theme)
   (color-theme-install
    '(color-theme-manoj-xy-dark
      ((background-color . "black")
