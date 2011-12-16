@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-color-theme.el'
-;; Time-stamp:<2011-12-16 Fri 09:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 12:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,6 +30,7 @@
   ;;     (color-theme-standard)
   ;;     (select-frame (make-frame))
   ;;     (color-theme-standard))
+
   (message "* ---[ color-theme configuration is complete ]---"))
 
 (provide 'xy-rc-color-theme)

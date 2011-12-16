@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-16 Fri 10:04 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-16 Fri 12:34 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -368,27 +368,10 @@
 ;;** color-theme
 ;; fancy themes for emacs
 ;; REF: (@url :file-name "http://emacser.com/color-theme.htm" :display "emacser")
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-settings)))
-     ;; ;; (color-theme-xy-dark)
-     ;; ;; (color-theme-solarized-dark)
-     ;; ;; (color-theme-zenburn)
-     ;; (if window-system
-     ;;     (color-theme-solarized-dark))
-     ;;   ;; (color-theme-xy-dark))
-     ;; (eal-define-keys-commonly
-     ;;  color-theme-mode-map
-     ;;  `(("'"   switch-to-other-buffer)
-     ;;    ("u"   View-scroll-half-page-backward)
-     ;;    ("SPC" scroll-up)
-     ;;    ("1"   delete-other-windows)
-     ;;    ("."   find-symbol-at-point)))))
-
-(when window-system ;; It may makes terminal too bright
-    '(progn
-       (require 'color-theme)
-       (color-theme-solarized-dark)))
+(eval-after-load "color-theme" '(color-theme-settings))
+(require 'color-theme)
+(when window-system
+  (color-theme-solarized-dark))
 
 ;;--------------------------------------------------------------------
 ;;** doremi
