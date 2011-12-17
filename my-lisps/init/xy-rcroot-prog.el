@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-16 Fri 12:42 xin on p6t>
+;; Time-stamp:<2011-12-17 Sat 12:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -61,6 +61,7 @@
 ;;** paren-mode
 (eval-after-load "paren" '(paren-settings))
 ;; (show-paren-mode 1)
+;; (setq show-paren-style 'parenthesis)
 
 ;;--------------------------------------------------------------------
 ;;** mic-paren

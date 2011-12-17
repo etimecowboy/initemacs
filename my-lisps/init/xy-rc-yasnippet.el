@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-12-16 Fri 10:23 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 12:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -66,7 +66,7 @@
 
 ;;------------------------------------------------------------------
 ;; NOTE: I changed `yas/trigger-key', this hack is not used now
-;; org mode TAB binding problem hack
+;; org-mode TAB binding problem hack
 ;; (add-hook 'org-mode-hook
 ;;           #'(lambda ()
 ;;               (setq yas/fallback-behavior

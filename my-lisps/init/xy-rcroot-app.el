@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-16 Fri 12:34 xin on p6t>
+;; Time-stamp:<2011-12-17 Sat 04:59 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -164,7 +164,7 @@
 (eval-after-load "icicles" '(diminish 'icicle-mode))
 (eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
-(eval-after-load "linkd" '(diminish 'linkd-mode))
+;; (eval-after-load "linkd" '(diminish 'linkd-mode))
 (eval-after-load "simple" '(diminish 'global-visual-line-mode))
 (eval-after-load "simple" '(diminish 'visual-line-mode))
 (eval-after-load "abbrev" '(diminish 'abbrev-mode))
@@ -178,6 +178,7 @@
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
 (eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
+(eval-after-load "ws-trim" '(diminish 'ws-trim-mode))
 
 ;;--------------------------------------------------------------------
 ;;** modeline-posn

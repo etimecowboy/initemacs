@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-12-16 Fri 03:49 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 12:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -94,6 +94,8 @@
   (setq ido-create-new-buffer 'always)
   (setq ido-default-buffer-method  (quote selected-window))
   (setq confirm-nonexistent-file-or-buffer t)
+  (setq ido-max-dir-file-cache 0) ;; 不让缓存目录,否则目录改变他也不知道
+  (setq ido-enable-regexp t)      ;; 可以用正则表达式找文件
 
   (defmacro def-ido-enter-command (command)
     "Make definition of command which execute some command in ido."

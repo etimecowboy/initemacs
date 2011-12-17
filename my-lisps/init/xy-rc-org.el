@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-16 Fri 03:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 07:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -13,7 +13,6 @@
 ;;--------------------------------------------------------------------
 ;; TODO: Divide org-settings into a few more funtions for org-agenda,
 ;; org-capture and so on.
-;; 中文测试
 
 (require 'cl)
 (require 'xy-rc-utils)
@@ -299,17 +298,16 @@ If html-file-name is not given, read it from minibuffer."
   ;; Add some hook functions to assist my system
   ;; See list of: (@url :file-name "http://orgmode.org/worg/org-configs/org-hooks.html" :display "org-mode hooks")
   ;; REF: (@url :file-name "http://thread.gmane.org/gmane.emacs.orgmode/21402/focus=21413" :display "orgmode mail-list")
+  ;; TODO: waiting for a after-schedule-hook in future release.
   (add-hook 'org-after-todo-state-change-hook
             '(lambda ()
                ;; Automaticaly remove the scheduled date/time after
-               ;; change the state to SOMEDAY TODO
-               (if (or (string= state "SOMEDAY")
-                       (string= state "TODO"))
-                   (org-schedule t))
+               ;; change the state to SOMEDAY
+               (if (string= state "SOMEDAY") (org-schedule t))
                ;; Automatically schedule the task to today after change
                ;; the state to NEXT
                (if (string= state "NEXT") (org-schedule nil "+0"))
-               ;; (when window-system
+               ;; (when window-system ;; also useful in console
                  (when (try-require 'todochiku)
                    (if (string= state "DONE")
                        (todochiku-message "Emacs Org"
@@ -380,7 +378,7 @@ If html-file-name is not given, read it from minibuffer."
   ;; Alarm
 
   ;; `appt' alarm
-  (require 'appt)
+  ;; (require 'appt)
   (setq org-agenda-include-diary t)
   ;; update appt each time agenda opened
   (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
@@ -448,7 +446,7 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-agenda-use-time-grid t)
   (setq org-agenda-time-grid
         '((daily today require-timed) "----------------"
-          (800 1000 1200 1400 1600 1800 2000 22:00)))
+          (800 1000 1200 1400 1600 1800)))
 
   ;; Agenda view presentation and sorting
   ;; org-agenda-tags-column
@@ -462,17 +460,29 @@ If html-file-name is not given, read it from minibuffer."
   ;; custom agenda commands
   ;; Custom agenda command definitions
   (setq org-agenda-custom-commands
-          '((" " "Day Planner"
+        '(("n" "Recent Notes" tags
+           "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
+           ((org-agenda-overriding-header
+                       "Recent notes (refile ASAP)")
+                      (org-tags-match-list-sublevels nil)))
+
+          ;;----------------------------------------------------------
+          ("i" "Recent Ideas" tags
+           "+idea+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
+           ((org-agenda-overriding-header "Recent ideas (refile ASAP)")
+            (org-tags-match-list-sublevels nil)))
+
+          ;;----------------------------------------------------------
+          ("p" "Day Planner (plan your day on a computer)"
            ((tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+SCHEDULED<\"<today>\"-repeat"
                        ((org-agenda-overriding-header
-                         "Un-finished Tasks of Yesterday or Earlier (Re-Schedule them first!)")
+                         "Re-schedule openning tasks (empty it before working)")
                         (org-tags-match-list-sublevels t)))
 
-
-            (tags-todo "TODO=\"WAITING\""
-                        ((org-agenda-overriding-header
-                          "You are WAITING on")
-                         (org-tags-match-list-sublevels nil)))
+            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\"-repeat"
+                       ((org-agenda-overriding-header
+                         "Process old wishes (empty it before working)")
+                        (org-tags-match-list-sublevels t)))
 
             (agenda ""
                     ((org-agenda-ndays 1)
@@ -486,74 +496,51 @@ If html-file-name is not given, read it from minibuffer."
                      (org-agenda-todo-list-sublevel t)
                      (org-agenda-timeline-show-empty-dates nil)))
 
-            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-            ;;            ((org-agenda-overriding-header
-            ;;              "1. Urgent & Important Tasks Scheduled for Today")
-            ;;             (org-tags-match-list-sublevels t)))
-
-            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY=\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-            ;;            ((org-agenda-overriding-header
-            ;;              "2. Urgent & NOT Important Tasks Scheduled for Today")
-            ;;             (org-tags-match-list-sublevels t)))
-
-            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance=\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-            ;;            ((org-agenda-overriding-header
-            ;;              "3. NOT Urgent & Important Tasks Scheduled for Today")
-            ;;             (org-tags-match-list-sublevels t)))
-
-            ;; (tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+Importance<>\"A\"+PRIORITY<>\"A\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<today>\""
-            ;;            ((org-agenda-overriding-header
-            ;;              "4. NOT Urgent & NOT Important Tasks Scheduled for Today")
-            ;;             (org-tags-match-list-sublevels t)))
+            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\"-repeat"
+                       ((org-agenda-overriding-header
+                         "New wishes today (empty it at the end of the day)")
+                        (org-tags-match-list-sublevels t)))
 
             (tags-todo "TODO=\"NEXT\"+SCHEDULED>=\"<tomorrow>\"+SCHEDULED<=\"<+3d>\""
                        ((org-agenda-overriding-header
-                         "Scheduled Tasks for the Next 3 days")
+                         "Scheduled tasks for the next 3 days")
                         (org-tags-match-list-sublevels nil)))
 
-            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\"-repeat"
+            (tags-todo "TODO=\"SOMEDAY\""
                        ((org-agenda-overriding-header
-                         "New Task Today (Un-Processed, Make Sure it is Empty at the end of today)")
+                         "Future tasks (add to today if possible)")
+                        (org-tags-match-list-sublevels nil)))))
+
+          ;;----------------------------------------------------------
+          ("d" "Agenda Today (print it out when away from computer)"
+           ((agenda ""
+                    ((org-agenda-ndays 1)
+                     (org-agenda-deadline-warning-days 14)
+                     (org-agenda-use-time-grid t)
+                     (org-agenda-skip-scheduled-if-done t)
+                     (org-agenda-skip-deadline-if-done t)
+                     (org-agenda-skip-timestamp-if-done t)
+                     (org-agenda-skip-archived-trees t)
+                     (org-agenda-skip-comment-trees t)
+                     (org-agenda-todo-list-sublevel t)
+                     (org-agenda-timeline-show-empty-dates nil)))
+
+            (tags-todo "TODO=\"STARTED\"|TODO=\"WAITING\""
+                       ((org-agenda-overriding-header
+                         "Working on (focus on these)")
                         (org-tags-match-list-sublevels t)))
 
             (tags      "CLOSED<\"<tomorrow>\"+CLOSED>=\"<today>\""
                        ((org-agenda-overriding-header
-                         "Finished Tasks Today (Refile them at End of this Week)")
+                         "Finished tasks today (refile them at end of this week)")
                         (org-tags-match-list-sublevels nil)
                         (org-agenda-skip-scheduled-if-done nil)
                         (org-agenda-skip-deadline-if-done nil)
                         (org-agenda-skip-timestamp-if-done nil)
-                        (org-agenda-skip-archived-trees nil)))
+                        (org-agenda-skip-archived-trees nil)))))
 
-            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\"-repeat"
-                       ((org-agenda-overriding-header
-                         "Old Un-Processed Tasks (Process Them ASAP)")
-                        (org-tags-match-list-sublevels t)))
-
-            (tags-todo "TODO=\"SOMEDAY\""
-                       ((org-agenda-overriding-header
-                         "Un-Scheduled Tasks (Schedule Them if Possible)")
-                        (org-tags-match-list-sublevels nil)))
-            ))
-
-          ("@" "Tasks Working on" tags-todo
-             "TODO=\"STARTED\"|TODO=\"WAITING\""
-             ((org-agenda-overriding-header
-               "Your are Working on These Tasks")
-              (org-tags-match-list-sublevels t)))
-
-          ("n" "Recent Notes NOT Refiled" tags
-             "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
-           ((org-agenda-overriding-header
-             "Recent Notes (Refile Them ASAP)")
-            (org-tags-match-list-sublevels nil)))
-
-          ("i" "Recent Ideas NOT Refiled" tags
-           "+idea+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
-           ((org-agenda-overriding-header "Recent Ideas (Refile Them ASAP)")
-            (org-tags-match-list-sublevels nil)))
-
-          ("w" "Weekly Review"
+          ;;----------------------------------------------------------
+          ("w" "Weekly Review (refile closed tasks and evaluate this week)"
            ((tags-todo "TODO=\"TODO\""
                        ((org-agenda-overriding-header
                          "Un-Processed New Tasks (Empty before Weekly Review)")
