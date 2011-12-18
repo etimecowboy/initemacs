@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-17 Sat 12:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 17:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -111,6 +111,7 @@
   ;; (smex-initialize-ido)
   (smex-initialize))
 (add-hook 'after-init-hook 'xy/ido+smex-start)
+(global-set-key (kbd "<f6> m") 'xy/ido+smex-start)
 
 ;;====================================================================
 ;;* Buffer auto complete
@@ -141,8 +142,8 @@
          ;; ("M-j"        ac-complete)
          ;; ("<C-return>" ac-complete)
          ("M-n"        ac-next)
-         ("M-p"        ac-previous)))
-     ))
+         ("M-p"        ac-previous))) ))
+(global-set-key (kbd "<f6> a") 'xy/ac-start)
 
 ;;--------------------------------------------------------------------
 ;;** company settings
@@ -174,13 +175,13 @@
 ;; (auto-insert-mode 1)
 
 ;;--------------------------------------------------------------------
-;;** yasnippet
+;** yasnippet
 (autoload 'yas/minor-mode "yasnippet" nil t)
 (eval-after-load "yasnippet"
   '(progn
      (yasnippet-settings)
      ;; tab is widely-used by ido/icicles/org/indent/outline/hideshow
-     (setq yas/trigger-key "C-<tab>")
+     (setq yas/trigger-key "C-c <tab>")
      (eal-define-keys
       'yas/keymap
       `(("M-j"     yas/next-field-or-maybe-expand)
@@ -189,19 +190,21 @@
       'yas/minor-mode-map
       `(("C-c C-f" yas/find-snippets)))))
 ;; NOTE: manually start it when required
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-   cc-mode-hook c-mode-hook c++-mode-hook
-   sh-mode-hook ;; vhdl-mode-hook verilog-mode-hook
-   org-mode-hook LaTeX-mode-hook matlab-mode-hook)
- '(lambda ()
-    (yas/minor-mode 1)))
+(global-set-key (kbd "<f6> y") 'yas/minor-mode)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+;;    cc-mode-hook c-mode-hook c++-mode-hook
+;;    sh-mode-hook ;; vhdl-mode-hook verilog-mode-hook
+;;    org-mode-hook LaTeX-mode-hook matlab-mode-hook)
+;;  '(lambda ()
+;;     (yas/minor-mode 1)))
 
 ;;====================================================================
 ;;* icicles
 ;; System-wide completion
 (eval-after-load "icicles" '(icicles-settings))
 ;; (add-hook 'after-init-hook 'icy-mode)
+(global-set-key (kbd "<f6> i") 'xy/icy-start)
 
 ;;--------------------------------------------------------------------
 ;;** apropos-mode

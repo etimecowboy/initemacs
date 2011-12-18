@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2011-12-14 Wed 08:57 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 17:06 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -50,6 +50,7 @@
       `(("M-c `" TeX-next-error)))
      )) ;; default C-c ` conflict with icy-mode
 (eval-after-load "preview-latex" '(preview-latex-settings))
+(global-set-key (kbd "<f6> t") 'xy/auctex-start)
 
 ;;--------------------------------------------------------------------
 ;;** reftex

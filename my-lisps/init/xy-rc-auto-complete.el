@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2011-12-08 Thu 03:03 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 16:56 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,13 +19,10 @@
 ;;;###autoload
 (defun xy/ac-start ()
   "Start auto-complete"
-
   (interactive)
-  ;; (xy/yas-start)
   (require 'auto-complete)
   (ac-config-default)
-  (revert-buffer)
-  )
+  (revert-buffer))
 
 ;;;###autoload
 (defun auto-complete-settings ()
@@ -85,7 +82,7 @@
                     ac-source-latex-commands)
                   ac-sources)))
 
-  (add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
+  (add-hook 'latex-mode-hook 'ac-latex-mode-setup)
   (ac-flyspell-workaround)
 
   ;;-----------------------------------------------------------------------------
@@ -325,8 +322,6 @@
   ;;        (define-key (symbol-value (am-intern mode-name "-map"))
   ;;           (kbd "C-c A") 'xy/ac-start)))))
 
-  (message "* ---[ auto-complete configuration is complete ]---")
-)
-
+  (message "* ---[ auto-complete configuration is complete ]---"))
 
 (provide 'xy-rc-auto-complete)

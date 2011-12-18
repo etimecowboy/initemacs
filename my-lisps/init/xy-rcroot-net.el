@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-14 Wed 09:24 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-18 Sun 09:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -134,7 +134,7 @@
 
 (eal-define-keys-commonly
  global-map
- `(("C-x E e" xy/emms-start)
+ `(("<f6> e"  xy/emms-start)
    ("C-x E b" emms-browser)
    ("C-x E f" emms-play-file)
    ("C-x E l" emms-play-playlist)
@@ -162,6 +162,7 @@
      (gnus-settings)
      (define-key gnus-summary-mode-map (kbd "<f6>")
        'my-archive-article)))
+(global-set-key (kbd "<f6> g") 'gnus)
 
 ;;====================================================================
 ;;* mew
@@ -171,5 +172,6 @@
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)
 (autoload 'mew-user-agent-compose "mew" nil t)
+(global-set-key (kbd "<f6> m") 'mew)
 
 (provide 'xy-rcroot-net)

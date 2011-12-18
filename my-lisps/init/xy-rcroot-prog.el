@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-17 Sat 12:32 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 16:46 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -152,10 +152,11 @@
           (lambda ()
               (setq indent-tabs-mode nil)
               (setq tab-always-indent t)
-              (define-key outline-minor-mode-map (kbd "<f6>")
+              (define-key outline-minor-mode-map (kbd "C-<tab>")
                 'outline-cycle)))
 
 (autoload 'outline-org-mode "outline-org-like" nil t)
+(global-set-key (kbd "<f6> o") 'outline-org-mode)
 ;; (am-add-hooks
 ;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
 ;;                       vhdl-mode-hook verilog-mode-hook
@@ -268,7 +269,7 @@
 
 ;;*** imenu-tree
 (eval-after-load "imenu-tree" '(imenu-tree-settings))
-(global-set-key (kbd "C-S-<f7>") 'imenu-tree)
+(global-set-key (kbd "<f6> i") 'imenu-tree)
 
 ;;--------------------------------------------------------------------
 ;;** etags
@@ -676,10 +677,12 @@
 
 ;;** CEDET settings
 (eval-after-load "cedet" '(cedet-settings))
+(global-set-key (kbd "<f6> c") 'xy/cedet-start)
 
 ;;--------------------------------------------------------------------
 ;;** ECB settings
 (eval-after-load "ecb" '(ecb-settings))
+(global-set-key (kbd "<f6> b") 'xy/ecb-start)
 
 ;;--------------------------------------------------------------------
 ;;** eclim settings

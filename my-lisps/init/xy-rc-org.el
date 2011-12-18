@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-17 Sat 07:15 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-17 Sat 16:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -11,7 +11,7 @@
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
 ;;--------------------------------------------------------------------
-;; TODO: Divide org-settings into a few more funtions for org-agenda,
+;; TODO: Divid org-settings into a few more funtions for org-agenda,
 ;; org-capture and so on.
 
 (require 'cl)
