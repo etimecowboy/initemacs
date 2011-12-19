@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-info.el'
-;; Time-stamp:<2011-12-10 Sat 03:01 xin on p6t>
+;; Time-stamp:<2011-12-19 Mon 09:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,11 +19,11 @@
 ;;;###autoload
 (defun info-settings ()
   "settings for `info'."
-  (apply-args-list-to-fun
-   'def-command-max-window `("info"))
+  ;; (apply-args-list-to-fun
+   ;; 'def-command-max-window `("info"))
   ;; With `info+.el', you can merge an Info node with its subnodes into
   ;; the same buffer, by calling `Info-merge-subnodes' (bound to `+'),
-  (try-require 'info+)
+  ;; (require 'info+)
   (message "* ---[ info configuration is complete ]---"))
 
 (provide 'xy-rc-info)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-17 Sat 16:14 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-18 Sun 08:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -541,27 +541,22 @@ If html-file-name is not given, read it from minibuffer."
 
           ;;----------------------------------------------------------
           ("w" "Weekly Review (refile closed tasks and evaluate this week)"
-           ((tags-todo "TODO=\"TODO\""
-                       ((org-agenda-overriding-header
-                         "Un-Processed New Tasks (Empty before Weekly Review)")
-                        (org-tags-match-list-sublevels t)))
-
-            (agenda ""
-                     ((org-agenda-span 'week)
+           ((agenda ""
+                    ((org-agenda-span 'week)
                      (org-agenda-ndays 7)
                      (org-agenda-deadline-warning-days 60)
-                     (org-agenda-use-time-grid nil)
+                     (org-agenda-use-time-grid t)
                      (org-agenda-skip-scheduled-if-done nil)
                      (org-agenda-skip-deadline-if-done nil)
                      (org-agenda-skip-timestamp-if-done nil)
                      (org-agenda-skip-archived-trees nil)
-                     (org-agenda-skip-comment-trees t)
-                     (org-agenda-todo-list-sublevel nil)
+                     (org-agenda-skip-comment-trees nil)
+                     (org-agenda-todo-list-sublevel t)
                      (org-agenda-timeline-show-empty-dates t)))
 
             (tags     "CLOSED<\"<tomorrow>\"+CLOSED>=\"<-1w>\""
                      ((org-agenda-overriding-header
-                       "Finished Tasks in This Week (Archive now)")
+                       "Archieve closed tasks in this week")
                       (org-tags-match-list-sublevels t)
                       (org-agenda-skip-scheduled-if-done nil)
                       (org-agenda-skip-deadline-if-done nil)
@@ -570,12 +565,17 @@ If html-file-name is not given, read it from minibuffer."
 
            (tags-todo "TODO<>\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
                        ((org-agenda-overriding-header
-                         "Un-Finished Tasks in This Week (Re-Schedule now)")
+                         "Re-schedule openning tasks")
                         (org-tags-match-list-sublevels t)))
+
+           (tags-todo "TODO=\"TODO\"-repeat"
+                      ((org-agenda-overriding-header
+                        "Process wishes remained")
+                       (org-tags-match-list-sublevels t)))
 
            (tags      "proj/!-TODO-SOMEDAY"
                       ((org-agenda-overriding-header
-                        "Projects Review (Make Sure NOT Stuck)")
+                        "Projects review (make sure NOT stuck)")
                        (org-tags-match-list-sublevels t)))))
           ))
 

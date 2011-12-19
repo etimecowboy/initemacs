@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-16 Fri 09:42 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-19 Mon 09:04 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -377,9 +377,8 @@
         ("<mouse-5>" mwheel-scroll)
         ("<backspace>"   Info-history-back)
         ("<S-backspace>" Info-history-forward)))))
-
-(apply-args-list-to-fun
- 'def-command-max-window `("info"))
+;; (apply-args-list-to-fun
+ ;; 'def-command-max-window `("info"))
 (global-set-key (kbd "C-<f1>") 'info)
 
 ;;--------------------------------------------------------------------

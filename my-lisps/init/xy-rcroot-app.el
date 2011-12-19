@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-18 Sun 11:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-19 Mon 09:50 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -11,7 +11,6 @@
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
 ;;--------------------------------------------------------------------
-;; 中文
 
 (require 'cl)
 (require 'xy-rc-utils)
@@ -67,17 +66,20 @@
 
 ;;---------------------------------------------------------------------
 ;;** Resize frame and window
-(when window-system
-  (eval-after-load "fit-frame" '(fit-frame-settings))
-  (eval-after-load "maxframe"  '(maxframe-settings))
-  (require 'fit-frame)
-  ;; (add-hook 'after-make-frame-functions 'fit-frame)
-  ;; (require 'autofit-frame)
-  (require 'thumb-frm)
-  (require 'maxframe) ;; NOTE: not stable with two or more monitors
-  (global-set-key (kbd "S-<f5>") 'fit-frame)
-  (global-set-key (kbd "M-<f5>") 'maximize-frame)
-  (global-set-key (kbd "M-S-<f5>") 'restore-frame))
+;; BUG: there is a bug in `fit-frame.el' or `thumb-frm.el' which causes
+;; info-mode reports an error when following a link. Have to load these
+;; two lisp files in order to fix it, whether it is in console mode or
+;; GUI mode.
+(eval-after-load "fit-frame" '(fit-frame-settings))
+(eval-after-load "maxframe"  '(maxframe-settings))
+(require 'fit-frame)
+;; (add-hook 'after-make-frame-functions 'fit-frame)
+;; (require 'autofit-frame)
+(require 'thumb-frm)
+(require 'maxframe) ;; NOTE: not stable with two or more monitors
+(global-set-key (kbd "S-<f5>") 'fit-frame)
+(global-set-key (kbd "M-<f5>") 'maximize-frame)
+(global-set-key (kbd "M-S-<f5>") 'restore-frame)
 
 ;;====================================================================
 ;;* Window settings
