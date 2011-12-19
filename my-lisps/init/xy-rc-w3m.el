@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-w3m.el'
-;; Time-stamp:<2011-12-16 Fri 11:28 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-19 Mon 07:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -265,11 +265,11 @@
   ;; (require 'w3m-dtree)
 
   (try-require 'mime-w3m)
+
   (when (try-require 'octet)
     (octet-mime-setup))
 
-  (GNULinux  ;; BUG: cause w3m to crash in Windows 7
-     (w3m-lnum-mode 1))
+  (w3m-lnum-mode 1) ;; BUG: Have set browse-url-generic-program
   (w3m-fb-mode 1)
 
   (autoload 'w3m-weather "w3m-weather" "Display weather report." t)
@@ -279,19 +279,6 @@
   ;; NOT using arrow
   ;; (dolist (k '([right] [left] [up] [down]))
   ;;     (define-key w3m-mode-map k nil))
-
-  (eal-define-keys
-   'w3m-mode-map
-   `(("C-x W f"      w3m-external-view-current-url)
-     ("C-x W F"      w3m-external-view-this-url)
-     ("C-x W o"      org-w3m-copy-for-org-mode) ;; copy region as org format
-     ;; ("<mouse-1>"    w3m-mouse-view-this-url)
-     ("S-<mouse-1>"  w3m-mouse-view-this-url-new-session)
-     ("<mouse-3>"    w3m-mouse-major-mode-menu)
-     ("C-x W s"      w3m-save-current-buffer)
-     ("C-x W w"      w3m-weather)
-     ("C-c l"        w3m-copy-current-url)
-     ))
 
   (message "* ---[ w3m configuration is complete ]---"))
 

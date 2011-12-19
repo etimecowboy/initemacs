@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-12-16 Fri 02:29 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-18 Sun 10:54 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,6 +22,7 @@
 
   (interactive)
   (require 'cedet)
+  (menu-bar-mode 1)
   (revert-buffer))
 
 ;;;###autoload
@@ -70,8 +71,7 @@
   (require 'semantic-c)
   ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
 
-  (when (executable-find "gcc")
-    (semantic-gcc-setup))
+  (when (executable-find "gcc") (semantic-gcc-setup))
 
   (mapc (lambda (dir)
           (semantic-add-system-include dir 'c++-mode)

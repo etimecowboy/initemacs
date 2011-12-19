@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-18 Sun 09:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-19 Mon 07:40 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,7 +37,20 @@
 
 ;;====================================================================
 ;;* w3m
-(eval-after-load "w3m" '(w3m-settings))
+(eval-after-load "w3m"
+  '(progn
+     (w3m-settings)
+     (eal-define-keys
+      'w3m-mode-map
+      `(("C-x W f"      w3m-external-view-current-url)
+        ("C-x W F"      w3m-external-view-this-url)
+        ("C-x W o"      org-w3m-copy-for-org-mode) ;; copy region as org format
+        ("S-<mouse-1>"  w3m-mouse-view-this-url-new-session)
+        ("<mouse-3>"    w3m-mouse-major-mode-menu)
+        ("C-x W s"      w3m-save-current-buffer)
+        ("C-x W w"      w3m-weather)
+        ("C-x W l"      w3m-copy-current-url)))))
+
 (eal-define-keys-commonly
  global-map
  `(("C-x W n"     w3m-goto-url-new-session)
@@ -47,8 +60,10 @@
    ("S-<f8>"      lookup-word-definition)
    ("C-<f8>"      lookup-wikipedia)
    ("M-<f8>"      google-region)))
-;; Use w3m as the default web browser
-;; (setq browse-url-browser-function 'w3m-browse-url)
+
+(setq browse-url-generic-program "w3m") ;; It won't affect emacs
+                                        ;; default browser
+(global-set-key (kbd "<f6> w") 'w3m)
 
 ;;====================================================================
 ;;* erc
