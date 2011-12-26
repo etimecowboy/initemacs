@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-23 Fri 09:45 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-26 Mon 21:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -63,7 +63,7 @@
 
 (setq browse-url-generic-program "w3m") ;; It won't affect emacs
                                         ;; default browser
-(global-set-key (kbd "<f6> w") 'w3m)
+;; (global-set-key (kbd "<f6> w") 'w3m)
 
 ;;====================================================================
 ;;* erc

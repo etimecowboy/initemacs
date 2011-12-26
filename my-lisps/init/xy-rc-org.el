@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-18 Sun 08:26 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-26 Mon 22:57 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -695,7 +695,7 @@ If html-file-name is not given, read it from minibuffer."
         '((emacs-lisp . t)
           (ditaa      . t)
           (dot        . t)
-          ;; (octave     . t)
+          (octave     . t)
           (matlab     . t)
           (latex      . t)
           (sh         . t)
@@ -703,13 +703,16 @@ If html-file-name is not given, read it from minibuffer."
           (org        . t)
           ))
 
-  ;; (require 'ob-emacs-lisp)
-  ;; (require 'ob-ditaa)
-  ;; (require 'ob-dot)
-  ;; (require 'ob-matlab)
-  ;; (require 'ob-latex)
-  ;; (require 'ob-sh)
-  ;; (require 'org-exp-bibtex)
+  (require 'ob-emacs-lisp)
+  (require 'ob-ditaa)
+  (require 'ob-dot)
+  (require 'ob-octave)
+  (require 'ob-matlab)
+  (require 'ob-latex)
+  (require 'ob-sh)
+  ;; (require 'ob-C)
+  (require 'ob-org)
+  (require 'org-exp)
 
   ;; default latex package list
   (setq org-export-latex-default-packages-alist
@@ -718,23 +721,20 @@ If html-file-name is not given, read it from minibuffer."
           ("" "graphicx" t) ("" "longtable" nil) ("" "float" nil)
           ("" "wrapfig" nil) ("" "soul" t) ("" "t1enc" t) ("" "textcomp" t)
           ("" "marvosym" t) ("" "wasysym" t) ("" "latexsym" t)
-          ("" "amssymb" t) ("" "hyperref" nil) "\\tolerance=1000"))
+          ("" "amssymb" t) ("" "hyperref" nil)
+          "\\tolerance=1000"))
 
-  (unless (boundp 'org-export-latex-classes)
-    (setq org-export-latex-classes nil))
-  (add-to-list 'org-export-latex-classes
-               '("article"
-                 "\\documentclass{article}"
-                 ("\\section{%s}" . "\\section{%s}")
-                 ("\\subsection{%s}" . "\\subsection{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
+  ;; BUG: beamer need to be defined in `org-export-latex-classes'
+  ;; (unless (boundp 'org-export-latex-classes)
+  ;;   (setq org-export-latex-classes nil))
   ;; (add-to-list 'org-export-latex-classes
   ;;              '("article"
   ;;                "\\documentclass{article}"
-  ;;                ("\\section{%s}" . "\\section*{%s}")))
-
+  ;;                ("\\section{%s}" . "\\section{%s}")
+  ;;                ("\\subsection{%s}" . "\\subsection{%s}")
+  ;;                ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+  ;;                ("\\paragraph{%s}" . "\\paragraph{%s}")
+  ;;                ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
 
   ;; BUG: not work
   ;; latex to pdf command list

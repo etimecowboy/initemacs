@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-12-16 Fri 09:50 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-26 Mon 21:12 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,9 +37,10 @@
 ;;--------------------------------------------------------------------
 ;;** ethan-wspace
 ;; REF: (@url :file-name "https://github.com/glasserc/ethan-wspace" :display "Source")
-;; (autoload 'ethan-wspace-mode "ethan-wspace" nil t)
-(require 'ethan-wspace)
-(global-ethan-wspace-mode 1)
+(autoload 'ethan-wspace-mode "ethan-wspace" nil t)
+;; (require 'ethan-wspace)
+;; (global-ethan-wspace-mode 1)
+(global-set-key (kbd "<f6> w") 'ethan-wspace-mode)
 
 ;;--------------------------------------------------------------------
 ;;** ws-trim
