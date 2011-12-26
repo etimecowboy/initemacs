@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-19 Mon 09:50 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-26 Mon 14:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -390,6 +390,7 @@
 (require 'color-theme)
 (when window-system
   (color-theme-solarized-dark))
+;; (global-set-key (kbd "<f6> t") 'xy/load-themes)
 
 ;;--------------------------------------------------------------------
 ;;** doremi

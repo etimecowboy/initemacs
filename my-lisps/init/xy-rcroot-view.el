@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-12-17 Sat 16:43 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-22 Thu 09:21 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -76,9 +76,9 @@
 
 (eal-define-keys-commonly
  global-map
- `(("C-x q" switch-major-mode-with-emaci)
-   ("M-s"   emaci-read-only)
-   ("M-S"   emaci-normal-edit)
+ `(;; ("C-x q" switch-major-mode-with-emaci)
+   ("M-s"   xy/read-only)
+   ("M-S"   xy/normal-edit)
    ;; ("M-s" emaci-mode-on)
    ;; ("M-S" emaci-mode-off)
    ))
@@ -110,7 +110,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** ediff
-(global-set-key (kbd "C-x D") 'ediff)
+(global-set-key (kbd "<f6> d") 'ediff)
 (eval-after-load "ediff"
   '(progn
      (ediff-settings)

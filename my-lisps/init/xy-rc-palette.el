@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-palette.el'
-;; Time-stamp:<2011-12-10 Sat 01:42 xin on p6t>
+;; Time-stamp:<2011-12-22 Thu 09:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -98,9 +98,9 @@
     "Face background be changed or not.")
   (defvar facemenup-last-face-color nil
     "Last face color used.")
-  (add-hook 'palette-mode-hook
-            (progn
-              (link-cursor-mode -1)))
+  ;; (add-hook 'palette-mode-hook
+  ;;           (progn
+  ;;             (link-cursor-mode -1)))
 
   (defmacro def-palette-move-command (move-command speed)
     "Make definition of command which palette move quickly."

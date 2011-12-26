@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-17 Sat 16:39 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-22 Thu 09:07 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,6 +49,7 @@
                   sh-mode-hook cperl-mode-hook c-common-mode-hook
                   vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
  '(lambda () (linum-mode 1)))
+(global-set-key (kbd "<f6> n") 'linum-mode)
 
 ;;--------------------------------------------------------------------
 ;;** time-stamp
@@ -172,7 +173,7 @@
         ("U"   scroll-down)
         ("u"   View-scroll-half-page-backward)
         ("o"   other-window)))))
-(global-set-key (kbd "C-=") 'browse-kill-ring)
+(global-set-key (kbd "<f6> k") 'browse-kill-ring)
 
 ;;====================================================================
 ;;* kill-ring-search

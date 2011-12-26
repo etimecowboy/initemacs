@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emaci.el'
-;; Time-stamp:<2011-12-11 Sun 10:12 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-22 Thu 09:15 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,14 +25,14 @@
     (emaci-mode (if emaci 1 -1))))
 
 ;;;###autoload
-(defun read-only ()
+(defun xy/read-only ()
   "Read-only mode."
   (interactive)
   (emaci-mode-on)
   (view-mode t))
 
 ;;;###autoload
-(defun normal-edit ()
+(defun xy/normal-edit ()
   "Normal edit mode."
   (interactive)
   (View-quit)

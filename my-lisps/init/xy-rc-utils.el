@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-15 Thu 10:16 xin on p6t>
+;; Time-stamp:<2011-12-26 Mon 15:39 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -966,16 +966,16 @@ directories starting with a `.'."
 
       (let ((files
              (directory-files this-directory t "^[^.]+\\.el$" nil)))
-    (while files
-      (let ((srcfile (car files))
-        (dstfile (concat (car files) "c")))
-        (if (or (not (file-exists-p dstfile))
-            (file-newer-than-file-p srcfile dstfile))
-        (progn
-          (byte-compile-file srcfile)
-          (message "* ---[ Byte compiling `%s'... ]---" srcfile))
-          (message "* ---[ `%s' exists and is newer. ]---" dstfile)))
-      (setq files (cdr files))))
+        (while files
+          (let ((srcfile (car files))
+                (dstfile (concat (car files) "c")))
+            (if (or (not (file-exists-p dstfile))
+                    (file-newer-than-file-p srcfile dstfile))
+                (progn
+                  (byte-compile-file srcfile)
+                  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
+              (message "* ---[ `%s' exists and is newer. ]---" dstfile)))
+          (setq files (cdr files))))
 
       (when with-subdirs
         (while files
@@ -1017,7 +1017,7 @@ directories starting with a `.'."
       (setq generated-autoload-file
             (concat this-directory "/loaddefs@"
                     (subst-char-in-string ?/ ?!
-                        (subst-char-in-string ?: ?! this-directory))
+                                          (subst-char-in-string ?: ?! this-directory))
                     ".el"))
       (setq update-flag nil)
       (let ((files (directory-files
@@ -1097,47 +1097,47 @@ directories starting with a `.'."
         (setq this-directory (expand-file-name this-directory)))
 
       (setq generated-autoload-file
-        (concat this-directory "/loaddefs@"
-            (subst-char-in-string ?/ ?!
-            (subst-char-in-string ?: ?! this-directory)) ".el"))
+            (concat this-directory "/loaddefs@"
+                    (subst-char-in-string ?/ ?!
+                                          (subst-char-in-string ?: ?! this-directory)) ".el"))
       (setq update-flag nil)
       (let ((files (directory-files
                     this-directory t "^[^.]+\\.el$" nil)))
-    (while files
-      (let ((srcfile (car files))
-        (dstfile (concat (car files) "c")))
+        (while files
+          (let ((srcfile (car files))
+                (dstfile (concat (car files) "c")))
 
-        (if (or (not (file-exists-p dstfile))
-            (file-newer-than-file-p srcfile dstfile))
-        (progn
-          (byte-compile-file srcfile)
-          (message "* ---[ Byte compiling `%s'... ]---" srcfile))
-          (message "* ---[ `%s' exists and is newer. ]---" dstfile))
+            (if (or (not (file-exists-p dstfile))
+                    (file-newer-than-file-p srcfile dstfile))
+                (progn
+                  (byte-compile-file srcfile)
+                  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
+              (message "* ---[ `%s' exists and is newer. ]---" dstfile))
 
-        (if (or (not (file-exists-p generated-autoload-file))
-            (not (file-exists-p dstfile))
-            (file-newer-than-file-p srcfile dstfile)
-            (file-newer-than-file-p srcfile generated-autoload-file)
-            (file-newer-than-file-p dstfile generated-autoload-file))
-        (setq update-flag (or update-flag t)))
-        (setq files (cdr files))))
+            (if (or (not (file-exists-p generated-autoload-file))
+                    (not (file-exists-p dstfile))
+                    (file-newer-than-file-p srcfile dstfile)
+                    (file-newer-than-file-p srcfile generated-autoload-file)
+                    (file-newer-than-file-p dstfile generated-autoload-file))
+                (setq update-flag (or update-flag t)))
+            (setq files (cdr files))))
 
-    (when update-flag ;; t
-        (progn
-          (cond ((fboundp 'update-autoloads-from-directory)
-             (update-autoloads-from-directory this-directory))
-            ((fboundp 'update-autoloads-from-directories)
-             (update-autoloads-from-directories this-directory))
-            ((fboundp 'update-directory-autoloads)
-             (update-directory-autoloads this-directory)))
-          (message "* ---[ Updating `%s'... ]---"
+        (when update-flag ;; t
+          (progn
+            (cond ((fboundp 'update-autoloads-from-directory)
+                   (update-autoloads-from-directory this-directory))
+                  ((fboundp 'update-autoloads-from-directories)
+                   (update-autoloads-from-directories this-directory))
+                  ((fboundp 'update-directory-autoloads)
+                   (update-directory-autoloads this-directory)))
+            (message "* ---[ Updating `%s'... ]---"
+                     generated-autoload-file))
+          (message "* ---[ `%s' exists and is newer. ]---"
                    generated-autoload-file))
-      (message "* ---[ `%s' exists and is newer. ]---"
-        generated-autoload-file))
 
-    (load-file generated-autoload-file)
-    (message "* ---[ Loading `%s'... ]---"
-             generated-autoload-file))
+        (load-file generated-autoload-file)
+        (message "* ---[ Loading `%s'... ]---"
+                 generated-autoload-file))
 
       (when with-subdirs
         (while files
@@ -1145,7 +1145,7 @@ directories starting with a `.'."
           (when (file-directory-p dir-or-file)
             (if recursive
                 (xy/install-all-lisps dir-or-file
-                      'with-subdirs 'recursive)
+                                      'with-subdirs 'recursive)
               (xy/install-all-lisps dir-or-file)))
           (setq files (cdr files)))))))
 
@@ -1174,16 +1174,60 @@ The process is:
       (setq generated-autoload-file
             (concat this-directory "/loaddefs@"
                     (subst-char-in-string ?/ ?!
-                       (subst-char-in-string ?: ?! this-directory))
+                                          (subst-char-in-string ?: ?! this-directory))
                     ".el"))
       (if (not (file-exists-p generated-autoload-file))
           (message "* ---[ Autoload file `%s' does not exist]"
-            generated-autoload-file)
+                   generated-autoload-file)
         ;; (add-to-list 'load-path this-directory)
         ;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
         (load-file generated-autoload-file)
         (message "* ---[ Loading `%s'... ]---"
                  generated-autoload-file)))))
+
+;;--------------------------------------------------------------------
+;;;###autoload
+(defun xy/load-all-lisps
+  (this-directory &optional with-subdirs recursive)
+  "Load all the lisps in THIS-DIRECTORY."
+
+  ;; (require 'bytecomp)
+  (interactive (list (read-file-name "Source directory: ")))
+
+  (when (and this-directory
+             (file-directory-p this-directory))
+    (let* ((this-directory (expand-file-name this-directory))
+           (files (directory-files this-directory t "^[^\\.]")))
+
+      ;; completely canonicalize the directory name (*may not* begin with `~')
+      (while (not (string= this-directory
+                           (expand-file-name this-directory)))
+        (setq this-directory (expand-file-name this-directory)))
+
+      (let ((files
+             (directory-files this-directory t "^[^.]+\\.el$" nil)))
+        (while files
+          (let ((srcfile (car files))
+                (dstfile (concat (car files) "c")))
+            (if (or (not (file-exists-p dstfile))
+                    (file-newer-than-file-p srcfile dstfile))
+                (progn
+                  (byte-compile-file srcfile)
+                  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
+              (message "* ---[ `%s' exists and is newer. ]---" dstfile))
+            (load-file dstfile)
+            (message "* ---[ Loading `%s'... ]---" dstfile))
+          (setq files (cdr files)))))
+
+    (when with-subdirs
+      (while files
+        (setq dir-or-file (car files))
+        (when (file-directory-p dir-or-file)
+          (if recursive
+              (xy/require-all-lisps dir-or-file
+                                    'with-subdirs 'recursive)
+            (xy/require-all-lisps dir-or-file)))
+        (setq files (cdr files))))))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload
