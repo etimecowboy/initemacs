@@ -658,7 +658,7 @@ Use alsa's aplay tool if available."
 
 (defun org-program-exists (program-name)
   "Checks whenever we can locate program and launch it."
-  (if (eq system-type 'gnu/linux)
+  (if (member system-type '(gnu/linux darwin))
       (= 0 (call-process "which" nil nil nil program-name))))
 
 (defvar org-clock-mode-line-entry nil
@@ -1696,7 +1696,9 @@ from the `before-change-functions' in the current buffer."
   "Clock out if the current entry contains the running clock.
 This is used to stop the clock after a TODO entry is marked DONE,
 and is only done if the variable `org-clock-out-when-done' is not nil."
-  (when (and org-clock-out-when-done
+  (when (and (org-clocking-p)
+	     org-clock-out-when-done
+	     (marker-buffer org-clock-marker)
 	     (or (and (eq t org-clock-out-when-done)
 		      (member state org-done-keywords))
 		 (and (listp org-clock-out-when-done)

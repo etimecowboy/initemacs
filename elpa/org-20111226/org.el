@@ -6,7 +6,7 @@
 ;; Maintainer: Bastien Guerry <bzg at gnu dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
 ;; Homepage: http://orgmode.org
-;; Version: 7.7
+;; Version: 7.8.02
 ;;
 ;; This file is part of GNU Emacs.
 ;;
@@ -203,7 +203,7 @@ identifier."
 
 ;;; Version
 
-(defconst org-version "7.7"
+(defconst org-version "7.8.02"
   "The version number of the file org.el.")
 
 (defun org-version (&optional here)
@@ -348,7 +348,6 @@ to add the symbol `xyz', and the package must have a call to
 	(const :tag "C  mac-link-grabber   Grab links and URLs from various Mac applications" org-mac-link-grabber)
 	(const :tag "C  man:               Support for links to manpages in Org-mode" org-man)
 	(const :tag "C  mtags:             Support for muse-like tags" org-mtags)
-	(const :tag "C  odt:               OpenDocumentText exporter for Org-mode" org-odt)
 	(const :tag "C  panel:             Simple routines for us with bad memory" org-panel)
 	(const :tag "C  registry:          A registry for Org-mode links" org-registry)
 	(const :tag "C  org2rem:           Convert org appointments into reminders" org2rem)
@@ -847,7 +846,7 @@ than its value."
 	  (const :tag "No limit" nil)
 	  (integer :tag "Maximum level")))
 
-(defcustom org-drawers '("PROPERTIES" "CLOCK" "LOGBOOK")
+(defcustom org-drawers '("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS")
   "Names of drawers.  Drawers are not opened by cycling on the headline above.
 Drawers only open with a TAB on the drawer line itself.  A drawer looks like
 this:
@@ -2652,7 +2651,7 @@ To turn this on on a per-file basis, insert anywhere in the file:
 (defcustom org-time-stamp-custom-formats
   '("<%m/%d/%y %a>" . "<%m/%d/%y %a %H:%M>") ; american
   "Custom formats for time stamps.  See `format-time-string' for the syntax.
-These are overlayed over the default ISO format if the variable
+These are overlaid over the default ISO format if the variable
 `org-display-custom-times' is set.  Time like %H:%M should be at the
 end of the second format.  The custom formats are also honored by export
 commands, if custom time display is turned on at the time of export."
@@ -4448,6 +4447,22 @@ means to push this value onto the list in the variable.")
 	      (org-remove-if (lambda (p) (string= (car p) key)) props)))
     (cons (cons key val) props)))
 
+(defconst org-block-regexp
+  "^[ \t]*#\\+begin_?\\([^ \n]+\\)\\(\\([^\n]+\\)\\)?\n\\([^\000]+?\\)#\\+end_?\\1[ \t]*$"
+  "Regular expression for hiding blocks.")
+(defconst org-heading-keyword-regexp-format
+  "^\\(\\*+\\)\\(?: +%s\\)\\(?: +\\(.*?\\)\\)?[ \t]*$"
+  "Printf format for a regexp matching an headline with some keyword.
+This regexp will match the headline of any node which has the
+exact keyword that is put into the format.  The keyword isn't in
+any group by default, but the stars and the body are.")
+(defconst org-heading-keyword-maybe-regexp-format
+  "^\\(\\*+\\)\\(?: +%s\\)?\\(?: +\\(.*?\\)\\)?[ \t]*$"
+  "Printf format for a regexp matching an headline, possibly with some keyword.
+This regexp can match any headline with the specified keyword, or
+without a keyword.  The keyword isn't in any group by default,
+but the stars and the body are.")
+
 (defun org-set-regexps-and-options ()
   "Precompute regular expressions for current buffer."
   (when (eq major-mode 'org-mode)
@@ -4870,18 +4885,6 @@ sure that we are at the beginning of the line.")
 (defconst org-heading-regexp "^\\(\\*+\\)\\(?: +\\(.*?\\)\\)?[ \t]*$"
   "Matches an headline, putting stars and text into groups.
 Stars are put in group 1 and the trimmed body in group 2.")
-(defconst org-heading-keyword-regexp-format
-  "^\\(\\*+\\)\\(?: +%s\\)\\(?: +\\(.*?\\)\\)?[ \t]*$"
-  "Printf format for a regexp matching an headline with some keyword.
-This regexp will match the headline of any node which has the
-exact keyword that is put into the format.  The keyword isn't in
-any group by default, but the stars and the body are.")
-(defconst org-heading-keyword-maybe-regexp-format
-  "^\\(\\*+\\)\\(?: +%s\\)?\\(?: +\\(.*?\\)\\)?[ \t]*$"
-  "Printf format for a regexp matching an headline, possibly with some keyword.
-This regexp can match any headline with the specified keyword, or
-without a keyword.  The keyword isn't in any group by default,
-but the stars and the body are.")
 
 ;;;###autoload
 (define-derived-mode org-mode outline-mode "Org"
@@ -6631,10 +6634,6 @@ DATA should have been made by `org-outline-overlay-data'."
 	      data)))))
 
 ;;; Folding of blocks
-
-(defconst org-block-regexp
-  "^[ \t]*#\\+begin_?\\([^ \n]+\\)\\(\\([^\n]+\\)\\)?\n\\([^\000]+?\\)#\\+end_?\\1[ \t]*$"
-  "Regular expression for hiding blocks.")
 
 (defvar org-hide-block-overlays nil
   "Overlays hiding blocks.")
@@ -9570,13 +9569,16 @@ application the system uses for this file type."
 	    (apply cmd (nreverse args1))))
 
 	 ((member type '("http" "https" "ftp" "news"))
-	  (browse-url (concat type ":" (org-link-escape
-					path org-link-escape-chars-browser))))
+	  (browse-url (concat type ":" (if (org-string-match-p "[[:nonascii:] ]" path)
+					   (org-link-escape
+					    path org-link-escape-chars-browser)
+					 path))))
 
 	 ((string= type "doi")
-	  (browse-url (concat "http://dx.doi.org/"
-                              (org-link-escape
-                               path org-link-escape-chars-browser))))
+	  (browse-url (concat "http://dx.doi.org/" (if (org-string-match-p "[[:nonascii:] ]" path)
+						       (org-link-escape
+							path org-link-escape-chars-browser)
+						     path))))
 
 	 ((member type '("message"))
 	  (browse-url (concat type ":" path)))
@@ -9679,7 +9681,7 @@ there is one, offer it as link number zero."
      ((equal (length links) 1)
       (setq link (list (car links))))
      ((and (integerp nth) (>= (length links) (if have-zero (1+ nth) nth)))
-      (setq link (nth (if have-zero nth (1- nth)) links)))
+      (setq link (list (nth (if have-zero nth (1- nth)) links))))
      (t ; we have to select a link
       (save-excursion
 	(save-window-excursion
@@ -10406,7 +10408,8 @@ on the system \"/user@host:\"."
 			   (or (funcall org-refile-target-verify-function)
 			       (throw 'next t))))
 		       (when (and (looking-at org-complex-heading-regexp)
-				  (not (member (match-string 4) excluded-entries)))
+				  (not (member (match-string 4) excluded-entries))
+				  (match-string 4))
 			 (setq level (org-reduced-level
 				      (- (match-end 1) (match-beginning 1)))
 			       txt (org-link-display-format (match-string 4))
@@ -11144,12 +11147,14 @@ nil or a string to be used for the todo mark." )
     ct1))
 
 (defun org-todo-yesterday (&optional arg)
-  "Like `org-todo' but the time of change will be 23:59 of yesterday"
+  "Like `org-todo' but the time of change will be 23:59 of yesterday."
   (interactive "P")
-  (let* ((hour (third (decode-time
-                       (org-current-time))))
-         (org-extend-today-until (1+ hour)))
-    (org-todo arg)))
+  (if (eq major-mode 'org-agenda-mode)
+      (apply 'org-agenda-todo-yesterday arg)
+    (let* ((hour (third (decode-time
+			 (org-current-time))))
+	   (org-extend-today-until (1+ hour)))
+      (org-todo arg))))
 
 (defun org-todo (&optional arg)
   "Change the TODO state of an item.
@@ -12077,9 +12082,8 @@ be removed."
 		  default-input (and ts (org-get-compact-tod ts))))))
       (when what
 	(setq time
-	      (if (and (stringp time)
-		       (string-match "^[-+]+[0-9]" time))
-		  ;; This is a relative time, set the proper date
+	      (if (stringp time)
+		  ;; This is a string (relative or absolute), set proper date
 		  (apply 'encode-time
 			 (org-read-date-analyze
 			  time default-time (decode-time default-time)))
@@ -14806,7 +14810,7 @@ The prompt will suggest to enter an ISO date, but you can also enter anything
 which will at least partially be understood by `parse-time-string'.
 Unrecognized parts of the date will default to the current day, month, year,
 hour and minute.  If this command is called to replace a timestamp at point,
-of to enter the second timestamp of a range, the default time is taken
+or to enter the second timestamp of a range, the default time is taken
 from the existing stamp.  Furthermore, the command prefers the future,
 so if you are giving a date where the year is not given, and the day-month
 combination is already past in the current year, it will assume you
@@ -15349,7 +15353,7 @@ The command returns the inserted time stamp."
   (org-restart-font-lock)
   (setq org-table-may-need-update t)
   (if org-display-custom-times
-      (message "Time stamps are overlayed with custom format")
+      (message "Time stamps are overlaid with custom format")
     (message "Time stamp overlays removed")))
 
 (defun org-display-custom-time (beg end)
@@ -17089,9 +17093,43 @@ BEG and END default to the buffer boundaries."
 
 ;;;; Key bindings
 
-;; Remap outline keys
+;; Outline functions from `outline-mode-prefix-map'
+;; that can be remapped in Org:
+(define-key org-mode-map [remap outline-mark-subtree] 'org-mark-subtree)
+(define-key org-mode-map [remap show-subtree] 'org-show-subtree)
+(define-key org-mode-map [remap outline-forward-same-level]
+  'org-forward-same-level)
+(define-key org-mode-map [remap outline-backward-same-level]
+  'org-backward-same-level)
+(define-key org-mode-map [remap show-branches]
+  'org-kill-note-or-show-branches)
 (define-key org-mode-map [remap outline-promote] 'org-promote-subtree)
 (define-key org-mode-map [remap outline-demote] 'org-demote-subtree)
+(define-key org-mode-map [remap outline-insert-heading] 'org-ctrl-c-ret)
+
+;; Outline functions from `outline-mode-prefix-map'
+;; that can not be remapped in Org:
+;; - the column "key binding" shows whether the Outline function is still
+;;   available in Org mode on the same key that it has been bound to in
+;;   Outline mode:
+;;   - "overridden": key used for a different functionality in Org mode
+;;   - else: key still bound to the same Outline function in Org mode
+;; | Outline function                   | key binding | Org replacement       |
+;; |------------------------------------+-------------+-----------------------|
+;; | `outline-next-visible-heading'     | `C-c C-n'   | still same function   |
+;; | `outline-previous-visible-heading' | `C-c C-p'   | still same function   |
+;; | `show-children'                    | `C-c C-i'   | visibility cycling    |
+;; | `hide-subtree'                     | overridden  | visibility cycling    |
+;; | `outline-up-heading'               | `C-c C-u'   | still same function   |
+;; | `hide-body'                        | overridden  | no replacement        |
+;; | `show-all'                         | overridden  | no replacement        |
+;; | `hide-entry'                       | overridden  | visibility cycling    |
+;; | `show-entry'                       | overridden  | no replacement        |
+;; | `hide-leaves'                      | overridden  | no replacement        |
+;; | `hide-sublevels'                   | overridden  | no replacement        |
+;; | `hide-other'                       | overridden  | no replacement        |
+;; | `outline-move-subtree-up'          | `C-c C-^'   | better: org-shiftup   |
+;; | `outline-move-subtree-down'        | overridden  | better: org-shiftdown |
 
 ;; Make `C-c C-x' a prefix key
 (org-defkey org-mode-map "\C-c\C-x" (make-sparse-keymap))
@@ -19402,7 +19440,7 @@ contexts are:
 :target           on a <<target>>
 :radio-target     on a <<<radio-target>>>
 :latex-fragment   on a LaTeX fragment
-:latex-preview    on a LaTeX fragment with overlayed preview image
+:latex-preview    on a LaTeX fragment with overlaid preview image
 
 This function expects the position to be visible because it uses font-lock
 faces as a help to recognize the following contexts: :table-special, :link,

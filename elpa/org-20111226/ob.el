@@ -32,6 +32,7 @@
 (defvar org-src-lang-modes)
 (defvar org-babel-library-of-babel)
 (declare-function show-all "outline" ())
+(declare-function org-reduce "org" (CL-FUNC CL-SEQ &rest CL-KEYS))
 (declare-function tramp-compat-make-temp-file "tramp-compat"
                   (filename &optional dir-flag))
 (declare-function tramp-dissect-file-name "tramp" (name &optional nodefault))
@@ -71,7 +72,6 @@
 (declare-function org-babel-ref-goto-headline-id "ob-ref" (id))
 (declare-function org-babel-ref-headline-body "ob-ref" ())
 (declare-function org-babel-lob-execute-maybe "ob-lob" ())
-(declare-function org-babel-map-call-lines "ob-lob" (file &rest body))
 (declare-function org-number-sequence "org-compat" (from &optional to inc))
 (declare-function org-at-item-p "org-list" ())
 (declare-function org-list-parse-list "org-list" (&optional delete))
@@ -240,6 +240,7 @@ Returns a list
       (setf (nth 2 info) (org-babel-process-params (nth 2 info))))
     (when info (append info (list name indent)))))
 
+(defvar org-current-export-file) ; dynamically bound
 (defun org-babel-confirm-evaluate (info)
   "Confirm evaluation of the code block INFO.
 This behavior can be suppressed by setting the value of
@@ -859,6 +860,30 @@ buffer."
        (goto-char point))))
 (def-edebug-spec org-babel-map-inline-src-blocks (form body))
 
+(defvar org-babel-lob-one-liner-regexp)
+;;;###autoload
+(defmacro org-babel-map-call-lines (file &rest body)
+  "Evaluate BODY forms on each call line in FILE.
+If FILE is nil evaluate BODY forms on source blocks in current
+buffer."
+  (declare (indent 1))
+  (let ((tempvar (make-symbol "file")))
+    `(let* ((,tempvar ,file)
+	    (visited-p (or (null ,tempvar)
+			   (get-file-buffer (expand-file-name ,tempvar))))
+	    (point (point)) to-be-removed)
+       (save-window-excursion
+	 (when ,tempvar (find-file ,tempvar))
+	 (setq to-be-removed (current-buffer))
+	 (goto-char (point-min))
+	 (while (re-search-forward org-babel-lob-one-liner-regexp nil t)
+	   (goto-char (match-beginning 1))
+	   (save-match-data ,@body)
+	   (goto-char (match-end 0))))
+       (unless visited-p (kill-buffer to-be-removed))
+       (goto-char point))))
+(def-edebug-spec org-babel-map-call-lines (form body))
+
 ;;;###autoload
 (defun org-babel-execute-buffer (&optional arg)
   "Execute source code blocks in a buffer.
@@ -973,89 +998,6 @@ This can be called with C-c C-c."
                               (overlays-at (or point (point))))))))
     (when hash (kill-new hash) (message hash))))
 (add-hook 'org-ctrl-c-ctrl-c-hook 'org-babel-hash-at-point)
-
-(defun org-babel-result-hide-spec ()
-  "Hide portions of results lines.
-Add `org-babel-hide-result' as an invisibility spec for hiding
-portions of results lines."
-  (add-to-invisibility-spec '(org-babel-hide-result . t)))
-(add-hook 'org-mode-hook 'org-babel-result-hide-spec)
-
-(defvar org-babel-hide-result-overlays nil
-  "Overlays hiding results.")
-
-(defun org-babel-result-hide-all ()
-  "Fold all results in the current buffer."
-  (interactive)
-  (org-babel-show-result-all)
-  (save-excursion
-    (while (re-search-forward org-babel-result-regexp nil t)
-      (save-excursion (goto-char (match-beginning 0))
-                      (org-babel-hide-result-toggle-maybe)))))
-
-(defun org-babel-show-result-all ()
-  "Unfold all results in the current buffer."
-  (mapc 'delete-overlay org-babel-hide-result-overlays)
-  (setq org-babel-hide-result-overlays nil))
-
-;;;###autoload
-(defun org-babel-hide-result-toggle-maybe ()
-  "Toggle visibility of result at point."
-  (interactive)
-  (let ((case-fold-search t))
-    (if (save-excursion
-          (beginning-of-line 1)
-          (looking-at org-babel-result-regexp))
-        (progn (org-babel-hide-result-toggle)
-               t) ;; to signal that we took action
-      nil))) ;; to signal that we did not
-
-(defun org-babel-hide-result-toggle (&optional force)
-  "Toggle the visibility of the current result."
-  (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (if (re-search-forward org-babel-result-regexp nil t)
-        (let ((start (progn (beginning-of-line 2) (- (point) 1)))
-	      (end (progn
-		     (while (looking-at org-babel-multi-line-header-regexp)
-		       (forward-line 1))
-		     (goto-char (- (org-babel-result-end) 1)) (point)))
-	      ov)
-          (if (memq t (mapcar (lambda (overlay)
-                                (eq (overlay-get overlay 'invisible)
-				    'org-babel-hide-result))
-                              (overlays-at start)))
-              (if (or (not force) (eq force 'off))
-                  (mapc (lambda (ov)
-                          (when (member ov org-babel-hide-result-overlays)
-                            (setq org-babel-hide-result-overlays
-                                  (delq ov org-babel-hide-result-overlays)))
-                          (when (eq (overlay-get ov 'invisible)
-                                    'org-babel-hide-result)
-                            (delete-overlay ov)))
-                        (overlays-at start)))
-            (setq ov (make-overlay start end))
-            (overlay-put ov 'invisible 'org-babel-hide-result)
-            ;; make the block accessible to isearch
-            (overlay-put
-             ov 'isearch-open-invisible
-             (lambda (ov)
-               (when (member ov org-babel-hide-result-overlays)
-                 (setq org-babel-hide-result-overlays
-                       (delq ov org-babel-hide-result-overlays)))
-               (when (eq (overlay-get ov 'invisible)
-                         'org-babel-hide-result)
-                 (delete-overlay ov))))
-            (push ov org-babel-hide-result-overlays)))
-      (error "Not looking at a result line"))))
-
-;; org-tab-after-check-for-cycling-hook
-(add-hook 'org-tab-first-hook 'org-babel-hide-result-toggle-maybe)
-;; Remove overlays when changing major mode
-(add-hook 'org-mode-hook
-	  (lambda () (org-add-hook 'change-major-mode-hook
-				   'org-babel-show-result-all 'append 'local)))
 
 (defvar org-file-properties)
 (defun org-babel-params-from-properties (&optional lang)
@@ -1703,6 +1645,10 @@ raw ----- results are added directly to the Org-mode file.  This
           is a good option if you code block will output org-mode
           formatted text.
 
+wrap ---- results are added directly to the Org-mode file as with
+          \"raw\", but are wrapped in a RESULTS drawer, allowing
+          them to later be replaced or removed automatically.
+
 org ----- similar in effect to raw, only the results are wrapped
           in an org code block.  Similar to the raw option, on
           export the results will be interpreted as org-formatted
@@ -1821,9 +1767,7 @@ code ---- the results are extracted in the syntax of the source
 	   ((member "raw" result-params)
 	    (goto-char beg) (if (org-at-table-p) (org-cycle)))
 	   ((member "wrap" result-params)
-	    (when (and (stringp result) (not (member "file" result-params)))
-	      (org-babel-examplize-region beg end results-switches))
-	    (wrap "#+BEGIN_RESULT" "#+END_RESULT"))
+	    (wrap ":RESULTS:" ":END:"))
 	   ((and (not (proper-list-p result))
 		 (not (member "file" result-params)))
 	    (org-babel-examplize-region beg end results-switches)
@@ -1858,6 +1802,8 @@ code ---- the results are extracted in the syntax of the source
      ((org-at-item-p) (let* ((struct (org-list-struct))
 			     (prvs (org-list-prevs-alist struct)))
 			(org-list-get-list-end (point-at-bol) struct prvs)))
+     ((looking-at "^\\([ \t]*\\):RESULTS:")
+      (re-search-forward (concat "^" (match-string 1) ":END:")))
      (t
       (let ((case-fold-search t)
 	    (blocks-re (regexp-opt
@@ -2068,21 +2014,15 @@ block but are passed literally to the \"example-block\"."
          (lang (nth 0 info))
          (body (nth 1 info))
 	 (comment (string= "noweb" (cdr (assoc :comments (nth 2 info)))))
+	 (rx-prefix (concat "\\(" org-babel-src-name-regexp "\\|"
+			    ":noweb-ref[ \t]+" "\\)"))
          (new-body "") index source-name evaluate prefix blocks-in-buffer)
     (flet ((nb-add (text) (setq new-body (concat new-body text)))
 	   (c-wrap (text)
 		   (with-temp-buffer
 		     (funcall (intern (concat lang "-mode")))
 		     (comment-region (point) (progn (insert text) (point)))
-		     (org-babel-trim (buffer-string))))
-	   (blocks () ;; return the info lists of all blocks in this buffer
-		   (let (infos)
-		     (save-restriction
-		       (widen)
-		       (org-babel-map-src-blocks nil
-			 (setq infos (cons (org-babel-get-src-block-info 'light)
-					   infos))))
-		     (reverse infos))))
+		     (org-babel-trim (buffer-string)))))
       (with-temp-buffer
         (insert body) (goto-char (point-min))
         (setq index (point))
@@ -2116,21 +2056,20 @@ block but are passed literally to the \"example-block\"."
 		    (when (org-babel-ref-goto-headline-id source-name)
 		      (org-babel-ref-headline-body)))
 		  ;; find the expansion of reference in this buffer
-		  (mapconcat
-		   (lambda (i)
-		     (when (string= source-name
-				    (or (cdr (assoc :noweb-ref (nth 2 i)))
-					(nth 4 i)))
-		       (let ((body (org-babel-expand-noweb-references i)))
-			 (if comment
-			     ((lambda (cs)
-				(concat (c-wrap (car cs)) "\n"
-					body "\n" (c-wrap (cadr cs))))
-			      (org-babel-tangle-comment-links i))
-			   body))))
-		   (or blocks-in-buffer
-		       (setq blocks-in-buffer (blocks)))
-		   "")
+		  (let ((rx (concat rx-prefix source-name))
+			expansion)
+		    (save-excursion
+		      (goto-char (point-min))
+		      (while (re-search-forward rx nil t)
+			(let* ((i (org-babel-get-src-block-info 'light))
+			       (body (org-babel-expand-noweb-references i)))
+			  (if comment
+			      ((lambda (cs)
+				 (concat (c-wrap (car cs)) "\n"
+					 body "\n" (c-wrap (cadr cs))))
+			       (org-babel-tangle-comment-links i))
+			    (setq expansion (concat expansion body))))))
+		    expansion)
 		  ;; possibly raise an error if named block doesn't exist
 		  (if (member lang org-babel-noweb-error-langs)
 		      (error "%s" (concat

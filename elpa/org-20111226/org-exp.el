@@ -52,9 +52,9 @@
 (autoload 'org-export-generic "org-export-generic" "Export using the generic exporter" t)
 
 (autoload 'org-export-as-odt "org-odt"
-  "Export the outline to a OpenDocumentText file." t)
+  "Export the outline to a OpenDocument Text file." t)
 (autoload 'org-export-as-odt-and-open "org-odt"
-  "Export the outline to a OpenDocumentText file and open it." t)
+  "Export the outline to a OpenDocument Text file and open it." t)
 
 (defgroup org-export nil
   "Options for exporting org-listings."
@@ -952,7 +952,7 @@ Pressing `1' will switch between these two options."
 
 \[D] export as DocBook   [V] export as DocBook, process to PDF, and open
 
-\[o] export as OpenDocumentText                    [O] ... and open
+\[o] export as OpenDocument Text                   [O] ... and open
 
 \[j] export as TaskJuggler                         [J] ... and open
 
@@ -2083,10 +2083,11 @@ Also, store forced alignment information found in such lines."
 	(re-angle-link (concat "\\([^[]\\)" org-angle-link-re))
 	nodesc)
     (goto-char (point-min))
+    (while (re-search-forward org-bracket-link-regexp nil t)
+      (put-text-property (match-beginning 0) (match-end 0) 'org-normalized-link t))
+    (goto-char (point-min))
     (while (re-search-forward re-plain-link nil t)
-      (unless (org-string-match-p
-	       "\\[\\[\\S-+:\\S-*?\\<"
-	       (buffer-substring (point-at-bol) (match-beginning 0)))
+      (unless (get-text-property (match-beginning 0) 'org-normalized-link)
 	(goto-char (1- (match-end 0)))
 	(org-if-unprotected-at (1+ (match-beginning 0))
 	  (let* ((s (concat (match-string 1)
