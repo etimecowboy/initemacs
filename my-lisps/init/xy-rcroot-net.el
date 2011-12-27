@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-26 Mon 21:09 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-27 Tue 15:40 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -175,7 +175,7 @@
 (eval-after-load "gnus"
   '(progn
      (gnus-settings)
-     (define-key gnus-summary-mode-map (kbd "C-x C-s")
+     (define-key gnus-summary-mode-map (kbd "<f6> C-s")
        'my-archive-article)))
 (global-set-key (kbd "<f6> g") 'gnus)
 
@@ -188,5 +188,12 @@
 (autoload 'mew-send "mew" nil t)
 (autoload 'mew-user-agent-compose "mew" nil t)
 (global-set-key (kbd "<f6> m") 'mew)
+
+;;====================================================================
+;;* ansit
+;; 把emacs中的代码以ansi高亮形式贴到bbs上
+(autoload 'ansit "ansit" nil t)
+(autoload 'ansit-buffer "ansit" nil t)
+(autoload 'ansit-copy-and-kill-buffer "ansit" nil t)
 
 (provide 'xy-rcroot-net)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-17 Sat 16:46 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-27 Tue 15:44 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -681,7 +681,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** ECB settings
-(eval-after-load "ecb" '(ecb-settings))
+(eval-after-load "ecb-autoloads" '(ecb-settings))
 (global-set-key (kbd "<f6> b") 'xy/ecb-start)
 
 ;;--------------------------------------------------------------------

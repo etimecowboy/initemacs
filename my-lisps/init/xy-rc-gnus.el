@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-27 Tue 13:39 xin on p6t>
+;; Time-stamp:<2011-12-27 Tue 15:31 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -555,7 +555,7 @@ archive more then one article."
   ;;------------------------------------------------------------------
   ;; ansit, by crazycool@newsmth
   ;; 把emacs里的代码按照当前模式的语法加上ANSI色彩，以方便贴在BBS上
-  ;; (try-require 'ansit) ;; 新闻组不好用。
+  ;; (try-require 'ansit) ;; 新闻组不好用。加在这里只是为了贴到BBS
   
   (message "* ---[ gnus configuration is complete ]---"))
 
