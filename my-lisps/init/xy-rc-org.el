@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-26 Mon 22:57 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-27 Tue 01:48 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -710,7 +710,7 @@ If html-file-name is not given, read it from minibuffer."
   (require 'ob-matlab)
   (require 'ob-latex)
   (require 'ob-sh)
-  ;; (require 'ob-C)
+  (require 'ob-C)
   (require 'ob-org)
   (require 'org-exp)
 
