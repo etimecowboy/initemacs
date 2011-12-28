@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-14 Wed 13:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-28 Wed 13:06 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -64,11 +64,11 @@
    ;;------------------------------------
    ("C-c <f5>" revert-buffer)
    ("C-x <f5>" gbk-revert)
-   ("M-<f10>"  menu-bar-mode)
-   ("C-<f10>"  tool-bar-mode)
+   ("M-<f10>"  menu-bar-mode) ;; (if (>= emacs-major-version 23)
+   ("C-<f10>"  tool-bar-mode) ;; (if (>= emacs-major-version 23)
    ;;------------------------------------
    ;; changing font size
-   ("C-+" text-scale-increase)
+   ("C-+" text-scale-increase) ;; (if (
    ("C--" text-scale-decrease)
    ("C-0" text-scale-normal-size)
    ))

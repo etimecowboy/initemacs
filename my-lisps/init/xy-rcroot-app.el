@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-26 Mon 14:07 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-28 Wed 17:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -162,29 +162,27 @@
 ;;--------------------------------------------------------------------
 ;;** diminish
 ;; Removing or abbreviating minor mode indicators
-;; (eval-after-load "filladapt" '(diminish 'filladapt-mode))
-;; (eval-after-load "icicles" '(diminish 'icicle-mode))
-;; (eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
-;; (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
-;; ;; (eval-after-load "linkd" '(diminish 'linkd-mode))
-;; (eval-after-load "simple" '(diminish 'global-visual-line-mode))
-;; (eval-after-load "simple" '(diminish 'visual-line-mode))
-;; (eval-after-load "abbrev" '(diminish 'abbrev-mode))
-;; (eval-after-load "flyspell" '(diminish 'flyspell-mode))
-;; (eval-after-load "autopair" '(diminish 'autopair-mode))
-;; (eval-after-load "hideshow" '(diminish 'hs-minor-mode))
-;; (eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
-;; (eval-after-load "xy-recent-jump-small" '(diminish 'recent-jump-small-mode))
-;; (eval-after-load "ibus" '(diminish 'ibus-mode))
-;; (eval-after-load "outline" '(diminish 'outline-minor-mode))
-;; (eval-after-load "eldoc" '(diminish 'eldoc-mode))
-;; (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
-;; (eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
-;; (eval-after-load "ws-trim" '(diminish 'ws-trim-mode))
+(eval-after-load "filladapt" '(diminish 'filladapt-mode))
+(eval-after-load "icicles" '(diminish 'icicle-mode))
+(eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
+(eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
+;; (eval-after-load "linkd" '(diminish 'linkd-mode))
+(eval-after-load "simple" '(diminish 'global-visual-line-mode))
+(eval-after-load "simple" '(diminish 'visual-line-mode))
+(eval-after-load "abbrev" '(diminish 'abbrev-mode))
+(eval-after-load "flyspell" '(diminish 'flyspell-mode))
+(eval-after-load "autopair" '(diminish 'autopair-mode))
+(eval-after-load "hideshow" '(diminish 'hs-minor-mode))
+(eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
+(eval-after-load "xy-recent-jump-small" '(diminish 'recent-jump-small-mode))
+(eval-after-load "ibus" '(diminish 'ibus-mode))
+(eval-after-load "outline" '(diminish 'outline-minor-mode))
+(eval-after-load "eldoc" '(diminish 'eldoc-mode))
+(eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+(eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
+(eval-after-load "ws-trim" '(diminish 'ws-trim-mode))
 
 ;; An function get from newsgroup cn.bbs.comp.emacs
-;; BUG: only hide not recover
-;; (defvar my-default-mode-line-modes 'mode-name)
 (setq my-default-mode-line-modes mode-line-modes)
 (defun my-modeline-format-toggle-minor-modes ()
   "toggle minor modes display on mode-line"
@@ -194,7 +192,7 @@
       (setq mode-line-modes 'mode-name)
     (setq mode-line-modes my-default-mode-line-modes))
   (force-mode-line-update))
-(my-modeline-format-toggle-minor-modes)
+;; (my-modeline-format-toggle-minor-modes)
 (global-set-key (kbd "<f6> h") 'my-modeline-format-toggle-minor-modes)
 
 ;;--------------------------------------------------------------------
@@ -222,6 +220,26 @@
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)
 ;; (minibuffer-electric-default-mode t) ;; ido or icicles
+
+;;====================================================================
+
+;;* Menu settings
+(defvar menu-bar-rectangle-map
+  (let
+      ((map (make-sparse-keymap "Rectangle functions")))
+    (define-key map [string] (quote ("string insert rectangle" .
+                                     string-insert-rectangle)))
+    (define-key map [yank] (quote ("yank rectangle" . yank-rectangle)))
+    (define-key map [delete] (quote ("delete rectangle" . delete-rectangle)))
+    (define-key map [kill] (quote ("kill rectangle" . kill-rectangle)))
+    map
+    )
+  )
+(defalias (quote menu-bar-rectangle-map) menu-bar-rectangle-map)
+(define-key-after
+  (lookup-key global-map [menu-bar edit])
+  [rectangle]
+  '("Rectangle" . menu-bar-rectangle-map) 'bookmark)
 
 ;;====================================================================
 ;;* Vaious bar settings
