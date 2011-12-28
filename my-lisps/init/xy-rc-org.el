@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-27 Tue 01:48 xin on p6t>
+;; Time-stamp:<2011-12-28 Wed 22:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -710,7 +710,9 @@ If html-file-name is not given, read it from minibuffer."
   (require 'ob-matlab)
   (require 'ob-latex)
   (require 'ob-sh)
-  (require 'ob-C)
+  ;; (require 'ob-C)
+  ;; BUG: cannot find this library on Windows 7, strange bug.
+  ;;      cause emacs error on Linux, may related with my c-mode settings.
   (require 'ob-org)
   (require 'org-exp)
 
