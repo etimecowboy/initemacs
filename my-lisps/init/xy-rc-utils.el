@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-26 Mon 19:58 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-29 Thu 23:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -779,9 +779,9 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (if window-system
       (qiang-set-font
        '("DejaVu Sans Mono" "Consolas" "Monaco"
-         "Monospace" "Courier") ":pixelsize=10"
+         "Monospace" "Courier") ":pixelsize=12"
          '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
-           "黑体") 12)
+           "黑体") 14)
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 9")))
 
