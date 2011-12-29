@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-28 Wed 17:55 xin on p6t>
+;; Time-stamp:<2011-12-29 Thu 15:51 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -444,5 +444,22 @@
  `(("C-x P p" palette)
    ("C-x P f" facemenup-palette-face-fg-at-point)
    ("C-x P b" facemenup-palette-face-bg-at-point)))
+
+;;--------------------------------------------------------------------
+;; rainbow-mode
+;; displays strings representing colors with the color they represent
+;; as background
+;; (require 'rainbow-mode)
+;; ;; 定义一个全局的 rainbow-mode, by 海猫◎newsmth
+;; (define-globalized-minor-mode
+;;   global-rainbow-mode
+;;   rainbow-mode rainbow-turn-on
+;;   :initialize 'custom-initialize-delay
+;;   :init-value (not (or noninteractive
+;;                        emacs-basic-display))
+;;   :group 'rainbow
+;;   :version "24")
+;; ;; 打开 global-rainbow-mode
+;; (global-rainbow-mode)
 
 (provide 'xy-rcroot-app)

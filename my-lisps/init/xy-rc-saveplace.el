@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-saveplace.el'
-;; Time-stamp:<2011-12-11 Sun 21:18 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-29 Thu 15:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,6 @@
                                         system-configuration))
   (unless (file-exists-p save-place-file)
     (shell-command (concat "touch " save-place-file)))
-  (message "* ---[ saveplace configuration is complete ]---")
-)
+  (message "* ---[ saveplace configuration is complete ]---"))
 
 (provide 'xy-rc-saveplace)

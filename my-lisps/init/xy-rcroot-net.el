@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-27 Tue 15:40 xin on p6t>
+;; Time-stamp:<2011-12-29 Thu 15:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -18,7 +18,7 @@
 
 ;;====================================================================
 ;;* url
-(eval-after-load "url" '(url-settings))
+(eval-after-load "url" '(url-settings)) ;; proxy setting is in it
 
 ;; Abbrev quickurl
 ;; (setq quickurl-url-file (concat my-emacs-path "/quickurls"))
@@ -56,10 +56,10 @@
  `(("C-x W n"     w3m-goto-url-new-session)
    ("C-x W b"     view-w3m-bookmark)
    ("C-x W w"     switch-to-w3m)
-   ("<f8>"        browse-url)
-   ("S-<f8>"      lookup-word-definition)
-   ("C-<f8>"      lookup-wikipedia)
-   ("M-<f8>"      google-region)))
+   ("<f8> u"      browse-url)
+   ("<f8> d"      lookup-word-definition)
+   ("<f8> w"      lookup-wikipedia)
+   ("<f8> g"      google-region)))
 
 (setq browse-url-generic-program "w3m") ;; It won't affect emacs
                                         ;; default browser
@@ -91,7 +91,7 @@
   "Use a web translation service to translate the current buffer." t)
 (eval-after-load "babel" '(babel-settings))
 ;; (global-set-key [f12] 'babel)
-(global-set-key (kbd "S-<f12>") 'babel-region)
+(global-set-key (kbd "<f12> r") 'babel-region)
 ;; (global-set-key (kbd "S-<f12>") 'babel-buffer)
 
 ;;====================================================================
@@ -100,8 +100,8 @@
 ;; (require 'dictionary-autoloads)
 ;; (global-set-key "\C-cS" 'dictionary-search)
 ;; (global-set-key "\C-cM" 'dictionary-match-words)
-(global-set-key (kbd "<f12>") 'dictionary-search)
-(global-set-key (kbd "C-<f12>") 'dictionary-match-words)
+(global-set-key (kbd "<f12> d") 'dictionary-search)
+(global-set-key (kbd "<f12> w") 'dictionary-match-words)
 
 ;;====================================================================
 ;;* eagle

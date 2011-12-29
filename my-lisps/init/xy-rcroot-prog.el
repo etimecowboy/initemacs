@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-27 Tue 15:44 xin on p6t>
+;; Time-stamp:<2011-12-29 Thu 17:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -296,32 +296,36 @@
   '(progn
      (emacs-lisp-mode-settings)
      (eal-define-keys
-      `emacs-lisp-mode-map
-      `(("C-c M-a"             beginning-of-defun)
-        ("C-c M-e"             end-of-defun)
+      'emacs-lisp-mode-map
+      `(;; ("C-c M-a"             beginning-of-defun)
+        ;; ("C-c M-e"             end-of-defun)
         ("C-M-h"               mark-function)
-        ("C-c D"               edebug-defun)
+        ;; ("C-c D"               edebug-defun)
         ("C-c C-d"             eval-defun)
-        ("C-c B"               eval-buffer)
-        ("C-c f"               copy-function)
-        ("C-c F"               kill-function)
-        ("C-c C-q"             indent-function)
-        ("C-c C"               comment-function))) ))
+        ;; ("C-c B"               eval-buffer)
+        ("C-c L"               emacs-lisp-byte-compile-and-load)
+        ;; ("C-c f"               copy-function)
+        ;; ("C-c F"               kill-function)
+        ;; ("C-c C-q"             indent-function)
+        ;; ("C-c C"               comment-function)
+        ))))
+
 (eval-after-load "lisp-mode"
   '(progn
      (lisp-mode-settings)
      (eal-define-keys
       `(lisp-mode-map lisp-interaction-mode-map)
-      `(("C-j"                 goto-line)
+      `(;; ("C-j"                 goto-line)
         ("M-j"                 eval-print-last-sexp)
         ("C-M-h"               mark-function)
-        ("C-c D"               edebug-defun)
+        ;; ("C-c D"               edebug-defun)
         ("C-c C-d"             eval-defun)
-        ("C-c B"               eval-buffer)
-        ("C-c f"               copy-function)
-        ("C-c F"               kill-function)
-        ("C-c C-q"             indent-function)
-        ("C-c C"               comment-function)))))
+        ;; ("C-c B"               eval-buffer)
+        ;; ("C-c f"               copy-function)
+        ;; ("C-c F"               kill-function)
+        ;; ("C-c C-q"             indent-function)
+        ;; ("C-c C"               comment-function)
+        ))))
 
 ;; auto compile elisp files after save, do so only if there's exists
 ;; a byte-compiled file ;; BUG: removed, it is cause resursive loading

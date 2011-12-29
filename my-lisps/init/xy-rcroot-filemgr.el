@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-29 Thu 02:52 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-29 Thu 22:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -90,12 +90,13 @@
 
 ;; open-with, open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
-(GNULinux
- (eval-after-load "openwith" '(openwith-settings))
- (require 'openwith)
- (add-hook 'dired-mode-hook
-           (function (lambda ()
-                       (openwith-mode 1)))))
+;; NOTE: semms not work in Linux, `dired+' is better.
+;; (GNULinux
+;;  (eval-after-load "openwith" '(openwith-settings))
+;;  (require 'openwith)
+;;  (add-hook 'dired-mode-hook
+;;            (function (lambda ()
+;;                        (openwith-mode 1)))))
 
 ;; 简略文件列表信息
 (eval-after-load "dired-details" '(dired-details-settings))
@@ -184,7 +185,7 @@
 ;;*** magit
 ;; Project range git
 (eval-after-load "magit" '(magit-settings))
-(global-set-key (kbd "<f11>") 'magit-status)
+(global-set-key (kbd "<f11> g") 'magit-status)
 
 ;;*** diff-git
 ;; Single file range
@@ -198,7 +199,7 @@
                       `(("C-c M-v" diff-git-buffer-stage)
                         ("C-c C-v" diff-git-diff-staged)))
      (define-key diff-mode-shared-map "g" 'diff-git-update-current-buffer)))
-(global-set-key (kbd "C-<f11>") 'diff-git-diff-unstaged)
-(global-set-key (kbd "M-<f11>") 'diff-git-diff-staged)
+(global-set-key (kbd "<f11> d u") 'diff-git-diff-unstaged)
+(global-set-key (kbd "<f11> d s") 'diff-git-diff-staged)
 
 (provide 'xy-rcroot-filemgr)

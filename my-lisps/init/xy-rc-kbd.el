@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-28 Wed 13:06 xin on p6t>
+;; Time-stamp:<2011-12-29 Thu 15:18 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -139,7 +139,6 @@
    ("C-S-p"               move-line-up)
    ("C-c C-x f"           format-region)
    ("C-c C-x F"           format-cxx-file)
-   ;; ("M-S-<f7>"         moccur-word-all-buffers)
    ("C-x M-l"             mark-current-line)
    ))
 

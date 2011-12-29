@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2011-12-16 Fri 03:39 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-29 Thu 15:15 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -62,9 +62,9 @@
 (eal-define-keys-commonly
  global-map
  `(;; M$ Visual Studio key setup.
-   ("<f2>"                      bm-toggle)
-   ("C-<f2>"                    bm-next)
-   ("S-<f2>"                    bm-previous)
+   ("<f2> m"   bm-toggle)
+   ("<f2> n"   bm-next)
+   ("<f2> p"   bm-previous)
    ;; Click on fringe to toggle bookmarks, and use mouse wheel to move
    ;; between them. If you would like the markers on the right fringe
    ;; instead of the left, add the following to line:
@@ -84,8 +84,14 @@
 ;;--------------------------------------------------------------------
 ;;** save-place
 ;; Save point places in buffers
-(eval-after-load "saveplace" '(saveplace-settings))
+;; (eval-after-load "saveplace" '(saveplace-settings))
 (setq-default save-place t)
+(setq save-place-file (concat my-var-path "/saveplace-"
+                              user-login-name "@"
+                              system-name "@"
+                              system-configuration))
+(unless (file-exists-p save-place-file)
+  (shell-command (concat "touch " save-place-file)))
 
 ;;--------------------------------------------------------------------
 ;;** savehist

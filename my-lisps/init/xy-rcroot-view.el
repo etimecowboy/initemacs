@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-12-22 Thu 09:21 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-29 Thu 15:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -195,7 +195,8 @@
 ;; can search files like grep(-find) without grep (and find) command.
 (autoload 'moccur-grep-find "color-moccur" nil t)
 (eval-after-load "color-moccur" '(moccur-settings))
-(global-set-key (kbd "C-<f7>") 'moccur-grep-find)
+(global-set-key (kbd "<f7> g") 'moccurd)
+(global-set-key (kbd "<f7> f") 'moccur-grep-find)
 
 ;;*** moccur-edit
 ;; moccur-edit provides to edit moccur buffer of color-moccur.el and
@@ -212,6 +213,6 @@
 ;; incremental, (without `anything')
 ;; REF: (@url :file-name "http://mercurial.intuxication.org/hg/ioccur" :display "Source")
 (autoload 'ioccur "ioccur" "Incremental occur" t)
-(global-set-key (kbd "M-<f7>") 'ioccur)
+(global-set-key (kbd "<f7> s") 'ioccur)
 
 (provide 'xy-rcroot-view)

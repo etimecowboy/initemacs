@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-22 Thu 09:07 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-29 Thu 15:24 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -123,8 +123,8 @@
 ;;  M-x local-set-key RET C-z self-insert-command
 ;; And if you want to background Emacs, just go to a different buffer.
 ;; ‘C-q C-z’ doesn’t work? - No, but C-c C-z should.
-(global-set-key (kbd "S-<f9>") 'shell)
-(global-set-key (kbd "C-<f9>") 'eshell)
+(global-set-key (kbd "<f9> s") 'shell)
+(global-set-key (kbd "<f9> e") 'eshell)
 
 ;;====================================================================
 ;;* undo-tree
@@ -273,7 +273,7 @@ from tradition chinese to simple chinese" t)
 (autoload 'shell-pop "shell-pop" "Pop-up a shell" t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (eval-after-load "shell-pop" '(shell-pop-settings))
-(global-set-key (kbd "<f9>") 'shell-pop)
+(global-set-key (kbd "<f9> p") 'shell-pop)
 
 (provide 'xy-rcroot-enhance)
 ;;* hanspell
