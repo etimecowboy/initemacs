@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-16 Fri 10:29 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-29 Thu 02:52 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -83,10 +83,6 @@
 ;; (eval-after-load "dired-isearch" '(dired-isearch-settings))
 
 ;;*** Contrib features for dired
-;; TODO: do a research and add more configurations.
-(eval-after-load "dired+" '(dired+-settings)) ;; dired大补
-(require 'dired+)
-
 ;; Use a single frame for visiting a sub-directory
 ;; (eval-after-load "dired-single" (dired-single-settings))
 ;; `T' 把目录压缩为.tar.gz文件
@@ -102,9 +98,13 @@
                        (openwith-mode 1)))))
 
 ;; 简略文件列表信息
-;; (eval-after-load "dired-details" '(dired-details-settings))
-(require 'dired-details)
+(eval-after-load "dired-details" '(dired-details-settings))
+;; (require 'dired-details)
 (require 'dired-details+)
+
+;; TODO: do a research and add more configurations.
+(eval-after-load "dired+" '(dired+-settings)) ;; dired大补
+(require 'dired+)
 
 ;; (add-hook 'dired-load-hook
 ;;           (function (lambda ()
