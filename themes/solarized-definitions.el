@@ -334,6 +334,7 @@ in order to expand or compress the tonal range displayed."
            (apropos-symbol-face ((t (:bold t :weight bold))))
            ;;----------------------------------------------------------------
            ;; HACK: more definistions
+           ;; dired+
            (diredp-compressed-file-suffix ((t (:foreground ,blue))))
            (diredp-date-time ((t (:foreground ,cyan))))
            (diredp-deletion ((t (:background ,red :foreground ,yellow))))

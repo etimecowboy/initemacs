@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2011-12-29 Thu 15:24 xin on p6t>
+;; Time-stamp:<2011-12-30 Fri 20:04 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -227,14 +227,12 @@ from tradition chinese to simple chinese" t)
         ("C-x L l" linkd-insert-link)))))
 ;; NOTE: Manually start it when required
 (global-set-key (kbd "<f6> l") 'linkd-mode)
-;; (am-add-hooks
-;;  `(lisp-mode-hook emacs-lisp-mode-hook
-;;    c-mode-hook c++-mode-hook cc-mode-hook
-;;    sh-mode-hook vhdl-mode-hook
-;;    verilog-mode-hook ;; org-mode-hook
-;;    LaTeX-mode-hook
-;;    matlab-mode-hook)
-;;  '(lambda () (linkd-mode 1)))
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+                  c-common-mode-hook sh-mode-hook matlab-mode-hook
+                  vhdl-mode-hook verilog-mode-hook
+                  org-mode-hook LaTeX-mode-hook)
+ '(lambda () (linkd-mode 1)))
 
 ;;====================================================================
 ;;* ascii

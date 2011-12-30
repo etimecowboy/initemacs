@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-17 Sat 17:06 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-30 Fri 20:07 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -191,13 +191,12 @@
       `(("C-c C-f" yas/find-snippets)))))
 ;; NOTE: manually start it when required
 (global-set-key (kbd "<f6> y") 'yas/minor-mode)
-;; (am-add-hooks
-;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-;;    cc-mode-hook c-mode-hook c++-mode-hook
-;;    sh-mode-hook ;; vhdl-mode-hook verilog-mode-hook
-;;    org-mode-hook LaTeX-mode-hook matlab-mode-hook)
-;;  '(lambda ()
-;;     (yas/minor-mode 1)))
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+                  c-common-mode-hook sh-mode-hook matlab-mode-hook
+                  vhdl-mode-hook verilog-mode-hook
+                  org-mode-hook LaTeX-mode-hook)
+ '(lambda () (yas/minor-mode 1)))
 
 ;;====================================================================
 ;;* icicles

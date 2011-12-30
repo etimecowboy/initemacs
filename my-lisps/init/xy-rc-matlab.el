@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-matlab.el'
-;; Time-stamp:<2011-12-30 Fri 06:41 xin on p6t>
+;; Time-stamp:<2011-12-30 Fri 19:39 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,8 +49,44 @@
   ;; (server-start) ;; server must be started for backtracing errors
                     ;; BUG: backtrace does not work
 
-  (setq matlab-indent-function t)    ; if you want function bodies indented
-  (setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
+  (setq matlab-shell-ask-MATLAB-for-completions t
+        matlab-shell-command "matlab"
+        matlab-shell-enable-gud-flag t
+        matlab-shell-input-ring-size 100)
+
+  (setq matlab-arg1-max-indent-length 15
+        matlab-auto-fill t
+        matlab-block-indent-tic-toc-flag nil
+        matlab-block-verify-max-buffer-size 50000
+        matlab-comment-anti-indent 0
+        matlab-comment-column 40
+        matlab-comment-line-s "% "
+        matlab-comment-on-line-s "% "
+        matlab-comment-region-s "% $$$ "
+        matlab-completion-technique 'increment
+        matlab-cont-level 4
+        matlab-cont-requires-ellipsis t
+        matlab-elipsis-string "..."
+        matlab-fill-code t
+        matlab-fill-count-ellipsis-flag t
+        matlab-fill-fudge 10
+        matlab-fill-fudge-hard-maximum 79
+        matlab-fill-strings-flag t
+        matlab-functions-have-end t
+        matlab-handle-simulink t
+        matlab-highlight-block-match-flag t
+        matlab-highlight-cross-function-variables t
+        matlab-indent-function t
+        matlab-indent-function-body 'guess
+        matlab-indent-level 4
+        matlab-return-add-semicolon nil
+        matlab-return-function 'matlab-indent-end-before-ret
+        matlab-show-mlint-warnings nil
+        matlab-show-periodic-code-details-flag nil ;; BUG: not working
+        matlab-use-eei t
+        matlab-verify-on-save-flag nil
+        matlab-vers-on-startup nil)
+  
   (matlab-cedet-setup)
   (message "* ---[ matlab configuration is complete ]---"))
 
