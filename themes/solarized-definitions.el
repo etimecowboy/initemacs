@@ -114,10 +114,10 @@ in order to expand or compress the tonal range displayed."
                      opt-under t)))
         `((;; basic
            (default ((t (:foreground ,base0 ,:background ,back))))
-           ;; (cursor
-           ;;  ((t (:foreground ,base0 :background ,base03 :inverse-video t))))
-           (cursor ;; HACK:
-            ((t (:foreground ,base0 :background ,magenta :inverse-video t))))
+           (cursor
+            ((t (:foreground ,base0 :background ,base03 :inverse-video t))))
+           ;; (cursor ;; HACK:
+           ;;  ((t (:foreground ,base0 :background ,blue :inverse-video t))))
            (escape-glyph-face ((t (:foreground ,red))))
            (fringe ((t (:foreground ,base01 :background ,base02))))
            (linum ((t (:foreground ,base01 :background ,base02))))
@@ -332,7 +332,31 @@ in order to expand or compress the tonal range displayed."
            (apropos-match-face ((t (:background ,blue))))
            (apropos-property-face ((t (:bold t :italic t :slant italic :weight bold))))
            (apropos-symbol-face ((t (:bold t :weight bold))))
-           ;;---------------------------------------------------------
+           ;;----------------------------------------------------------------
+           ;; HACK: more definistions
+           (diredp-compressed-file-suffix ((t (:foreground ,blue))))
+           (diredp-date-time ((t (:foreground ,cyan))))
+           (diredp-deletion ((t (:background ,red :foreground ,yellow))))
+           (diredp-deletion-file-name ((t (:foreground ,red))))
+           (diredp-dir-heading ((t (:background ,base02 :foreground ,cyan))))
+           (diredp-dir-priv ((t (:background ,base02 :foreground ,cyan))))
+           (diredp-display-msg ((t (:foreground ,yellow))))
+           (diredp-exec-priv ((t (:background ,magenta))))
+           (diredp-executable-tag ((t (:foreground ,red))))
+           (diredp-file-name ((t (:foreground ,base0))))
+           (diredp-file-suffix ((t (:foreground ,green))))
+           (diredp-flag-mark ((t (:background ,violet :foreground ,red))))
+           (diredp-flag-mark-line ((t (:background ,base01))))
+           (diredp-ignored-file-name ((t (:foreground ,base01))))
+           (diredp-link-priv ((t (:foreground ,violet))))
+           (diredp-no-priv ((t (:background ,base02))))
+           (diredp-number ((t (:foreground ,base0))))
+           (diredp-other-priv ((t (:background ,blue))))
+           (diredp-rare-priv ((t (:background ,magenta :foreground ,green))))
+           (diredp-read-priv ((t (:background ,base01))))
+           (diredp-symlink ((t (:foreground ,violet))))
+           (diredp-write-priv ((t (:background ,green))))
+           ;;------------------------------------------------------------------
            ;; gnus
            (gnus-cite-1 ((t (:foreground ,magenta))))
            (gnus-cite-2 ((t (:foreground ,base2))))
@@ -417,7 +441,7 @@ in order to expand or compress the tonal range displayed."
            (background-color . ,base03)
            (background-mode . ,mode)
            ;; (cursor-color . ,base0) ;; HACK:
-           (cursor-color . ,magenta)
+           (cursor-color . ,blue)
            ))))))
 
 (defmacro create-solarized-theme (mode)

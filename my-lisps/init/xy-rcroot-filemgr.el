@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-30 Fri 06:58 xin on p6t>
+;; Time-stamp:<2011-12-30 Fri 15:14 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -68,13 +68,11 @@
 ;;*** GNU Emacs features for dired
 ;; 对特定文件简略显示
 (eval-after-load "dired-x" '(dired-x-settings))
-;; (require 'dired-x)
-(add-hook 'dired-mode-hook
-          (function (lambda ()
-                      (dired-omit-mode 1))))
+(require 'dired-x)
 
 ;; 以文件形式修改dired buffer,  has been a part of GNU Emacs since 23
-;; (require 'wdired)
+(require 'wdired)
+
 ;; 只对文件名isearch
 ;;   NOTE: Emacs 23 has builtin Isearch of filenames in Dired:
 ;;     M-s f C-s   – `dired-isearch-filenames'
@@ -86,7 +84,7 @@
 ;; Use a single frame for visiting a sub-directory
 ;; (eval-after-load "dired-single" (dired-single-settings))
 ;; `T' 把目录压缩为.tar.gz文件
-(require 'dired-tar)
+;; (require 'dired-tar)
 
 ;; open-with, open files in external applications
 ;; NOTE: it need to be patched in order to run on windows
@@ -98,14 +96,22 @@
 ;;            (function (lambda ()
 ;;                        (openwith-mode 1)))))
 
-;; 简略文件列表信息
-(eval-after-load "dired-details" '(dired-details-settings))
-;; (require 'dired-details)
+;; dired-details
+;; 简略文件列表信息, BUG: not working properly
+;; (eval-after-load "dired-details" '(dired-details-settings))
+(require 'dired-details)
+;; (dired-details-install) ;; called in `dired-details+'
+(setq dired-details-hide-link-targets nil
+      dired-details-initially-hide t
+      dired-details-hidden-string "")
 (require 'dired-details+)
+(setq dired-details-propagate-flag t) ;option added by
+                                        ;`dired-details+'
 
 ;; TODO: do a research and add more configurations.
-(eval-after-load "dired+" '(dired+-settings)) ;; dired大补
+;; (eval-after-load "dired+" '(dired+-settings)) ;; dired大补
 (require 'dired+)
+(setq diredp-prompt-for-bookmark-prefix-flag nil)
 
 ;; (add-hook 'dired-load-hook
 ;;           (function (lambda ()
@@ -118,15 +124,16 @@
 ;;                       (load "openwith")
 ;;                       )))
 
-;; (add-hook 'dired-mode-hook
-;;           (function (lambda ()
-;;                       (dired-omit-mode 1)
+(add-hook 'dired-mode-hook
+          (function (lambda ()
+                      (dired-omit-mode 1)
+                      ;; (dired-details-hide)
                       ;; (dired-details-toggle 1)
                       ;; (define-key ctl-x-map   "d"
                       ;;   'diredp-dired-files)
                       ;; (define-key ctl-x-4-map "d"
                       ;;   'diredp-dired-files-other-window)
-                      ;; )))
+                      )))
 
 (when window-system
   ;; image-dired
