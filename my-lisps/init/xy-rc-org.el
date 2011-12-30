@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-28 Wed 22:36 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-30 Fri 06:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -125,8 +125,6 @@ If html-file-name is not given, read it from minibuffer."
 ;;;###autoload
 (defun org-settings ()
   "Settings of `org'."
-
-  (require 'org-install)
 
   ;;==================================================================
   ;; Some basic settings and some confliction fixes

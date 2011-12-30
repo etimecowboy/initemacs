@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-26 Mon 19:59 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-30 Fri 03:46 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -640,12 +640,8 @@
 
 ;;====================================================================
 ;;* Emacs server
-
 ;; Emacs可以做为一个server, 然后用emacsclient连接这个server,
 ;; 无需再打开两个Emacs。
-;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
-;; Windows 下使用我定义的 `xy/done' 函数也能达到类似的效果，
-;; 用 `C-x C-c' 隐藏 Emacs frame，但只能使用一个 frame。
 
 ;; Emacs-21 以前的版本要用 gnuserv
 ;; (if is-before-emacs-21
@@ -658,19 +654,22 @@
 ;;       ;; 打开后让emacs跳到前面来
 ;;       (setenv "GNUSERV_SHOW_EMACS" "1")))
 
+;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
+;; Windows 下使用我定义的 `xy/done' 函数也能达到类似的效果，
+;; 用 `C-x C-c' 隐藏 Emacs frame，但只能使用一个 frame。
+;; (if is-after-emacs-23
+;;   (progn
+;;     (server-force-delete)
+;;     (setq-default server-auth-dir (concat my-var-path "/server"))
+;;     (server-start)
+;;     (global-set-key (kbd "C-x C-c") 'xy/done)
+;; ))
+
 ;; NOTE: If you want to re-load emacs configuration during the run,
 ;; don't start emacs server here, instead, you can `M-x server-start'
 ;; or `M-x xy/server-start' in an emacs process when you need.
 
-;; (if is-after-emacs-23
-;;     (progn
-;; (server-force-delete)
 ;; (setq-default server-auth-dir (concat my-var-path "/server"))
-;; (server-start)
-;; (global-set-key (kbd "C-x C-c") 'xy/done)
-;; ))
-
-(setq-default server-auth-dir (concat my-var-path "/server"))
 ;; (if (not (eq t (server-running-p server-name)))
 ;;     (server-start))
 
@@ -681,6 +680,32 @@
 ;;   (server-force-delete)
 ;;   ;; (setq server-auth-dir (concat my-var-path "/server"))
 ;;   (server-start))
+
+(setq-default server-auth-dir (concat my-var-path "/server"))
+
+;; NOTE: With this macro, `server-start', `server-force-delete', and
+;; `emacs --daemon' works properly even when there is an emacs server
+;; running, when you set `delete-by-moving-to-trash' to true.
+;; REF: (@url :file-name "http://superuser.com/questions/176207/emacs-daemon-not-deleting-socket" :display "Post")
+(defmacro bypass-trash-in-function (fun)
+  "Set FUN to always use normal deletion, and never trash.
+
+Specifically, the value of `delete-by-moving-to-trash' will be
+set to nil inside FUN, so any deletions that happen inside FUN or
+any functions called by it will bypass the trash."
+  `(defadvice ,fun (around no-trash activate)
+     "Ignore `delete-by-moving-to-trash' inside this function.
+
+See `bypass-trash-in-function' for more information."
+     (let (delete-by-moving-to-trash)
+       ad-do-it)))
+
+;; Any server function that may delete the server file should never
+;; move it to trash instead.
+(mapc (lambda (fun) (eval `(bypass-trash-in-function ,fun)))
+      '(server-start server-sentinel server-force-delete))
+
+(server-start)
 
 ;;====================================================================
 ;;* Emacs key bindings

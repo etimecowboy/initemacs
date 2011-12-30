@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-29 Thu 22:26 xin on p6t>
+;; Time-stamp:<2011-12-30 Fri 06:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -199,7 +199,7 @@
                       `(("C-c M-v" diff-git-buffer-stage)
                         ("C-c C-v" diff-git-diff-staged)))
      (define-key diff-mode-shared-map "g" 'diff-git-update-current-buffer)))
-(global-set-key (kbd "<f11> d u") 'diff-git-diff-unstaged)
-(global-set-key (kbd "<f11> d s") 'diff-git-diff-staged)
+(global-set-key (kbd "<f11> u") 'diff-git-diff-unstaged)
+(global-set-key (kbd "<f11> s") 'diff-git-diff-staged)
 
 (provide 'xy-rcroot-filemgr)

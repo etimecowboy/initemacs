@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-12-18 Sun 10:54 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-30 Fri 06:32 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,11 +19,35 @@
 ;;;###autoload
 (defun xy/cedet-start ()
   "Start CEDET programming environment"
-
   (interactive)
   (require 'cedet)
-  (menu-bar-mode 1)
-  (revert-buffer))
+  (revert-buffer)
+  (menu-bar-mode 1))
+
+;;;###autoload
+(defun cedet-4-cc ()
+  "CEDET settings for cc-mode"
+  (require 'semantic-c)
+  (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
+
+  (when (executable-find "gcc") (semantic-gcc-setup))
+
+  (mapc (lambda (dir)
+          (semantic-add-system-include dir 'c++-mode)
+          (semantic-add-system-include dir 'c-mode))
+        user-include-dirs)
+
+  (dolist (file c-preprocessor-symbol-files)
+    (when (file-exists-p file)
+      (setq semantic-lex-c-preprocessor-symbol-file
+            (append semantic-lex-c-preprocessor-symbol-file (list
+    file)))))
+
+  ;; (if window-system
+  ;;     (define-key c-mode-base-map "\C-c " 'semantic-ia-complete-symbol-menu)
+  ;;   (define-key c-mode-base-map "\C-c " 'semantic-ia-complete-symbol))
+  ;; (define-key c-mode-base-map (kbd "M-n") 'semantic-ia-complete-symbol-menu)
+  )
 
 ;;;###autoload
 (defun cedet-settings ()
@@ -50,7 +74,7 @@
 
   ;;------------------------------------------------------------------
   ;; srecode, use yasnippet as my code template
-  (global-srecode-minor-mode -1)
+  (global-srecode-minor-mode 1)
 
   ;;------------------------------------------------------------------
   ;; ede
@@ -68,86 +92,71 @@
 
   ;;------------------------------------------------------------------
   ;; C/C++ related settings
-  (require 'semantic-c)
-  ;; (setq semantic-c-obey-conditional-section-parsing-flag nil) ; ignore #if
+  (cedet-4-cc)  ;; TODO: run it when major-mode is c-mode or c++-mode
 
-  (when (executable-find "gcc") (semantic-gcc-setup))
+  ;;------------------------------------------------------------------
+  ;; NOTE: semantic-ia-fast-jump are replaced by `xy-recent-jump.el'
+  ;;   ;; (require 'semantic/bovine/el)
+  ;;   ;; (require 'semantic/analyze/refs)      ; for semantic-ia-fast-jump
+  ;;   (defadvice push-mark (around semantic-mru-bookmark activate)
+  ;;     "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark'.
+  ;; If `semantic-mru-bookmark-mode' is active, also push a tag onto
+  ;; the mru bookmark stack."
+  ;;     (semantic-mrub-push semantic-mru-bookmark-ring
+  ;;                         (point)
+  ;;                         'mark)
+  ;;     ad-do-it)
 
-  (mapc (lambda (dir)
-          (semantic-add-system-include dir 'c++-mode)
-          (semantic-add-system-include dir 'c-mode))
-        user-include-dirs)
+  ;;   (defun semantic-ia-fast-jump-back ()
+  ;;     (interactive)
+  ;;     (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
+  ;;         (error "Semantic Bookmark ring is currently empty"))
+  ;;     (let* ((ring (oref semantic-mru-bookmark-ring ring))
+  ;;            (alist (semantic-mrub-ring-to-assoc-list ring))
+  ;;            (first (cdr (car alist))))
+  ;;       ;; (if (semantic-equivalent-tag-p (oref first tag) (semantic-current-tag))
+  ;;       ;;     (setq first (cdr (car (cdr alist)))))
+  ;;       (semantic-mrub-visit first)
+  ;;       (ring-remove ring 0)))
 
-  (dolist (file c-preprocessor-symbol-files)
-    (when (file-exists-p file)
-      (setq semantic-lex-c-preprocessor-symbol-file
-            (append semantic-lex-c-preprocessor-symbol-file (list file)))))
+  ;;   (defun semantic-ia-fast-jump-or-back (&optional back)
+  ;;     (interactive "P")
+  ;;     (if back
+  ;;         (semantic-ia-fast-jump-back)
+  ;;       (semantic-ia-fast-jump (point))))
 
-  ;; (if window-system
-  ;;     (define-key c-mode-base-map "\C-c " 'semantic-ia-complete-symbol-menu)
-  ;;   (define-key c-mode-base-map "\C-c " 'semantic-ia-complete-symbol))
-  ;; (define-key c-mode-base-map (kbd "M-n") 'semantic-ia-complete-symbol-menu)
-
-  (require 'semantic/bovine/el)
-  (require 'semantic/analyze/refs)      ; for semantic-ia-fast-jump
-  (defadvice push-mark (around semantic-mru-bookmark activate)
-    "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark'.
-If `semantic-mru-bookmark-mode' is active, also push a tag onto
-the mru bookmark stack."
-    (semantic-mrub-push semantic-mru-bookmark-ring
-                        (point)
-                        'mark)
-    ad-do-it)
-
-  (defun semantic-ia-fast-jump-back ()
-    (interactive)
-    (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
-        (error "Semantic Bookmark ring is currently empty"))
-    (let* ((ring (oref semantic-mru-bookmark-ring ring))
-           (alist (semantic-mrub-ring-to-assoc-list ring))
-           (first (cdr (car alist))))
-      ;; (if (semantic-equivalent-tag-p (oref first tag) (semantic-current-tag))
-      ;;     (setq first (cdr (car (cdr alist)))))
-      (semantic-mrub-visit first)
-      (ring-remove ring 0)))
-
-  (defun semantic-ia-fast-jump-or-back (&optional back)
-    (interactive "P")
-    (if back
-        (semantic-ia-fast-jump-back)
-      (semantic-ia-fast-jump (point))))
-
-  (defun semantic-ia-fast-jump-mouse (ev)
-    "semantic-ia-fast-jump with a mouse click. EV is the mouse event."
-    (interactive "e")
-    (mouse-set-point ev)
-    (semantic-ia-fast-jump (point)))
-
+  ;;   (defun semantic-ia-fast-jump-mouse (ev)
+  ;;     "semantic-ia-fast-jump with a mouse click. EV is the mouse event."
+  ;;     (interactive "e")
+  ;;     (mouse-set-point ev)
+  ;;     (semantic-ia-fast-jump (point)))
+  ;;-----------------------------------------------------------------
+  
   (when (and window-system
              (> emacs-major-version 21)
              (require 'semantic-tag-folding nil 'noerror))
     (global-semantic-tag-folding-mode 1))
 
   ;;------------------------------------------------------------------
-  ;; eassist
-  (when (try-require 'eassist )
-    (setq eassist-header-switches
-          '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
-            ("hh" . ("cc" "CC" "cpp" "cxx" "c++" "C"))
-            ("hpp" . ("cpp" "cxx" "c++" "cc" "CC" "C"))
-            ("hxx" . ("cxx" "cpp" "c++" "cc" "CC" "C"))
-            ("h++" . ("c++" "cpp" "cxx" "cc" "CC" "C"))
-            ("H" . ("C" "CC" "cc" "cpp" "cxx" "c++" "mm" "m"))
-            ("HH" . ("CC" "cc" "C" "cpp" "cxx" "c++"))
-            ("cpp" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
-            ("cxx" . ("hxx" "hpp" "h++" "HH" "hh" "H" "h"))
-            ("c++" . ("h++" "hpp" "hxx" "HH" "hh" "H" "h"))
-            ("CC" . ("HH" "hh" "hpp" "hxx" "h++" "H" "h"))
-            ("cc" . ("hh" "HH" "hpp" "hxx" "h++" "H" "h"))
-            ("C" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
-            ("c" . ("h"))
-            ("m" . ("h"))
-            ("mm" . ("h")))))
+  ;; ;; eassist
+  ;; (when (try-require 'eassist )
+  ;;   (setq eassist-header-switches
+  ;;         '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
+  ;;           ("hh" . ("cc" "CC" "cpp" "cxx" "c++" "C"))
+  ;;           ("hpp" . ("cpp" "cxx" "c++" "cc" "CC" "C"))
+  ;;           ("hxx" . ("cxx" "cpp" "c++" "cc" "CC" "C"))
+  ;;           ("h++" . ("c++" "cpp" "cxx" "cc" "CC" "C"))
+  ;;           ("H" . ("C" "CC" "cc" "cpp" "cxx" "c++" "mm" "m"))
+  ;;           ("HH" . ("CC" "cc" "C" "cpp" "cxx" "c++"))
+  ;;           ("cpp" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
+  ;;           ("cxx" . ("hxx" "hpp" "h++" "HH" "hh" "H" "h"))
+  ;;           ("c++" . ("h++" "hpp" "hxx" "HH" "hh" "H" "h"))
+  ;;           ("CC" . ("HH" "hh" "hpp" "hxx" "h++" "H" "h"))
+  ;;           ("cc" . ("hh" "HH" "hpp" "hxx" "h++" "H" "h"))
+  ;;           ("C" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
+  ;;           ("c" . ("h"))
+  ;;           ("m" . ("h"))
+  ;;           ("mm" . ("h")))))
 
   ;;------------------------------------------------------------------
   ;; speedbar

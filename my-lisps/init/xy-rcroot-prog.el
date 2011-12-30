@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-29 Thu 17:21 xin on p6t>
+;; Time-stamp:<2011-12-30 Fri 06:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -523,7 +523,12 @@
 ;;====================================================================
 ;;* Matlab development settings
 (eval-after-load "matlab" '(matlab-settings))
-;; (require 'matlab-load)
+(autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
+(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.M\\'" . matlab-mode) auto-mode-alist))
+(autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
+;; (global-set-key (kbd "<f6> m") 'xy/matlab-cedet-start)
+;; (global-set-key (kbd "<f6> m") 'xy/matlab-ecb-start)
 
 ;;====================================================================
 ;;* Documentation settings

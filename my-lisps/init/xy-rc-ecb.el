@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ecb.el'
-;; Time-stamp:<2011-12-17 Sat 16:46 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-30 Fri 05:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,8 +23,7 @@
   (xy/cedet-start)
   (require 'ecb-autoloads)
   (ecb-activate)
-  (ecb-layout-switch "left-analyse")
-)
+  (ecb-layout-switch "left-analyse"))
 
 ;;;###autoload
 (defun ecb-settings ()
