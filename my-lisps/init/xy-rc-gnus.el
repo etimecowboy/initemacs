@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2011-12-27 Tue 15:31 xin on p6t>
+;; Time-stamp:<2011-12-30 Fri 21:46 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -317,7 +317,7 @@
   ;;       sc-nested-citation-p nil
   ;;       sc-preferred-header-style 4
   ;;       sc-use-only-preference-p nil)
-  (add-hook 'mail-citation-hook 'sc-cite-original)
+  ;; (add-hook 'mail-citation-hook 'sc-cite-original) ;; this works
 
   ;;==================================================================
   ;; 阅读设置
