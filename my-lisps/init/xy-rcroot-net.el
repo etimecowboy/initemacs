@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2011-12-30 Fri 07:07 xin on p6t>
+;; Time-stamp:<2012-01-01 Sun 23:41 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -58,12 +58,12 @@
    ("C-x W w"     switch-to-w3m)
    ("<f8> u"      browse-url)
    ("<f8> d"      lookup-word-definition)
-   ("<f8> w"      lookup-wikipedia)
-   ("<f8> g"      google-region)))
+   ;; ("<f8> w"      lookup-wikipedia) ;; not very useful
+   ("<f8> s"      google-region)))
 
 (setq browse-url-generic-program "w3m") ;; It won't affect emacs
                                         ;; default browser
-;; (global-set-key (kbd "<f6> w") 'w3m)
+(global-set-key (kbd "<f8> w") 'w3m)
 
 ;;====================================================================
 ;;* erc
@@ -149,7 +149,7 @@
 
 (eal-define-keys-commonly
  global-map
- `(("<f6> e"  xy/emms-start)
+ `(("<f8> e"  xy/emms-start)
    ("C-x E b" emms-browser)
    ("C-x E f" emms-play-file)
    ("C-x E l" emms-play-playlist)
@@ -175,9 +175,9 @@
 (eval-after-load "gnus"
   '(progn
      (gnus-settings)
-     (define-key gnus-summary-mode-map (kbd "<f6> C-s")
+     (define-key gnus-summary-mode-map (kbd "C-c C-x C-s")
        'my-archive-article)))
-(global-set-key (kbd "<f6> g") 'gnus)
+(global-set-key (kbd "<f8> g") 'gnus)
 
 ;;====================================================================
 ;;* mew
@@ -187,7 +187,7 @@
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)
 (autoload 'mew-user-agent-compose "mew" nil t)
-(global-set-key (kbd "<f6> m") 'mew)
+(global-set-key (kbd "<f8> m") 'mew)
 
 ;;====================================================================
 ;;* ansit
