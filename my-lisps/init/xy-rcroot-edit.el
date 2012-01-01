@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2011-12-26 Mon 21:12 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-01 Sun 23:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,8 +38,7 @@
 ;;** ethan-wspace
 ;; REF: (@url :file-name "https://github.com/glasserc/ethan-wspace" :display "Source")
 (autoload 'ethan-wspace-mode "ethan-wspace" nil t)
-;; (require 'ethan-wspace)
-;; (global-ethan-wspace-mode 1)
+(global-ethan-wspace-mode 1)
 (global-set-key (kbd "<f6> w") 'ethan-wspace-mode)
 
 ;;--------------------------------------------------------------------
@@ -50,6 +49,7 @@
 ;; ethan-wspace will grow similar functionality soon.
 ;; (require 'ws-trim)
 ;; (gloabl-ws-trim-mode 1) ;NOTE: too agressive
+(global-set-key (kbd "<f7> w") 'ws-trim-buffer)
 
 ;;====================================================================
 ;;* Fast point move
