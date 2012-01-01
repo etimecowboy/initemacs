@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-30 Fri 06:26 xin on p6t>
+;; Time-stamp:<2011-12-31 Sat 20:36 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -717,7 +717,7 @@ If html-file-name is not given, read it from minibuffer."
   ;; default latex package list
   (setq org-export-latex-default-packages-alist
         '(("AUTO" "inputenc" t) ("T1" "fontenc" t) ("" "fixltx2e" nil)
-          ("UTF8,noindent,hyperref" "ctex" nil)
+          ("UTF8,noindent,hyperref" "ctex" t)
           ("" "graphicx" t) ("" "longtable" nil) ("" "float" nil)
           ("" "wrapfig" nil) ("" "soul" t) ("" "t1enc" t) ("" "textcomp" t)
           ("" "marvosym" t) ("" "wasysym" t) ("" "latexsym" t)

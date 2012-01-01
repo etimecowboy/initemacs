@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2011-12-29 Thu 15:18 xin on p6t>
+;; Time-stamp:<2011-12-31 Sat 15:01 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -160,5 +160,10 @@
    ("C-x G h" goto-my-home-dir)
    ("C-x G o" goto-my-org-source-dir)
    ("C-x G t" goto-my-org-latex-dir)))
+
+(global-set-key (kbd "C-x K") (lambda ()
+                                (interactive)
+                                (kill-buffer)
+                                (delete-window)))
 
 (provide 'xy-rc-kbd)

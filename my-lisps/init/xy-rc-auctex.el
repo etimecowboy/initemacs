@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-12-13 Tue 19:35 xin on P6T-WIN7>
+;; Time-stamp:<2011-12-31 Sat 17:42 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -29,7 +29,7 @@
   ;; (require 'auctex)
   ;; (require 'preview-latex)
   (revert-buffer)
-)
+  (menu-bar-mode 1))
 
 ;;;###autoload
 (defun auctex-settings ()
@@ -82,22 +82,22 @@
   ;;-------------------------------------------------------------------
   ;; 为AUCTeX添加自定义命令，注意命令中用了很多引号，这是为了适应文件名中含有空格的情况
   ;;-------------------------------------------------------------------
-  ;;(setq my-tex-commands-extra (list
-  ;;                  (list "texify" "texify --tex-opt=--src %s.tex" 'TeX-run-command nil t)
-  ;;                  (list "pdf texify" "texify --pdf %s.tex" 'TeX-run-command nil t)
+  ;; (setq my-tex-commands-extra (list
+  ;;                  ;; (list "texify" "texify --tex-opt=--src %s.tex" 'TeX-run-command nil t)
+  ;;                  ;; (list "pdf texify" "texify --pdf %s.tex" 'TeX-run-command nil t)
   ;;                  (list "pdflatex" "pdflatex \"%s.tex\"" 'TeX-run-LaTeX nil t)
   ;;                  (list "dvipdfmx" "dvipdfmx \"%s.dvi\"" 'TeX-run-command nil t)
   ;;                  (list "dvips" "dvips %s.dvi" 'TeX-run-command nil t)
   ;;                  (list "ps2pdf" "ps2pdf %s.ps" 'TeX-run-command nil t)
   ;;                  (list "gbk2uni" "gbk2uni \"%s.out\"" 'TeX-run-command nil t)
-  ;;               (list "Yap" "yap -1 \"%dS\" \"%d\"" 'TeX-run-discard nil t)
+  ;;                  ;; (list "Yap" "yap -1 \"%dS\" \"%d\"" 'TeX-run-discard nil t)
   ;;                  (list "Gsview" "start .\\\"%s.ps\"" 'TeX-run-LaTeX nil t)
   ;;                  (list "Acrobat" "acroread \"%s.pdf\"" 'TeX-run-command nil t))
   ;;                  (list "Clean" "rm -f *.log *.aux %s.out %s.exa %s.ilg %s.idx %s.ind %s.lof %s.lot %s.toc %s.bbl %s.blg ctextemp_*.*" 'TeX-run-command nil t))
-  ;;)
-  ;; 添加上面定义的命令
-  ;;(require 'tex)
-  ;;(setq TeX-command-list (append TeX-command-list my-tex-commands-extra))
+  ;; )
+  ;; ;; 添加上面定义的命令
+  ;; (require 'tex)
+  ;; (setq TeX-command-list (append TeX-command-list my-tex-commands-extra))
 
   ;; set bib path
   ;; (defvar BIBINPUTS
