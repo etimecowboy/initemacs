@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2011-12-31 Sat 20:36 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-01 Sun 23:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -175,13 +175,6 @@ If html-file-name is not given, read it from minibuffer."
     (add-hook 'org-mode-hook
               'wl-org-column-view-uses-fixed-width-face))
 
-  ;; For `seesion.el'
-  ;; BUG: error when load this two lines
-  ;; ;; Don't recursively display gtd files in session list
-  ;; (add-to-list 'session-globals-exclude 'org-mark-ring)
-  ;; ;; Don't display org agenda files
-  ;; (add-to-list 'session-globals-exclude 'org-agenda-files)
-
   ;;------------------------------------------------------------------
   ;; NOTE: Use icicles instead
   ;; (setq org-completion-use-iswitchb t)
@@ -211,6 +204,13 @@ If html-file-name is not given, read it from minibuffer."
          "~/emacs/org/gtd/Notes.org"
          ))
 
+  ;; For `seesion.el'
+  ;; BUG: error when load this two lines
+  ;; Don't recursively display gtd files in session list
+  (add-to-list 'session-globals-exclude 'org-mark-ring)
+  ;; Don't display org agenda files
+  (add-to-list 'session-globals-exclude 'org-agenda-files)
+  
   ;;------------------------------------------------------------------
   ;; GTD contexts & tags
   (setq org-tag-persistent-alist ;; contexts
@@ -714,27 +714,57 @@ If html-file-name is not given, read it from minibuffer."
   (require 'ob-org)
   (require 'org-exp)
 
-  ;; default latex package list
-  (setq org-export-latex-default-packages-alist
-        '(("AUTO" "inputenc" t) ("T1" "fontenc" t) ("" "fixltx2e" nil)
-          ("UTF8,noindent,hyperref" "ctex" t)
-          ("" "graphicx" t) ("" "longtable" nil) ("" "float" nil)
-          ("" "wrapfig" nil) ("" "soul" t) ("" "t1enc" t) ("" "textcomp" t)
-          ("" "marvosym" t) ("" "wasysym" t) ("" "latexsym" t)
-          ("" "amssymb" t) ("" "hyperref" nil)
-          "\\tolerance=1000"))
-
-  ;; BUG: beamer need to be defined in `org-export-latex-classes'
-  ;; (unless (boundp 'org-export-latex-classes)
-  ;;   (setq org-export-latex-classes nil))
-  ;; (add-to-list 'org-export-latex-classes
-  ;;              '("article"
-  ;;                "\\documentclass{article}"
-  ;;                ("\\section{%s}" . "\\section{%s}")
-  ;;                ("\\subsection{%s}" . "\\subsection{%s}")
-  ;;                ("\\subsubsection{%s}" . "\\subsubsection{%s}")
-  ;;                ("\\paragraph{%s}" . "\\paragraph{%s}")
-  ;;                ("\\subparagraph{%s}" . "\\subparagraph{%s}")))
+  ;;----------------------------------------------------------------
+  ;; LaTeX export settings
+  (require 'org-latex)
+  (setq org-export-latex-coding-system 'utf-8-unix)
+  (setq org-export-latex-table-caption-above nil)
+  (setq org-export-latex-tables-column-borders t)
+  (add-to-list 'org-export-latex-packages-alist
+               '("UTF8,noindent,hyperref" "ctex"))
+  (add-to-list 'org-export-latex-packages-alist '("numbers=left,numberstyle=\\tiny" "listings"))
+  (add-to-list 'org-export-latex-packages-alist '("" "xcolor"))
+  
+  (setq org-export-latex-classes
+   (quote (("article" "\\documentclass[11pt]{article}"
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+            ("\\paragraph{%s}" . "\\paragraph*{%s}")
+            ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+           ;;------------------------------------------------
+           ("report" "\\documentclass[11pt]{report}"
+            ("\\part{%s}" . "\\part*{%s}")
+            ("\\chapter{%s}" . "\\chapter*{%s}")
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+           ;;-------------------------------------------------
+           ("book" "\\documentclass[11pt]{book}"
+            ("\\part{%s}" . "\\part*{%s}")
+            ("\\chapter{%s}" . "\\chapter*{%s}")
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+           ;;--------------------------------------------------
+           ("beamer" "\\documentclass{beamer}"
+            org-beamer-sectioning)
+           ;;--------------------------------------------------
+           ;; BUG: conflicts with added ctex package
+           ;; ("ctexart" "\\documentclass[UTF8]{ctexart}")       
+           )))
+  
+  ;; code listing settings, new `minted' is also supported
+  (setq org-export-latex-listings t)
+  ;; (setq org-export-latex-listings-langs
+  ;;       (quote
+  ;;        ((emacs-lisp "Lisp") (lisp "Lisp") (clojure "Lisp")
+  ;;         (c "C") (cc "C++") (fortran "fortran") (perl "Perl")
+  ;;         (cperl "Perl") (python "Python") (ruby "Ruby")
+  ;;         (html "HTML") (xml "XML") (tex "TeX") (latex "TeX")
+  ;;         (shell-script "bash") (gnuplot "Gnuplot")
+  ;;         (ocaml "Caml") (caml "Caml") (sql "SQL") (sqlite "sql")
+  ;;         (vhdl "vhdl") (verilog "verilog"))))
 
   ;; BUG: not work
   ;; latex to pdf command list
@@ -745,12 +775,21 @@ If html-file-name is not given, read it from minibuffer."
   ;;      "pdflatex -interaction nonstopmode %b")
   ;;    )
   ;; )
+  ;; (setq org-latex-to-pdf-process
+  ;;       '("xelatex -interaction nonstopmode %b"
+  ;;         "xelatex -interaction nonstopmode %b"))
 
+  ;; load reftex
+  (require 'reftex)
+  ;; load cd-latex
+  (require 'cdlatex)
+  
   (add-hook 'org-mode-hook
             '(lambda ()
                ;; BUG: org-mobile
                (turn-on-auto-fill)
-               (org-mode-reftex-setup)
+               ;; (org-mode-reftex-setup)
+               (turn-on-reftex)
                (turn-on-org-cdlatex)
                (flyspell-mode 1)
                ;; (autopair-mode -1)

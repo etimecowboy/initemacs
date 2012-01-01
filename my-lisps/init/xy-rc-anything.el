@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2011-12-12 Mon 00:33 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-01 Sun 23:09 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -43,7 +43,7 @@
      anything-c-source-bookmarks
      ;; Command:
      ;; BUG: Conflicts with `session.el'. Emacs would crashes.
-     anything-c-source-minibuffer-history
+     ;; anything-c-source-minibuffer-history
      anything-c-source-emacs-commands
      ;; Buffer Contents:
      anything-c-source-imenu
