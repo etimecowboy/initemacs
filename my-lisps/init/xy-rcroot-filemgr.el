@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2011-12-30 Fri 15:14 xin on p6t>
+;; Time-stamp:<2012-01-02 Mon 01:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -99,14 +99,14 @@
 ;; dired-details
 ;; 简略文件列表信息, BUG: not working properly
 ;; (eval-after-load "dired-details" '(dired-details-settings))
-(require 'dired-details)
-;; (dired-details-install) ;; called in `dired-details+'
-(setq dired-details-hide-link-targets nil
-      dired-details-initially-hide t
-      dired-details-hidden-string "")
-(require 'dired-details+)
-(setq dired-details-propagate-flag t) ;option added by
-                                        ;`dired-details+'
+;; (require 'dired-details)
+;; ;; (dired-details-install) ;; called in `dired-details+'
+;; (setq dired-details-hide-link-targets nil
+;;       dired-details-initially-hide t
+;;       dired-details-hidden-string "")
+;; (require 'dired-details+)
+;; (setq dired-details-propagate-flag t) ;option added by
+;;                                         ;`dired-details+'
 
 ;; TODO: do a research and add more configurations.
 ;; (eval-after-load "dired+" '(dired+-settings)) ;; dired大补
