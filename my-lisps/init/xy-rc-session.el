@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-session.el'
-;; Time-stamp:<2011-12-08 Thu 03:40 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-02 Mon 15:13 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,7 +38,6 @@
   (setq session-globals-max-string 40960)
   (setq session-registers-max-string 2048)
 
-  (message "* ---[ session configuration is complete ]---")
-)
+  (message "* ---[ session configuration is complete ]---"))
 
 (provide 'xy-rc-session)

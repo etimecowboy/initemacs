@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2011-12-31 Sat 17:42 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-02 Mon 23:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,13 +36,18 @@
   "Settings of `auctex'."
   (require 'tex-site)
   (require 'font-latex)
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq-default TeX-master nil) ;; project support
-  (setq tex-source-specials-mode t)
-  (setq-default LaTeX-math-mode t)
-  (setq-default TeX-fold-mode t)
-  (setq-default TeX-PDF-mode t)
+  (setq TeX-auto-save t
+        TeX-parse-self t
+        TeX-electric-escape t
+        TeX-auto-untabify t
+        TeX-show-compilation t
+        TeX-save-query nil
+        ;; TeX-newline-function 'newline-and-indent ;;回车时自动缩进
+        )
+  (setq-default TeX-master nil)  ;; project support
+
+  ;; (setq TeX-engine 'xetex) ;; set xelatex as default engine.
+  ;; NOTE: AUCTeX-11.86: Preview does not work with xelatex
 
   ;; load reftex
   (require 'reftex)
@@ -57,9 +62,10 @@
                (turn-on-reftex)
                (turn-on-cdlatex)
                (autopair-mode -1)
-               ;; (xy/yas-start)
-               ;; (xy/linkd-start)
-               ;; (xy/set-font-write)
+               (setq tex-source-specials-mode t)
+               (setq LaTeX-math-mode t)
+               (setq TeX-fold-mode t)
+               (setq TeX-PDF-mode  nil)
                ))
   ;; (add-hook 'latex-mode-hook
   ;;           '(lambda ()
@@ -98,6 +104,73 @@
   ;; ;; 添加上面定义的命令
   ;; (require 'tex)
   ;; (setq TeX-command-list (append TeX-command-list my-tex-commands-extra))
+
+  (setq TeX-command-list
+        (quote
+         (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t"
+           TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode)
+           :help "Run plain TeX")
+          ("LaTeX" "%`%l%(mode)%' %t"
+           TeX-run-TeX nil (latex-mode doctex-mode)
+           :help "Run LaTeX")
+          ("Makeinfo" "makeinfo %t"
+           TeX-run-compile nil (texinfo-mode)
+           :help "Run Makeinfo with Info output")
+          ("Makeinfo HTML" "makeinfo --html %t"
+           TeX-run-compile nil (texinfo-mode)
+           :help "Run Makeinfo with HTML output")
+          ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t"
+           TeX-run-TeX nil (ams-tex-mode)
+           :help "Run AMSTeX")
+          ("ConTeXt" "texexec --once --texutil %(execopts)%t"
+           TeX-run-TeX nil (context-mode)
+           :help "Run ConTeXt once")
+          ("ConTeXt Full" "texexec %(execopts)%t"
+           TeX-run-TeX nil (context-mode)
+           :help "Run ConTeXt until completion")
+          ("BibTeX" "bibtex %s"
+           TeX-run-BibTeX nil t
+           :help "Run BibTeX")
+          ("Dvipdfmx" "dvipdfmx %s"
+           TeX-run-command nil t
+           :help "Run dvipdfmx")
+          ("Dvips" "dvips %s"
+           TeX-run-command nil t
+           :help "Run dvips")
+          ("Ps2pdf" "ps2pdf %s"
+           TeX-run-command nil t
+           :help "Run ps2pdf")
+          ("View" "%V"
+           TeX-run-discard-or-function t t
+           :help "Run Viewer")
+          ("Print" "%p"
+           TeX-run-command t t
+           :help "Print the file")
+          ("Queue" "%q"
+           TeX-run-background nil t
+           :help "View the printer queue"
+           :visible TeX-queue-command)
+          ("File" "%(o?)dvips %d -o %f "
+           TeX-run-command t t
+           :help "Generate PostScript file")
+          ("Index" "makeindex %s"
+           TeX-run-command nil t
+           :help "Create index file")
+          ("Check" "lacheck %s"
+           TeX-run-compile nil (latex-mode)
+           :help "Check LaTeX file for correctness")
+          ("Spell" "(TeX-ispell-document \"\")"
+           TeX-run-function nil t
+           :help "Spell-check the document")
+          ("Clean" "TeX-clean"
+           TeX-run-function nil t
+           :help "Delete generated intermediate files")
+          ("Clean All" "(TeX-clean t)"
+           TeX-run-function nil t
+           :help "Delete generated intermediate and output files")
+          ("Other" ""
+           TeX-run-command t t
+           :help "Run an arbitrary command"))))
 
   ;; set bib path
   ;; (defvar BIBINPUTS

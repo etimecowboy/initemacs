@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2012-01-01 Sun 23:09 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-02 Mon 16:41 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,8 +22,6 @@
 (defun xy/my-anything ()
   "My anything."
   (interactive)
-  (require 'anything)
-  (require 'anything-config)
   (anything-other-buffer
    '(;; Buffer:
      anything-c-source-buffers
@@ -42,14 +40,17 @@
      ;; Bookmark:
      anything-c-source-bookmarks
      ;; Command:
-     ;; BUG: Conflicts with `session.el'. Emacs would crashes.
+     ;; BUG: Conflicts with `session.el'. Error when
+     ;; running`xy/my-anything'
      ;; anything-c-source-minibuffer-history
      anything-c-source-emacs-commands
      ;; Buffer Contents:
      anything-c-source-imenu
      anything-c-source-occur
      ;; System:
-     anything-c-source-kill-ring
+     ;; BUG: Conflicts with `session.el'. Error when
+     ;; running`xy/my-anything'
+     ;; anything-c-source-kill-ring
      anything-c-source-emacs-process
      )
    "*my-anything*"))
@@ -60,15 +61,15 @@
   ;;NOTE: anything-config will use <f5> as the prefix key, this
   ;; conflicts with your own emacs <f5> key bindings.
   ;; The following 6 are included in `anything-startup'
-  ;; (require 'anything-match-plugin)
-  ;; (require 'anything-config)
+  (require 'anything-config)
+  (require 'anything-startup)
+  (require 'anything-auto-install) ;; BUG: NOT work in Emacs 24
+  (require 'descbinds-anything)
+  (require 'anything-gtags)
+  (require 'anything-menu)
+  (require 'anything-show-completion)
   ;; (require 'anything-grep)
-  (try-require 'anything-startup)
-  (try-require 'anything-auto-install) ;; BUG: NOT work in Emacs 24
-  (try-require 'descbinds-anything)
-  (try-require 'anything-gtags)
-  (try-require 'anything-menu)
-  (try-require 'anything-show-completion)
+  ;; (require 'anything-match-plugin)
   ;; (try-require 'anything-ipa)
 
   ;; NOTE: a workaround to fix the Emacs crash with `anything' (not
@@ -104,15 +105,15 @@
                 anything-c-source-locate))))
   ;; BUG: windows locate32 not working!, console mode chinese encoding error.
 
-  (global-set-key (kbd "C-<f1>")  ;; i -> info
-           (lambda () (interactive)
-             (anything
-              :prompt "Info about: "
-              :candidate-number-limit 3
-              :sources
-              '( ;; anything-c-source-info-libc             ;; glibc docs
-                 anything-c-source-man-pages             ;; man pages
-                 anything-c-source-info-emacs))))        ;; emacs
+  ;; (global-set-key (kbd "C-<f1>")  ;; i -> info
+           ;; (lambda () (interactive)
+             ;; (anything
+              ;; :prompt "Info about: "
+              ;; :candidate-number-limit 3
+              ;; :sources
+              ;; '( ;; anything-c-source-info-libc          ;; glibc docs
+                 ;; anything-c-source-man-pages             ;; man pages
+                 ;; anything-c-source-info-emacs))))        ;; emacs
 
   (add-hook 'emacs-lisp-mode-hook
            (lambda()
