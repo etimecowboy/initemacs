@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-01-01 Sun 23:18 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-02 Mon 00:30 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -210,7 +210,7 @@ If html-file-name is not given, read it from minibuffer."
   (add-to-list 'session-globals-exclude 'org-mark-ring)
   ;; Don't display org agenda files
   (add-to-list 'session-globals-exclude 'org-agenda-files)
-  
+
   ;;------------------------------------------------------------------
   ;; GTD contexts & tags
   (setq org-tag-persistent-alist ;; contexts
@@ -722,9 +722,9 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-export-latex-tables-column-borders t)
   (add-to-list 'org-export-latex-packages-alist
                '("UTF8,noindent,hyperref" "ctex"))
-  (add-to-list 'org-export-latex-packages-alist '("numbers=left,numberstyle=\\tiny" "listings"))
+  (add-to-list 'org-export-latex-packages-alist '("" "listings"))
   (add-to-list 'org-export-latex-packages-alist '("" "xcolor"))
-  
+
   (setq org-export-latex-classes
    (quote (("article" "\\documentclass[11pt]{article}"
             ("\\section{%s}" . "\\section*{%s}")
@@ -751,9 +751,9 @@ If html-file-name is not given, read it from minibuffer."
             org-beamer-sectioning)
            ;;--------------------------------------------------
            ;; BUG: conflicts with added ctex package
-           ;; ("ctexart" "\\documentclass[UTF8]{ctexart}")       
+           ;; ("ctexart" "\\documentclass[UTF8]{ctexart}")
            )))
-  
+
   ;; code listing settings, new `minted' is also supported
   (setq org-export-latex-listings t)
   ;; (setq org-export-latex-listings-langs
@@ -783,7 +783,7 @@ If html-file-name is not given, read it from minibuffer."
   (require 'reftex)
   ;; load cd-latex
   (require 'cdlatex)
-  
+
   (add-hook 'org-mode-hook
             '(lambda ()
                ;; BUG: org-mobile
