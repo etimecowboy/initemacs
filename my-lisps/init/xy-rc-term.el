@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-term.el'
-;; Time-stamp:<2011-12-04 Sun 17:57 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-05 Thu 03:33 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -156,7 +156,87 @@
         ("M-8"   . term-send-raw-meta)
         ("M-9"   . term-send-raw-meta)))
 
-  (message "* ---[ term-mode configuration is complete ]---")
-)
+  (message "* ---[ term-mode configuration is complete ]---"))
+
+;; emacs上水木的一些配置
+;; (@url :file-name "http://www.newsmth.net/bbsanc.php?path=%2Fgroups%2Fcomp.faq%2FEmacs%2Fmode%2Fdired%2Frokia" :display "Emacs版 (精华区)@newsmth.net")
+
+;1.调整一些颜色，因为我的emacs是白底的，所以改一些颜色否则看不清。不喜
+;欢的话直接去掉就好了。
+;; (defvar ansi-term-color-vector
+;;   [unspecified "white" "red3" "green3" "red3" "blue2"
+;;                "magenta3" "cyan3" "black"])
+
+;; 防止idle,就是每过20分钟发一个@字符过去。　这个功能写的不好，因为只是
+;; 机械的每过20分钟就发，即使你正在上面发文。还好是20分钟，影响不是太大
+(setq dd-anti-idle-timer (run-at-time "15 min" 900
+                                      'dd-send-noidle-to-term))
+;;;###autoload
+(defun dd-send-noidle-to-term()
+  "send noidle to term , such as smth"
+  (interactive)
+  (cancel-timer dd-anti-idle-timer)
+  (let* ((oldbuf (buffer-name)))
+    (set-buffer dd-newsmth-buffer-name)
+    (if(string= "term-mode" (format "%s" major-mode))
+        (term-send-raw-string "@")
+      ((lambda ()
+         (message "no ansi-term found")
+         (insert "oh, I am disconnected")
+         (cancel-timer dd-anti-idle-timer)
+         ))
+      )
+    (switch-to-buffer oldbuf)
+    )
+  )
+
+;; 还加了一个自动登录，你把里面的username,password改成你的，就好了。但
+;; 是这个功能也不完善，如果登录时间太慢的话，就发不出去了
+;;;###autoload
+(defun dd-auto-logon (user pwd)
+  (term-send-raw-string (concat user "\n" pwd "\n" ))
+  )
+
+;;;###autoload
+(defun dd-term-telnet(host)
+  "dd telnet"
+  (interactive "Maddress:")
+  (ansi-term "telnet")
+  (term-line-mode)
+  (insert (concat (concat "open " host ) "\n"))
+  (term-char-mode))
+
+;;;###autoload
+(defun dd-logon-newsmth()
+  "log on newsmth.net"
+  (interactive)
+  ;; (dd-set-color 1)
+  (cancel-timer dd-anti-idle-timer)
+  ;; (set-w32-system-coding-system 'chinese-gbk)
+  (set-terminal-coding-system 'gbk-dos)
+  (dd-term-telnet "newsmth.net")
+  (sit-for 5)
+  ;; (term-send-raw-string "rokia\n")
+  (dd-auto-logon "username" "password")
+  (setq dd-anti-idle-timer (run-at-time "15 min" 900 'dd-send-noidle-to-term))
+  (setq dd-newsmth-buffer-name (buffer-name (current-buffer)))
+  )
+
+(setq dd-newsmth-buffer-name nil)
+;设置了一个F9键，切换水木，就是象老板键的意思，这个比较适合在公司用。
+;;;###autoload
+(defun dd-switch-newsmth()
+  "switch  newsmth"
+  (interactive)
+  (if (get-buffer dd-newsmth-buffer-name)
+      (if (string= (buffer-name (current-buffer)) (buffer-name (get-buffer dd-newsmth-buffer-name)))
+          (bury-buffer)
+        (switch-to-buffer dd-newsmth-buffer-name)
+        )
+    (dd-logon-newsmth)
+    )
+  )
+
+;; (global-set-key [f9] 'dd-switch-newsmth)
 
 (provide 'xy-rc-term)

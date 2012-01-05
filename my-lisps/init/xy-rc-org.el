@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-01-02 Mon 21:10 xin on p6t>
+;; Time-stamp:<2012-01-04 Wed 23:50 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -720,11 +720,11 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-export-latex-coding-system 'utf-8-unix)
   (setq org-export-latex-table-caption-above nil)
   (setq org-export-latex-tables-column-borders t)
-  (add-to-list 'org-export-latex-packages-alist
-               '("UTF8,noindent,hyperref" "ctex"))
-  (add-to-list 'org-export-latex-packages-alist '("" "listings"))
-  (add-to-list 'org-export-latex-packages-alist '("" "xcolor"))
-  (add-to-list 'org-export-latex-packages-alist '("" "setspace"))
+
+  ;; NOTE:  Don't add more packages here. This will improve the
+  ;; portability of org-files.
+  ;; (add-to-list 'org-export-latex-packages-alist
+  ;;              '("UTF8,noindent,hyperref" "ctex"))
 
   (setq org-export-latex-classes
    (quote (("article" "\\documentclass[11pt]{article}"
@@ -757,15 +757,10 @@ If html-file-name is not given, read it from minibuffer."
 
   ;; code listing settings, new `minted' is also supported
   (setq org-export-latex-listings t)
-  ;; (setq org-export-latex-listings-langs
-  ;;       (quote
-  ;;        ((emacs-lisp "Lisp") (lisp "Lisp") (clojure "Lisp")
-  ;;         (c "C") (cc "C++") (fortran "fortran") (perl "Perl")
-  ;;         (cperl "Perl") (python "Python") (ruby "Ruby")
-  ;;         (html "HTML") (xml "XML") (tex "TeX") (latex "TeX")
-  ;;         (shell-script "bash") (gnuplot "Gnuplot")
-  ;;         (ocaml "Caml") (caml "Caml") (sql "SQL") (sqlite "sql")
-  ;;         (vhdl "vhdl") (verilog "verilog"))))
+  ;; The following 3 packages are required if using `listings' package
+  (add-to-list 'org-export-latex-packages-alist '("" "setspace"))
+  (add-to-list 'org-export-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-export-latex-packages-alist '("" "xcolor"))
 
   ;; BUG: not work
   ;; latex to pdf command list

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-02 Mon 23:19 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 01:52 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -140,6 +140,9 @@
           ("Ps2pdf" "ps2pdf %s"
            TeX-run-command nil t
            :help "Run ps2pdf")
+          ("Acrobat Reader" "acroread \"%s.pdf\""
+           TeX-run-command nil t
+           :help "Run Acrobat Reader")
           ("View" "%V"
            TeX-run-discard-or-function t t
            :help "Run Viewer")

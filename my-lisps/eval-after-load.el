@@ -3,7 +3,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: eval-after-load, autoload
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/eval-after-load.el
-;; Time-stamp:<2011-12-12 Mon 07:03 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-05 Thu 01:43 xin on p6t>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -132,6 +132,9 @@
     ("matlab-mode"     matlab-mode            matlab-mode-map) ;; HACK: add matlab-mode
     ("vhdl-mode"       vhdl-mode              vhdl-mode-map) ;; HACK: add vhdl-mode
     ("verilog-mode"    verilog-mode           verilog-mode-map) ;; HACK: add verilog-mode
+    ("LaTeX-mode"      LaTeX-mode             LaTeX-mode-map)
+    ("latex-mode"      latex-mode             latex-mode-map)
+    ("tex-mode"      tex-mode             tex-mode-map)
     )
   "*List used to find load file by mode or map.
 

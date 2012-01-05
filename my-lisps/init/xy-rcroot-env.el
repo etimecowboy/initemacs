@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2011-12-30 Fri 03:46 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 04:13 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -519,16 +519,23 @@
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (setq default-keyboard-coding-system 'utf-8-unix)
 (setq default-sendmail-coding-system 'utf-8-unix)
+;; TODO: check if it is the reason for not displaying chinese properly
+;; in maggit-status
 (Windows
  ;; (let ((code (or file-name-coding-system default-file-name-coding-system)))
  ;;   (setq default-process-coding-system (cons code code))))
   (setq default-file-name-coding-system 'gbk-dos)
-  (setq default-terminal-coding-system 'gbk-dos)
-  (setq default-process-coding-system '(gbk-dos . gbk-dos)))
+  ;; (setq default-terminal-coding-system 'gbk-dos)
+  (setq default-terminal-coding-system 'utf-8-unix)
+  ;; (setq default-process-coding-system '(gbk-dos . gbk-dos)))
+  (setq default-process-coding-system '(utf-8-unix . utf-8-unix)))
+
 (GNULinux
   (setq default-file-name-coding-system 'utf-8-unix)
   (setq default-terminal-coding-system 'utf-8-unix)
   (setq default-process-coding-system '(utf-8-unix . utf-8-unix)))
+  ;; (setq default-terminal-coding-system 'gbk-dos)
+  ;; (setq default-process-coding-system '(gbk-dos . gbk-dos)))
 
 ;;--------------------------------------------------------------------
 ;;** Fonts

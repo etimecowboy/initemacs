@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org2blog.el'
-;; Time-stamp:<2011-12-29 Thu 05:55 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 05:28 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,16 +31,16 @@
   (setq org2blog/wp-buffer-template "# -*- mode: org -*-
 # Time-stamp:<>
 #
-#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil 
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil
 #+OPTIONS: TeX:nil LaTeX:nil
 #+STARTUP: content showstars oddeven align indent
 #+STARTUP: lognotestate hideblocks
 #+DATE:    %s
 #+CATEGORY: %s
-#+TAGS: 
+#+TAGS:
 #+PERMALINK:
 #+PARENT:
-
+#
 #+TITLE:  %s
 #+AUTHOR: Xin Yang
 #+EMAIL:  xin2.yang@gmail.com

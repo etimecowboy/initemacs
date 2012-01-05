@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2011-12-30 Fri 20:39 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 04:56 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -764,12 +764,12 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (interactive)
   (if window-system
       (qiang-set-font
-       '("Consolas" "Monaco" "DejaVu Sans Mono"
-         "Monospace" "Courier") ":pixelsize=12"
+       '("Monaco" "Consolas" ;; NOTE: "DejaVu Sans Mon" = "Monospace"
+         "DejaVu Sans Mono" "Monospace" "Courier") ":pixelsize=14"
          '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
-           "黑体") 14)
+           "黑体") 16)
     ;; 默认字体，term 下的字体
-    (set-default-font "Monospace 11")))
+    (set-default-font "Monospace 12")))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload
@@ -778,8 +778,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (interactive)
   (if window-system
       (qiang-set-font
-       '("DejaVu Sans Mono" "Consolas" "Monaco"
-         "Monospace" "Courier") ":pixelsize=12"
+       '("DejaVu Sans Mono" "Consolas" "Monospace"
+         "Monaco" "Courier") ":pixelsize=12"
          '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
            "黑体") 14)
     ;; 默认字体，term 下的字体
@@ -792,8 +792,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (interactive)
   (if window-system
       (qiang-set-font
-       '("Consolas" "Monaco" "Courier"
-         "Monospace" "DejaVu Sans Mono") ":pixelsize=14"
+       '("Monaco" "Monospace" "Consolas"
+         "Courier" "DejaVu Sans Mono") ":pixelsize=14"
          '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
            "黑体") 16)
     (set-default-font "Monospace 12")))
