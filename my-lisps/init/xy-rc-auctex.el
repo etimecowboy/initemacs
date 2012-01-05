@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-05 Thu 06:11 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 14:19 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -63,7 +63,7 @@
                (turn-on-cdlatex)
                (autopair-mode -1)
                (setq tex-source-specials-mode t)
-               (setq LaTeX-math-mode t)
+               (setq LaTeX-math-mode nil)
                (setq TeX-fold-mode t)
                (setq TeX-PDF-mode  nil)
                ))
