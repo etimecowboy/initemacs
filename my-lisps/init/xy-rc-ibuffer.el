@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2011-12-12 Mon 04:48 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-05 Thu 23:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -55,6 +55,10 @@
 
   (setq ibuffer-saved-filter-groups
         '(("default"
+           ("dired" (mode . dired-mode))
+           ("lisp" (or
+                    (mode . emacs-lisp-mode)
+                    (mode . lisp-interaction-mode)))
            ("c"   (or
                    (mode . c-mode)
                    (mode . cc-mode)))
@@ -74,14 +78,10 @@
                    (mode . LaTeX-mode)
                    (mode . tex-mode)
                    (mode . TeX-mode)))
-           ("lisp" (or
-                    (mode . emacs-lisp-mode)
-                    (mode . lisp-interaction-mode)))
            ;; ("vc"  (or
            ;;            (mode . egg-status)
            ;;            (mode . egg-log-msg-mode)
            ;;            (name .  "^\\*Egg:Select Action\\*$")))
-           ("dired" (mode . dired-mode))
            ("emacs" (or
                      (name . "^\\*scratch\\*$")
                      (name . "^\\*Messages\\*$")
