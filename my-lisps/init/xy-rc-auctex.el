@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-05 Thu 01:52 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 06:11 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,7 +40,7 @@
         TeX-parse-self t
         TeX-electric-escape t
         TeX-auto-untabify t
-        TeX-show-compilation t
+        TeX-show-compilation nil
         TeX-save-query nil
         ;; TeX-newline-function 'newline-and-indent ;;回车时自动缩进
         )
