@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2011-12-29 Thu 15:51 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 20:26 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -77,9 +77,6 @@
 ;; (require 'autofit-frame)
 (require 'thumb-frm)
 (require 'maxframe) ;; NOTE: not stable with two or more monitors
-(global-set-key (kbd "S-<f5>") 'fit-frame)
-(global-set-key (kbd "M-<f5>") 'maximize-frame)
-(global-set-key (kbd "M-S-<f5>") 'restore-frame)
 
 ;;====================================================================
 ;;* Window settings
@@ -248,7 +245,7 @@
 (menu-bar-mode -1) ;; No menu bar as default
 
 ;;*** menua-bar+
-;; (require 'menu-bar+)
+(require 'menu-bar+)
 
 ;;*** facemenu+
 ;; This library enhances the "Text Properties" menu.  It adds menu
@@ -256,7 +253,7 @@
 ;; menu: one for the menu-bar Edit menu (`facemenu-menu') and one for
 ;; the mouse popup menu (`facemenu-mouse-menu').  In standard library
 ;; `facemenu.el', these two menus are the same.
-;; (require 'facemenu+)
+(require 'facemenu+)
 
 ;;--------------------------------------------------------------------
 ;;** tool-bar
@@ -271,6 +268,8 @@
 (scroll-bar-mode -1)
 (setq scroll-step 1
       scroll-margin 3
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01
       scroll-conservatively 10000)
 
 ;;--------------------------------------------------------------------
@@ -315,11 +314,12 @@
 ;; (mouse-wheel-mode 1)
 ;; (mouse-sel-mode 1)
 (mouse-avoidance-mode 'jump)
-(setq mouse-drag-copy-region nil)
-(setq mouse-wheel-progressive-speed t)
-(setq mouse-wheel-scroll-amount '(5 ((shift) . 1) ((control))))
-;;(setq mouse-autoselect-window 1.0) ;; don't auto select
-(setq mouse-throw-with-scroll-bar nil)
+(setq mouse-drag-copy-region nil
+      mouse-wheel-progressive-speed t
+      mouse-wheel-follow-mouse  t ;; scroll window under mouse
+      mouse-wheel-scroll-amount '(5 ((shift) . 1) ((control)))
+      ;; mouse-autoselect-window 1.0 ;; don't auto select
+      mouse-throw-with-scroll-bar nil)
 (when (not window-system) (xterm-mouse-mode 1)) ;; Mouse in terminal
 
 ;;====================================================================

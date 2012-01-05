@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-01-05 Thu 04:13 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 20:17 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -661,17 +661,7 @@
 ;;       ;; 打开后让emacs跳到前面来
 ;;       (setenv "GNUSERV_SHOW_EMACS" "1")))
 
-;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
-;; Windows 下使用我定义的 `xy/done' 函数也能达到类似的效果，
-;; 用 `C-x C-c' 隐藏 Emacs frame，但只能使用一个 frame。
-;; (if is-after-emacs-23
-;;   (progn
-;;     (server-force-delete)
-;;     (setq-default server-auth-dir (concat my-var-path "/server"))
-;;     (server-start)
-;;     (global-set-key (kbd "C-x C-c") 'xy/done)
-;; ))
-
+;;--------------------------------------------------------------------
 ;; NOTE: If you want to re-load emacs configuration during the run,
 ;; don't start emacs server here, instead, you can `M-x server-start'
 ;; or `M-x xy/server-start' in an emacs process when you need.
@@ -713,6 +703,22 @@ See `bypass-trash-in-function' for more information."
       '(server-start server-sentinel server-force-delete))
 
 (server-start)
+
+;;--------------------------------------------------------------------
+;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
+;; Windows 下使用我定义的 `xy/done' 函数也能达到类似的效果，
+;; 用 `C-x C-c' 隐藏 Emacs frame，但只能使用一个 frame。
+;; (if is-after-emacs-23
+;;   (progn
+;;     (server-force-delete)
+;;     (setq-default server-auth-dir (concat my-var-path "/server"))
+;;     (server-start)
+;;     (global-set-key (kbd "C-x C-c") 'xy/done)
+;; ))
+
+(Windows
+ (global-set-key (kbd "C-x C-c") 'xy/done)
+ (global-set-key (kbd "C-x C-C") 'save-buffers-kill-terminal))
 
 ;;====================================================================
 ;;* Emacs key bindings

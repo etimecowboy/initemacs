@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-05 Thu 14:19 xin on p6t>
+;; Time-stamp:<2012-01-05 Thu 19:00 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,8 +26,6 @@
   (interactive)
   (load "auctex.el" nil t t)
   (load "preview-latex.el" nil t t)
-  ;; (require 'auctex)
-  ;; (require 'preview-latex)
   (revert-buffer)
   (menu-bar-mode 1))
 
@@ -46,64 +44,9 @@
         )
   (setq-default TeX-master nil)  ;; project support
 
+  ;; (require 'tex-mik) ;; Windows下使用 miktex
   ;; (setq TeX-engine 'xetex) ;; set xelatex as default engine.
   ;; NOTE: AUCTeX-11.86: Preview does not work with xelatex
-
-  ;; load reftex
-  (require 'reftex)
-  ;; load cd-latex
-  (require 'cdlatex)
-
-  (add-hook 'LaTeX-mode-hook
-            '(lambda ()
-               (turn-on-auto-fill)
-               (flyspell-mode 1)
-               ;; (outline-minor-mode 1)
-               (turn-on-reftex)
-               (turn-on-cdlatex)
-               (autopair-mode -1)
-               (setq tex-source-specials-mode t)
-               (setq LaTeX-math-mode nil)
-               (setq TeX-fold-mode t)
-               (setq TeX-PDF-mode  nil)
-               ))
-  ;; (add-hook 'latex-mode-hook
-  ;;           '(lambda ()
-  ;;              (turn-on-auto-fill)
-  ;;              (when (featurep 'flyspell) (flyspell-mode 1))
-  ;;              (when (featurep 'outline) (outline-minor-mode 1))
-  ;;              (when (try-require 'cdlatex) (cdlatex-mode 1))
-  ;;              (when (try-require 'reftex) (reftex-mode 1))
-  ;;              ;; (turn-on-reftex)
-  ;;              ;; (turn-on-cdlatex)
-  ;;              (when (featurep 'autopair) (autopair-mode -1))
-  ;;              ;; (xy/yas-start)
-  ;;              ;; (xy/linkd-start)
-  ;;              ;; (xy/set-font-write)
-  ;;              ))
-
-  ;; (require 'tex-mik)
-  ;; (setq TeX-auto-global "~/.emacs.d/site-lisp/auctex")
-
-  ;;-------------------------------------------------------------------
-  ;; 为AUCTeX添加自定义命令，注意命令中用了很多引号，这是为了适应文件名中含有空格的情况
-  ;;-------------------------------------------------------------------
-  ;; (setq my-tex-commands-extra (list
-  ;;                  ;; (list "texify" "texify --tex-opt=--src %s.tex" 'TeX-run-command nil t)
-  ;;                  ;; (list "pdf texify" "texify --pdf %s.tex" 'TeX-run-command nil t)
-  ;;                  (list "pdflatex" "pdflatex \"%s.tex\"" 'TeX-run-LaTeX nil t)
-  ;;                  (list "dvipdfmx" "dvipdfmx \"%s.dvi\"" 'TeX-run-command nil t)
-  ;;                  (list "dvips" "dvips %s.dvi" 'TeX-run-command nil t)
-  ;;                  (list "ps2pdf" "ps2pdf %s.ps" 'TeX-run-command nil t)
-  ;;                  (list "gbk2uni" "gbk2uni \"%s.out\"" 'TeX-run-command nil t)
-  ;;                  ;; (list "Yap" "yap -1 \"%dS\" \"%d\"" 'TeX-run-discard nil t)
-  ;;                  (list "Gsview" "start .\\\"%s.ps\"" 'TeX-run-LaTeX nil t)
-  ;;                  (list "Acrobat" "acroread \"%s.pdf\"" 'TeX-run-command nil t))
-  ;;                  (list "Clean" "rm -f *.log *.aux %s.out %s.exa %s.ilg %s.idx %s.ind %s.lof %s.lot %s.toc %s.bbl %s.blg ctextemp_*.*" 'TeX-run-command nil t))
-  ;; )
-  ;; ;; 添加上面定义的命令
-  ;; (require 'tex)
-  ;; (setq TeX-command-list (append TeX-command-list my-tex-commands-extra))
 
   (setq TeX-command-list
         (quote
@@ -175,10 +118,23 @@
            TeX-run-command t t
            :help "Run an arbitrary command"))))
 
-  ;; set bib path
-  ;; (defvar BIBINPUTS
-  ;;   '("\\.bib$" "$BSTINPUTS" "$BIBINPUTS")) ; bibtex files.
-  ;; (setenv "BIBINPUTS" "jabref")
+  (require 'reftex)    ;; load reftex
+  (require 'cdlatex)   ;; load cd-latex
+
+  (add-hook 'LaTeX-mode-hook
+            '(lambda ()
+               (turn-on-auto-fill)
+               (flyspell-mode 1)
+               ;; (outline-minor-mode 1)
+               (turn-on-reftex)
+               (turn-on-cdlatex)
+               (autopair-mode -1)
+               (setq tex-source-specials-mode t)
+               (setq LaTeX-math-mode nil)
+               (setq TeX-fold-mode t)
+               (setq TeX-PDF-mode  nil)
+               ))
+
   (message "* ---[ auctex configuration is complete ]---"))
 
 ;;;###autoload
