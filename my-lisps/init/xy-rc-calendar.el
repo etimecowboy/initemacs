@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-calendar.el'
-;; Time-stamp:<2011-12-07 Wed 21:40 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-06 Fri 17:01 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -41,107 +41,138 @@
   (setq abbreviated-calendar-year nil)
   (setq diary-abbreviated-year-flag nil)
 
-  ;; ;; interpret the date 1/2/1990 as February 1, 1990
-  ;; (setq european-calendar-style t)  ; obsolete!
-
   ;; set the style of calendar and diary dates to ISO
+  ;; this helps org-mode time-stamp to use iso format instead of other
+  ;; (such as Chinese style)
   (setq calendar-date-style 'iso)
 
   ;; week in the calendar begins on Monday
   (setq calendar-week-start-day 1)
 
-  ;; marks the current date, by changing its face
-  (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-
-  (setq calendar-chinese-all-holidays-flag t)
   (setq calendar-chinese-celestial-stem
         ["甲" "乙" "丙" "丁" "戊" "己" "庚" "辛" "壬" "癸"])
   (setq calendar-chinese-terrestrial-branch
         ["子" "丑" "寅" "卯" "辰" "巳" "午" "未" "申" "酉" "戌" "亥"])
-  (setq calendar-christian-all-holidays-flag nil)
 
+  ;; mark all visible dates that have diary entries
+  (setq calendar-mark-diary-entries-flag t)
+  ;; (add-hook 'initial-calendar-window-hook 'mark-diary-entries)
+
+  ;; mark all holidays
   (setq calendar-mark-holidays-flag t)
+
+  ;; marks the current date, by changing its face
+  (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+
   ;; remove some holidays
-  ;; (setq christian-holidays nil)
   (setq holiday-bahai-holidays nil)       ; get rid of Baha'i holidays
   (setq holiday-general-holidays nil)     ; get rid of too U.S.-centric holidays
   (setq holiday-hebrew-holidays nil)      ; get rid of religious holidays
   (setq holiday-islamic-holidays nil)     ; get rid of religious holidays
-  ;; (setq holiday-oriental-holidays nil)    ; get rid of Oriental holidays
-  (setq holiday-solar-holidays nil)
-  ;; (setq holiday-christian-holidays nil)
+  (setq holiday-oriental-holidays t)    ; get rid of Oriental holidays
+  (setq holiday-solar-holidays t)
+  (setq holiday-christian-holidays nil)
+  (setq calendar-christian-all-holidays-flag nil)
   (setq holiday-other-holidays nil)       ; user defined holidays
+  ;; (setq holiday-local-holidays ;; add some holidays
+  ;;       '(
+  ;;         ))
 
-  ;; add some holidays
-  (setq holiday-local-holidays
-        '(
-          (holiday-fixed 01 01 "New Year's Day")
-          (holiday-fixed 02 14 "Valentine's Day")
-          (holiday-fixed 05 01 "Labor Day")
-          (holiday-fixed 06 01 "Children's Day")
-          (holiday-fixed 10 01 "PRC Anniversary")
-          ;; (holiday-fixed 11 01 "Toussaint")
-          ;; (holiday-fixed 11 11 "Armistice 1918")
-          ;; holidays with variable dates
-          (holiday-float 5 0 2 "Mother's Day")
-          (holiday-float 6 0 3 "Father's Day")
-          (holiday-chinese 1 15  "元宵节 (正月十五)")
-          (holiday-chinese 5 5   "端午节 (五月初五)")
-          (holiday-chinese 9 9   "重阳节 (九月初九)")
-          (holiday-chinese 8 15  "中秋节 (八月十五)")
+  (setq calendar-holidays ;;直接覆盖
+        '(;;公历节日
+          (holiday-fixed 1 1 "元旦")
+          (holiday-fixed 2 14 "情人节")
+          (holiday-fixed 4 1 "愚人节")
+          (holiday-float 5 0 2 "母亲节")
+          (holiday-float 6 0 3 "父亲节")
+          ;; 英国节日
+          (holiday-float 4 5 1 "Good Friday")
+          (holiday-float 4 1 2 "Easter Bank Holiday")
+          (holiday-float 5 1 1 "Early May Bank Holiday")
+          (holiday-float 6 1 1 "Spring Bank Holiday")
+          (holiday-float 8 1 4 "Summer Bank Holiday")
+          (holiday-fixed 12 25 "Christmas")
+          (holiday-fixed 12 26 "Boxing Day")
+          ;; 中国节日
+          (holiday-chinese 1 1 "春节")
+          (holiday-chinese 1 2 "春节")
+          (holiday-chinese 1 3 "春节")
+          (holiday-chinese 1 15 "元宵节")
+          (holiday-chinese 7 7 "七夕")
+          (holiday-chinese 8 15 "中秋节")
+          (holiday-chinese 5 5 "端午节")
+          ;; Need `cal-china-x.el'
+          ;; (holiday-solar-term "清明" "清明节")
+          (holiday-fixed 3 8 "妇女节")
+          (holiday-fixed 5 1 "劳动节")
+          (holiday-fixed 6 1 "儿童节")
+          (holiday-fixed 9 10 "教师节")
+          (holiday-fixed 10 1 "国庆节")
+          (holiday-fixed 10 2 "国庆节")
+          (holiday-fixed 10 3 "国庆节")
+          ;; 生日纪念日 -- 家人,朋友
+          (holiday-fixed 2 13 "我的生日")
+          (holiday-fixed 12 05 "老婆生日")
+          (holiday-fixed 7 28 "牛牛生日")
+          (holiday-fixed 10 10 "爸爸生日")
+          (holiday-fixed 6 9 "妈妈生日")
+          (holiday-fixed 1 20 "岳父生日")
+          (holiday-fixed 1 19 "岳母生日")
+          (holiday-fixed 1 8 "结婚纪念日")
           ))
 
-  ;; mark all visible dates that have diary entries
-  (setq mark-diary-entries-in-calendar t)
-  ;; (add-hook 'initial-calendar-window-hook 'mark-diary-entries)
+  ;;------------------------------------------------------------------
+  ;; cal-china-x ;; 农历扩展 BUG: 使用后calendar崩溃
+  ;; (require 'cal-china-x)
+  ;; (setq holiday-xy-holidays
+  ;;       '(;;公历节日
+  ;;         (holiday-fixed 1 1 "元旦")
+  ;;         (holiday-fixed 2 14 "情人节")
+  ;;         (holiday-fixed 4 1 "愚人节")
+  ;;         (holiday-float 5 0 2 "母亲节")
+  ;;         (holiday-float 6 0 3 "父亲节")
+  ;;         (holiday-fixed 12 25 "圣诞节")
+  ;;         ;; 英国节日
+  ;;         (holiday-float 4 5 1 "Good Friday")
+  ;;         (holiday-float 4 1 2 "Easter Bank Holiday")
+  ;;         (holiday-float 5 1 1 "Early May Bank Holiday")
+  ;;         (holiday-float 6 1 1 "Spring Bank Holiday")
+  ;;         (holiday-float 8 1 3 "Summer Bank Holiday")
+  ;;         (holiday-fixed 12 26 "Boxing Day")
+  ;;         ;; 中国节日
+  ;;         (holiday-lunar 12 30 "春节" 0)
+  ;;         (holiday-lunar 1 1 "春节" 0)
+  ;;         (holiday-lunar 1 2 "春节" 0)
+  ;;         (holiday-lunar 1 15 "元宵节" 0)
+  ;;         (holiday-solar-term "清明" "清明节")
+  ;;         (holiday-lunar 5 5 "端午节" 0)
+  ;;         (holiday-fixed 3 8 "妇女节")
+  ;;         (holiday-fixed 5 1 "劳动节")
+  ;;         (holiday-fixed 6 1 "儿童节")
+  ;;         (holiday-lunar 8 15 "中秋节" 0)
+  ;;         (holiday-fixed 9 10 "教师节")
+  ;;         (holiday-fixed 10 1 "国庆节")
+  ;;         (holiday-fixed 10 2 "国庆节")
+  ;;         (holiday-fixed 10 3 "国庆节")
+  ;;         ;; 生日纪念日 -- 家人,朋友
+  ;;         (holiday-fixed 2 13 "我的生日")
+  ;;         (holiday-fixed 12 05 "老婆生日")
+  ;;         (holiday-fixed 7 28 "牛牛生日")
+  ;;         (holiday-fixed 10 10 "爸爸生日")
+  ;;         (holiday-fixed 6 9 "妈妈生日")
+  ;;         (holiday-fixed 1 20 "岳父生日")
+  ;;         (holiday-fixed 1 19 "岳母生日")
+  ;;         (holiday-fixed 1 8 "结婚纪念日")
+  ;;         ))
+  ;; (setq calendar-holidays holiday-xy-holidays) ;;直接覆盖
 
-  ;; fix foolish calendar-mode scrolling
-  (add-hook 'calendar-load-hook
-            (lambda ()
-              ;; (setq mark-holidays-in-calendar t)
-              (define-key calendar-mode-map [(>)] 'scroll-calendar-left)
-              (define-key calendar-mode-map [(<)] 'scroll-calendar-right)
-              (define-key calendar-mode-map [(control x) (>)]
-                'scroll-calendar-left)
-              (define-key calendar-mode-map [(control x) (<)]
-                'scroll-calendar-right)))
-
+  ;;----------------------------------------------------------------
   ;; Sunrise/Sunset
   ;; 设置所在地的经纬度和地名，calendar 中按 S，可以根据这些信息告知你
   ;; 每天的日出和日落的时间
   ;; (setq calendar-latitude [50 87 north])
   ;; (setq calendar-longitude [4 71 east])
   ;; (setq calendar-location-name "Leuven, BE")
-
-  ;; cal-china-x
-  ;; (when (try-require 'cal-china-x)
-    ;; (require 'cal-china-x)
-    ;; (setq cal-china-x-priority1-holidays
-    ;;       (append cal-china-x-chinese-holidays
-    ;;               '((holiday-fixed 2 14 "情人节")
-    ;;                 (holiday-fixed 3 8 "妇女节")
-    ;;                 (holiday-fixed 3 12 "植树节")
-    ;;                 (holiday-fixed 5 4 "青年节")
-    ;;                 (holiday-fixed 6 1 "儿童节")
-    ;;                 (holiday-fixed 9 10 "教师节")
-    ;;                 (holiday-lunar 1 15 "元宵节(正月十五)" 0)
-    ;;                 (holiday-lunar 7 7 "七夕节")
-    ;;                 (holiday-lunar 9 9 "重阳节(九月初九)"))))
-    ;; (setq cal-china-x-priority2-holidays
-    ;;         '((holiday-chinese 6 23 "李浩斌生日")
-    ;;           (holiday-fixed 10 16 "李可生日(1981)")
-    ;;           (holiday-chinese 8 15 "爸妈生日(1955)")
-    ;;           (holiday-fixed 4 9 "戚生日(1983)")
-    ;;           (holiday-fixed 10 6 "奇奇阳历生日(2010)")
-    ;;           (holiday-chinese 8 29 "奇奇阴历生日(2010)")
-    ;;           (holiday-fixed 12 8 "刘阳历生日(1981)")
-    ;;           (holiday-chinese 11 13 "刘阴历生日(1981)")))
-    ;; (setq calendar-holidays
-    ;;       (append calendar-holidays
-    ;;               cal-china-x-priority1-holidays
-    ;;               ;; cal-china-x-priority2-holidays
-    ;;               ))
-    ;; )
 
   (message "* ---[ calendar configuration is complete ]---"))
 

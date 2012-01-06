@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-01-06 Fri 02:18 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-06 Fri 03:25 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -519,8 +519,10 @@
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (setq default-keyboard-coding-system 'utf-8-unix)
 (setq default-sendmail-coding-system 'utf-8-unix)
-;; TODO: check if it is the reason for not displaying chinese properly
-;; in maggit-status
+
+;; NOTE: git would not display chinese characters properly if
+;; `default-terminal-coding-system' and
+;; `default-process-coding-system' are set to gbk
 (Windows
  ;; (let ((code (or file-name-coding-system default-file-name-coding-system)))
  ;;   (setq default-process-coding-system (cons code code))))
