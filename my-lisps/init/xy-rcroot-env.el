@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-01-05 Thu 23:19 xin on p6t>
+;; Time-stamp:<2012-01-06 Fri 00:05 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -718,7 +718,7 @@ See `bypass-trash-in-function' for more information."
 (Windows
  (global-set-key (kbd "C-x C-c") 'xy/done))
 
-(global-set-key (kbd "C-x C-C") 'save-buffers-kill-emacs)
+(global-set-key (kbd "C-x M-c") 'save-buffers-kill-emacs)
 
 ;;====================================================================
 ;;* Emacs key bindings
