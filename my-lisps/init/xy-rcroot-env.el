@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-01-06 Fri 00:05 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-06 Fri 02:18 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -715,8 +715,9 @@ See `bypass-trash-in-function' for more information."
 ;;     (server-start)
 ;;     (global-set-key (kbd "C-x C-c") 'xy/done)
 ;; ))
-(Windows
- (global-set-key (kbd "C-x C-c") 'xy/done))
+;; NOTE: emacsclient has not worked in Windows 7
+;; (Windows
+;;  (global-set-key (kbd "C-x C-c") 'xy/done))
 
 (global-set-key (kbd "C-x M-c") 'save-buffers-kill-emacs)
 
