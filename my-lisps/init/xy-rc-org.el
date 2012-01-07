@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-01-04 Wed 23:50 xin on p6t>
+;; Time-stamp:<2012-01-07 Sat 06:04 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -213,15 +213,15 @@ If html-file-name is not given, read it from minibuffer."
 
   ;;------------------------------------------------------------------
   ;; GTD contexts & tags
-  (setq org-tag-persistent-alist ;; contexts
-        '((:startgroup)
+  (setq org-tag-persistent-alist
+        '(;; GTD contexts
+          (:startgroup)
           ("@campus" . ?C) ("@BRL" . ?B) ("@library" . ?L)
           ("@home" . ?H) ("@street" . ?S)
           (:endgroup)
-
-          ("online" . ?O) ("post" . ?M) ("email" . ?E)
-          ("phone" . ?F) ("people" . ?Z)
-
+          ("@online" . ?O) ("@post" . ?M) ("@email" . ?E)
+          ("@phone" . ?F) ("@people" . ?Z)
+          ;; special tags
           ("appt" . ?A) ("proj" . ?P)
           ("repeat" . ?R)
           ("delegated" . ?D)))
@@ -538,7 +538,7 @@ If html-file-name is not given, read it from minibuffer."
                         (org-agenda-skip-archived-trees nil)))))
 
           ;;----------------------------------------------------------
-          ("w" "Weekly Review (refile closed tasks and evaluate this week)"
+          ("w" "Weekly Review (refile and evaluate this week)"
            ((agenda ""
                     ((org-agenda-span 'week)
                      (org-agenda-ndays 7)
