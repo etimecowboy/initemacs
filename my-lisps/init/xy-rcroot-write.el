@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2012-01-05 Thu 07:22 xin on p6t>
+;; Time-stamp:<2012-01-09 Mon 14:28 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,7 +49,7 @@
 (eval-after-load "auctex"
   '(progn
      (auctex-settings)
-     (eal-define-keys
+     (eal-define-keys ;; BUG: not working
       'latex-mode-map
       `(("C-x `" TeX-next-error)))
      )) ;; default C-c ` conflict with icy-mode
@@ -67,9 +67,20 @@
 
 ;;--------------------------------------------------------------------
 ;;** cdlatex, tex writing tools
-;; (eval-after-load "cdlatex" 'cdlatex-settings))
-;;(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-;;(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
+(eval-after-load "cdlatex" '(cdlatex-settings))
+(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
+(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
+
+;;--------------------------------------------------------------------
+;;** whizzytex-mode
+;; A minor mode for incrementally viewing LATEX documents that you are
+;; editing. It works under Unix with `gv' and `xdvi' viewers, but the
+;; ActiveDVI `advi' viewer will provide much better visual effects and
+;; offer more functionalities.
+;; NOTE: - whizztex now only support latex engine, NOT pdflatex.
+;;       - Chinese is not supported.
+(eval-after-load "Whizzytex-mode" '(whizzytex-settings))
+(global-set-key (kbd "<f6> w") 'xy/whizzytex-start)
 
 ;;====================================================================
 ;;* txt2tags
@@ -92,5 +103,14 @@
   "Save region as a pdf file." t)
 (autoload 'pdf-save-region-with-faces "pdftools.el"
   "Save region as a pdf file with faces." t)
+
+;;====================================================================
+;;* markdown-mode
+;; major mode for editing [Markdown][]-formatted text files
+;; REF: (@url :file-name "http://jblevins.org/projects/markdown-mode/" :display "Source")
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
+(setq auto-mode-alist
+      (cons '("\\.text" . markdown-mode) auto-mode-alist))
 
 (provide 'xy-rcroot-write)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-01-06 Fri 03:25 xin on p6t>
+;; Time-stamp:<2012-01-08 Sun 17:49 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -315,17 +315,24 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-(add-to-list 'load-path "~/.emacs.d/themes")
-(xy/load-autoload "~/.emacs.d/themes")
-(message "* ---[ theme lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
-
 ;; REF: (@url :file-name "http://emacs-w3m.namazu.org/index-en.html" :display "Source")
 ;; BUG: current cvs version has a bug when compiling
 (xy/load-autoload (concat my-local-lisp-path "/w3m"))
 (message "* ---[ w3m lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: (@url :file-name "http://cristal.inria.fr/whizzytex/" :display "Source")
+(xy/load-autoload (concat my-local-lisp-path "/whizzytex"))
+(message "* ---[ whizzytex lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+(add-to-list 'load-path "~/.emacs.d/themes")
+(xy/load-autoload "~/.emacs.d/themes")
+(message "* ---[ theme lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2011-12-30 Fri 20:48 xin on p6t>
+;; Time-stamp:<2012-01-08 Sun 17:24 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -40,7 +40,7 @@
 ;;** auto-fill
 (eval-after-load "simple" '(simple-settings))
 (am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook
+ `(lisp-mode-hook emacs-lisp-mode-hook latex-mode-hook
                   c-common-mode-hook LaTeX-mode-hook
                   matlab-mode-hook org-mode-hook
                   ;; magit-log-edit-mode-hook ;no hook for this mode

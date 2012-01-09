@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
-;; Time-stamp:<2012-01-04 Wed 01:09 xin on p6t>
+;; Time-stamp:<2012-01-08 Sun 18:56 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -47,7 +47,7 @@
                   vhdl-mode-hook verilog-mode-hook
                   org-mode-hook LaTeX-mode-hook)
  '(lambda () (ethan-wspace-mode 1)))
-(global-set-key (kbd "<f6> w") 'ethan-wspace-mode)
+(global-set-key (kbd "<f6> W") 'ethan-wspace-mode)
 
 ;;--------------------------------------------------------------------
 ;;** ws-trim
@@ -57,7 +57,7 @@
 ;; ethan-wspace will grow similar functionality soon.
 ;; (require 'ws-trim)
 ;; (gloabl-ws-trim-mode 1) ;NOTE: too agressive
-(global-set-key (kbd "<f7> w") 'ws-trim-buffer)
+(global-set-key (kbd "<f7> W") 'ws-trim-buffer)
 
 ;;====================================================================
 ;;* Fast point move

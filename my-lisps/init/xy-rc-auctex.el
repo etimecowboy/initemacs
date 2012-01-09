@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-05 Thu 19:00 xin on p6t>
+;; Time-stamp:<2012-01-08 Sun 18:56 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -40,8 +40,11 @@
         TeX-auto-untabify t
         TeX-show-compilation nil
         TeX-save-query nil
-        ;; TeX-newline-function 'newline-and-indent ;;回车时自动缩进
-        )
+        tex-source-specials-mode t
+        LaTeX-math-mode nil
+        TeX-fold-mode t
+        TeX-PDF-mode  nil
+        TeX-newline-function 'newline-and-indent)
   (setq-default TeX-master nil)  ;; project support
 
   ;; (require 'tex-mik) ;; Windows下使用 miktex
@@ -125,14 +128,10 @@
             '(lambda ()
                (turn-on-auto-fill)
                (flyspell-mode 1)
-               ;; (outline-minor-mode 1)
+               (outline-minor-mode 1)
                (turn-on-reftex)
                (turn-on-cdlatex)
                (autopair-mode -1)
-               (setq tex-source-specials-mode t)
-               (setq LaTeX-math-mode nil)
-               (setq TeX-fold-mode t)
-               (setq TeX-PDF-mode  nil)
                ))
 
   (message "* ---[ auctex configuration is complete ]---"))

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2012-01-06 Fri 16:26 xin on p6t>
+;; Time-stamp:<2012-01-08 Sun 17:23 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -68,7 +68,8 @@
 (eval-after-load 'flyspell '(flyspell-settings))
 (am-add-hooks
  `(text-mode-hook org-mode-hook latex-mode-hook
-   message-mode-hook mew-draft-mode-hook)
+                  LaTeX-mode-hook message-mode-hook
+                  mew-draft-mode-hook)
  '(lambda ()
     (flyspell-mode 1)))
 
