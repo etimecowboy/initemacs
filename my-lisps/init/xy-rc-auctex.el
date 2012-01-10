@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-08 Sun 18:56 xin on p6t>
+;; Time-stamp:<2012-01-10 Tue 06:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -65,6 +65,10 @@
           ("Makeinfo HTML" "makeinfo --html %t"
            TeX-run-compile nil (texinfo-mode)
            :help "Run Makeinfo with HTML output")
+          ("Makeindex Nomenclature"
+           "makeindex %s.nlo -s nomencl.ist -o %s.nls"
+           TeX-run-compile nil t
+           :help "Make index for package `nomencl'")
           ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t"
            TeX-run-TeX nil (ams-tex-mode)
            :help "Run AMSTeX")
@@ -121,8 +125,9 @@
            TeX-run-command t t
            :help "Run an arbitrary command"))))
 
-  (require 'reftex)    ;; load reftex
-  (require 'cdlatex)   ;; load cd-latex
+  (require 'reftex)
+  (require 'cdlatex)
+  (require 'wysiwyg-tex) ;; BUG: not working properly
 
   (add-hook 'LaTeX-mode-hook
             '(lambda ()
@@ -132,6 +137,10 @@
                (turn-on-reftex)
                (turn-on-cdlatex)
                (autopair-mode -1)
+               (local-set-key "\C-c\C-t" ; Displays a page around cursor.
+                              'wysiwyg-tex-show-preview)
+               ;; (local-set-key "\C-c\C-T" ; Displays the whole page.
+                              ;; 'wysiwyg-tex-show-whole-preview)
                ))
 
   (message "* ---[ auctex configuration is complete ]---"))

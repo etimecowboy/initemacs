@@ -1,0 +1,729 @@
+\mbox{{\tiny \textcolor{white}{.,.,.}\hspace{-5.0ex}}}\mbox{{\tiny \textcolor{white}{.,.,.}\hspace{-5.0ex}}}% Created 2012-01-10 Tue 05:36
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{nomencl}
+\makenomenclature
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{Chapter 2: Background}
+\author{Xin Yang}
+\date{2012-01-10}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs Org-mode version 7.8.02}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\printnomenclature
+\setstretch{1.5}
+
+\section{Introduction}
+\label{sec-1}
+\label{sec:ch2-introduction}
+
+This chapter is continued with an introduction of the human auditory
+system and some widely-accepted auditory models. Instead of providing
+a lot of detailed information about the physiology and psychology,
+this chapter emphasises on the behavioural characteristics of the
+components in the auditory system in order to discover some
+interesting functionalities of these components in terms of signal
+processing. The objectives of this chapter are to:
+
+\begin{enumerate}
+\item Get a general understanding of the human auditory system and its
+   power in the acoustic signal processing.
+\item Assess some widely-accepted models of physiological components that
+   comprise the auditory periphery in terms of their behavioural
+   accuracy and their correspondence to known anatomical structure.
+\item Select appropriate models which may be possible to be implemented
+   as a real-time neuromorphic auditory periphery. These models will
+   be investigated in later chapters.
+\end{enumerate}
+\section{Auditory System}
+\label{sec-2}
+\label{sec:ch2-auditory-system}
+
+In this section, the anatomical structure of the human auditory system
+is introduced. These physiological and psychophysical facts are
+references in the real world for the modelling and implementation in
+later chapters.
+
+For different roles in the acoustic signal processing, the auditory
+system comprises two parts \cite{Pickles2008}: the auditory periphery,
+which pre-processes the incoming sound waves to generate neural
+spikes, and the auditory brainstem, which begins neural processing and
+finally leads to auditory sensations. In the past decades, significant
+details about individual components of the auditory periphery are
+revealed; while a clear understanding of the operation and purpose of
+the cells within the auditory brainstem is still not available.
+Therefore, this thesis emphasises on the auditory periphery.
+
+It is convenient to consider the auditory periphery as consisting of
+three divisions, the outer ear, the middle ear and the inner ear \footnote{Ext: ``It's yours? Offer a reference!'' }.
+Figure \ref{fig:ear-periphery} is an illustration of the general
+structure of the human auditory periphery.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{./Chapter2Figs/ear-periphery.png}
+\caption{\label{fig:ear-periphery}The three divisions of the human auditory periphery \cite{BritannicaEarPeriphery}.}
+\end{figure}
+\subsection{Outer Ear}
+\label{sec-2-1}
+\label{sec:ch2-outer-ear}
+
+The externally visible portion of the outer ear is the auricle (or
+pinna), and the portion ``inside the head'' is the external auditory
+canal (or ear canal). The outer ear collects the mechanical sound
+energy, and transmits the sound wave oscillations to the tympanic
+membrane (or eardum) of the middle ear.
+\subsection{Middle Ear}
+\label{sec-2-2}
+\label{sec:ch2-middle-ear}
+
+The middle ear consists of three very small bones (or ossicles): the
+malleus (or hammer), the incus (or anvil) and the stapes (or stirrup).
+The malleus is attached to the other side of the eardrum and its
+vibration is transmitted through the incus to the stapes. The stapes
+motion impinges on the oval window, and cause the movements of
+the fluids held within the inner ear. The middle ear translates air
+vibrations into pressure waves in the fluids, and matches the
+different impedances between the air and fluid without a great energy
+loss which would otherwise occur \cite{Zwicker1999}.
+\subsection{Inner Ear}
+\label{sec-2-3}
+\label{sec:ch2-inner-ear}
+
+The snail-shaped inner ear (or cochlea), as shown in
+Figure \ref{fig:cochlea}, is embedded in the extremely hard temporal
+bone. There are three chambers/ducts inside the cochlea, called
+scalae, which are filled with fluids. The three scalae are divided by
+the Reissner's membrane and the basilar membrane (BM). The organ of
+Corti (OC) is located on the BM, and contains two types of hair-cells:
+inner hair cells (IHCs) and outer hair cells (OHCs).
+
+\nomenclature{BM}{Basilar membrane}
+\nomenclature{OC}{Organ of Corti}
+\nomenclature{IHC}{Inner hair cell}
+\nomenclature{OHC}{Outer hair cell}
+\nomenclature{AN}{Auditory nerve}
+
+% \begin{figure}[htb]
+% \centering
+% \includegraphics[width=\textwidth]{./Chapter2Figs/cochlea.png}
+% \caption{\label{fig:cochlea}The cochlea and the ducts inside \cite{BritannicaEarBones}.}
+% \end{figure}
+\subsubsection{Basilar Membrane}
+\label{sec-2-3-1}
+\label{sec:ch2-basilar-membrane}
+
+The cochlear fluid movements are conveyed to the BM within the
+cochlea. Along the BM, where the stapes impinges on the oval window is
+the base, and the far end is the apex. Near the base, the
+BM is relatively narrow and stiff; while near the apex it is wider and
+less stiff. BM acts like a frequency analyser, with the base part
+responding to high frequencies, and the apical part responding to
+lower frequencies, as shown in Figure \ref{fig:bm}. This
+characteristic of BM is known as frequency selectivity.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{./Chapter2Figs/bm.png}
+\caption{\label{fig:bm}The frequency analysis of sound by the basilar membrane \cite{BritannicaBMfreq}.}
+\end{figure}
+
+BM also has many nonlinear characteristics, which are very
+interesting and meaningful for the hearing system, such as:
+\begin{itemize}
+
+\item item Compression\\
+\label{sec-2-3-1-1}%
+The vibration magnitude of a BM site grows compressively with
+increasing sound levels. This nonlinear characteristic does not only
+protects the BM from the impact of very loud sound, but also helps
+to increase the hearing resolution in an quite environment.
+
+
+\item Level-Dependence\\
+\label{sec-2-3-1-2}%
+The characteristic frequency (CF) of basal BM sites, which respond to
+high frequencies, decrease when the sound level increases, while the
+bandwidths of all BM sites increase.
+
+
+\item Suppression\\
+\label{sec-2-3-1-3}%
+When a second tone with a different frequency presents after the
+first tone, the response to the first tone decreases. This is a
+great help for the listener to realise the new tone.
+
+
+\item Distortion\\
+\label{sec-2-3-1-4}%
+When BM response to a pair (or more) of tones with different
+frequencies, its response contains a distortion product with the
+frequency between the original two tones. For example, a third tone
+(800Hz) would appear, when the original two tones (1000Hz and
+1200Hz) play. \footnote{Ext: ``How? clarify this.'' }
+
+These nonlinear characteristics have received a lot attention from
+physiologists and psychophysists who developed various models of
+BM to simulate these phenomena. An important aspect of this research
+also lays in here, since these characteristics are quite useful. If a
+real-time neuromorphic auditory periphery could represent these
+behaviour, lots of applications  would emerge, such as a real-time
+active speech enhancement device which is based on the compression and
+suppression characteristics of the real BM.
+
+\end{itemize} % ends low level
+\subsubsection{Hair Cells}
+\label{sec-2-3-2}
+\label{sec:ch2-hair-cells}
+
+The hair cells are arranged as one row of IHCs on the inner side of
+the OC, and three parallel rows of OHCs near the middle, as shown in
+Figure \ref{fig:corti}. Each hair cell has a lot of stereocilia or
+hairs. The most important function of IHCs is to transform mechanical
+movements to electrochemistric process which stimulates the AN fibres
+by releasing neurotransmitters. This transformation happens when the
+stereocilia of an IHC bend sufficiently in a specific direction (not
+the other). This asymmetric gating led to the well-known description
+of the IHC as a half-wave rectifier (HWR).
+
+\nomenclature{HWR}{Half-wave rectifier}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.9\textwidth]{./Chapter2Figs/corti.png}
+\caption{\label{fig:corti}Structure of the organ of Corti on the basilar membrane\cite{BritannicaOrganOfCorti}.}
+\end{figure}
+
+The main properties of the inner hair cell, as discovered through
+physiological studies are:
+
+\begin{itemize}
+\item Onset and steady-state response to stimuli,
+\item Two-component adaptation,
+\item Recovery of spontaneous activity after stimulus offset.
+\end{itemize}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{./Chapter2Figs/ihc-response-trans.eps}
+\caption{\label{fig:ihc-response}The amount of released neurotransmitters by an IHC to tones with different intensities.}
+\end{figure}
+
+These characteristics are best observed by looking at the response of
+a real IHC to the application of 2 tones of different intensities, as
+illustrated in Figure \ref{fig:ihc-response}. In the figure, the spike
+rate produced in the auditory nerve by the IHC is seen, in the case of
+applying a tone of intensities 30dB and 40dB. The greater the amount
+of transmitter in the cleft the greater the spiking activity is caused
+in the auditory nerve fibres. The permeability of the cell membrane is
+related to the intensity of hair cell's input. The tones are applied
+in regions B and C but no stimulus is applied in regions A and D.
+Regions A of the responses represent the spontaneous activity of the
+cell when no stimulus is applied. In region B the onset response of
+the cell and the two-component adaptation can be seen. The magnitude
+of the onset response is related to the intensity of the stimulus.
+This onset is caused by a sudden increase in the membrane permeability
+combined with full reservoirs. The two-component adaptation consists
+of a rapid component, causing the steep decline from the onset
+response, and a slower component, which contributes to the gentle
+final stage of adaptation to the steady state response. Regions C show
+that the steady state response is similar for both stimulus
+intensities. This demonstrates the automatic gain control (AGC)
+mechanism inherent within the hair cell. This automatic gain control
+is caused by a balance between the depleted reservoirs (tending to
+decrease the level of activity) and the increase in the membrane
+permeability (tending to increase the level of activity). Regions D
+show the recovery of the hair cell back to its spontaneous level of
+activity. It can be seen that after the application of a high
+intensity stimulus the hair cell takes longer to recover. This is
+caused by heavily depleted reservoirs taking time to refill.
+
+\nomenclature{AGC}{Automatic gain control}
+
+There is another characteristic of the hair cell, phase locking, which
+occurs when low frequency tones are applied (lower than 2kHz in
+humans). This effect results in the hair cell stimulating tone. The
+overall effect is that the temporal information in the signal is
+preserved within the auditory nerve.
+\subsubsection{Auditory Nerve}
+\label{sec-2-3-3}
+\label{sec:ch2-auditory-nerve}
+
+The auditory nerve (AN) is made up of a collection of nerve fibres. When
+neurotransmitters are released into the synaptic cleft between an IHC
+and an AN fibre, a spike may be generated in an AN fibre. These
+spikes along the AN fibres are transmitted to various cells within the
+auditory brainstem. For human, there are about 30,000 fibres
+associated with each cochlea. The AN fibres are often divided into
+three categories according to their spontaneous firing rates:
+
+\begin{enumerate}
+\item High-spontaneous rate (HSR) fibres (60\% of all nerve fibers,
+   firing rate > 18 spikes/second)
+\item Medium-spontaneous rate (MSR) fibres (25\% of all nerve
+   fibres, firing rate are 0.5--18 spikes/second)
+\item Low-spontaneous rate (LSR) fibres (15\% of all nerve fibers,
+   firing rate < 0.5 spikes/second)
+\end{enumerate}
+
+\nomenclature{HSR}{High-spontaneous rate}
+\nomenclature{MSR}{Medium-spontaneous rate}
+\nomenclature{LSR}{Low-spontaneous rate}
+\subsection{Auditory Brainstem}
+\label{sec-2-4}
+\label{sec:ch2-auditory-brainstem}
+\subsubsection{Neurons}
+\label{sec-2-4-1}
+\label{sec:ch2-neurons}
+
+There are various types of neurons within the auditory brainstem,
+which has the ability to transmit information by electrical and
+chemical signalling. A typical neuron is illustrated in
+Figure \ref{fig:neuron}. The input connectors are the dendrites; the
+output connector is the axon, and the cell body is the soma. The
+synapse is a junction between two neurons where the transmission of
+electrical and/or chemical signals happens.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{./Chapter2Figs/neuron.eps}
+\caption{\label{fig:neuron}Structure of a typical neuron, reproduced from \cite{WikiNeuron}.}
+\end{figure}
+
+The behaviour of a neuron is determined by the chemical
+processes of the soma, which are characterised by the flow of many
+types of ions (ion channels) through the soma membrane. This membrane
+contains ion gates that can be activated and deactivated at certain
+input potentials and membrane potentials to allow (or prohibit) ions
+in and out of the soma. Neurons communicate with each other by
+transmitting neural spikes. These spikes take the form of brief and
+sudden voltage changes that are transmitted down a cell's axon to
+synaptic connections with another neuron.
+
+Although there are some arguments, it has been widely accepted that
+the information transmitted by the neurons is only related with the firing
+rate of the spike train, not the actual potentials, nor the shapes of
+the spikes \cite{Gerstner2002}. A spike cannot be generated
+immediately after the previous one. Instead, there is a refractory
+period between them. Neurophysiologists divide this interval into two
+periods \cite{Gerstner2002}:
+
+\begin{itemize}
+\item Absolute refractory period: the second pike cannot be generated
+  regardless of any stimulation.
+\item Relative refractory period: the second spike can only be
+  generated if the stimulus is strong enough.
+\end{itemize}
+
+For humans, the absolute refractory period is about 1ms
+\cite{Gerstner2002}, therefore, the maximum firing rate is limited to
+about 1000 per second.
+\subsubsection{Auditory Pathway}
+\label{sec-2-4-2}
+\label{sec:ch2-auditory-pathway}
+
+A diagram of the afferent auditory pathway is illustrated in
+Figure \ref{fig:afferent}. It can be seen that the afferent pathway
+goes through a number of nuclei, each of which is a region that contains
+certain types of cells, and finally reach the auditory cortex.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.7\textwidth]{./Chapter2Figs/afferent.jpg}
+\caption{\label{fig:afferent}Simplified organisation of the auditory brainstem \cite{Yost1977}.}
+\end{figure}
+\subsubsection{Auditory Cortex}
+\label{sec-2-4-3}
+\label{sec:ch2-auditory-cortex}
+
+The auditory cortex is responsible for the most difficult tasks of the
+auditory system. Most importantly, for humans, it performs speech
+processing allowing us to communicate with each other. In the case of
+other animals; it allows them to recognise, for example, the sound of
+their enemies.
+\section{Auditory Models}
+\label{sec-3}
+\label{sec:ch2-auditory-models}
+
+The auditory models explain how the psychology of hearing could be
+understood in terms of signal processing. This section reviews a
+number of computational models for the various components that make up
+the auditory peripheral system.
+\subsection{Head-Related Transfer Function}
+\label{sec-3-1}
+\label{sec:ch2-head-related-transfer-function}
+
+Existing models of the auditory periphery usually starts from the
+response of the middle ear. However, the outer ear and other parts of the
+body also play an important role in the signal processing chain,
+especially for the sound localisation task. The mathematical
+description of the acoustic effects (reflection, diffraction, and
+interference) by the outer ear and other parts of the body (head,
+shoulder, torso and etc.) is referred as a transfer function. In the
+frequency domain, it is called head-related transfer function (HRTF).
+The HRTF $H(f)$ can be described as \footnote{Ext: ``Add reference.'' }:
+
+\nomenclature{HRTF}{Head-related transfer function}
+
+\begin{equation}
+  \label{eq:HRTF}
+  H(f) = \frac{\textrm{Out}(f)}{\textrm{In}(f)}
+\end{equation}
+
+where $f$ is the frequency input. The HRTF is the Fourier transform of
+the head-related impulse response (HRIR) in the time domain.
+
+\nomenclature{HRIR}{Head-related impulse response}
+
+The HRTF has been widely used in sound localisation and other
+applications, such as stereo-sound synthesis. However, it depends
+strongly on the physical characteristics of the listener (the size and
+shape of the pinna and etc.) and the acoustic environment (echos,
+noises, and etc.). This makes the implementation of the HRTF quite a
+challenge for a general purpose neuromorphic auditory periphery.
+\subsection{Middle Ear Filter}
+\label{sec-3-2}
+\label{sec:ch2-middle-ear-filter}
+
+It is reasonable to consider the middle ear as a linear system whose
+input is the pressure wave level near the eardrum and the output is
+the stape velocity or displacement \cite{Goode1994}. Therefore, the
+middle ear is often modelled as a filter with an appropriate frequency
+response. This model could be an IIR (e.g., \cite{Lopez-Poveda1996} and
+\cite{Tan2003}), an FIR (e.g., \cite{Lopez-Poveda2001} and
+\cite{Lopez-Najera2007}), or cascaded filters (e.g.,
+\cite{Sumner2003b} and \cite{Holmes2004}). All these filter models
+are possible be implemented in the neuromorphic auditory periphery.
+
+\nomenclature{IIR}{Infinite impulse response}
+\nomenclature{FIR}{Finite impulse response}
+\subsection{BM Filterbank}
+\label{sec-3-3}
+\label{sec:ch2-bm-filterbank}
+
+The BM is the component in the auditory periphery which has the most
+number of models and varies widely in complexity. Early BM models only
+simulate the basic frequency selectivity; whereas recent BM models
+exhibit more nonlinear characteristics to be consistent with the
+physiological observations.
+
+\begin{enumerate}
+\item Linear BM filters
+\item Nonlinear BM filters
+\end{enumerate}
+\subsubsection{Linear BM Filters}
+\label{sec-3-3-1}
+\label{sec:ch2-linear-bm-filters}
+
+A linear BM filter has a linear transfer function. It is
+generally evaluated by the sharpness of the frequency response curve
+at its characteristic frequency (CF) and the
+highest achievable quality factor. Almost all the reported
+neuromorphic auditory system (both analogue and digital) adopt linear
+BM filters which are widely applied in various applications. Some
+important developments are listed below.
+
+\nomenclature{CF}{Characteristic frequency}
+
+\begin{itemize}
+\item Zweig and et al's approximate transmission line model
+  (\cite{Zweig1976}),
+\item Patterson and et al's gammatone filter (GTF) (\cite{Patterson1992}),
+\item Lyon's all-pole asymmetric GTF (\cite{Lyon1997}),
+\item Irino and Patterson's original gammachirp (GC) filter
+  (\cite{Irino1997}).\footnote{Ext: ``Describe the concept for each models (4-5 lines) }
+\end{itemize}
+
+
+The gammatone filter (GTF) by Patterson \cite{Patterson1992} is the
+most-widely applied linear BM filter, because it provides a reasonable
+trade-off between the physiological correspondence and computational
+efficiency. \footnote{Ext: ``What's GTF = explain'' }
+\subsubsection{Nonlinear BM Filters}
+\label{sec-3-3-2}
+\label{sec:ch2-nonlinear-bm-filters}
+
+A number of nonlinear BM filters have also been developed, which have
+nonlinear transfer functions, such as:
+
+\begin{itemize}
+\item Goldstein's multiple bandpass nonlinear (MBPNL) filters
+  (\cite{Goldstein1990}),
+\item Zhang and et al.'s feedback model (\cite{Zhang2001}),
+\item Irino and et al.'s compressive Gammachirp (cGC) filter
+  (\cite{Irino2001}),
+\item Lopez-Poveda, Meddis and et al.'s dual-resonance nonlinear
+  (DRNL) filters proposed for humans, guinea ping, and chinchilla
+  (\cite{Lopez-Poveda2001}, \cite{Sumner2003b} and
+  \cite{Lopez-Najera2007}),
+\item Irion and Patterson's dynamic compressive Gammachirp (dcGC)
+  filter (\cite{Irino2006}),
+\item Ferry and Meddis' DRNL filter with efferent suppression
+  (\cite{Ferry2007}). \footnote{Ext: ``Describe each models'' }
+\end{itemize}
+
+\nomenclature{MBPNL}{Multiple bandpass nonlinear}
+\nomenclature{cGC}{Compressive Gammachirp}
+\nomenclature{dcGC}{Dynamic compressive Gammachirp}
+\nomenclature{DRNL}{Dual-resonance nonlinear}
+
+Among these nonlinear BM filters, the GC-family filters and the
+DRNL-family filters are mostly referred \footnote{Ext: ``What do you mean by `referred'?'' }. Both of them have been
+improved extensively during the past decade, and have the ability to
+simulate various BM nonlinear phenomena, such as compression,
+suppression and distortion.
+\subsubsection{Discussion}
+\label{sec-3-3-3}
+\label{sec:ch2-discussion1}
+
+Linear BM filters are favoured by engineers, because they have simple
+structures which could be easily implemented as electronic circuits.
+This has been demonstrated by the author's work of FPGA implementation
+of the classic GTF \cite{Yang2009}. However, they have no ability to
+simulate the nonlinear characteristic of the BM \footnote{The Ext did not understand it was my work, rephrase these two
+  sentence. }. Therefore, current
+auditory peripheral models usually adopt nonlinear BM filters other
+than linear ones.
+
+Compared to linear BM filters, nonlinear BM filters require much more
+computation time and resources. This gets worse when tens or hundreds
+of nonlinear filters are grouped as a filterbank to model the BM.
+Generally speaking, a software implementation of a bank
+nonlinear BM model cannot run in real-time on the common sequential
+computer processor, let alone current embedded microprocessors.
+
+Based on the review, there were no real-time digital implementations
+of nonlinear BM filters before this work. Therefore, it could be an
+important contribution to explore the possibility of implementing an
+real-time neuromorphic auditory periphery which adapts nonlinear BM
+filters using current digital electronic technology.
+\subsection{IHC Models}
+\label{sec-3-4}
+\label{sec:ch2-ihc-models}
+
+The IHCs account for the mechanoelectrical and electrochemistric
+processes within the cochlea. The input to an IHC model is the
+instantaneous amplitude of the BM site attached to that IHC, the
+output being the neurotransmitters released. The general interaction
+between the IHC and AN is illustrated in Figure \ref{fig:an-synapse}:
+
+\begin{enumerate}
+\item The stereocilia opens the icon channels that allow potassium
+   (K$^{+}$) and calcium (Ca$^{\mathrm{+2}}$) from the endolymph to
+   enter the cell.
+\item The IHC get depolarised and generates a receptor potential (RP)
+   in return.
+\item This RP opens Ca$^{\mathrm{+2}}$ channels to allow
+   Ca$^{\mathrm{+2}}$ enter the cell.
+\item Vesicles which contains neurotransmitters from the IHC are
+   released, then cross the synapse cleft between the IHC and an AN
+   receptor.
+\item The AN fibre generates an action potentials (AP) which results a
+   neural spike.
+\end{enumerate}
+
+\nomenclature{K$^{\mathrm{+}}$}{Potassium}
+\nomenclature{Ca$^{\mathrm{+2}}$}{Calcium}
+\nomenclature{RP}{Receptor potential}
+\nomenclature{AP}{Action potential}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./Chapter2Figs/an-synapse.eps}
+\caption{\label{fig:an-synapse}Illustration of the general process of IHC stimulating neural spikes in the synapse, reproduced form \cite{WikSynapse}.}
+\end{figure}
+
+The general model structure, whose mechanism is responsible for this
+interaction between IHCs and AN fibres, can be seen in
+Figure \ref{fig:ihc-model}. This general model comprises a number of
+reservoirs that contain a transmitter substance. Existing IHC models
+can be divided into three types.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./Chapter2Figs/ihc-model.eps}
+\caption{\label{fig:ihc-model}Generalised representation of IHC models.}
+\end{figure}
+\subsubsection{Single-Reservoir Models}
+\label{sec-3-4-1}
+\label{sec:ch2-signle-reservoir-models}
+
+The first IHC models developed by Schroeder \cite{Schroeder1974}
+consisted of a single reservoir that released the transmitter to stimulate
+the pose-synaptic membrane. The amount of released transmitter
+depended on the stimulus-related permeability of the cell membrane.
+Such a simple model is unable to represent the two-component
+adaptation known to exist in the IHC.
+\subsubsection{Multiple-Reservoir Models}
+\label{sec-3-4-2}
+\label{sec:ch2-multiple-reservoir-models}
+
+More sophisticated models emerged such as that of Schwid
+\cite{Schwid1982}, Ross \cite{Ross1982} and its improvement
+\cite{Ross1996}.
+
+The model by Schwid \cite{Schwid1982} consisted of independent
+immediate stores of transmitters. The reservoirs were ordered in
+increasing threshold such that a transmitter can be released from only 1
+reservoir at low stimulus levels and by all 6 at high stimulus levels.
+These reservoirs were arranged like the immediate stores in Figure
+\ref{fig:ihc-model}.
+
+The model by Ross \cite{Ross1982} employed 4 reservoirs in series.
+The permeability between the reservoirs is constant and so the flow rate
+between them is determined by the concentration or level differences.
+The transmitter release from the final reservoir is governed by 2
+permeabilities. The first permeability is fixed and the second is
+related to the stimulus intensity.
+\subsubsection{Feedback Models}
+\label{sec-3-4-3}
+\label{sec:ch2-feedback-models}
+
+The model proposed by Meddis (\cite{Meddis1986}, \cite{Meddis1988})
+consisted of 3 reservoirs that incorporated a novel re-uptake and
+re-synthesis loop. The Meddis model has been the most computationally
+efficient model until today, which incorporates the three main
+properties (see \ref{sec:ch2-audisys-haircell}) of an IHC.
+However, the original Meddis IHC model only represents the average
+firing rate of HSR fibres, since the majority of auditory nerve fibres
+are this type. Current developments in physiology show different
+adaptations in the three types of fibre (HSR, MSR, and LSR). In this
+case, Sumner has reported a revised version of the Meddis IHC model
+(\cite{Sumner2002} and \cite{Sumner2003a}) to be consistent with the
+physiological findings.
+\subsubsection{Discussion}
+\label{sec-3-4-4}
+\label{sec:ch2-discussion2}
+
+The original Meddis IHC model has been the most important development
+in the research of IHC modelling. Although Sumner's revised Meddis
+model is the most philological corresponding IHC model at present, it
+is not appropriate to be implemented as a module in the neuromorphic
+system because of its sophisticated arithmetics. The original Meddis
+model has been successfully implemented both in analogue and digital
+electronic circuits. These related works will be discussed in the next
+chapter.
+\subsection{AN Model}
+\label{sec-3-5}
+\label{sec:ch2-an-model}
+
+In physiology, the actual process of the transformation from the
+release of neurotransmitters to AN spikes has not been known. However,
+the release rate has been used as an indication of the firing rate of the
+AN fibres attached to the synapse between an IHC and a bunch of AN
+fibres. There are two forms of representation of the IHC model output.
+One is the spike probability, which is the same for all the AN fibre
+in that synapse, the other is presented by several spike trains for
+all AN fibres in the synapse. The former is a general description and
+runs quicker, while the later needs more computation time but is
+essential for other neural models in the brainstem. It should be noted
+that the refractory period (see \ref{sec:ch2-audisys-neuron})
+need to be considered for both representation of the AN output. This
+means that the interval time between two spikes should be greater than
+about 1ms, and the maximum firing rate is about 1kHz. \footnote{Ext: ``Rephrase this paragraph'' }
+
+It is obvious that this research need the second type output from the
+AN model. The generation of neural spikes is a stochastic process and
+therefore requires random (or pseudo-random) numbers to generate
+uncorrelated spiking patterns in the auditory nerve. Pseudo-random
+numbers can be efficiently generated using linear-feedback
+shift-registers (LFSRs) \cite{George2007}.
+
+Generally, there are two approaches to generate auditory spikes. One
+uses binomial distribution method, while the other uses the rejection
+method \footnote{Ext: ``Reference required'' Need to explain the rejection method
+  before this conclusion. }.
+\subsubsection{Binomial Distribution Method}
+\label{sec-3-5-1}
+\label{sec:ch2-binomial-distribution-method}
+
+This method uses binomial statistics together with a random number
+generator. The binomial distribution method has been applied in the
+revised Meddis IHC model to generate spikes for each AN fibre.
+However, this method usually employs logarithmic, exponential or
+division functions each of which are expensive to implement in digital
+technology.
+\subsubsection{The Rejection Method}
+\label{sec-3-5-2}
+\label{sec:ch2-the-rejection-method}
+
+In this case, assume $n$ is a random number whose value is between 0 and 1
+inclusive, $p$ is the probability value produced by the IHC. If $n\ge
+p$, the corresponding nerve fibres fires. For building a digital
+neuromorphic auditory periphery, it is also a very economic method.
+Therefore, the rejection method is chosen for this research.
+\section{Summary}
+\label{sec-4}
+\label{sec:ch2-summary}
+
+In terms of signal processing, the auditory periphery is a complicated
+system which consists many stages of processing according to its
+anatomical structure. An appropriate model has to be developed for
+building a digital neuromorphic system which would have the ability to
+represent some useful functions of the biological auditory system.
+In this chapter, some widely-accepted auditory models are evaluated
+according to their physiological correspondence and computational
+efficiency in order to form an initial structure of the system, as
+illustrated in Figure \ref{fig:init-design}. The selected models for
+different components of the neuromorphic system are listed in
+Table \ref{tbl:init-models} \footnote{Ext: ``you need to discuss this table, with more words'' }. The investigation and implementation of
+these components will be described in later chapters \footnote{Ext: ``Refer to specific chapters, which chapters.'' }, and the finial
+system structure is not the same as this one.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\textwidth]{./Chapter2Figs/init-design.eps}
+\caption{\label{fig:init-design}Initial design of the system structure.}
+\end{figure}
+
+\begin{longtable}{|c|l|l|}
+\\
+ Components           &  Description           &  Model                \\
+\hline
+\endhead
+\hline\multicolumn{3}{r}{Continued on next page}\
+\endfoot
+\endlastfoot
+\hline
+ Ourter ear and etc.  &  HRTF                  &  A dummy listener      \\
+ Middle ear           &  An IIR filter         &  No predefined model   \\
+ BM                   &  An bank of BM filters  &  Linear or nonlinear filters  \\
+ IHCs                 &  A group of IHC models  &  The Meddis IHC model  \\
+ AN fibres            &  A group of AN fibre models  &  Rejection method      \\
+\caption{Selected auditory models for different components of the neuromorphic system.} \label{tbl:init-models}\end{longtable}
+
+
+\setstretch{1}
+
+\bibliographystyle{plain}
+\bibliography{bib/thesis}
+
+\end{document}

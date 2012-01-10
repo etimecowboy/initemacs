@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2012-01-09 Mon 14:28 xin on p6t>
+;; Time-stamp:<2012-01-10 Tue 06:28 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -49,9 +49,9 @@
 (eval-after-load "auctex"
   '(progn
      (auctex-settings)
-     (eal-define-keys ;; BUG: not working
-      'latex-mode-map
-      `(("C-x `" TeX-next-error)))
+     ;; (eal-define-keys ;; BUG: not working
+     ;;  'latex-mode-map
+     ;;  `(("C-x `" TeX-next-error)))
      )) ;; default C-c ` conflict with icy-mode
 (eval-after-load "preview-latex" '(preview-latex-settings))
 (global-set-key (kbd "<f6> t") 'xy/auctex-start)
@@ -82,13 +82,28 @@
 (eval-after-load "Whizzytex-mode" '(whizzytex-settings))
 (global-set-key (kbd "<f6> w") 'xy/whizzytex-start)
 
+;;--------------------------------------------------------------------
+;;** wysiwyg-tex
+;; REF: (@url :file-name "https://github.com/laysakura/WYSIWYG-TeX-el" :display "Source")
+;; WYSIWYG (What You See Is What You Get) tex writitng mode using
+;; `doc-view.el' and `doc-view-fit-page.el'
+(autoload 'wysiwyg-tex-show-preview "wysiwyg-tex" nil t)
+(autoload 'wysiwyg-tex-show-whole-preview "wysiwyg-tex" nil t)
+(eval-after-load "wysiwyg-tex" '(wysiwyg-tex-settings))
+;; (add-hook 'tex-mode-hook
+;;           ;; key-binds for tex-mode
+;;           (local-set-key "\C-c\C-t" ; Displays a page around cursor.
+;;                          'wysiwyg-tex-show-preview)
+;;           (local-set-key "\C-c\C-T" ; Displays the whole page.
+;;                          'wysiwyg-tex-show-whole-preview))
+
 ;;====================================================================
 ;;* txt2tags
 ;; convert plain text files to various formats
 (setq auto-mode-alist
       (append (list '("\\.t2t$" . t2t-mode))
               (if (boundp 'auto-mode-alist) auto-mode-alist)))
-(autoload  't2t-mode "txt2tags-mode" "Txt2tags Mode" t)
+(autoload 't2t-mode "txt2tags-mode" "Txt2tags Mode" t)
 
 ;;====================================================================
 ;;* pdftools
