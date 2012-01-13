@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
-;; Time-stamp:<2012-01-10 Tue 05:04 xin on p6t>
+;; Time-stamp:<2012-01-13 Fri 05:11 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -13,15 +13,15 @@
 ;;
 ;;--------------------------------------------------------------------
 
+(require 'cl)
+(require 'xy-rc-utils)
+
 ;;;###autoload
 (defun count-buffers ()
   "list the buffer numbers to see if you are hard working or not."
   (interactive)
   (setq l (buffer-list))
   (message "%d Buffers right now" (length l)))
-
-(require 'cl)
-(require 'xy-rc-utils)
 
 ;;;###autoload
 (defun ibuffer-settings ()
@@ -48,11 +48,11 @@
         '((mark modified read-only " "
                 (name 20 20 :left :elide)
                 " | "
-                (size-h 9 -1 :right)
+                (size-h 7 -1 :right)
                 " | "
                 (mode 12 12 :left :elide)
                 " | "
-                (filename-and-process 40 40 :left :elide))))
+                (filename-and-process 30 30 :left :elide))))
 
   ;; (setq ibuffer-formats
   ;;     '((mark modified read-only " " (name 25 25 :left :elide) " "

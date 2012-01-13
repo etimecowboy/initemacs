@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icicles.el'
-;; Time-stamp:<2011-12-16 Fri 02:40 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-13 Fri 05:12 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,7 +33,7 @@
   (icicle-ido-like-mode 1)
   (setq icicle-download-dir                         my-local-lisp-path
         icicle-Completions-display-min-input-chars  2
-        icicle-WYSIWYG-Completions-flag             "MMMM"
+        icicle-WYSIWYG-Completions-flag             "ABCD"
         icicle-bookmark-refresh-cache-flag          t
         icicle-completions-format                   nil
         icicle-help-in-mode-line-delay              10
@@ -72,7 +72,7 @@
             '(setq org-completion-use-ido nil))
 
   (defun icicle-keys ()
-    "icicle-mode的按键设置."
+    "icicle-mode key bindings."
     (define-key minibuffer-local-completion-map
       (kbd "SPC") 'minibuffer-complete-word)
     (define-key minibuffer-local-completion-map
