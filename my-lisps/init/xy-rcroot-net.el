@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2012-01-01 Sun 23:41 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-14 Sat 14:57 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -195,5 +195,13 @@
 (autoload 'ansit "ansit" nil t)
 (autoload 'ansit-buffer "ansit" nil t)
 (autoload 'ansit-copy-and-kill-buffer "ansit" nil t)
+
+;;====================================================================
+;;* edit-server
+;; Chrome extension: Edit with Emacs
+;; REF: (@url :file-name "https://chrome.google.com/webstore/detail/ljobjlafonikaiipfkggjbhkghgicgoh" :display "website")
+(when (require 'edit-server nil t)
+  (setq edit-server-new-frame nil)
+  (edit-server-start))
 
 (provide 'xy-rcroot-net)
