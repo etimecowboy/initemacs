@@ -1,13 +1,13 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2010-04-08 18:30:48 Thursday by ahei>
+;; Time-stamp:<2012-01-14 Sat 22:19 xin on t42>
 
 ;;; Commentary:
 
 ;; 修改自command-frequency.el, 记得当时这个扩展是从水木下载下来的
 
 (require 'desktop)
-(require 'display-line-number)
+;; (require 'display-line-number) ;; BUG: cannot find this lib
 
 (defvar cf-frequence-threshrold 1 "*显示命令报告的时候命令频率大于等于该值的时候才显示")
 (defvar cf-stat-self-insert-command nil "*Non-nil means also statistic `self-insert-command'")

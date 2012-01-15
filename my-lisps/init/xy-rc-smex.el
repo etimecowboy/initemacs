@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-smex.el'
-;; Time-stamp:<2011-12-08 Thu 03:41 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-14 Sat 23:49 xin on t42>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,10 +24,7 @@
   (interactive)
   (when (featurep 'icicles)
     (icy-mode -1))
-  ;; (require 'ido)
   (require 'smex)
-  ;; (ido-mode 1)
-  ;; (smex-initialize-ido)
   (smex-initialize))
 
 ;;;###autoload
@@ -36,7 +33,7 @@
   (setq-default smex-save-file
                   (concat my-var-path "/smex-save-"
                           user-login-name "@"
-                          system-name "@"
+                          system-name "-"
                           system-configuration))
   (unless (file-exists-p smex-save-file)
     (shell-command (concat "touch " smex-save-file)))

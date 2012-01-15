@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2011-12-17 Sat 12:18 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-14 Sat 23:47 xin on t42>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,11 +25,7 @@
   (when (featurep 'icicles)
     (icy-mode -1))
   (require 'ido)
-  ;; (require 'smex)
-  (ido-mode 1)
-  ;; (smex-initialize-ido)
-  ;; (smex-initialize)
-  )
+  (ido-mode 1))
 
 ;;;###autoload
 (defun ido-up-directory-clean-text ()
@@ -108,6 +104,14 @@
   (add-hook 'org-mode-hook
             '(lambda ()
                (setq org-completion-use-ido t)))
+
+  ;;--------------------------------------------------------------------
+  ;; Other ido plugins
+  (require 'ido-ubiquitous)
+  (ido-ubiquitous-mode 1)
+
+  (autoload 'idomenu "idomenu" nil t)
+  ;; (global-set-key (kbd "C-c g") 'idomenu)
 
   (message "* ---[ ido configuration is complete ]---"))
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2011-12-30 Fri 20:07 xin on p6t>
+;; Time-stamp:<2012-01-15 Sun 00:25 xin on t42>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,14 +52,6 @@
      ;;    ("C-p"   ido-prev-match)))))
 
 ;;--------------------------------------------------------------------
-;;*** Other ido plugins
-(require 'ido-ubiquitous)
-(ido-ubiquitous-mode 1)
-
-(autoload 'idomenu "idomenu" nil t)
-(global-set-key (kbd "C-c g") 'idomenu)
-
-;;--------------------------------------------------------------------
 ;;** icomplete
 ;; minibuffer中输入部分命令就可以使用补全
 ;; (eval-after-load "icomplete"
@@ -85,6 +77,7 @@
 ;; Smex is a M-x enhancement for Emacs. Built on top of Ido, it
 ;; provides a convenient interface to your recently and most
 ;; frequently used commands. And to all the other commands, too.
+;; REF: (@url :file-name "https://github.com/nonsequitur/smex" :display "Source")
 (eval-after-load 'smex
   '(progn
      (smex-settings)
@@ -108,10 +101,11 @@
   (require 'ido)
   (require 'smex)
   (ido-mode 1)
-  ;; (smex-initialize-ido)
-  (smex-initialize))
-(add-hook 'after-init-hook 'xy/ido+smex-start)
+  (smex-initialize-ido)) ;; BUG: `smex-initialize' cause error in
+                         ;; Emacs 23.2, but OK in 23.3
 (global-set-key (kbd "<f6> m") 'xy/ido+smex-start)
+;; (add-hook 'after-init-hook 'xy/ido+smex-start)
+;; BUG: smex did not work in Emacs 23.2
 
 ;;====================================================================
 ;;* Buffer auto complete
