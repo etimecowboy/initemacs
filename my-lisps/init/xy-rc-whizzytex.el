@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-whizzytex.el'
-;; Time-stamp:<2012-01-08 Sun 20:53 xin on p6t>
+;; Time-stamp:<2012-01-17 Tue 23:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,6 +30,7 @@
   (GNULinux
    (require 'whizzytex)
    (whizzytex-mode 1)
+   (menu-bar-mode 1)
    (message "Writing your tex files in WYSIWYG environment!"))
   (Windows
    (message "Sorry, whizzytex cannot be used in Windows!")))

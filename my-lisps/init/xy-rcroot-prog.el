@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2012-01-08 Sun 17:24 xin on p6t>
+;; Time-stamp:<2012-01-17 Tue 23:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -269,7 +269,7 @@
 
 ;;*** imenu-tree
 (eval-after-load "imenu-tree" '(imenu-tree-settings))
-(global-set-key (kbd "<f6> i") 'imenu-tree)
+(global-set-key (kbd "<f7> i") 'imenu-tree)
 
 ;;--------------------------------------------------------------------
 ;;** etags

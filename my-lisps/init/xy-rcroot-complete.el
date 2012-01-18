@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-01-15 Sun 00:25 xin on t42>
+;; Time-stamp:<2012-01-17 Tue 23:39 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -103,7 +103,7 @@
   (ido-mode 1)
   (smex-initialize-ido)) ;; BUG: `smex-initialize' cause error in
                          ;; Emacs 23.2, but OK in 23.3
-(global-set-key (kbd "<f6> m") 'xy/ido+smex-start)
+(global-set-key (kbd "<f6> d") 'xy/ido+smex-start)
 ;; (add-hook 'after-init-hook 'xy/ido+smex-start)
 ;; BUG: smex did not work in Emacs 23.2
 

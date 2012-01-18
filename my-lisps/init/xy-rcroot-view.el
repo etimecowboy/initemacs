@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-view.el'
-;; Time-stamp:<2011-12-29 Thu 15:20 xin on p6t>
+;; Time-stamp:<2012-01-17 Tue 23:39 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -110,7 +110,7 @@
 
 ;;--------------------------------------------------------------------
 ;;** ediff
-(global-set-key (kbd "<f6> d") 'ediff)
+;; (global-set-key (kbd "<f6> d") 'ediff)
 (eval-after-load "ediff"
   '(progn
      (ediff-settings)
