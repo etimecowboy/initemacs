@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gud.el'
-;; Time-stamp:<2011-12-04 Sun 18:22 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-19 Thu 17:05 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -116,28 +116,6 @@
     (gud-tooltip-mode -1)
     (tool-bar-mode -1))
 
-  ;; (define-key c-mode-base-map [f5] 'gdb)
-  ;; (eval-after-load "gud"
-  ;;   '(progn
-  ;;      (define-key gud-minor-mode-map [f5] (lambda (&optional kill)
-  ;;                                            (interactive "P")
-  ;;                                            (if kill
-  ;;                                                (gud-kill)
-  ;;                                              (gud-go))))
-  ;;      (define-key gud-minor-mode-map [S-f5] 'gud-kill)
-  ;;      (define-key gud-minor-mode-map [f17] 'gud-kill) ; S-f5
-  ;;      (define-key gud-minor-mode-map [f8] 'gud-print)
-  ;;      (define-key gud-minor-mode-map [C-f8] 'gud-pstar)
-  ;;      (define-key gud-minor-mode-map [f9] 'gud-break-or-remove)
-  ;;      (define-key gud-minor-mode-map [C-f9] 'gud-enable-or-disable)
-  ;;      (define-key gud-minor-mode-map [S-f9] 'gud-watch)
-  ;;      (define-key gud-minor-mode-map [f10] 'gud-next)
-  ;;      (define-key gud-minor-mode-map [C-f10] 'gud-until)
-  ;;      (define-key gud-minor-mode-map [C-S-f10] 'gud-jump)
-  ;;      (define-key gud-minor-mode-map [f11] 'gud-step)
-  ;;      (define-key gud-minor-mode-map [C-f11] 'gud-finish)))
-
-  (message "* ---[ gud configuration is complete ]---")
-  )
+  (message "* ---[ gud configuration is complete ]---"))
 
 (provide 'xy-rc-gud)

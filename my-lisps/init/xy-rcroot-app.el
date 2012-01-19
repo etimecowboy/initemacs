@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-01-05 Thu 23:18 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 16:16 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -121,11 +121,7 @@
 ;;* Buffer settings
 
 (global-visual-line-mode 1) ;; Wrap line dynamically
-(setq visual-line-fringe-indicators '(nil right-curly-arrow))
 (setq word-wrap t)
-(setq-default
- indicate-buffer-boundaries 'left)    ;; Display buffer boudaries
-(setq-default indicate-empty-lines t) ;; Indicate empty lines
 (setq inhibit-startup-screen t) ;; Do not display starup welcome screen
 (setq visible-bell t) ;; Use visible bell instead of bell sound
 (setq-default echo-keystrokes 0.1)    ;; Display key strokes quickly
@@ -142,11 +138,19 @@
 ;; emacs lock
 ;; (autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
 
+;;===================================================================
+;;* Fringe settings
+(fringe-mode '(3 . 0))
+(setq visual-line-fringe-indicators '(nil left-curly-arrow))
+(setq-default indicate-buffer-boundaries 'left ;; Display buffer boudaries
+              indicate-empty-lines t ;; Indicate empty lines
+              overflow-newline-into-fringe t)
+
 ;;====================================================================
 ;;* mode-line settings
 
 (setq-default ;; Display mode-line the same in non-selected windows
- mode-line-in-non-selected-windows nil)
+  mode-line-in-non-selected-windows nil)
 (column-number-mode 1) ;; Display column number
 (size-indication-mode 1) ;; Display the current location in the file
 (setq-default mode-line-buffer-identification

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2012-01-07 Sat 19:39 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 14:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -180,7 +180,15 @@
 
 ;;*** magit
 ;; Project range git
-(eval-after-load "magit" '(magit-settings))
+(eval-after-load "magit"
+  '(progn
+     (magit-settings)
+     (eal-define-keys-commonly
+      magit-mode-map
+      `(("M-n"   magit-show-commit-forward)
+        ("M-p"   magit-show-commit-backward)
+        ("q"     delete-window)
+        ))))
 (global-set-key (kbd "<f11> g") 'magit-status)
 
 ;;*** diff-git

@@ -1,7 +1,7 @@
-;; -*- encoding: utf-8-unix; -*-
+;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;; File-name:    <indent-vline.el>
 ;; Create:       <2012-01-18 00:53:10 ran9er>
-;; Time-stamp:<2012-01-19 Thu 08:12 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 14:59 xin on p6t>
 ;; Mail:         <2999am@gmail.com>
 
 ;;;###autoload

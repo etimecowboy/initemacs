@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-magit.el'
-;; Time-stamp:<2011-12-04 Sun 17:28 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-19 Thu 14:54 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,14 +22,6 @@
   (setq magit-log-edit-mode-hook
         '(lambda ()
            (flyspell-mode 1)))
-  (eal-define-keys-commonly
-   magit-mode-map
-   `(("M-n"   magit-show-commit-forward)
-       ("M-p"   magit-show-commit-backward)
-       ;; ("C-M-h" magit-push)
-       ;; ("C-M-l" magit-pull)
-       ))
-  (message "* ---[ magit configuration is complete ]---")
-)
+  (message "* ---[ magit configuration is complete ]---"))
 
 (provide 'xy-rc-magit)

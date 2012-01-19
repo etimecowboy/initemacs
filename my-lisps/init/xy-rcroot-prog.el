@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2012-01-17 Tue 23:37 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 17:08 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -677,8 +677,30 @@
 ;;    ("M-c"   gud-cont)
 ;;    ("M-C"   capitalize-word)
 ;;    ("C-c m" make)))
-
-(eval-after-load "gdb-ui" '(gud-settings))
+(eval-after-load "gdb-ui"
+  '(progn
+     (gud-settings)
+     ;; (define-key c-mode-base-map [f5] 'gdb)
+     ;; (eval-after-load "gud"
+     ;;   '(progn
+     ;;      (define-key gud-minor-mode-map [f5] (lambda (&optional kill)
+     ;;                                            (interactive "P")
+     ;;                                            (if kill
+     ;;                                                (gud-kill)
+     ;;                                              (gud-go))))
+     ;;      (define-key gud-minor-mode-map [S-f5] 'gud-kill)
+     ;;      (define-key gud-minor-mode-map [f7] 'gud-kill) ; S-f5
+     ;;      (define-key gud-minor-mode-map [f8] 'gud-print)
+     ;;      (define-key gud-minor-mode-map [C-f8] 'gud-pstar)
+     ;;      (define-key gud-minor-mode-map [f9] 'gud-break-or-remove)
+     ;;      (define-key gud-minor-mode-map [C-f9] 'gud-enable-or-disable)
+     ;;      (define-key gud-minor-mode-map [S-f9] 'gud-watch)
+     ;;      (define-key gud-minor-mode-map [f10] 'gud-next)
+     ;;      (define-key gud-minor-mode-map [C-f10] 'gud-until)
+     ;;      (define-key gud-minor-mode-map [C-S-f10] 'gud-jump)
+     ;;      (define-key gud-minor-mode-map [f11] 'gud-step)
+     ;;      (define-key gud-minor-mode-map [C-f11] 'gud-finish)))
+     ))
 ;; (eval-after-load "gdb-mi" '(gud-settings))
 
 ;;====================================================================
