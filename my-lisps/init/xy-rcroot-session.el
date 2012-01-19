@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2012-01-02 Mon 15:10 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 22:28 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -53,25 +53,25 @@
 (eval-after-load "bookmark+" '(bookmark+-settings))
 ;; (require 'bookmark+)
 
-;;*** bm
-;; provides visible, buffer local, bookmarks and the ability
-;; to jump forward and backward to the next bookmark.
-(autoload 'bm-toggle   "bm" "Toggle bookmark in current buffer." t)
-(autoload 'bm-next     "bm" "Goto bookmark."                     t)
-(autoload 'bm-previous "bm" "Goto previous bookmark."            t)
-(eal-define-keys-commonly
- global-map
- `(;; M$ Visual Studio key setup.
-   ("<f2> m"   bm-toggle)
-   ("<f2> n"   bm-next)
-   ("<f2> p"   bm-previous)
-   ;; Click on fringe to toggle bookmarks, and use mouse wheel to move
-   ;; between them. If you would like the markers on the right fringe
-   ;; instead of the left, add the following to line:
-   ;; (setq bm-marker 'bm-marker-right)
-   ("<left-fringe> <mouse-5>"   bm-next-mouse)
-   ("<left-fringe> <mouse-4>"   bm-previous-mouse)
-   ("<left-fringe> <mouse-1>"   bm-toggle-mouse)))
+;; ;;*** bm
+;; ;; provides visible, buffer local, bookmarks and the ability
+;; ;; to jump forward and backward to the next bookmark.
+;; (autoload 'bm-toggle   "bm" "Toggle bookmark in current buffer." t)
+;; (autoload 'bm-next     "bm" "Goto bookmark."                     t)
+;; (autoload 'bm-previous "bm" "Goto previous bookmark."            t)
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(;; M$ Visual Studio key setup.
+;;    ("<f2> m"   bm-toggle)
+;;    ("<f2> n"   bm-next)
+;;    ("<f2> p"   bm-previous)
+;;    ;; Click on fringe to toggle bookmarks, and use mouse wheel to move
+;;    ;; between them. If you would like the markers on the right fringe
+;;    ;; instead of the left, add the following to line:
+;;    ;; (setq bm-marker 'bm-marker-right)
+;;    ("<left-fringe> <mouse-5>"   bm-next-mouse)
+;;    ("<left-fringe> <mouse-4>"   bm-previous-mouse)
+;;    ("<left-fringe> <mouse-1>"   bm-toggle-mouse)))
 
 ;;====================================================================
 ;;* Save Emacs session information

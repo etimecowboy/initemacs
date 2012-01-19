@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2012-01-19 Thu 17:08 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 17:57 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -680,14 +680,12 @@
 (eval-after-load "gdb-ui"
   '(progn
      (gud-settings)
-     ;; (define-key c-mode-base-map [f5] 'gdb)
-     ;; (eval-after-load "gud"
-     ;;   '(progn
-     ;;      (define-key gud-minor-mode-map [f5] (lambda (&optional kill)
-     ;;                                            (interactive "P")
-     ;;                                            (if kill
-     ;;                                                (gud-kill)
-     ;;                                              (gud-go))))
+     ;; (define-key c-mode-base-map [f2] 'gdb)
+     ;; (define-key gud-minor-mode-map [f5]
+     ;;   (lambda (&optional kill)
+     ;;     (interactive "P")
+     ;;     (if kill (gud-kill)
+     ;;       (gud-go))))
      ;;      (define-key gud-minor-mode-map [S-f5] 'gud-kill)
      ;;      (define-key gud-minor-mode-map [f7] 'gud-kill) ; S-f5
      ;;      (define-key gud-minor-mode-map [f8] 'gud-print)
