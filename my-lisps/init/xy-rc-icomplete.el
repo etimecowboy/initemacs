@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-icomplete.el'
-;; Time-stamp:<2011-12-04 Sun 17:11 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-19 Thu 13:55 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,8 +22,7 @@
   ;; There is a icomolete+ available, check it later.
   ;; Here I use ahei's hacked version of icomplete+.
   (require 'my-icomplete+)
-  (message "* ---[ icomplete configuration is complete ]---")
-  )
+  (message "* ---[ icomplete configuration is complete ]---"))
 
 ;; ;;;###autoload
 ;; (defun icomplete+-face-settings ()
