@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-10 Tue 06:36 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 04:16 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -42,12 +42,13 @@
         TeX-save-query nil
         tex-source-specials-mode t
         LaTeX-math-mode nil
-        TeX-fold-mode t
-        TeX-PDF-mode  nil
         TeX-newline-function 'newline-and-indent)
-  (setq-default TeX-master nil)  ;; project support
 
-  ;; (require 'tex-mik) ;; Windows下使用 miktex
+  (setq-default TeX-master nil ;; project support
+                TeX-PDF-mode  t
+                TeX-fold-mode t)
+
+  ;; (require 'tex-mik) ;; Windows下可使用 miktex
   ;; (setq TeX-engine 'xetex) ;; set xelatex as default engine.
   ;; NOTE: AUCTeX-11.86: Preview does not work with xelatex
 

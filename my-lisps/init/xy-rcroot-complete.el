@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-01-17 Tue 23:39 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 13:18 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -101,6 +101,7 @@
   (require 'ido)
   (require 'smex)
   (ido-mode 1)
+  ;; (smex-initialize))
   (smex-initialize-ido)) ;; BUG: `smex-initialize' cause error in
                          ;; Emacs 23.2, but OK in 23.3
 (global-set-key (kbd "<f6> d") 'xy/ido+smex-start)

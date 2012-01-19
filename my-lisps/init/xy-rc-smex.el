@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-smex.el'
-;; Time-stamp:<2012-01-14 Sat 23:49 xin on t42>
+;; Time-stamp:<2012-01-19 Thu 13:31 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -37,6 +37,7 @@
                           system-configuration))
   (unless (file-exists-p smex-save-file)
     (shell-command (concat "touch " smex-save-file)))
+  (setq smex-history-length 100)
   (message "* ---[ smex configuration is complete ]---"))
 
 (provide 'xy-rc-smex)
