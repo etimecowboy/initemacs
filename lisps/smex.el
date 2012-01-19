@@ -78,13 +78,17 @@ Must be set before initializing Smex."
 (defun smex ()
   (interactive)
   (if (smex-already-running)
-      (smex-do-with-selected-item
-       (lambda (ignore) (smex-update) (smex-read-and-run smex-ido-cache ido-text)))
-    (and smex-auto-update (smex-detect-new-commands) (smex-update))
+      (smex-update-and-rerun)
+    (and smex-auto-update (smex-detect-new-commands)
+         (smex-update))
     (smex-read-and-run smex-ido-cache)))
 
 (defsubst smex-already-running ()
   (and (boundp 'ido-choice-list) (eql ido-choice-list smex-ido-cache)))
+
+(defsubst smex-update-and-rerun ()
+  (smex-do-with-selected-item
+   (lambda (ignore) (smex-update) (smex-read-and-run smex-ido-cache ido-text))))
 
 (defun smex-read-and-run (commands &optional initial-input)
   (let ((chosen-item (intern (smex-completing-read commands initial-input))))
@@ -177,6 +181,16 @@ Must be set before initializing Smex."
                   (setcdr command-cell smex-cache)
                   (setq smex-cache command-cell))))))
         (reverse smex-history)))
+
+(defun smex-sort-according-to-cache (list)
+  "Sorts a list of commands by their order in `smex-cache'"
+  (let (sorted)
+    (dolist (command-item smex-cache)
+      (let ((command (car command-item)))
+        (when (memq command list)
+          (setq sorted (cons command sorted))
+          (setq list (delq command list)))))
+    (nreverse (append list sorted))))
 
 (defun smex-update ()
   (interactive)
@@ -432,15 +446,6 @@ Returns nil when reaching the end of the list."
                   (when (commandp function)
                     (setq commands (append commands (list function))))))))))
     commands))
-
-(defun smex-sort-according-to-cache (list)
-  (let (sorted)
-    (dolist (command-item smex-cache)
-      (let ((command (car command-item)))
-        (when (memq command list)
-          (setq sorted (cons command sorted))
-          (setq list (delq command list)))))
-    (nreverse (append list sorted))))
 
 (defun smex-show-unbound-commands ()
   "Shows unbound commands in a new buffer,

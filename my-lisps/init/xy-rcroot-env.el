@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-01-19 Thu 08:16 xin on p6t>
+;; Time-stamp:<2012-01-19 Thu 14:21 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -127,7 +127,7 @@
 ;; `idle-require', `ioccur', `iy-go-to-char', `kill-ring-search',
 ;; `lacarte', `light-symbol', `load-dir', `maxframe', `mic-paren',
 ;; `multi-term', `notify', `org-table-comment', `rect-mark',
-;; `redo+', `session' (BUG: conflicts with `anything'),
+;; `redo+', `session' (BUG: conflicts with `anything'), `smex'
 ;; `sr-speedbar', `synonyms', `tabbar', `tabbar-ruler', `texdrive',
 ;; `tex-math-preview', `vline', `w32-browser', `weblogger',
 ;; `window-number', `windresize', `winpoint', `xml-rpc'
