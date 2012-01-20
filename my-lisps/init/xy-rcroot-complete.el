@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-01-19 Thu 13:18 xin on p6t>
+;; Time-stamp:<2012-01-20 Fri 00:20 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,9 +54,9 @@
 ;;--------------------------------------------------------------------
 ;;** icomplete
 ;; minibuffer中输入部分命令就可以使用补全
-;; (eval-after-load "icomplete"
-;;   '(prog
-;;     (icomplete-settings)
+(eval-after-load "icomplete"
+  '(progn
+    (icomplete-settings)))
 ;;     (eal-define-keys
 ;;      'completion-list-mode-map
 ;;      `(("SPC" scroll-up)
@@ -94,7 +94,7 @@
 ;;       the way of using minibuffer, and conflicts with each other.
 ;;;###autoload
 (defun xy/ido+smex-start ()
-  "Start ido completion."
+  "Start ido and smex completion."
   (interactive)
   (when (featurep 'icicles)
     (icy-mode -1))
@@ -107,6 +107,22 @@
 (global-set-key (kbd "<f6> d") 'xy/ido+smex-start)
 ;; (add-hook 'after-init-hook 'xy/ido+smex-start)
 ;; BUG: smex did not work in Emacs 23.2
+
+
+;;--------------------------------------------------------------------
+;;** ido+icomplete
+;; Use both ido and icomplete
+;;;###autoload
+(defun xy/ido+icomplete-start ()
+  "Start ido and icomplete completion."
+  (interactive)
+  (when (featurep 'icicles)
+    (icy-mode -1))
+  (require 'ido)
+  (ido-mode 1)
+  (require 'icomplete)
+  (icomplete-mode 1))
+(global-set-key (kbd "<f6> D") 'xy/ido+icomplete-start)
 
 ;;====================================================================
 ;;* Buffer auto complete
