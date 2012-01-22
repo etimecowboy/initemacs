@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-19 Thu 04:16 xin on p6t>
+;; Time-stamp:<2012-01-20 Fri 19:08 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -128,7 +128,7 @@
 
   (require 'reftex)
   (require 'cdlatex)
-  (require 'wysiwyg-tex) ;; BUG: not working properly
+  ;; (require 'wysiwyg-tex) ;; BUG: not working properly
 
   (add-hook 'LaTeX-mode-hook
             '(lambda ()

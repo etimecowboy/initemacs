@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-01-07 Sat 06:04 xin on p6t>
+;; Time-stamp:<2012-01-20 Fri 18:09 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -771,9 +771,12 @@ If html-file-name is not given, read it from minibuffer."
   ;;      "pdflatex -interaction nonstopmode %b")
   ;;    )
   ;; )
-  ;; (setq org-latex-to-pdf-process
-  ;;       '("xelatex -interaction nonstopmode %b"
-  ;;         "xelatex -interaction nonstopmode %b"))
+  (setq org-latex-to-pdf-process
+        '("xelatex -interaction nonstopmode %b"
+          "xelatex -interaction nonstopmode %b"
+          "bibtex %b"
+          "xelatex -interaction nonstopmode %b"
+          "xelatex -interaction nonstopmode %b"))
 
   ;; load reftex
   (require 'reftex)
