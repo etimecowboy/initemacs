@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-01-19 Thu 14:22 xin on p6t>
+;; Time-stamp:<2012-01-29 Sun 06:47 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -756,6 +756,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 ;; 对不齐。 测试：
 ;;       1234567890
 ;;       一二三四五
+;;       1l0oO
 
 ;;--------------------------------------------------------------------
 ;;;###autoload
@@ -780,7 +781,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
       (qiang-set-font
        '("DejaVu Sans Mono" "Consolas" "Monospace"
          "Monaco" "Courier") ":pixelsize=12"
-         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
+         '("STHeiti" "Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
            "黑体") 14)
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 9")))
@@ -809,6 +810,25 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
          '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
            "黑体") 16)
     (set-default-font "Monospace 12")))
+
+;;--------------------------------------------------------------------
+;; 配合的比较好的字体组合，可以一齐缩放
+;;;###autoload
+(defun xy/set-font-write-2 ()
+  "My Emacs font setting for writing articles."
+  (interactive)
+  (if window-system
+      (progn
+        ;; Setting English Font
+        (set-face-attribute
+         'default nil :font "Monofur")
+
+        ;; Chinese Font
+        (dolist (charset '(kana han symbol cjk-misc bopomofo))
+          (set-fontset-font (frame-parameter nil 'font)
+                            charset
+                            (font-spec :family "STHeiti"))))
+    (set-default-font "Monospace")))
 
 ;;====================================================================
 ;;* For compatibility among different version of Emacs
@@ -1289,8 +1309,8 @@ The process is:
   (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.0.0"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/org-20111226"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/rainbow-mode-0.2"))
-  (xy/recompile-dir (concat my-elpa-lisp-path
-                            "/sunrise-commander-5.400"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-commander-5.400"))
   ;;------------------------------------------------------------------
   ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled
   ;; with cedet. Just activate ecb without byte-compiled lisps, then

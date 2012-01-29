@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-01-19 Thu 23:32 xin on p6t>
+;; Time-stamp:<2012-01-27 Fri 12:32 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -141,7 +141,7 @@
 ;;===================================================================
 ;;* Fringe settings
 (fringe-mode '(nil . 0))
-(setq visual-line-fringe-indicators '(nil left-curly-arrow))
+(setq visual-line-fringe-indicators '(left-curly-arrow nil))
 (setq-default indicate-buffer-boundaries 'left ;; Display buffer boudaries
               indicate-empty-lines t ;; Indicate empty lines
               overflow-newline-into-fringe t)

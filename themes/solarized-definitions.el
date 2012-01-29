@@ -74,10 +74,10 @@ in order to expand or compress the tonal range displayed."
            (let ((index (if window-system
                             (if solarized-degrade
                                 3
-			      2)
-			  (if (= solarized-termcolors 256)
-			      3
-			    4))))
+                  2)
+              (if (= solarized-termcolors 256)
+                  3
+                4))))
              (nth index (assoc name solarized-colors)))))
     (let ((base03    (find-color 'base03))
           (base02    (find-color 'base02))
