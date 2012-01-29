@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2012-01-14 Sat 23:47 xin on t42>
+;; Time-stamp:<2012-01-29 Sun 09:26 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -107,6 +107,9 @@
 
   ;;--------------------------------------------------------------------
   ;; Other ido plugins
+
+  ;; ido-ubiquitous
+  ;; (@url :file-name "https://github.com/DarwinAwardWinner/ido-ubiquitous" :display "Source")
   (require 'ido-ubiquitous)
   (ido-ubiquitous-mode 1)
 
