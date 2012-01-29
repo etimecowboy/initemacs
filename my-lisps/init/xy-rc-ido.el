@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2012-01-29 Sun 09:26 xin on P6T-WIN7>
+;; Time-stamp:<2012-01-29 Sun 12:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -115,6 +115,9 @@
 
   (autoload 'idomenu "idomenu" nil t)
   ;; (global-set-key (kbd "C-c g") 'idomenu)
+
+  ;; ido-yes-or-no
+  (require 'ido-yes-or-no)
 
   (message "* ---[ ido configuration is complete ]---"))
 
