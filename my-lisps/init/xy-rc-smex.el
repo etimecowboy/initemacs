@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-smex.el'
-;; Time-stamp:<2012-01-19 Thu 13:31 xin on p6t>
+;; Time-stamp:<2012-01-29 Sun 21:36 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -38,6 +38,12 @@
   (unless (file-exists-p smex-save-file)
     (shell-command (concat "touch " smex-save-file)))
   (setq smex-history-length 100)
+
+  (defun smex-update-after-load (unused)
+    (when (boundp 'smex-cache)
+      (smex-update)))
+  (add-hook 'after-load-functions 'smex-update-after-load)
+
   (message "* ---[ smex configuration is complete ]---"))
 
 (provide 'xy-rc-smex)
