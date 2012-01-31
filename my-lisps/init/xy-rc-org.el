@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-01-20 Fri 18:09 xin on p6t>
+;; Time-stamp:<2012-01-31 Tue 20:31 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -720,12 +720,6 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-export-latex-coding-system 'utf-8-unix)
   (setq org-export-latex-table-caption-above nil)
   (setq org-export-latex-tables-column-borders t)
-
-  ;; NOTE:  Don't add more packages here. This will improve the
-  ;; portability of org-files.
-  ;; (add-to-list 'org-export-latex-packages-alist
-  ;;              '("UTF8,noindent,hyperref" "ctex"))
-
   (setq org-export-latex-classes
    (quote (("article" "\\documentclass[11pt]{article}"
             ("\\section{%s}" . "\\section*{%s}")
@@ -751,26 +745,66 @@ If html-file-name is not given, read it from minibuffer."
            ("beamer" "\\documentclass{beamer}"
             org-beamer-sectioning)
            ;;--------------------------------------------------
-           ;; BUG: conflicts with added ctex package
-           ;; ("ctexart" "\\documentclass[UTF8]{ctexart}")
+           ;; NOTE: ctex documentclasses, no need to use ctex package
+           ("ctexart" "\\documentclass[UTF8, winfonts, cs4size, a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]{ctexart}"
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+            ("\\paragraph{%s}" . "\\paragraph*{%s}")
+            ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+           ;;--------------------------------------------------
+           ("ctexrep" "\\documentclass[UTF8, winfonts, cs4size, a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]{ctexrep}"
+            ("\\part{%s}" . "\\part*{%s}")
+            ("\\chapter{%s}" . "\\chapter*{%s}")
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+           ;;--------------------------------------------------
+           ("ctexbook" "\\documentclass[UTF8, winfonts, cs4size, a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]{ctexbook}"
+            ("\\part{%s}" . "\\part*{%s}")
+            ("\\chapter{%s}" . "\\chapter*{%s}")
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
            )))
+
+  ;; NOTE: "Alist of default packages to be inserted in the header.
+  ;; Change this only if one of the packages here causes an
+  ;; incompatibility with another package you are using." The default
+  ;; `inputenc' and `fontenc' packages conflicts with `xecjk' and
+  ;; `ctex'. The encoding of the input latex files don't need to be
+  ;; set.
+  (setq org-export-latex-default-packages-alist
+        '(("" "fixltx2e" nil)
+          ("" "graphicx" t) ("" "longtable" nil) ("" "float" nil) ("" "wrapfig" nil)
+          ("" "soul" t) ("" "textcomp" t) ("" "marvosym" t) ("" "wasysym" t)
+          ("" "latexsym" t) ("" "amssymb" t)
+          ("bookmarksnumbered, pdfencoding=auto, breaklinks, colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
 
   ;; code listing settings, new `minted' is also supported
   (setq org-export-latex-listings t)
-  ;; The following 3 packages are required if using `listings' package
-  (add-to-list 'org-export-latex-packages-alist '("" "setspace"))
-  (add-to-list 'org-export-latex-packages-alist '("" "listings"))
-  (add-to-list 'org-export-latex-packages-alist '("" "xcolor"))
 
-  ;; BUG: not work
-  ;; latex to pdf command list
-  ;; (setq org-latex-to-pdf-process
-  ;;   '(("pdflatex -interaction nonstopmode %b"
-  ;;      "bibtex %b"
-  ;;      "pdflatex -interaction nonstopmode %b"
-  ;;      "pdflatex -interaction nonstopmode %b")
-  ;;    )
-  ;; )
+  ;; NOTE: Alist of packages to be inserted in every LaTeX header.
+  ;; These will be inserted after
+  ;; `org-export-latex-default-packages-alist'.
+  (setq org-export-latex-packages-alist
+        '(;; The following 3 packages are required if using `listings'
+          ("svgnames, table" "xcolor" t) ("" "listings" t) ("" "setspace" nil)
+          ;; Display various latex-related logos
+          ("" "metalogo" t) ("" "mflogo" t) ("" "texnames" t)
+          ;; Some extra text markups
+          ;; ("normalem" "ulem" t)
+          ;; Some figure-related packages
+          ;; ("" "rotating" t) ("" "subfig" t)
+          ;; Some table-related packages
+          ;; ("" "booktabs" t) ("" "longtable" nil) ("" "multirow" t)
+          ;; ("" "tabularx" t) ("" "warpcol" t)
+          ;; Some document layout/structure-related packages
+          ;; ("" "etex" nil) ("" "multicol" nil) ("" "multind" nil)
+          ;; ("" "titlesec" nil)
+          ))
+
+  ;; Use xelatex instead of pdflatex
   (setq org-latex-to-pdf-process
         '("xelatex -interaction nonstopmode %b"
           "xelatex -interaction nonstopmode %b"
