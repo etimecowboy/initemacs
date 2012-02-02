@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 28 Jan 2011
-;; Time-stamp:<2011-12-06 Tue 08:09 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-02 Thu 00:55 xin on p6t>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -184,6 +184,21 @@
 ;;           (setq i (1+ i)))
 ;;     (aset disptab 127 (vector ?^ ??))
 ;;     (setq buffer-display-table disptab)))
+
+;;** 确认创建新文件夹
+;;;###autoload
+(defun my-make-directory-yes-or-no (dir)
+  "Ask user to create the DIR, if it does not already exist."
+
+  (if dir
+      (if (not (file-directory-p dir))
+          (if (yes-or-no-p
+               (concat "The directory `" dir
+                       "' does not exist currently. Create it? "))
+              (make-directory dir t)
+            (error
+             (concat "Cannot continue without directory `" dir "'"))))
+    (error "my-make-directory-yes-or-no: missing operand")))
 
 ;;====================================================================
 ;;* Programming tools
