@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-01-31 Tue 20:31 xin on p6t>
+;; Time-stamp:<2012-02-05 Sun 03:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -792,6 +792,8 @@ If html-file-name is not given, read it from minibuffer."
           ("svgnames, table" "xcolor" t) ("" "listings" t) ("" "setspace" nil)
           ;; Display various latex-related logos
           ("" "metalogo" t) ("" "mflogo" t) ("" "texnames" t)
+          ;; xelatex font adjustment (by default)
+          ;; ("" "fontspec" nil)
           ;; Some extra text markups
           ;; ("normalem" "ulem" t)
           ;; Some figure-related packages
@@ -877,6 +879,30 @@ save -ascii %s ans")
   ;; org v7.3 new features
   ;; Fontify code in code blocks
   (setq org-src-fontify-natively t)
+
+  ;; set default viewer for exported files
+  (setq org-file-apps
+        (quote ((auto-mode       . emacs)
+                ("\\.odc\\'"     . system)
+                ("\\.odf\\'"     . system)
+                ("\\.odi\\'"     . system)
+                ("\\.otp\\'"     . system)
+                ("\\.odp\\'"     . system)
+                ("\\.otg\\'"     . system)
+                ("\\.odg\\'"     . system)
+                ("\\.ots\\'"     . system)
+                ("\\.ods\\'"     . system)
+                ("\\.odm\\'"     . system)
+                ("\\.ott\\'"     . system)
+                ("\\.odt\\'"     . system)
+                ("\\.mm\\'"      . system)
+                ("\\.pdf\\'"     . system)
+                ("\\.x?html?\\'" . system)
+                ("\\.png\\'"     . system)
+                ("\\.jpg\\'"     . system)
+                ("\\.bmp\\'"     . system)
+                ("\\.gif\\'"     . system)
+                )))
 
   ;;==================================================================
   ;; Publishing settings
