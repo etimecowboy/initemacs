@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-01-27 Fri 12:32 xin on p6t>
+;; Time-stamp:<2012-02-06 Mon 10:59 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -55,14 +55,12 @@
 ;;--------------------------------------------------------------------
 ;;** Transparent frame
 ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/TransparentEmacs" :display "emacswiki")
-;; BUG: not work in Windows 7, nor in Linux with gnome 3
-;; (when (and is-after-emacs-23 window-system) ; from emacs-22
-
-;;   ;; User controls the frame opacity
-;;   ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
-;;   (set-frame-parameter (selected-frame) 'alpha '(100 100))
-;;   (add-to-list 'default-frame-alist '(alpha 100 100))
-;;   (global-set-key (kbd "C-x W t") 'toggle-transparency))
+;;; `alpha.el'
+;; sample keybinding for transparency manipulation
+(global-set-key (kbd "M-?") 'transparency-set-value)
+;; the two below let for smooth transparency control
+(global-set-key (kbd "C->") 'transparency-increase)
+(global-set-key (kbd "C-<") 'transparency-decrease)
 
 ;;---------------------------------------------------------------------
 ;;** Resize frame and window
