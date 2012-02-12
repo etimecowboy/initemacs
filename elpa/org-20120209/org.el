@@ -4547,7 +4547,7 @@ but the stars and the body are.")
 			      (mapcar (lambda (x) (org-split-string x ":"))
 				      (org-split-string value)))))))
 	     ((equal key "DRAWERS")
-	      (setq drawers (org-split-string value splitre)))
+	      (setq drawers (delete-dups (append org-drawers (org-split-string value splitre)))))
 	     ((equal key "CONSTANTS")
 	      (setq const (append const (org-split-string value splitre))))
 	     ((equal key "STARTUP")
@@ -6210,34 +6210,36 @@ in special contexts.
 
 (defun org-cycle-internal-global ()
   "Do the global cycling action."
-  (cond
-   ((and (eq last-command this-command)
-	 (eq org-cycle-global-status 'overview))
-    ;; We just created the overview - now do table of contents
-    ;; This can be slow in very large buffers, so indicate action
-    (run-hook-with-args 'org-pre-cycle-hook 'contents)
-    (message "CONTENTS...")
-    (org-content)
-    (message "CONTENTS...done")
-    (setq org-cycle-global-status 'contents)
-    (run-hook-with-args 'org-cycle-hook 'contents))
+  ;; Hack to avoid display of messages for .org  attachments in Gnus
+  (let ((ga (string-match "\\*fontification" (buffer-name))))
+    (cond
+     ((and (eq last-command this-command)
+	   (eq org-cycle-global-status 'overview))
+      ;; We just created the overview - now do table of contents
+      ;; This can be slow in very large buffers, so indicate action
+      (run-hook-with-args 'org-pre-cycle-hook 'contents)
+      (unless ga (message "CONTENTS..."))
+      (org-content)
+      (unless ga (message "CONTENTS...done"))
+      (setq org-cycle-global-status 'contents)
+      (run-hook-with-args 'org-cycle-hook 'contents))
 
-   ((and (eq last-command this-command)
-	 (eq org-cycle-global-status 'contents))
-    ;; We just showed the table of contents - now show everything
-    (run-hook-with-args 'org-pre-cycle-hook 'all)
-    (show-all)
-    (message "SHOW ALL")
-    (setq org-cycle-global-status 'all)
-    (run-hook-with-args 'org-cycle-hook 'all))
+     ((and (eq last-command this-command)
+	   (eq org-cycle-global-status 'contents))
+      ;; We just showed the table of contents - now show everything
+      (run-hook-with-args 'org-pre-cycle-hook 'all)
+      (show-all)
+      (unless ga (message "SHOW ALL"))
+      (setq org-cycle-global-status 'all)
+      (run-hook-with-args 'org-cycle-hook 'all))
 
-   (t
-    ;; Default action: go to overview
-    (run-hook-with-args 'org-pre-cycle-hook 'overview)
-    (org-overview)
-    (message "OVERVIEW")
-    (setq org-cycle-global-status 'overview)
-    (run-hook-with-args 'org-cycle-hook 'overview))))
+     (t
+      ;; Default action: go to overview
+      (run-hook-with-args 'org-pre-cycle-hook 'overview)
+      (org-overview)
+      (unless ga (message "OVERVIEW"))
+      (setq org-cycle-global-status 'overview)
+      (run-hook-with-args 'org-cycle-hook 'overview)))))
 
 (defun org-cycle-internal-local ()
   "Do the local cycling action."
@@ -6301,6 +6303,8 @@ in special contexts.
 	  (org-list-set-item-visibility (point-at-bol) struct 'children)
 	(org-show-entry)
 	(show-children)
+	(when (memq 'org-cycle-hide-drawers org-cycle-hook)
+	  (org-cycle-hide-drawers 'subtree))
 	;; Fold every list in subtree to top-level items.
 	(when (eq org-cycle-include-plain-lists 'integrate)
 	  (save-excursion
@@ -9443,7 +9447,7 @@ Org-mode syntax."
   (interactive "sLink: \nP")
   (let ((reference-buffer (or reference-buffer (current-buffer))))
     (with-temp-buffer
-      (let ((org-inhibit-startup t))
+      (let ((org-inhibit-startup (not reference-buffer)))
 	(org-mode)
 	(insert s)
 	(goto-char (point-min))
@@ -18036,14 +18040,16 @@ See the individual commands for more information."
    (t (call-interactively 'backward-word))))
 
 (defun org-metaright (&optional arg)
-  "Demote subtree or move table column to right.
-Calls `org-do-demote' or `org-table-move-column', depending on context.
+  "Demote a subtree, a list item or move table column to right.
+In front of a drawer or a block keyword, indent it correctly.
 With no specific context, calls the Emacs default `forward-word'.
 See the individual commands for more information."
   (interactive "P")
   (cond
    ((run-hook-with-args-until-success 'org-metaright-hook))
    ((org-at-table-p) (call-interactively 'org-table-move-column))
+   ((org-at-drawer-p) (call-interactively 'org-indent-drawer))
+   ((org-at-block-p) (call-interactively 'org-indent-block))
    ((org-with-limited-levels
      (or (org-at-heading-p)
 	 (and (org-region-active-p)
@@ -19329,6 +19335,17 @@ With prefix arg UNCOMPILED, load the uncompiled versions."
       (eval form)
     (error (format "%%![Error: %s]" error))))
 
+(defun org-in-clocktable-p ()
+  "Check if the cursor is in a clocktable."
+  (let ((pos (point)) start)
+    (save-excursion
+      (end-of-line 1)
+      (and (re-search-backward "^[ \t]*#\\+BEGIN:[ \t]+clocktable" nil t)
+	   (setq start (match-beginning 0))
+	   (re-search-forward "^[ \t]*#\\+END:.*" nil t)
+	   (>= (match-end 0) pos)
+	   start))))
+
 (defun org-in-commented-line ()
   "Is point in a line starting with `#'?"
   (equal (char-after (point-at-bol)) ?#))
@@ -20207,6 +20224,47 @@ If point is in an inline task, mark that task instead."
 		       t t))
     (org-move-to-column column)))
 
+(defun org-indent-drawer ()
+  "Indent the drawer at point."
+  (interactive)
+  (let ((p (point))
+	(e (and (save-excursion (re-search-forward ":END:" nil t))
+		(match-end 0)))
+	(folded
+	 (save-excursion
+	   (end-of-line)
+	   (when (overlays-at (point))
+	     (member 'invisible (overlay-properties
+				 (car (overlays-at (point)))))))))
+    (when folded (org-cycle))
+    (indent-for-tab-command)
+    (while (and (move-beginning-of-line 2) (< (point) e))
+	(indent-for-tab-command))
+    (goto-char p)
+    (when folded (org-cycle)))
+  (message "Drawer at point indented"))
+
+(defun org-indent-block ()
+  "Indent the block at point."
+  (interactive)
+  (let ((p (point))
+	(case-fold-search t)
+	(e (and (save-excursion (re-search-forward "#\\+end_?\\(?:[a-z]+\\)?" nil t))
+		(match-end 0)))
+	(folded
+	 (save-excursion
+	   (end-of-line)
+	   (when (overlays-at (point))
+	     (member 'invisible (overlay-properties
+				 (car (overlays-at (point)))))))))
+    (when folded (org-cycle))
+    (indent-for-tab-command)
+    (while (and (move-beginning-of-line 2) (< (point) e))
+	(indent-for-tab-command))
+    (goto-char p)
+    (when folded (org-cycle)))
+  (message "Block at point indented"))
+
 (defvar org-adaptive-fill-regexp-backup adaptive-fill-regexp
   "Variable to store copy of `adaptive-fill-regexp'.
 Since `adaptive-fill-regexp' is set to never match, we need to
@@ -20251,10 +20309,11 @@ the functionality can be provided as a fall-back.")
   (org-set-local 'fill-paragraph-function 'org-fill-paragraph)
   ;; Prevent auto-fill from inserting unwanted new items.
   (if (boundp 'fill-nobreak-predicate)
-      (org-set-local 'fill-nobreak-predicate
-		     (if (memq 'org-fill-item-nobreak-p fill-nobreak-predicate)
-			 fill-nobreak-predicate
-		       (cons 'org-fill-item-nobreak-p fill-nobreak-predicate))))
+      (org-set-local
+       'fill-nobreak-predicate
+       (org-uniquify
+	(append fill-nobreak-predicate
+		'(org-fill-item-nobreak-p org-fill-line-break-nobreak-p)))))
   ;; Adaptive filling: To get full control, first make sure that
   ;; `adaptive-fill-regexp' never matches.  Then install our own matcher.
   (unless (local-variable-p 'adaptive-fill-regexp (current-buffer))
@@ -20273,6 +20332,13 @@ the functionality can be provided as a fall-back.")
 (defun org-fill-item-nobreak-p ()
   "Non-nil when a line break at point would insert a new item."
   (and (looking-at (org-item-re)) (org-list-in-valid-context-p)))
+
+(defun org-fill-line-break-nobreak-p ()
+  "Non-nil when a line break at point would create an Org line break."
+  (save-excursion
+    (skip-chars-backward "[ \t]")
+    (skip-chars-backward "\\\\")
+    (looking-at "\\\\\\\\\\($\\|[^\\\\]\\)")))
 
 (defun org-fill-paragraph (&optional justify)
   "Re-align a table, pass through to fill-paragraph if no table."
@@ -20508,24 +20574,28 @@ beyond the end of the headline."
 		 ((not (eq last-command this-command)) (point))
 		 (t refpos)))))
        ((org-at-item-p)
-	;; Set special position at first white space character after
-	;; bullet, and check-box, if any.
-	(let ((after-bullet
-	       (and (looking-at org-list-full-item-re)
-		    (let ((box (match-end 3)))
-		      (if (not box) (match-end 1)
-			(let ((after (char-after box)))
-			  (if (and after (= after ? )) (1+ box) box)))))))
-	  ;; Special case: Move point to special position when
-	  ;; currently after it or at beginning of line.
-	  (if (eq special t)
-	      (when (or (> pos after-bullet) (= (point) pos))
-		(goto-char after-bullet))
-	    ;; Reversed case: Move point to special position when
-	    ;; point was already at beginning of line and command is
-	    ;; repeated.
-	    (when (and (= (point) pos) (eq last-command this-command))
-	      (goto-char after-bullet)))))))
+	;; Being at an item and not looking at an the item means point
+	;; was previously moved to beginning of a visual line, whiche
+	;; doesn't contain the item.  Therefore, do nothing special,
+	;; just stay here.
+	(when (looking-at org-list-full-item-re)
+	  ;; Set special position at first white space character after
+	  ;; bullet, and check-box, if any.
+	  (let ((after-bullet
+		 (let ((box (match-end 3)))
+		   (if (not box) (match-end 1)
+		     (let ((after (char-after box)))
+		       (if (and after (= after ? )) (1+ box) box))))))
+	    ;; Special case: Move point to special position when
+	    ;; currently after it or at beginning of line.
+	    (if (eq special t)
+		(when (or (> pos after-bullet) (= (point) pos))
+		  (goto-char after-bullet))
+	      ;; Reversed case: Move point to special position when
+	      ;; point was already at beginning of line and command is
+	      ;; repeated.
+	      (when (and (= (point) pos) (eq last-command this-command))
+		(goto-char after-bullet))))))))
     (org-no-warnings
      (and (featurep 'xemacs) (setq zmacs-region-stays t)))))
 
@@ -20564,7 +20634,10 @@ beyond the end of the headline."
       (move-end-of-line 1)
       (when (overlays-at (1- (point))) (backward-char 1)))
      ;; At an item: Move before any hidden text.
-     (t (call-interactively 'end-of-line)))
+     (t (call-interactively
+	 (cond ((org-bound-and-true-p line-move-visual) 'end-of-visual-line)
+	       ((fboundp 'move-end-of-line) 'move-end-of-line)
+	       (t 'end-of-line)))))
     (org-no-warnings
      (and (featurep 'xemacs) (setq zmacs-region-stays t)))))
 
@@ -20760,10 +20833,16 @@ This version does not only check the character property, but also
 (defalias 'org-on-heading-p 'org-at-heading-p)
 
 (defun org-at-drawer-p nil
-  "Whether point is at a drawer."
+  "Is cursor at a drawer keyword?"
   (save-excursion
     (move-beginning-of-line 1)
     (looking-at org-drawer-regexp)))
+
+(defun org-at-block-p nil
+  "Is cursor at a block keyword?"
+  (save-excursion
+    (move-beginning-of-line 1)
+    (looking-at org-block-regexp)))
 
 (defun org-point-at-end-of-empty-headline ()
   "If point is at the end of an empty headline, return t, else nil.

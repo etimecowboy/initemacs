@@ -1480,8 +1480,8 @@ quick note in the LOGBOOK drawer, in a similar way to state changes, use
 
    ---------- Footnotes ----------
 
-   (1) You can define drawers on a per-file basis with a line like
-`#+DRAWERS: HIDDEN PROPERTIES STATE'
+   (1) You can define additional drawers on a per-file basis with a
+line like `#+DRAWERS: HIDDEN STATE'
 
 
 File: org,  Node: Blocks,  Next: Footnotes,  Prev: Drawers,  Up: Document Structure
@@ -9725,8 +9725,7 @@ this line.  Various optional arguments to the `\includegraphics' macro
 can also be specified in this fashion.  To modify the placement option
 of the floating environment, add something like `placement=[h!]' to the
 attributes.  It is to be noted this option can be used with tables as
-well(1).  For example the `#+ATTR_LaTeX:' line below is exported as the
-`figure' environment below it.
+well(1).
 
    If you would like to let text flow around the image, add the word
 `wrap' to the `#+ATTR_LaTeX:' line, which will make the figure occupy
@@ -12739,7 +12738,8 @@ File: org,  Node: noweb,  Next: noweb-ref,  Prev: session,  Up: Specific header 
 The `:noweb' header argument controls expansion of "noweb" syntax
 references (see *note Noweb reference syntax::) when the code block is
 evaluated, tangled, or exported.  The `:noweb' header argument can have
-one of four values: `no', `yes', `tangle', or `no-export'.
+one of the five values: `no', `yes', `tangle', or `no-export'
+`strip-export'.
 
    * `no' The default.  "Noweb" syntax references in the body of the
      code block will not be expanded before the code block is
@@ -12757,6 +12757,11 @@ one of four values: `no', `yes', `tangle', or `no-export'.
    * `no-export' "Noweb" syntax references in the body of the code
      block will be expanded before the block is evaluated or tangled.
      However, "noweb" syntax references will not be expanded when the
+     code block is exported.
+
+   * `strip-export' "Noweb" syntax references in the body of the code
+     block will be expanded before the block is evaluated or tangled.
+     However, "noweb" syntax references will not be removed when the
      code block is exported.
 
 Noweb prefix lines
@@ -13237,24 +13242,50 @@ context.
 
    In an Org mode buffer, the following key bindings are active:
 
-`C-c C-v a'   or   `C-c C-v      `org-babel-sha1-hash'
-C-a'                             
+`C-c C-v p'   or   `C-c C-v      `org-babel-previous-src-block'
+C-p'                             
+`C-c C-v n'   or   `C-c C-v      `org-babel-next-src-block'
+C-n'                             
+`C-c C-v e'   or   `C-c C-v      `org-babel-execute-maybe'
+C-e'                             
+`C-c C-v o'   or   `C-c C-v      `org-babel-open-src-block-result'
+C-o'                             
+`C-c C-v v'   or   `C-c C-v      `org-babel-expand-src-block'
+C-v'                             
+`C-c C-v u'   or   `C-c C-v      `org-babel-goto-src-block-head'
+C-u'                             
+`C-c C-v g'   or   `C-c C-v      `org-babel-goto-named-src-block'
+C-g'                             
+`C-c C-v r'   or   `C-c C-v      `org-babel-goto-named-result'
+C-r'                             
 `C-c C-v b'   or   `C-c C-v      `org-babel-execute-buffer'
 C-b'                             
-`C-c C-v f'   or   `C-c C-v      `org-babel-tangle-file'
-C-f'                             
-`C-c C-v g'                      `org-babel-goto-named-source-block'
-`C-c C-v h'                      `org-babel-describe-bindings'
-`C-c C-v l'   or   `C-c C-v      `org-babel-lob-ingest'
-C-l'                             
-`C-c C-v p'   or   `C-c C-v      `org-babel-expand-src-block'
-C-p'                             
 `C-c C-v s'   or   `C-c C-v      `org-babel-execute-subtree'
 C-s'                             
+`C-c C-v d'   or   `C-c C-v      `org-babel-demarcate-block'
+C-d'                             
 `C-c C-v t'   or   `C-c C-v      `org-babel-tangle'
 C-t'                             
-`C-c C-v z'   or   `C-c C-v      `org-babel-switch-to-session'
+`C-c C-v f'   or   `C-c C-v      `org-babel-tangle-file'
+C-f'                             
+`C-c C-v c'   or   `C-c C-v      `org-babel-check-src-block'
+C-c'                             
+`C-c C-v j'   or   `C-c C-v      `org-babel-insert-header-arg'
+C-j'                             
+`C-c C-v l'   or   `C-c C-v      `org-babel-load-in-session'
+C-l'                             
+`C-c C-v i'   or   `C-c C-v      `org-babel-lob-ingest'
+C-i'                             
+`C-c C-v I'   or   `C-c C-v      `org-babel-view-src-block-info'
+C-I'                             
+`C-c C-v z'   or   `C-c C-v      `org-babel-switch-to-session-with-code'
 C-z'                             
+`C-c C-v a'   or   `C-c C-v      `org-babel-sha1-hash'
+C-a'                             
+`C-c C-v h'   or   `C-c C-v      `org-babel-describe-bindings'
+C-h'                             
+`C-c C-v x'   or   `C-c C-v      `org-babel-do-key-sequence-in-edit-buffer'
+C-x'                             
 
 
 File: org,  Node: Batch execution,  Prev: Key bindings and useful functions,  Up: Working With Source Code
@@ -13538,8 +13569,8 @@ file is visited again in a new Emacs session.
      the top-level entries.
 
 `#+DRAWERS: NAME1 .....'
-     Set the file-local set of drawers.  The corresponding global
-     variable is `org-drawers'.
+     Set the file-local set of additional drawers.  The corresponding
+     global variable is `org-drawers'.
 
 `#+LINK:  linkword replace'
      These lines (several are allowed) specify link abbreviations.
@@ -15010,13 +15041,15 @@ File: org,  Node: MobileOrg,  Next: History and Acknowledgments,  Prev: Hacking,
 Appendix B MobileOrg
 ********************
 
-MobileOrg (http://mobileorg.ncogni.to/) is an application for the
-iPhone/iPod Touch series of devices, developed by Richard Moreland.
-MobileOrg offers offline viewing and capture support for an Org mode
-system rooted on a "real" computer.  It does also allow you to record
-changes to existing entries.  Android users should check out MobileOrg
-Android (http://wiki.github.com/matburt/mobileorg-android/) by Matt
-Jones.
+MobileOrg is the name of the mobile companion app for Org mode,
+currently available for iOS and for Android.  MobileOrg offers offline
+viewing and capture support for an Org mode system rooted on a "real"
+computer.  It does also allow you to record changes to existing entries.
+The iOS implementation (http://mobileorg.ncogni.to/) for the
+iPhone/iPod Touch/iPad series of devices, was developed by Richard
+Moreland. Android users should check out MobileOrg Android
+(http://wiki.github.com/matburt/mobileorg-android/) by Matt Jones.  The
+two implementations are not identical but offer similar features.
 
    This appendix describes the support Org has for creating agenda
 views in a format that can be displayed by MobileOrg, and for
@@ -15200,7 +15233,7 @@ Bastien Guerry
      exporter and the plain list parser.  His support during the early
      days, when he basically acted as co-maintainer, was central to the
      success of this project.  Bastien also invented Worg, helped
-     establishing the Web presence of Org, and sponsors hosting costs
+     establishing the Web presence of Org, and sponsored hosting costs
      for the orgmode.org website.
 
 Eric Schulte and Dan Davison
@@ -15474,7 +15507,7 @@ Concept index
 * #+ATTR_HTML:                           Links in HTML export.
                                                               (line  21)
 * #+ATTR_LaTeX <1>:                      Images in LaTeX export.
-                                                              (line  29)
+                                                              (line  28)
 * #+ATTR_LaTeX:                          Tables in LaTeX export.
                                                               (line  14)
 * #+ATTR_ODT <1>:                        Customizing tables in ODT export.
@@ -15504,7 +15537,7 @@ Concept index
 * #+CAPTION <1>:                         Images in DocBook export.
                                                               (line  30)
 * #+CAPTION <2>:                         Images in LaTeX export.
-                                                              (line  29)
+                                                              (line  28)
 * #+CAPTION <3>:                         Tables in LaTeX export.
                                                               (line  14)
 * #+CAPTION <4>:                         Images in HTML export.
@@ -15536,7 +15569,7 @@ Concept index
 * #+LABEL <1>:                           Images in DocBook export.
                                                               (line  30)
 * #+LABEL <2>:                           Images in LaTeX export.
-                                                              (line  29)
+                                                              (line  28)
 * #+LABEL <3>:                           Tables in LaTeX export.
                                                               (line  14)
 * #+LABEL:                               Images and tables.   (line   6)
@@ -16776,44 +16809,96 @@ Key index
 * C-c C-t:                               TODO basics.         (line  13)
 * C-c C-u:                               Motion.              (line  18)
 * C-c C-v a:                             Key bindings and useful functions.
-                                                              (line  18)
+                                                              (line  54)
 * C-c C-v b:                             Key bindings and useful functions.
-                                                              (line  18)
-* C-c C-v C-a:                           Key bindings and useful functions.
-                                                              (line  18)
-* C-c C-v C-b:                           Key bindings and useful functions.
-                                                              (line  18)
-* C-c C-v C-f:                           Key bindings and useful functions.
-                                                              (line  20)
-* C-c C-v C-l:                           Key bindings and useful functions.
-                                                              (line  25)
-* C-c C-v C-p:                           Key bindings and useful functions.
-                                                              (line  26)
-* C-c C-v C-s:                           Key bindings and useful functions.
-                                                              (line  28)
-* C-c C-v C-t:                           Key bindings and useful functions.
-                                                              (line  30)
-* C-c C-v C-z:                           Key bindings and useful functions.
                                                               (line  32)
-* C-c C-v f:                             Key bindings and useful functions.
+* C-c C-v c:                             Key bindings and useful functions.
+                                                              (line  42)
+* C-c C-v C-a:                           Key bindings and useful functions.
+                                                              (line  54)
+* C-c C-v C-b:                           Key bindings and useful functions.
+                                                              (line  32)
+* C-c C-v C-c:                           Key bindings and useful functions.
+                                                              (line  42)
+* C-c C-v C-d:                           Key bindings and useful functions.
+                                                              (line  36)
+* C-c C-v C-e:                           Key bindings and useful functions.
                                                               (line  20)
-* C-c C-v g:                             Key bindings and useful functions.
-                                                              (line  22)
-* C-c C-v h:                             Key bindings and useful functions.
-                                                              (line  24)
-* C-c C-v i:                             Library of Babel.    (line  20)
-* C-c C-v l:                             Key bindings and useful functions.
-                                                              (line  25)
-* C-c C-v p:                             Key bindings and useful functions.
-                                                              (line  26)
-* C-c C-v s:                             Key bindings and useful functions.
+* C-c C-v C-f:                           Key bindings and useful functions.
+                                                              (line  40)
+* C-c C-v C-g:                           Key bindings and useful functions.
                                                               (line  28)
-* C-c C-v t <1>:                         Key bindings and useful functions.
+* C-c C-v C-h:                           Key bindings and useful functions.
+                                                              (line  56)
+* C-c C-v C-I:                           Key bindings and useful functions.
+                                                              (line  50)
+* C-c C-v C-i:                           Key bindings and useful functions.
+                                                              (line  48)
+* C-c C-v C-j:                           Key bindings and useful functions.
+                                                              (line  44)
+* C-c C-v C-l:                           Key bindings and useful functions.
+                                                              (line  46)
+* C-c C-v C-n:                           Key bindings and useful functions.
+                                                              (line  18)
+* C-c C-v C-o:                           Key bindings and useful functions.
+                                                              (line  22)
+* C-c C-v C-p:                           Key bindings and useful functions.
+                                                              (line  18)
+* C-c C-v C-r:                           Key bindings and useful functions.
                                                               (line  30)
+* C-c C-v C-s:                           Key bindings and useful functions.
+                                                              (line  34)
+* C-c C-v C-t:                           Key bindings and useful functions.
+                                                              (line  38)
+* C-c C-v C-u:                           Key bindings and useful functions.
+                                                              (line  26)
+* C-c C-v C-v:                           Key bindings and useful functions.
+                                                              (line  24)
+* C-c C-v C-x:                           Key bindings and useful functions.
+                                                              (line  58)
+* C-c C-v C-z:                           Key bindings and useful functions.
+                                                              (line  52)
+* C-c C-v d:                             Key bindings and useful functions.
+                                                              (line  36)
+* C-c C-v e:                             Key bindings and useful functions.
+                                                              (line  20)
+* C-c C-v f:                             Key bindings and useful functions.
+                                                              (line  40)
+* C-c C-v g:                             Key bindings and useful functions.
+                                                              (line  28)
+* C-c C-v h:                             Key bindings and useful functions.
+                                                              (line  56)
+* C-c C-v I:                             Key bindings and useful functions.
+                                                              (line  50)
+* C-c C-v i <1>:                         Key bindings and useful functions.
+                                                              (line  48)
+* C-c C-v i:                             Library of Babel.    (line  20)
+* C-c C-v j:                             Key bindings and useful functions.
+                                                              (line  44)
+* C-c C-v l:                             Key bindings and useful functions.
+                                                              (line  46)
+* C-c C-v n:                             Key bindings and useful functions.
+                                                              (line  18)
+* C-c C-v o:                             Key bindings and useful functions.
+                                                              (line  22)
+* C-c C-v p:                             Key bindings and useful functions.
+                                                              (line  18)
+* C-c C-v r:                             Key bindings and useful functions.
+                                                              (line  30)
+* C-c C-v s:                             Key bindings and useful functions.
+                                                              (line  34)
+* C-c C-v t <1>:                         Key bindings and useful functions.
+                                                              (line  38)
 * C-c C-v t:                             Extracting source code.
                                                               (line  26)
+* C-c C-v u:                             Key bindings and useful functions.
+                                                              (line  26)
+* C-c C-v v:                             Key bindings and useful functions.
+                                                              (line  24)
+* C-c C-v x:                             Key bindings and useful functions.
+                                                              (line  58)
 * C-c C-v z:                             Key bindings and useful functions.
-                                                              (line  32)
+                                                              (line  52)
 * C-c C-w <1>:                           Agenda commands.     (line 299)
 * C-c C-w <2>:                           Refiling notes.      (line  11)
 * C-c C-w <3>:                           Using capture.       (line  22)
@@ -18408,179 +18493,179 @@ Ref: Header and sectioning-Footnote-1420302
 Node: Quoting LaTeX code420428
 Node: Tables in LaTeX export421063
 Node: Images in LaTeX export422101
-Ref: Images in LaTeX export-Footnote-1424327
-Node: Beamer class export424547
-Node: DocBook export430247
-Node: DocBook export commands431121
-Ref: DocBook export commands-Footnote-1432674
-Ref: DocBook export commands-Footnote-2432734
-Node: Quoting DocBook code432786
-Node: Recursive sections433835
-Node: Tables in DocBook export434563
-Node: Images in DocBook export435028
-Node: Special characters436962
-Node: OpenDocument Text export438003
-Ref: OpenDocument Text export-Footnote-1439016
-Ref: OpenDocument Text export-Footnote-2439046
-Node: Pre-requisites for ODT export439190
-Node: ODT export commands439549
-Ref: x-export-to-odt439780
-Ref: x-export-to-other-formats440864
-Ref: ODT export commands-Footnote-1441403
-Ref: ODT export commands-Footnote-2441463
-Node: Applying custom styles441514
-Node: Links in ODT export443682
-Node: Tables in ODT export444002
-Ref: Tables in ODT export-Footnote-1444964
-Node: Images in ODT export445057
-Node: Math formatting in ODT export447282
-Node: Working with LaTeX math snippets447741
-Ref: Working with LaTeX math snippets-Footnote-1449760
-Node: Working with MathML or OpenDocument formula files449835
-Node: Literal examples in ODT export450406
-Ref: Literal examples in ODT export-Footnote-1451591
-Node: Advanced topics in ODT export451867
-Node: Exporting and converting to other formats452630
-Ref: x-odt-converter-capabilities454775
-Node: Working with OpenDocument style files455373
-Ref: x-factory-styles455876
-Ref: x-orgodtstyles-xml456108
-Ref: x-orgodtcontenttemplate-xml456435
-Ref: x-overriding-factory-styles457091
-Ref: x-org-export-odt-styles-file457365
-Ref: x-org-export-odt-content-template-file458253
-Node: Creating one-off styles458401
-Node: Customizing tables in ODT export460599
-Ref: Customizing tables in ODT export-Footnote-1465611
-Ref: Customizing tables in ODT export-Footnote-2465715
-Ref: Customizing tables in ODT export-Footnote-3465803
-Node: Validating OpenDocument XML466118
-Ref: Validating OpenDocument XML-Footnote-1467142
-Node: TaskJuggler export467194
-Node: Freemind export472515
-Node: XOXO export472868
-Node: iCalendar export473399
-Ref: iCalendar export-Footnote-1476093
-Ref: iCalendar export-Footnote-2476183
-Ref: iCalendar export-Footnote-3476283
-Node: Publishing476420
-Node: Configuration477288
-Node: Project alist478070
-Node: Sources and destinations479232
-Node: Selecting files480749
-Node: Publishing action481748
-Ref: Publishing action-Footnote-1483538
-Node: Publishing options483892
-Node: Publishing links487568
-Node: Sitemap489251
-Node: Generating an index492466
-Node: Uploading files493051
-Node: Sample configuration494814
-Node: Simple example495303
-Node: Complex example495976
-Node: Triggering publication498031
-Node: Working With Source Code499019
-Node: Structure of code blocks500710
-Ref: Structure of code blocks-Footnote-1502579
-Node: Editing source code502673
-Node: Exporting code blocks504223
-Node: Extracting source code505966
-Node: Evaluating code blocks507327
-Ref: Evaluating code blocks-Footnote-1510679
-Ref: Evaluating code blocks-Footnote-2510976
-Node: Library of Babel511104
-Node: Languages512081
-Node: Header arguments514385
-Node: Using header arguments514870
-Node: System-wide header arguments515630
-Node: Language-specific header arguments516453
-Node: Buffer-wide header arguments516856
-Node: Header arguments in Org mode properties517546
-Node: Code block specific header arguments518653
-Node: Header arguments in function calls520479
-Node: Specific header arguments521226
-Node: var523517
-Node: results530637
-Node: file534873
-Node: dir535779
-Node: exports538703
-Node: tangle539357
-Node: mkdirp540168
-Node: comments540499
-Node: padline541637
-Node: no-expand542167
-Node: session542659
-Node: noweb543106
-Node: noweb-ref544901
-Ref: noweb-ref-Footnote-1546367
-Node: noweb-sep546496
-Node: cache546790
-Node: sep548286
-Node: hlines548858
-Node: colnames550366
-Node: rownames551845
-Node: shebang552854
-Node: eval553249
-Node: wrap554283
-Node: Results of evaluation554710
-Node: Noweb reference syntax558477
-Node: Key bindings and useful functions559868
-Node: Batch execution561362
-Node: Miscellaneous562457
-Node: Completion563286
-Node: Easy Templates565261
-Node: Speed keys566670
-Node: Code evaluation security567496
-Node: Customization570205
-Node: In-buffer settings570796
-Ref: In-buffer settings-Footnote-1580031
-Node: The very busy C-c C-c key580079
-Node: Clean view582061
-Ref: Clean view-Footnote-1586047
-Ref: Clean view-Footnote-2586108
-Ref: Clean view-Footnote-3586292
-Ref: Clean view-Footnote-4586353
-Ref: Clean view-Footnote-5586465
-Ref: Clean view-Footnote-6586520
-Node: TTY keys586645
-Node: Interaction588411
-Node: Cooperation588808
-Node: Conflicts592606
-Node: org-crypt.el596628
-Node: Hacking597942
-Node: Hooks598794
-Node: Add-on packages599210
-Node: Adding hyperlink types599751
-Node: Context-sensitive commands603673
-Ref: Context-sensitive commands-Footnote-1605249
-Node: Tables in arbitrary syntax605383
-Node: Radio tables606792
-Node: A LaTeX example609335
-Ref: A LaTeX example-Footnote-1613257
-Ref: A LaTeX example-Footnote-2613405
-Node: Translator functions613840
-Ref: Translator functions-Footnote-1617063
-Node: Radio lists617151
-Node: Dynamic blocks618280
-Node: Special agenda views620496
-Ref: Special agenda views-Footnote-1624747
-Node: Extracting agenda information624882
-Node: Using the property API628954
-Node: Using the mapping API632265
-Node: MobileOrg636658
-Node: Setting up the staging area638135
-Ref: Setting up the staging area-Footnote-1639234
-Ref: Setting up the staging area-Footnote-2639535
-Node: Pushing to MobileOrg639797
-Ref: Pushing to MobileOrg-Footnote-1640787
-Ref: Pushing to MobileOrg-Footnote-2641203
-Node: Pulling from MobileOrg641260
-Ref: Pulling from MobileOrg-Footnote-1643680
-Ref: Pulling from MobileOrg-Footnote-2643740
-Node: History and Acknowledgments644117
-Node: Main Index655340
-Node: Key Index729418
-Node: Command and Function Index775610
-Node: Variable Index807524
+Ref: Images in LaTeX export-Footnote-1424233
+Node: Beamer class export424453
+Node: DocBook export430153
+Node: DocBook export commands431027
+Ref: DocBook export commands-Footnote-1432580
+Ref: DocBook export commands-Footnote-2432640
+Node: Quoting DocBook code432692
+Node: Recursive sections433741
+Node: Tables in DocBook export434469
+Node: Images in DocBook export434934
+Node: Special characters436868
+Node: OpenDocument Text export437909
+Ref: OpenDocument Text export-Footnote-1438922
+Ref: OpenDocument Text export-Footnote-2438952
+Node: Pre-requisites for ODT export439096
+Node: ODT export commands439455
+Ref: x-export-to-odt439686
+Ref: x-export-to-other-formats440770
+Ref: ODT export commands-Footnote-1441309
+Ref: ODT export commands-Footnote-2441369
+Node: Applying custom styles441420
+Node: Links in ODT export443588
+Node: Tables in ODT export443908
+Ref: Tables in ODT export-Footnote-1444870
+Node: Images in ODT export444963
+Node: Math formatting in ODT export447188
+Node: Working with LaTeX math snippets447647
+Ref: Working with LaTeX math snippets-Footnote-1449666
+Node: Working with MathML or OpenDocument formula files449741
+Node: Literal examples in ODT export450312
+Ref: Literal examples in ODT export-Footnote-1451497
+Node: Advanced topics in ODT export451773
+Node: Exporting and converting to other formats452536
+Ref: x-odt-converter-capabilities454681
+Node: Working with OpenDocument style files455279
+Ref: x-factory-styles455782
+Ref: x-orgodtstyles-xml456014
+Ref: x-orgodtcontenttemplate-xml456341
+Ref: x-overriding-factory-styles456997
+Ref: x-org-export-odt-styles-file457271
+Ref: x-org-export-odt-content-template-file458159
+Node: Creating one-off styles458307
+Node: Customizing tables in ODT export460505
+Ref: Customizing tables in ODT export-Footnote-1465517
+Ref: Customizing tables in ODT export-Footnote-2465621
+Ref: Customizing tables in ODT export-Footnote-3465709
+Node: Validating OpenDocument XML466024
+Ref: Validating OpenDocument XML-Footnote-1467048
+Node: TaskJuggler export467100
+Node: Freemind export472421
+Node: XOXO export472774
+Node: iCalendar export473305
+Ref: iCalendar export-Footnote-1475999
+Ref: iCalendar export-Footnote-2476089
+Ref: iCalendar export-Footnote-3476189
+Node: Publishing476326
+Node: Configuration477194
+Node: Project alist477976
+Node: Sources and destinations479138
+Node: Selecting files480655
+Node: Publishing action481654
+Ref: Publishing action-Footnote-1483444
+Node: Publishing options483798
+Node: Publishing links487474
+Node: Sitemap489157
+Node: Generating an index492372
+Node: Uploading files492957
+Node: Sample configuration494720
+Node: Simple example495209
+Node: Complex example495882
+Node: Triggering publication497937
+Node: Working With Source Code498925
+Node: Structure of code blocks500616
+Ref: Structure of code blocks-Footnote-1502485
+Node: Editing source code502579
+Node: Exporting code blocks504129
+Node: Extracting source code505872
+Node: Evaluating code blocks507233
+Ref: Evaluating code blocks-Footnote-1510585
+Ref: Evaluating code blocks-Footnote-2510882
+Node: Library of Babel511010
+Node: Languages511987
+Node: Header arguments514291
+Node: Using header arguments514776
+Node: System-wide header arguments515536
+Node: Language-specific header arguments516359
+Node: Buffer-wide header arguments516762
+Node: Header arguments in Org mode properties517452
+Node: Code block specific header arguments518559
+Node: Header arguments in function calls520385
+Node: Specific header arguments521132
+Node: var523423
+Node: results530543
+Node: file534779
+Node: dir535685
+Node: exports538609
+Node: tangle539263
+Node: mkdirp540074
+Node: comments540405
+Node: padline541543
+Node: no-expand542073
+Node: session542565
+Node: noweb543012
+Node: noweb-ref545065
+Ref: noweb-ref-Footnote-1546531
+Node: noweb-sep546660
+Node: cache546954
+Node: sep548450
+Node: hlines549022
+Node: colnames550530
+Node: rownames552009
+Node: shebang553018
+Node: eval553413
+Node: wrap554447
+Node: Results of evaluation554874
+Node: Noweb reference syntax558641
+Node: Key bindings and useful functions560032
+Node: Batch execution562774
+Node: Miscellaneous563869
+Node: Completion564698
+Node: Easy Templates566673
+Node: Speed keys568082
+Node: Code evaluation security568908
+Node: Customization571617
+Node: In-buffer settings572208
+Ref: In-buffer settings-Footnote-1581454
+Node: The very busy C-c C-c key581502
+Node: Clean view583484
+Ref: Clean view-Footnote-1587470
+Ref: Clean view-Footnote-2587531
+Ref: Clean view-Footnote-3587715
+Ref: Clean view-Footnote-4587776
+Ref: Clean view-Footnote-5587888
+Ref: Clean view-Footnote-6587943
+Node: TTY keys588068
+Node: Interaction589834
+Node: Cooperation590231
+Node: Conflicts594029
+Node: org-crypt.el598051
+Node: Hacking599365
+Node: Hooks600217
+Node: Add-on packages600633
+Node: Adding hyperlink types601174
+Node: Context-sensitive commands605096
+Ref: Context-sensitive commands-Footnote-1606672
+Node: Tables in arbitrary syntax606806
+Node: Radio tables608215
+Node: A LaTeX example610758
+Ref: A LaTeX example-Footnote-1614680
+Ref: A LaTeX example-Footnote-2614828
+Node: Translator functions615263
+Ref: Translator functions-Footnote-1618486
+Node: Radio lists618574
+Node: Dynamic blocks619703
+Node: Special agenda views621919
+Ref: Special agenda views-Footnote-1626170
+Node: Extracting agenda information626305
+Node: Using the property API630377
+Node: Using the mapping API633688
+Node: MobileOrg638081
+Node: Setting up the staging area639742
+Ref: Setting up the staging area-Footnote-1640841
+Ref: Setting up the staging area-Footnote-2641142
+Node: Pushing to MobileOrg641404
+Ref: Pushing to MobileOrg-Footnote-1642394
+Ref: Pushing to MobileOrg-Footnote-2642810
+Node: Pulling from MobileOrg642867
+Ref: Pulling from MobileOrg-Footnote-1645287
+Ref: Pulling from MobileOrg-Footnote-2645347
+Node: History and Acknowledgments645724
+Node: Main Index656948
+Node: Key Index731026
+Node: Command and Function Index781092
+Node: Variable Index813006
 
 End Tag Table

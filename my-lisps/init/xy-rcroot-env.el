@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-01-29 Sun 07:07 xin on p6t>
+;; Time-stamp:<2012-02-12 Sun 04:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -610,20 +610,19 @@
 ;; (global-set-key "C-\\" 'toggle-input-method))
 
 ;;*** ibus-el
-;; NOTE: ibus 太不好用了。放弃。
 ;; IBus client for GNU Emacs
 ;; REF:  (@url :file-name "http://www11.atwiki.jp/s-irie/pages/21.html" :display "Source")
-;; (GNULinux
-;;  (require 'ibus)
-;;  ;; Turn on ibus-mode automatically after loading .emacs
-;;  (add-hook 'after-init-hook 'ibus-mode-on)
-;;  ;; Use C-SPC for Set Mark command
-;;  ;; (ibus-define-common-key ?\C-\s nil)
-;;  ;; Use C-/ for Undo command
-;;  (ibus-define-common-key ?\C-/ nil)
-;;  ;; Change cursor color depending on IBus status
-;;  ;; (setq ibus-cursor-color '("red" "blue" "limegreen"))
-;; )
+(GNULinux
+ (require 'ibus)
+ ;; Turn on ibus-mode automatically after loading .emacs
+ (add-hook 'after-init-hook 'ibus-mode-on)
+ ;; Use C-SPC for Set Mark command
+ ;; (ibus-define-common-key ?\C-\s nil)
+ ;; Use C-/ for Undo command
+ (ibus-define-common-key ?\C-/ nil)
+ ;; Change cursor color depending on IBus status
+ (setq ibus-cursor-color '("red" "blue" "limegreen"))
+)
 
 ;;====================================================================
 ;;* Emacs lisp management

@@ -1966,7 +1966,8 @@ ATTR is a string of other attributes of the a element."
 				   (pixels-to-cms (cdr size-in-pixels)))))))
     (case probe-method
       (emacs
-       (size-in-cms (ignore-errors (image-size (create-image file) 'pixels))))
+       (size-in-cms (ignore-errors (clear-image-cache)
+				   (image-size (create-image file) 'pixels))))
       (imagemagick
        (size-in-cms
 	(let ((dim (shell-command-to-string
@@ -2401,8 +2402,10 @@ visually."
       (replace-match ""))))
 
 (defcustom org-export-odt-convert-processes
-  '(("BasicODConverter"
-     ("soffice" "-norestore" "-invisible" "-headless"
+  '(("LibreOffice"
+     ("soffice" "--headless" "--convert-to %f" "--outdir %d" "%i"))
+    ("BasicODConverter"
+     ("soffice" "--headless"
       "\"macro:///BasicODConverter.Main.Convert(%I,%f,%O)\""))
     ("unoconv"
      ("unoconv" "-f" "%f" "-o" "%d" "%i")))
@@ -2435,7 +2438,7 @@ they are interpreted as below:
 	   :value-type (group (cons (string :tag "Executable")
 				    (repeat (string :tag "Command line args")))))))
 
-(defcustom org-export-odt-convert-process nil
+(defcustom org-export-odt-convert-process "LibreOffice"
   "Use this converter to convert from \"odt\" format to other formats.
 During customization, the list of converter names are populated
 from `org-export-odt-convert-processes'."
@@ -2451,19 +2454,19 @@ from `org-export-odt-convert-processes'."
 
 (defcustom org-export-odt-convert-capabilities
   '(("Text"
-     ("odt" "ott" "doc" "rtf")
-     (("pdf" "pdf") ("odt" "odt") ("xhtml" "html") ("rtf" "rtf")
-      ("ott" "ott") ("doc" "doc") ("ooxml" "xml") ("html" "html")))
+     ("odt" "ott" "doc" "rtf" "docx")
+     (("pdf" "pdf") ("odt" "odt") ("rtf" "rtf") ("ott" "ott") ("doc" "doc")
+      ("docx" "docx") ("html" "html")))
     ("Web"
-     ("html" "xhtml") (("pdf" "pdf") ("odt" "txt") ("html" "html")))
+     (("pdf" "pdf") ("odt" "odt") ("html" "html")))
     ("Spreadsheet"
-     ("ods" "ots" "xls" "csv")
-     (("pdf" "pdf") ("ots" "ots") ("html" "html") ("csv" "csv")
-      ("ods" "ods") ("xls" "xls") ("xhtml" "xhtml") ("ooxml" "xml")))
+     ("ods" "ots" "xls" "csv" "xlsx")
+     (("pdf" "pdf") ("ots" "ots") ("html" "html") ("csv" "csv") ("ods" "ods")
+      ("xls" "xls") ("xlsx" "xlsx")))
     ("Presentation"
-     ("odp" "otp" "ppt")
-     (("pdf" "pdf") ("swf" "swf") ("odp" "odp") ("xhtml" "xml")
-      ("otp" "otp") ("ppt" "ppt") ("odg" "odg") ("html" "html"))))
+     ("odp" "otp" "ppt" "pptx")
+     (("pdf" "pdf") ("swf" "swf") ("odp" "odp") ("otp" "otp") ("ppt" "ppt")
+      ("pptx" "pptx") ("odg" "odg"))))
   "Specify input and output formats of `org-export-odt-convert-process'.
 More correctly, specify the set of input and output formats that
 the user is actually interested in.
