@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cc.el'
-;; Time-stamp:<2011-12-11 Sun 22:31 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-14 Tue 23:13 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My C/C++/Java development settings
@@ -94,7 +94,7 @@
   (require 'filladapt)
   (c-setup-filladapt)
   (filladapt-mode 1)
-  (message "* ---[ c-common-mode configuration is complete ]---") )
+  (message "* ---[ c-common-mode configuration is complete ]---"))
 
 ;; Customizations for c-mode
 ;;;###autoload
