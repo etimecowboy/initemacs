@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-eldoc; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-eldoc.el'
-;; Time-stamp:<2011-12-04 Sun 16:39 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-23 Thu 19:11 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -12,6 +12,8 @@
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
 ;;--------------------------------------------------------------------
+
+;; BUG: Emacs24 this file was changed to `rainbow-mode-autoloads'
 
 (require 'cl)
 (require 'xy-rc-utils)

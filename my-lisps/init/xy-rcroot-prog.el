@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2012-01-19 Thu 17:57 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-23 Thu 19:02 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -349,7 +349,7 @@
 ;;--------------------------------------------------------------------
 ;;** eldoc
 ;; 显示变量, 函数的声明，可用在很多语言中(c)
-(eval-after-load "eldoc" '(eldoc-settings))
+;; (eval-after-load "eldoc" '(eldoc-settings))
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook)
  'turn-on-eldoc-mode)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-01-29 Sun 21:47 xin on p6t>
+;; Time-stamp:<2012-02-23 Thu 19:14 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -23,7 +23,7 @@
 ;; query-replace-regexp.
 ;; (unless is-after-emacs-23
 ;;   (partial-completion-mode 1))
-(partial-completion-mode 1)
+;; (partial-completion-mode 1) ;; BUG: Emacs24
 
 ;;--------------------------------------------------------------------
 ;;** ido
