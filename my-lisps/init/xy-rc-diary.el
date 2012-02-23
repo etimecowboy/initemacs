@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-diary.el'
-;; Time-stamp:<2011-12-11 Sun 20:58 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-23 Thu 20:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -43,7 +43,7 @@
   (add-hook 'list-diary-entries-hook 'include-other-diary-files)
   ;; Mark today when display
   (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-  (add-hook 'diary-hook 'appt-make-list)
+  ;; (add-hook 'diary-hook 'appt-make-list) ;; BUG: emacs24
 
   (message "* ---[ diary configuration is complete ]---"))
 

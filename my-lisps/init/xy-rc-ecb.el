@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ecb.el'
-;; Time-stamp:<2011-12-30 Fri 19:45 xin on p6t>
+;; Time-stamp:<2012-02-23 Thu 20:34 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,6 +20,7 @@
 (defun xy/ecb-start ()
   "Start ECB."
   (interactive)
+  (setq stack-trace-on-error t) ;; BUG: fix emacs24 ((@url :file-name "http://lists.gnu.org/archive/html/help-gnu-emacs/2011-09/msg00192.html" :display "REF"))
   (xy/cedet-start)
   (require 'ecb-autoloads)
   (ecb-activate)

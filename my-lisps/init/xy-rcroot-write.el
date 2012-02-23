@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2012-01-10 Tue 06:28 xin on p6t>
+;; Time-stamp:<2012-02-23 Thu 20:20 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -43,6 +43,10 @@
    ("C-c c"   org-capture)
    ("C-c n"   org2blog/wp-new-entry)
    ("C-c M-w" tzz-copy-region-with-mode-property)))
+
+;; BUG: when use this to fix org-agenda/org-mobile-push error ((error
+;;      function `appt-make-list') in Emacs24 ((@url :file-name "http://www.mail-archive.com/emacs-orgmode@gnu.org/msg47051.html" :display "REF")) .
+;; (add-hook 'diary-hook (function appt-make-list))
 
 ;;====================================================================
 ;;* auctex
