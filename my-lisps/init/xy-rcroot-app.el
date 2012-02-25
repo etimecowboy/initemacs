@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-02-06 Mon 10:59 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-25 Sat 14:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -35,6 +35,14 @@
 ;;   ;;       (width  . 90)))
 ;;   (add-to-list 'default-frame-alist '(height . 40))
 ;;   (add-to-list 'default-frame-alist '(width . 95)))
+
+;; (Windows ;; HACK: 打了全屏补丁的Windows版Emacs，Linux下还没有试
+;;  ;; http://www.newsmth.net/bbscon.php?bid=573&id=99323
+;;  (set-frame-parameter nil 'fullscreen 'fullscreen))
+;; BUG: NOT working!
+;; (global-set-key (kbd "C-x C-0")
+;;                 '(lambda ()
+;;                    ((set-frame-parameter nil 'fullscreen 'fullscreen))))
 
 ;;--------------------------------------------------------------------
 ;;** Frame title
