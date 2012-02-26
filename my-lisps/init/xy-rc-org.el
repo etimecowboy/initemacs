@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-02-23 Thu 19:56 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-26 Sun 14:22 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -633,31 +633,54 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-capture-templates
           '(("p" "Add a PhD Task----->Day Planner"
              entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
-             "** TODO %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
+             "** TODO %? %^g\n\
+   :LOGBOOK:\n\
+   - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
+   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("l" "Add a Life Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
-             "** TODO %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
+             "** TODO %? %^g\n\
+   :LOGBOOK:\n\
+   - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
+   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("g" "Add a Geek Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
-             "** TODO %? %^g\n   :LOGBOOK:\n   - State \"TODO\" from \"%i\" in \"%a\"    %U\n   :END:\n"
+             "** TODO %? %^g\n\
+   :LOGBOOK:\n\
+   - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
+   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("s" "Add a Learn Task--->Day Planner"
              entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
-             "** TODO %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
+             "** TODO %? %^g\n\
+   :LOGBOOK:\n\
+   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n\
+   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
           ("m" "Add a Misc Task---->Day Planner"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
-             "** TODO %? %^g\n   :LOGBOOK:\n   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n   :END:\n"
+             "** TODO %? %^g\n\
+   :LOGBOOK:\n\
+   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n\
+   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("n" "Write a Notes"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
-             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n"
+             "** %? %^G\n\
+   :LOGBOOK:\n\
+   - Entered from \"%i\" in \"%a\"   %U\n\
+   - Last updated on   %U\n\
+   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
             ("i" "Record an Idea"
              entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
-             "** %? %^G\n   :LOGBOOK:\n   - Entered from \"%i\" in \"%a\"   %U\n   - Last updated on   %U\n   :END:\n"
+             "** %? %^G\n\
+   :LOGBOOK:\n\
+   - Entered from \"%i\" in \"%a\"   %U\n\
+   - Last updated on   %U\n\
+   :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
              ))
 
@@ -753,21 +776,27 @@ If html-file-name is not given, read it from minibuffer."
             org-beamer-sectioning)
            ;;--------------------------------------------------
            ;; NOTE: ctex documentclasses, no need to use ctex package
-           ("ctexart" "\\documentclass[UTF8, winfonts, cs4size, a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]{ctexart}"
+           ("ctexart" "\\documentclass[UTF8, winfonts, cs4size, \
+a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]\
+{ctexart}"
             ("\\section{%s}" . "\\section*{%s}")
             ("\\subsection{%s}" . "\\subsection*{%s}")
             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
             ("\\paragraph{%s}" . "\\paragraph*{%s}")
             ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
            ;;--------------------------------------------------
-           ("ctexrep" "\\documentclass[UTF8, winfonts, cs4size, a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]{ctexrep}"
+           ("ctexrep" "\\documentclass[UTF8, winfonts, cs4size, \
+a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]\
+{ctexrep}"
             ("\\part{%s}" . "\\part*{%s}")
             ("\\chapter{%s}" . "\\chapter*{%s}")
             ("\\section{%s}" . "\\section*{%s}")
             ("\\subsection{%s}" . "\\subsection*{%s}")
             ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
            ;;--------------------------------------------------
-           ("ctexbook" "\\documentclass[UTF8, winfonts, cs4size, a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]{ctexbook}"
+           ("ctexbook" "\\documentclass[UTF8, winfonts, cs4size, \
+a4paper, cap, punct, nospace, indent, fancyhdr, hypperref, fntef]\
+{ctexbook}"
             ("\\part{%s}" . "\\part*{%s}")
             ("\\chapter{%s}" . "\\chapter*{%s}")
             ("\\section{%s}" . "\\section*{%s}")
@@ -783,10 +812,13 @@ If html-file-name is not given, read it from minibuffer."
   ;; set.
   (setq org-export-latex-default-packages-alist
         '(("" "fixltx2e" nil)
-          ("" "graphicx" t) ("" "longtable" nil) ("" "float" nil) ("" "wrapfig" nil)
-          ("" "soul" t) ("" "textcomp" t) ("" "marvosym" t) ("" "wasysym" t)
+          ("" "graphicx" t) ("" "longtable" nil)
+          ("" "float" nil) ("" "wrapfig" nil)
+          ("" "soul" t) ("" "textcomp" t)
+          ("" "marvosym" t) ("" "wasysym" t)
           ("" "latexsym" t) ("" "amssymb" t)
-          ("bookmarksnumbered, pdfencoding=auto, breaklinks, colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
+          ("bookmarksnumbered, pdfencoding=auto, breaklinks, \
+colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
 
   ;; code listing settings, new `minted' is also supported
   (setq org-export-latex-listings t)

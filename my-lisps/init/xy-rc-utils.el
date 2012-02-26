@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-02-23 Thu 19:36 xin on P6T-WIN7>
+;; Time-stamp:<2012-02-26 Sun 13:42 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -829,6 +829,22 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
                             charset
                             (font-spec :family "STHeiti"))))
     (set-default-font "Monospace")))
+
+;;*===================================================================
+;;* 全屏控制
+;; From: xiaoxuan@newsmth.net-SPAM.no (小轩)
+;; fullscreen
+(defvar my-full-screen-var nil)
+(defun toggle-fullscreen ()
+  (interactive)
+  (if my-full-screen-var
+      (progn
+        (set-frame-parameter nil 'fullscreen 'nil)
+        (setq my-full-screen-var nil))
+    (progn
+      (set-frame-parameter nil 'fullscreen 'fullscreen)
+      (setq my-full-screen-var t))))
+;; (global-set-key [f11] 'toggle-fullscreen)
 
 ;;====================================================================
 ;;* For compatibility among different version of Emacs
