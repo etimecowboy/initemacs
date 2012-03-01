@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp:<2012-02-27 Mon 21:15 xin on p6t>
+;; Time-stamp:<2012-03-01 Thu 17:24 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,13 +20,13 @@
 
 (message "* ---[ Loading my Emacs init file ]---")
 
-;; ;; measure the loading time per file.
-;; (defadvice load (around load-with-time-logging)
-;;   "display the load time for each file."
-;;   (let ((now (float-time)))
-;;     ad-do-it
-;;     (message "%2.2f seconds is used." (- (float-time) now))))
-;; (ad-activate 'load)
+;; measure the loading time per file.
+(defadvice load (around load-with-time-logging)
+  "display the load time for each file."
+  (let ((now (float-time)))
+    ad-do-it
+    (message "%2.3f seconds is used." (- (float-time) now))))
+(ad-activate 'load)
 
 ;; Startup time
 (defvar *emacs-load-start* (current-time))
@@ -38,91 +38,91 @@
 ;; Load environment settings
 ;; (require 'xy-rcroot-env)
 (load "xy-rcroot-env")
-(message "* ---[ `xy-rcroot-env.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-env.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Emacs apparence
 ;; (require 'xy-rcroot-app)
 (load "xy-rcroot-app")
-(message "* ---[ `xy-rcroot-app.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-app.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Some enhancements
 ;;(require 'xy-rcroot-enhance)
 (load "xy-rcroot-enhance")
-(message "* ---[ `xy-rcroot-enhance.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-enhance.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Editing settings
 ;; (require 'xy-rcroot-edit)
 (load "xy-rcroot-edit")
-(message "* ---[ `xy-rcroot-edit.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-edit.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Various abbrevations and auto-completions
 ;; (require 'xy-rcroot-complete)
 (load "xy-rcroot-complete")
-(message "* ---[ `xy-rcroot-complete.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-complete.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Viewing/Comparing files
 ;; (require 'xy-rcroot-view)
 (load "xy-rcroot-view")
-(message "* ---[ `xy-rcroot-view.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-view.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; File management
 ;; (require 'xy-rcroot-filemgr)
 (load "xy-rcroot-filemgr")
-(message "* ---[ `xy-rcroot-filemgr.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-filemgr.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Web application packages
 ;; (require 'xy-rcroot-net)
 (load "xy-rcroot-net")
-(message "* ---[ `xy-rcroot-net.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-net.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Various programming settings
 ;; (require 'xy-rcroot-prog)
 (load "xy-rcroot-prog")
-(message "* ---[ `xy-rcroot-prog.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-prog.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Document packages
 ;; (require 'xy-rcroot-write)
 (load "xy-rcroot-write")
-(message "* ---[ `xy-rcroot-write.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-write.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Save editor information between emacs sessions
 ;; Must be put at last to avoid failing
 ;; (require 'xy-rcroot-session)
 (load "xy-rcroot-session")
-(message "* ---[ `xy-rcroot-session.el' loaded at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; (message "* ---[ `xy-rcroot-session.el' loaded at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 (message "* ---[ My .emacs fully loaded in %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
