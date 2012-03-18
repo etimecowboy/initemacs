@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-02-26 Sun 13:42 xin on p6t>
+;; Time-stamp:<2012-03-18 Sun 07:32 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1322,9 +1322,9 @@ The process is:
   (xy/recompile-dir (concat my-elpa-lisp-path "/auctex-11.86"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/dictionary-1.8.7"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/emms-3.0"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.0.0"))
+  (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.1.1"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/org-20120216"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/rainbow-mode-0.2"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/rainbow-mode-0.2"))
   ;; (xy/recompile-dir (concat my-elpa-lisp-path
   ;;                           "/sunrise-commander-5.400"))
   ;;------------------------------------------------------------------
