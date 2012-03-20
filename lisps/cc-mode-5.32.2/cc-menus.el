@@ -1,8 +1,8 @@
 ;;; cc-menus.el --- imenu support for CC Mode
 
 ;; Copyright (C) 1985, 1987, 1992, 1993, 1994, 1995, 1996, 1997, 1998,
-;;   1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006  Free Software
-;;   Foundation, Inc.
+;;   1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+;;   2010, 2011   Free Software Foundation, Inc.
 
 ;; Authors:    1998- Martin Stjernholm
 ;;	       1992-1999 Barry A. Warsaw
@@ -17,7 +17,7 @@
 
 ;; GNU Emacs is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 
 ;; GNU Emacs is distributed in the hope that it will be useful,
@@ -26,9 +26,8 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program; see the file COPYING.  If not, write to
-;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; along with this program; see the file COPYING.  If not, see
+;; <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
@@ -110,8 +109,11 @@ A sample value might look like: `\\(_P\\|_PROTO\\)'.")
        "[^" c-alnum "_:<>~]"		      ; match any non-identifier char
        "\\([" c-alpha "_][" c-alnum "_:<>~]*\\)" ; match function name
        "\\([ \t\n]\\|\\\\\n\\)*("	      ; see above, BUT the arg list
-       "\\([ \t\n]\\|\\\\\n\\)*\\([^ \t\n(*][^)]*\\)?)" ; must not start
-       "\\([ \t\n]\\|\\\\\n\\)*[^ \t\n;(]"    ; with an asterisk or parentheses
+       "\\([ \t\n]\\|\\\\\n\\)*"	      ; must not start
+       "\\([^ \t\n(*]"			      ; with an asterisk or parentheses
+       "[^()]*\\(([^()]*)[^()]*\\)*"	      ; Maybe function pointer arguments
+       "\\)?)"
+       "\\([ \t\n]\\|\\\\\n\\)*[^ \t\n;(]"
        ) 1)
     ;; Special case for definitions using phony prototype macros like:
     ;; `int main _PROTO( (int argc,char *argv[]) )'.

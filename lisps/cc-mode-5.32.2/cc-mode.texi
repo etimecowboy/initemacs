@@ -201,7 +201,7 @@ file @file{COPYING}, along with @ccmode{}.  If not, see
 @vskip 0pt plus 1filll
 @insertcopying
 
-This manual was generated from $Revision: 5.264 $ of $RCSfile: cc-mode.texi,v $, which can be
+This manual was generated from $Revision: 5.265 $ of $RCSfile: cc-mode.texi,v $, which can be
 downloaded from
 @url{http://cvs.sf.net/viewcvs.py/cc-mode/cc-mode/cc-mode.texi}.
 @end titlepage

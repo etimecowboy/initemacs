@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-03-18 Sun 07:32 xin on P6T-WIN7>
+;; Time-stamp:<2012-03-20 Tue 10:30 xin on DAN-T60>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1303,7 +1303,7 @@ The process is:
                                 "/anything-config/contrib"))
   (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
   (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32.2"))
   (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
   (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
   (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
