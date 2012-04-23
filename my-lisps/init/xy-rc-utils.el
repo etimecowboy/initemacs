@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-04-23 Mon 18:55 xin on XIN-PC>
+;; Time-stamp:<2012-04-23 Mon 20:17 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1323,11 +1323,7 @@ The process is:
   (xy/recompile-dir (concat my-elpa-lisp-path "/auctex-11.86"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/dictionary-1.8.7"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/emms-3.0"))
-  ;; ELPA package is out-dated, and cause problems.
-  ;; I just overwrote these lisps with the Github version.
-  ;; Waiting for a upgrade version of ELPA Magit.
   (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.1.1"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/magithub-0.2"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/org-20120423"))
   ;; (xy/recompile-dir (concat my-elpa-lisp-path "/rainbow-mode-0.2"))
   ;; (xy/recompile-dir (concat my-elpa-lisp-path
