@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-03-20 Tue 10:29 xin on DAN-T60>
+;; Time-stamp:<2012-04-23 Mon 18:54 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -336,6 +336,13 @@
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
+
+;; ;; REF: (@url :file-name "https://github.com/magit/magit" :display "Source")
+;; (xy/load-autoload (concat my-local-lisp-path "/magit"))
+;; (message "* ---[ magit lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;;** My own lisps
 ;; Include init files and my own hacks, make sure they are installed

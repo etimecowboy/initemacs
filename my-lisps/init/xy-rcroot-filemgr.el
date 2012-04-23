@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2012-04-23 Mon 18:10 xin on XIN-PC>
+;; Time-stamp:<2012-04-23 Mon 18:44 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -179,7 +179,6 @@
 ;; (eval-after-load "egg" '(egg-settings))
 
 ;;*** magit
-;; (@url :file-name "https://github.com/magit/magit" :display "Source")
 (eval-after-load "magit"
   '(progn
      (magit-settings)
