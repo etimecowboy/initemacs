@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2012-01-14 Sat 14:57 xin on p6t>
+;; Time-stamp:<2012-04-26 Thu 16:52 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -76,7 +76,8 @@
 ;;====================================================================
 ;;* org2blog
 ;; use publish org to HTML then use xml-rpc to blog
-(eval-after-load "org2blog" '(org2blog-settings))
+;; NOTE: Moved to `xy-rcroot-write.el'
+;; (eval-after-load "org2blog" '(org2blog-settings))
 
 ;;====================================================================
 ;;* babel

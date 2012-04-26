@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2012-02-23 Thu 20:20 xin on P6T-WIN7>
+;; Time-stamp:<2012-04-26 Thu 16:51 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -47,6 +47,10 @@
 ;; BUG: when use this to fix org-agenda/org-mobile-push error ((error
 ;;      function `appt-make-list') in Emacs24 ((@url :file-name "http://www.mail-archive.com/emacs-orgmode@gnu.org/msg47051.html" :display "REF")) .
 ;; (add-hook 'diary-hook (function appt-make-list))
+
+;;** org2blog
+;; use publish org to HTML then use xml-rpc to blog
+(eval-after-load "org2blog" '(org2blog-settings))
 
 ;;====================================================================
 ;;* auctex

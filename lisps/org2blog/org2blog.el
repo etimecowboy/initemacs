@@ -9,7 +9,7 @@
 ;; Copyright (C) 2010 Matt Price <matt@roke.mercey.dyndns.org>
 
 ;; Author: Puneeth Chaganti <punchagan+org2blog@gmail.com>
-;; Version: 0.4
+;; Version: 0.5
 ;; Keywords: orgmode, wordpress, blog
 
 ;; This program is free software: you can redistribute it and/or modify
@@ -110,6 +110,11 @@ All the other properties are optional. They over-ride the global variables.
   :group 'org2blog/wp
   :type 'string)
 
+(defcustom org2blog/wp-buffer-template-prefix nil
+  "A prefix to the default template used for a new post buffer."
+  :group 'org2blog/wp
+  :type 'string)
+
 (defcustom org2blog/wp-default-title "Hello, World"
   "Title of the new post"
   :group 'org2blog/wp
@@ -207,7 +212,7 @@ Set to nil if you don't wish to track posts."
   "Ask before killing buffer")
 (make-variable-buffer-local 'org2blog/wp-buffer-kill-prompt)
 
-(defconst org2blog/wp-version "0.4"
+(defconst org2blog/wp-version "0.5"
   "Current version of blog.el")
 
 (defvar org2blog/wp-mode-hook nil
@@ -280,10 +285,12 @@ Entry to this mode calls the value of `org2blog/wp-mode-hook'."
   (if (not org2blog/wp-blog-alist)
       (error "Set `org2blog/wp-blog-alist' to be able to use org2blog."))
   (let ()
-    (setq org2blog/wp-blog-name (completing-read
-                                 "Blog to login into? ([Tab] to see list): "
-                                 (mapcar 'car
-                                         org2blog/wp-blog-alist))
+    (setq org2blog/wp-blog-name (if (equal (length org2blog/wp-blog-alist) 1)
+                                    (car (car org2blog/wp-blog-alist))
+                                  (completing-read
+                                   "Blog to login into? ([Tab] to see list): "
+                                   (mapcar 'car
+                                           org2blog/wp-blog-alist)))
           org2blog/wp-blog (assoc org2blog/wp-blog-name org2blog/wp-blog-alist)
           org2blog/wp-server-xmlrpc-url (plist-get (cdr org2blog/wp-blog) :url)
           org2blog/wp-server-userid (eval (plist-get (cdr org2blog/wp-blog) :username))
@@ -340,6 +347,7 @@ Entry to this mode calls the value of `org2blog/wp-mode-hook'."
     (add-hook 'kill-buffer-hook 'org2blog/wp-kill-buffer-hook nil 'local)
     (org-mode)
     (insert
+     (or org2blog/wp-buffer-template-prefix "")
      (format org2blog/wp-buffer-template
              (format-time-string "[%Y-%m-%d %a %H:%M]" (current-time))
              (mapconcat
@@ -349,7 +357,7 @@ Entry to this mode calls the value of `org2blog/wp-mode-hook'."
               ", ")
              (or (plist-get (cdr org2blog/wp-blog) :default-title)
                  org2blog/wp-default-title)))
-    (org2blog/wp-mode)))
+    (org2blog/wp-mode t)))
 
 (defun org2blog/wp-upload-files-replace-urls (text)
   "Uploads files, if any in the html, and changes their links"
@@ -368,7 +376,8 @@ Entry to this mode calls the value of `org2blog/wp-mode-hook'."
         (setq beg (match-end 0))
         (if (save-match-data (not (or
                                    (string-match org-plain-link-re file-name)
-                                   (string-match "^#" file-name))))
+                                   (string-match "^#" file-name)
+                                   (string-equal (file-name-nondirectory file-name) ""))))
 
             (progn
               (goto-char (point-min))
@@ -569,7 +578,7 @@ Entry to this mode calls the value of `org2blog/wp-mode-hook'."
         (if (not org2blog/wp-mode)
             (org-save-outline-visibility 'use-markers (org-mode-restart))
           (org-save-outline-visibility 'use-markers (org-mode-restart))
-          (org2blog/wp-mode))
+          (org2blog/wp-mode t))
         (setq narrow-p (not (equal (- (point-max) (point-min)) (buffer-size))))
         (if narrow-p
             (progn
@@ -668,7 +677,7 @@ Entry to this mode calls the value of `org2blog/wp-mode-hook'."
 (defun org2blog/wp-post-buffer (&optional publish)
   "Posts new blog entry to the blog or edits an existing entry."
   (interactive "P")
-  (org2blog/wp-mode) ;; turn on org2blog-wp-mode
+  (org2blog/wp-mode t) ;; turn on org2blog-wp-mode
   (unless org2blog/wp-logged-in
     (org2blog/wp-login))
   (save-excursion
