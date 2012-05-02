@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-02-26 Sun 14:22 xin on p6t>
+;; Time-stamp:<2012-05-02 Wed 15:31 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -296,21 +296,22 @@ If html-file-name is not given, read it from minibuffer."
   ;; Add some hook functions to assist my system
   ;; See list of: (@url :file-name "http://orgmode.org/worg/org-configs/org-hooks.html" :display "org-mode hooks")
   ;; REF: (@url :file-name "http://thread.gmane.org/gmane.emacs.orgmode/21402/focus=21413" :display "orgmode mail-list")
+  ;; BUG: `state' variable is not recognised
   ;; TODO: waiting for a after-schedule-hook in future release.
-  (add-hook 'org-after-todo-state-change-hook
-            '(lambda ()
-               ;; Automaticaly remove the scheduled date/time after
-               ;; change the state to SOMEDAY
-               (if (string= state "SOMEDAY") (org-schedule t))
-               ;; Automatically schedule the task to today after change
-               ;; the state to NEXT
-               (if (string= state "NEXT") (org-schedule nil "+0"))
-               ;; (when window-system ;; also useful in console
-                 (when (try-require 'todochiku)
-                   (if (string= state "DONE")
-                       (todochiku-message "Emacs Org"
-                                          "Task DONE, Great Work!"
-                                          (todochiku-icon 'check))))))
+  ;; (add-hook 'org-after-todo-state-change-hook
+  ;;           '(lambda ()
+  ;;              ;; Automaticaly remove the scheduled date/time after
+  ;;              ;; change the state to SOMEDAY
+  ;;              (if (string= state "SOMEDAY") (org-schedule t))
+  ;;              ;; Automatically schedule the task to today after change
+  ;;              ;; the state to NEXT
+  ;;              (if (string= state "NEXT") (org-schedule nil "+0"))
+  ;;              ;; (when window-system ;; also useful in console
+  ;;                (when (try-require 'todochiku)
+  ;;                  (if (string= state "DONE")
+  ;;                      (todochiku-message "Emacs Org"
+  ;;                                         "Task DONE, Great Work!"
+  ;;                                         (todochiku-icon 'check))))))
 
   ;; Treat adding item as state change
   (setq org-treat-insert-todo-heading-as-state-change t)
