@@ -1,0 +1,18 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("org-capture-last-stored" 0 23
+      (bmkp-full-record #1#))
+    (filename . "~/emacs/org/gtd/Notes.org")
+    (buffer-name . "Notes.org")
+    (front-context-string . "** Growl eats =M")
+    (rear-context-string . "        :note:\n\n")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(20385 59432 609000))
+    (created . #2#)
+    (position . 782)
+    (end-position . 782))
+)

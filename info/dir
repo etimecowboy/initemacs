@@ -31,23 +31,11 @@ Emacs
 GNU Emacs Lisp
 * Emacs-w3m: (emacs-w3m).       An Emacs interface to w3m
 * Emacs-w3m-ja: (emacs-w3m-ja). An Emacs interface to w3m (Japanese)
+* Mew: (mew.info).      Messaging in the Emacs World (in English)
+* Mewj: (mew.ja.info). Messaging in the Emacs World (in Japanese)
 
 Miscellaneous
 * cogre: (cogre).       Graphs & UML for Emacs
 * ede: (ede).       Project management for Emacs
 * eieio: (eieio).       Objects for Emacs
 * srecode: (srecode).       Template code generator
-
-Emacs
-* CEDET: (cedet).       Collection of Emacs Development Environment Tools
-* Org Mode: (org).              Outline-based notes management and organizer
-* RefTeX: (reftex).	Emacs support for LaTeX cross-references and citations.
-* Semantic: (semantic). Infrastructure for parser based text analysis.
-* Semantic Application Writer's guide: (semantic-appdev).
-* Semantic Grammar Framework: (grammar-fw).
-* Semantic Language Writer's guide: (semantic-langdev).
-* Semantic User's guide: (semantic-user).
-* Semantic Wisent parser development: (wisent).
-* Semantic bovine parser development: (bovine).
-* Speedbar: (speedbar). File/Tag summarizing utility.
-* Speedbar: (speedbar).        File/Tag summarizing utility.
