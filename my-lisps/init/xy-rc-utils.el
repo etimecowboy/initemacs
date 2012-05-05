@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-05-03 Thu 09:01 xin on XIN-PC>
+;; Time-stamp:<2012-05-04 Fri 08:50 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -74,7 +74,7 @@
    'if (string-match
         "brl" (prin1-to-string (downcase system-name)))
    (cons 'progn body)))
-(defmacro HomeDesktop (&rest body)
+(defmacro UKDesktop (&rest body)
   (list
    'if (string-match
         "p6t" (prin1-to-string (downcase system-name)))

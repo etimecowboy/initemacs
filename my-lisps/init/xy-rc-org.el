@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-02 Wed 19:42 xin on XIN-PC>
+;; Time-stamp:<2012-05-04 Fri 10:26 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -581,8 +581,7 @@ If html-file-name is not given, read it from minibuffer."
   ;;------------------------------------------------------------------
   ;; MobileOrg settings
   ;; NOTE: I use Dropbox serveice
-  (setq org-mobile-directory
-        (concat org-directory "/gtd/mobile"))
+  (setq org-mobile-directory "~/Dropbox/MobileOrg")
   (setq org-mobile-encryption-tempfile
         (concat org-directory "/orgtmpcrypt"))
   (unless (file-exists-p org-mobile-encryption-tempfile)

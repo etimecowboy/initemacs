@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2011-12-16 Fri 02:42 xin on P6T-WIN7>
+;; Time-stamp:<2012-05-04 Fri 08:51 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -146,7 +146,7 @@
          mew-smtp-ssl       nil))
 
   ;; Virgin Media smtp
-  (HomeDesktop
+  (UKDesktop
    (setq mew-smtp-server "smtp.blueyonder.co.uk"
          mew-smtp-port      25
          mew-use-smtp-auth  nil

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-gnus.el'
-;; Time-stamp:<2012-04-26 Thu 20:50 xin on XIN-PC>
+;; Time-stamp:<2012-05-04 Fri 08:50 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -106,7 +106,7 @@
   (setq gnus-select-method
         ;; '(nntp "news.aioe.org"))
         '(nntp "nntp.aioe.org"))
-  (HomeDesktop
+  (UKDesktop
    (setq gnus-select-method
          '(nntp "news.virginmedia.com"
                 (nntp-port-number 119))))
@@ -208,7 +208,7 @@
         smtpmail-smtp-service 25
         smtpmail-debug-info t)
   ;; @home
-  (HomeDesktop
+  (UKDesktop
    (setq
     smtpmail-default-smtp-server "smtp.blueyonder.co.uk"
     smtpmail-smtp-server "smtp.blueyonder.co.uk"))
