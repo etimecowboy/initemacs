@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-bookmark+.el'
-;; Time-stamp:<2011-12-13 Tue 10:36 xin on P6T-WIN7>
+;; Time-stamp:<2012-05-13 Sun 14:37 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,7 +24,12 @@
   (setq bmkp-bmenu-state-file
         (concat my-var-path "/emacs-bmk-bmenu-state.el"))
   (setq bmkp-last-as-first-bookmark-file
-        (concat my-var-path "/emacs.bmk"))
+        (concat my-var-path "/bookmark-"
+                user-login-name "@"
+                system-name "@"
+                system-configuration))
+  (unless (file-exists-p bmkp-last-as-first-bookmark-file)
+    (shell-command (concat "touch " bmkp-last-as-first-bookmark-file)))
   (message "* ---[ bookmark+ configuration is complete ]---"))
 
 (provide 'xy-rc-bookmark+)
