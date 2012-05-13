@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-04 Fri 10:26 xin on XIN-PC>
+;; Time-stamp:<2012-05-10 Thu 08:22 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -197,10 +197,10 @@ If html-file-name is not given, read it from minibuffer."
   ;; agenda files
   (setq org-agenda-files
         (list
-         "~/emacs/org/gtd/PhdWork.org"
-         "~/emacs/org/gtd/DailyLife.org"
-         "~/emacs/org/gtd/GeekInterests.org"
-         "~/emacs/org/gtd/Learn.org"
+         "~/emacs/org/gtd/Life.org"
+         "~/emacs/org/gtd/Phd.org"
+         "~/emacs/org/gtd/Work.org"
+         "~/emacs/org/gtd/Geek.org"
          "~/emacs/org/gtd/Notes.org"
          ))
 
@@ -459,28 +459,28 @@ If html-file-name is not given, read it from minibuffer."
   ;; custom agenda commands
   ;; Custom agenda command definitions
   (setq org-agenda-custom-commands
-        '(("n" "Recent Notes" tags
+        '(("n" "Notes in the past 10 days" tags
            "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
            ((org-agenda-overriding-header
                        "Recent notes (refile ASAP)")
                       (org-tags-match-list-sublevels nil)))
 
           ;;----------------------------------------------------------
-          ("i" "Recent Ideas" tags
+          ("i" "Ideas in the past 10 days" tags
            "+idea+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
            ((org-agenda-overriding-header "Recent ideas (refile ASAP)")
             (org-tags-match-list-sublevels nil)))
 
           ;;----------------------------------------------------------
-          ("p" "Day Planner (plan your day on a computer)"
+          ("p" "Day Planner"
            ((tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+SCHEDULED<\"<today>\"-repeat"
                        ((org-agenda-overriding-header
-                         "Re-schedule openning tasks (empty it before working)")
+                         "Openning Next Actions")
                         (org-tags-match-list-sublevels t)))
 
             (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\"-repeat"
                        ((org-agenda-overriding-header
-                         "Process old wishes (empty it before working)")
+                         "Old Wishes")
                         (org-tags-match-list-sublevels t)))
 
             (agenda ""
@@ -497,21 +497,21 @@ If html-file-name is not given, read it from minibuffer."
 
             (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\"-repeat"
                        ((org-agenda-overriding-header
-                         "New wishes today (empty it at the end of the day)")
+                         "Wish Inbox")
                         (org-tags-match-list-sublevels t)))
 
             (tags-todo "TODO=\"NEXT\"+SCHEDULED>=\"<tomorrow>\"+SCHEDULED<=\"<+3d>\""
                        ((org-agenda-overriding-header
-                         "Scheduled tasks for the next 3 days")
+                         "Next Actions in the next 3 days")
                         (org-tags-match-list-sublevels nil)))
 
             (tags-todo "TODO=\"SOMEDAY\""
                        ((org-agenda-overriding-header
-                         "Future tasks (add to today if possible)")
+                         "Someday/Maybe Items")
                         (org-tags-match-list-sublevels nil)))))
 
           ;;----------------------------------------------------------
-          ("d" "Agenda Today (print it out when away from computer)"
+          ("d" "Agenda Today"
            ((agenda ""
                     ((org-agenda-ndays 1)
                      (org-agenda-deadline-warning-days 14)
@@ -526,12 +526,12 @@ If html-file-name is not given, read it from minibuffer."
 
             (tags-todo "TODO=\"STARTED\"|TODO=\"WAITING\""
                        ((org-agenda-overriding-header
-                         "Working on (focus on these)")
+                         "Current Next Actions")
                         (org-tags-match-list-sublevels t)))
 
             (tags      "CLOSED<\"<tomorrow>\"+CLOSED>=\"<today>\""
                        ((org-agenda-overriding-header
-                         "Finished tasks today (refile them at end of this week)")
+                         "Finished Next Actions")
                         (org-tags-match-list-sublevels nil)
                         (org-agenda-skip-scheduled-if-done nil)
                         (org-agenda-skip-deadline-if-done nil)
@@ -539,7 +539,7 @@ If html-file-name is not given, read it from minibuffer."
                         (org-agenda-skip-archived-trees nil)))))
 
           ;;----------------------------------------------------------
-          ("w" "Weekly Review (refile and evaluate this week)"
+          ("w" "Weekly Review"
            ((agenda ""
                     ((org-agenda-span 'week)
                      (org-agenda-ndays 7)
@@ -555,7 +555,7 @@ If html-file-name is not given, read it from minibuffer."
 
             (tags     "CLOSED<\"<tomorrow>\"+CLOSED>=\"<-1w>\""
                      ((org-agenda-overriding-header
-                       "Archieve closed tasks in this week")
+                       "Archieve Closed Next Actions in this week")
                       (org-tags-match-list-sublevels t)
                       (org-agenda-skip-scheduled-if-done nil)
                       (org-agenda-skip-deadline-if-done nil)
@@ -564,17 +564,17 @@ If html-file-name is not given, read it from minibuffer."
 
            (tags-todo "TODO<>\"TODO\"+SCHEDULED<\"<tomorrow>\"+SCHEDULED>=\"<-1w>\""
                        ((org-agenda-overriding-header
-                         "Re-schedule openning tasks")
+                         "Re-schedule Openning Next Actions")
                         (org-tags-match-list-sublevels t)))
 
            (tags-todo "TODO=\"TODO\"-repeat"
                       ((org-agenda-overriding-header
-                        "Process wishes remained")
+                        "Process Old Wishes")
                        (org-tags-match-list-sublevels t)))
 
            (tags      "proj/!-TODO-SOMEDAY"
                       ((org-agenda-overriding-header
-                        "Projects review (make sure NOT stuck)")
+                        "Projects Review")
                        (org-tags-match-list-sublevels t)))))
           ))
 
@@ -631,36 +631,36 @@ If html-file-name is not given, read it from minibuffer."
 
   ;; cpature templates
   (setq org-capture-templates
-          '(("p" "Add a PhD Task----->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/PhdWork.org" "Task pool")
+          '(("p" "Add a PhD Wish----->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/Phd.org" "Wish Pool")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-            ("l" "Add a Life Task---->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/DailyLife.org" "Task pool")
+            ("w" "Add a Work Wish----->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/Work.org" "Wish Pool")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-            ("g" "Add a Geek Task---->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/GeekInterests.org" "Task pool")
+            ("l" "Add a Life Wish---->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/Life.org" "Wish Pool")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-            ("s" "Add a Learn Task--->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/Learn.org" "Task pool")
+            ("g" "Add a Geek Wish---->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/Geek.org" "Wish Pool")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
-   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n\
+   - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-          ("m" "Add a Misc Task---->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/Notes.org" "Unclassified tasks")
+          ("m" "Add a General Wish---->Day Planner"
+             entry (file+headline "~/emacs/org/gtd/Notes.org" "Wish Pool")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\"  from \"%i\" in \"%a\"   %U\n\
