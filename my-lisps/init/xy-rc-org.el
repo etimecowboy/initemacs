@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-10 Thu 08:22 xin on XIN-PC>
+;; Time-stamp:<2012-05-16 Wed 19:53 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -222,9 +222,8 @@ If html-file-name is not given, read it from minibuffer."
           ("@online" . ?O) ("@post" . ?M) ("@email" . ?E)
           ("@phone" . ?F) ("@people" . ?Z)
           ;; special tags
-          ("appt" . ?A) ("proj" . ?P)
-          ("repeat" . ?R)
-          ("delegated" . ?D)))
+          ("appt" . ?A) ("proj" . ?P) ("repeat" . ?R)
+          ("delegated" . ?D) ("noexport" . ?N)))
 
   ;; Inherit tags in most of cases
   (setq org-use-tag-inheritance t)
@@ -712,33 +711,48 @@ If html-file-name is not given, read it from minibuffer."
   ;; Babel settings
 
   ;; babel evaluation languages
-  (setq org-babel-load-languages
-        '((emacs-lisp . t)
-          (ditaa      . t)
-          (dot        . t)
-          (octave     . t)
-          (matlab     . t)
-          (latex      . t)
-          (sh         . t)
-          (c          . t)
-          (org        . t)
-          ))
+  ;; (setq org-babel-load-languages
+  ;;       '((emacs-lisp . t)
+  ;;         (ditaa      . t)
+  ;;         (dot        . t)
+  ;;         (octave     . t)
+  ;;         (matlab     . t)
+  ;;         (latex      . t)
+  ;;         (sh         . t)
+  ;;         (c          . t)
+  ;;         (org        . t)
+  ;;         (python     . t)
+  ;;         (R          . t)
+  ;;         (ruby       . t)
+  ;;         (perl       . t)
+  ;;         ))
 
-  (require 'ob-emacs-lisp)
-  (require 'ob-ditaa)
-  (require 'ob-dot)
-  (require 'ob-octave)
-  (require 'ob-matlab)
-  (require 'ob-latex)
-  (require 'ob-sh)
-  ;; (require 'ob-C)
+  (setq org-babel-load-languages
+        (quote ((C . t) (R . t) (asymptote . t)
+                (ditaa . t) (dot . t) (emacs-lisp . t) (latex . t)
+                (matlab . t) (octave . t) (org . t) (perl . t)
+                (python . t) (ruby . t) (sh . t))))
+
+  (require 'ob-C)
   ;; BUG: cannot find this library on Windows 7, strange bug.
   ;;      cause emacs error on Linux, may related with my c-mode settings.
+  (require 'ob-R)
+  (require 'asymptote)
+  (require 'ob-ditaa)
+  (require 'ob-dot)
+  (require 'ob-latex)
+  (require 'ob-emacs-lisp)
+  (require 'ob-matlab)
+  (require 'ob-octave)
   (require 'ob-org)
-  (require 'org-exp)
+  (require 'ob-perl)
+  (require 'ob-python)
+  (require 'ob-ruby)
+  (require 'ob-sh)
 
   ;;----------------------------------------------------------------
   ;; LaTeX export settings
+  (require 'org-exp)
   (require 'org-latex)
   (setq org-export-latex-coding-system 'utf-8-unix)
   (setq org-export-latex-table-caption-above nil)

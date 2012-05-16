@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-bookmark.el'
-;; Time-stamp:<2011-12-11 Sun 20:55 xin on P6T-WIN7>
+;; Time-stamp:<2012-05-16 Wed 09:35 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,10 +20,11 @@
 (defun bookmark-settings ()
   "Settings of `bookmark.el'."
   (setq bookmark-save-flag 1)
-  (setq bookmark-default-file (concat my-var-path "/bookmark-"
-                                      user-login-name "@"
-                                      system-name "@"
-                                      system-configuration))
+  (setq bookmark-default-file ;; (concat my-var-path "/bookmark-"
+                              ;;         user-login-name "@"
+                              ;;         system-name "@"
+                              ;;         system-configuration))
+        (concat my-var-path "/bookmarks"))
   (unless (file-exists-p bookmark-default-file)
     (shell-command (concat "touch " bookmark-default-file)))
   (message "* ---[ bookmark configuration is complete ]---"))
