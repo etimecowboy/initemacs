@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-16 Wed 19:53 xin on p6t>
+;; Time-stamp:<2012-05-16 Wed 19:58 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -737,7 +737,7 @@ If html-file-name is not given, read it from minibuffer."
   ;; BUG: cannot find this library on Windows 7, strange bug.
   ;;      cause emacs error on Linux, may related with my c-mode settings.
   (require 'ob-R)
-  (require 'asymptote)
+  ;; (require 'asymptote)
   (require 'ob-ditaa)
   (require 'ob-dot)
   (require 'ob-latex)
