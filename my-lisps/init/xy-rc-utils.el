@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-05-04 Fri 08:50 xin on XIN-PC>
+;; Time-stamp:<2012-05-17 Thu 10:34 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -772,6 +772,19 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 12")))
 
+;;;###autoload
+(defun xy/set-font-default-big ()
+  "My default Emacs font setting."
+  (interactive)
+  (if window-system
+      (qiang-set-font
+       '("Consolas" "Monaco" ;; NOTE: "DejaVu Sans Mon" = "Monospace"
+         "DejaVu Sans Mono" "Monospace" "Courier") ":pixelsize=18"
+         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
+           "黑体") 20)
+    ;; 默认字体，term 下的字体
+    (set-default-font "Monospace 16")))
+
 ;;--------------------------------------------------------------------
 ;;;###autoload
 (defun xy/set-font-prog ()
@@ -786,6 +799,19 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     ;; 默认字体，term 下的字体
     (set-default-font "Monospace 9")))
 
+;;;###autoload
+(defun xy/set-font-prog-big ()
+  "My default Emacs font setting."
+  (interactive)
+  (if window-system
+      (qiang-set-font
+       '("DejaVu Sans Mono" "Consolas" "Monospace"
+         "Monaco" "Courier") ":pixelsize=16"
+         '("STHeiti" "Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
+           "黑体") 20)
+    ;; 默认字体，term 下的字体
+    (set-default-font "Monospace 14")))
+
 ;;--------------------------------------------------------------------
 ;;;###autoload
 (defun xy/set-font-write ()
@@ -798,6 +824,18 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
          '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
            "黑体") 16)
     (set-default-font "Monospace 12")))
+
+;;;###autoload
+(defun xy/set-font-write-big ()
+  "My Emacs font setting for writing articles."
+  (interactive)
+  (if window-system
+      (qiang-set-font
+       '("Monaco" "Monospace" "Consolas"
+         "Courier" "DejaVu Sans Mono") ":pixelsize=17"
+         '("Microsoft Yahei" "文泉驿等宽正黑" "文泉驿等宽微米黑"
+           "黑体") 20)
+    (set-default-font "Monospace 16")))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload

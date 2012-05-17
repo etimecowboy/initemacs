@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-16 Wed 19:58 xin on p6t>
+;; Time-stamp:<2012-05-17 Thu 12:10 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -711,21 +711,6 @@ If html-file-name is not given, read it from minibuffer."
   ;; Babel settings
 
   ;; babel evaluation languages
-  ;; (setq org-babel-load-languages
-  ;;       '((emacs-lisp . t)
-  ;;         (ditaa      . t)
-  ;;         (dot        . t)
-  ;;         (octave     . t)
-  ;;         (matlab     . t)
-  ;;         (latex      . t)
-  ;;         (sh         . t)
-  ;;         (c          . t)
-  ;;         (org        . t)
-  ;;         (python     . t)
-  ;;         (R          . t)
-  ;;         (ruby       . t)
-  ;;         (perl       . t)
-  ;;         ))
 
   (setq org-babel-load-languages
         (quote ((C . t) (R . t) (asymptote . t)
@@ -749,6 +734,13 @@ If html-file-name is not given, read it from minibuffer."
   (require 'ob-python)
   (require 'ob-ruby)
   (require 'ob-sh)
+
+  ;; Custom library of babel file. Add code blocks to the library from
+  ;; any Org-mode file using the `org-babel-lob-ingest' (bound to C-c
+  ;; C-v i).
+  ;; BUG:
+  ;; (setq org-babel-lob-files
+  ;;       '("~/emacs/org/babel/library-of-babel.org"))
 
   ;;----------------------------------------------------------------
   ;; LaTeX export settings

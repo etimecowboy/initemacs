@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-05-04 Fri 08:52 xin on XIN-PC>
+;; Time-stamp:<2012-05-17 Thu 10:27 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -558,7 +558,7 @@
 
 ;;*** Emacs auto font selection for different OS
 ;; REF: (@url :file-name "http://emacser.com/torture-emacs.htm" :display "emacser")
-(xy/set-font-default)
+(xy/set-font-default-big)
 ;; (am-add-hooks
 ;;  `(lisp-mode-hook emacs-lisp-mode-hook cc-mode-hook c-mode-hook
 ;;    c++-mode-hook sh-mode-hook vhdl-mode-hook verilog-mode-hook
@@ -574,6 +574,10 @@
 (global-set-key (kbd "C-x F w") 'xy/set-font-write)
 (global-set-key (kbd "C-x F m") 'xy/set-font-write-2)
 (global-set-key (kbd "C-x F p") 'xy/set-font-prog)
+(global-set-key (kbd "C-x F D") 'xy/set-font-default-big)
+(global-set-key (kbd "C-x F W") 'xy/set-font-write-big)
+;; (global-set-key (kbd "C-x F M") 'xy/set-font-write-2)
+(global-set-key (kbd "C-x F P") 'xy/set-font-prog-big)
 
 ;;*** Font scale by mouse wheel
 (GNULinux
