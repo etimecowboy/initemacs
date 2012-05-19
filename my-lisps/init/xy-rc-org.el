@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-17 Thu 12:10 xin on p6t>
+;; Time-stamp:<2012-05-19 Sat 14:03 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -710,14 +710,6 @@ If html-file-name is not given, read it from minibuffer."
   ;;==================================================================
   ;; Babel settings
 
-  ;; babel evaluation languages
-
-  (setq org-babel-load-languages
-        (quote ((C . t) (R . t) (asymptote . t)
-                (ditaa . t) (dot . t) (emacs-lisp . t) (latex . t)
-                (matlab . t) (octave . t) (org . t) (perl . t)
-                (python . t) (ruby . t) (sh . t))))
-
   (require 'ob-C)
   ;; BUG: cannot find this library on Windows 7, strange bug.
   ;;      cause emacs error on Linux, may related with my c-mode settings.
@@ -735,12 +727,27 @@ If html-file-name is not given, read it from minibuffer."
   (require 'ob-ruby)
   (require 'ob-sh)
 
+  ;; babel evaluation languages
+  (setq org-babel-load-languages
+        (quote ((C . t) (R . t) (asymptote . t)
+                (ditaa . t) (dot . t) (emacs-lisp . t) (latex . t)
+                (matlab . t) (octave . t) (org . t) (perl . t)
+                (python . t) (ruby . t) (sh . t))))
+
   ;; Custom library of babel file. Add code blocks to the library from
   ;; any Org-mode file using the `org-babel-lob-ingest' (bound to C-c
   ;; C-v i).
   ;; BUG:
   ;; (setq org-babel-lob-files
   ;;       '("~/emacs/org/babel/library-of-babel.org"))
+
+  (defvar org-babel-octave-wrapper-method
+    "%s
+save -ascii %s ans")
+
+  ;; org v7.3 new features
+  ;; Fontify code in code blocks
+  (setq org-src-fontify-natively t)
 
   ;;----------------------------------------------------------------
   ;; LaTeX export settings
@@ -878,6 +885,8 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
                ;; (xy/set-font-write)
                ))
 
+  ;;==================================================================
+
   ;; Use ditaa/graphviz to generate png pictures.
   ;;  *  Use artist mode to draw ascii picutre,
   ;;  *  then convert to png pictures using ditaa.
@@ -912,19 +921,12 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
   ;;                                    (kill-buffer (current-buffer)))
   ;;                                  (delete-frame)))
 
+  ;;==================================================================
+  ;; HTML5 Presentation export for Org-mode
+  ;; (@url :file-name "https://gist.github.com/509761" :display "Source")
+  (require 'org-html5presentation)
 
-  (defvar org-babel-octave-wrapper-method
-    "%s
-save -ascii %s ans")
-
-  ;; matlab integration
-  ;; (require 'ob-matlab)
-  ;; (require 'matlab)
-
-  ;; org v7.3 new features
-  ;; Fontify code in code blocks
-  (setq org-src-fontify-natively t)
-
+  ;;==================================================================
   ;; set default viewer for exported files
   (setq org-file-apps
         (quote ((auto-mode       . emacs)

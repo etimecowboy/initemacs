@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2012-04-26 Thu 16:51 xin on XIN-PC>
+;; Time-stamp:<2012-05-19 Sat 14:58 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -32,7 +32,8 @@
       `(("C-c C-x C-h" xy/org-html-chinese-no-extra-space)
         ("C-c o m"     org2blog/wp-mode)
         ("C-c o l"     org2blog/wp-login)
-        ("C-c o t"     org2blog/wp-post-subtree)))))
+        ("C-c o t"     org2blog/wp-post-subtree)
+        ("C-c s"   org-export-as-html5presentation-and-open)))))
 (eval-after-load "org-agenda" '(org-settings))
 (eval-after-load "org-capture" '(org-settings))
 (eal-define-keys-commonly
