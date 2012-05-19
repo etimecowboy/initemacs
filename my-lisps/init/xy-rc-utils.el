@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-05-19 Sat 13:24 xin on XIN-PC>
+;; Time-stamp:<2012-05-19 Sat 23:17 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -867,6 +867,16 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
                             charset
                             (font-spec :family "STHeiti"))))
     (set-default-font "Monospace")))
+
+;;--------------------------------------------------------------------
+;;;###autoload
+(defun xy/daemon-after ()
+  "Tasks been done after emacsclient first start."
+  (interactive)
+  (if window-system
+      (progn
+        (xy/set-font-write-big)
+        (color-theme-solarized-dark))))
 
 ;;*===================================================================
 ;;* 全屏控制

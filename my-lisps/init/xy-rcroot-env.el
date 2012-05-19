@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-05-17 Thu 10:27 xin on p6t>
+;; Time-stamp:<2012-05-19 Sat 23:18 xin on p6t>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -578,6 +578,7 @@
 (global-set-key (kbd "C-x F W") 'xy/set-font-write-big)
 ;; (global-set-key (kbd "C-x F M") 'xy/set-font-write-2)
 (global-set-key (kbd "C-x F P") 'xy/set-font-prog-big)
+(global-set-key (kbd "C-x F A") 'xy/daemon-after)
 
 ;;*** Font scale by mouse wheel
 (GNULinux
