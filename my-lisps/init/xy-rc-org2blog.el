@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org2blog.el'
-;; Time-stamp:<2012-01-05 Thu 05:28 xin on p6t>
+;; Time-stamp:<2012-05-25 Fri 10:21 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,6 +26,9 @@
            :default-title "New Post"
            :default-categories ("Uncategorized")
            :tags-as-categories nil
+           ;; :keep-new-lines t
+           :confirm t
+           ;; :wp-code nil
            )))
 
   (setq org2blog/wp-buffer-template "# -*- mode: org -*-
