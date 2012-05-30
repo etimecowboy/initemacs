@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-19 Sat 14:03 xin on XIN-PC>
+;; Time-stamp:<2012-05-30 Wed 16:08 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -474,12 +474,22 @@ If html-file-name is not given, read it from minibuffer."
           ("p" "Day Planner"
            ((tags-todo "TODO<>\"TODO\"+TODO<>\"SOMEDAY\"+SCHEDULED<\"<today>\"-repeat"
                        ((org-agenda-overriding-header
-                         "Openning Next Actions")
+                         "Yesterday Next Actions")
                         (org-tags-match-list-sublevels t)))
 
-            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\"-repeat"
+            ;; (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<today>\"-repeat"
+            ;;            ((org-agenda-overriding-header
+            ;;              "Old Wishes")
+            ;;             (org-tags-match-list-sublevels t)))
+
+            ;; (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\"-repeat"
+            ;;            ((org-agenda-overriding-header
+            ;;              "Wish Inbox")
+            ;;             (org-tags-match-list-sublevels t)))
+
+            (tags-todo "TODO=\"TODO\"-repeat"
                        ((org-agenda-overriding-header
-                         "Old Wishes")
+                         "Wish Inbox")
                         (org-tags-match-list-sublevels t)))
 
             (agenda ""
@@ -493,11 +503,6 @@ If html-file-name is not given, read it from minibuffer."
                      (org-agenda-skip-comment-trees t)
                      (org-agenda-todo-list-sublevel t)
                      (org-agenda-timeline-show-empty-dates nil)))
-
-            (tags-todo "TODO=\"TODO\"+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<today>\"-repeat"
-                       ((org-agenda-overriding-header
-                         "Wish Inbox")
-                        (org-tags-match-list-sublevels t)))
 
             (tags-todo "TODO=\"NEXT\"+SCHEDULED>=\"<tomorrow>\"+SCHEDULED<=\"<+3d>\""
                        ((org-agenda-overriding-header
@@ -1180,6 +1185,42 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
   ;;   %%(org-google-weather "New York" "en-gb")
   (eval-after-load "org-google-weather" '(org-google-weather-settings))
   (try-require 'org-google-weather)
+
+  ;;------------------------------------------------------------------
+  ;; org-location-google-maps
+  ;; google-maps API for org
+  ;; `google-maps.el'
+  ;; The easiest way to use it is to load it from your .emacs:
+  ;;
+  ;; (require 'google-maps)
+  ;;
+  ;; You can then use M-x google-maps and type a location.
+  ;;
+  ;; Various key bindings are available. Here's a few:
+  ;;
+  ;; + or - to zoom in or out;
+  ;; left, right, up, down to move;
+  ;; z to set a zoom level via prefix;
+  ;; q to quit;
+  ;; m to add or remove markers;
+  ;; c to center the map on a place;
+  ;; C to remove centering;
+  ;; t to change the maptype;
+  ;; w to copy the URL of the map to the kill-ring;
+  ;; h to show your home.
+  ;;
+  ;; You can integrate directly Google Maps into Org-mode:
+  ;;
+  ;; (require 'org-location-google-maps)
+  ;;
+  ;; Then you can use C-c M-L to enter a location assisted by Google
+  ;; geocoding service. Pressing C-c M-l will show you a map.
+  ;;
+  ;; If you want to use advanced feature, you should take a look at
+  ;; google-maps-static-show and google-maps-geocode-request
+  ;; functions.
+
+  (try-require 'org-location-google-maps)
 
   ;;------------------------------------------------------------------
   (define-key org-mode-map (kbd "C-c t") 'timestamp)

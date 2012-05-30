@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cc.el'
-;; Time-stamp:<2012-02-14 Tue 23:13 xin on p6t>
+;; Time-stamp:<2012-05-30 Wed 17:10 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My C/C++/Java development settings
@@ -142,4 +142,45 @@
 ;;   ;;       (eval-after-load "c-eldoc"
 ;;   ;;         (progn
 ;;   ;;           (c-eldoc-settings)))))
+;;   )
+
+
+;; REF: http://wuyang.yangsheep.net/#sec-2-2-1-18
+;; 2.2.1.18 一个简单的C风格设定，不过现在我用google的了
+
+;; (add-hook 'c-mode-hook 'linux-c-mode)
+;; (add-hook 'c++-mode-hook 'linux-cpp-mode)
+;; ;; 设置imenu的排序方式为按名称排序
+;; (setq imenu-sort-function 'imenu--sort-by-name)
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (defun linux-c-mode()
+;;   ;; 将回车代替C-j的功能，换行的同时对齐
+;;   (define-key c-mode-map [return] 'newline-and-indent)
+;;   (interactive)
+;;   ;; 设置C程序的对齐风格
+;;   (c-set-style "K&R")
+;;   ;; 自动模式，在此种模式下当你键入{时，会自动根据你设置的对齐风格对齐
+;;   (c-toggle-auto-state)
+;;   ;; 此模式下，当按Backspace时会删除最多的空格
+;;   (c-toggle-hungry-state)
+;;   ;; TAB键的宽度设置为4
+;;   (setq c-basic-offset 4)
+;;   ;; 在菜单中加入当前Buffer的函数索引
+;;   (imenu-add-menubar-index)
+;;   ;; 在状态条上显示当前光标在哪个函数体内部
+;;   (which-function-mode)
+;;   )
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (defun linux-cpp-mode()
+;;   (define-key c++-mode-map [return] 'newline-and-indent)
+;;   (define-key c++-mode-map [(control c) (c)] 'compile)
+;;   (interactive)
+;;   (c-set-style "K&R")
+;;   (c-toggle-auto-state)
+;;   (c-toggle-hungry-state)
+;;   (setq c-basic-offset 8)
+;;   (imenu-add-menubar-index)
+;;   (which-function-mode)
 ;;   )

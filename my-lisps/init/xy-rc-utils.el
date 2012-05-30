@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-05-19 Sat 23:17 xin on p6t>
+;; Time-stamp:<2012-05-30 Wed 22:30 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1365,6 +1365,8 @@ The process is:
   (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
   (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
   (xy/install-all-lisps (concat my-local-lisp-path "/whizzytex"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/google-maps"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/weibo"))
   (xy/install-all-lisps "~/.emacs.d/themes")
   ;; (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
   ;;------------------------------------------------------------------

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
-;; Time-stamp:<2011-12-30 Fri 06:32 xin on p6t>
+;; Time-stamp:<2012-05-30 Wed 17:04 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -184,6 +184,11 @@
   ;; (require 'zjl-hl)
 
   ;;------------------------------------------------------------------
+  ;; REF: http://wuyang.yangsheep.net/#sec-2-2-1-17造成emacs卡住的最大
+  ;; 嫌疑人是cedet这个扩展，它会在auto-save-hook上面挂东西。我曾经试过
+  ;; 关闭auto save，发现也不管用。一个粗暴但有效的解决办法是在加载
+  ;; cedet之后强行把auto-save-hook清空：
+  (setq auto-save-hook nil)
 
   (message "* ---[ cedet configuration is complete ]---"))
 

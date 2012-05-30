@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2012-02-23 Thu 19:02 xin on P6T-WIN7>
+;; Time-stamp:<2012-05-30 Wed 10:04 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings
@@ -111,7 +111,8 @@
 (am-add-hooks
  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
                   sh-mode-hook cperl-mode-hook c-common-mode-hook
-                  vhdl-mode-hook verilog-mode-hook matlab-mode-hook)
+                  ;; vhdl-mode-hook
+                  verilog-mode-hook matlab-mode-hook)
  '(lambda () (autopair-mode 1)))
 
 ;;====================================================================

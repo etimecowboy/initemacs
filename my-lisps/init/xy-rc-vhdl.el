@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-vhdl.el'
-;; Time-stamp:<2011-12-04 Sun 18:08 xin on P6T-WIN7>
+;; Time-stamp:<2012-05-30 Wed 10:06 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,7 +31,7 @@
         vhdl-upper-case-enum-values t
         vhdl-upper-case-keywords t
         vhdl-upper-case-types t)
-  (message "* ---[ vhdl-mode configuration is complete ]---")
-)
+  (autopair-mode -1)
+  (message "* ---[ vhdl-mode configuration is complete ]---"))
 
 (provide 'xy-rc-vhdl)

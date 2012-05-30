@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-05-19 Sat 23:18 xin on p6t>
+;; Time-stamp:<2012-05-30 Wed 22:30 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -31,8 +31,12 @@
 (setq message-log-max 100000)
 
 ;; Debug errors
+;; M-x toggle-debug-on-quit使用这条命令后，每次卡住后，马上按C-g，就会
+;; 打出当前执行函数的调用栈，是哪个函数造成的卡住，也就一目了然了。然后
+;; 根据这个造成卡住的函数属于哪个扩展包，再分别想解决办法。
+
 (setq debug-on-error t)
-;; (setq debug-on-quit t)
+(setq debug-on-quit t)
 
 ;; Compilation message
 ;; (setq compilation-auto-jump-to-first-error t)
@@ -324,6 +328,20 @@
 ;; REF: (@url :file-name "http://cristal.inria.fr/whizzytex/" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/whizzytex"))
 (message "* ---[ whizzytex lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: (@url :file-name "http://julien.danjou.info/software/google-maps.el" :display "Source")
+(xy/load-autoload (concat my-local-lisp-path "/google-maps"))
+(message "* ---[ google-maps lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: (@url :file-name "https://github.com/austin-----/weibo.emacs" :display "Source")
+(xy/load-autoload (concat my-local-lisp-path "/weibo"))
+(message "* ---[ weibo lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
