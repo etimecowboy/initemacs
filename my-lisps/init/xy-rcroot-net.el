@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2012-05-30 Wed 22:45 xin on p5q>
+;; Time-stamp:<2012-05-31 Thu 00:08 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -112,11 +112,20 @@
 ;; * weibo.emacs
 ;; REF: (@url :file-name "https://github.com/austin-----/weibo.emacs" :display "Source")
 ;;      (@url :file-name "http://emacser.com/weibo.htm" :display "Post@emacser.com")
-;; NOTE: 还不能用，留待观察。
+;; TODO: Make it work
 ;; (autoload 'weibo-timeline "weibo-timeline"
 ;;   "Check your sina weibo timeline." t)
 ;; (when (try-require 'weibo)
 ;;   (setq oauth-use-curl t))
+;; (try-require 'weibo)
+
+;;====================================================================
+;; * twittering-mode
+;; REF: (@url :file-name "http://emacser.com/twittering-mode.htm" :display "Post@emacser.com")
+;; TODO: Make it work
+;; (eval-after-load "twittering-mode"
+;;   '(progn
+;;     (twittering-mode-settings)))
 
 ;;====================================================================
 ;;* google-maps
