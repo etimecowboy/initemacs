@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2012-05-31 Thu 00:08 xin on p5q>
+;; Time-stamp:<2012-05-31 Thu 15:15 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -122,6 +122,7 @@
 ;;====================================================================
 ;; * twittering-mode
 ;; REF: (@url :file-name "http://emacser.com/twittering-mode.htm" :display "Post@emacser.com")
+;;      (@url :file-name "http://harfang.yo2.cn/?p=11522" :display "Another Post")
 ;; TODO: Make it work
 ;; (eval-after-load "twittering-mode"
 ;;   '(progn

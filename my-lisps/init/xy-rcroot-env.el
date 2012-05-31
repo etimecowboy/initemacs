@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-05-30 Wed 22:30 xin on p5q>
+;; Time-stamp:<2012-05-31 Thu 18:06 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -36,7 +36,7 @@
 ;; 根据这个造成卡住的函数属于哪个扩展包，再分别想解决办法。
 
 (setq debug-on-error t)
-(setq debug-on-quit t)
+;; (setq debug-on-quit t) ;; 平时太烦人
 
 ;; Compilation message
 ;; (setq compilation-auto-jump-to-first-error t)
@@ -103,52 +103,16 @@
 ;;* Install additional lisp packages
 
 ;;** ELPA packages
-;; Packages got from `package.el'.
-;; They are usually for tests and will be moved out of the management
-;; of the `package.el' when ready for production usage. Sometime, the
-;; ELPA packages are older than the lisps resided outside.
+
+;; Packages installed via `package.el'.
 
 ;; `package.el' is now part of GNU Emacs 24. You can get the
 ;; latest at http://bit.ly/pkg-el while the last version that's
 ;; compatible with Emacs 23 is at http://bit.ly/pkg-el23
 
-;; Packges moved out
-;; `anything', `anything-complete', `anything-config',
-;; `anything-extension', `anything-match-plugin', `anything-obsolete',
-;; `archive-downloader', `auto-complete', `auto-complete-etags',
-;; `auto-complete-octave', `auto-complete-verilog', `autopair',
-;; `blank-mode', `bm', `browse-kill-ring' `buffer-move',
-;; `cal-china-x', `caps-mode', `cdlatex', `c-eldoc', `cmake-mode',
-;; `color-file-completion', `color-theme', `col-highlight',
-;; `columnify', `ctags', `cursor-chg', `descbinds-anything',
-;; `desktop', `diff-git', `diminish', `dired-details+',
-;; `dired-details', `dired-isearch', `dired-single', `doc-mode',
-;; `elisp-cache', `ert', `full-ack', `graphviz-dot-mode', `hexrgb',
-;; `highlight-parentheses', `highlight-symbol', `highline',
-;; `hl-line+', `htmlize', `hungry-delete', `icicles', `icomplete+',
-;; `idle-require', `ioccur', `iy-go-to-char', `kill-ring-search',
-;; `lacarte', `light-symbol', `load-dir', `maxframe', `mic-paren',
-;; `multi-term', `notify', `org-table-comment', `rect-mark',
-;; `redo+', `session' (BUG: conflicts with `anything'), `smex'
-;; `sr-speedbar', `synonyms', `tabbar', `tabbar-ruler', `texdrive',
-;; `tex-math-preview', `vline', `w32-browser', `weblogger',
-;; `window-number', `windresize', `winpoint', `xml-rpc'
-
-;; packages still managed by `package.el'
-;; (load "company-autoloads.el")
-;; (load "dictionary-autoloads.el")
-;; ;; Current ECB do not support cedet version 1.0, has been hacked by me
-;; ;; (load "ecb_snap-autoloads.el")
-;; (load "emms-autoloads.el")
-;; (load "magit-autoloads.el")
-;; (load "yasnippet-autoloads.el")
-;; (message "* ---[ ELPA lisps installed at %ds ]---"
-;;          (destructuring-bind (hi lo ms) (current-time)
-;;            (- (+ hi lo) (+ (first *emacs-load-start*)
-;;                            (second *emacs-load-start*)))))
-
 ;;--------------------------------------------------------------------
 ;;** Manual installed lisps
+
 ;;*** Small/single lisps installed
 
 ;; Download from emacswiki, via `auto-install'
@@ -158,7 +122,7 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; Seperately collected/downloaded lisps
+;; Seperately collected/downloaded lisps.
 (xy/load-autoload my-local-lisp-path)
 (message "* ---[ my local lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -167,6 +131,7 @@
 
 ;;--------------------------------------------------------------------
 ;;*** Bigger packages
+
 ;; Packages with version numbers are stable releases, while
 ;; packages without version numbers are development versions
 

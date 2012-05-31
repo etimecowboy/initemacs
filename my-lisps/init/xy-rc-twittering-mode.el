@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-twittering-mode.el'
-;; Time-stamp:<2012-05-31 Thu 00:04 xin on p5q>
+;; Time-stamp:<2012-05-31 Thu 15:09 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -33,10 +33,14 @@
   (setq-default twittering-icon-mode t)
 
   ;; 启动时默认打开的 timeline.
-  (setq twittering-initial-timeline-spec-string
-        `( "http://weibo.com/u/2817412634"
-           ;; ":home@douban"
-        ))
+  ;; (setq twittering-initial-timeline-spec-string
+  ;;       `( "http://weibo.com/u/2817412634"
+  ;;          ;; ":home@douban"
+  ;;       ))
+
+  (setq twittering-enabled-services '(sina))
+  (setq twittering-accounts '((sina (username "15327122549"))))
+                                    ;; (auth oauth))))
 
   (message "* ---[ twittering-mode configuration is complete ]---"))
 

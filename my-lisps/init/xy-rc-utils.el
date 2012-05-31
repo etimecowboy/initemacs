@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-05-31 Thu 00:09 xin on p5q>
+;; Time-stamp:<2012-05-31 Thu 18:11 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1341,6 +1341,7 @@ The process is:
   (interactive)
   (setq debug-on-error t)
   ;;------------------------------------------------------------------
+  ;; TODO: Write lisp code to do it
   (xy/install-all-lisps my-local-lisp-path)
   (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
   (xy/install-all-lisps (concat my-local-lisp-path
@@ -1370,16 +1371,40 @@ The process is:
   (xy/install-all-lisps "~/.emacs.d/themes")
   ;; (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
   ;;------------------------------------------------------------------
-  (xy/recompile-dir (concat my-elpa-lisp-path "/auctex-11.86"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/dictionary-1.8.7"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/emms-3.0"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.1.1"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/org-20120423"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/ess-5.14"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/twittering-mode-2.0.0"))
-  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/rainbow-mode-0.2"))
+  ;; TODO: Write lisp code to do it.
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/ascii-3.1"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/auctex-11.86"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/autopair-0.3"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/bm-1.53"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/boxquote-1.23"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/dictionary-1.8.7"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/emms-3.0"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.1.1"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/org-20120530"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path "/ess-5.14"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/twittering-mode-2.0.0"))
   ;; (xy/recompile-dir (concat my-elpa-lisp-path
   ;;                           "/sunrise-commander-5.400"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-buttons-1.394"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-checkpoints-1.374"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-loop-3.394"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-mirror-2.396"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-modeline-2.394"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-tabs-1.394"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-tree-1.413"))
+  ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;;                           "/sunrise-x-w32-addons-1.394"))
+  ;; ;; (xy/recompile-dir (concat my-elpa-lisp-path "/rainbow-mode-0.2"))
+  ;; ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;; ;;                           "/sunrise-commander-5.400"))
   ;;------------------------------------------------------------------
   ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled
   ;; with cedet. Just activate ecb without byte-compiled lisps, then
