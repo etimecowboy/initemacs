@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ido.el'
-;; Time-stamp:<2012-01-29 Sun 12:34 xin on P6T-WIN7>
+;; Time-stamp:<2012-06-03 Sun 20:26 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -66,11 +66,16 @@
   ;;   (ido-everywhere t)
   ;;   (setq ido-define-mode-map-hook 'ido-setup-hook))
 
+  ;; (setq ido-save-directory-list-file
+  ;;               (concat my-var-path "/ido-last-"
+  ;;                         user-login-name "@"
+  ;;                         system-name "@"
+  ;;                         system-configuration))
+
+  ;; NOTE: no need to have different ido-last files on different
+  ;;       machines.
   (setq ido-save-directory-list-file
-                (concat my-var-path "/ido-last-"
-                          user-login-name "@"
-                          system-name "@"
-                          system-configuration))
+        (concat my-var-path "/ido-last"))
   (unless (file-exists-p ido-save-directory-list-file)
     (shell-command (concat "touch " ido-save-directory-list-file)))
   (setq ido-everywhere t)

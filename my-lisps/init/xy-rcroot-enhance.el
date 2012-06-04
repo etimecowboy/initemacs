@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2012-05-16 Wed 09:32 xin on p6t>
+;; Time-stamp:<2012-06-03 Sun 21:46 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -67,9 +67,11 @@
 ;;** flyspell
 (eval-after-load 'flyspell '(flyspell-settings))
 (am-add-hooks
- `(text-mode-hook org-mode-hook latex-mode-hook
-                  LaTeX-mode-hook message-mode-hook
-                  mew-draft-mode-hook)
+ `(;;text-mode-hook ;; BUG: cause error when start emacs daemon or
+                    ;;      emacs24
+     org-mode-hook latex-mode-hook
+                   LaTeX-mode-hook message-mode-hook
+                   mew-draft-mode-hook)
  '(lambda ()
     (flyspell-mode 1)))
 
@@ -277,11 +279,17 @@ from tradition chinese to simple chinese" t)
 
 (provide 'xy-rcroot-enhance)
 ;;* hanspell
-(eval-after-load "rw-hunspell" '(rw-hunspell-settings))
-(eval-after-load "rw-ispell" '(rw-ispell-settings))
-(require 'rw-language-and-country-codes)
-(require 'rw-ispell)
+;; (eval-after-load "rw-hunspell" '(rw-hunspell-settings))
+;; (eval-after-load "rw-ispell" '(rw-ispell-settings))
+;; (require 'rw-language-and-country-codes)
+;; (require 'rw-ispell)
+;; (Windows
+;;  (require 'rw-hunspell))
 (Windows
+ (eval-after-load "rw-hunspell" '(rw-hunspell-settings))
+ (eval-after-load "rw-ispell" '(rw-ispell-settings))
+ (require 'rw-language-and-country-codes)
+ (require 'rw-ispell)
  (require 'rw-hunspell))
 
 ;;====================================================================

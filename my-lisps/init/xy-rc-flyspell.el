@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-flyspell.el'
-;; Time-stamp:<2011-12-12 Mon 02:06 xin on P6T-WIN7>
+;; Time-stamp:<2012-06-03 Sun 20:59 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -32,7 +32,7 @@
   (setq flyspell-issue-welcome-flag nil)
   ;; 令flyspell按照相近程度补齐
   (setq flyspell-sort-corrections nil)
-  (add-hook 'flyspell-incorrect-hook 'my-flyspell-ignore-uppercase)
+  ;; (add-hook 'flyspell-incorrect-hook 'my-flyspell-ignore-uppercase)
   (message "* ---[ flyspell configuration is complete ]---"))
 
 (provide 'xy-rc-flyspell)

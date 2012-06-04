@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ispell.el'
-;; Time-stamp:<2011-12-13 Tue 00:36 xin on p6t>
+;; Time-stamp:<2012-06-03 Sun 20:51 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,6 +19,7 @@
 ;;;###autoload
 (defun ispell-settings ()
   "Settings of `ispell.el'."
+
   (GNULinux
    (setq ispell-program-name "aspell")
    (setq-default ispell-dictionary "british")
@@ -44,6 +45,7 @@
         ispell-skip-html (quote use-mode-name)
         ispell-skip-tib t
         ispell-use-framepop-p nil)
+
   (message "* ---[ ispell configuration is complete ]---"))
 
 (provide 'xy-rc-ispell)

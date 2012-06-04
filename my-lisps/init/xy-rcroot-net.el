@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2012-05-31 Thu 15:15 xin on p5q>
+;; Time-stamp:<2012-06-03 Sun 17:20 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -115,8 +115,8 @@
 ;; TODO: Make it work
 ;; (autoload 'weibo-timeline "weibo-timeline"
 ;;   "Check your sina weibo timeline." t)
-;; (when (try-require 'weibo)
-;;   (setq oauth-use-curl t))
+(when (try-require 'weibo)
+  (setq oauth-use-curl t))
 ;; (try-require 'weibo)
 
 ;;====================================================================

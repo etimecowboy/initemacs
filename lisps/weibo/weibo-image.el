@@ -16,7 +16,10 @@
 (defconst weibo-image-buffer-name "*weibo-image*")
 
 (defvar weibo-display-image t
-  "When set to true, images are displayed. Set it to nil to disable image display.")
+  "When set to true, images are displayed. Set it to nil to disable image display")
+
+(defvar weibo-download-image-queue nil)
+(defvar weibo-download-image-queue2 nil)
 
 (defun weibo-get-image-directory ()
   (let ((image-directory (expand-file-name "cache" weibo-directory)))
@@ -27,17 +30,55 @@
 (defun weibo-make-image-file-name (url)
   (expand-file-name (md5 url) (weibo-get-image-directory)))
 
-(defun weibo-get-image-file (url)
+(defun weibo-download-image-file (url)
+  (let ((image-file (weibo-make-image-file-name url)))
+    (with-current-buffer (url-retrieve-synchronously url)
+      (goto-char (point-min))
+      (let ((end (search-forward "\n\n" nil t)))
+	(when end
+	  (delete-region (point-min) end)
+	  (write-file image-file)))
+      (kill-buffer))))
+
+(defun weibo-add-to-image-download-queue (url)
+  (unless (member url weibo-download-image-queue2)
+    (add-to-list 'weibo-download-image-queue url)))
+
+(defun weibo-download-image-in-queue ()
+  (let ((buffer (current-buffer))
+	(url (pop weibo-download-image-queue)))
+    (while url
+	(let ((image-file (weibo-make-image-file-name url))
+	      (size (length weibo-download-image-queue)))
+	  (message (format "剩余%d张图片" size))
+	  (unless (file-exists-p image-file)
+	    (add-to-list 'weibo-download-image-queue2 url)
+	    (url-retrieve url
+			(lambda (status image-file weibo-timeline-data buffer url)
+			  (goto-char (point-min))
+			  (let ((end (search-forward "\n\n" nil t)))
+			    (when end
+			      (delete-region (point-min) end)
+			      (write-file image-file)))
+			  (kill-buffer)
+			  (setq weibo-download-image-queue2 (remove url weibo-download-image-queue2))
+			  (when (= (% (length weibo-download-image-queue2) 5) 0)
+			    (with-current-buffer buffer
+			      (let ((current-position (point)))
+				(ewoc-refresh weibo-timeline-data)
+				(goto-char current-position)))))
+			`(,image-file ,weibo-timeline-data ,buffer ,url)))
+	  (setq url (pop weibo-download-image-queue))
+	  (when (= (% size 5) 0)
+	    (sleep-for 0.1))))))
+
+(defun weibo-get-image-file (url &optional download-synchronously)
   (if weibo-display-image
       (let ((image-file (weibo-make-image-file-name url)))
 	(unless (file-exists-p image-file)
-	  (with-current-buffer (url-retrieve-synchronously url)
-	    (goto-char (point-min))
-	    (let ((end (search-forward "\n\n" nil t)))
-	      (when end
-		(delete-region (point-min) end)
-		(write-file image-file)))
-	    (kill-buffer)))
+	  (if download-synchronously
+	      (weibo-download-image-file url)
+	    (weibo-add-to-image-download-queue url)))
 	(if (file-exists-p image-file) image-file nil))
     nil))
 
@@ -59,7 +100,7 @@
     (setq buffer-read-only nil)
     (erase-buffer)
     (weibo-image-mode)
-    (if (weibo-insert-image (weibo-get-image-file url))
+    (if (weibo-insert-image (weibo-get-image-file url t))
 	(progn
 	  (setq buffer-read-only t)
 	  (image-mode))

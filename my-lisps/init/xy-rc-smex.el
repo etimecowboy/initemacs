@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-smex.el'
-;; Time-stamp:<2012-01-29 Sun 21:36 xin on p6t>
+;; Time-stamp:<2012-06-03 Sun 20:26 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -30,11 +30,17 @@
 ;;;###autoload
 (defun smex-settings ()
   "Settings of `smex.el'."
+  ;; BUG: cannot automatically create smex-save file in Linux, you
+  ;;      have to create it manually.
+  ;; (setq-default smex-save-file
+  ;;                 (concat my-var-path "/smex-save-"
+  ;;                         user-login-name "@"
+  ;;                         system-name "-"
+  ;;                         system-configuration))
+  ;; NOTE: no need to have different smex-save files on different
+  ;;       machines.
   (setq-default smex-save-file
-                  (concat my-var-path "/smex-save-"
-                          user-login-name "@"
-                          system-name "-"
-                          system-configuration))
+                (concat my-var-path "/smex-save"))
   (unless (file-exists-p smex-save-file)
     (shell-command (concat "touch " smex-save-file)))
   (setq smex-history-length 100)

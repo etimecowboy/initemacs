@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-02-23 Thu 19:14 xin on P6T-WIN7>
+;; Time-stamp:<2012-06-03 Sun 20:29 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -105,25 +105,28 @@
   ;; (smex-initialize-ido)) ;; BUG: `smex-initialize-ido' cause error
   ;;                        ;; in Emacs 23.2, but OK in 23.3
 (global-set-key (kbd "<f6> d") 'xy/ido+smex-start)
-(Windows ;; BUG: not work in Linux. Why?
- (add-hook 'after-init-hook 'xy/ido+smex-start))
+ ;; (Windows ;; BUG: not work in Linux. Why? --Answer: The
+ ;; `smex-save-file' cannot be automatically created in Linux. Fixed
+ ;; by manually create it.
+ ;; (add-hook 'after-init-hook 'xy/ido+smex-start))
+(add-hook 'after-init-hook 'xy/ido+smex-start)
 
 ;;--------------------------------------------------------------------
 ;;** ido+icomplete
 ;; Use both ido and icomplete
 ;;;###autoload
-(defun xy/ido+icomplete-start ()
-  "Start ido and icomplete completion."
-  (interactive)
-  (when (featurep 'icicles)
-    (icy-mode -1))
-  (require 'ido)
-  (ido-mode 1)
-  (require 'icomplete)
-  (icomplete-mode 1))
-(global-set-key (kbd "<f6> D") 'xy/ido+icomplete-start)
-(GNULinux
- (add-hook 'after-init-hook 'xy/ido+icomplete-start))
+;; (defun xy/ido+icomplete-start ()
+;;   "Start ido and icomplete completion."
+;;   (interactive)
+;;   (when (featurep 'icicles)
+;;     (icy-mode -1))
+;;   (require 'ido)
+;;   (ido-mode 1)
+;;   (require 'icomplete)
+;;   (icomplete-mode 1))
+;; (global-set-key (kbd "<f6> D") 'xy/ido+icomplete-start)
+;; (GNULinux
+;;  (add-hook 'after-init-hook 'xy/ido+icomplete-start))
 
 ;;====================================================================
 ;;* Buffer auto complete

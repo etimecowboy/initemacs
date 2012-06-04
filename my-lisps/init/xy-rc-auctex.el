@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-01-20 Fri 19:08 xin on p6t>
+;; Time-stamp:<2012-06-04 Mon 21:14 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -32,25 +32,45 @@
 ;;;###autoload
 (defun auctex-settings ()
   "Settings of `auctex'."
+
   (require 'tex-site)
   (require 'font-latex)
+  (require 'reftex)
+  (require 'cdlatex)
+  ;; (require 'wysiwyg-tex) ;; BUG: not working properly
+
+  ;; (Windows ;; Use texlive instead of miktex in Windows now.
+  ;;  (require 'tex-mik))
+
   (setq TeX-auto-save t
         TeX-parse-self t
         TeX-electric-escape t
         TeX-auto-untabify t
         TeX-show-compilation nil
         TeX-save-query nil
-        tex-source-specials-mode t
-        LaTeX-math-mode nil
-        TeX-newline-function 'newline-and-indent)
+        TeX-clean-confirm nil
+        TeX-newline-function 'newline-and-indent
+        TeX-electric-escape nil
+        TeX-DVI-via-PDFTeX t
+        TeX-electric-sub-and-superscript t
+        TeX-quote-after-quote t
+        LaTeX-math-abbrev-prefix "#"
+        font-latex-fontify-script t
+        reftex-plug-into-AUCTeX t)
 
-  (setq-default TeX-master nil ;; project support
-                TeX-PDF-mode  t
-                TeX-fold-mode t)
+  (setq-default TeX-master nil) ;; project support
 
-  ;; (require 'tex-mik) ;; Windows下可使用 miktex
-  ;; (setq TeX-engine 'xetex) ;; set xelatex as default engine.
-  ;; NOTE: AUCTeX-11.86: Preview does not work with xelatex
+  (setq TeX-fold-env-spec-list
+        (quote (("[comment]" ("comment"))
+                ("[figure]" ("figure"))
+                ("[table]" ("table"))
+                ("[itemize]"("itemize"))
+                ("[enumerate]"("enumerate"))
+                ("[description]"("description"))
+                ("[overpic]"("overpic"))
+                ("[tabularx]"("tabularx"))
+                ("[code]"("code"))
+                ("[shell]"("shell")))))
 
   (setq TeX-command-list
         (quote
@@ -126,23 +146,57 @@
            TeX-run-command t t
            :help "Run an arbitrary command"))))
 
-  (require 'reftex)
-  (require 'cdlatex)
-  ;; (require 'wysiwyg-tex) ;; BUG: not working properly
+  (setq TeX-source-correlate-method 'synctex
+        TeX-source-correlate-start-server t)
+
+  (setq TeX-view-program-list
+        '(("SumatraPDF" "SumatraPDF.exe %o")
+          ("Gsview" "gsview32.exe %o")
+          ("Okular" "okular --unique %o#src:%n%b")
+          ("Evince" "evince %o")
+          ("Firefox" "firefox %o")))
 
   (add-hook 'LaTeX-mode-hook
             '(lambda ()
                (turn-on-auto-fill)
                (flyspell-mode 1)
-               (outline-minor-mode 1)
-               (turn-on-reftex)
-               (turn-on-cdlatex)
                (autopair-mode -1)
+               (outline-minor-mode 1)
+               (LaTeX-math-mode 1)
+               (TeX-global-PDF-mode 1)
+               (TeX-PDF-mode 1)
+               (setq TeX-engine 'xetex) ;; set xelatex as default
+               ;; engine. NOTE: Preview does not work with xelatex
+               (GNULinux
+                (setq TeX-view-program-selection
+                      '((output-pdf "Okular")
+                        ;; ((output-dvi style-pstricks) "dvips and gv")
+                        (output-dvi "Okular")
+                        (output-html "xdg-open"))))
+               ;; (Windows
+               ;;  (setq TeX-view-program-selection
+               ;;        '((output-pdf "SumatraPDF")
+               ;;          (output-dvi "Yap"))))
+               (TeX-source-correlate-mode 1)
+               (setq TeX-fold-mode 1)
+               (setq Tex-source-specials-mode 1)
+               (turn-on-cdlatex)
+               (turn-on-reftex)
+               ;; (imenu-add-menubar-index)
                (local-set-key "\C-c\C-t" ; Displays a page around cursor.
                               'wysiwyg-tex-show-preview)
                ;; (local-set-key "\C-c\C-T" ; Displays the whole page.
                               ;; 'wysiwyg-tex-show-whole-preview)
+               ;; (define-key LaTeX-mode-map
+               ;;   (kbd "C-c r") 'reftex-parse-all)
                ))
+
+  (setq LaTeX-section-hook
+        '(LaTeX-section-heading
+          LaTeX-section-title
+          ;;LaTeX-section-toc
+          LaTeX-section-section
+          LaTeX-section-label))
 
   (message "* ---[ auctex configuration is complete ]---"))
 
@@ -152,8 +206,11 @@
   (require 'preview)
   ;; preview-latex, preview latex output in Emacs
   (LaTeX-preview-setup)
-  ;; Picture scale
-  (setq preview-scale-function 1.5)
+  (setq preview-image-type 'dvipng
+        preview-scale-function 1.5
+        preview-prefer-TeX-bb t
+        preview-transparent-color "white")
+
   (message "* ---[ preview-latex configuration is complete ]---"))
 
 (provide 'xy-rc-auctex)

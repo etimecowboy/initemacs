@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-rw-hunspell.el'
-;; Time-stamp:<2011-12-13 Tue 00:35 xin on p6t>
+;; Time-stamp:<2012-06-03 Sun 20:47 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,12 +22,13 @@
   (GNULinux
    (setq rw-hunspell-dicpath-list
          (quote
-          ("/usr/share/hunspell"))))
+          ("/usr/share/hunspell")))
+   (setq rw-hunspell-default-dictionary "en_US_hunspell"))
   (Windows
    (setq rw-hunspell-dicpath-list
          (quote
-          ("~/.emacs.d/bin/win32/hunspell"))))
-  (setq rw-hunspell-default-dictionary "en_GB_hunspell")
+          ("~/.emacs.d/bin/win32/hunspell")))
+   (setq rw-hunspell-default-dictionary "en_GB_hunspell"))
   (setq rw-hunspell-make-dictionary-menu t)
   (setq rw-hunspell-use-rw-ispell t)
   (message "* ---[ rw-hunspell configuration is complete ]---"))
