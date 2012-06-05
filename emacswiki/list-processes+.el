@@ -1,9 +1,9 @@
-;;; list-processes+.el --- 
+;;; list-processes+.el --- Add process management to `list-processes'
 
 ;; Copyright 2006 Ye Wenbin
 ;;
 ;; Author: wenbinye@163.com
-;; Time-stamp: <Ye Wenbin 2006-10-15 18:35:43>
+;; Time-stamp:<2012-06-05 Tue 20:55 xin on p5q>
 ;; Version: $Id: list-process-mode.el,v 0.0 <2006-10-15 17:13:28> ywb Exp $
 ;; Keywords: 
 ;; X-URL: not distributed yet

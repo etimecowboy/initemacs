@@ -4,12 +4,12 @@
 ;; Description: Functions dealing with accented characters.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1999-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1999-2012, Drew Adams, all rights reserved.
 ;; Created: Fri Sep  3 11:02:14 1999
 ;; Version: 20.0
-;; Last-Updated: Tue Jan  4 14:50:09 2011 (-0800)
+;; Last-Updated: Sun Jan  1 14:05:07 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 55
+;;     Update #: 56
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/unaccent.el
 ;; Keywords: i18n, language, accents
 ;; Compatibility: GNU Emacs 20.x
@@ -72,28 +72,28 @@
 
 
 (defvar reverse-iso-chars-alist
-  '(;; Trema/umlaut (äëïöü) (ÄËÏÖÜ)
+  '(;; Trema/umlaut (�� ��) (�� ��)
     (?\344 . ?a)(?\353 . ?e)(?\357 . ?i)(?\366 . ?o)(?\374 . ?u)
     (?\304 . ?A)(?\313 . ?E)(?\317 . ?I)(?\326 . ?O)(?\334 . ?U)
-    ;; Circumflex (âêîôû) (ÂÊÎÔÛ)
+    ;; Circumflex (� �� ) (� �� )
     (?\342 . ?a)(?\352 . ?e)(?\356 . ?i)(?\364 . ?o)(?\373 . ?u)
     (?\302 . ?A)(?\312 . ?E)(?\316 . ?I)(?\324 . ?O)(?\333 . ?U)
-    ;; Grave (àèìòù) (ÀÈÌÒÙ)
+    ;; Grave (     ) (     )
     (?\340 . ?a)(?\350 . ?e)(?\354 . ?i)(?\362 . ?o)(?\371 . ?u)
     (?\300 . ?A)(?\310 . ?E)(?\314 . ?I)(?\322 . ?O)(?\331 . ?U)
-    ;; Acute (áéíóúý) (ÁÉÍÓÚÝ)
+    ;; Acute (������) (������)
     (?\341 . ?a)(?\351 . ?e)(?\355 . ?i)(?\363 . ?o)(?\372 . ?u)(?\375 . ?y)
     (?\301 . ?A)(?\311 . ?E)(?\315 . ?I)(?\323 . ?O)(?\332 . ?U)(?\335 . ?Y)
-    (?\347 . ?c)(?\307 . ?C)            ; Cedilla (çÇ)
-    ;; Tilde (ñãõÑÃÕ)
+    (?\347 . ?c)(?\307 . ?C)            ; Cedilla (��)
+    ;; Tilde (      )
     (?\361 . ?n)(?\343 . ?a)(?\365 . ?o)(?\321 . ?N)(?\303 . ?A)(?\325 . ?O)
-    (?\337 . "ss")                      ; S-zed (Beta) (ß)
-    (?\253 . ?")(?\273 . ?")            ; Guillemets -> double quotes («»)
-    (?\346 . "ae")(?\306 . "AE")        ; ae, AE (æÆ)
-    (?\370 . ?o)(?\330 . ?O)            ; Slashed O (øØ)
-    (?\260 . ?@)(?\345 . ?a)(?\305 . ?A) ; Angstrom (degree) (°åÅ)
-    (?\277 . ??)                        ; Upside-down question mark (¿)
-    (?\241 . ?!)                        ; Upside-down exclamation mark (¡)
+    (?\337 . "ss")                      ; S-zed (Beta) (�)
+    (?\253 . ?")(?\273 . ?")            ; Guillemets -> double quotes (  )
+    (?\346 . "ae")(?\306 . "AE")        ; ae, AE (  )
+    (?\370 . ?o)(?\330 . ?O)            ; Slashed O (  )
+    (?\260 . ?@)(?\345 . ?a)(?\305 . ?A) ; Angstrom (degree) (�  )
+    (?\277 . ??)                        ; Upside-down question mark ( )
+    (?\241 . ?!)                        ; Upside-down exclamation mark ( )
     ))
 
 ;;;###autoload
@@ -138,7 +138,7 @@ display in-progress messages."
 
 (defsubst accented-char-p (char)
   "Non-nil iff CHAR is an accented character."
-  (and (>= char ?\240)(<= char ?\377))) ; SPC <= char <= ÿ
+  (and (>= char ?\240)(<= char ?\377))) ; SPC <= char <=  
 
 ;;;###autoload
 (defun unaccent-char ()

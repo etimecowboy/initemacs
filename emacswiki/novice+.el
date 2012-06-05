@@ -4,33 +4,19 @@
 ;; Description: Extensions to `novice.el'.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2012, Drew Adams, all rights reserved.
 ;; Created: Thu Jul 11 17:10:39 1996
 ;; Version: 21.0
-;; Last-Updated: Tue Jan  4 11:46:25 2011 (-0800)
+;; Last-Updated: Fri Mar  2 08:32:41 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 136
+;;     Update #: 143
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/novice+.el
 ;; Keywords: internal, help
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
 ;;
 ;; Features that might be required by this library:
 ;;
-;;   `apropos', `apropos+', `apropos-fn+var', `avoid', `cl',
-;;   `cus-edit', `cus-face', `cus-load', `cus-start', `custom',
-;;   `dired', `dired+', `dired-aux', `dired-x', `doremi', `easymenu',
-;;   `ediff-diff', `ediff-help', `ediff-init', `ediff-merg',
-;;   `ediff-mult', `ediff-util', `ediff-wind', `el-swank-fuzzy',
-;;   `ffap', `ffap-', `fit-frame', `frame-cmds', `frame-fns',
-;;   `fuzzy', `fuzzy-match', `help+20', `hexrgb', `icicles',
-;;   `icicles-cmd1', `icicles-cmd2', `icicles-face', `icicles-fn',
-;;   `icicles-mac', `icicles-mcmd', `icicles-mode', `icicles-opt',
-;;   `icicles-var', `info', `info+', `kmacro', `levenshtein',
-;;   `menu-bar', `menu-bar+', `misc-cmds', `misc-fns', `mkhtml',
-;;   `mkhtml-htmlize', `mouse3', `mwheel', `novice', `novice+', `pp',
-;;   `pp+', `regexp-opt', `ring', `ring+', `second-sel', `strings',
-;;   `thingatpt', `thingatpt+', `unaccent', `w32-browser',
-;;   `w32browser-dlgopen', `wid-edit', `wid-edit+', `widget'.
+;;   `novice', `novice+', `thingatpt', `thingatpt+'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -56,6 +42,8 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2012/02/25 dadams
+;;     Removed soft require of Icicles.
 ;; 2010/01/12 dadams
 ;;     (enable|disable)-command: save-excursion + set-buffer -> with-current-buffer.
 ;; 2005/10/31 dadams
@@ -86,15 +74,14 @@
 ;;
 ;;; Code:
 
-(and (< emacs-major-version 20) (eval-when-compile (require 'cl))) ;; when, unless
-
 ;; Cannot do (require 'novice) prior to version 20, because `novice.el'
 ;; does no `provide'.  Don't want to do a (load-library "novice") either,
 ;; for prior versions, because it wouldn't allow doing
 ;; (eval-after-load "novice" '(progn (require 'novice+)))
 (when (>= emacs-major-version 20) (require 'novice))
 
-(require 'icicles nil t) ;; (no error if not found): completing-read
+;; (require 'icicles nil t) ;; (no error if not found): completing-read
+
 (require 'thingatpt nil t) ;; (no error if not found): symbol-at-point
 (require 'thingatpt+ nil t) ;; (no error if not found): symbol-nearest-point
 
@@ -104,7 +91,7 @@
 
 
 
-;; REPLACES ORIGINAL in `novice.el':
+;; REPLACE ORIGINAL in `novice.el':
 ;; Uses `completing-read' in interactive spec, with `symbol-nearest-point'.
 ;; `symbol-nearest-point' is defined in `thingatpt+.el'.
 ;; `symbol-at-point' is defined in `thingatpt.el'.
@@ -162,9 +149,8 @@ to future sessions."
       (with-current-buffer (find-file-noselect (substitute-in-file-name init-file))
         (goto-char (point-min))
         (if (search-forward (concat "(put '" (symbol-name command) " ") nil t)
-            (delete-region
-             (progn (beginning-of-line) (point))
-             (progn (forward-line 1) (point))))
+            (delete-region (progn (beginning-of-line) (point))
+                           (progn (forward-line 1) (point))))
         ;; Explicitly enable, in case this command is disabled by default
         ;; or in case the code we deleted was actually a comment.
         (goto-char (point-max))
@@ -173,7 +159,7 @@ to future sessions."
 
 
 
-;; REPLACES ORIGINAL in `novice.el':
+;; REPLACE ORIGINAL in `novice.el':
 ;; Uses `completing-read' in interactive spec, with `symbol-nearest-point'.
 ;; `symbol-nearest-point' is defined in `thingatpt+.el'.
 ;; `symbol-at-point' is defined in `thingatpt.el'.
@@ -232,9 +218,8 @@ to future sessions."
       (with-current-buffer (find-file-noselect (substitute-in-file-name init-file))
         (goto-char (point-min))
         (if (search-forward (concat "(put '" (symbol-name command) " ") nil t)
-            (delete-region
-             (progn (beginning-of-line) (point))
-             (progn (forward-line 1) (point))))
+            (delete-region (progn (beginning-of-line) (point))
+                           (progn (forward-line 1) (point))))
         (goto-char (point-max))
         (insert "\n(put '" (symbol-name command) " 'disabled t)\n")
         (save-buffer)))))

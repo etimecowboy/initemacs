@@ -4,11 +4,11 @@
 ;; Description: Macros for Bookmark+.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 2000-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 2000-2012, Drew Adams, all rights reserved.
 ;; Created: Sun Aug 15 11:12:30 2010 (-0700)
-;; Last-Updated: Fri Apr  1 16:24:04 2011 (-0700)
+;; Last-Updated: Fri Apr 27 17:25:39 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 78
+;;     Update #: 97
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/bookmark+-mac.el
 ;; Keywords: bookmarks, bookmark+, placeholders, annotations, search, info, url, w3m, gnus
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -53,6 +53,29 @@
 ;;
 ;;    (The commentary links in #1 and #3 work only if you have library
 ;;    `bookmark+-doc.el' in your `load-path'.)
+;;
+;;
+;;    ****** NOTE ******
+;;
+;;      WHENEVER you update Bookmark+ (i.e., download new versions of
+;;      Bookmark+ source files), I recommend that you do the
+;;      following:
+;;
+;;      1. Delete ALL existing BYTE-COMPILED Bookmark+ files
+;;         (bookmark+*.elc).
+;;      2. Load Bookmark+ (`load-library' or `require').
+;;      3. Byte-compile the source files.
+;;
+;;      In particular, ALWAYS LOAD `bookmark+-mac.el' (not
+;;      `bookmark+-mac.elc') BEFORE YOU BYTE-COMPILE new versions of
+;;      the files, in case there have been any changes to Lisp macros
+;;      (in `bookmark+-mac.el').
+;;
+;;      (This is standard procedure for Lisp: code that depends on
+;;      macros needs to be byte-compiled anew after loading the
+;;      updated macros.)
+;;
+;;    ******************
  
 ;;(@> "Index")
 ;;
@@ -77,7 +100,8 @@
 ;;    `bmkp-define-cycle-command',
 ;;    `bmkp-define-next+prev-cycle-commands',
 ;;    `bmkp-define-sort-command', `bmkp-define-file-sort-predicate',
-;;    `bmkp-menu-bar-make-toggle'.
+;;    `bmkp-menu-bar-make-toggle',
+;;    `bmkp-with-output-to-plain-temp-buffer'.
 ;;
 ;;  Non-interactive functions defined here:
 ;;
@@ -110,6 +134,23 @@
 ;; bookmark-bmenu-bookmark, bookmark-bmenu-ensure-position,
 ;; bookmark-bmenu-surreptitiously-rebuild-list, bookmark-get-bookmark,
 ;; bookmark-get-filename
+
+
+;; Some general Renamings.
+;;
+;; 1. Fix incompatibility introduced by gratuitous Emacs name change.
+;;
+(cond ((and (fboundp 'bookmark-name-from-record) (not (fboundp 'bookmark-name-from-full-record)))
+       (defalias 'bookmark-name-from-full-record 'bookmark-name-from-record))
+      ((and (fboundp 'bookmark-name-from-full-record) (not (fboundp 'bookmark-name-from-record)))
+       (defalias 'bookmark-name-from-record 'bookmark-name-from-full-record)))
+
+;; 2. The vanilla name of the first is misleading, as it returns only the cdr of the record.
+;;    The second is for consistency.
+;;
+(defalias 'bmkp-bookmark-data-from-record 'bookmark-get-bookmark-record)
+(defalias 'bmkp-bookmark-name-from-record 'bookmark-name-from-full-record)
+
 
 ;; (eval-when-compile (require 'bookmark+-bmu))
 ;; bmkp-bmenu-barf-if-not-in-menu-list,
@@ -153,6 +194,17 @@ Elements of ALIST that are not conses are ignored."
 ;;; Macros -----------------------------------------------------------
 
 ;;;###autoload
+(defmacro bmkp-with-output-to-plain-temp-buffer (buf &rest body)
+  "Like `with-output-to-temp-buffer', but with no *Help* navigation stuff."
+  `(unwind-protect
+    (progn
+      (remove-hook 'temp-buffer-setup-hook 'help-mode-setup)
+      (remove-hook 'temp-buffer-show-hook  'help-mode-finish)
+      (with-output-to-temp-buffer ,buf ,@body))
+    (add-hook 'temp-buffer-setup-hook 'help-mode-setup)
+    (add-hook 'temp-buffer-show-hook  'help-mode-finish)))
+
+;;;###autoload
 (defmacro bmkp-define-cycle-command (type &optional otherp)
   "Define a cycling command for bookmarks of type TYPE.
 Non-nil OTHERP means define a command that cycles in another window."
@@ -174,8 +226,7 @@ In Lisp code:
     (interactive (let ((startovr  (consp current-prefix-arg)))
                    (list (if startovr 1 (prefix-numeric-value current-prefix-arg))
                          startovr)))
-    (let ((bmkp-nav-alist  (bmkp-sort-and-remove-dups
-                            (,(intern (format "bmkp-%s-alist-only" type))))))
+    (let ((bmkp-nav-alist  (bmkp-sort-omit (,(intern (format "bmkp-%s-alist-only" type))))))
       (bmkp-cycle increment ,otherp startoverp))))
 
 ;;;###autoload
@@ -251,16 +302,17 @@ sort, and unsorted.")
                (not (equal bmkp-sort-comparer ',comparer))
                (setq bmkp-sort-comparer   ',comparer
                      bmkp-reverse-sort-p  nil))
-              (;; This sort order reversed.  Change to unsorted.
-               bmkp-reverse-sort-p
-               (setq bmkp-sort-comparer   nil))
-              (t;; This sort order - reverse it.
-               (setq bmkp-reverse-sort-p  t)))
+              (;; Not this sort order reversed - make it reversed.
+               (not bmkp-reverse-sort-p)
+               (setq bmkp-reverse-sort-p  t))
+              (t;; This sort order reversed.  Change to unsorted.
+               (setq bmkp-sort-comparer   nil)))
         (message "Sorting...")
         (bookmark-bmenu-ensure-position)
         (let ((current-bmk  (bookmark-bmenu-bookmark)))
           (bookmark-bmenu-surreptitiously-rebuild-list)
-          (bmkp-bmenu-goto-bookmark-named current-bmk)) ; Put cursor back on right line.
+          (when current-bmk             ; Should be non-nil, but play safe.
+            (bmkp-bmenu-goto-bookmark-named current-bmk))) ; Put cursor back on right line.
         (when (interactive-p)
           (bmkp-msg-about-sort-order
            ,sort-order
@@ -291,10 +343,12 @@ files are tested for attributes - remote-file bookmarks are treated
 here like non-file bookmarks."
   `(defun ,(intern (format "bmkp-file-attribute-%d-cp" att-nb)) (b1 b2)
     ,(format "Sort file bookmarks by attribute %d.
-B1 and B2 are bookmarks or bookmark names.
 Sort bookmarks with file attributes before those without attributes
 Sort file bookmarks before non-file bookmarks.
-Treat remote file bookmarks like non-file bookmarks."
+Treat remote file bookmarks like non-file bookmarks.
+
+B1 and B2 are full bookmarks (records) or bookmark names.
+If either is a record then it need not belong to `bookmark-alist'."
              att-nb)
     (setq b1  (bookmark-get-bookmark b1))
     (setq b2  (bookmark-get-bookmark b2))

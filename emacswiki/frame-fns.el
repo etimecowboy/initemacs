@@ -4,12 +4,12 @@
 ;; Description: Non-interactive frame and window functions.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2012, Drew Adams, all rights reserved.
 ;; Created: Tue Mar  5 16:15:50 1996
 ;; Version: 21.1
-;; Last-Updated: Tue Jan  4 09:43:55 2011 (-0800)
+;; Last-Updated: Fri Mar  2 07:57:04 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 197
+;;     Update #: 201
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/frame-fns.el
 ;; Keywords: internal, extensions, local, frames
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -34,7 +34,7 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Change log:
+;;; Change Log:
 ;;
 ;; 2011/01/04 dadams
 ;;     Removed autoload cookies from non-interactive functions.
@@ -76,8 +76,8 @@
 ;;
 ;;; Code:
 
-(eval-when-compile (require 'cl)) ;; (plus, for Emacs 20: dolist, push
-                                  ;;  and, for Emacs <20: cadr, when, unless)
+(eval-when-compile (when (< emacs-major-version 21) (require 'cl)))
+ ;; dolist, push
 (require 'avoid nil t) ;; mouse-avoidance-point-position
 
 ;;;;;;;;;;;;;;;;;;;;;;;

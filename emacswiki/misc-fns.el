@@ -4,12 +4,12 @@
 ;; Description: Miscellaneous non-interactive functions.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2012, Drew Adams, all rights reserved.
 ;; Created: Tue Mar  5 17:21:28 1996
 ;; Version: 21.0
-;; Last-Updated: Tue Jan  4 11:33:24 2011 (-0800)
+;; Last-Updated: Sat Apr 21 19:54:57 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 568
+;;     Update #: 586
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/misc-fns.el
 ;; Keywords: internal, unix, lisp, extensions, local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -47,16 +47,19 @@
 ;;    `another-buffer', `current-line', `display-in-mode-line',
 ;;    `do-files', `flatten', `fontify-buffer', `force-time-redisplay',
 ;;    `interesting-buffer-p', `live-buffer-name',
-;;    `make-transient-mark-mode-buffer-local', `mod-signed',
-;;    `notify-user-of-mode', `region-or-buffer-limits', `signum',
-;;    `simple-set-difference', `simple-set-intersection',
-;;    `simple-set-union', `undefine-keys-bound-to',
-;;    `undefine-killer-commands', `unique-name'.
+;;    `make-transient-mark-mode-buffer-local', `mode-ancestors',
+;;    `mod-signed', `notify-user-of-mode', `region-or-buffer-limits',
+;;    `signum', `undefine-keys-bound-to', `undefine-killer-commands',
+;;    `unique-name'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Change log:
+;;; Change Log:
 ;;
+;; 2012/04/21 dadams
+;;     Added mode-ancestors.
+;; 2012/02/29 dadams
+;;     Removed: simple-set-(intersection|union|difference).
 ;; 2011/01/04 dadams
 ;;     Removed autoload cookies from non-interactive fns.  Added for defcustom.
 ;; 2010/05/25 dadams
@@ -158,8 +161,7 @@
 ;;
 ;;; Code:
 
-(and (< emacs-major-version 21)         ;; dolist, push, pop
-     (eval-when-compile (require 'cl))) ;; (plus, for Emacs <20: when, unless)
+(eval-when-compile (when (< emacs-major-version 21) (require 'cl))) ;; dolist
 
 ;;;;;;;;;;;;;;;;;;;;;
 
@@ -322,7 +324,7 @@ If the region is not active or is empty, then bob and eob are used."
 
 
 
-;;;$ MODE ---------------------------------------------------------------------
+;;;$ MODES ---------------------------------------------------------------------
 
 (defcustom notifying-user-of-mode-flag t
   "*Non-nil means to display messages notifying user of mode changes.
@@ -351,6 +353,17 @@ Useful as a mode hook.  For example:
     (message "Buffer `%s' is in %s mode.   For info on the mode: `%s'."
              buffer mode-name
              (substitute-command-keys "\\[describe-mode]"))))
+
+(defun mode-ancestors (mode)
+  "Return the ancestor modes, a list of symbols, for symbol MODE.
+Uses symbol property `derived-mode-parent' to trace backwards."
+  (let ((parent  (get mode 'derived-mode-parent))
+        (modes   ()))
+    (while parent
+      (push parent modes)
+      (setq parent  (get parent 'derived-mode-parent)))
+    modes))
+  
 
 
 ;;;$ FILES --------------------------------------------------------------------
@@ -511,58 +524,6 @@ Also works for a consp whose cdr is non-nil."
                (setq item (car item)))
              (setq new (cons item new)))
            (reverse new)))))
-
-;; From `cl-seq.el', function `union', without keyword treatment.
-(defun simple-set-union (list1 list2)
-  "Combine LIST1 and LIST2 using a set-union operation.
-The result list contains all items that appear in either LIST1 or
-LIST2.  This is a non-destructive function; it copies the data if
-necessary."
-  (cond ((null list1) list2)
-        ((null list2) list1)
-        ((equal list1 list2) list1)
-        (t
-         (or (>= (length list1) (length list2))
-             (setq list1 (prog1 list2 (setq list2 list1)))) ; Swap them.
-         (while list2
-           (unless (member (car list2) list1)
-               (setq list1 (cons (car list2) list1)))
-           (setq list2 (cdr list2)))
-         list1)))
-
-;; From `cl-seq.el', function `intersection', without keyword treatment.
-(defun simple-set-intersection (list1 list2)
-  "Set intersection of lists LIST1 and LIST2.
-This is a non-destructive operation: it copies the data if necessary."
-  (and list1 list2
-       (if (equal list1 list2)
-           list1
-         (let ((result nil))
-           (unless (>= (length list1) (length list2))
-             (setq list1 (prog1 list2 (setq list2 list1)))) ; Swap them.
-           (while list2
-             (when (member (car list2) list1)
-               (setq result (cons (car list2) result)))
-             (setq list2 (cdr list2)))
-           result))))
-
-;; From `cl-seq.el', function `set-difference', without keyword treatment.
-(defun simple-set-difference (list1 list2 &rest cl-keys)
-  "Combine LIST1 and LIST2 using a set-difference operation.
-The result list contains all items that appear in LIST1 but not LIST2.
-This is a non-destructive function; it copies the data if necessary."
-  (if (or (null list1) (null list2))
-      list1
-    (let ((result nil))
-      (while list1
-        (unless (member (car list1) list2) (setq result (cons (car list1) result)))
-        (setq list1 (cdr list1)))
-      result)))
-
-;; from `cl-extra.el'.
-(defun signum (num)
-  "Return 1 if NUM is positive, -1 if negative, 0 if zero."
-  (cond ((< num 0) -1) ((> num 0) 1) (t 0)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; misc-fns.el ends here

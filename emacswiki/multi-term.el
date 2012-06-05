@@ -6,7 +6,7 @@
 ;; Copyright (C) 2010, ahei, all rights reserved.
 ;; Created: <2008-09-19 23:02:42>
 ;; Version: 0.8.8
-;; Last-Updated: <2010-05-13 00:40:24 Thursday by ahei>
+;; Last-Updated: <<2012-06-05 Tue 20:56 xin on p5q>>
 ;; URL: http://www.emacswiki.org/emacs/download/multi-term.el
 ;; Keywords: term, terminal, multiple buffer
 ;; Compatibility: GNU Emacs 23.2.1
@@ -46,12 +46,12 @@
 ;; 2. By default, the keystrokes of term.el conflict with global-mode keystrokes,
 ;;    which makes it difficult for the user to integrate term.el with Emacs.
 ;;
-;; 3. By default, executing *NIX command exit from term-mode,
+;; 3. By default, executing *NIX command “exit” from term-mode,
 ;;    it will leave an unused buffer.
 ;;
-;; 4. term.el wont quit running sub-process when you kill terminal buffer forcibly.
+;; 4. term.el won’t quit running sub-process when you kill terminal buffer forcibly.
 ;;
-;; 5. Havent a dedicated window for debug program.
+;; 5. Haven’t a dedicated window for debug program.
 ;;
 ;; And multi-term.el is enhanced with those features.
 ;;
@@ -241,6 +241,11 @@
 (defcustom multi-term-program nil
   "The program of term.
 If this is nil, setup to environment variable of `SHELL'."
+  :type 'string
+  :group 'multi-term)
+
+(defcustom multi-term-program-switches nil
+  "The command-line switches to pass to the term program."
   :type 'string
   :group 'multi-term)
 
@@ -534,7 +539,10 @@ If option DEDICATED-WINDOW is `non-nil' will create dedicated `multi-term' windo
       (if special-shell
           (setq shell-name (read-from-minibuffer "Run program: " shell-name)))
       ;; Make term, details to see function `make-term' in `term.el'.
-      (make-term term-name shell-name))))
+      (if multi-term-program-switches
+          (make-term term-name shell-name nil multi-term-program-switches)
+          (make-term term-name shell-name)))))
+
 
 (defun multi-term-handle-close ()
   "Close current term buffer when `exit' from term buffer."
@@ -761,6 +769,6 @@ This advice can make `other-window' skip `multi-term' dedicated window."
 ;; time-stamp-end: ">"
 ;; End:
 
-;;; LocalWords:  multi el dir sr Hawley eb ef cd
-
 ;;; multi-term.el ends here
+
+;;; LocalWords:  multi el dir sr Hawley eb ef cd

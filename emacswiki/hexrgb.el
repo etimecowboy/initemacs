@@ -4,12 +4,12 @@
 ;; Description: Functions to manipulate colors, including RGB hex strings.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 2004-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 2004-2012, Drew Adams, all rights reserved.
 ;; Created: Mon Sep 20 22:58:45 2004
 ;; Version: 21.0
-;; Last-Updated: Sat Nov 26 17:33:22 2011 (-0800)
+;; Last-Updated: Sat Mar 17 19:00:37 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 802
+;;     Update #: 897
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/hexrgb.el
 ;; Keywords: number, hex, rgb, color, background, frames, display
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -62,13 +62,15 @@
 ;;    `hexrgb-defined-colors-alist',
 ;;    `hexrgb-delete-whitespace-from-string',
 ;;    `hexrgb-float-to-color-value', `hexrgb-hex-char-to-integer',
-;;    `hexrgb-hex-to-color-values', `hexrgb-hex-to-hsv',
-;;    `hexrgb-hex-to-rgb', `hexrgb-hsv-to-hex', `hexrgb-hex-to-int',
-;;    `hexrgb-hsv-to-rgb', `hexrgb-increment-blue',
-;;    `hexrgb-increment-equal-rgb', `hexrgb-increment-green',
-;;    `hexrgb-increment-hex', `hexrgb-increment-red',
-;;    `hexrgb-int-to-hex', `hexrgb-rgb-hex-string-p',
-;;    `hexrgb-rgb-to-hex', `hexrgb-rgb-to-hsv'.
+;;    `hexrgb-hex-to-color-values', `hexrgb-hex-to-hex',
+;;    `hexrgb-hex-to-hsv', `hexrgb-hex-to-rgb', `hexrgb-hsv-to-hex',
+;;    `hexrgb-hex-to-int', `hexrgb-hsv-to-rgb',
+;;    `hexrgb-increment-blue', `hexrgb-increment-equal-rgb',
+;;    `hexrgb-increment-green', `hexrgb-increment-hex',
+;;    `hexrgb-increment-red', `hexrgb-int-to-hex', `hexrgb-blue-hex',
+;;    `hexrgb-green-hex', `hexrgb-red-hex', `hexrgb-rgb-hex-string-p',
+;;    `hexrgb-rgb-hex-to-rgb-hex', `hexrgb-rgb-to-hex',
+;;    `hexrgb-rgb-to-hsv'.
 ;;
 ;;
 ;;  Add this to your initialization file (~/.emacs or ~/_emacs):
@@ -82,6 +84,11 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2012/03/17 dadams
+;;     Added: hexrgb-(red|green|blue-hex, hexrgb-rgb-hex-to-rgb-hex, hexrgb-hex-to-hex.
+;; 2012/01/05 dadams
+;;     hexrgb-complement: Added optional arg MSG-P.
+;;     Some doc-string cleanup.
 ;; 2011/11/26 dadams
 ;;     hexrgb-read-color: Changed arg order to match vanilla Emacs read-color.  Added MSGP.
 ;;     *** THIS IS AN INCOMPATIBLE CHANGE.  IF YOU USE THIS FUNCTION THEN UPDATE YOUR CODE. ***
@@ -380,15 +387,17 @@ returned; otherwise, t is returned."
       (and laxp (string-match "^\\([a-fA-F0-9][a-fA-F0-9][a-fA-F0-9]\\)+$" color) t)))
 
 ;;;###autoload
-(defun hexrgb-complement (color)
-  "Return the color that is the complement of COLOR."
-  (interactive (list (hexrgb-read-color)))
+(defun hexrgb-complement (color &optional msg-p)
+  "Return the color that is the complement of COLOR.
+Non-interactively, non-nil optional arg MSG-P means show a message
+with the complement."
+  (interactive (list (hexrgb-read-color) t))
   (setq color  (hexrgb-color-name-to-hex color))
   (let ((red    (hexrgb-red color))
         (green  (hexrgb-green color))
         (blue   (hexrgb-blue color)))
     (setq color  (hexrgb-rgb-to-hex (- 1.0 red) (- 1.0 green) (- 1.0 blue))))
-  (when (interactive-p) (message "Complement: `%s'" color))
+  (when msg-p (message "Complement: `%s'" color))
   color)
 
 ;;;###autoload
@@ -718,6 +727,64 @@ N must be an integer between 0 and 65535, or else an error is raised."
   (unless (and (wholenump n) (<= n 65535))
     (error "Not a whole number less than 65536"))
   (/ (float n) 65535.0))
+
+(defun hexrgb-hex-to-hex (hex nb-digits)
+  "Return a hex string of NB-DIGITS digits, rounded from hex string HEX.
+Raise an error if HEX represents a number > `most-positive-fixnum'
+HEX is a hex string, not an RGB string.  It does not start with `#'."
+  (let* ((len      (length hex))
+         (digdiff  (- nb-digits len)))
+    (cond ((zerop digdiff)
+           hex)
+          ((natnump digdiff)
+           (let ((int  (hexrgb-hex-to-int hex)))
+             (unless (natnump int) (error "HEX number is too large"))
+             (format (concat "%0" (int-to-string len) "X" (make-string digdiff ?0)) int)))
+          (t
+           (let ((over  (substring hex digdiff)))
+             (setq hex  (substring hex 0 nb-digits))
+             (if (> (string-to-number over 16)
+                    (string-to-number (make-string (- digdiff) ?7) 16))
+                 (hexrgb-increment-hex hex nb-digits 1) ; Round up.
+               hex))))))
+
+(defun hexrgb-rgb-hex-to-rgb-hex (hex nb-digits)
+  "Trim or expand hex RGB string HEX to NB-DIGITS digits.
+HEX can optionally start with `#'.
+In that case, so does the return value."
+  (let* ((nb-sign-p  (eq ?# (aref hex 0)))
+         (hex+       (or (and nb-sign-p  hex)  (concat "#" hex)))
+         (red        (hexrgb-red-hex   hex+))
+         (green      (hexrgb-green-hex hex+))
+         (blue       (hexrgb-blue-hex  hex+)))
+    (format "%s%s%s%s"
+            (if nb-sign-p "#" "")
+            (hexrgb-hex-to-hex red   nb-digits)
+            (hexrgb-hex-to-hex green nb-digits)
+            (hexrgb-hex-to-hex blue  nb-digits))))
+
+(defun hexrgb-red-hex (hex)
+  "Return the red hex component for RGB string HEX.
+HEX can optionally start with `#'.  The return value does not."
+  (let* ((nb-sign-p  (eq ?# (aref hex 0)))
+         (hex-       (or (and nb-sign-p  (substring hex 1))  hex)))
+    (substring hex- 0 (/ (length hex-) 3))))
+
+(defun hexrgb-green-hex (hex)
+  "Return the green hex component for RGB string HEX.
+HEX can optionally start with `#'.  The return value does not."
+  (let* ((nb-sign-p  (eq ?# (aref hex 0)))
+         (hex-       (or (and nb-sign-p  (substring hex 1))  hex))
+         (len        (/ (length hex-) 3)))
+    (substring hex- len (* 2 len))))
+
+(defun hexrgb-blue-hex (hex)
+  "Return the blue hex component for RGB string HEX.
+HEX can optionally start with `#'.  The return value does not."
+  (let* ((nb-sign-p  (eq ?# (aref hex 0)))
+         (hex-       (or (and nb-sign-p  (substring hex 1))  hex))
+         (len        (/ (length hex-) 3)))
+    (substring hex- (* 2 len))))
 
 (defun hexrgb-float-to-color-value (x)
   "Return the color-component value equivalent of floating-point number X.

@@ -5,7 +5,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: line number
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/linum%2B.el
-;; Time-stamp: <2010-04-08 10:55:43 Thursday by ahei>
+;; Time-stamp:<2012-06-05 Tue 21:07 xin on p5q>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as

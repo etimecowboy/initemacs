@@ -4,13 +4,13 @@
 ;; Description: Display line numbers in left-margin of buffer.
 ;; Author: (Darryl Okahata) darrylo@hpsrdmo, Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1999-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1999-2012, Drew Adams, all rights reserved.
 ;; Copyright (C) 1989, Hewlett-Packard, all rights reserved.
 ;; Created: Wed Mar 31 16:18:24 1999
 ;; Version: 21.0
-;; Last-Updated: Tue Jan  4 11:03:41 2011 (-0800)
+;; Last-Updated: Fri Mar  2 08:27:06 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 209
+;;     Update #: 212
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/line-num.el
 ;; Keywords: local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -39,7 +39,7 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Change log:
+;;; Change Log:
 ;;
 ;; 2004/11/26 dadams
 ;;     Replaced decf with setq...1+.
@@ -77,9 +77,6 @@
 ;;; Code:
 
 ;;>> Problem:  Tabs at beginning of lines
-
-
-(and (< emacs-major-version 20) (eval-when-compile (require 'cl))) ;; when, unless
 
 ;;;;;;;;;;;;;
 

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2012-01-19 Thu 23:33 xin on p6t>
+;; Time-stamp:<2012-06-05 Tue 21:57 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -125,6 +125,7 @@
 ;;** session
 ;; session.el can remember more information.
 (eval-after-load "session" '(session-settings))
+(require 'session)
 (add-hook 'after-init-hook ;; 'session-start)
           'session-initialize)
 

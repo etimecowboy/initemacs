@@ -4,12 +4,12 @@
 ;; Description: Extensions to `info.el'.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2012, Drew Adams, all rights reserved.
 ;; Created: Tue Sep 12 16:30:11 1995
 ;; Version: 21.1
-;; Last-Updated: Tue Nov 15 12:42:02 2011 (-0800)
+;; Last-Updated: Sun Jan 15 00:50:02 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 4486
+;;     Update #: 4495
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/info+.el
 ;; Keywords: help, docs, internal
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -78,6 +78,7 @@
 ;;  ***** NOTE: The following standard functions defined in `info.el'
 ;;              have been REDEFINED HERE:
 ;;
+;;  `info-display-manual' - Use completion to input manual name.
 ;;  `Info-find-emacs-command-nodes' - Added in-progress message.
 ;;  `Info-find-file' (Emacs 23+) - Handle virtual books.
 ;;  `Info-find-node', `Info-find-node-2' -
@@ -179,6 +180,9 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2012/01/15 dadams
+;;     Added: info-display-manual (redefinition).
+;;     Info-find-file: Do not define for < Emacs 23.2 - no virtual books.
 ;; 2011/11/15 dadams
 ;;     Added: redefinition of Info-find-file for Emacs 23+, to handle virtual books.
 ;; 2011/08/23 dadams
@@ -958,9 +962,9 @@ For example, type `^Q^L^Q^J* ' to set this to \"\\f\\n* \"."
 
 ;; REPLACE ORIGINAL in `info.el':
 ;; 
-;; Added final clause to `cond', to handle virtual books.
+;; Added final clause to `cond', to handle virtual books.  (Emacs 23.2+)
 ;;
-(when (> emacs-major-version 22)
+(when (or (> emacs-major-version 23) (and (= emacs-major-version 23) (> emacs-minor-version 1)))
   (defun Info-find-file (filename &optional noerror)
     "Return expanded FILENAME, or t if FILENAME is \"dir\".
 Optional second argument NOERROR, if t, means if file is not found
@@ -4506,6 +4510,47 @@ These are all of the current Info Mode bindings:
     (set (make-local-variable 'bookmark-make-record-function) 'Info-bookmark-make-record)
     (run-mode-hooks 'Info-mode-hook)))
 
+
+;; REPLACES ORIGINAL in `info.el':
+;;
+;; Use completion for inputting the manual name. 
+;;
+(when (> emacs-major-version 22)
+  (defun info-display-manual (manual)
+    "Go to Info buffer that displays MANUAL, creating it if none already exists."
+    ;;  (interactive "sManual name: ")
+    (interactive
+     (let ((manuals  ()))
+       (condition-case nil
+           (with-temp-buffer
+             (Info-mode)
+             (Info-directory)
+             (goto-char (point-min))
+             (re-search-forward "\\* Menu: *\n" nil t)
+             (let (manual)
+               (while (re-search-forward "\\*.*: *(\\([^)]+\\))" nil t)
+                 ;; `add-to-list' ensures no dups in `manuals', so the `dolist' runs faster.
+                 (setq manual  (match-string 1))
+                 (set-text-properties 0 (length manual) nil manual)
+                 (add-to-list 'manuals (list manual)))))
+         (error nil))
+       (list (completing-read "Display manual: " manuals))))
+    (let ((blist (buffer-list))
+          (manual-re (concat "\\(/\\|\\`\\)" manual "\\(\\.\\|\\'\\)"))
+          (case-fold-search t)
+          found)
+      (dolist (buffer blist)
+        (with-current-buffer buffer
+          (when (and (eq major-mode 'Info-mode)
+                     (stringp Info-current-file)
+                     (string-match manual-re Info-current-file))
+            (setq found  buffer
+                  blist  ()))))
+      (if found
+          (switch-to-buffer found)
+        (info-initialize)
+        (info (Info-find-file manual))))))
+
 (defun Info-display-node-default-header ()
   "Insert node name as header."
   ;; `node-name' is free here - bound in `Info-merge-subnodes'.
@@ -4758,7 +4803,7 @@ subnodes (outside Info)? ")
                 (buffer-enable-undo) (undo-start) ; chars to underline.
                 (untabify (point) (save-excursion (forward-line 1) (point)))
                 (setq menu-item-line  (buffer-substring-no-properties
-                                       (save-excursion (beginning-of-line)(forward-char 2) (point))
+                                       (save-excursion (beginning-of-line) (forward-char 2) (point))
                                        (save-excursion (forward-line 1) (point))))
                 (when pending-undo-list (undo-more 1)) ; Only if did something.
                 (buffer-disable-undo))

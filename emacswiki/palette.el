@@ -4,12 +4,12 @@
 ;; Description: Color palette useful with RGB, HSV, and color names
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 2006-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 2006-2012, Drew Adams, all rights reserved.
 ;; Created: Sat May 20 07:56:06 2006
 ;; Version: 22.0
-;; Last-Updated: Thu Dec  8 08:47:56 2011 (-0800)
+;; Last-Updated: Sun Mar 18 07:45:29 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 588 4
+;;     Update #: 728 4
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/palette.el
 ;; Keywords: color, rgb, hsv, hexadecimal, face, frame
 ;; Compatibility: GNU Emacs: 22.x, 23.x
@@ -103,10 +103,14 @@
 ;;  * You can at any time use an RGB hexadecimal color string in place
 ;;    of a recognized color name.  An RGB string has the form
 ;;    #XXXXXXXXXXXX, where each X is a hex digit (the # is optional
-;;    for input).  The number of Xs must be a multiple of 3, with the
-;;    same number of Xs for each of red, green, and blue.  Examples:
-;;    #FF0099 (red: FF, green: 00, blue: 99), #0C1FA329E (red: 0C1,
-;;    green: FA3, blue: 29E).
+;;    for input).  The number of Xs must be 12 or less and a multiple
+;;    of 3, with the same number of Xs for each of red, green, and
+;;    blue.  Examples: #FF0099 (red: FF, green: 00, blue: 99),
+;;    #0C1FA329E (red: 0C1, green: FA3, blue: 29E).
+;;
+;;  * For output, that is, messages and some return values, an RGB
+;;    value respects user option `palette-hex-rgb-digits', which
+;;    determines the number of hex digits (1 to 4) per RGB component.
 ;;
 ;;  * Once you find a color you like, you can use its RGB string
 ;;    anywhere in Emacs as the color definition of a face or a frame.
@@ -235,9 +239,9 @@
 ;;  User options defined here:
 ;;
 ;;    `palette-change-color-hook', `palette-exit-hook',
-;;    `palette-font', `palette-message-info',
-;;    `palette-save-color-hook', `palette-update-cursor-color-flag',
-;;    `palette-verbose-flag'.
+;;    `palette-font', `palette-hex-rgb-digits',
+;;    `palette-message-info', `palette-save-color-hook',
+;;    `palette-update-cursor-color-flag', `palette-verbose-flag'.
 ;;
 ;;  Commands defined here:
 ;;
@@ -251,16 +255,16 @@
 ;;    `eyedropper-foreground', `foreground-color', `hsv', `palette',
 ;;    `palette-background-at-mouse', `palette-background-at-point',
 ;;    `palette-brightness-scale', `palette-current-color',
-;;    `palette-decrease-blue', `palette-decrease-green',
-;;    `palette-decrease-hue', `palette-decrease-red',
-;;    `palette-decrease-saturation', `palette-decrease-value',
-;;    `palette-down', `palette-down+pick', `palette-exit',
-;;    `palette-foreground-at-mouse', `palette-foreground-at-point',
-;;    `palette-help', `palette-hex-info', `palette-hsv-info',
-;;    `palette-increase-blue', `palette-increase-green',
-;;    `palette-increase-hue', `palette-increase-red',
-;;    `palette-increase-saturation', `palette-increase-value',
-;;    `palette-left', `palette-left+pick',
+;;    `palette-current-rgb-to-kill-ring', `palette-decrease-blue',
+;;    `palette-decrease-green', `palette-decrease-hue',
+;;    `palette-decrease-red', `palette-decrease-saturation',
+;;    `palette-decrease-value', `palette-down', `palette-down+pick',
+;;    `palette-exit', `palette-foreground-at-mouse',
+;;    `palette-foreground-at-point', `palette-help',
+;;    `palette-hex-info', `palette-hsv-info', `palette-increase-blue',
+;;    `palette-increase-green', `palette-increase-hue',
+;;    `palette-increase-red', `palette-increase-saturation',
+;;    `palette-increase-value', `palette-left', `palette-left+pick',
 ;;    `palette-pick-background-at-mouse',
 ;;    `palette-pick-background-at-point', `palette-pick-color-by-hsv',
 ;;    `palette-pick-color-by-name', `palette-pick-color-by-rgb',
@@ -304,6 +308,15 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2012/03/18 dadams
+;;     palette-current-rgb-to-kill-ring: Added optional MSG-P arg and message.
+;; 2012/03/17 dadams
+;;     Added option palette-hex-rgb-digits, palette-current-rgb-to-kill-ring.
+;;     Bound palette-current-rgb-to-kill-ring to M-w in palette keymap.
+;;     palette-hex-info, palette-current-color, palette-color-message:
+;;       Use palette-hex-rgb-digits.
+;; 2012/01/05 dadams
+;;     Cleaned up some doc strings.  Added optional arg MSG-P, instead of using interactive-p.
 ;; 2011/11/26 dadams
 ;;     palette-pick-color-by-name, palette-where-is-color, palette, palette-(hex|rgb|hsv)-info:
 ;;       Use new arg order for hexrgb-read-color.
@@ -432,9 +445,9 @@
 (require 'hexrgb) ;; hexrgb-approx-equal, hexrgb-blue, hexrgb-color-name-to-hex,
                   ;; hexrgb-complement, hexrgb-defined-colors,
                   ;; hexrgb-defined-colors-alist, hexrgb-green, hexrgb-hex-to-rgb,
-                  ;; hexrgb-hex-to-hsv, hexrgb-hsv-to-hex, hexrgb-hue, hexrgb-read-color,
-                  ;; hexrgb-red, hexrgb-rgb-to-hex, hexrgb-rgb-to-hsv, hexrgb-saturation,
-                  ;; hexrgb-value
+                  ;; hexrgb-hex-to-hsv, hexrgb-hsv-to-hex, hexrgb-hue,
+                  ;; hexrgb-read-color, hexrgb-red, hexrgb-rgb-hex-to-rgb-hex,
+                  ;; hexrgb-rgb-to-hex, hexrgb-rgb-to-hsv, hexrgb-saturation, hexrgb-value
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -464,9 +477,18 @@ This can cause redisplay of the palette frame, which means a slowdown."
 
 ;;;###autoload
 (defcustom palette-verbose-flag nil
-  "*Non-nil: display color info often; nil: display it only on demand.
+  "*Non-nil means display color info often.
+Otherwise, display it only on demand.
 Non-nil slows things down to recalculate color components often."
   :type 'boolean :group 'Color-Palette :group 'doremi)
+
+;;;###autoload
+(defcustom palette-hex-rgb-digits 4
+  "*Number of hex RGB digits to use in output (messages, return values).
+This is the number for each component (red, green, blue).
+Must be a number from 1 to 4.  This value is only for output.
+\(Internally, 4 is used for calculation.)"
+  :type '(choice (const 1) (const 2) (const 3) (const 4)) :group 'Color-Palette)
 
 ;;;###autoload
 (defcustom palette-message-info 'all
@@ -478,7 +500,11 @@ Possible values are:
  rgb - RGB decimal information
  hex+hsv - RGB hex and HSV decimal information
  hex+rgb - RGB hex and RGB decimal information
- rgb+hsv - RGB decimal and HSV decimal information"
+ rgb+hsv - RGB decimal and HSV decimal information
+
+RGB hex here means either the color name or an RGB hex color string.
+The latter uses `palette-hex-rgb-digits' hex digits for each
+component."
    :type '(choice
            (const :tag "RGB hex, RGB decimal, and HSV decimal information" all)
            (const :tag "RGB hex information"                               hex)
@@ -544,37 +570,40 @@ by this hook."
   "Function called on the current palette color, whenever it changes.")
 
 (defvar palette-current-color "#000000000000"
-  "Current (new) color.  Use `\\<palette-mode-map>\\[palette-save-new-color]' \
-to save it.")
+  "Current (new) color, as a hex RGB color string.
+Use `\\<palette-mode-map>\\[palette-save-new-color]' to save it.")
 
 (defvar palette-last-color "#000000000000"
-  "Current color before last command.  Use `\\<palette-mode-map>\\[palette-swap-last-color]' \
-to make this the current color.")
+  "Current color before last command, as a hex RGB color string.
+Use `\\<palette-mode-map>\\[palette-swap-last-color]' to make this the current color.")
 
 (defvar palette-old-color "#000000000000"
-  "Saved color.  Use `\\<palette-mode-map>\\[palette-restore-old-color]' \
-to make this the current color.")
+  "Saved color, as a hex RGB color string.
+Use `\\<palette-mode-map>\\[palette-restore-old-color]' to make this the current color.")
 
 (defvaralias 'eyedrop-picked-background 'palette-picked-background)
 (defvar palette-picked-background nil
   "Color last picked from a face or frame background.
+A hex RGB color string.
 You can use `palette-pick-background-at-point' or
 `palette-pick-background-at-mouse' to pick the color.")
 
 (defvaralias 'eyedrop-picked-foreground 'palette-picked-foreground)
 (defvar palette-picked-foreground nil
   "Color last picked from a face or frame foreground.
+A hex RGB color string.
 You can use `palette-pick-foreground-at-point' or
 `palette-pick-foreground-at-mouse' to pick the color.")
 
 (defvaralias 'eyedrop-last-picked-color 'palette-last-picked-color)
 (defvar palette-last-picked-color nil
-  "Color last picked from a face or frame foreground or background.")
+  "Color last picked from a face or frame foreground or background.
+A hex RGB color string.")
 
 (defvar palette-saved-blink-cursor-mode nil
-  "Value of `blink-cursor-mode' before `palette' is displayed.
-`blink-cursor-mode' is restored (turned on or off) to reflect this
-saved value when you exit or quit the palette.
+  "Value of option `blink-cursor-mode' before `palette' is displayed.
+Option `blink-cursor-mode' is restored (turned on or off) to reflect
+this saved value when you exit or quit the palette.
 The saved value is updated when `palette' is called and whenever the
 user updates `blink-cursor-mode'.")
 
@@ -624,6 +653,7 @@ user updates `blink-cursor-mode'.")
     (define-key map "\M-c" 'palette-pick-color-by-name) ; c = color
     (define-key map "\M-h" 'palette-pick-color-by-hsv)  ; h = HSV
     (define-key map "\M-r" 'palette-pick-color-by-rgb)  ; r = RGB
+    (define-key map "\M-w" 'palette-current-rgb-to-kill-ring)
     (define-key map [(shift control f)] 'palette-right+pick)
     (define-key map [(shift right)]     'palette-right+pick)
     (define-key map [(shift control b)] 'palette-left+pick)
@@ -633,6 +663,9 @@ user updates `blink-cursor-mode'.")
     (define-key map [(shift control p)] 'palette-up+pick)
     (define-key map [(shift up)]        'palette-up+pick)
 
+    (define-key popup-map [current-rgb-to-kill-ring]
+      '(menu-item "Copy Current Color as Kill" palette-current-rgb-to-kill-ring
+        :help "Copy color as RGB hex string, respecting `palette-hex-rgb-digits'"))
     (define-key popup-map [current-color]
       '(menu-item "Current Color Info" palette-current-color
         :help "Return the current color and show info about it"))
@@ -735,9 +768,9 @@ mode (`palette-mode').  This has three sub-palettes (from left to
 right):
 
  - a hue x saturation palette - buffer Palette (Hue x Saturation)
-   Hue is horizontal; saturation is vertical.  Hue is the tint of
-   a color, independent of its brightness and grayness.
-   Saturation is the purity of a color (opposite of grayness).
+   Hue is horizontal; saturation is vertical.  Hue is the tint of a
+   color, independent of its brightness and grayness.  Saturation is
+   the purity of a color (opposite of grayness).
 
  - a color-swatch palette - buffer Current/Original
 
@@ -762,75 +795,74 @@ In the color palette:
  - `r', `g', `b', `h', `s', `v' decreases the red, green, blue, hue,
    saturation, value  component of the current color, respectively;
    `R', `G', `B', `H', `S', `V' increases the component
+ - `M-w' copies the current color (RGB hex) to the kill ring
  - `q' quits the palette
  - `C-l' refreshes the palette: use if you have a display problem
  - `C-h m' provides info on Color Palette mode
 
 Some things to keep in mind when using the Color Palette:
 
- * Whenever you input a color name, you can use completion
-   against the list of all recognized colors.  If you also use my
-   library Icicles, then you can match any part(s) of the color
-   name.
+ * Whenever you input a color name, you can use completion against the
+   list of all recognized colors.  If you also use my library Icicles,
+   then you can match any part(s) of the color name.
 
- * You can at any time use an RGB hexadecimal color string in
-   place of a recognized color name.  An RGB string has the form
-   #XXXXXXXXXXXX, where each X is a hex digit (the # is optional
-   for input).  The number of Xs must be a multiple of 3, with
-   the same number of Xs for each of red, green, and blue.
-   Examples: #FF0099 (red: FF, green: 00, blue: 99),
-   #0C1FA329E (red: 0C1, green: FA3, blue: 29E).
+ * You can at any time use an RGB hexadecimal color string in place of
+   a recognized color name.  An RGB string has the form #XXXXXXXXXXXX,
+   where each X is a hex digit (the # is optional for input).  The
+   number of Xs must be 12 or less and a multiple of 3, with the same
+   number of Xs for each of red, green, and blue.  Examples:
+   #FF0099 (red: FF, green: 00, blue: 99), #0C1FA329E (red: 0C1,
+   green: FA3, blue: 29E).
 
- * Once you find a color you like, you can use its RGB string
-   anywhere in Emacs as the color definition of a face or a
-   frame.  Its RGB string is the value of
-   `palette-current-color'.
+ * For output, that is, messages and some return values, an RGB value
+   respects user option `palette-hex-rgb-digits', which determines the
+   number of hex digits (1 to 4) per RGB component.
 
- * Hue 0.0 and hue 1.0 are the same: pure red.  The hue x
-   saturation palette shows this discontinuity.  Move the cursor
-   horizontally near the right side of this palette and you will
-   see the hue value jump between 0.0 and 1.0 at a certain point.
+ * Once you find a color you like, you can use its RGB string anywhere
+   in Emacs as the color definition of a face or a frame.  Its RGB
+   string is the value of `palette-current-color'.
 
- * By default, information about the color at any location is
-   only available upon demand, by clicking `mouse-1' or
-   `mouse-2', or hitting `?' or `RET'.  If you prefer additional
-   feedback, set option `palette-verbose-flag' to non-nil to
-   display color information each time you move the cursor, pick
-   a color, or modify a color swatch.  This can slow things down
-   a bit, because it means additional computation of color
-   components.
+ * Hue 0.0 and hue 1.0 are the same: pure red.  The hue x saturation
+   palette shows this discontinuity.  Move the cursor horizontally
+   near the right side of this palette and you will see the hue value
+   jump between 0.0 and 1.0 at a certain point.
+
+ * By default, information about the color at any location is only
+   available upon demand, by clicking `mouse-1' or `mouse-2', or
+   hitting `?' or `RET'.  If you prefer additional feedback, set
+   option `palette-verbose-flag' to non-nil to display color
+   information each time you move the cursor, pick a color, or modify
+   a color swatch.  This can slow things down a bit, because it means
+   additional computation of color components.
 
  * Non-nil `palette-update-cursor-color-flag' updates the frame
-   foreground and cursor color dynamically, so that the position
-   of the current color stands out well against the palette.  For
+   foreground and cursor color dynamically, so that the position of
+   the current color stands out well against the palette.  For
    example, if the current color is red then the foreground color
-   becomes cyan.  The default value is nil.  When nil, you cannot
-   see the black cursor against a black background.  When
-   non-nil, there are two annoyances: 1) updating the cursor
-   color causes redisplay of the frame, which is slow; 2) If you
-   ask for information about a color that is very different from
-   the current color, then it still might be difficult to see the
-   cursor because of its color.  In that case, you can hit `RET'
-   to make it the current color so its position stands out
-   better.
+   becomes cyan.  The default value is nil.  When nil, you cannot see
+   the black cursor against a black background.  When non-nil, there
+   are two annoyances: 1) updating the cursor color causes redisplay
+   of the frame, which is slow; 2) If you ask for information about a
+   color that is very different from the current color, then it still
+   might be difficult to see the cursor because of its color.  In that
+   case, you can hit `RET' to make it the current color so its
+   position stands out better.
    (Hit `l' to undo).
 
  * You can at any time toggle options `palette-verbose-flag' and
-   `palette-update-cursor-color-flag' with keys `f' (for
-   \"feedback\") and `e' (for \"enhanced cursor color\").
+   `palette-update-cursor-color-flag' with keys `f' (for \"feedback\")
+   and `e' (for \"enhanced cursor color\").
 
- * By default, feedback about a color includes its RGB hex
-   string, RGB decimal components, and HSV decimal components.
-   If your minibuffer is too short for all of that info, or if
-   you are interested in only some of it, then you can change the
-   value of user option `palette-message-info' accordingly.  In
-   addition, you can use commands `palette-hex-info',
-   `palette-hsv-info', `palette-rgb-info' at any time to obtain
-   only color information of one type.
+ * By default, feedback about a color includes its RGB hex string, RGB
+   decimal components, and HSV decimal components.  If your minibuffer
+   is too short for all of that info, or if you are interested in only
+   some of it, then you can change the value of user option
+   `palette-message-info' accordingly.  In addition, you can use
+   commands `palette-hex-info', `palette-hsv-info', `palette-rgb-info'
+   at any time to obtain only color information of one type.
 
- * If you enter an empty name (that is, just hit `RET') when you
-   are prompted for a color name, then a name is picked
-   randomly."
+ * If you enter an empty name (that is, just hit `RET') when you are
+   prompted for a color name, then a name is picked randomly."
       (setq mode-line-format  nil)
       (set (make-local-variable 'auto-hscroll-mode) nil)
       (set (make-local-variable 'auto-window-vscroll) nil)
@@ -851,9 +883,9 @@ mode (`palette-mode').  This has three sub-palettes (from left to
 right):
 
  - a hue x saturation palette - buffer Palette (Hue x Saturation)
-   Hue is horizontal; saturation is vertical.  Hue is the tint of
-   a color, independent of its brightness and grayness.
-   Saturation is the purity of a color (opposite of grayness).
+   Hue is horizontal; saturation is vertical.  Hue is the tint of a
+   color, independent of its brightness and grayness.  Saturation is
+   the purity of a color (opposite of grayness).
 
  - a color-swatch palette - buffer Current/Original
 
@@ -878,75 +910,74 @@ In the color palette:
  - `r', `g', `b', `h', `s', `v' decreases the red, green, blue, hue,
    saturation, value  component of the current color, respectively;
    `R', `G', `B', `H', `S', `V' increases the component
+ - `M-w' copies the current color (RGB hex) to the kill ring
  - `q' quits the palette
  - `C-l' refreshes the palette: use if you have a display problem
  - `C-h m' provides info on Color Palette mode
 
 Some things to keep in mind when using the Color Palette:
 
- * Whenever you input a color name, you can use completion
-   against the list of all recognized colors.  If you also use my
-   library Icicles, then you can match any part(s) of the color
-   name.
+ * Whenever you input a color name, you can use completion against the
+   list of all recognized colors.  If you also use my library Icicles,
+   then you can match any part(s) of the color name.
 
- * You can at any time use an RGB hexadecimal color string in
-   place of a recognized color name.  An RGB string has the form
-   #XXXXXXXXXXXX, where each X is a hex digit (the # is optional
-   for input).  The number of Xs must be a multiple of 3, with
-   the same number of Xs for each of red, green, and blue.
-   Examples: #FF0099 (red: FF, green: 00, blue: 99),
-   #0C1FA329E (red: 0C1, green: FA3, blue: 29E).
+ * You can at any time use an RGB hexadecimal color string in place of
+   a recognized color name.  An RGB string has the form #XXXXXXXXXXXX,
+   where each X is a hex digit (the # is optional for input).  The
+   number of Xs must be 12 or less and a multiple of 3, with the same
+   number of Xs for each of red, green, and blue.  Examples:
+   #FF0099 (red: FF, green: 00, blue: 99), #0C1FA329E (red: 0C1,
+   green: FA3, blue: 29E).
 
- * Once you find a color you like, you can use its RGB string
-   anywhere in Emacs as the color definition of a face or a
-   frame.  Its RGB string is the value of
-   `palette-current-color'.
+ * For output, that is, messages and some return values, an RGB value
+   respects user option `palette-hex-rgb-digits', which determines the
+   number of hex digits (1 to 4) per RGB component.
 
- * Hue 0.0 and hue 1.0 are the same: pure red.  The hue x
-   saturation palette shows this discontinuity.  Move the cursor
-   horizontally near the right side of this palette and you will
-   see the hue value jump between 0.0 and 1.0 at a certain point.
+ * Once you find a color you like, you can use its RGB string anywhere
+   in Emacs as the color definition of a face or a frame.  Its RGB
+   string is the value of `palette-current-color'.
 
- * By default, information about the color at any location is
-   only available upon demand, by clicking `mouse-1' or
-   `mouse-2', or hitting `?' or `RET'.  If you prefer additional
-   feedback, set option `palette-verbose-flag' to non-nil to
-   display color information each time you move the cursor, pick
-   a color, or modify a color swatch.  This can slow things down
-   a bit, because it means additional computation of color
-   components.
+ * Hue 0.0 and hue 1.0 are the same: pure red.  The hue x saturation
+   palette shows this discontinuity.  Move the cursor horizontally
+   near the right side of this palette and you will see the hue value
+   jump between 0.0 and 1.0 at a certain point.
+
+ * By default, information about the color at any location is only
+   available upon demand, by clicking `mouse-1' or `mouse-2', or
+   hitting `?' or `RET'.  If you prefer additional feedback, set
+   option `palette-verbose-flag' to non-nil to display color
+   information each time you move the cursor, pick a color, or modify
+   a color swatch.  This can slow things down a bit, because it means
+   additional computation of color components.
 
  * Non-nil `palette-update-cursor-color-flag' updates the frame
-   foreground and cursor color dynamically, so that the position
-   of the current color stands out well against the palette.  For
+   foreground and cursor color dynamically, so that the position of
+   the current color stands out well against the palette.  For
    example, if the current color is red then the foreground color
-   becomes cyan.  The default value is nil.  When nil, you cannot
-   see the black cursor against a black background.  When
-   non-nil, there are two annoyances: 1) updating the cursor
-   color causes redisplay of the frame, which is slow; 2) If you
-   ask for information about a color that is very different from
-   the current color, then it still might be difficult to see the
-   cursor because of its color.  In that case, you can hit `RET'
-   to make it the current color so its position stands out
-   better.
+   becomes cyan.  The default value is nil.  When nil, you cannot see
+   the black cursor against a black background.  When non-nil, there
+   are two annoyances: 1) updating the cursor color causes redisplay
+   of the frame, which is slow; 2) If you ask for information about a
+   color that is very different from the current color, then it still
+   might be difficult to see the cursor because of its color.  In that
+   case, you can hit `RET' to make it the current color so its
+   position stands out better.
    (Hit `l' to undo).
 
  * You can at any time toggle options `palette-verbose-flag' and
-   `palette-update-cursor-color-flag' with keys `f' (for
-   \"feedback\") and `e' (for \"enhanced cursor color\").
+   `palette-update-cursor-color-flag' with keys `f' (for \"feedback\")
+   and `e' (for \"enhanced cursor color\").
 
- * By default, feedback about a color includes its RGB hex
-   string, RGB decimal components, and HSV decimal components.
-   If your minibuffer is too short for all of that info, or if
-   you are interested in only some of it, then you can change the
-   value of user option `palette-message-info' accordingly.  In
-   addition, you can use commands `palette-hex-info',
-   `palette-hsv-info', `palette-rgb-info' at any time to obtain
-   only color information of one type.
+ * By default, feedback about a color includes its RGB hex string, RGB
+   decimal components, and HSV decimal components.  If your minibuffer
+   is too short for all of that info, or if you are interested in only
+   some of it, then you can change the value of user option
+   `palette-message-info' accordingly.  In addition, you can use
+   commands `palette-hex-info', `palette-hsv-info', `palette-rgb-info'
+   at any time to obtain only color information of one type.
 
- * If you enter an empty name (that is, just hit `RET') when you
-   are prompted for a color name, then a name is picked
-   randomly."
+ * If you enter an empty name (that is, just hit `RET') when you are
+   prompted for a color name, then a name is picked randomly."
     (setq mode-line-format  nil)
     (set (make-local-variable 'auto-hscroll-mode) nil)
     (set (make-local-variable 'auto-window-vscroll) nil)
@@ -959,14 +990,15 @@ Some things to keep in mind when using the Color Palette:
       (blink-cursor-mode 1))))
 
 (defun palette-update-blink-cursor-mode ()
-  "Update `palette-saved-blink-cursor-mode' from `blink-cursor-mode'.
+  "Update `palette-saved-blink-cursor-mode' from option `blink-cursor-mode'.
 No update is made if we are in the palette."
   (unless (eq major-mode 'palette-mode)
     (setq palette-saved-blink-cursor-mode  blink-cursor-mode)))
 
 ;;;###autoload
 (defun palette-popup-menu (event)       ; Bound to `mouse-3'.
-  "Display a popup menu of palette commands."
+  "Display a popup menu of palette commands.
+EVENT is a mouse event."
   (interactive "e")
   (popup-menu palette-popup-map))
 
@@ -983,7 +1015,7 @@ With prefix arg, prompts for color name.
 Otherwise, uses the color at the cursor."
   (interactive
    (list (if current-prefix-arg (hexrgb-read-color nil t) (palette-background-at-point))))
-  (message "RGB hex: %s" color))
+  (message "RGB hex: %s" (hexrgb-rgb-hex-to-rgb-hex color palette-hex-rgb-digits)))
 
 ;;;###autoload
 (defun palette-hsv-info (color)
@@ -1006,17 +1038,37 @@ Otherwise, uses the color at the cursor."
 ;;;###autoload
 (defun palette-current-color (&optional msg-p)
   "Return the current palette color, `palette-current-color'.
-Interactively, display a message with information about the color."
+The value returned respects option `palette-hex-rgb-digits'.
+For the full value instead, use variable, not function,
+`palette-current-color'.
+
+Interactively, display a message with information about the color.
+Non-interactively, non-nil optional arg MSG-P means show an
+informative message."
   (interactive "p")
-  (when msg-p (palette-color-message palette-current-color t))
-  palette-current-color)
+  (let ((color  (hexrgb-rgb-hex-to-rgb-hex palette-current-color palette-hex-rgb-digits)))
+    (when msg-p (palette-color-message color t))
+    color))
+
+;;;###autoload
+(defun palette-current-rgb-to-kill-ring (&optional msg-p) ; Bound to `M-w'.
+  "Copy the RGB hex string for the current color to the kill ring.
+Respect option `palette-hex-rgb-digits'."
+  (interactive "p")
+  (kill-new (palette-current-color))
+  (when msg-p (message "Copied: %s" (palette-current-color))))
 
 ;;;###autoload
 (defalias 'eyedrop-background-at-mouse 'palette-background-at-mouse)
 ;;;###autoload
 (defun palette-background-at-mouse (event &optional msg-p) ; Bound to `mouse-1'.
   "Return the background color under the mouse pointer.
-Non-nil optional arg MSG-P means display an informative message."
+Display it in a message, respecting option `palette-hex-rgb-digits'.
+Return the full value, however, ignoring `palette-hex-rgb-digits'.
+
+EVENT is a mouse event.
+Non-interactively, non-nil optional arg MSG-P means display an
+informative message."
   (interactive "e\np")
   ;; Emacs bug on Windows: Get extra, pending <C-drag-mouse-2> event, so discard it.
   (while (input-pending-p) (discard-input))
@@ -1031,7 +1083,12 @@ Non-nil optional arg MSG-P means display an informative message."
 ;;;###autoload
 (defun palette-foreground-at-mouse (event &optional msg-p)
   "Return the foreground color under the mouse pointer.
-Non-nil optional arg MSG-P means display an informative message."
+Display it in a message, respecting option `palette-hex-rgb-digits'.
+Return the full value, however, ignoring `palette-hex-rgb-digits'.
+
+EVENT is a mouse event.
+Non-interactively, non-nil optional arg MSG-P means display an
+informative message."
   (interactive "e\np")
   ;; Emacs bug on Windows: Get extra, pending <C-drag-mouse-2> event, so discard it.
   (while (input-pending-p) (discard-input))
@@ -1066,8 +1123,13 @@ Return nil if there is no face at point."
 ;;;###autoload
 (defun palette-background-at-point (&optional msg-p) ; Bound to `?'.
   "Return the background color under the text cursor.
+Display it in a message, respecting option `palette-hex-rgb-digits'.
+Return the full value, however, ignoring `palette-hex-rgb-digits'.
+
 There need be no defined face at the cursor position (point).
-Non-nil optional arg MSG-P means display an informative message.
+
+Non-interactively, non-nil optional arg MSG-P means display an
+informative message.
 
 NOTE: The cursor is positioned in each of the windows so that it
       corresponds as well as possible to the other windows.  However,
@@ -1110,8 +1172,13 @@ NOTE: The cursor is positioned in each of the windows so that it
 ;;;###autoload
 (defun palette-foreground-at-point (&optional msg-p)
   "Return the foreground color under the text cursor.
+Display it in a message, respecting option `palette-hex-rgb-digits'.
+Return the full value, however, ignoring `palette-hex-rgb-digits'.
+
 There need be no defined face at the cursor position (point).
-Non-nil optional arg MSG-P means display an informative message."
+
+Non-interactively, non-nil optional arg MSG-P means display an
+informative message."
   (interactive "p")
   ;; Outside the palette, we need to check both for a named face (via `palette-face-at-point')
   ;; and face properties that are not associated with named faces.
@@ -1140,13 +1207,17 @@ Non-nil optional arg MSG-P means display an informative message."
 ;;;###autoload
 (defalias 'eyedrop-pick-background-at-mouse 'palette-pick-background-at-mouse)
 ;;;###autoload
-(defun palette-pick-background-at-mouse (event &optional show-p)
+(defun palette-pick-background-at-mouse (event &optional show-p msg-p)
   "Set the current color to the background color under the mouse pointer.
 The background color is saved in `palette-picked-background' and
 `palette-last-picked-color'.  The new current color is returned.
+
+EVENT is a mouse event.
 Non-nil optional arg SHOW-P (prefix arg) means display the palette.
-If called from the color palette, update the current color there."
-  (interactive "e\nP")
+If called from the color palette, update the current color there.
+Non-interactively, non-nil optional arg MSG-P means show an
+informative message."
+  (interactive "e\nP\p")
   (setq palette-last-color  palette-current-color)
   (let ((win  (posn-window (event-end event)))
         (bg   (palette-background-at-mouse event)))
@@ -1154,7 +1225,7 @@ If called from the color palette, update the current color there."
     (setq palette-picked-background  bg
           palette-last-picked-color  bg)
     (unless (stringp bg) (error "No background color here to pick"))
-    (when (interactive-p) (palette-color-message bg))
+    (when msg-p (palette-color-message bg))
     (cond ((get-buffer-window "Palette (Hue x Saturation)" 'visible)
            (palette-brightness-scale)
            (palette-swatch))
@@ -1174,13 +1245,17 @@ Use this everywhere instead of (setq palette-current-color new-value)."
 ;;;###autoload
 (defalias 'eyedrop-pick-foreground-at-mouse 'palette-pick-foreground-at-mouse)
 ;;;###autoload
-(defun palette-pick-foreground-at-mouse (event &optional show-p) ; Bound to `mouse-2'.
+(defun palette-pick-foreground-at-mouse (event &optional show-p msg-p) ; Bound to `mouse-2'.
   "Set the current color to the foreground color under the mouse pointer.
 The foreground color is saved in `palette-picked-foreground' and
 `palette-last-picked-color'.  The new current color is returned.
+
+EVENT is a mouse event.
 Non-nil optional arg SHOW-P (prefix arg) means display the palette.
-If called from the color palette, update the current color there."
-  (interactive "e\nP")
+If called from the color palette, update the current color there.
+Non-interactively, non-nil optional arg MSG-P means show an
+informative message."
+  (interactive "e\nP\p")
   (setq palette-last-color  palette-current-color)
   (let ((win  (posn-window (event-end event)))
         (fg   (palette-foreground-at-mouse event)))
@@ -1188,7 +1263,7 @@ If called from the color palette, update the current color there."
     (setq palette-picked-foreground  fg
           palette-last-picked-color  fg)
     (unless (stringp fg) (error "No foreground color here to pick"))
-    (when (interactive-p) (palette-color-message fg))
+    (when msg-p (palette-color-message fg))
     (cond ((get-buffer-window "Palette (Hue x Saturation)" 'visible)
            (palette-brightness-scale)
            (palette-swatch))
@@ -1203,20 +1278,22 @@ If called from the color palette, update the current color there."
 ;;;###autoload
 (defalias 'eyedrop-pick-background-at-point 'palette-pick-background-at-point)
 ;;;###autoload
-(defun palette-pick-background-at-point (&optional show-p) ; Bound to `RET'.
+(defun palette-pick-background-at-point (&optional show-p msg-p) ; Bound to `RET'.
   "Set the current color to the background color under the text cursor.
 The background color is saved in `palette-picked-background' and
 `palette-last-picked-color'.  The (new) current color is returned.
 Non-nil optional arg SHOW-P (prefix arg) means display the palette.
-If called from the color palette, update the current color there."
-  (interactive "P")
+If called from the color palette, update the current color there.
+Non-interactively, non-nil optional arg MSG-P means show an
+informative message."
+  (interactive "P\np")
   (setq palette-last-color  palette-current-color)
   (save-selected-window
     (palette-set-current-color (palette-background-at-point))
     (setq palette-picked-background  palette-current-color
           palette-last-picked-color  palette-current-color)
     (unless (stringp palette-current-color) (error "No background color here to pick"))
-    (when (interactive-p) (palette-color-message palette-current-color))
+    (when msg-p (palette-color-message palette-current-color))
     (cond ((get-buffer-window "Palette (Hue x Saturation)" 'visible)
            (palette-brightness-scale)
            (palette-swatch))
@@ -1232,20 +1309,22 @@ If called from the color palette, update the current color there."
 ;;;###autoload
 (defalias 'eyedrop-pick-foreground-at-point 'palette-pick-foreground-at-point)
 ;;;###autoload
-(defun palette-pick-foreground-at-point (&optional show-p)
+(defun palette-pick-foreground-at-point (&optional show-p msg-p)
   "Set the current color to the foreground color under the text cursor.
 The foreground color is saved in `palette-picked-foreground' and
 `palette-last-picked-color'.  The (new) current color is returned.
 Non-nil optional arg SHOW-P (prefix arg) means display the palette.
-If called from the color palette, update the current color there."
-  (interactive "P")
+If called from the color palette, update the current color there.
+Non-interactively, non-nil optional arg MSG-P means show an
+informative message."
+  (interactive "P\np")
   (setq palette-last-color  palette-current-color)
   (save-selected-window
     (palette-set-current-color (palette-foreground-at-point))
     (setq palette-picked-foreground  palette-current-color
           palette-last-picked-color  palette-current-color)
     (unless (stringp palette-current-color) (error "No foreground color here to pick"))
-    (when (interactive-p) (palette-color-message palette-current-color))
+    (when msg-p (palette-color-message palette-current-color))
     (cond ((get-buffer-window "Palette (Hue x Saturation)" 'visible)
            (palette-brightness-scale)
            (palette-swatch))
@@ -1254,7 +1333,7 @@ If called from the color palette, update the current color there."
 
 ;;;###autoload
 (defun palette-pick-color-by-name (color) ; Bound to `c', `M-c'.
-  "Set the current color to a color you name.
+  "Set the current palette color to a COLOR you name.
 Instead of a color name, you can use an RGB string #XXXXXXXXXXXX,
 where each X is a hex digit.  The number of Xs must be a multiple of
 3, with the same number of Xs for each of red, green, and blue.
@@ -1278,7 +1357,7 @@ The new current color is returned."
 (defalias 'rgb 'palette-pick-color-by-rgb)
 ;;;###autoload
 (defun palette-pick-color-by-rgb (red green blue) ; Bound to `M-r'.
-  "Set the current color by providing red, green, and blue components.
+  "Set the current color by providing RED, GREEN, and BLUE components.
 Each component is from 0.0 to 1.0 inclusive."
   (interactive "nColor by RGB (0 to 1) - Red: \nnGreen: \nnBlue: ")
   (setq palette-last-color  palette-current-color)
@@ -1293,7 +1372,7 @@ Each component is from 0.0 to 1.0 inclusive."
 (defalias 'hsv 'palette-pick-color-by-hsv)
 ;;;###autoload
 (defun palette-pick-color-by-hsv (hue saturation value) ; Bound to `M-h'.
-  "Set the current color by providing hue, saturation, and value.
+  "Set the current color by providing HUE, SATURATION, and VALUE.
 Each component is from 0.0 to 1.0 inclusive."
   (interactive "nColor by HSV (0 to 1) - Hue: \nnSaturation: \nnValue: ")
   (setq palette-last-color  palette-current-color)
@@ -1409,7 +1488,9 @@ Return `palette-current-color'."
 ;;;###autoload
 (defun palette-where-is-color (color &optional cursor-color) ; Bound to `w'.
   "Move to the palette location of COLOR.
-This does not change the current color."
+This does not change the current color.
+Non-nil optional arg CURSOR-COLOR means update the cursor color, if
+option `palette-update-cursor-color-flag' is non-nil."
   (interactive (list (hexrgb-read-color nil t)))
   (setq color  (hexrgb-color-name-to-hex color)) ; Needed if not interactive.
   (let ((target-hue              (hexrgb-hue color))
@@ -1476,7 +1557,7 @@ ARG < 0 means move up, wrapping around from the bottom."
   (let* ((fwd-p   (wholenump arg))
          ;;(redisplay-dont-pause) ;; I don't really see any difference.
          (column  (current-column))
-         (start   (progn (beginning-of-line) (point)))
+         (start   (line-beginning-position))
          (max     (save-excursion (if (not fwd-p)
                                       (goto-char (point-min))
                                     (goto-char (point-max))
@@ -1504,7 +1585,8 @@ ARG < 0 means move down, wrapping around from the top."
 
 ;;;###autoload
 (defun palette-right+pick (&optional arg) ; Bound to `S-right', `C-S-f' (`C-F').
-  "`palette-right' followed by `palette-pick-background-at-point'."
+  "`palette-right' followed by `palette-pick-background-at-point'.
+The prefix ARG is passed is passed to `palette-right'."
   (interactive "p")
   (setq palette-last-color  palette-current-color)
   (palette-right arg)
@@ -1512,7 +1594,8 @@ ARG < 0 means move down, wrapping around from the top."
 
 ;;;###autoload
 (defun palette-left+pick (&optional arg) ; Bound to `S-left', `C-S-b' (`C-B').
-  "`palette-left' followed by `palette-pick-background-at-point'."
+  "`palette-left' followed by `palette-pick-background-at-point'.
+The prefix ARG is passed is passed to `palette-left'."
   (interactive "p")
   (setq palette-last-color  palette-current-color)
   (palette-left arg)
@@ -1520,7 +1603,8 @@ ARG < 0 means move down, wrapping around from the top."
 
 ;;;###autoload
 (defun palette-down+pick (&optional arg) ; Bound to `S-down', `C-S-n' (`C-N').
-  "`palette-down' followed by `palette-pick-background-at-point'."
+  "`palette-down' followed by `palette-pick-background-at-point'.
+The prefix ARG is passed is passed to `palette-down'."
   (interactive "p")
   (setq palette-last-color  palette-current-color)
   (palette-down arg)
@@ -1528,7 +1612,8 @@ ARG < 0 means move down, wrapping around from the top."
 
 ;;;###autoload
 (defun palette-up+pick (&optional arg) ; Bound to `S-up', `C-S-p' (`C-P').
-  "`palette-up' followed by `palette-pick-background-at-point'."
+  "`palette-up' followed by `palette-pick-background-at-point'.
+The prefix ARG is passed is passed to `palette-up'."
   (interactive "p")
   (setq palette-last-color  palette-current-color)
   (palette-up arg)
@@ -1783,10 +1868,12 @@ See `palette-mode' for more information."
   palette-current-color)
 
 ;;;###autoload
-(defun palette-brightness-scale (&optional color)
+(defun palette-brightness-scale (&optional color msg-p)
   "Display a brightness (value) scale for COLOR.
-If a color palette is already displayed, then just update it."
-  (interactive (list (hexrgb-read-color)))
+If a color palette is already displayed, then just update it.
+Non-interactively, non-nil optional arg MSG-P means show an
+informative message."
+  (interactive (list (hexrgb-read-color) t))
   (setq color  (or color palette-current-color))
   (setq color  (hexrgb-color-name-to-hex color)) ; Needed if not interactive.
   (let* ((width          5)
@@ -1796,7 +1883,7 @@ If a color palette is already displayed, then just update it."
          (stringlen      (* width height))
          (target-val     (hexrgb-value color))
          (val            1.0))
-    (if (and (interactive-p) hue-sat-win)
+    (if (and msg-p hue-sat-win)
         (palette-pick-color-by-name color)
       (let ((split-window-preferred-function  (lambda (w) (eq w (get-lru-window)))))
         (with-output-to-temp-buffer "Brightness"
@@ -1862,22 +1949,25 @@ If a color palette is already displayed, then just update it."
                   ,(cons 'mouse-color complement-color)
                   ,(cons 'font palette-font) ,(cons 'cursor-color complement-color)))
                ;; Get rid of any header line from `tabbar-mode' etc.
-               (when (interactive-p) (redisplay t))))))))
+               (when msg-p (redisplay t))))))))
 
 ;;;###autoload
-(defun palette-swatch (&optional oldp color)
-  "Display a color swatch for COLOR.
+(defun palette-swatch (&optional oldp color msg-p)
+  "Display a color swatch.
 OLDP non-nil means update the original (old) color;
      nil means update the current (new) color.
-If a color palette is already displayed, then just update it."
-  (interactive (list nil (hexrgb-read-color)))
+If a color palette is already displayed, then just update it.
+Interactively, you are prompted for the COLOR to display.
+Non-interactively, non-nil optional arg MSG-P means show an
+informative message."
+  (interactive (list nil (hexrgb-read-color) t))
   (let* ((width          10)
          (height         50)
          (hue-sat-win    (get-buffer-window "Palette (Hue x Saturation)" 'visible))
          (swatch-name    "Current/Original")
          (pop-up-frames  (not hue-sat-win))
          (stringlen      (* width height)))
-    (if (and (interactive-p) hue-sat-win)
+    (if (and msg-p hue-sat-win)
         (palette-pick-color-by-name color)
       (setq color  (or color (hexrgb-color-name-to-hex ; Needed if not interactive.
                               (if oldp palette-old-color palette-current-color))))
@@ -1931,7 +2021,7 @@ If a color palette is already displayed, then just update it."
              ,(cons 'width (1+ width)) ,(cons 'cursor-color complement-color)
              ,(cons 'font palette-font)))
           ;; Get rid of any header line from `tabbar-mode' etc.
-          (when (interactive-p) (redisplay t)))))))
+          (when msg-p (redisplay t)))))))
 
 (defun palette-complement-or-alternative (color &optional alternative)
   "Complement of COLOR, or ALTERNATIVE if COLOR is its own complement.
@@ -1949,18 +2039,27 @@ The default ALTERNATIVE color is Red."
 
 (defalias 'eyedrop-color-message 'palette-color-message)
 (defun palette-color-message (color &optional hint-p)
-  "Print information about COLOR.
+  "Print information about COLOR, according to `palette-message-info'.
+If an RGB hex pattern is shown then it respects option
+`palette-hex-rgb-digits'.
+
+Return COLOR as a color name or a full RGB hex pattern (ignoring
+`palette-hex-rgb-digits').
+
 Non-nil HINT-P means provide a hint about how to pick the color."
   (let* ((rgb  (hexrgb-hex-to-rgb color))
+         (hex  (if (eq ?# (aref color 0))
+                   (hexrgb-rgb-hex-to-rgb-hex color palette-hex-rgb-digits)
+                 color))
          (hsv  (apply #'hexrgb-rgb-to-hsv rgb))
          (msg  (case palette-message-info
-                 (all (format "Color: %s, RGB: %s, HSV: %s" color rgb hsv))
-                 (hex (format "RGB hex: %s" color))
-                 (hsv (format "HSV: %s" hsv))
-                 (rgb (format "RGB: %s" rgb))
-                 (hex+hsv (format "Color: %s, HSV: %s" color hsv))
-                 (hex+rgb (format "Color: %s, RGB: %s" color rgb))
-                 (rgb+hsv (format "RGB: %s, HSV: %s" rgb hsv)))))
+                 (all      (format "Color: %s, RGB: %s, HSV: %s" hex rgb hsv))
+                 (hex      (format "Color: %s" hex))
+                 (hsv      (format "HSV: %s" hsv))
+                 (rgb      (format "RGB: %s" rgb))
+                 (hex+hsv  (format "Color: %s, HSV: %s" hex hsv))
+                 (hex+rgb  (format "Color: %s, RGB: %s" hex rgb))
+                 (rgb+hsv  (format "RGB: %s, HSV: %s" rgb hsv)))))
     (if hint-p (message "%s  (pick: mouse-2, RET)" msg) (message "%s" msg)))
   color)                                ; Return it.
 

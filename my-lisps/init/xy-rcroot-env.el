@@ -372,7 +372,7 @@
         ("<mouse-5>" mwheel-scroll)
         ("<backspace>"   Info-history-back)
         ("<S-backspace>" Info-history-forward)))))
-(require 'info+)
+;; (require 'info+)
 ;; (apply-args-list-to-fun
  ;; 'def-command-max-window `("info"))
 (global-set-key (kbd "C-<f1>") 'info)

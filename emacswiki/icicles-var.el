@@ -4,12 +4,12 @@
 ;; Description: Internal variables for Icicles
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2012, Drew Adams, all rights reserved.
 ;; Created: Mon Feb 27 09:23:26 2006
 ;; Version: 22.0
-;; Last-Updated: Fri Oct 21 09:42:05 2011 (-0700)
+;; Last-Updated: Mon May 14 10:05:01 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 1585
+;;     Update #: 1622
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/icicles-var.el
 ;; Keywords: internal, extensions, help, abbrev, local, minibuffer,
 ;;           keys, apropos, completion, matching, regexp, command
@@ -17,11 +17,10 @@
 ;;
 ;; Features that might be required by this library:
 ;;
-;;   `apropos', `apropos-fn+var', `backquote', `bytecomp', `cl',
-;;   `el-swank-fuzzy', `ffap', `ffap-', `fuzzy', `fuzzy-match',
-;;   `hexrgb', `icicles-face', `icicles-opt', `kmacro',
-;;   `levenshtein', `naked', `regexp-opt', `thingatpt', `thingatpt+',
-;;   `wid-edit', `widget'.
+;;   `apropos', `apropos-fn+var', `cl', `el-swank-fuzzy', `ffap',
+;;   `ffap-', `fuzzy', `fuzzy-match', `hexrgb', `icicles-face',
+;;   `icicles-opt', `kmacro', `levenshtein', `naked', `regexp-opt',
+;;   `thingatpt', `thingatpt+', `wid-edit', `widget'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -38,8 +37,8 @@
 ;;    `icicle-all-candidates-list-action-fn',
 ;;    `icicle-all-candidates-list-alt-action-fn',
 ;;    `icicle-apply-nomsg', `icicle-apropos-complete-match-fn',
-;;    `icicle-bookmark-history', `icicle-bookmark-types',
-;;    `icicle-buffer-config-history',
+;;    `icicle-bookmark-history', `icicle-bookmark-list-names-only-p',
+;;    `icicle-bookmark-types', `icicle-buffer-config-history',
 ;;    `icicle-buffer-sort-first-time-p', `icicle-bufflist',
 ;;    `icicle-candidate-action-fn', `icicle-candidate-alt-action-fn',
 ;;    `icicle-candidate-entry-fn', `icicle-candidate-help-fn',
@@ -115,10 +114,10 @@
 ;;    `icicle-previous-raw-non-file-name-inputs',
 ;;    `icicle-progressive-completing-p', `icicle-prompt',
 ;;    `icicle-proxy-candidate-regexp', `icicle-proxy-candidates',
-;;    `icicle-read-expression-map', `icicle-remove-icicles-props-p',
-;;    `icicle-re-no-dot', `icicle-require-match-p',
-;;    `icicle-reverse-multi-sort-p', `icicle-reverse-sort-p',
-;;    `icicle-saved-candidate-overlays',
+;;    `icicle-read-char-history', `icicle-read-expression-map',
+;;    `icicle-remove-icicles-props-p', `icicle-re-no-dot',
+;;    `icicle-require-match-p', `icicle-reverse-multi-sort-p',
+;;    `icicle-reverse-sort-p', `icicle-saved-candidate-overlays',
 ;;    `icicle-saved-candidates-variables-obarray',
 ;;    `icicle-saved-completion-candidate',
 ;;    `icicle-saved-completion-candidates',
@@ -235,11 +234,11 @@ activation state when you turn off Icicle mode.")
 That is, `icicle-all-candidates-action-1' is in progress.
 If neither nil nor t, then the value is the action function to use.")
 
-(defvar icicle-all-candidates-list-alt-action-fn nil
-  "Alternative action function to apply to a list of matching completions.")
-
 (defvar icicle-all-candidates-list-action-fn nil
   "Action function to apply to a list of all matching completions.")
+
+(defvar icicle-all-candidates-list-alt-action-fn nil
+  "Alternative action function to apply to a list of matching completions.")
 
 (defvar icicle-apply-nomsg nil
   "Non-nil means `icicle-apply' does not show status of applying function.")
@@ -254,6 +253,9 @@ not filtered by the input, except possibly by a function-valued
 `minibuffer-completion-table'.")
 
 (defvar icicle-bookmark-history nil "History for bookmark names.")
+
+(defvar icicle-bookmark-list-names-only-p nil
+  "Non-nil means `icicle-bookmark-list' returns names, not bookmarks.")
 
 (defvar icicle-bookmark-types ()
   "List of strings naming bookmark types.
@@ -284,9 +286,11 @@ this should return nil for \"success\" and non-nil for \"failure\".")
 
 (defvar icicle-candidate-help-fn nil
   "Help function to be applied to current completion candidate.
+If nil then default help function `icicle-help-on-candidate' is used.
 If non-nil, it must be a function that accepts a completion candidate
-  (a string or a symbol) as argument.
-If nil, default help function `icicle-help-on-candidate' is used.")
+in its display form.  If the candidate is a multi-completion then the
+help function can invoke `icicle-transform-multi-completion' on it,
+binding `icicle-list-use-nth-parts' as appropriate.")
 
 (defvar icicle-candidate-nb nil
   "Current completion candidate number, or nil if not cycling candidates.
@@ -402,7 +406,7 @@ Effective starting with Emacs 23.")
 
 (defvar icicle-current-raw-input "" "Current minibuffer raw (unexpanded) input.
 This can be different from `icicle-current-input' only when
-`icicle-expand-input-to-common-match-flag' is non-nil.")
+`icicle-expand-input-to-common-match' causes your input to expand.")
 
 (defvar icicle-cycling-p nil
   "Non-nil means the user is currently cycling completion candidates.")
@@ -555,7 +559,6 @@ noted in parentheses.
 * `icicle-Completions-text-scale-decrease'- `*Completions*' shrink
 * `icicle-Completions-window-max-height' - Max lines, `*Completions*'
 * `icicle-customize-save-flag'           - Save some options on quit?
-* `icicle-cycle-into-subdirs-flag'       - Explore subdirectories?
 * `icicle-default-cycling-mode'          - Default completion mode for
                                            per-mode cycling
 * `icicle-default-thing-insertion'       - Control behavior of \
@@ -565,7 +568,7 @@ noted in parentheses.
 * `icicle-deletion-action-flag'          - `S-delete' deletes?
 * `icicle-dot-show-regexp-flag'          - Show regexp for `.'?
 * `icicle-dot-string'                    - String that `.' inserts
-* `icicle-expand-input-to-common-match-flag'- Expand input? (`C-;')
+* `icicle-expand-input-to-common-match'  - Expand your input? (`C-\"')
 * `icicle-file-*'                        - `icicle-file' options
 * `icicle-filesets-as-saved-completion-sets-flag'- Use filesets?
 * `icicle-guess-commands-in-path'        - Shell commands to complete
@@ -579,8 +582,8 @@ noted in parentheses.
                                          - Highlight input whitespace?
 * `icicle-highlight-lighter-flag'        - Highlight mode-line `Icy'
 * `icicle-ignore-space-prefix-flag'      - See initial space? (`M-_')
+* `icicle-incremental-completion'        - Icompletion? (`C-#')
 * `icicle-incremental-completion-delay'  - Delay before update cands
-* `icicle-incremental-completion-flag'   - Icompletion? (`C-#')
 * `icicle-incremental-completion-threshold'- # of candidates for delay
 * `icicle-inhibit-advice-functions'      - Advice-inhibited functions
 * `icicle-inhibit-ding-flag'             - Suppress audible bell
@@ -747,6 +750,8 @@ input prompt is prefixed by `+'.
 + `icicle-completing-yank'             - `yank' using completion
 + `icicle-customize-face'              - Multi-`customize-face'
   `icicle-customize-icicles-group'     - Customize options and faces
+  `icicle-cycle-expand-to-common-match' - Cycle input ECM expansion
+  `icicle-cycle-incremental-completion' - Cycle incremental completion
 + `icicle-delete-file'                 - Delete file/directory
   `icicle-delete-window'               - Delete window (`C-u': buffer)
 + `icicle-delete-windows'              - Delete windows (`C-u C-x 0')
@@ -810,7 +815,7 @@ input prompt is prefixed by `+'.
 + `icicle-search-bookmarks-together'   - Search bookmarks together
 + `icicle-search-char-property'        - Search for overlay/text props
 + `icicle-search-dired-bookmark'       - Search Dired bookmarks
-+ `icicle-search-dired-marked'         - Search marked files in Dired
++ `icicle-search-dired-marked-recursive'- Search marked files in Dired
 + `icicle-search-file'                 - Search multiple files
 + `icicle-search-file-bookmark'        - Search bookmarked files
 + `icicle-search-gnus-bookmark'        - Search bookmarked Gnus msgs
@@ -842,7 +847,6 @@ input prompt is prefixed by `+'.
   `icicle-toggle-C-for-actions'        - Toggle using `C-' for actions
   `icicle-toggle-case-sensitivity'     - Toggle case sensitivity
   `icicle-toggle-dot'                  - Toggle `.' matching newlines
-  `icicle-toggle-expand-to-common-match' - Toggle input ECM expansion
   `icicle-toggle-hiding-common-match'  - Toggle match, `*Completions*'
   `icicle-toggle-highlight-all-current' - Toggle max search highlight
   `icicle-toggle-highlight-historical-candidates'
@@ -851,7 +855,6 @@ input prompt is prefixed by `+'.
                                        - Toggle highlighting saved
   `icicle-toggle-ignored-extensions'   - Toggle ignored files
   `icicle-toggle-ignored-space-prefix' - Toggle ignoring space prefix
-  `icicle-toggle-incremental-completion' - Toggle apropos icompletion
 + `icicle-toggle-option'               - Toggle binary user option
   `icicle-toggle-proxy-candidates'     - Toggle proxy candidates
   `icicle-toggle-regexp-quote'         - Toggle regexp escaping
@@ -901,7 +904,7 @@ If this is nil, then no file extensions are ignored.
 The ignored file extensions come from `completion-ignored-extensions'.")
 
 (defvar icicle-incremental-completion-p nil
-  "Takes the place of `icicle-incremental-completion-flag' during input.
+  "Takes the place of `icicle-incremental-completion' during input.
 The program updates this to `always' from `t' after `*Completions*' has
 been displayed.")
 
@@ -1166,6 +1169,12 @@ The candidates are highlighted in buffer `*Completions*' using face
 
 (defvar icicle-proxy-candidates nil "List of proxy completion candidates (strings).")
 
+(when (fboundp 'read-char-by-name)      ; Emacs 23+
+  (defvar icicle-read-char-history ()
+    "History list for reading characters by name.
+Augmented by `icicle-read-char-maybe-completing' and
+`icicle-read-char-by-name'."))
+
 (defvar icicle-read-expression-map nil
   "Icicle mode version of `read-expression-map'.
 Several Emacs-Lisp mode key bindings are used.")
@@ -1191,7 +1200,8 @@ Depending on the value of option
 `icicle-unpropertize-completion-result-flag', it may also remove all
 text properties.")
 
-(defvar icicle-re-no-dot "^\\([^.]\\|\\.\\([^.]\\|\\..\\)\\).*"
+;; Same as `directory-files-no-dot-files-regexp' in `files.el', available for Emacs 23+.
+(defconst icicle-re-no-dot "^\\([^.]\\|\\.\\([^.]\\|\\..\\)\\).*"
   "Regexp that matches anything except `.' and `..'.")
 
 (defvar icicle-require-match-p nil
@@ -1327,11 +1337,13 @@ current search context.")
 It is bound to the key prefix `icicle-search-key-prefix'.")
 
 (defvar icicle-search-modes
-  '((dired-mode           (dired-get-marked-files))
+  '((dired-mode           (progn (unless (fboundp 'diredp-get-files)
+                                   (error "You need library Dired+ for this"))
+                                 (diredp-get-files)))
     (ibuffer-mode         (nreverse (ibuffer-get-marked-buffers)))
     (Buffer-menu-mode     (Buffer-menu-marked-buffers))
     (bookmark-bmenu-mode  (progn (unless (fboundp 'bmkp-bmenu-get-marked-files)
-                                   (error "You need Bookmark+ for this"))
+                                   (error "You need library Bookmark+ for this"))
                                  (bmkp-bmenu-get-marked-files))))
   "Alist that maps `major-mode' values to sexps that return WHERE.
 Each entry is a two-element list (MODE SEXP).

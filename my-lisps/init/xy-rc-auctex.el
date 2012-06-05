@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-06-04 Mon 21:14 xin on p5q>
+;; Time-stamp:<2012-06-05 Tue 16:39 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -152,6 +152,7 @@
   (setq TeX-view-program-list
         '(("SumatraPDF" "SumatraPDF.exe %o")
           ("Gsview" "gsview32.exe %o")
+          ("Dviout" "dviout.exe %o")
           ("Okular" "okular --unique %o#src:%n%b")
           ("Evince" "evince %o")
           ("Firefox" "firefox %o")))
@@ -173,10 +174,10 @@
                         ;; ((output-dvi style-pstricks) "dvips and gv")
                         (output-dvi "Okular")
                         (output-html "xdg-open"))))
-               ;; (Windows
-               ;;  (setq TeX-view-program-selection
-               ;;        '((output-pdf "SumatraPDF")
-               ;;          (output-dvi "Yap"))))
+               (Windows
+                (setq TeX-view-program-selection
+                      '((output-pdf "SumatraPDF")
+                        (output-dvi "Dviout"))))
                (TeX-source-correlate-mode 1)
                (setq TeX-fold-mode 1)
                (setq Tex-source-specials-mode 1)
@@ -210,6 +211,7 @@
         preview-scale-function 1.5
         preview-prefer-TeX-bb t
         preview-transparent-color "white")
+        ;; preview-fast-dvips-command "pdftops -origpagesizes %s.pdf %m/preview.ps")
 
   (message "* ---[ preview-latex configuration is complete ]---"))
 

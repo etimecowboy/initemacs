@@ -4,12 +4,12 @@
 ;; Description: Incrementally adjust face attributes and frame parameters.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 2004-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 2004-2012, Drew Adams, all rights reserved.
 ;; Created: Sat Sep 11 10:40:32 2004
 ;; Version: 22.0
-;; Last-Updated: Tue Jan  4 08:37:04 2011 (-0800)
+;; Last-Updated: Fri Mar  2 07:41:52 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 2973
+;;     Update #: 2985
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/doremi-frm.el
 ;; Keywords: frames, extensions, convenience, keys, repeat, cycle
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -129,7 +129,7 @@
 ;;
 ;;    `doremi-adjust-increment-for-color-component',
 ;;    `doremi-all-faces-bg/fg-1', `doremi-all-frames-bg/fg-1',
-;;    `doremi-bg-1', `doremi-bg/fg-color-name-1',
+;;    `doremi-bg-1', `doremi-bg/fg-color-name-1', `doremi-delete-if',
 ;;    `doremi-face-bg/fg-1', `doremi-face-bg/fg-color-name-1',
 ;;    `doremi-face-color-component',
 ;;    `doremi-face-hue-stepping-saturation', `doremi-face-set',
@@ -273,8 +273,11 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Change log:
+;;; Change Log:
 ;;
+;; 2012/03/02 dadams
+;;     Added doremi-delete-if: to avoid runtime load of cl.el.
+;;     doremi-frame-config-wo-parameters: Use doremi-delete-if.
 ;; 2011/01/04 dadams
 ;;     Removed autoload cookies from non def* sexps and non-interactive functions.
 ;;     Added missing autoload cookies for defgroup, defcustom, defalias, commands.
@@ -576,7 +579,7 @@
 (unless (fboundp 'read-number)
   (require 'strings nil t)) ;; (no error if not found): read-number (std in Emacs 22)
 
-(eval-when-compile (require 'cl)) ;; case (plus, for Emacs<21: pop)
+(eval-when-compile (require 'cl)) ;; case (plus, for Emacs 20: pop)
 
 ;; Quiet the byte-compiler
 (defvar text-scale-mode)                ; In `face-remap.el' (Emacs 23+)
@@ -913,11 +916,24 @@ after removing frame parameters `buffer-list' and `minibuffer'."
         (mapcar (lambda (fr+parms)
                   (let ((parms  (copy-sequence (nth 1 fr+parms))))
                     (list (car fr+parms) ; frame
-                          (delete-if (lambda (parm) (memq (car parm) params-to-remove))
-                                     parms)
+                          (doremi-delete-if (lambda (parm)
+                                              (memq (car parm) params-to-remove))
+                                            parms)
                           (nth 2 fr+parms)))) ; window config
                 (cdr frame-config))))   ; frames alist
 
+(defun doremi-delete-if (predicate list)
+  "Remove all occurrences of ITEM in LIST that satisfy PREDICATE.
+This is a destructive function: It reuses the storage of LIST whenever
+possible."
+  (while (and list  (funcall predicate (car list)))
+    (setq list  (cdr list)))
+  (let ((cl-p  list))
+    (while (cdr cl-p)
+      (if (funcall predicate (cadr cl-p))
+          (setcdr cl-p (cddr cl-p))
+        (setq cl-p  (cdr cl-p)))))
+  list)
 
 ;; NOTE: Frame parameters `buffer-list' and `minibuffer' are ignored
 ;;       when determining if two frame configurations are equal here.

@@ -4,12 +4,12 @@
 ;; Description: Extensions to `imenu.el'.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1999-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1999-2012, Drew Adams, all rights reserved.
 ;; Created: Thu Aug 26 16:05:01 1999
 ;; Version: 21.0
-;; Last-Updated: Thu Nov 24 08:21:58 2011 (-0800)
+;; Last-Updated: Thu Mar 15 14:13:02 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 719
+;;     Update #: 733
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/imenu+.el
 ;; Keywords: tools, menus
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -65,6 +65,11 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2012/03/15 dadams
+;;     imenu-update-menubar: Applied Emacs 24 bug fix to handle a dynamically composed keymap.
+;;     Require cl.el for Emacs 20 when byte-compile.
+;; 2012/01/01 dadams
+;;     imenu-update-menubar: buffer-modified-tick -> buffer-chars-modified-tick.  (Sync w/ vanilla.)
 ;; 2011/11/24 dadams
 ;;     Added: imenup-invisible-p.
 ;;     imenu--generic-function: Use imenup-invisible-p, not just get-text-property (so overlays too).
@@ -138,7 +143,7 @@
 ;;
 ;;; Code:
 
-(and (< emacs-major-version 20) (eval-when-compile (require 'cl))) ;; cadr, when, unless
+(eval-when-compile (when (< emacs-major-version 21) (require 'cl))) ;; dolist
 
 (require 'imenu)
 
@@ -309,10 +314,9 @@ See `imenu' for more information."
   (when (and (current-local-map)
              (keymapp (lookup-key (current-local-map) [menu-bar index]))
              (or (not (boundp 'imenu-menubar-modified-tick))
-                 (not (eq (buffer-modified-tick)
-                          imenu-menubar-modified-tick))))
-    (when (boundp 'imenu-menubar-modified-tick)
-      (setq imenu-menubar-modified-tick  (buffer-modified-tick)))
+                 (/= (buffer-chars-modified-tick) imenu-menubar-modified-tick))) ; Emacs 22+
+    (when (boundp 'imenu-menubar-modified-tick) ; Emacs 22+
+      (setq imenu-menubar-modified-tick  (buffer-chars-modified-tick)))
     (let ((index-alist  (imenu--make-index-alist t)))
       ;; Don't bother updating if the index-alist has not changed
       ;; since the last time we did it.
@@ -340,6 +344,10 @@ See `imenu' for more information."
                                                    (cdr (car (cdr menu))))
                                                  t)))
           (setq old  (lookup-key (current-local-map) [menu-bar index]))
+	  ;; Next line was added in vanilla Emacs 24, with the comment.
+          ;; This should never happen, but in some odd cases, potentially,
+	  ;; lookup-key may return a dynamically composed keymap.
+	  (when (keymapp (cadr old)) (setq old  (cadr old)))
           (setcdr old (cdr menu1)))))))
 
 

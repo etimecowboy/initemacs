@@ -4,19 +4,20 @@
 ;; Description: Extensions to `buff-menu.el'
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams (concat "drew.adams" "@" "oracle" ".com")
-;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2012, Drew Adams, all rights reserved.
 ;; Created: Mon Sep 11 10:29:56 1995
 ;; Version: 21.0
-;; Last-Updated: Thu Oct 27 15:58:30 2011 (-0700)
+;; Last-Updated: Sun Jan 15 16:10:06 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 2736
+;;     Update #: 2777
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/buff-menu+.el
 ;; Keywords: mouse, local, convenience
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
 ;;
 ;; Features that might be required by this library:
 ;;
-;;   `avoid', `fit-frame', `frame-fns', `misc-cmds', `misc-fns'.
+;;   `avoid', `fit-frame', `frame-fns', `misc-cmds', `misc-fns',
+;;   `strings', `thingatpt', `thingatpt+'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -50,16 +51,16 @@
 ;;
 ;;  Commands defined here:
 ;;
-;;    `buffer-menu-decrease-max-buffer+size' (Emacs 22+),
+;;    `Buffer-menu-decrease-max-buffer+size' (Emacs 22+),
 ;;    `Buffer-menu-delete-flagged',
-;;    `buffer-menu-increase-max-buffer+size' (Emacs 22+),
+;;    `Buffer-menu-increase-max-buffer+size' (Emacs 22+),
 ;;    `Buffer-menu-mouse-3-menu', `Buffer-menu-mouse-delete',
 ;;    `Buffer-menu-mouse-execute', `Buffer-menu-mouse-modified',
 ;;    `Buffer-menu-mouse-other-window', `Buffer-menu-mouse-save',
-;;    `Buffer-menu-mouse-unmark', `buffer-menu-toggle-file-column'
-;;    (Emacs 22+), `buffer-menu-toggle-mode-column' (Emacs 22+),
-;;    `buffer-menu-toggle-time-column' (Emacs 22+),
-;;    `buffer-menu-toggle-time-format' (Emacs 22+).
+;;    `Buffer-menu-mouse-unmark', `Buffer-menu-toggle-file-column'
+;;    (Emacs 22+), `Buffer-menu-toggle-mode-column' (Emacs 22+),
+;;    `Buffer-menu-toggle-time-column' (Emacs 22+),
+;;    `Buffer-menu-toggle-time-format' (Emacs 22+).
 ;;
 ;;  Internal variables defined here:
 ;;
@@ -141,6 +142,14 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2012/01/15 dadams
+;;     Rename commands to capitalized Buffer-menu from buffer-menu.
+;;     Bind Buffer-menu-toggle-(file|mode|time)-column to M-f, M-m, M-t.
+;;     Bind Buffer-menu-toggle-time-format to C-M-t.
+;;     Bind Buffer-menu-delete-flagged to C-M-x for all Emacs versions.
+;;     Buffer-menu-mode: Use \\[...] for those commands.
+;; 2011/12/19 dadams
+;;     Buffer-menu-mode, Buffer-menu-mouse-3-menu: Use line-end-position, not end-of-line + point.
 ;; 2011/10/27 dadams
 ;;     Handle Dired buffers like file buffers, e.g., wrt arg FILES-ONLY.
 ;; 2011/06/29 dadams
@@ -444,15 +453,10 @@ Don't forget to mention your Emacs and library versions."))
   (defvar Buffer-menu-buffer+size-computed-width 0
     "Max width of all buffer names, plus 4 for initial `CRM '.")
 
-  (defun buffer-menu-increase-max-buffer+size ()
-    "Increase option `Buffer-menu-buffer+size-width' by one."
-    (interactive)
-    (when (> (1+ Buffer-menu-buffer+size-width) 150) (error "Cannot increase further"))
-    (setq Buffer-menu-buffer+size-width  (1+ Buffer-menu-buffer+size-width))
-    (buffer-menu)
-    (message "New max width: %s" Buffer-menu-buffer+size-width))
 
-  (defun buffer-menu-decrease-max-buffer+size ()
+  (define-key Buffer-menu-mode-map "-" 'Buffer-menu-decrease-max-buffer+size)
+
+  (defun Buffer-menu-decrease-max-buffer+size () ; Bound to `-'.
     "Decrease option `Buffer-menu-buffer+size-width' by one."
     (interactive)
     (let ((orig  Buffer-menu-buffer+size-width))
@@ -465,30 +469,49 @@ Don't forget to mention your Emacs and library versions."))
                       (buffer-menu)
                       (error "Cannot decrease further"))))))
 
-  (define-key Buffer-menu-mode-map "+" 'buffer-menu-increase-max-buffer+size)
-  (define-key Buffer-menu-mode-map "-" 'buffer-menu-decrease-max-buffer+size)
-  (define-key Buffer-menu-mode-map "\C-\M-x" 'Buffer-menu-delete-flagged)
 
-  (defun buffer-menu-toggle-time-format ()
+  (define-key Buffer-menu-mode-map "+" 'Buffer-menu-increase-max-buffer+size)
+
+  (defun Buffer-menu-increase-max-buffer+size () ; Bound to `+'.
+    "Increase option `Buffer-menu-buffer+size-width' by one."
+    (interactive)
+    (when (> (1+ Buffer-menu-buffer+size-width) 150) (error "Cannot increase further"))
+    (setq Buffer-menu-buffer+size-width  (1+ Buffer-menu-buffer+size-width))
+    (buffer-menu)
+    (message "New max width: %s" Buffer-menu-buffer+size-width))
+
+
+  (define-key Buffer-menu-mode-map "\C-\M-t" 'Buffer-menu-toggle-time-format)
+
+  (defun Buffer-menu-toggle-time-format () ; Bound to `C-M-t'.
     "Toggle `Buffer-menu-time-format' and redisplay Buffer Menu."
     (interactive)
     (buffer-menu-set-default-value 'Buffer-menu-time-format
                                    (if (eq 'short Buffer-menu-time-format) 'long 'short))
     (buffer-menu))
 
-  (defun buffer-menu-toggle-time-column ()
+
+  (define-key Buffer-menu-mode-map "\M-t" 'Buffer-menu-toggle-time-column)
+
+  (defun Buffer-menu-toggle-time-column () ; Bound to `M-t'.
     "Toggle `Buffer-menu-time-flag' and redisplay Buffer Menu."
     (interactive)
     (buffer-menu-set-default-value 'Buffer-menu-time-flag (not Buffer-menu-time-flag))
     (buffer-menu))
 
-  (defun buffer-menu-toggle-mode-column ()
+
+  (define-key Buffer-menu-mode-map "\M-m" 'Buffer-menu-toggle-mode-column)
+
+  (defun Buffer-menu-toggle-mode-column () ; Bound to `M-m'.
     "Toggle `Buffer-menu-mode-flag' and redisplay Buffer Menu."
     (interactive)
     (buffer-menu-set-default-value 'Buffer-menu-mode-flag (not Buffer-menu-mode-flag))
     (buffer-menu))
 
-  (defun buffer-menu-toggle-file-column ()
+
+  (define-key Buffer-menu-mode-map "\M-f" 'Buffer-menu-toggle-file-column)
+
+  (defun Buffer-menu-toggle-file-column () ; Bound to `M-f'.
     "Toggle `Buffer-menu-file-flag' and redisplay Buffer Menu."
     (interactive)
     (buffer-menu-set-default-value 'Buffer-menu-file-flag (not Buffer-menu-file-flag))
@@ -833,6 +856,7 @@ Click a column heading to sort by that field and update this option."
         (select-window (get-buffer-window (current-buffer) 'visible))
         (when (and (fboundp 'fit-frame) (one-window-p t)) (fit-frame))
         (raise-frame)))
+    ;; Refresh `font-lock-keywords' from `font-lock-defaults'
     (when (fboundp 'font-lock-refresh-defaults) (font-lock-refresh-defaults))))
 
 ;; Fontify buffer, then fit and raise its frame.
@@ -918,11 +942,13 @@ These features are available for Emacs 22 and later:
 
 * You can resize the Buffer and Size columns using `+' and `-'.
 
-* You can toggle the display of columns Time, Mode, and File using
-  commands `buffer-menu-toggle-time-column',
-  `buffer-menu-toggle-mode-column', and
-  `buffer-menu-toggle-file-column'.  You can toggle the Time format
-  using command `buffer-menu-toggle-time-format'.
+* You can toggle showing columns Time, Mode, and File using
+  `\\[Buffer-menu-toggle-time-column]',
+  `\\[Buffer-menu-toggle-mode-column]', and
+  `\\[Buffer-menu-toggle-file-column]'.
+  You can toggle the Time format using
+  `\\[Buffer-menu-toggle-time-format]]'.
+  (These re only for Emacs 21 and later.)
 
 Column `CRM':
  `C' shows `>' if you have marked the buffer to be displayed,
@@ -999,9 +1025,7 @@ Bindings in Buffer Menu mode:
       (when (or (not (boundp 'Buffer-menu-use-header-line)) (not Buffer-menu-use-header-line))
         (forward-line 2))               ; First two lines are title, unless use header line.
       (while (not (eobp))
-        (put-text-property (point)
-                           (save-excursion (end-of-line) (point))
-                           'mouse-face 'highlight)
+        (put-text-property (point) (line-end-position) 'mouse-face 'highlight)
         (forward-line 1)))
     (set (make-local-variable 'revert-buffer-function) 'Buffer-menu-revert-function)
     (when (> emacs-major-version 21)
@@ -1048,11 +1072,9 @@ These features are available for Emacs 22 and later:
 
 * You can resize the Buffer and Size columns using `+' and `-'.
 
-* You can toggle the display of columns Time, Mode, and File using
-  commands `buffer-menu-toggle-time-column',
-  `buffer-menu-toggle-mode-column', and
-  `buffer-menu-toggle-file-column'.  You can toggle the Time format
-  using command `buffer-menu-toggle-time-format'.
+* You can toggle showing columns Time, Mode, and File using `\\[Buffer-menu-toggle-time-column]',
+  `\\[Buffer-menu-toggle-mode-column]', and `\\[Buffer-menu-toggle-file-column]'.  You can toggle \
+the Time format using `\\[Buffer-menu-toggle-time-format]'.
 
 Column `CRM':
  `C' shows `>' if you have marked the buffer to be displayed,
@@ -1125,16 +1147,18 @@ Bindings in Buffer Menu mode:
         (when (or (not (boundp 'Buffer-menu-use-header-line)) (not Buffer-menu-use-header-line))
           (forward-line 2))             ; First two lines are title, unless use header line.
         (while (not (eobp))
-          (put-text-property (point) (save-excursion (end-of-line) (point))
-                             'mouse-face 'highlight)
+          (put-text-property (point) (line-end-position) 'mouse-face 'highlight)
           (forward-line 1))))
     (set (make-local-variable 'revert-buffer-function) 'Buffer-menu-revert-function)
     (set (make-local-variable 'buffer-stale-function) #'(lambda (&optional noconfirm) 'fast))
     (setq truncate-lines    t
           buffer-read-only  t)))
 
+
+(define-key Buffer-menu-mode-map "\C-\M-x" 'Buffer-menu-delete-flagged)
+
 ;;;###autoload
-(defun Buffer-menu-delete-flagged ()
+(defun Buffer-menu-delete-flagged ()    ; Bound to `C-M-x'.
   "Delete all buffers marked `D', even if they have been modified.
 If there are any file buffers that have been modified since the last
 save, then you must confirm the deletion of all at once.
@@ -1616,8 +1640,8 @@ For more information, see the function `buffer-menu'."
                          (set-buffer (window-buffer (posn-window mouse-pos)))
                          (save-excursion
                            (goto-char (posn-point mouse-pos))
-                           (save-excursion (setq bol  (progn (beginning-of-line) (point))
-                                                 eol  (progn (end-of-line) (point))))
+                           (setq bol  (line-beginning-position)
+                                 eol  (line-end-position))
                            (if Buffer-menu-overlay ; Don't recreate if exists.
                                (move-overlay Buffer-menu-overlay bol eol (current-buffer))
                              (setq Buffer-menu-overlay  (make-overlay bol eol))

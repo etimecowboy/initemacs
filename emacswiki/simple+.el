@@ -4,12 +4,12 @@
 ;; Description: Extensions to standard library `simple.el'.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 1996-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2012, Drew Adams, all rights reserved.
 ;; Created: Fri Apr 12 10:56:45 1996
 ;; Version: 21.0
-;; Last-Updated: Sat Sep  3 18:29:18 2011 (-0700)
+;; Last-Updated: Fri Mar  2 08:41:00 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 412
+;;     Update #: 452
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/simple+.el
 ;; Keywords: internal, lisp, extensions, abbrev
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -67,6 +67,12 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2012/02/03 dadams
+;;     read-var-and-value:
+;;       Added optional arg BUFFER.  Use default-value if var is not local.
+;;     set(-any)-variable:
+;;       Add BUFFER arg in call to read-var-and-value (only for Icicles).
+;;       Set default value, if not MAKE-LOCAL.
 ;; 2011/05/16 dadams
 ;;     Added redefinition of kill-new for Emacs 20.
 ;; 2011/01/04 dadams
@@ -129,8 +135,7 @@
 ;; Don't want to do a (load-library "simple") either, because it wouldn't
 ;; allow doing (eval-after-load "simple" '(require 'simple+))
 
-(and (< emacs-major-version 21)
-     (eval-when-compile (require 'cl))) ;; push, pop (plus, for Emacs <20: when, unless)
+(eval-when-compile (when (< emacs-major-version 21) (require 'cl))) ;; push, pop
 
 (require 'strings) ;; read-any-variable
 
@@ -237,13 +242,13 @@ See variables `compilation-parse-errors-function' and
              (boundp 'compilation-highlight-overlay)
              compilation-highlight-overlay)
         (delete-overlay compilation-highlight-overlay)
-      (if (consp arg) (setq reset t arg nil))
-      (when (setq next-error-last-buffer (next-error-find-buffer))
+      (when (consp arg) (setq reset  t
+                              arg    nil))
+      (when (setq next-error-last-buffer  (next-error-find-buffer))
         ;; we know here that next-error-function is a valid symbol we can funcall
         (with-current-buffer next-error-last-buffer
           (funcall next-error-function (prefix-numeric-value arg) reset)
-          (when next-error-recenter
-            (recenter next-error-recenter))
+          (when next-error-recenter (recenter next-error-recenter))
           (run-hooks 'next-error-hook))))))
 
 
@@ -257,17 +262,16 @@ See variables `compilation-parse-errors-function' and
     "Prompting with PROMPT, let user edit COMMAND and eval result.
 COMMAND is a Lisp expression.  Let user edit that expression in
 the minibuffer, then read and evaluate the result."
-    (let* ((minibuffer-history-sexp-flag t)
-           (command (read-from-minibuffer prompt (prin1-to-string command)
-                                          read-expression-map t
-                                          '(command-history . 1))))
+    (let* ((minibuffer-history-sexp-flag  t)
+           (command                       (read-from-minibuffer
+                                           prompt (prin1-to-string command)
+                                           read-expression-map t '(command-history . 1))))
       ;; If command was added to `command-history' as a string,
       ;; get rid of that.  We want only evaluable expressions there.
       (when (stringp (car command-history)) (pop command-history))
       ;; If command to be redone does not match front of `command-history',
       ;; add it to `command-history'.
-      (unless (equal command (car command-history))
-        (push command command-history))
+      (unless (equal command (car command-history)) (push command command-history))
       (eval command))))
 
 
@@ -279,25 +283,38 @@ the minibuffer, then read and evaluate the result."
 ;; Inspired from original `set-variable', with these changes:
 ;; Use READ-VAR-FN and SET-VAR-HIST-VAR.  Use current value as default value.
 ;;
-(defun read-var-and-value (read-var-fn set-var-hist-var make-local-p)
+(defun read-var-and-value (read-var-fn set-var-hist-var make-local-p &optional buffer)
   "Read a variable name and value.
 READ-VAR-FN is a function to read the variable name.
 SET-VAR-HIST-VAR is a variable holding a history of variable values.
-MAKE-LOCAL-P non-nil means the variable is to be local."
-  (let* ((var (funcall read-var-fn "Set variable: "))
-         (current-val (format "%S" (symbol-value var)))
-         (minibuffer-help-form '(describe-variable var))
-         (prompt (format "Set %s%s to value: " var
-                         (cond ((local-variable-p var) " (buffer-local)")
-                               ((or make-local-p (local-variable-if-set-p var))
-                                " buffer-locally")
-                               (t " globally"))))
-         (prop (get var 'variable-interactive))
-         (val (if prop
-                  ;; Use VAR's `variable-interactive' property
-                  ;; as an interactive spec for prompting.
-                  (call-interactively `(lambda (arg) (interactive ,prop) arg))
-                (read (read-string prompt current-val set-var-hist-var current-val)))))
+MAKE-LOCAL-P non-nil means the variable is to be local.
+Optional arg BUFFER is the buffer used to determine the current value
+of the variable, which is used as the default value when reading the new value."
+  (let* ((var                   (funcall read-var-fn "Set variable: "))
+         (current-val           (format "%S"
+                                        (if (fboundp 'buffer-local-value) ; Emacs 22+.
+                                            (buffer-local-value var (or buffer
+                                                                        (current-buffer)))
+                                          (if (member var (buffer-local-variables buffer))
+                                              (with-current-buffer (or buffer
+                                                                       (current-buffer))
+                                                (symbol-value var))
+                                            (default-value var)))))
+         (minibuffer-help-form  '(describe-variable var))
+         (prompt                (format "Set %s%s to value: " var
+                                        (cond ((local-variable-p var) " (buffer-local)")
+                                              ((or make-local-p
+                                                   (local-variable-if-set-p var))
+                                               " buffer-locally")
+                                              (t " globally"))))
+         (prop                  (get var 'variable-interactive))
+         (val                   (if prop
+                                    ;; Use VAR's `variable-interactive' property
+                                    ;; as an interactive spec for prompting.
+                                    (call-interactively `(lambda (arg)
+                                                          (interactive ,prop) arg))
+                                  (read (read-string prompt current-val set-var-hist-var
+                                                     current-val)))))
     (list var val make-local-p)))
 
 
@@ -306,7 +323,7 @@ MAKE-LOCAL-P non-nil means the variable is to be local."
 ;; Uses `read-var-and-value' to get args interactively.
 ;;
 ;;;###autoload
-(defun set-variable (var val &optional make-local)
+(defun set-variable (variable value &optional make-local)
   "Set VARIABLE to VALUE.  VALUE is a Lisp object.
 When using this interactively, enter a Lisp object for VALUE.
 If you want VALUE to be a string, you must surround it with doublequotes.
@@ -321,21 +338,23 @@ in the definition is used to check that VALUE is valid.
 With a prefix argument, set VARIABLE to VALUE buffer-locally."
   (interactive (read-var-and-value 'read-variable
                                    'set-variable-value-history
-                                   current-prefix-arg))
-  (and (or (not (fboundp 'custom-variable-p)) (custom-variable-p var))
-       (not (get var 'custom-type))
-       (custom-load-symbol var))
-  (let ((type (get var 'custom-type)))
+                                   current-prefix-arg
+                                   (and (boundp 'icicle-pre-minibuffer-buffer)
+                                        icicle-mode
+                                        icicle-pre-minibuffer-buffer)))
+  (and (or (not (fboundp 'custom-variable-p)) (custom-variable-p variable))
+       (not (get variable 'custom-type))
+       (custom-load-symbol variable))
+  (let ((type  (get variable 'custom-type)))
     (when type
       ;; Match with custom type.
       (require 'cus-edit)
-      (setq type (widget-convert type))
-      (unless (widget-apply type :match val)
-        (error "Value `%S' does not match type %S of %S"
-               val (car type) var))))
+      (setq type  (widget-convert type))
+      (unless (widget-apply type :match value)
+        (error "Value `%S' does not match type %S of %S" value (car type) variable))))
   (if make-local
-      (make-local-variable var))
-  (set var val)
+      (set (make-local-variable variable) value)
+    (set-default variable value))
   ;; Force a thorough redisplay for the case that the variable
   ;; has an effect on the display, like `tab-width' has.
   (force-mode-line-update))
@@ -357,20 +376,23 @@ in the definition is used to check that VALUE is valid.
 With a prefix argument, set VARIABLE to VALUE buffer-locally."
   (interactive (read-var-and-value 'read-any-variable
                                    'set-any-variable-value-history
-                                   current-prefix-arg))
+                                   current-prefix-arg
+                                   (and (boundp 'icicle-pre-minibuffer-buffer)
+                                        icicle-mode
+                                        icicle-pre-minibuffer-buffer)))
   (and (custom-variable-p variable)
        (not (get variable 'custom-type))
        (custom-load-symbol variable))
-  (let ((type (get variable 'custom-type)))
+  (let ((type  (get variable 'custom-type)))
     (when type
       ;; Match with custom type.
       (require 'cus-edit)
-      (setq type (widget-convert type))
+      (setq type  (widget-convert type))
       (unless (widget-apply type :match value)
-        (error "Value `%S' does not match type %S of %S"
-               value (car type) variable))))
-  (if make-local (make-local-variable variable))
-  (set variable value)
+        (error "Value `%S' does not match type %S of %S" value (car type) variable))))
+  (if make-local
+      (set (make-local-variable variable) value)
+    (set-default variable value))
   ;; Force a thorough redisplay for the case that the variable
   ;; has an effect on the display, like `tab-width' has.
   (force-mode-line-update))
@@ -392,21 +414,25 @@ not end the comment.  Blank lines do not get comments."
     ;; every line.
     (interactive "r\nP")
     (or comment-start (error "No comment syntax is defined"))
-    (if (> beg end) (let (mid) (setq mid beg beg end end mid)))
+    (when (> beg end) (let (mid)
+                        (setq mid  beg
+                              beg  end
+                              end  mid)))
     (save-excursion
       (save-restriction
-        (let ((cs comment-start) (ce comment-end)
-              (cp (when comment-padding
-                    (make-string comment-padding ? )))
+        (let ((cs  comment-start)
+              (ce  comment-end)
+              (cp  (and comment-padding (make-string comment-padding ? )))
               numarg)
-          (if (consp arg) (setq numarg t)
-            (setq numarg (prefix-numeric-value arg))
+          (if (consp arg)
+              (setq numarg  t)
+            (setq numarg  (prefix-numeric-value arg))
             ;; For positive arg > 1, replicate the comment delims now,
             ;; then insert the replicated strings just once.
             (while (> numarg 1)
-              (setq cs (concat cs comment-start)
-                    ce (concat ce comment-end))
-              (setq numarg (1- numarg))))
+              (setq cs      (concat cs comment-start)
+                    ce      (concat ce comment-end)
+                    numarg  (1- numarg))))
           ;; Loop over all lines from BEG to END.
           (narrow-to-region beg end)
           (goto-char beg)
@@ -416,16 +442,15 @@ not end the comment.  Blank lines do not get comments."
                   ;; Delete comment start from beginning of line.
                   (if (eq numarg t)
                       (while (looking-at (regexp-quote cs))
-                        (setq found-comment t)
+                        (setq found-comment  t)
                         (delete-char (length cs)))
-                    (let ((count numarg))
-                      (while (and (> 1 (setq count (1+ count)))
+                    (let ((count  numarg))
+                      (while (and (> 1 (setq count  (1+ count)))
                                   (looking-at (regexp-quote cs)))
-                        (setq found-comment t)
+                        (setq found-comment  t)
                         (delete-char (length cs)))))
                   ;; Delete comment padding from beginning of line
-                  (when (and found-comment comment-padding
-                             (looking-at (regexp-quote cp)))
+                  (when (and found-comment comment-padding (looking-at (regexp-quote cp)))
                     (delete-char comment-padding))
                   ;; Delete comment end from end of line.
                   (if (string= "" ce)
@@ -442,8 +467,8 @@ not end the comment.  Blank lines do not get comments."
                                                (backward-char (length ce))
                                                (looking-at (regexp-quote ce)))))
                             (delete-char (- (length ce)))))
-                      (let ((count numarg))
-                        (while (> 1 (setq count (1+ count)))
+                      (let ((count  numarg))
+                        (while (> 1 (setq count  (1+ count)))
                           (end-of-line)
                           ;; this is questionable if comment-end ends in whitespace
                           ;; that is pretty brain-damaged though
@@ -455,8 +480,7 @@ not end the comment.  Blank lines do not get comments."
                                     (delete-char (length ce)))))))))
                   (forward-line 1)))
 
-            (when comment-padding
-              (setq cs (concat cs cp)))
+            (when comment-padding (setq cs  (concat cs cp)))
             (while (not (eobp))
               ;; Insert at beginning and at end.
               (if (looking-at "[ \t]*$") ()
@@ -482,12 +506,12 @@ the front of the kill ring, rather than being added to the list."
          (menu-bar-update-yank-menu string (and replace (car kill-ring))))
     (if (and replace kill-ring)         ; Bug fix: only if non-nil `kill-ring'.
         (setcar kill-ring string)
-      (setq kill-ring (cons string kill-ring))
-      (if (> (length kill-ring) kill-ring-max)
-          (setcdr (nthcdr (1- kill-ring-max) kill-ring) nil)))
-    (setq kill-ring-yank-pointer kill-ring)
-    (if interprogram-cut-function
-        (funcall interprogram-cut-function string (not replace)))))
+      (setq kill-ring  (cons string kill-ring))
+      (when (> (length kill-ring) kill-ring-max)
+        (setcdr (nthcdr (1- kill-ring-max) kill-ring) nil)))
+    (setq kill-ring-yank-pointer  kill-ring)
+    (when interprogram-cut-function
+      (funcall interprogram-cut-function string (not replace)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -4,12 +4,12 @@
 ;; Description: Resize a frame.  In particular, fit a frame to its buffers.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams
-;; Copyright (C) 2000-2011, Drew Adams, all rights reserved.
+;; Copyright (C) 2000-2012, Drew Adams, all rights reserved.
 ;; Created: Thu Dec  7 09:32:12 2000
 ;; Version: 22.0
-;; Last-Updated: Fri Mar  4 23:46:34 2011 (-0800)
+;; Last-Updated: Fri Mar  2 07:52:04 2012 (-0800)
 ;;           By: dradams
-;;     Update #: 1310
+;;     Update #: 1318
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/fit-frame.el
 ;; Keywords: internal, extensions, convenience, local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -53,7 +53,7 @@
 ;;  when determining the proper frame size:
 ;;
 ;;   - font sizes, other than the default frame font
-;;   - characters, such as TAB, that have special widths
+;;   - characters that have special widths
 ;;
 ;;  NOTE: If you also use library `frame-cmds.el', and you are on MS
 ;;  Windows, then load that library after `fit-frame.el'.  This is
@@ -126,7 +126,7 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;; Change log:
+;;; Change Log:
 ;;
 ;; 2011/03/04 dadams
 ;;     fit-frame-to-image: Fixed for Emacs 23, which doesn't yet have image-display-size.
@@ -271,7 +271,7 @@
 ;;
 ;;; Code:
 
-(when (< emacs-major-version 21) (eval-when-compile (require 'cl))) ;; dolist
+(eval-when-compile (when (< emacs-major-version 21) (require 'cl))) ;; dolist
 
 ;; Quiet the byte compiler.
 (defvar image-minor-mode)
@@ -389,7 +389,6 @@ variable is buffer-local."
 (defcustom fit-frame-skip-header-lines-alist
   '((Info-mode . 1) (dired-mode . 2) (compilation-mode . 2))
   "*Alist of major-modes and header lines to ignore.
-
 When `fit-frame' calculates the width of the current buffer, it can
 first skip some lines at the buffer beginning, ignoring their
 widths.  For example, Info, Dired, and compilation buffers sometimes
@@ -736,7 +735,7 @@ Windows that are in list EXCLUDE are excluded from the result."
 (defun fit-frame-max-window-size (window)
   "Maximum size that would be needed to display the buffer in WINDOW.
 Returned as a cons: (MAX-WIDTH . MAX-HEIGHT), where:
- MAX-WIDTH is the maximum width, in characters.
+ MAX-WIDTH is the maximum width, in default characters.
  MAX-HEIGHT is the maximum height, in lines."
   (select-window window)
   (let ((hdr-lines                  (cdr (assq major-mode

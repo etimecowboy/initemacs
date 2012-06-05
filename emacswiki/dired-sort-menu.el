@@ -4,7 +4,7 @@
 
 ;; Author: Francis J. Wright <F.J.Wright@maths.qmw.ac.uk>
 ;; Maintainer: Francis J. Wright <F.J.Wright@maths.qmw.ac.uk>
-;; Time-stamp: <26 July 2001>
+;; Time-stamp:<2012-06-05 Tue 20:27 xin on p5q>
 ;; URL: http://centaur.maths.qmw.ac.uk/Emacs/
 ;; Keywords: dired, sort, menu, dialogue
 
