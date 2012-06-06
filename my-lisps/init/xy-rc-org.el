@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-05-30 Wed 16:08 xin on p5q>
+;; Time-stamp:<2012-06-05 Tue 23:26 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -864,12 +864,15 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
           ))
 
   ;; Use xelatex instead of pdflatex
+  ;; (setq org-latex-to-pdf-process
+  ;;       '("xelatex -interaction nonstopmode %b"
+  ;;         "xelatex -interaction nonstopmode %b"
+  ;;         "bibtex %b"
+  ;;         "xelatex -interaction nonstopmode %b"
+  ;;         "xelatex -interaction nonstopmode %b"))
+  ;; Better solution: use latexmk
   (setq org-latex-to-pdf-process
-        '("xelatex -interaction nonstopmode %b"
-          "xelatex -interaction nonstopmode %b"
-          "bibtex %b"
-          "xelatex -interaction nonstopmode %b"
-          "xelatex -interaction nonstopmode %b"))
+        '("latexmk -pdflatex=xelatex -pdf -silent -f %b"))
 
   ;; load reftex
   (require 'reftex)

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2012-06-04 Mon 03:37 xin on p5q>
+;; Time-stamp:<2012-06-05 Tue 23:16 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -83,6 +83,7 @@
                   ac-sources)))
 
   (add-hook 'latex-mode-hook 'ac-latex-mode-setup)
+  (add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
   (ac-flyspell-workaround)
 
   ;;-----------------------------------------------------------------------------

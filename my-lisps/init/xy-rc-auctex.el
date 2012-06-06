@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-06-05 Tue 16:39 xin on p5q>
+;; Time-stamp:<2012-06-05 Tue 22:35 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -28,6 +28,29 @@
   (load "preview-latex.el" nil t t)
   (revert-buffer)
   (menu-bar-mode 1))
+
+;; Automagic detection of master file
+;; REF: (@url :file-name "http://emacswiki.org/emacs/AUCTeX#toc18" :display "emacswiki")
+;;;###autoload
+(defun guess-TeX-master (filename)
+  "Guess the master file for FILENAME from currently open .tex files."
+  (let ((candidate nil)
+        (filename (file-name-nondirectory filename)))
+    (save-excursion
+      (dolist (buffer (buffer-list))
+        (with-current-buffer buffer
+          (let ((name (buffer-name))
+                (file buffer-file-name))
+            (if (and file (string-match "\\.tex$" file))
+                (progn
+                  (goto-char (point-min))
+                  (if (re-search-forward (concat "\\\\input{" filename "}") nil t)
+                      (setq candidate file))
+                  (if (re-search-forward (concat "\\\\include{" (file-name-sans-extension filename) "}") nil t)
+                      (setq candidate file))))))))
+    (if candidate
+        (message "TeX master document: %s" (file-name-nondirectory candidate)))
+    candidate))
 
 ;;;###autoload
 (defun auctex-settings ()
@@ -58,7 +81,8 @@
         font-latex-fontify-script t
         reftex-plug-into-AUCTeX t)
 
-  (setq-default TeX-master nil) ;; project support
+  ;; (setq-default TeX-master nil) ;; project support
+  (setq-default TeX-master (guess-TeX-master (buffer-file-name)))
 
   (setq TeX-fold-env-spec-list
         (quote (("[comment]" ("comment"))

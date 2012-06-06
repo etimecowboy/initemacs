@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-06-03 Sun 20:29 xin on p5q>
+;; Time-stamp:<2012-06-06 Wed 09:12 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -170,6 +170,12 @@
 ;;    java-mode-hook lisp-interaction-mode-hook sh-mode-hook
 ;;   ,(if (not is-before-emacs-21) 'awk-mode-hook) ruby-mode-hook)
 ;;   'company-mode)
+
+;;--------------------------------------------------------------------
+;;** predictive completion
+;; A minor-mode exploits the redundancy inherent in languages in order
+;; to complete words you are typing before you've finished typing them
+(autoload 'predictive-mode "predictive" t)
 
 ;;--------------------------------------------------------------------
 ;;** template settings
