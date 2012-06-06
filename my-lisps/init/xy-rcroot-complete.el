@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-06-06 Wed 09:12 xin on p5q>
+;; Time-stamp:<2012-06-06 Wed 23:21 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -105,11 +105,12 @@
   ;; (smex-initialize-ido)) ;; BUG: `smex-initialize-ido' cause error
   ;;                        ;; in Emacs 23.2, but OK in 23.3
 (global-set-key (kbd "<f6> d") 'xy/ido+smex-start)
- ;; (Windows ;; BUG: not work in Linux. Why? --Answer: The
- ;; `smex-save-file' cannot be automatically created in Linux. Fixed
- ;; by manually create it.
- ;; (add-hook 'after-init-hook 'xy/ido+smex-start))
-(add-hook 'after-init-hook 'xy/ido+smex-start)
+;; (Windows ;; BUG: not work in Linux. Why? --Answer: The
+;;          ;;      `smex-save-file' cannot be automatically created in
+;;          ;;      Linux. Fixed by manually create it.
+;;          ;; NOTE: Use this combination to reduce system load in Windows?
+;;   (add-hook 'after-init-hook 'xy/ido+smex-start))
+;; (add-hook 'after-init-hook 'xy/ido+smex-start)
 
 ;;--------------------------------------------------------------------
 ;;** ido+icomplete
@@ -125,8 +126,6 @@
 ;;   (require 'icomplete)
 ;;   (icomplete-mode 1))
 ;; (global-set-key (kbd "<f6> D") 'xy/ido+icomplete-start)
-;; (GNULinux
-;;  (add-hook 'after-init-hook 'xy/ido+icomplete-start))
 
 ;;====================================================================
 ;;* Buffer auto complete
@@ -172,10 +171,22 @@
 ;;   'company-mode)
 
 ;;--------------------------------------------------------------------
+;;** pabbrev
+;; REF: (@url :file-name "http://www.emacswiki.org/emacs/PredictiveAbbreviation" :display "Emacswiki page")
+;; (require 'pabbrev)
+
+;;--------------------------------------------------------------------
 ;;** predictive completion
 ;; A minor-mode exploits the redundancy inherent in languages in order
 ;; to complete words you are typing before you've finished typing them
-(autoload 'predictive-mode "predictive" t)
+(autoload 'predictive-mode "predictive" nil t)
+(eval-after-load "predictive"
+  '(progn
+     (predictive-settings)))
+;; (am-add-hooks
+;;  `(org-mode-hook latex-mode-hook LaTeX-mode-hook)
+;;  '(lambda ()
+;;     (predictive-mode 1)))
 
 ;;--------------------------------------------------------------------
 ;;** template settings

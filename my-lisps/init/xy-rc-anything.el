@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
-;; Time-stamp:<2012-01-02 Mon 16:41 xin on p6t>
+;; Time-stamp:<2012-06-06 Wed 23:18 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,6 +22,7 @@
 (defun xy/my-anything ()
   "My anything."
   (interactive)
+  (require 'anything)
   (anything-other-buffer
    '(;; Buffer:
      anything-c-source-buffers
