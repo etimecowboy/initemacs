@@ -1,0 +1,8 @@
+\SourceFile{main.tex}\SetLineno{26}
+let simple =
+  let node s =
+    rect ~name:s ~stroke:None (round_rect ~stroke:None ~fill:lightblue (tex s))
+  in
+  let b = hbox ~padding:(bp 20.) [node "A"; node "BB"] in
+  let arrow x y = box_arrow ~pen:Pen.circle ~color:red (get x b) (get y b) in
+  seq [draw b; arrow "A" "BB"]

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-06-06 Wed 14:30 xin on p5q>
+;; Time-stamp:<2012-06-06 Wed 17:34 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1350,29 +1350,31 @@ The process is:
                                 "/anything-config/extensions"))
   (xy/install-all-lisps (concat my-local-lisp-path
                                 "/anything-config/contrib"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
+  ;; (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
   (xy/install-all-lisps (concat my-local-lisp-path "/popup-el"))
   (xy/install-all-lisps (concat my-local-lisp-path "/fuzzy-el"))
   (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32.2"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/ac-math"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32.3"))
   (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
   (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/ibus-el-0.2.1"))
+  ;; (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/ibus-el-0.3.2"))
   (xy/install-all-lisps (concat my-local-lisp-path
                                 "/mailcrypt-3.5.8"))
   (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
   (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.5"))
   (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
   (xy/install-all-lisps (concat my-local-lisp-path "/rw-hunspell-0.2"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/w3m"))
+  ;; (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/emacs-w3m/shimbun"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/emacs-w3m"))
   (xy/install-all-lisps (concat my-local-lisp-path "/whizzytex"))
   (xy/install-all-lisps (concat my-local-lisp-path "/google-maps"))
   (xy/install-all-lisps (concat my-local-lisp-path "/weibo"))
   (xy/install-all-lisps (concat my-local-lisp-path "/predictive"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
   (xy/install-all-lisps "~/.emacs.d/themes")
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
   ;;------------------------------------------------------------------
   ;; TODO: Write lisp code to do it.
   (xy/recompile-dir (concat my-elpa-lisp-path "/ascii-3.1"))
@@ -1405,7 +1407,6 @@ The process is:
   (xy/recompile-dir (concat my-elpa-lisp-path "/json-1.2"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/kill-ring-search-1.1"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/light-symbol-0.1"))
-  (xy/recompile-dir (concat my-elpa-lisp-path "/magit-1.1.1"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/markdown-mode-1.8.1"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/mwe-log-commands-20041106"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/openwith-20120530"))

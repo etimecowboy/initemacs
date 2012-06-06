@@ -1,0 +1,390 @@
+Unrecoverable error: undefined in B
+Operand stack:
+    pgfsc  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: rangecheck in repeat
+Operand stack:
+    --nostringval--  -1  --nostringval--
+Unrecoverable error: undefined in dcount
+Operand stack:
+    --nostringval--  5
+Unrecoverable error: stackunderflow in sub
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: rangecheck in repeat
+Operand stack:
+    -1  --nostringval--
+Unrecoverable error: undefined in dcount
+Operand stack:
+    6
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: rangecheck in repeat
+Operand stack:
+    -1  --nostringval--
+Unrecoverable error: undefined in dcount
+Operand stack:
+    7
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: typecheck in %s_proc_read_continue
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in %s_proc_read_continue
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+Unrecoverable error: typecheck in restore
+Operand stack:
+    --nostringval--  --nostringval--
+Unrecoverable error: invalidrestore in restore
+Operand stack:
+    --nostringval--  --nostringval--  --nostringval--
+Unrecoverable error: stackunderflow in exch
+Operand stack:
+    --nostringval--
+sync: 344 412 - 200 268
+true, true

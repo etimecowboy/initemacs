@@ -1,0 +1,14 @@
+\usepackage {hyperref}
+\usepackage {exercise}
+\edef\hyper@quote{\string"}
+\edef\hyper@sharp{\string#}
+\def \softlink #1#2{\special 
+  {html:<A href=\hyper@quote\hyper@sharp#1\hyper@quote>}#2\special
+  {html:</A>}}
+\def \softtarget #1#2{\special
+  {html:<A name=\hyper@quote#1\hyper@quote>}#2\special
+  {html:</A>}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newenvironment{proof}{Proof:}{}

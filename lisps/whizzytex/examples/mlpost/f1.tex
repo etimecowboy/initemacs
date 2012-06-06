@@ -1,0 +1,12 @@
+\SourceFile{main.tex}\SetLineno{38}
+let f1 =
+  let tex = tex ~style:Rect ~stroke:(Some Color.black) in
+  let b =
+    hbox ~padding:(bp 20.)
+      [vbox ~padding:(bp 4.) ~pos:`Right
+        [te^^Ax "A"; tex ~name:"bc" "$\\sqrt{x}$"; tex "D"];
+       vbox ~padding:(bp 4.) ~pos:`Left
+ [tex ~name:"e" "$\\int _0 ^1$"; tex "FGH"]]
+  in
+  seq [draw b;
+       box_arrow (get "bc" b) (get "e" b)]

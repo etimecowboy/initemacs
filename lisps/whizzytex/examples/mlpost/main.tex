@@ -1,0 +1,71 @@
+\documentclass{article}
+
+\usepackage{mlpost}
+
+\begin{mlpost}{}
+open Mlpost
+open Num
+open Command
+open Helpers
+open Path
+open Point
+open Color
+open Box
+\end{mlpost}
+
+\begin{document}
+
+\section{Examples}
+
+\subsection{Prelude for mlpost}
+
+The prelude is in the introduction so that it can be shared by slices.
+
+\subsection{A simple figure}
+
+\begin{mlpost}[scale=3]{simple}
+let simple =
+  let node s =
+    rect ~name:s ~stroke:None (round_rect ~stroke:None ~fill:lightblue (tex s))
+  in
+  let b = hbox ~padding:(bp 20.) [node "A"; node "BB"] in
+  let arrow x y = box_arrow ~pen:Pen.circle ~color:red (get x b) (get y b) in
+  seq [draw b; arrow "A" "BB"]
+\end{mlpost}
+
+\subsection{A figure with fonts}
+
+\begin{mlpost}[scale=2]{f1}
+let f1 =
+  let tex = tex ~style:Rect ~stroke:(Some Color.black) in
+  let b = 
+    hbox ~padding:(bp 20.)
+      [vbox ~padding:(bp 4.) ~pos:`Right 
+        [tex "A"; tex ~name:"bc" "$\\sqrt{x}$"; tex "D"];
+       vbox ~padding:(bp 4.) ~pos:`Left  
+	 [tex ~name:"e" "$\\int _0 ^1$"; tex "FGH"]]
+  in
+  seq [draw b;
+       box_arrow (get "bc" b) (get "e" b)]
+\end{mlpost}
+
+\subsection{A figure without fonts}
+
+aaa aaa aa kjkl  foo foo  aaaa fooa
+
+\begin{mlpost}{f2}
+let f2 =
+  let tex = tex ~style:Circle ~stroke:(Some Color.black) in 
+  let b = vbox [tex "a"; hbox [tex ~name:"b" "b"; tex "c"]] in
+  let f = hbox ~padding:(bp 20.) [b;b;b] in
+  let arrow = box_arrow ~outd:(vec (dir (-60.))) in
+  let node i = get "b" (nth i f) in
+  seq [draw f;
+       arrow (node 1) (node 0); 
+       arrow (node 0) (node 2); 
+       arrow (node 0)  (node 2); 
+       arrow (node 1) (node 2);
+      ]
+\end{mlpost}
+
+\end{document}

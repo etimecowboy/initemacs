@@ -1,0 +1,19 @@
+\SetLineno{162}\SourceFile{beamer_advi.tex}
+\frametitle {Fragile (with no argument)}
+\begin{itemize}
+
+\item <1->
+This frame works well written as
+ \begin{verbatim}
+    \begin{frame}[fragile]
+    \frametitle{Fragile (with no argument)}
+    ...
+\end{verbatim}
+\item <2->
+But it would brake if written as
+ \begin{verbatim}
+    \begin{frame}[fragile]{Fragile (with no argument)}
+    ...
+\end{verbatim}
+This seems to be a problem with beamer, independant of whizzytex.
+\end{itemize}

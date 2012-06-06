@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-whizzytex.el'
-;; Time-stamp:<2012-01-17 Tue 23:58 xin on p6t>
+;; Time-stamp:<2012-06-06 Wed 14:56 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,7 @@
 (defun whizzytex-copy-sty ()
   "Copy the file `whizzytex.sty' file to the current directory."
   (interactive)
-  (copy-file "~/.emacs.d/lisps/whizzytex/whizzytex.sty" "./" t)
+  (copy-file "~/.emacs.d/lisps/whizzytex/src/whizzytex.sty" "./" t)
   (message "whizzytex.sty copied."))
 
 ;;;###autoload

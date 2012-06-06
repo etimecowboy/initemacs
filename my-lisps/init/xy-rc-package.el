@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2012-01-07 Sat 18:11 xin on p6t>
+;; Time-stamp:<2012-06-06 Wed 17:12 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
