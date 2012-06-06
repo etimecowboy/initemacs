@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-06-06 Wed 13:54 xin on p5q>
+;; Time-stamp:<2012-06-06 Wed 14:30 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1400,6 +1400,7 @@ The process is:
   (xy/recompile-dir (concat my-elpa-lisp-path "/highlight-symbol-1.1"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/htmlize-1.39"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/hungry-delete-1.0"))
+  (xy/recompile-dir (concat my-elpa-lisp-path "/ido-ubiquitous-1.0"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/ioccur-2.4"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/json-1.2"))
   (xy/recompile-dir (concat my-elpa-lisp-path "/kill-ring-search-1.1"))
