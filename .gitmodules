@@ -7,9 +7,6 @@
 [submodule "lisps/org2blog"]
 	path = lisps/org2blog
 	url = https://github.com/punchagan/org2blog.git
-[submodule "lisps/magit"]
-	path = lisps/magit
-	url = https://github.com/magit/magit.git
 [submodule "lisps/command-log-mode"]
 	path = lisps/command-log-mode
 	url = https://github.com/lewang/command-log-mode.git
