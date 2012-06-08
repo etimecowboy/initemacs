@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-08 Fri 16:55 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 17:00 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -135,29 +135,31 @@
 ;; Packages with version numbers are stable releases, while
 ;; packages without version numbers are development versions
 
-;; REF: (@url :file-name "http://code.google.com/p/dea/" :display "Source")
+;; REF: (@url :file-name "http://code.google.com/p/dea/" :display "SVN Source")
 (xy/load-autoload (concat my-local-lisp-path "/dea"))
 (message "* ---[ dea lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; ;; REF: (@url :file-name "https://github.com/wanderlust" :display "Source")
+;; ;; REF: (@url :file-name "https://github.com/wanderlust" :display "GIT Source")
 ;; ;; NOTE: apel, flim, semi, and mule-ucs are very old packages.
 ;; ;; NOTE: These packages are closly related. They are widely used by
-;; ;; Japanese developers which produced `mew', `wanderlust', `emacs-w3m'
-;; ;; and etc.
+;; ;;       Japanese developers that developed `mew', `wanderlust',
+;; ;;       `emacs-w3m', and etc.
 ;; ;; NOTE: Some lisps cause errors while byte-compiled, and they are
-;; ;; put in the `bug' sub-folders.
+;; ;;       put in the `bug' sub-folders.
 ;; ;; NOTE: Just put these packages in the load-path. Other lisps can
-;; ;; load them when required.
+;; ;;       load them when required.
+;; ;; NOTE: No need to have a git submodule for them. I don't upgrade
+;; ;;       them very often.
 ;; (xy/load-autoload (concat my-local-lisp-path "/apel"))
 ;; (message "* ---[ apel lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
-;; ;; NOTE: flim has a lisp `mailcap.el' which shadows the emacs version
-;; ;; `mailcap.el'.
+;; ;; NOTE: flim has a lisp `mailcap.el' which shadows the emacs
+;; ;;       version one.
 ;; (xy/load-autoload (concat my-local-lisp-path "/flim"))
 ;; (message "* ---[ flim lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
