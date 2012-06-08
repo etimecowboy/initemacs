@@ -1,3 +1,12 @@
 [submodule "lisps/anything-config"]
 	path = lisps/anything-config
 	url = git://repo.or.cz/anything-config.git
+[submodule "lisps/fuzzy-el"]
+	path = lisps/fuzzy-el
+	url = https://github.com/m2ym/fuzzy-el.git
+[submodule "lisps/popup-el"]
+	path = lisps/popup-el
+	url = https://github.com/m2ym/popup-el.git
+[submodule "lisps/auto-complete"]
+	path = lisps/auto-complete
+	url = https://github.com/m2ym/auto-complete.git
