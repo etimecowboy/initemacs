@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-06 Wed 18:09 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 14:45 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -334,9 +334,16 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; ;; REF: (@url :file-name "https://github.com/magit/magit" :display "Source")
+;; REF: (@url :file-name "https://github.com/magit/magit" :display "Source")
 (xy/load-autoload (concat my-local-lisp-path "/magit"))
 (message "* ---[ magit lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF: (@url :file-name "https://github.com/lewang/command-log-mode" :display "Source")
+(xy/load-autoload (concat my-local-lisp-path "/command-log-mode"))
+(message "* ---[ command-log-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
@@ -505,7 +512,8 @@
 
 ;;--------------------------------------------------------------------
 ;;** log
-;;*** mwe-log-commands
+;;*** mwe-log-commands ;;NOTE: it is very old and I am using a fork
+                       ;;      `command-log-mode.el' of it.
 ;; This add-on can be used to demo Emacs to an audience.  When
 ;; activated, keystrokes get logged into a designated buffer, along
 ;; with the command bound to them.
@@ -513,6 +521,16 @@
 ;;   (add-hook 'LaTeX-mode-hook (function mwe:log-keyboard-commands))
 ;; To see the log buffer, call M-x mwe:open-command-log-buffer.
 ;; To start logging, call M-x mwe:log-keyboard-commands
+
+(autoload 'command-log-mode "command-log-mode" "\
+Toggle keyboard command logging of current buffer.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'global-command-log-mode "command-log-mode" "\
+Toggle keyboard command logging of whole emacs.
+
+\(fn &optional ARG)" t nil)
 
 ;;====================================================================
 ;;* Language environment
@@ -637,11 +655,10 @@
  ;; Use C-/ for Undo command
  (ibus-define-common-key ?\C-/ nil)
  ;; Change cursor color depending on IBus status
- (setq ibus-cursor-color '("red" "blue" "limegreen"))
-)
+ (setq ibus-cursor-color '("cyan" "lightblue" "lightgreen")))
 
 ;;====================================================================
-;;* Emacs lisp management
+;;* Emacs lisp management中文设置无问题
 
 ;;** ELPA packages
 ;; BUG: Conflict with auctex's `style/url.el' and flim's `mailcap.el'

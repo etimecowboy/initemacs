@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-02-26 Sun 13:43 xin on p6t>
+;; Time-stamp:<2012-06-07 Thu 20:16 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -312,12 +312,14 @@
 ;;** bar-cursor
 ;; 光标由方块变成一个小长条
 ;; (require 'bar-cursor)
+;; (bar-cursor-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** cursor-change
 ;; 智能的改变光标形状
 ;; REF: (@url :file-name "http://emacser.com/cursor-change.htm" :display "emacser")
-(autoload 'cursor-change-mode "cursor-change" nil t)
+;; (autoload 'cursor-change-mode "cursor-change" nil t)
+;; (cursor-change-mode 1)
 
 ;;====================================================================
 ;;* Mouse settings

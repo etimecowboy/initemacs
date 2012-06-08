@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-06-06 Wed 23:21 xin on p5q>
+;; Time-stamp:<2012-06-07 Thu 06:35 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -110,7 +110,7 @@
 ;;          ;;      Linux. Fixed by manually create it.
 ;;          ;; NOTE: Use this combination to reduce system load in Windows?
 ;;   (add-hook 'after-init-hook 'xy/ido+smex-start))
-;; (add-hook 'after-init-hook 'xy/ido+smex-start)
+(add-hook 'after-init-hook 'xy/ido+smex-start)
 
 ;;--------------------------------------------------------------------
 ;;** ido+icomplete

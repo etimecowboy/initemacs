@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-06-06 Wed 17:34 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 10:35 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1374,6 +1374,8 @@ The process is:
   (xy/install-all-lisps (concat my-local-lisp-path "/weibo"))
   (xy/install-all-lisps (concat my-local-lisp-path "/predictive"))
   (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/command-log-mode"))
+
   (xy/install-all-lisps "~/.emacs.d/themes")
   ;;------------------------------------------------------------------
   ;; TODO: Write lisp code to do it.

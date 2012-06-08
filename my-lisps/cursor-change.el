@@ -50,7 +50,8 @@
 (defvar cursor-change-old-cursor-type nil "Cursor type before toggle on function `cursor-change-mode'.")
 (defvar cursor-change-old-blink-cursor-mode nil "`blink-cursor-mode' before toggle on function `crsor-change-mode'.")
 
-(setq curchg-default-cursor-color "green")
+;; HACK: don't want to set a color
+;; (setq curchg-default-cursor-color "green")
 
 ;;;###autoload
 (define-minor-mode cursor-change-mode

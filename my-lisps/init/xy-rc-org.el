@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-06-05 Tue 23:26 xin on p5q>
+;; Time-stamp:<2012-06-07 Thu 09:37 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -871,8 +871,10 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
   ;;         "xelatex -interaction nonstopmode %b"
   ;;         "xelatex -interaction nonstopmode %b"))
   ;; Better solution: use latexmk
+  ;; (setq org-latex-to-pdf-process
+  ;;   '("latexmk -c -bm DRAFT -pdf -pdflatex=\"xelatex -synctex=1 %O %S\" -silent -pvc -f %b"))
   (setq org-latex-to-pdf-process
-        '("latexmk -pdflatex=xelatex -pdf -silent -f %b"))
+    '("latexmk -xelatex -d -f -silent -c %b"))
 
   ;; load reftex
   (require 'reftex)

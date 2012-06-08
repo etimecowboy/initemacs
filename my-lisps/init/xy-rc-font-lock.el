@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-font-lock.el'
-;; Time-stamp:<2011-12-11 Sun 21:27 xin on P6T-WIN7>
+;; Time-stamp:<2012-06-07 Thu 07:06 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -19,8 +19,15 @@
 ;;;###autoload
 (defun font-lock-settings ()
   "Settings for `font-lock'."
+
   (setq  font-lock-maximum-decoration t
          font-lock-support-mode 'jit-lock-mode)
+
+  (setq  jit-lock-stealth-time 16
+         jit-lock-defer-contextually t
+         jit-lock-stealth-nice 0.5)
+
+  (setq-default font-lock-multiline t)
 
   ;; 增加自定义关键字
   (dolist (mode '(c-mode c++-mode java-mode lisp-mode emacs-lisp-mode
@@ -40,8 +47,7 @@
        ;; ("{\\|}" . green-face)
        )
      ))
-  (message "* ---[ font-lock configuration is complete ]---")
-)
+  (message "* ---[ font-lock configuration is complete ]---"))
 
 ;; NOTE: moved to my `color-theme-xy.el'
 ;; ;;;###autoload

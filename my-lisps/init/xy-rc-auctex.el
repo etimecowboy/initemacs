@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
-;; Time-stamp:<2012-06-05 Tue 22:35 xin on p5q>
+;; Time-stamp:<2012-06-07 Thu 10:47 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -98,7 +98,15 @@
 
   (setq TeX-command-list
         (quote
-         (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t"
+         (("latexmk" "latexmk %s"  ;; NOTE: you would need to set
+           ;; configuration in your `$HOME/.latexmkrc' file, so that
+           ;; it may create pdf or/and dvi file.
+           TeX-run-command nil t
+           :help "Run latexmk script")
+          ("latexmk -pvc" "latexmk -pvc %s"
+           TeX-run-command nil t
+           :help "Run latexmk script with switch -pvc")
+          ("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t"
            TeX-run-TeX nil (plain-tex-mode texinfo-mode ams-tex-mode)
            :help "Run plain TeX")
           ("LaTeX" "%`%l%(mode)%' %t"
