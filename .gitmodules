@@ -4,9 +4,6 @@
 [submodule "lisps/fuzzy-el"]
 	path = lisps/fuzzy-el
 	url = https://github.com/m2ym/fuzzy-el.git
-[submodule "lisps/popup-el"]
-	path = lisps/popup-el
-	url = https://github.com/m2ym/popup-el.git
 [submodule "lisps/org2blog"]
 	path = lisps/org2blog
 	url = https://github.com/punchagan/org2blog.git
