@@ -7,9 +7,6 @@
 [submodule "lisps/popup-el"]
 	path = lisps/popup-el
 	url = https://github.com/m2ym/popup-el.git
-[submodule "lisps/auto-complete"]
-	path = lisps/auto-complete
-	url = https://github.com/m2ym/auto-complete.git
 [submodule "lisps/org2blog"]
 	path = lisps/org2blog
 	url = https://github.com/punchagan/org2blog.git
