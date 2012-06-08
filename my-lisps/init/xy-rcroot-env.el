@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-08 Fri 17:00 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 17:13 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -264,6 +264,7 @@
 ;; REF: (@url :file-name "http://cedet.sourceforge.net/" :display "Source")
 
 ;; ;; REF: (@url :file-name "https://github.com/bogolisk/egg" :display "Git Source")
+;; ;; NOTE: Very old. Use `magit' instead of it.
 ;; (xy/load-autoload (concat my-local-lisp-path "/egg"))
 ;; (message "* ---[ egg lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
@@ -272,7 +273,8 @@
 
 ;; REF: - (@url :file-name "https://github.com/viogus/eim" :display "Website")
 ;;      - (@url :file-name "http://ywb-codes.googlecode.com/svn/trunk/emacs/eim" :display "Git Source")
-;; NOTE: Seems no one is maitaining this package. Very old.
+;; NOTE: Seems no one is maitaining this package. Very old. No
+;;       need to have a git submodule for it.
 (xy/load-autoload (concat my-local-lisp-path "/eim-2.4"))
 (message "* ---[ eim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -355,6 +357,7 @@
                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "http://www.dr-qubit.org/emacs.php#predictive" :display "Git Source")
+;; BUG: I have some connection problem with it.
 (xy/load-autoload (concat my-local-lisp-path "/predictive"))
 (message "* ---[ predictive lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)

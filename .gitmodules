@@ -10,3 +10,15 @@
 [submodule "lisps/auto-complete"]
 	path = lisps/auto-complete
 	url = https://github.com/m2ym/auto-complete.git
+[submodule "lisps/org2blog"]
+	path = lisps/org2blog
+	url = https://github.com/punchagan/org2blog.git
+[submodule "lisps/google-maps"]
+	path = lisps/google-maps
+	url = git://git.naquadah.org/google-maps.git
+[submodule "lisps/magit"]
+	path = lisps/magit
+	url = https://github.com/magit/magit.git
+[submodule "lisps/command-log-mode"]
+	path = lisps/command-log-mode
+	url = https://github.com/lewang/command-log-mode.git
