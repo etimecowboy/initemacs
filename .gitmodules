@@ -1,0 +1,3 @@
+[submodule "lisps/anything-config"]
+	path = lisps/anything-config
+	url = git://repo.or.cz/anything-config.git
