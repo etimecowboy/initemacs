@@ -1,8 +1,0 @@
-myadvi () {
-  exec advi \
-      -edit -nowatch -html Start-Document \
-      -g 800x700 -vmargin 29mm -nocrop \
-      "$@"
-}
-
-VIEWCOMMAND="myadvi"

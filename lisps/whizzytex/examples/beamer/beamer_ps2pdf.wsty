@@ -1,8 +1,0 @@
-\RequirePackage{hyperref}
-\def \whizzy@putlink #1{%
-    \@ifundefined{hypertarget}%
-      {\special {html:<A name=\whizzy@quote #1\whizzy@quote>}%
-       \special {html:</A>}}%
-      {\hypertarget{#1}{}}%
-}
-\def \whizzy@putlink #1{\hypertarget{#1}{}}

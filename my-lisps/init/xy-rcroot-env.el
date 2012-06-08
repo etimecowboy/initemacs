@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-08 Fri 17:13 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 17:52 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -101,6 +101,9 @@
 
 ;;====================================================================
 ;;* Install additional lisp packages
+
+;; NOTE: There is a (@url :file-name "https://github.com/emacsmirror" :display "Github site")
+;;       which has a lot of emacs git sources. You can always check it.
 
 ;;** ELPA packages
 
@@ -245,6 +248,7 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
+;; REF: (@url :file-name "https://github.com/juergenhoetzel/babel" :display "Git Source")
 ;; (xy/load-autoload (concat my-local-lisp-path "/babel"))
 ;; (message "* ---[ babel installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)

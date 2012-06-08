@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
-;; Time-stamp:<2012-06-06 Wed 17:12 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 19:35 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,7 +25,14 @@
         '(("tromey" . "http://tromey.com/elpa/") ;; Original ELPA package.
           ("gnu" . "http://elpa.gnu.org/packages/") ;; Add the official packages
           ("marmalade" . "http://marmalade-repo.org/packages/")
+          ("melpa" . "http://melpa.milkbox.net/packages/")
           ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
+
+  ;; NOTE: there is an enhancement lisp `melpa.el' for the
+  ;; `package.el' shipped by Emacs24. Provided by melpa.
+  ;; REF: (@url :file-name "http://melpa.milkbox.net/" :display "Site")
+  ;; (require 'melpa)
+
   (package-initialize)  ;; Activate all packages
   (when (not package-archive-contents)
     (package-refresh-contents))

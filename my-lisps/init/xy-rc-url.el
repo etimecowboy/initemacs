@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-url.el'
-;; Time-stamp:<2011-12-29 Thu 15:56 xin on p6t>
+;; Time-stamp:<2012-06-08 Fri 18:22 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -24,6 +24,9 @@
   (setq url-privacy-level (quote high))
   ;; (setq url-proxy-services '(("no_proxy" . "work\\.com")
   ;;                            ("http" . "proxy.work.com:911")))
+  ;; NOTE: Suggested in http://melpa.milkbox.net/#known-issues for
+  ;;       melpa ELPA repo.
+  (setq url-http-attempt-keepalives nil)
   (message "* ---[ url configuration is complete ]---"))
 
 (provide 'xy-rc-url)

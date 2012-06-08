@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-06-07 Thu 09:37 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 18:09 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -933,7 +933,7 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
 
   ;;==================================================================
   ;; HTML5 Presentation export for Org-mode
-  ;; (@url :file-name "https://gist.github.com/509761" :display "Source")
+  ;; REF: (@url :file-name "https://gist.github.com/509761" :display "Git Source")
   (require 'org-html5presentation)
 
   ;;==================================================================
@@ -1184,6 +1184,7 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
 
   ;;------------------------------------------------------------------
   ;; org-google-weather
+  ;; REF: (@url :file-name "https://github.com/emacsmirror/google-weather.git" :display "Git Source")
   ;; google-weather-el for org
   ;; Add the following in one of your Org file.
   ;;   * Weather

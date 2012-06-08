@@ -1,35 +1,0 @@
-1
-
-First section
-
-Some text in the section.
-
-1.1
-
-Sub
-
-Some text in the subsection.
-
-1
-
-1.1.1
-
-SubSub
-
-Some text HERE in the sub-subsection.
-
-2
-
-The cursor should follow on other pages as well. This requires loading the package hyperref, which is done automatically in pdf mode (if after loading the package ifpdf, the command \ifpdf is true).
-
-2
-2.1
-Par
-
-Foo
-Bar
-And a paragraph aaa a jjj aaaaa
-
-3
-
-
