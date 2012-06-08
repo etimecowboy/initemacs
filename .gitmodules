@@ -10,9 +10,6 @@
 [submodule "lisps/command-log-mode"]
 	path = lisps/command-log-mode
 	url = https://github.com/lewang/command-log-mode.git
-[submodule "lisps/smex"]
-	path = lisps/smex
-	url = https://github.com/nonsequitur/smex.git
 [submodule "lisps/google-weather"]
 	path = lisps/google-weather
 	url = https://github.com/emacsmirror/google-weather.git
