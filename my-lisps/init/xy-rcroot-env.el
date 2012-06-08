@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-08 Fri 17:52 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 21:37 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -225,21 +225,21 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: (@url :file-name "https://github.com/m2ym/popup-el" :display "Git Source")
-;; NOTE: MUST before `auto-complete'
-(xy/load-autoload (concat my-local-lisp-path "/popup-el"))
-(message "* ---[ popup-el installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; ;; REF: (@url :file-name "https://github.com/m2ym/popup-el" :display "Git Source")
+;; ;; NOTE: MUST before `auto-complete'
+;; (xy/load-autoload (concat my-local-lisp-path "/popup-el"))
+;; (message "* ---[ popup-el installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
-;; REF: (@url :file-name "http://cx4a.org/software/auto-complete/" :display "Website")
-;;      (@url :file-name "https://github.com/m2ym/auto-complete" :display "Git Source")
-(xy/load-autoload (concat my-local-lisp-path "/auto-complete"))
-(message "* ---[ auto-complete installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; ;; REF: (@url :file-name "http://cx4a.org/software/auto-complete/" :display "Website")
+;; ;;      (@url :file-name "https://github.com/m2ym/auto-complete" :display "Git Source")
+;; (xy/load-autoload (concat my-local-lisp-path "/auto-complete"))
+;; (message "* ---[ auto-complete installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "http://code.google.com/p/ac-math/" :display "SVN Source")
 (xy/load-autoload (concat my-local-lisp-path "/ac-math"))
@@ -248,7 +248,7 @@
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
 
-;; REF: (@url :file-name "https://github.com/juergenhoetzel/babel" :display "Git Source")
+;; ;; REF: (@url :file-name "https://github.com/juergenhoetzel/babel" :display "Git Source")
 ;; (xy/load-autoload (concat my-local-lisp-path "/babel"))
 ;; (message "* ---[ babel installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
@@ -330,13 +330,13 @@
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-;; REF: (@url :file-name "http://julien.danjou.info/software/google-maps.el" :display "Source")
-;;      (@url :file-name "http://git.naquadah.org/?p=google-maps.git;a=summary" :display "Git Source")
-(xy/load-autoload (concat my-local-lisp-path "/google-maps"))
-(message "* ---[ google-maps lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; ;; REF: (@url :file-name "http://julien.danjou.info/software/google-maps.el" :display "Source")
+;; ;;      (@url :file-name "http://git.naquadah.org/?p=google-maps.git;a=summary" :display "Git Source")
+;; (xy/load-autoload (concat my-local-lisp-path "/google-maps"))
+;; (message "* ---[ google-maps lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "https://github.com/austin-----/weibo.emacs" :display "Git Source")
 ;; NOTE: NOT work
@@ -346,12 +346,12 @@
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-;; REF: (@url :file-name "https://github.com/magit/magit" :display "Git Source")
-(xy/load-autoload (concat my-local-lisp-path "/magit"))
-(message "* ---[ magit lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; ;; REF: (@url :file-name "https://github.com/magit/magit" :display "Git Source")
+;; (xy/load-autoload (concat my-local-lisp-path "/magit"))
+;; (message "* ---[ magit lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "https://github.com/lewang/command-log-mode" :display "Git Source")
 (xy/load-autoload (concat my-local-lisp-path "/command-log-mode"))
