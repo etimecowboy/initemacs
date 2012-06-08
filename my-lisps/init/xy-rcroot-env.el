@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-08 Fri 16:42 xin on p5q>
+;; Time-stamp:<2012-06-08 Fri 16:55 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -268,9 +268,9 @@
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-;; NOTE: seems no one is maitaining this package
 ;; REF: - (@url :file-name "https://github.com/viogus/eim" :display "Website")
 ;;      - (@url :file-name "http://ywb-codes.googlecode.com/svn/trunk/emacs/eim" :display "Git Source")
+;; NOTE: Seems no one is maitaining this package. Very old.
 (xy/load-autoload (concat my-local-lisp-path "/eim-2.4"))
 (message "* ---[ eim lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
@@ -315,11 +315,12 @@
                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "http://cristal.inria.fr/whizzytex/" :display "Source")
-(xy/load-autoload (concat my-local-lisp-path "/whizzytex/src"))
-(message "* ---[ whizzytex lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; NOTE: NOT very useful, bad Chinese support
+;; (xy/load-autoload (concat my-local-lisp-path "/whizzytex/src"))
+;; (message "* ---[ whizzytex lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "http://julien.danjou.info/software/google-maps.el" :display "Source")
 ;;      (@url :file-name "http://git.naquadah.org/?p=google-maps.git;a=summary" :display "Git Source")
@@ -330,11 +331,12 @@
                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "https://github.com/austin-----/weibo.emacs" :display "Git Source")
-(xy/load-autoload (concat my-local-lisp-path "/weibo"))
-(message "* ---[ weibo lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; NOTE: NOT work
+;; (xy/load-autoload (concat my-local-lisp-path "/weibo"))
+;; (message "* ---[ weibo lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "https://github.com/magit/magit" :display "Git Source")
 (xy/load-autoload (concat my-local-lisp-path "/magit"))
