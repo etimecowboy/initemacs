@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2012-06-05 Tue 21:57 xin on p5q>
+;; Time-stamp:<2012-06-10 Sun 09:14 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -117,17 +117,18 @@
    ("C-c w s" save-current-configuration)
    ("C-c w r" resume)
    ("C-c w k" wipe)))
+(when (try-require 'windows)
 ;; Automatically save window configuration when quit emacs
-(add-hook 'kill-emacs-hook 'save-current-configuration)
-(win:startup-with-window)
+      (add-hook 'kill-emacs-hook 'save-current-configuration)
+      (win:startup-with-window))
 
 ;;--------------------------------------------------------------------
 ;;** session
 ;; session.el can remember more information.
 (eval-after-load "session" '(session-settings))
-(require 'session)
-(add-hook 'after-init-hook ;; 'session-start)
-          'session-initialize)
+(when (try-require 'session)
+  (add-hook 'after-init-hook ;; 'session-start)
+            'session-initialize))
 
 (provide 'xy-rcroot-session)
 
