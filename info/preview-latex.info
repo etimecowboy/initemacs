@@ -2,7 +2,7 @@ This is preview-latex.info, produced by makeinfo version 4.13 from
 preview-latex.texi.
 
 This manual is for preview-latex, a LaTeX preview mode for AUCTeX
-(version 11.86 from 2010-02-21).
+(version 2012-04-26 from 2012-04-26).
 
    Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 Free Software
 Foundation, Inc.
@@ -2030,7 +2030,7 @@ Appendix C Copying this Manual
 The copyright notice for this manual is:
 
    This manual is for preview-latex, a LaTeX preview mode for AUCTeX
-(version 11.86 from 2010-02-21).
+(version 2012-04-26 from 2012-04-26).
 
    Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 Free Software
 Foundation, Inc.
@@ -2658,43 +2658,43 @@ Index
 
 
 Tag Table:
-Node: Top942
-Node: Copying2214
-Node: Introduction2675
-Node: What use is it?3348
-Node: Activating preview-latex4740
-Node: Getting started5555
-Node: Basic modes of operation7642
-Node: More documentation8846
-Node: Availability9734
-Node: Contacts10339
-Node: Installation11611
-Node: Keys and lisp11824
-Node: Simple customization18492
-Node: Known problems24253
-Node: Problems with Ghostscript25074
-Node: Font problems with Dvips27267
-Node: Emacs problems28470
-Node: Too small bounding boxes30207
-Node: x-symbol interoperation31591
-Node: Middle-clicks paste instead of toggling32973
-Node: For advanced users33789
-Node: The LaTeX style file34248
-Node: Package options36809
-Node: Provided commands47744
-Node: The Emacs interface55099
-Node: The preview images64279
-Node: Misplaced previews67751
-Node: ToDo71194
-Node: Frequently Asked Questions75979
-Node: Introduction to FAQ76302
-Node: Requirements76641
-Node: Installation Trouble79605
-Node: Customization82167
-Node: Troubleshooting85715
-Node: Other formats88232
-Node: Copying this Manual89549
-Node: GNU Free Documentation License90474
-Node: Index115615
+Node: Top947
+Node: Copying2219
+Node: Introduction2680
+Node: What use is it?3353
+Node: Activating preview-latex4745
+Node: Getting started5560
+Node: Basic modes of operation7647
+Node: More documentation8851
+Node: Availability9739
+Node: Contacts10344
+Node: Installation11616
+Node: Keys and lisp11829
+Node: Simple customization18497
+Node: Known problems24258
+Node: Problems with Ghostscript25079
+Node: Font problems with Dvips27272
+Node: Emacs problems28475
+Node: Too small bounding boxes30212
+Node: x-symbol interoperation31596
+Node: Middle-clicks paste instead of toggling32978
+Node: For advanced users33794
+Node: The LaTeX style file34253
+Node: Package options36814
+Node: Provided commands47749
+Node: The Emacs interface55104
+Node: The preview images64284
+Node: Misplaced previews67756
+Node: ToDo71199
+Node: Frequently Asked Questions75984
+Node: Introduction to FAQ76307
+Node: Requirements76646
+Node: Installation Trouble79610
+Node: Customization82172
+Node: Troubleshooting85720
+Node: Other formats88237
+Node: Copying this Manual89554
+Node: GNU Free Documentation License90484
+Node: Index115625
 
 End Tag Table

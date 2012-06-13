@@ -5,8 +5,8 @@
 
 ;;;###autoload
 ;;; begin lisp code
-(require 'highlight)
-(require 'region-list-edit)
+;; (require 'highlight)
+;; (require 'region-list-edit)
 
 ;;;###autoload
 (defcustom zjl-hl-make-fun-call-notable  t

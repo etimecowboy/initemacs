@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
-;; Time-stamp:<2012-06-04 Mon 03:03 xin on p5q>
+;; Time-stamp:<2012-06-13 Wed 16:53 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None

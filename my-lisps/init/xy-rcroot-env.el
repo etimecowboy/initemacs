@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-12 Tue 22:25 xin on p5q>
+;; Time-stamp:<2012-06-13 Wed 17:55 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -213,6 +213,7 @@
 ;; NOTE: auctex are patched by myself to make it works in my system.
 ;; (the latex style file `url.el' of auctex conflicts with the
 ;; standard `url.el')
+;; NOTE: I am using cvs `auctex' instead of the old ELPA one.
 ;; REF: (@url :file-name "http://www.gnu.org/s/auctex/" :display "Source")
 ;; (load "auctex.el" nil t t)           ;; auctex
 ;; (load "preview-latex.el" nil t t)    ;; preview-latex
@@ -221,6 +222,7 @@
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
+(add-to-list 'load-path "~/.emacs.d/auctex")
 
 ;; ;; REF: (@url :file-name "https://github.com/m2ym/fuzzy-el" :display "Git Source")
 ;; ;; NOTE: MUST before `auto-complete'
@@ -683,7 +685,7 @@ Toggle keyboard command logging of whole emacs.
  ;; Use C-/ for Undo command
  (ibus-define-common-key ?\C-/ nil)
  ;; Change cursor color depending on IBus status
- (setq ibus-cursor-color '("pink" "lightgreen" "lightblue")))
+ (setq ibus-cursor-color '("purple" "red" "blue")))
 
 ;;====================================================================
 ;;* Emacs lisp management中文设置无问题

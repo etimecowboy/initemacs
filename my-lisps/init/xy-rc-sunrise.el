@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sunrise.el'
-;; Time-stamp:<2012-06-12 Tue 21:13 xin on p5q>
+;; Time-stamp:<2012-06-13 Wed 16:44 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,8 +22,8 @@
   (setq ;; sr-avfs-root "~/"
         sr-history-length 100
         sr-show-file-attributes nil
-        sr-show-hidden-files nil
-        sr-windows-default-ratio 40
+        sr-show-hidden-files t
+        sr-windows-default-ratio 50
         sr-window-split-style (quote horizontal))
 
   (setq sr-start-hook

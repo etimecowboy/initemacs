@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-06-12 Tue 22:02 xin on p5q>
+;; Time-stamp:<2012-06-13 Wed 17:09 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -81,7 +81,7 @@
 (eval-after-load "maxframe"  '(maxframe-settings))
 (require 'fit-frame)
 (add-hook 'after-make-frame-functions 'fit-frame)
-;; (require 'autofit-frame)
+(require 'autofit-frame)
 (require 'thumb-frm)
 (require 'maxframe) ;; NOTE: not stable with two or more monitors
 
@@ -95,7 +95,19 @@
    ("M-S-<f5>" restore-frame)
    ;;------------------------------------
    ;; `windresize.el'
-   ("C-<f5>" windresize)))
+   ("C-<f5>" windresize)
+   ;;----------------------------------
+   ;; `thumb-frm.el'
+   ;; (define-key special-event-map [iconify-frame]
+   ;;             'thumfr-thumbify-frame-upon-event)
+   ;; (global-set-key [(shift mouse-3)]
+   ;;                 'thumfr-toggle-thumbnail-frame)
+   ;; (global-set-key [(shift control mouse-3)]
+   ;;                 'thumfr-thumbify-other-frames)
+   ("C-M-z" thumfr-thumbify-other-frames)
+   ("C-S-p" thumfr-fisheye-previous-frame)
+   ("C-S-n" thumfr-fisheye-next-frame)
+   ("C-S-z" thumfr-toggle-thumbnail-frame))) ;; thumfr-really-iconify-or-deiconify-frame
 
 ;;====================================================================
 ;;* Window settings
@@ -340,15 +352,15 @@ the mode-line." t)
 ;;** bar-cursor
 ;; 光标由方块变成一个小长条
 ;; (require 'bar-cursor)
-(autoload 'bar-cursor-mode "bar-cursor" nil t)
-(bar-cursor-mode 1)
+;; (autoload 'bar-cursor-mode "bar-cursor" nil t)
+;; (bar-cursor-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** cursor-change
 ;; 智能的改变光标形状
 ;; REF: (@url :file-name "http://emacser.com/cursor-change.htm" :display "emacser")
-;; (autoload 'cursor-change-mode "cursor-change" nil t)
-;; (cursor-change-mode 1)
+(autoload 'cursor-change-mode "cursor-change" nil t)
+(cursor-change-mode 1)
 
 ;;====================================================================
 ;;* Mouse settings
