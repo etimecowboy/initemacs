@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-06-07 Thu 06:35 xin on p5q>
+;; Time-stamp:<2012-06-12 Tue 15:38 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -12,7 +12,6 @@
 ;;  \____|_| |_| |_|\__,_|\___|___/
 ;;
 ;;--------------------------------------------------------------------
-
 (require 'cl)
 (require 'xy-rc-utils)
 
@@ -152,11 +151,12 @@
      (eal-define-keys
       'ac-complete-mode-map
       `(("<return>"   nil)
-         ("RET"        nil)
          ;; ("M-j"        ac-complete)
          ;; ("<C-return>" ac-complete)
-         ("M-n"        ac-next)
-         ("M-p"        ac-previous))) ))
+         ;; ("M-n"        ac-next)
+         ;; ("M-p"        ac-previous)
+         ("<C-tab>"    auto-complete)))))
+;; (autoload 'auto-complete-mode "auto-complete" "AutoComplete mode" t nil)
 (global-set-key (kbd "<f6> a") 'xy/ac-start)
 
 ;;--------------------------------------------------------------------
@@ -173,16 +173,47 @@
 ;;--------------------------------------------------------------------
 ;;** pabbrev
 ;; REF: (@url :file-name "http://www.emacswiki.org/emacs/PredictiveAbbreviation" :display "Emacswiki page")
+;; BUG: NOT work very well.
 ;; (require 'pabbrev)
+;; (require 'popup)
+
+;; (defun pabbrevx-suggestions-goto-buffer (suggestions)
+;;   (let* ((candidates (mapcar 'car suggestions))
+;;          (bounds (pabbrev-bounds-of-thing-at-point))
+;;          (selection (popup-menu* candidates
+;;                                  :point (car bounds)
+;;                                  :scroll-bar t)))
+;;     (when selection
+;;       ;; modified version of pabbrev-suggestions-insert
+;;       (let ((point))
+;;         (save-excursion
+;;           (progn
+;;             (delete-region (car bounds) (cdr bounds))
+;;             (insert selection)
+;;             (setq point (point))))
+;;         (if point
+;;             (goto-char point))
+;;         ;; need to nil this so pabbrev-expand-maybe-full won't try
+;;         ;; pabbrev expansion if user hits another TAB after ac aborts
+;;         (setq pabbrev-last-expansion-suggestions nil)
+;;         ))))
+
+;; (fset 'pabbrev-suggestions-goto-buffer
+;;       'pabbrevx-suggestions-goto-buffer)
+
+;; (define-key pabbrev-mode-map "\t" 'pabbrev-expand-maybe)
+;; (define-key pabbrev-mode-map [tab] 'pabbrev-expand-maybe)
 
 ;;--------------------------------------------------------------------
 ;;** predictive completion
 ;; A minor-mode exploits the redundancy inherent in languages in order
 ;; to complete words you are typing before you've finished typing them
-(autoload 'predictive-mode "predictive" nil t)
-(eval-after-load "predictive"
-  '(progn
-     (predictive-settings)))
+;; NOTE: makes emacs too slow!
+;; (autoload 'predictive-mode "predictive" nil t)
+;; (autoload 'global-predictive-mode "predictive" nil t)
+;; (eval-after-load "predictive"
+;;   '(progn
+;;      (predictive-settings)))
 ;; (am-add-hooks
 ;;  `(org-mode-hook latex-mode-hook LaTeX-mode-hook)
 ;;  '(lambda ()
@@ -221,14 +252,15 @@
      (eal-define-keys
       'yas/minor-mode-map
       `(("C-c C-f" yas/find-snippets)))))
-;; NOTE: manually start it when required
-(global-set-key (kbd "<f6> y") 'yas/minor-mode)
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-                  c-common-mode-hook sh-mode-hook matlab-mode-hook
-                  vhdl-mode-hook verilog-mode-hook
-                  org-mode-hook LaTeX-mode-hook)
- '(lambda () (yas/minor-mode 1)))
+;; NOTE: manually start it when required.
+;; NOTE: use with `auto-complete' would be nice!
+;; (global-set-key (kbd "<f6> y") 'yas/minor-mode)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+;;                   c-common-mode-hook sh-mode-hook matlab-mode-hook
+;;                   vhdl-mode-hook verilog-mode-hook
+;;                   org-mode-hook LaTeX-mode-hook)
+;;  '(lambda () (yas/minor-mode 1)))
 
 ;;====================================================================
 ;;* icicles

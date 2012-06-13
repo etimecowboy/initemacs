@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
-;; Time-stamp:<2012-05-30 Wed 10:04 xin on p5q>
+;; Time-stamp:<2012-06-10 Sun 22:40 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My programming settings

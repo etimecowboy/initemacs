@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
-;; Time-stamp:<2011-12-13 Tue 11:22 xin on P6T-WIN7>
+;; Time-stamp:<2012-06-12 Tue 21:06 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -220,12 +220,12 @@ will remain open and unsaved."
   ;; (def-redo-command dired-redo 'dired-redo 'dired-undo)
 
   ;;------------------------------------------------------------------
-  ;; (try-require 'dired+)
+  (try-require 'dired+)
   ;; (require 'dired-x)
   ;; (require 'wdired)
   ;; (dired-omit-mode 1)
   ;; (try-require 'dired-details+)
-  ;; ;; (try-require 'dired-single)
+  ;; (try-require 'dired-single)
   ;; (try-require 'dired-tar)
   ;; (when (try-require 'dired+)
   ;;   (define-key ctl-x-map   "d"
@@ -255,6 +255,28 @@ will remain open and unsaved."
   ;;           (function (lambda ()
   ;;                       (when (featurep 'openwith)
   ;;                         (openwith-mode 1)))))
+
+  ;; (add-hook 'dired-load-hook
+  ;;           (function (lambda ()
+  ;;                       (load "dired+")
+  ;;                       (load "dired-x")
+  ;;                       (load "wdired")
+  ;;                       (load "dired-tar")
+  ;;                       (load "dired-details+")
+  ;;                       ;; (load 'dired-single)
+  ;;                       (load "openwith")
+  ;;                       )))
+
+  ;; (add-hook 'dired-mode-hook
+  ;;           (function (lambda ()
+  ;;                       (dired-omit-mode 1)
+  ;;                       ;; (dired-details-hide)
+  ;;                       ;; (dired-details-toggle 1)
+  ;;                       ;; (define-key ctl-x-map   "d"
+  ;;                       ;;   'diredp-dired-files)
+  ;;                       ;; (define-key ctl-x-4-map "d"
+  ;;                       ;;   'diredp-dired-files-other-window)
+  ;;                       )))
 
   (message "* ---[ dired configuration is complete ]---"))
 

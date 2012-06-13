@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2012-05-30 Wed 09:39 xin on p5q>
+;; Time-stamp:<2012-06-12 Tue 23:46 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -68,10 +68,10 @@
 ;;*** GNU Emacs features for dired
 ;; 对特定文件简略显示
 (eval-after-load "dired-x" '(dired-x-settings))
-(require 'dired-x)
+;; (require 'dired-x)
 
 ;; 以文件形式修改dired buffer,  has been a part of GNU Emacs since 23
-(require 'wdired)
+;; (require 'wdired)
 
 ;; 只对文件名isearch
 ;;   NOTE: Emacs 23 has builtin Isearch of filenames in Dired:
@@ -109,31 +109,9 @@
 ;;                                         ;`dired-details+'
 
 ;; TODO: do a research and add more configurations.
-;; (eval-after-load "dired+" '(dired+-settings)) ;; dired大补
-(require 'dired+)
-(setq diredp-prompt-for-bookmark-prefix-flag nil)
-
-;; (add-hook 'dired-load-hook
-;;           (function (lambda ()
-;;                       (load "dired+")
-;;                       (load "dired-x")
-;;                       (load "wdired")
-;;                       (load "dired-tar")
-;;                       (load "dired-details+")
-;;                       ;; (load 'dired-single)
-;;                       (load "openwith")
-;;                       )))
-
-(add-hook 'dired-mode-hook
-          (function (lambda ()
-                      (dired-omit-mode 1)
-                      ;; (dired-details-hide)
-                      ;; (dired-details-toggle 1)
-                      ;; (define-key ctl-x-map   "d"
-                      ;;   'diredp-dired-files)
-                      ;; (define-key ctl-x-4-map "d"
-                      ;;   'diredp-dired-files-other-window)
-                      )))
+(eval-after-load "dired+" '(dired+-settings)) ;; dired大补
+;; (require 'dired+)
+;; (setq diredp-prompt-for-bookmark-prefix-flag nil)
 
 (when window-system
   ;; image-dired
@@ -159,8 +137,7 @@
 (setq kept-old-versions 2)
 (setq kept-new-versions 5)
 (setq delete-old-versions t)
-
-(setq vc-make-backup-files nil)
+(setq vc-make-backup-files t)
 (setq auto-revert-check-vc-info t)
 
 ;; Autosaved files

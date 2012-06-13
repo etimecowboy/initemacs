@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2012-06-03 Sun 21:46 xin on p5q>
+;; Time-stamp:<2012-06-12 Tue 21:16 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -131,8 +131,9 @@
 
 ;;====================================================================
 ;;* undo-tree
-(require 'undo-tree)
-(global-undo-tree-mode t)
+;; (require 'undo-tree)
+(autoload 'global-undo-tree-mode "undo-tree" nil t)
+(global-undo-tree-mode 1)
 
 ;;====================================================================
 ;;* list-processes+
@@ -228,15 +229,15 @@ from tradition chinese to simple chinese" t)
       `(("C-x L t" linkd-insert-tag)
         ("C-x L s" linkd-insert-star)
         ("C-x L l" linkd-insert-link)))))
-;; NOTE: Manually start it when required
 (global-set-key (kbd "<f6> l") 'linkd-mode)
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-                  c-common-mode-hook sh-mode-hook matlab-mode-hook
-                  vhdl-mode-hook verilog-mode-hook
-                  ;; org-mode-hook ;; NOTE: C-c ' conflicts with linkd
-                  LaTeX-mode-hook)
- '(lambda () (linkd-mode 1)))
+;; NOTE: Manually start it when required
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+;;                   c-common-mode-hook sh-mode-hook matlab-mode-hook
+;;                   vhdl-mode-hook verilog-mode-hook
+;;                   ;; org-mode-hook ;; NOTE: C-c ' conflicts with linkd
+;;                   LaTeX-mode-hook)
+;;  '(lambda () (linkd-mode 1)))
 
 ;;====================================================================
 ;;* ascii
@@ -249,7 +250,6 @@ from tradition chinese to simple chinese" t)
 ;;   "Toggle ASCII code display."    t)
 ;; (autoload 'ascii-customize "ascii"
 ;;   "Customize ASCII code display." t)
-
 
 ;;====================================================================
 ;;* multi-term

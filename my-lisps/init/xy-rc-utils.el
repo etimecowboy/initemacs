@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-06-08 Fri 21:51 xin on p5q>
+;; Time-stamp:<2012-06-10 Sun 21:45 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -180,53 +180,53 @@
 ;;--------------------------------------------------------------------
 ;;** Jump to some directory, open some config files
 
-;;;###autoload
-(defun goto-my-local-lisp-dir ()
-  "Goto `my-local-lisp-path'."
-  (interactive)
-  (dired my-local-lisp-path))
+;; ;;;###autoload
+;; (defun goto-my-local-lisp-dir ()
+;;   "Goto `my-local-lisp-path'."
+;;   (interactive)
+;;   (dired my-local-lisp-path))
 
-;;;###autoload
-(defun goto-my-elpa-lisp-dir ()
-  "Goto `my-elpa-lisp-path'."
-  (interactive)
-  (dired my-elpa-lisp-path))
+;; ;;;###autoload
+;; (defun goto-my-elpa-lisp-dir ()
+;;   "Goto `my-elpa-lisp-path'."
+;;   (interactive)
+;;   (dired my-elpa-lisp-path))
 
-;;;###autoload
-(defun goto-my-emacswiki-lisp-dir ()
-  "Goto `my-emacswiki-lisp-path'."
-  (interactive)
-  (dired my-emacswiki-lisp-path))
+;; ;;;###autoload
+;; (defun goto-my-emacswiki-lisp-dir ()
+;;   "Goto `my-emacswiki-lisp-path'."
+;;   (interactive)
+;;   (dired my-emacswiki-lisp-path))
 
-;;;###autoload
-(defun goto-my-own-lisp-dir ()
-  "Goto `my-own-lisp-path'."
-  (interactive)
-  (dired my-own-lisp-path))
+;; ;;;###autoload
+;; (defun goto-my-own-lisp-dir ()
+;;   "Goto `my-own-lisp-path'."
+;;   (interactive)
+;;   (dired my-own-lisp-path))
 
-;;;###autoload
-(defun goto-my-emacs-dir ()
-  "Goto `my-emacs-path'."
-  (interactive)
-  (dired my-emacs-path))
+;; ;;;###autoload
+;; (defun goto-my-emacs-dir ()
+;;   "Goto `my-emacs-path'."
+;;   (interactive)
+;;   (dired my-emacs-path))
 
-;;;###autoload
-(defun goto-my-home-dir ()
-  "Goto my home directory."
-  (interactive)
-  (dired "~"))
+;; ;;;###autoload
+;; (defun goto-my-home-dir ()
+;;   "Goto my home directory."
+;;   (interactive)
+;;   (dired "~"))
 
-;;;###autoload
-(defun goto-my-org-source-dir ()
-  "Goto my org source file directory."
-  (interactive)
-  (dired my-org-source-path))
+;; ;;;###autoload
+;; (defun goto-my-org-source-dir ()
+;;   "Goto my org source file directory."
+;;   (interactive)
+;;   (dired my-org-source-path))
 
-;;;###autoload
-(defun goto-my-org-latex-dir ()
-  "Goto my org source file directory."
-  (interactive)
-  (dired my-org-latex-path))
+;; ;;;###autoload
+;; (defun goto-my-org-latex-dir ()
+;;   "Goto my org source file directory."
+;;   (interactive)
+;;   (dired my-org-latex-path))
 
 ;;**  Reload init file
 ;; Note: when using `require' in the init.el to load other setting files,

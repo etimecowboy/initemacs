@@ -143,8 +143,15 @@
   (with-no-warnings
     (if (fboundp 'yas/get-snippet-tables)
         ;; >0.6.0
-        (apply 'append (mapcar 'ac-yasnippet-candidate-1 (yas/get-snippet-tables major-mode)))
-      (let ((table
+        ;; (apply 'append (mapcar 'ac-yasnippet-candidate-1
+        ;; (yas/get-snippet-tables major-mode)))
+        ;; HACK: (@url :file-name "https://github.com/tkf/auto-complete/commit/337caa2ccc254a79f615bb2417f0d2fb9552b547" :display "Fix ac-yasnippet-candidates ")
+        (apply 'append (mapcar 'ac-yasnippet-candidate-1
+                               (condition-case nil
+                                   (yas/get-snippet-tables major-mode)
+                                 (wrong-number-of-arguments
+                                  (yas/get-snippet-tables)))))
+        (let ((table
              (if (fboundp 'yas/snippet-table)
                  ;; <0.6.0
                  (yas/snippet-table major-mode)

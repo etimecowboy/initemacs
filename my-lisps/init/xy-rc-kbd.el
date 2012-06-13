@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
-;; Time-stamp:<2012-01-05 Thu 20:22 xin on p6t>
+;; Time-stamp:<2012-06-12 Tue 16:32 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -25,29 +25,29 @@
 (eal-define-keys-commonly
  global-map
  `(;; `fit-frame.el'
-   ("S-<f5>" fit-frame)
+   ;; ("S-<f5>" fit-frame)
    ;;-----------------------------------
    ;; `maxframe.el'
-   ("M-<f5>" maximize-frame)
-   ("M-S-<f5>" restore-frame)
+   ;; ("M-<f5>" maximize-frame)
+   ;; ("M-S-<f5>" restore-frame)
    ;;------------------------------------
    ;; `windresize.el'
-   ("C-<f5>" windresize)
+   ;; ("C-<f5>" windresize)
    ;;------------------------------------
    ;; `windmove.el'
-   ("C-S-<left>" windmove-left)
-   ("C-S-<right>" windmove-right)
-   ("C-S-<up>" windmove-up)
-   ("C-S-<down>" windmove-down)
+   ;; ("C-S-<left>" windmove-left)
+   ;; ("C-S-<right>" windmove-right)
+   ;; ("C-S-<up>" windmove-up)
+   ;; ("C-S-<down>" windmove-down)
    ;;----------------------------------
    ;; `window-number.el'
    ;; ("M-<f5>"  window-number-meta-mode)
    ;;----------------------------------
    ;; `buffer-move.el'
-   ("M-S-<up>"    buf-move-up)
-   ("M-S-<down>"  buf-move-down)
-   ("M-S-<left>"  buf-move-left)
-   ("M-S-<right>" buf-move-right)
+   ;; ("M-S-<up>"    buf-move-up)
+   ;; ("M-S-<down>"  buf-move-down)
+   ;; ("M-S-<left>"  buf-move-left)
+   ;; ("M-S-<right>" buf-move-right)
    ;;----------------------------------
    ;; `thumb-frm.el'
    ;; (define-key special-event-map [iconify-frame]
@@ -56,10 +56,10 @@
    ;;                 'thumfr-toggle-thumbnail-frame)
    ;; (global-set-key [(shift control mouse-3)]
    ;;                 'thumfr-thumbify-other-frames)
-   ("C-M-z" thumfr-thumbify-other-frames)
-   ("C-S-p" thumfr-fisheye-previous-frame)
-   ("C-S-n" thumfr-fisheye-next-frame)
-   ("C-S-z" thumfr-toggle-thumbnail-frame)
+   ;; ("C-M-z" thumfr-thumbify-other-frames)
+   ;; ("C-S-p" thumfr-fisheye-previous-frame)
+   ;; ("C-S-n" thumfr-fisheye-next-frame)
+   ;; ("C-S-z" thumfr-toggle-thumbnail-frame)
             ;;'thumfr-really-iconify-or-deiconify-frame)
    ;;------------------------------------
    ("C-c <f5>" revert-buffer)
@@ -147,19 +147,19 @@
 
 (eal-define-keys-commonly
  global-map
- `(("C-x G b" xy/emacs-build)
-   ("C-x G i" open-init-dot-el-file)))
+ `(("C-x B" xy/emacs-build)))
+   ;; ("C-x G i" open-init-dot-el-file)))
 
-(eal-define-keys-commonly
- global-map
- `(("C-x G l" goto-my-local-lisp-dir)
-   ("C-x G m" goto-my-own-lisp-dir)
-   ("C-x G p" goto-my-elpa-lisp-dir)
-   ("C-x G a" goto-my-emacswiki-lisp-dir)
-   ("C-x G e" goto-my-emacs-dir)
-   ("C-x G h" goto-my-home-dir)
-   ("C-x G o" goto-my-org-source-dir)
-   ("C-x G t" goto-my-org-latex-dir)))
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("C-x G l" goto-my-local-lisp-dir)
+;;    ("C-x G m" goto-my-own-lisp-dir)
+;;    ("C-x G p" goto-my-elpa-lisp-dir)
+;;    ("C-x G a" goto-my-emacswiki-lisp-dir)
+;;    ("C-x G e" goto-my-emacs-dir)
+;;    ("C-x G h" goto-my-home-dir)
+;;    ("C-x G o" goto-my-org-source-dir)
+;;    ("C-x G t" goto-my-org-latex-dir)))
 
 (global-set-key (kbd "C-x K") (lambda ()
                                 (interactive)

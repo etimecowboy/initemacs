@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-06-07 Thu 20:16 xin on p5q>
+;; Time-stamp:<2012-06-12 Tue 22:02 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -73,10 +73,10 @@
 
 ;;---------------------------------------------------------------------
 ;;** Resize frame and window
-;; BUG: there is a bug in `fit-frame.el' or `thumb-frm.el' which causes
-;; info-mode reports an error when following a link. Have to load these
-;; two lisp files in order to fix it, whether it is in console mode or
-;; GUI mode.
+;; BUG: there is a bug in `fit-frame.el' or `thumb-frm.el' which
+;;      causes info-mode reports an error when following a link. Have
+;;      to load these two lisp files in order to fix it, whether it is
+;;      in console mode or GUI mode.
 (eval-after-load "fit-frame" '(fit-frame-settings))
 (eval-after-load "maxframe"  '(maxframe-settings))
 (require 'fit-frame)
@@ -85,37 +85,63 @@
 (require 'thumb-frm)
 (require 'maxframe) ;; NOTE: not stable with two or more monitors
 
+(eal-define-keys-commonly
+ global-map
+ `(;; `fit-frame.el'
+   ("S-<f5>" fit-frame)
+   ;;-----------------------------------
+   ;; `maxframe.el'
+   ("M-<f5>" maximize-frame)
+   ("M-S-<f5>" restore-frame)
+   ;;------------------------------------
+   ;; `windresize.el'
+   ("C-<f5>" windresize)))
+
 ;;====================================================================
 ;;* Window settings
 
 ;;** window-number
-;; (autoload 'window-number-mode "window-number"
-;;   "A global minor mode that enables selection of windows according to
-;; numbers with the C-x C-j prefix.  Another mode,
-;; `window-number-meta-mode' enables the use of the M- prefix." t)
-;; (autoload 'window-number-meta-mode "window-number"
-;;   "A global minor mode that enables use of the M- prefix to select
-;; windows, use `window-number-mode' to display the window numbers in
-;; the mode-line." t)
-;; (add-hook 'org-mode-hook
-;;           '(lambda ()
-;;              (window-number-meta-mode t)))
-(require 'window-number)
+(autoload 'window-number-mode "window-number"
+  "A global minor mode that enables selection of windows according to
+numbers with the C-x C-j prefix.  Another mode,
+`window-number-meta-mode' enables the use of the M- prefix." t)
+(autoload 'window-number-meta-mode "window-number"
+  "A global minor mode that enables use of the M- prefix to select
+windows, use `window-number-mode' to display the window numbers in
+the mode-line." t)
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (window-number-meta-mode 1)))
 (window-number-meta-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** windmove
-;; NOTE: not fast enough, use `window-number.el'
+;; NOTE: If not fast enough, use `window-number.el'
+;; NOTE: the default key bindings C-left/right/up/down conflicts
+;; with org-mode default key bindings.
 (eval-after-load "windmove" '(windmove-settings))
+
+(eal-define-keys-commonly
+ global-map
+ `(("C-S-<left>" windmove-left)
+   ("C-S-<right>" windmove-right)
+   ("C-S-<up>" windmove-up)
+   ("C-S-<down>" windmove-down)))
 
 ;;--------------------------------------------------------------------
 ;;** buffer-move
 ;; swap buffers without typing C-x b on each window
-;; (require 'buffer-move)
 (autoload 'buf-move-up "buffer-move" nil t)
 (autoload 'buf-move-down "buffer-move" nil t)
 (autoload 'buf-move-left "buffer-move" nil t)
 (autoload 'buf-move-right "buffer-move" nil t)
+
+(eal-define-keys-commonly
+ global-map
+ `(("M-S-<up>"    buf-move-up)
+   ("M-S-<down>"  buf-move-down)
+   ("M-S-<left>"  buf-move-left)
+   ("M-S-<right>" buf-move-right)))
 
 ;;--------------------------------------------------------------------
 ;;** Winner mode for window splits
@@ -123,6 +149,9 @@
 
 ;;--------------------------------------------------------------------
 ;;** Windresize
+(eal-define-keys-commonly
+ global-map
+ `(("C-<f5>" windresize)))
 
 ;;====================================================================
 ;;* Buffer settings
@@ -162,10 +191,10 @@
 (size-indication-mode 1) ;; Display the current location in the file
 (setq-default mode-line-buffer-identification
               (propertized-buffer-identification "%b"))
-;; (setq display-time-day-and-date t) ;; Display time and date
-;; (display-time-mode 1)
-;; (when is-after-emacs-23
-;;   (display-battery-mode -1)) ;; battery infomation is not necessary
+(setq display-time-day-and-date t) ;; Display time and date
+(display-time-mode 1)
+(when is-after-emacs-23
+  (display-battery-mode -1)) ;; battery infomation is not necessary
 
 ;;--------------------------------------------------------------------
 ;;** diminish
@@ -201,7 +230,7 @@
     (setq mode-line-modes my-default-mode-line-modes))
   (force-mode-line-update))
 ;; (my-modeline-format-toggle-minor-modes)
-(global-set-key (kbd "<f6> h") 'my-modeline-format-toggle-minor-modes)
+;; (global-set-key (kbd "<f6> h") 'my-modeline-format-toggle-minor-modes)
 
 ;;--------------------------------------------------------------------
 ;;** modeline-posn
@@ -255,23 +284,23 @@
 ;;** menu-bar
 (menu-bar-mode -1) ;; No menu bar as default
 
-;;*** menua-bar+
-(require 'menu-bar+)
+;; ;;*** menua-bar+
+;; (require 'menu-bar+)
 
-;;*** facemenu+
-;; This library enhances the "Text Properties" menu.  It adds menu
-;; items to the menu, and provides two different versions of the
-;; menu: one for the menu-bar Edit menu (`facemenu-menu') and one for
-;; the mouse popup menu (`facemenu-mouse-menu').  In standard library
-;; `facemenu.el', these two menus are the same.
-(require 'facemenu+)
+;; ;;*** facemenu+
+;; ;; This library enhances the "Text Properties" menu.  It adds menu
+;; ;; items to the menu, and provides two different versions of the
+;; ;; menu: one for the menu-bar Edit menu (`facemenu-menu') and one for
+;; ;; the mouse popup menu (`facemenu-mouse-menu').  In standard library
+;; ;; `facemenu.el', these two menus are the same.
+;; (require 'facemenu+)
 
 ;;--------------------------------------------------------------------
 ;;** tool-bar
 (tool-bar-mode -1)
 
-;;*** tool-bar+
-(require 'tool-bar+)
+;; ;;*** tool-bar+
+;; (require 'tool-bar+)
 
 ;;--------------------------------------------------------------------
 ;;** scroll-bar
@@ -304,7 +333,6 @@
 
 ;;====================================================================
 ;;* Point (cursor) settings
-
 (blink-cursor-mode 1)
 (setq x-stretch-cursor t)
 
@@ -312,7 +340,8 @@
 ;;** bar-cursor
 ;; 光标由方块变成一个小长条
 ;; (require 'bar-cursor)
-;; (bar-cursor-mode 1)
+(autoload 'bar-cursor-mode "bar-cursor" nil t)
+(bar-cursor-mode 1)
 
 ;;--------------------------------------------------------------------
 ;;** cursor-change
@@ -427,36 +456,36 @@
 ;;** doremi
 ;; (eval-after-load "icicles" `(doremi-settings))
 
-;;--------------------------------------------------------------------
-;;** palette
-;; emacs 的调色板
-(eval-after-load "palette"
-  '(progn
-     (palette-settings)
-     (eal-define-keys
-      'palette-mode-map
-      `(("j"     palette-down)
-        ("k"     palette-up)
-        ("h"     palette-left)
-        ("l"     palette-right)
-        ("J"     palette-down-quickly)
-        ("K"     palette-up-quickly)
-        ("H"     palette-left-quickly)
-        ("L"     palette-right-quickly)
-        ("r"     palette-face-restore-bg-fg)
-        ("f"     palette-set-face-changed-to-foreground)
-        ("b"     palette-set-face-changed-to-background)
-        ("B"     facemenup-face-bg-restore)
-        ("F"     facemenup-face-fg-restore)
-        ("d"     palette-disply-which-in-changine)
-        ("m"     palette-pick-background-at-point)
-        ("C"     palette-copy-current-color)
-        ("C-x k" palette-quit-restore-bg-fg)))))
-(eal-define-keys-commonly
- global-map
- `(("C-x P p" palette)
-   ("C-x P f" facemenup-palette-face-fg-at-point)
-   ("C-x P b" facemenup-palette-face-bg-at-point)))
+;; ;;--------------------------------------------------------------------
+;; ;;** palette
+;; ;; emacs 的调色板
+;; (eval-after-load "palette"
+;;   '(progn
+;;      (palette-settings)
+;;      (eal-define-keys
+;;       'palette-mode-map
+;;       `(("j"     palette-down)
+;;         ("k"     palette-up)
+;;         ("h"     palette-left)
+;;         ("l"     palette-right)
+;;         ("J"     palette-down-quickly)
+;;         ("K"     palette-up-quickly)
+;;         ("H"     palette-left-quickly)
+;;         ("L"     palette-right-quickly)
+;;         ("r"     palette-face-restore-bg-fg)
+;;         ("f"     palette-set-face-changed-to-foreground)
+;;         ("b"     palette-set-face-changed-to-background)
+;;         ("B"     facemenup-face-bg-restore)
+;;         ("F"     facemenup-face-fg-restore)
+;;         ("d"     palette-disply-which-in-changine)
+;;         ("m"     palette-pick-background-at-point)
+;;         ("C"     palette-copy-current-color)
+;;         ("C-x k" palette-quit-restore-bg-fg)))))
+;; (eal-define-keys-commonly
+;;  global-map
+;;  `(("C-x P p" palette)
+;;    ("C-x P f" facemenup-palette-face-fg-at-point)
+;;    ("C-x P b" facemenup-palette-face-bg-at-point)))
 
 ;;--------------------------------------------------------------------
 ;; rainbow-mode

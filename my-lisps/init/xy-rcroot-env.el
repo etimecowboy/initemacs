@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-08 Fri 21:37 xin on p5q>
+;; Time-stamp:<2012-06-12 Tue 22:25 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -52,14 +52,17 @@
 (Windows (setq w32-get-true-file-attributes nil))
 
 ;; Change default major mode of *scratch* buffer
-(setq initial-major-mode 'text-mode)
+;; (setq initial-major-mode 'text-mode)
 ;; Change default text in the *scratch* buffer
-(setq initial-scratch-message "")
+
+;; NOTE: a warnning message is nessary for emacs fans like me
+;; (setq initial-scratch-message "")
 
 ;;====================================================================
 ;;* Emacs generated customization
 
 (setq custom-file (concat my-init-lisp-path "/xy-rcroot-auto.el"))
+(load "xy-rcroot-auto")
 
 ;;====================================================================
 ;;* Search pathes
@@ -118,16 +121,18 @@
 
 ;;*** Small/single lisps installed
 
-;; Download from emacswiki, via `auto-install'
-(xy/load-autoload my-emacswiki-lisp-path)
-(message "* ---[ my local lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; NOTE: don't load all the emacswiki lisps, they might cause
+;; conflictions with other lisps
+;; ;; Download from emacswiki, via `auto-install'
+;; (xy/load-autoload my-emacswiki-lisp-path)
+;; (message "* ---[ my local lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; Seperately collected/downloaded lisps.
 (xy/load-autoload my-local-lisp-path)
-(message "* ---[ my local lisps installed at %ds ]---"
+(message "* ---[ my own lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))
@@ -217,13 +222,13 @@
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-;; REF: (@url :file-name "https://github.com/m2ym/fuzzy-el" :display "Git Source")
-;; NOTE: MUST before `auto-complete'
-(xy/load-autoload (concat my-local-lisp-path "/fuzzy-el"))
-(message "* ---[ fuzzy-el installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; ;; REF: (@url :file-name "https://github.com/m2ym/fuzzy-el" :display "Git Source")
+;; ;; NOTE: MUST before `auto-complete'
+;; (xy/load-autoload (concat my-local-lisp-path "/fuzzy-el"))
+;; (message "* ---[ fuzzy-el installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 ;; ;; REF: (@url :file-name "https://github.com/m2ym/popup-el" :display "Git Source")
 ;; ;; NOTE: MUST before `auto-complete'
@@ -346,7 +351,8 @@
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
 
-;; ;; REF: (@url :file-name "https://github.com/magit/magit" :display "Git Source")
+;; REF: (@url :file-name "https://github.com/magit/magit" :display "Git Source")
+;; NOTE: use ELPA package instead.
 ;; (xy/load-autoload (concat my-local-lisp-path "/magit"))
 ;; (message "* ---[ magit lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
@@ -361,12 +367,14 @@
                            (second *emacs-load-start*)))))
 
 ;; REF: (@url :file-name "http://www.dr-qubit.org/emacs.php#predictive" :display "Git Source")
-;; BUG: I have some connection problem with it.
-(xy/load-autoload (concat my-local-lisp-path "/predictive"))
-(message "* ---[ predictive lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
+;; NOTE: I have very slow git connection with it, then a git submodule
+;; is not possible
+;; NOTE: It makes emacs quite slow. I don't like it.
+;; (xy/load-autoload (concat my-local-lisp-path "/predictive"))
+;; (message "* ---[ predictive lisps installed at %ds ]---"
+;;          (destructuring-bind (hi lo ms) (current-time)
+;;            (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                            (second *emacs-load-start*)))))
 
 (add-to-list 'load-path "~/.emacs.d/themes")
 (xy/load-autoload "~/.emacs.d/themes")
@@ -675,7 +683,7 @@ Toggle keyboard command logging of whole emacs.
  ;; Use C-/ for Undo command
  (ibus-define-common-key ?\C-/ nil)
  ;; Change cursor color depending on IBus status
- (setq ibus-cursor-color '("cyan" "lightblue" "lightgreen")))
+ (setq ibus-cursor-color '("pink" "lightgreen" "lightblue")))
 
 ;;====================================================================
 ;;* Emacs lisp management中文设置无问题

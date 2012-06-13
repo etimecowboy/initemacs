@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2011-12-17 Sat 12:11 xin on P6T-WIN7>
+;; Time-stamp:<2012-06-11 Mon 23:22 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -44,21 +44,25 @@
   "settings for `yasnippet'."
   ;; 2011-07-29 yasnippet. Make the “yas/minor-mode”'s expansion
   ;; behavior to take input word including hyphen.
-  (setq yas/key-syntaxes '("w_" "w_." "^ ")) ; default is '("w" "w_"
-                                        ; "w_." "^ ") as of 2011-07-29
-  (setq yas/root-directory
-        (concat my-emacs-path "/yasnippet/snippets"))
+  ;; (setq yas/key-syntaxes '("w_" "w_." "^ ")) ; default is '("w" "w_"
+  ;;                                       ; "w_." "^ ") as of 2011-07-29
+  ;; (setq yas/root-directory
+  ;;       (concat my-emacs-path "/yasnippet/snippets"))
 
-  ;; A workaround is to inhibit flyspell overlays
-  ;; while the snippet is active:
-  (add-hook 'flyspell-incorrect-hook
-            #'(lambda (dummy1 dummy2 dymmy3)
-                (and yas/active-field-overlay
-                     (overlay-buffer yas/active-field-overlay))))
+  ;; (add-to-list 'yas/snippet-dirs "~/emacs/yasnippet/snippets")
+  (add-to-list 'yas/snippet-dirs
+  "~/.emacs.d/elpa/yasnippet-20120605/snippets")
 
-  ;; (yasnippet-unbind-trigger-key)
-  (add-hook 'after-save-hook 'yasnippet-reload-after-save)
-  (yas/load-directory yas/root-directory)
+  ;; ;; A workaround is to inhibit flyspell overlays
+  ;; ;; while the snippet is active:
+  ;; (add-hook 'flyspell-incorrect-hook
+  ;;           #'(lambda (dummy1 dummy2 dymmy3)
+  ;;               (and yas/active-field-overlay
+  ;;                    (overlay-buffer yas/active-field-overlay))))
+
+  ;; ;; (yasnippet-unbind-trigger-key)
+  ;; (add-hook 'after-save-hook 'yasnippet-reload-after-save)
+  ;; (yas/load-directory yas/root-directory)
 
   (message "* ---[ yasnippet configuration is complete ]---"))
 

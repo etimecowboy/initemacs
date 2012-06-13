@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
-;; Time-stamp:<2012-06-03 Sun 17:20 xin on p5q>
+;; Time-stamp:<2012-06-10 Sun 21:36 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -224,5 +224,15 @@
 (when (require 'edit-server nil t)
   (setq edit-server-new-frame nil)
   (edit-server-start))
+
+;;====================================================================
+;;* gist
+;; Github gist service
+;; Online code snippet for sharing and version controlling
+;; NOTE: Change the location of cache file (by pcache)
+(eval-after-load "pcache" '(pcache-settings))
+(global-set-key (kbd "C-x G c") 'gist-region-or-buffer)
+(global-set-key (kbd "C-x G p") 'gist-region-or-buffer-private)
+(global-set-key (kbd "C-x G l") 'gist-list)
 
 (provide 'xy-rcroot-net)
