@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-06-13 Wed 17:09 xin on p5q>
+;; Time-stamp:<2012-06-14 Thu 11:27 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -82,6 +82,8 @@
 (require 'fit-frame)
 (add-hook 'after-make-frame-functions 'fit-frame)
 (require 'autofit-frame)
+(add-hook 'temp-buffer-show-hook
+          'fit-frame-if-one-window 'append)
 (require 'thumb-frm)
 (require 'maxframe) ;; NOTE: not stable with two or more monitors
 

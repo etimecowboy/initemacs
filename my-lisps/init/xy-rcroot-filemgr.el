@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2012-06-12 Tue 23:46 xin on p5q>
+;; Time-stamp:<2012-06-14 Thu 13:47 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -112,6 +112,10 @@
 (eval-after-load "dired+" '(dired+-settings)) ;; dired大补
 ;; (require 'dired+)
 ;; (setq diredp-prompt-for-bookmark-prefix-flag nil)
+
+;; BUG: NOT work
+;; Pop up a sort menu when press `C-d' or `S-mouse2' in dired mode
+;; (eval-after-load "dired-sort-menu" '(dired-sort-menu-settings))
 
 (when window-system
   ;; image-dired

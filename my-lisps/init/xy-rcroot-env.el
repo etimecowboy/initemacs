@@ -124,7 +124,7 @@
 ;; NOTE: don't load all the emacswiki lisps, they might cause
 ;; conflictions with other lisps
 ;; ;; Download from emacswiki, via `auto-install'
-;; (xy/load-autoload my-emacswiki-lisp-path)
+(xy/load-autoload my-emacswiki-lisp-path)
 ;; (message "* ---[ my local lisps installed at %ds ]---"
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
