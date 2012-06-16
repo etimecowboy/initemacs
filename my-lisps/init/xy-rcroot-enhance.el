@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
-;; Time-stamp:<2012-06-12 Tue 21:16 xin on p5q>
+;; Time-stamp:<2012-06-16 Sat 07:27 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -288,7 +288,7 @@ from tradition chinese to simple chinese" t)
 (Windows
  (eval-after-load "rw-hunspell" '(rw-hunspell-settings))
  (eval-after-load "rw-ispell" '(rw-ispell-settings))
- (require 'rw-language-and-country-codes)
+ ;; (require 'rw-language-and-country-codes)
  (require 'rw-ispell)
  (require 'rw-hunspell))
 
