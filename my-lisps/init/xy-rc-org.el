@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-06-08 Fri 18:09 xin on p5q>
+;; Time-stamp:<2012-06-18 Mon 20:32 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings

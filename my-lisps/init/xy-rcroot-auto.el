@@ -7,7 +7,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/emacs/var/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/emacs/var/bookmark")
  '(initial-scratch-message ";; Emacs is a work TOOL other than a computer toy!
 ;; Playing with Emacs is fun, but your work in hand is MUCH MORE important!
 ;; Press \"C-c a p\" now to check your tasks today.

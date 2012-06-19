@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
-;; Time-stamp:<2012-06-11 Mon 23:22 xin on p5q>
+;; Time-stamp:<2012-06-18 Mon 21:25 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -50,8 +50,8 @@
   ;;       (concat my-emacs-path "/yasnippet/snippets"))
 
   ;; (add-to-list 'yas/snippet-dirs "~/emacs/yasnippet/snippets")
-  (add-to-list 'yas/snippet-dirs
-  "~/.emacs.d/elpa/yasnippet-20120605/snippets")
+  ;; (add-to-list 'yas/snippet-dirs
+  ;; "~/.emacs.d/elpa/yasnippet-20120605/snippets")
 
   ;; ;; A workaround is to inhibit flyspell overlays
   ;; ;; while the snippet is active:
@@ -63,6 +63,13 @@
   ;; ;; (yasnippet-unbind-trigger-key)
   ;; (add-hook 'after-save-hook 'yasnippet-reload-after-save)
   ;; (yas/load-directory yas/root-directory)
+
+  (setq yas/also-auto-indent-first-line t
+        yas/choose-keys-first t
+        yas/snippet-dirs '("~/emacs/yasnippet/snippets")
+        yas/snippet-revival t
+        yas/trigger-symbol " =>"
+        yas/use-menu 'abbreviate)
 
   (message "* ---[ yasnippet configuration is complete ]---"))
 

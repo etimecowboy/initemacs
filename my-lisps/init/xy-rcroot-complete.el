@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
-;; Time-stamp:<2012-06-12 Tue 15:38 xin on p5q>
+;; Time-stamp:<2012-06-18 Mon 20:38 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -151,10 +151,8 @@
      (eal-define-keys
       'ac-complete-mode-map
       `(("<return>"   nil)
-         ;; ("M-j"        ac-complete)
-         ;; ("<C-return>" ac-complete)
-         ;; ("M-n"        ac-next)
-         ;; ("M-p"        ac-previous)
+         ("C-n"        ac-next)
+         ("C-p"        ac-previous)
          ("<C-tab>"    auto-complete)))))
 ;; (autoload 'auto-complete-mode "auto-complete" "AutoComplete mode" t nil)
 (global-set-key (kbd "<f6> a") 'xy/ac-start)

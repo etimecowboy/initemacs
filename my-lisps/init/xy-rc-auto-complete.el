@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auto-complete.el'
-;; Time-stamp:<2012-06-12 Tue 15:35 xin on p5q>
+;; Time-stamp:<2012-06-18 Mon 20:39 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -54,7 +54,7 @@
         ac-dwim t
         ac-candidate-limit ac-menu-height
         ac-use-quick-help t
-        ac-quick-help-delay .5
+        ac-quick-help-delay 5.0
         ac-disable-faces nil)
 
   ;; (setq help-xref-following nil)
