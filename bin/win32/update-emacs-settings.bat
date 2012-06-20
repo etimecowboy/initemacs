@@ -1,7 +1,6 @@
 cd E:\xin\.emacs.d\my-lisps
 rm loaddefs*
-rm *.elc
 cd .\init
 rm loaddefs*
-rm *.elc
-emacs -nw --debug-init
+rm xy-rcroot-env.elc
+emacs --debug-init

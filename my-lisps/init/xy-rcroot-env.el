@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
-;; Time-stamp:<2012-06-13 Wed 17:55 xin on p5q>
+;; Time-stamp:<2012-06-20 Wed 18:03 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -56,13 +56,18 @@
 ;; Change default text in the *scratch* buffer
 
 ;; NOTE: a warnning message is nessary for emacs fans like me
-;; (setq initial-scratch-message "")
+(setq initial-scratch-message
+      ";; Emacs is a work TOOL other than a computer toy!
+;; Playing with Emacs is fun, but your work in hand is MUCH MORE important!
+;; Press \"C-c a p\" now to check your tasks today.
+;; GETTING THINGS DONE from now on!
+")
 
 ;;====================================================================
 ;;* Emacs generated customization
 
 (setq custom-file (concat my-init-lisp-path "/xy-rcroot-auto.el"))
-(load "xy-rcroot-auto")
+;; (load "xy-rcroot-auto")
 
 ;;====================================================================
 ;;* Search pathes
@@ -788,8 +793,8 @@ See `bypass-trash-in-function' for more information."
 ;;     (global-set-key (kbd "C-x C-c") 'xy/done)
 ;; ))
 ;; NOTE: emacsclient has not worked in Windows 7
-;; (Windows
-;;  (global-set-key (kbd "C-x C-c") 'xy/done))
+(Windows
+ (global-set-key (kbd "C-x C-c") 'xy/done))
 
 (global-set-key (kbd "C-x M-c") 'save-buffers-kill-emacs)
 

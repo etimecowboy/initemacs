@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
-;; Time-stamp:<2012-05-04 Fri 08:51 xin on XIN-PC>
+;; Time-stamp:<2012-06-20 Wed 09:11 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -313,7 +313,6 @@
               (lambda ()
                 (local-set-key "\C-c\M-o" 'org-mime-htmlize))))
 
-  (message "* ---[ mew configuration is complete ]---")
-)
+  (message "* ---[ mew configuration is complete ]---"))
 
 (provide 'xy-rc-mew)

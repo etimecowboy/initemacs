@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2012-06-10 Sun 09:14 xin on p5q>
+;; Time-stamp:<2012-06-20 Wed 09:28 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -26,7 +26,7 @@
 ;; This mode tries to work around this problem by storing and
 ;; restoring per-window positions for each buffer.
 (eval-after-load "winpoint" '(winpoint-settings))
-(require 'winpoint)
+(autoload 'window-point-remember-mode "winpoint" nil t)
 (window-point-remember-mode 1)
 
 ;;-----------------------------------------------------------------------

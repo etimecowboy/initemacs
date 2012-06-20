@@ -7,9 +7,9 @@
 ;; Copyright (C) 1999-2012, Drew Adams, all rights reserved.
 ;; Created: Fri Mar 19 15:58:58 1999
 ;; Version: 21.2
-;; Last-Updated: Thu Jun 14 08:15:25 2012 (-0700)
+;; Last-Updated: Tue Jun 19 13:12:52 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 5883
+;;     Update #: 5991
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/dired+.el
 ;; Keywords: unix, mouse, directories, diredp, dired
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -27,7 +27,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;    Extensions to Dired
+;;    Extensions to Dired.
 ;;
 ;;  This file extends functionalities provided by standard GNU Emacs
 ;;  files `dired.el', `dired-aux.el', and `dired-x.el'.
@@ -35,24 +35,33 @@
 ;;  Key bindings changed.  Menus redefined.  `diredp-mouse-3-menu'
 ;;  popup menu added.  New commands.  Some commands enhanced.
 ;;
+;;  All of the new functions, variables, and faces defined here have
+;;  the prefix `diredp-' (for Dired Plus) in their names.
+;;
 ;;  Additional suggested key bindings:
 ;;
 ;;    (define-key ctl-x-map   "d" 'diredp-dired-files)
 ;;    (define-key ctl-x-4-map "d" 'diredp-dired-files-other-window)
 ;;
-;;  Note: If you want a maximum or minimum fontification for Dired
-;;  mode, then customize option `font-lock-maximum-decoration'.  If
-;;  you want a different fontification level for Dired than for other
-;;  modes, you can do this too by customizing
+;;
+;;  Fontification Level
+;;  -------------------
+;;
+;;  If you want a maximum or minimum fontification for Dired mode,
+;;  then customize option `font-lock-maximum-decoration'.  If you want
+;;  a different fontification level for Dired than for other modes,
+;;  you can do this too by customizing
 ;;  `font-lock-maximize-decoration'.
 ;;
-;;  Note:
 ;;
-;;    Most of the commands (such as `C' and `M-g') that operate on
-;;    marked files have the added feature here that multiple `C-u' use
-;;    not the files that are marked or the next or previous N files,
-;;    but *all* of the files in the Dired buffer.  Just what "all"
-;;    files means changes with the number of `C-u', as follows:
+;;  Act on All Files
+;;  ----------------
+;;
+;;  Most of the commands (such as `C' and `M-g') that operate on the
+;;  marked files have the added feature here that multiple `C-u' use
+;;  not the files that are marked or the next or previous N files, but
+;;  *all* of the files in the Dired buffer.  Just what "all" files
+;;  means changes with the number of `C-u', as follows:
 ;;
 ;;    `C-u C-u'         - Use all files present, but no directories.
 ;;    `C-u C-u C-u'     - Use all files and dirs except `.' and `..'.
@@ -60,19 +69,131 @@
 ;;
 ;;    (More than four `C-u' act the same as two.)
 ;;
-;;    This feature can be particularly useful when you have a Dired
-;;    buffer with files from multiple directories.
+;;  This feature can be particularly useful when you have a Dired
+;;  buffer with files chosen from multiple directories.
 ;;
-;;    Note that this behavior is described only in the doc string of
-;;    function `dired-get-marked-files'.  It is *not* described in the
-;;    doc strings of the various commands, because that would require
-;;    redefining each command separately here.  Instead, we redefine
-;;    only macro `dired-map-over-marks' and function
-;;    `dired-get-filename' in order to achieve this effect.
+;;  Note that this behavior is described only in the doc string of
+;;  function `dired-get-marked-files'.  It is *not* described in the
+;;  doc strings of the various commands, because that would require
+;;  redefining each command separately here.  Instead, we redefine
+;;  only macro `dired-map-over-marks' and function
+;;  `dired-get-filename' in order to achieve this effect.
 ;;
 ;;
-;;  All new functions, variables, and faces defined here have the
-;;  prefix `diredp-' (for Dired Plus) in their names.
+;;  Act on Marked (or All) Files Here and Below
+;;  -------------------------------------------
+;;
+;;  The prefix argument behavior just described does not apply to the
+;;  `diredp-*-recursive' commands.  These commands act on the marked
+;;  files in the current Dired buffer or on all files in the directory
+;;  if none are marked.
+;;
+;;  But these commands also handle marked subdirectories recursively,
+;;  in the same way.  That is, they act also on the marked files in
+;;  any marked subdirectories, found recursively.  If there is no
+;;  Dired buffer for a given marked subdirectory then all of its files
+;;  and subdirs are acted on.
+;;
+;;  With a prefix argument, all marks are ignored.  The commands act
+;;  on all files in the current Dired buffer and all of its
+;;  subdirectories, recursively.
+;;
+;;  All of the `diredp-*-recursive' commands are on prefix key `M-+',
+;;  and they are available on submenu `Marked Here and Below' of the
+;;  `Multiple' menu-bar menu.
+;;
+;;  If you use library `Icicles' then you have these additional
+;;  commands/keys that act recursively on marked files.  They are in
+;;  the `Icicles' submenu of menu `Multiple' > `Marked Here and
+;;  Below'.
+;;
+;;  * `M-+ M-s M-s' or `M-s M-s m' - Use Icicles search (and its
+;;                  on-demand replace) on the marked files.
+;;
+;;  * Save the names of the marked files:
+;;
+;;    `M-+ C-M->' - Save as a completion set, for use during
+;;                  completion (e.g. with `C-x C-f').
+;;
+;;    `M-+ C->'   - Add marked names to the names in the current saved
+;;                  completion set.
+;;
+;;    `M-+ C-}'   - Save persistently to an Icicles cache file, for
+;;                  use during completion in another session.
+;;
+;;    `icicle-dired-save-marked-to-fileset-recursive' - Like `M-+
+;;                  C-}', but save persistently to an Emacs fileset.
+;;
+;;    `M-+ C-M-}' - Save to a Lisp variable.
+;;
+;;
+;;  In the other direction, if you have a saved set of file names then
+;;  you can use `C-M-<' (`icicle-dired-chosen-files-other-window') in
+;;  Dired to open a Dired buffer for just those files.  So you can
+;;  mark some files and subdirs in a hierarchy of Dired buffers, use
+;;  `M-+ C-}' to save their names persistently, then later use `C-{'
+;;  to retrieve them, and `C-M-<' (in Dired) to open Dired on them.
+;;
+;;
+;;  Inserted Subdirs, Multiple Dired Buffers, Files from Anywhere,...
+;;  -----------------------------------------------------------------
+;;
+;;  These two standard Dired features are worth pointing out:
+;;
+;;  * You can insert multiple subdirectory listings into a single
+;;    Dired buffer using `i' on each subdir line.  Use `C-u i' to
+;;    specify `ls' switches.  Specifying switch `R' inserts the
+;;    inserted subdirectory's subdirs also, recursively.  You can also
+;;    use `i' to bounce between a subdirectory line and its
+;;    inserted-listing header line.  You can delete a subdir listing
+;;    using `C-u k' on its header line.  You can hide/show an inserted
+;;    subdir using `$' and `M-$'.  You can use `C-_' to undo any of
+;;    these operations.
+;;
+;;  * You can open a Dired buffer for an arbitrary set of files, from
+;;    different directories.
+;;
+;;    First, you can pass a glob pattern with wildcards to `dired'
+;;    interactively, as the file name.
+;;
+;;    Beyond that, you can invoke `dired' non-interactively, passing
+;;    it a cons of buffer name and file names.  Relative file names
+;;    are interpreted relative to the value of `default-directory'.
+;;    Use absolute file names if appropriate.
+;;
+;;  Some other libraries, such as `Bookmark+' and `Icicles', make it
+;;  easy to create or re-create Dired buffers that list specific files
+;;  and have a particular set of markings.  This can be handy for
+;;  using Dired buffers to manage projects.  In such use cases you
+;;  might have multiple Dired buffers that have quite specific
+;;  contents and that you want to keep around during a session.
+;;
+;;  This is one motivation for the Dired+ `diredp-*-recursive'
+;;  commands, which act on the marked files in marked subdirectories,
+;;  recursively.  In one sense these commands are an alternative to
+;;  using a single Dired buffer with inserted subdirectories.  They
+;;  let you use the same operations on the files in a set of Dired
+;;  directories, without inserting those directories into an ancestor
+;;  Dired buffer.
+;;
+;;  So you might have some subdirectories inserted in the same Dired
+;;  buffer, and you might have separate Dired buffers for some
+;;  subdirectories.  Sometimes it is useful to have both for the same
+;;  subdirectory.  And sometimes it is useful to move from one
+;;  presentation to the other.
+;;
+;;  You can use command `diredp-dired-inserted-subdirs' to open a
+;;  separate Dired buffer for each of the subdirs that is inserted in
+;;  the current Dired buffer.  Markings and Dired switches are
+;;  preserved.
+;;
+;;  In the opposite direction, if you use `Icicles' then you can use
+;;  multi-command `icicle-dired-insert-as-subdir', which lets you
+;;  insert any number of directories you choose interactively into a
+;;  Dired ancestor directory listing.  If a directory you choose to
+;;  insert already has its own Dired buffer, then its markings and
+;;  switches are preserved for the new, subdirectory listing in the
+;;  ancestor Dired buffer.
 ;;
 ;;
 ;;  Options defined here:
@@ -2083,7 +2204,7 @@ If HDR is non-nil, insert a header line with the directory name."
   '(menu-item "Dired (Filter via Wildcards)..." dired
     :help "Explore a directory (you can provide wildcards)"))
 (define-key diredp-menu-bar-subdir-menu [revert]
-  '(menu-item "Refresh (Sync & Show All)" revert-buffer :help "Update directory contents"))
+  '(menu-item "Refresh (Sync \& Show All)" revert-buffer :help "Update directory contents"))
 
 ;; On Windows, bind more.
 (eval-after-load "w32-browser"
