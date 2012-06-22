@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-06-19 Tue 16:16 xin on p5q>
+;; Time-stamp:<2012-06-21 Thu 07:36 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -60,6 +60,18 @@
 ;; ;;         (:eval (system-name))
 ;; ;;         ":"
 ;; ;;         (:eval (or (buffer-file-name) (buffer-name)))))
+
+(setq frame-title-format
+      '("%b"
+        (:eval
+         (if (buffer-file-name)
+             (concat " (" (directory-file-name
+                           (file-name-directory
+                            (abbreviate-file-name
+                             (buffer-file-name))))
+                     ")")
+           ""))
+        " - Emacs"))
 
 ;;--------------------------------------------------------------------
 ;;** Transparent frame

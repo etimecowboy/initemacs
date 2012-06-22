@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
-;; Time-stamp:<2012-06-20 Wed 09:28 xin on XIN-PC>
+;; Time-stamp:<2012-06-21 Thu 07:34 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -132,4 +132,4 @@
 
 (provide 'xy-rcroot-session)
 
-;; This is the last place to load emacs
+;; NOTE: This is the last root configuration file to load
