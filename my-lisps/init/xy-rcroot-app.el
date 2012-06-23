@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
-;; Time-stamp:<2012-06-21 Thu 07:36 xin on XIN-PC>
+;; Time-stamp:<2012-06-23 Sat 16:10 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Emacs apparence
@@ -343,18 +343,14 @@ the mode-line." t)
 ;; tab style buffer switch
 ;; (require 'tabbar)
 ;; (tabbar-mode 1)
-;; (global-set-key (kbd "C-+") 'tabbar-forward-group)
-;; (global-set-key (kbd "C-_") 'tabbar-backward-group)
-;; (global-set-key (kbd "C-=") 'tabbar-forward)
-;; (global-set-key (kbd "C--") 'tabbar-backward)
 ;; (setq tabbar-cycling-scope (quote tabs))
 ;; (setq tabbar-cycling-scope nil)
 
 ;;*** tabbar-ruler
-;; (setq EmacsPortable-global-tabbar 't) ; If you want tabbar
-;; (setq EmacsPortable-global-ruler 't) ; if you want a global ruler
-;; (setq EmacsPortable-popup-menu 't) ; If you want a popup menu.
-;; (setq EmacsPortable-popup-toolbar 't) ; If you want a popup toolbar
+;; (setq tabbar-ruler-global-tabbar 't) ; If you want tabbar
+;; (setq tabbar-ruler-global-ruler 't) ; if you want a global ruler
+;; (setq tabbar-ruler-popup-menu 't) ; If you want a popup menu.
+;; (setq tabbar-ruler-popup-toolbar 't) ; If you want a popup toolbar
 ;; (require 'tabbar-ruler)
 
 ;;====================================================================

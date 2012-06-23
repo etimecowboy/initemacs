@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads (session-initialize) "session" "session.el" (20435
-;;;;;;  61488))
+;;;### (autoloads (session-initialize) "session" "session.el" (20453
+;;;;;;  27423))
 ;;; Generated autoloads from session.el
 
 (autoload 'session-initialize "session" "\
@@ -17,7 +17,7 @@ this function to `after-init-hook'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("session-pkg.el") (20435 61488 155699))
+;;;### (autoloads nil nil ("session-pkg.el") (20453 27423 984000))
 
 ;;;***
 
