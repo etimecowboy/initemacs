@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads (bmkp-version) "bookmark+" "bookmark+.el" (20447
-;;;;;;  7833))
+;;;### (autoloads (bmkp-version) "bookmark+" "bookmark+.el" (20454
+;;;;;;  25220))
 ;;; Generated autoloads from bookmark+.el
 
 (defconst bmkp-version-number "3.4.1")
@@ -106,7 +106,7 @@ Show version number of library `bookmark+.el'.
 ;;;;;;  bmkp-autoname-format bmkp-autoname-bookmark-function bmkp-auto-idle-bookmark-mode-set-function
 ;;;;;;  bmkp-auto-idle-bookmark-mode-lighter bmkp-auto-idle-bookmark-mode-delay
 ;;;;;;  bmkp-auto-idle-bookmark-min-distance) "bookmark+-1" "bookmark+-1.el"
-;;;;;;  (20447 7833))
+;;;;;;  (20454 25220))
 ;;; Generated autoloads from bookmark+-1.el
 
 (defvar bmkp-auto-idle-bookmark-min-distance 1000 "\
@@ -2352,7 +2352,7 @@ Non-interactively:
 ;;;;;;  bookmark-bmenu-list bookmark-bmenu-delete-backwards bookmark-bmenu-delete
 ;;;;;;  bookmark-bmenu-unmark bookmark-bmenu-mark bmkp-bmenu-image-bookmark-icon-file
 ;;;;;;  bmkp-bmenu-state-file bmkp-bmenu-commands-file bmkp-bmenu-omitted-bookmarks)
-;;;;;;  "bookmark+-bmu" "bookmark+-bmu.el" (20447 7833))
+;;;;;;  "bookmark+-bmu" "bookmark+-bmu.el" (20454 25220))
 ;;; Generated autoloads from bookmark+-bmu.el
 
 (defvar bmkp-bmenu-omitted-bookmarks nil "\
@@ -3392,7 +3392,7 @@ Pop-up menu on `mouse-3' for a bookmark listed in `*Bookmark List*'.
 ;;;;;;  bmkp-light-threshold bmkp-light-style-non-autonamed bmkp-light-style-autonamed
 ;;;;;;  bmkp-light-priorities bmkp-auto-light-when-set bmkp-auto-light-when-jump
 ;;;;;;  bmkp-auto-light-relocate-when-jump-flag) "bookmark+-lit"
-;;;;;;  "bookmark+-lit.el" (20447 7833))
+;;;;;;  "bookmark+-lit.el" (20454 25220))
 ;;; Generated autoloads from bookmark+-lit.el
 
 (defvar bmkp-auto-light-relocate-when-jump-flag t "\
@@ -3722,7 +3722,7 @@ See `bmkp-next-lighted-this-buffer-repeat'.
 ;;;### (autoloads (bmkp-menu-bar-make-toggle bmkp-define-file-sort-predicate
 ;;;;;;  bmkp-define-sort-command bmkp-define-next+prev-cycle-commands
 ;;;;;;  bmkp-define-cycle-command bmkp-with-output-to-plain-temp-buffer)
-;;;;;;  "bookmark+-mac" "bookmark+-mac.el" (20447 7833))
+;;;;;;  "bookmark+-mac" "bookmark+-mac.el" (20454 25220))
 ;;; Generated autoloads from bookmark+-mac.el
 
 (autoload 'bmkp-with-output-to-plain-temp-buffer "bookmark+-mac" "\
@@ -3796,7 +3796,7 @@ setting the variable and displaying a status message (not MESSAGE).
 ;;;***
 
 ;;;### (autoloads nil nil ("bookmark+-chg.el" "bookmark+-doc.el"
-;;;;;;  "bookmark+-key.el" "bookmark+-pkg.el") (20447 7834 126390))
+;;;;;;  "bookmark+-key.el" "bookmark+-pkg.el") (20454 25220 328000))
 
 ;;;***
 

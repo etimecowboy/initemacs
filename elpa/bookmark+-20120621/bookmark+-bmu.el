@@ -7,9 +7,9 @@
 ;; Copyright (C) 2000-2012, Drew Adams, all rights reserved.
 ;; Copyright (C) 2009, Thierry Volpiatto, all rights reserved.
 ;; Created: Mon Jul 12 09:05:21 2010 (-0700)
-;; Last-Updated: Fri Jun 15 11:16:24 2012 (-0700)
+;; Last-Updated: Thu Jun 21 10:21:49 2012 (-0700)
 ;;           By: dradams
-;;     Update #: 2176
+;;     Update #: 2185
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/bookmark+-bmu.el
 ;; Keywords: bookmarks, bookmark+, placeholders, annotations, search, info, url, w3m, gnus
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x
@@ -136,7 +136,8 @@
 ;;    `bmkp-bmenu-mark-url-bookmarks',
 ;;    `bmkp-bmenu-mark-variable-list-bookmarks',
 ;;    `bmkp-bmenu-mark-w3m-bookmarks', `bmkp-bmenu-mouse-3-menu',
-;;    `bmkp-bmenu-mode-status-help', `bmkp-bmenu-omit',
+;;    `bmkp-bmenu-mode-status-help',
+;;    `bmkp-bmenu-nb-marked-in-mode-name', `bmkp-bmenu-omit',
 ;;    `bmkp-bmenu-omit-marked', `bmkp-bmenu-omit/unomit-marked',
 ;;    `bmkp-bmenu-paste-add-tags',
 ;;    `bmkp-bmenu-paste-add-tags-to-marked',
@@ -325,7 +326,11 @@
 (defalias 'bmkp-bookmark-name-from-record 'bookmark-name-from-full-record)
 
 
-(require 'bookmark+-mac) ;; bmkp-define-sort-command, bmkp-with-output-to-plain-temp-buffer
+(or (condition-case nil
+        (load-library "bookmark+-mac")  ; Use load-library to ensure latest .elc.
+      (error nil))
+    (require 'bookmark+-mac))           ; Require, so can load separately if not on `load-path'.
+;; bmkp-define-sort-command, bmkp-with-output-to-plain-temp-buffer
 
 (put 'bmkp-with-output-to-plain-temp-buffer 'common-lisp-indent-function '(4 &body))
 
@@ -3744,12 +3749,14 @@ Autosave bookmarks:\t%s\nAutosave list display:\t%s\n\n\n"
             (when (and (fboundp 'display-images-p)  (display-images-p)
                        bmkp-bmenu-image-bookmark-icon-file
                        (file-readable-p bmkp-bmenu-image-bookmark-icon-file))
-              (insert "  ") (insert-image (create-image bmkp-bmenu-image-bookmark-icon-file nil nil :ascent 95))
+              (insert "  ")
+              (insert-image (create-image bmkp-bmenu-image-bookmark-icon-file nil nil :ascent 95))
               (insert " Image file\n"))
-            (insert "  " gnus) (insert "  " info) (insert "  " man) (insert "  " url) (insert "  " local-no-region)
-            (insert "  " local-w-region) (insert "  " no-file) (insert "  " buffer) (insert "  " no-buf)
-            (insert "  " remote) (insert "  " sudo) (insert "  " local-dir) (insert "  " file-handler)
-            (insert "  " bookmark-list) (insert "  " bookmark-file) (insert "  " desktop) (insert "  " sequence)
+            (insert "  " gnus) (insert "  " info) (insert "  " man) (insert "  " url)
+            (insert "  " local-no-region) (insert "  " local-w-region) (insert "  " no-file)
+            (insert "  " buffer) (insert "  " no-buf) (insert "  " remote) (insert "  " sudo)
+            (insert "  " local-dir) (insert "  " file-handler) (insert "  " bookmark-list)
+            (insert "  " bookmark-file) (insert "  " desktop) (insert "  " sequence)
             (insert "  " variable-list) (insert "  " function) (insert "  " bad)
             (insert "\n\nKeys without prefix `C-x' are available only here (`*Bookmark List*').\n")
             (insert "Keys with prefix `C-x' are available everywhere.\n\n")
@@ -4212,6 +4219,59 @@ the same name."
   "Return a list with elements `face' or `font-lock-face' and VALUE.
 Starting with Emacs 22, the first element is `font-lock-face'."
   (list (if (> emacs-major-version 21) 'font-lock-face 'face) value))
+
+(when (> emacs-major-version 21)
+  (defun bmkp-bmenu-nb-marked-in-mode-name ()
+    "Add number of marked and flagged lines to mode name in the mode line.
+\(Flagged means flagged for deletion.)
+If the current line is marked/flagged and there are others
+marked/flagged after it then show `N/M', where N is the number
+marked/flagged through the current line and M is the total number
+marked/flagged."
+    (setq mode-name
+          `(,mode-name
+            (:eval (let* ((marked-regexp   "^>")
+                          (nb-marked       (count-matches marked-regexp
+                                                          (point-min) (point-max))))
+                     (if (not (> nb-marked 0))
+                         ""
+                       (propertize
+                        (format " %s%d>"
+                                (save-excursion
+                                  (forward-line 0)
+                                  (if (looking-at (concat marked-regexp ".*"))
+                                      (format "%d/" (1+ (count-matches marked-regexp
+                                                                       (point-min) (point))))
+                                    ""))
+                                nb-marked)
+                        'face 'bmkp-mode-line-marked))))
+            (:eval (let* ((flagged-regexp  "^D")
+                          (nb-flagged      (count-matches flagged-regexp
+                                                          (point-min) (point-max))))
+                     (if (not (> nb-flagged 0))
+                         ""
+                       (propertize
+                        (format " %s%dD"
+                                (save-excursion
+                                  (forward-line 0)
+                                  (if (looking-at (concat flagged-regexp ".*"))
+                                      (format "%d/" (1+ (count-matches flagged-regexp
+                                                                       (point-min) (point))))
+                                    ""))
+                                nb-flagged)
+                        'face 'bmkp-mode-line-flagged)))))))
+
+  (defface bmkp-mode-line-marked
+      '((t (:inherit 'bmkp->-mark)))
+    "*Face for marked number in mode line `mode-name' for Dired buffers."
+    :group 'bookmark-plus :group 'font-lock-highlighting-faces)
+
+  (defface bmkp-mode-line-flagged
+      '((t (:foreground "Red")))
+    "*Face for flagged number in mode line `mode-name' for Dired buffers."
+    :group 'bookmark-plus :group 'font-lock-highlighting-faces)
+
+  (add-hook 'bookmark-bmenu-mode-hook 'bmkp-bmenu-nb-marked-in-mode-name))
 
 
 ;;(@* "Sorting - Commands")
