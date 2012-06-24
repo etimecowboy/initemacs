@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-filemgr.el'
-;; Time-stamp:<2012-06-14 Thu 13:47 xin on p5q>
+;; Time-stamp:<2012-06-24 Sun 20:31 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  File management packages settings
@@ -122,6 +122,11 @@
   (eval-after-load "image-dired" '(image-dired-settings))
   ;; thumbs, Thumbnails previewer for images files
   (eval-after-load "thumbs" '(thumbs-settings)))
+
+;;--------------------------------------------------------------------
+;; ** w32-browser
+(Windows
+ (try-require 'w32-browser))
 
 ;;--------------------------------------------------------------------
 ;;** Sunrise commander; file manager
