@@ -5,14 +5,15 @@ This is my Emacs configuration with various collected lisps.
 * Installation
 
 1. Clone the repository to ".emacs.d/" in your HOME directory.
-2. Un-compress the `cedet.zip' in the "/lisps" folder.
-3. Enter the "/lisp/cedet" folder, and run
+2. Un-compress the `~/backup/cedet.zip' to the "/lisps" folder.
+3. Enter the "~/.emacs.d/lisp/cedet" folder, and run
      "Emacs -nw -Q -l cedet-build.el -f cedet-build"
    in the terminal to install the cedet package.
-4. Run Emacs, you will get Errors, but don't afraid of it.
-5. "M-x xy/emacs-build" serveral times in the Emacs that you 
+4. Un-compress the `~/.emacs.d/backup/elpa.zip' to the  "~/.emacs.d" folder.
+5. Run Emacs, you will get Errors, but don't afraid of it.
+6. "M-x xy/emacs-build" serveral times in the Emacs that you 
    just opened.
-6. Restart Emacs.
+7. Restart Emacs.
 
 * Maintain
 

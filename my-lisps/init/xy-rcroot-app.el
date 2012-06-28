@@ -135,9 +135,9 @@ numbers with the C-x C-j prefix.  Another mode,
   "A global minor mode that enables use of the M- prefix to select
 windows, use `window-number-mode' to display the window numbers in
 the mode-line." t)
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (window-number-meta-mode 1)))
+;; (add-hook 'org-mode-hook
+;;           '(lambda ()
+;;              (window-number-meta-mode 1)))
 (window-number-meta-mode 1)
 
 ;;--------------------------------------------------------------------
