@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-06-18 Mon 20:32 xin on p5q>
+;; Time-stamp:<2012-07-01 Sun 01:02 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -969,7 +969,7 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
   (setq org-publish-use-timestamps-flag t)
 
 ;; List of projects
-;; http://192.168.1.100/  (local website)
+;; http://127.0.0.1/  (localhost)
 ;; local-org are the org-files that generate the content
 ;; local-extra are images and css files that need to be included
 ;; local is the top-level project that gets published
@@ -1015,8 +1015,8 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
               :tables t
               :table-auto-headline t
               :style-include-default t
-              :style "<link rel=\"stylesheet\" href=\"http://192.168.1.100/org/stylesheets/org.css\" type=\"text/css\">"
-              ;;            :style-extra "<link rel=\"stylesheet\" href=\"http://192.168.1.100/stylesheets/org.css\" type=\"text/css\" />"
+              :style "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://dl.dropbox.com/u/7817597/stylesheets/org.css\">"
+              ;;            :style-extra "<link rel=\"stylesheet\" href=\"http://127.0.0.1/stylesheets/org.css\" type=\"text/css\" />"
               :convert-org-links t
               :inline-images t
               ;;            :html-extension
@@ -1024,7 +1024,8 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
               ;;            :html-table-tag
               :expand-quoted-html t
               :timestamp t
-              :publishing-directory "/ftp:nobody@192.168.1.100:/org/"
+              ;; :publishing-directory "/ftp:xin@127.0.0.1:/org/"
+              :publishing-directory "~/emacs/org/html/"
               ;;            :preamble
               ;;            :postamble
               ;;            :auto-preamble
@@ -1047,7 +1048,8 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
              ("local-extra"
               :base-directory "~/emacs/org/source/"
               :base-extension "css\\|pdf\\|png\\|jpg\\|gif\\|CSS\\|PDF\\|PNG\\|JPG\\|GIF\\|c\\|C\\|m\\|M\\|vhd\\|VHD\\|v\\|V\\|cpp\\|CPP"
-              :publishing-directory "/ftp:nobody@192.168.1.100:/org/"
+              ;; :publishing-directory "/ftp:xin@127.0.0.1:/org/"
+              :publishing-directory "~/emacs/org/html/"
               :publishing-function org-publish-attachment
               :recursive t
               :author nil
@@ -1055,7 +1057,8 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
              ("local-addon"
               :base-directory "~/emacs/org/addon/"
               :base-extension "css\\|pdf\\|png\\|jpg\\|gif\\|CSS\\|PDF\\|PNG\\|JPG\\|GIF"
-              :publishing-directory "/ftp:nobody@192.168.1.100:/org/"
+              ;; :publishing-directory "/ftp:xin@127.0.0.1:/org/"
+              :publishing-directory "~/emacs/org/html/"
               :publishing-function org-publish-attachment
               :recursive t
               :author nil
@@ -1105,8 +1108,8 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
               :tables t
               :table-auto-headline t
               ;;            :style-include-default t
-              ;;            :style "<link rel=\"stylesheet\" href=\"http://192.168.1.100/org/stylesheets/org.css\" type=\"text/css\">"
-              ;;            :style-extra "<link rel=\"stylesheet\" href=\"http://192.168.1.100/stylesheets/org.css\" type=\"text/css\" />"
+              ;;            :style "<link rel=\"stylesheet\" href=\"https://dl.dropbox.com/u/7817597/stylesheets/org.css\" type=\"text/css\">"
+              ;;            :style-extra "<link rel=\"stylesheet\" href=\"http://127.0.0.1/stylesheets/org.css\" type=\"text/css\" />"
               :convert-org-links t
               :inline-images t
               ;;            :html-extension

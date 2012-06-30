@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-06-20 Wed 09:55 xin on XIN-PC>
+;; Time-stamp:<2012-06-30 Sat 09:23 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1330,7 +1330,7 @@ The process is:
 (defun xy/done ()
   "Make Emacs frame invisible, just like the `emacs --daemon'"
   (interactive)
-  (save-some-buffers)
+  (save-some-buffers) ;; Save edited buffers first!
   (server-edit)
   (make-frame-invisible nil t))
 
