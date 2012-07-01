@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-06-30 Sat 09:23 xin on XIN-PC>
+;; Time-stamp:<2012-07-01 Sun 08:15 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1333,6 +1333,16 @@ The process is:
   (save-some-buffers) ;; Save edited buffers first!
   (server-edit)
   (make-frame-invisible nil t))
+
+;;--------------------------------------------------------------------
+;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
+;;;###autoload
+(defun xy/toggle-full-screen ()
+  "Toggles full-screen mode for Emacs window on Win32."
+  (interactive)
+  (Windows ;; NOTE: Put `emacs_fullscreen.exe'in your $PATH, such as
+           ;;       your `emacs.exe' folder.
+   (shell-command "emacs_fullscreen.exe")))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload
