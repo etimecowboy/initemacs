@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
+;; Time-stamp: <2012-07-01 Sun 23:38 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-winpoint.el'
-;; Time-stamp:<2011-12-11 Sun 21:19 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,7 +20,6 @@
 (defun winpoint-settings ()
   "Settings of `winpoint.el'."
   (setq winpoint-non-restore-buffer-list '("*Group*"))
-  (message "* ---[ winpoint configuration is complete ]---")
-)
+  (message "* ---[ winpoint configuration is complete ]---"))
 
 (provide 'xy-rc-winpoint)

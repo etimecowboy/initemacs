@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
+;; Time-stamp: <2012-07-01 Sun 23:33 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
-;; Time-stamp:<2012-07-01 Sun 01:02 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  Org mode settings
@@ -67,7 +67,10 @@ If html-file-name is not given, read it from minibuffer."
       ;; check file
       (if (or (not (file-exists-p html-file))
               (file-directory-p html-file)
-              (not (string-match ".+\\.html" html-file)))
+              (not (or (string-match ".+\\.html" html-file)
+                       (string-match ".+\\.HTML" html-file)
+                       (string-match ".+\\.htm" html-file)
+                       (string-match ".+\\.HTM" html-file))))
           (error "Error: %s is not a valid filename" html-file)
         (save-excursion
           (with-current-buffer
@@ -297,9 +300,9 @@ If html-file-name is not given, read it from minibuffer."
   ;; REF: (@url :file-name "http://thread.gmane.org/gmane.emacs.orgmode/21402/focus=21413" :display "orgmode mail-list")
   ;; BUG: `state' variable is not recognised
   ;; TODO: waiting for a after-schedule-hook in future release.
+  ;; Automaticaly remove the scheduled date/time after
   (add-hook 'org-after-todo-state-change-hook
             '(lambda ()
-               ;; Automaticaly remove the scheduled date/time after
                ;; change the state to SOMEDAY
                (if (string= org-state "SOMEDAY") (org-schedule t))
                ;; Automatically schedule the task to today after change

@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
+;; Time-stamp: <2012-07-01 Sun 23:25 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cc-mode.el'
-;; Time-stamp:<2012-06-06 Wed 15:39 xin on p5q>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Description:  My C/C++/Java development settings

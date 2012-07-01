@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
+;; Time-stamp: <2012-07-01 Sun 23:37 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
-;; Time-stamp:<2012-07-01 Sun 08:15 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -1342,7 +1342,7 @@ The process is:
   (interactive)
   (Windows ;; NOTE: Put `emacs_fullscreen.exe'in your $PATH, such as
            ;;       your `emacs.exe' folder.
-   (shell-command "emacs_fullscreen.exe")))
+   (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe")))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload

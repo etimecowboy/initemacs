@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
+;; Time-stamp: <2012-07-01 Sun 23:32 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-maxframe.el'
-;; Time-stamp:<2012-05-04 Fri 08:50 xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,6 @@
   (UKDesktop
    (setq mf-max-width 1280)  ;; Pixel width of main monitor
    )
-  (message "* ---[ maxframe configuration is complete ]---")
-)
+  (message "* ---[ maxframe configuration is complete ]---"))
 
 (provide 'xy-rc-maxframe)

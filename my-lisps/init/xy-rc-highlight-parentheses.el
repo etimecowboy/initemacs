@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
+;; Time-stamp: <2012-07-01 Sun 23:30 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-highlight-parentheses.el'
-;; Time-stamp:<2011-12-04 Sun 16:58 xin on P6T-WIN7>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -22,7 +22,6 @@
   ;;Test: (((((((((((((())))))))))))))
   (setq hl-paren-colors '("red" "magenta" "orange" "yellow" "green"
                           "cyan" "blue"))
-  (message "* ---[ highlight-parentheses configuration is complete ]---")
-)
+  (message "* ---[ highlight-parentheses configuration is complete ]---"))
 
 (provide 'xy-rc-highlight-parentheses)
