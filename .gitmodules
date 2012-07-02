@@ -16,3 +16,6 @@
 [submodule "lisps/org-html5presentation"]
 	path = lisps/org-html5presentation
 	url = git://gist.github.com/509761.git
+[submodule "lisps/o-blog"]
+	path = lisps/o-blog
+	url = https://github.com/renard/o-blog.git
