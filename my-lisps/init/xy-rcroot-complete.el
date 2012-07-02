@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:41 by xin on XIN-PC>
+;; Time-stamp: <2012-07-02 Mon 16:17 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
 ;; Author:       Xin Yang
@@ -150,7 +150,7 @@
      ;; 必须要干掉补全菜单, 很麻烦, 用M-j来执行`ac-complete'
      (eal-define-keys
       'ac-complete-mode-map
-      `(("<return>"   nil)
+      `(("<return>"    nil)
          ("C-n"        ac-next)
          ("C-p"        ac-previous)
          ("<C-tab>"    auto-complete)))))
