@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:33 by xin on XIN-PC>
+;; Time-stamp: <2012-07-02 Mon 20:17 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
 ;; Author:       Xin Yang
@@ -935,11 +935,6 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
   ;;                                  (delete-frame)))
 
   ;;==================================================================
-  ;; HTML5 Presentation export for Org-mode
-  ;; REF: (@url :file-name "https://gist.github.com/509761" :display "Git Source")
-  (require 'org-html5presentation)
-
-  ;;==================================================================
   ;; set default viewer for exported files
   (setq org-file-apps
         (quote ((auto-mode       . emacs)
@@ -1233,6 +1228,15 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
   ;; functions.
 
   (try-require 'org-location-google-maps)
+
+  ;;------------------------------------------------------------------
+  ;; HTML5 Presentation export for Org-mode
+  ;; REF: (@url :file-name "https://gist.github.com/509761" :display "Git Source")
+  (try-require 'org-html5presentation)
+
+  ;;------------------------------------------------------------------
+  ;; A stand-alone blog and publication tool for org-mode.
+  (try-require 'o-blog)
 
   ;;------------------------------------------------------------------
   (define-key org-mode-map (kbd "C-c t") 'timestamp)

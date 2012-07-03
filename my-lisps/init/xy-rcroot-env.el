@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:41 by xin on XIN-PC>
+;; Time-stamp: <2012-07-02 Mon 20:05 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -382,6 +382,14 @@
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
+
+;; REF: (@url :file-name "https://github.com/renard/o-blog" :display "Git Source")
+;;      (@url :file-name "http://renard.github.com/o-blog/index.html" :display "Website")
+(xy/load-autoload (concat my-local-lisp-path "/o-blog"))
+(message "* ---[ o-blog lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
 
 (add-to-list 'load-path "~/.emacs.d/themes")
 (xy/load-autoload "~/.emacs.d/themes")

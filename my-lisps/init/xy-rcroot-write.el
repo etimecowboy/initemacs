@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:41 by xin on XIN-PC>
+;; Time-stamp: <2012-07-02 Mon 20:13 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
 ;; Author:       Xin Yang
@@ -52,6 +52,10 @@
 ;;** org2blog
 ;; use publish org to HTML then use xml-rpc to blog
 (eval-after-load "org2blog" '(org2blog-settings))
+
+;;** o-blog
+;; A stand-alone blog and publication tool for org-mode.
+(eval-after-load "o-blog" '(o-blog-settings))
 
 ;;====================================================================
 ;;* auctex
