@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-02 Mon 20:13 by xin on XIN-PC>
+;; Time-stamp: <2012-07-06 Fri 17:43 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
 ;; Author:       Xin Yang
@@ -43,6 +43,7 @@
    ("C-c b"   org-ido-switchb)
    ("C-c c"   org-capture)
    ("C-c n"   org2blog/wp-new-entry)
+   ("C-c g"   org-publish-blog)
    ("C-c M-w" tzz-copy-region-with-mode-property)))
 
 ;; BUG: when use this to fix org-agenda/org-mobile-push error ((error

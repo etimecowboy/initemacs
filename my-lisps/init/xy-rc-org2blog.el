@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:33 by xin on XIN-PC>
+;; Time-stamp: <2012-07-06 Fri 00:22 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org2blog.el'
 ;; Author:       Xin Yang
@@ -20,7 +20,7 @@
 (defun org2blog-settings ()
   "Settings of `org2blog.el'."
   (setq org2blog/wp-blog-alist
-        '(("wordpress.com"
+        '(("etimecowboy.wordpress.com"
            :url "http://etimecowboy.wordpress.com/xmlrpc.php"
            :username "etimecowboy"
            :default-title "New Post"
@@ -29,7 +29,18 @@
            ;; :keep-new-lines t
            :confirm t
            ;; :wp-code nil
-           )))
+           )
+          ("etimecowboy.sinaapp.com"
+           :url "http://etimecowboy.sinaapp.com/xmlrpc.php"
+           :username "etimecowboy"
+           :default-title "新博文"
+           :default-categories ("未分类")
+           :tags-as-categories nil
+           ;; :keep-new-lines t
+           :confirm t
+           ;; :wp-code nil
+           )
+          ))
 
   (setq org2blog/wp-buffer-template "# -*- mode: org -*-
 # Time-stamp:<>

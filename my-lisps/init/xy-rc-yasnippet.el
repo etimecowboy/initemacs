@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:38 by xin on XIN-PC>
+;; Time-stamp: <2012-07-06 Fri 09:44 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-yasnippet.el'
 ;; Author:       Xin Yang
@@ -32,12 +32,12 @@
     (setq yas/trigger-key nil)
     (yas/trigger-key-reload key)))
 
-;;;###autoload
-(defun yasnippet-reload-after-save ()
-  (let* ((bfn (expand-file-name (buffer-file-name)))
-         (root (expand-file-name yas/root-directory)))
-    (when (string-match (concat "^" root) bfn)
-      (yas/load-snippet-buffer))))
+;; ;;;###autoload
+;; (defun yasnippet-reload-after-save ()
+;;   (let* ((bfn (expand-file-name (buffer-file-name)))
+;;          (root (expand-file-name yas/root-directory)))
+;;     (when (string-match (concat "^" root) bfn)
+;;       (yas/load-snippet-buffer))))
 
 ;;;###autoload
 (defun yasnippet-settings ()
