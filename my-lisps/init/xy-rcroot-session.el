@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-16 Mon 17:53 by xin on p5q>
+;; Time-stamp: <2012-07-16 Mon 18:34 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
 ;; Author:       Xin Yang
@@ -76,7 +76,7 @@
 ;;** ace-jump-mode
 ;; ace-jump-mode is an fast/direct cursor location minor mode.
 (try-require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-c j") 'ace-jump-mode)
 
 ;;====================================================================
 ;;* Save Emacs session information
