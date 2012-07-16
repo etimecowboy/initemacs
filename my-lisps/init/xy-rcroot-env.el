@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-02 Mon 20:05 by xin on XIN-PC>
+;; Time-stamp: <2012-07-16 Mon 17:56 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -387,6 +387,14 @@
 ;;      (@url :file-name "http://renard.github.com/o-blog/index.html" :display "Website")
 (xy/load-autoload (concat my-local-lisp-path "/o-blog"))
 (message "* ---[ o-blog lisps installed at %ds ]---"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*)
+                           (second *emacs-load-start*)))))
+
+;; REF:  (@url :file-name "https://github.com/winterTTr/ace-jump-mode" :display "Git Source")
+;; A fast/direct cursor location minor mode.
+(xy/load-autoload (concat my-local-lisp-path "/ace-jump-mode"))
+(message "* ---[ ace-jump-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))

@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-02 Mon 20:06 by xin on XIN-PC>
+;; Time-stamp: <2012-07-16 Mon 17:57 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -1387,6 +1387,7 @@ The process is:
   ;; (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
   (xy/install-all-lisps (concat my-local-lisp-path "/command-log-mode"))
   (xy/install-all-lisps (concat my-local-lisp-path "/o-blog"))
+  (xy/install-all-lisps (concat my-local-lisp-path "/ace-jump-mode"))
 
   (xy/install-all-lisps "~/.emacs.d/themes")
   ;;------------------------------------------------------------------

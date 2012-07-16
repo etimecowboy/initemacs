@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-02 Mon 20:17 by xin on XIN-PC>
+;; Time-stamp: <2012-07-11 Wed 10:50 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
 ;; Author:       Xin Yang
@@ -749,13 +749,14 @@ If html-file-name is not given, read it from minibuffer."
   ;; (setq org-babel-lob-files
   ;;       '("~/emacs/org/babel/library-of-babel.org"))
 
-  (defvar org-babel-octave-wrapper-method
-    "%s
-save -ascii %s ans")
+;;   (defvar org-babel-octave-wrapper-method
+;;     "%s
+;; save -ascii %s ans")
 
-  ;; org v7.3 new features
-  ;; Fontify code in code blocks
-  (setq org-src-fontify-natively t)
+  (setq org-src-fontify-natively t
+        org-confirm-babel-evaluate nil
+        org-export-babel-evaluate nil
+        org-src-tab-acts-natively t)
 
   ;;----------------------------------------------------------------
   ;; LaTeX export settings

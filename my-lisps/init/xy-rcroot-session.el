@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:41 by xin on XIN-PC>
+;; Time-stamp: <2012-07-16 Mon 17:53 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
 ;; Author:       Xin Yang
@@ -71,6 +71,12 @@
    ("<left-fringe> <mouse-5>"   bm-next-mouse)
    ("<left-fringe> <mouse-4>"   bm-previous-mouse)
    ("<left-fringe> <mouse-1>"   bm-toggle-mouse)))
+
+;;====================================================================
+;;** ace-jump-mode
+;; ace-jump-mode is an fast/direct cursor location minor mode.
+(try-require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;;====================================================================
 ;;* Save Emacs session information

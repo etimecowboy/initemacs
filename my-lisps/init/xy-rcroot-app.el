@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:38 by xin on XIN-PC>
+;; Time-stamp: <2012-07-12 Thu 21:20 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
 ;; Author:       Xin Yang
@@ -393,7 +393,13 @@ the mode-line." t)
 
 ;;** font-lock
 (eval-after-load "font-lock" '(font-lock-settings))
-(global-font-lock-mode 1)
+(global-font-lock-mode -1) ;; 避免打开大的文本文件时反应缓慢
+(am-add-hooks
+ `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+                  sh-mode-hook cperl-mode-hook c-common-mode-hook
+                  vhdl-mode-hook verilog-mode-hook matlab-mode-hook
+                  org-mode-hook)
+ '(lambda () (font-lock-mode 1)))
 
 ;;--------------------------------------------------------------------
 ;;** hl-line
