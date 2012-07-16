@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:28 by xin on XIN-PC>
+;; Time-stamp: <2012-07-16 Mon 18:13 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emms.el'
 ;; Author:       Xin Yang
@@ -178,7 +178,7 @@
   ;; (add-hook 'emms-player-finished-hook 'emms-random) ;当播放完当前的歌曲时随机选择下一首歌曲
   ;; 歌词设置
   ;; (require 'emms-lyrics)
-  (ad-activate 'emms-lyrics-find-lyric)       ;自动下载歌词
+  ;; (ad-activate 'emms-lyrics-find-lyric)       ;自动下载歌词
   (setq emms-lyrics-dir (concat my-emacs-path "/emms/lyrics"))   ;EMMS的歌词目录
   (setq emms-lyrics-dir emms-directory)
   (setq emms-lyrics-display-format "%s")       ;设置歌词显示格式

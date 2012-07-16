@@ -9,7 +9,10 @@ This is my Emacs configuration with various collected lisps.
 3. Enter the "~/.emacs.d/lisp/cedet" folder, and run
      "Emacs -nw -Q -l cedet-build.el -f cedet-build"
    in the terminal to install the cedet package.
-4. Un-compress the `~/.emacs.d/backup/elpa.zip' to the  "~/.emacs.d" folder.
+4. Un-compress 
+     - `~/.emacs.d/backup/elpa.tar.gz'
+     - `~/.emacs.d/backup/emacswiki.tar.gz'          
+   to the  "~/.emacs.d" folder.
 5. Run Emacs, you will get Errors, but don't afraid of it.
 6. "M-x xy/emacs-build" serveral times in the Emacs that you 
    just opened.
