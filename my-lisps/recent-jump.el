@@ -1,11 +1,11 @@
-;;; xy-recent-jump.el --- Auto set font for Emacs
+;;; recent-jump.el --- Auto set font for Emacs
 
 ;; Copyright (C) 2011-2012, Xin Yang, all rights reserved.
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Maintainer: Xin Yang
 ;; Created: 29 Jan 2011
-;; Time-stamp:<2011-12-03 Sat 14:41 xin on P6T-WIN7>
+;; Time-stamp: <2012-07-23 Mon 16:08 by xin on p5q>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -163,4 +163,4 @@
 (dolist (var (list 'rj-ring 'rj-index 'rj-position-before))
   (add-to-list 'desktop-globals-to-save var))
 
-(provide 'xy-recent-jump)
+(provide 'recent-jump)

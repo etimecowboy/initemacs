@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:26 by xin on XIN-PC>
+;; Time-stamp: <2012-07-23 Mon 16:09 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-cedet.el'
 ;; Author:       Xin Yang
@@ -95,7 +95,7 @@
   (cedet-4-cc)  ;; TODO: run it when major-mode is c-mode or c++-mode
 
   ;;------------------------------------------------------------------
-  ;; NOTE: semantic-ia-fast-jump are replaced by `xy-recent-jump.el'
+  ;; NOTE: semantic-ia-fast-jump are replaced by `recent-jump.el'
   ;;   ;; (require 'semantic/bovine/el)
   ;;   ;; (require 'semantic/analyze/refs)      ; for semantic-ia-fast-jump
   ;;   (defadvice push-mark (around semantic-mru-bookmark activate)

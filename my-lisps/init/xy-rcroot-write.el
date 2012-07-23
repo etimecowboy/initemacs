@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-06 Fri 17:43 by xin on p5q>
+;; Time-stamp: <2012-07-18 Wed 16:26 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
 ;; Author:       Xin Yang
@@ -140,6 +140,8 @@
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
 (setq auto-mode-alist
-      (cons '("\\.text" . markdown-mode) auto-mode-alist))
+      (cons '("\\.md" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist
+      (cons '("\\.mkd" . markdown-mode) auto-mode-alist))
 
 (provide 'xy-rcroot-write)

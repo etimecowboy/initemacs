@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-16 Mon 17:56 by xin on p5q>
+;; Time-stamp: <2012-07-23 Mon 14:54 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -596,6 +596,9 @@ Toggle keyboard command logging of whole emacs.
 (setq sentence-end
       "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 
+;; 支持中文分词的M-f与M-b
+(try-require 'ws)
+
 ;;--------------------------------------------------------------------
 ;;** System encodings
 (set-language-environment 'UTF-8)
@@ -630,6 +633,9 @@ Toggle keyboard command logging of whole emacs.
 ;;** Fonts
 ;; Use scalable fonts
 (setq scalable-fonts-allowed t)
+
+;;*** Default font, using hybird font `yahei_mono.ttf'
+;; (set-frame-font "Yahei Mono")
 
 ;;*** Emacs auto font selection for different OS
 ;; REF: (@url :file-name "http://emacser.com/torture-emacs.htm" :display "emacser")

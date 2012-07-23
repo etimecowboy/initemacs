@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-02 Mon 16:17 by xin on XIN-PC>
+;; Time-stamp: <2012-07-18 Wed 08:12 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-complete.el'
 ;; Author:       Xin Yang
@@ -142,6 +142,8 @@
 
 ;;--------------------------------------------------------------------
 ;;** auto-complete settings
+;; BUG: 不能与emacswiki上的`thingatpt+.el'同时使用，否则auto-complete
+;; 不能正确工作。
 (eval-after-load "auto-complete"
   '(progn
      (auto-complete-settings)

@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-11 Wed 10:50 by xin on p5q>
+;; Time-stamp: <2012-07-23 Mon 14:14 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
 ;; Author:       Xin Yang
@@ -136,7 +136,7 @@ If html-file-name is not given, read it from minibuffer."
   (setq org-directory
         (concat my-emacs-path "/org"))
   (setq org-default-notes-file
-        (concat org-directory "/gtd/Notes.org"))
+        (concat org-directory "/gtd/Capture.org"))
   (unless (file-exists-p org-default-notes-file)
     (shell-command (concat "touch " org-default-notes-file)))
   (setq org-combined-agenda-icalendar-file
@@ -204,7 +204,7 @@ If html-file-name is not given, read it from minibuffer."
          "~/emacs/org/gtd/Phd.org"
          "~/emacs/org/gtd/Work.org"
          "~/emacs/org/gtd/Geek.org"
-         "~/emacs/org/gtd/Notes.org"
+         "~/emacs/org/gtd/Capture.org"
          ))
 
   ;; For `seesion.el'
@@ -638,51 +638,36 @@ If html-file-name is not given, read it from minibuffer."
 
   ;; cpature templates
   (setq org-capture-templates
-          '(("p" "Add a PhD Wish----->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/Phd.org" "Wish Pool")
+          '(("p" "Add a PhD  Wish"
+             entry (file+headline "~/emacs/org/gtd/Capture.org" "PhD")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-            ("w" "Add a Work Wish----->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/Work.org" "Wish Pool")
+            ("w" "Add a Work Wish"
+             entry (file+headline "~/emacs/org/gtd/Capture" "Work")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-            ("l" "Add a Life Wish---->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/Life.org" "Wish Pool")
+            ("l" "Add a Life Wish"
+             entry (file+headline "~/emacs/org/gtd/Capture" "Life")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-            ("g" "Add a Geek Wish---->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/Geek.org" "Wish Pool")
+            ("g" "Add a Geek Wish"
+             entry (file+headline "~/emacs/org/gtd/Capture.org" "Geek")
              "** TODO %? %^g\n\
    :LOGBOOK:\n\
    - State \"TODO\" from \"%i\" in \"%a\"    %U\n\
    :END:\n"
              :empty-lines 1 :prepend t :clock-keep t)
-          ("m" "Add a General Wish---->Day Planner"
-             entry (file+headline "~/emacs/org/gtd/Notes.org" "Wish Pool")
-             "** TODO %? %^g\n\
-   :LOGBOOK:\n\
-   - State \"TODO\"  from \"%i\" in \"%a\"   %U\n\
-   :END:\n"
-             :empty-lines 1 :prepend t :clock-keep t)
-            ("n" "Write a Notes"
-             entry (file+headline "~/emacs/org/gtd/Notes.org" "Notes")
-             "** %? %^G\n\
-   :LOGBOOK:\n\
-   - Entered from \"%i\" in \"%a\"   %U\n\
-   - Last updated on   %U\n\
-   :END:\n"
-             :empty-lines 1 :prepend t :clock-keep t)
-            ("i" "Record an Idea"
-             entry (file+headline "~/emacs/org/gtd/Notes.org" "Ideas")
+            ("n" "Take a Note"
+             entry (file+headline "~/emacs/org/gtd/Capture.org" "Notes")
              "** %? %^G\n\
    :LOGBOOK:\n\
    - Entered from \"%i\" in \"%a\"   %U\n\
@@ -867,23 +852,27 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
           ;; ("" "titlesec" nil)
           ))
 
-  ;; Use xelatex instead of pdflatex
-  ;; (setq org-latex-to-pdf-process
-  ;;       '("xelatex -interaction nonstopmode %b"
-  ;;         "xelatex -interaction nonstopmode %b"
-  ;;         "bibtex %b"
-  ;;         "xelatex -interaction nonstopmode %b"
-  ;;         "xelatex -interaction nonstopmode %b"))
+  ;; Use xelatex instead of pdflatex for better font supports.
+  (setq org-latex-to-pdf-process
+        '("xelatex -interaction nonstopmode -output-directory %o %f"
+          "bibtex %b"
+          "xelatex -interaction nonstopmode -output-directory %o %f"
+          "xelatex -interaction nonstopmode -output-directory %o %f"))
+
   ;; Better solution: use latexmk
+  ;; BUG: cause error when using tikz
   ;; (setq org-latex-to-pdf-process
   ;;   '("latexmk -c -bm DRAFT -pdf -pdflatex=\"xelatex -synctex=1 %O %S\" -silent -pvc -f %b"))
-  (setq org-latex-to-pdf-process
-    '("latexmk -xelatex -d -f -silent -c %b"))
+  ;; (setq org-latex-to-pdf-process
+  ;;   '("latexmk -xelatex -d -f -silent -c %b"))
 
   ;; load reftex
   (require 'reftex)
   ;; load cd-latex
   (require 'cdlatex)
+
+  ;; load auctex for better latex editing support C-c '
+  ;; (xy/auctex-start)
 
   (add-hook 'org-mode-hook
             '(lambda ()
@@ -1014,7 +1003,7 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
               :tables t
               :table-auto-headline t
               :style-include-default t
-              :style "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://dl.dropbox.com/u/7817597/stylesheets/org.css\">"
+              :style "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://dl.dropbox.com/u/7817597/stylesheets/org.css\" />"
               ;;            :style-extra "<link rel=\"stylesheet\" href=\"http://127.0.0.1/stylesheets/org.css\" type=\"text/css\" />"
               :convert-org-links t
               :inline-images t

@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-12 Thu 21:20 by xin on p5q>
+;; Time-stamp: <2012-07-23 Mon 16:09 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
 ;; Author:       Xin Yang
@@ -238,8 +238,8 @@ the mode-line." t)
 (eval-after-load "flyspell" '(diminish 'flyspell-mode))
 (eval-after-load "autopair" '(diminish 'autopair-mode))
 (eval-after-load "hideshow" '(diminish 'hs-minor-mode))
-(eval-after-load "xy-recent-jump" '(diminish 'recent-jump-mode))
-(eval-after-load "xy-recent-jump-small" '(diminish 'recent-jump-small-mode))
+(eval-after-load "recent-jump" '(diminish 'recent-jump-mode))
+(eval-after-load "recent-jump-small" '(diminish 'recent-jump-small-mode))
 (eval-after-load "ibus" '(diminish 'ibus-mode))
 (eval-after-load "outline" '(diminish 'outline-minor-mode))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
@@ -393,13 +393,16 @@ the mode-line." t)
 
 ;;** font-lock
 (eval-after-load "font-lock" '(font-lock-settings))
-(global-font-lock-mode -1) ;; 避免打开大的文本文件时反应缓慢
-(am-add-hooks
- `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
-                  sh-mode-hook cperl-mode-hook c-common-mode-hook
-                  vhdl-mode-hook verilog-mode-hook matlab-mode-hook
-                  org-mode-hook)
- '(lambda () (font-lock-mode 1)))
+(global-font-lock-mode 1)
+;; 避免打开大的文本文件时反应缓慢
+;; BUG: org-mode 显示错误
+;; (global-font-lock-mode -1)
+;; (am-add-hooks
+;;  `(lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook
+;;                   sh-mode-hook cperl-mode-hook c-common-mode-hook
+;;                   vhdl-mode-hook verilog-mode-hook matlab-mode-hook
+;;                   org-mode-hook)
+;;  '(lambda () (font-lock-mode 1)))
 
 ;;--------------------------------------------------------------------
 ;;** hl-line

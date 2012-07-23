@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:22 by xin on XIN-PC>
+;; Time-stamp: <2012-07-20 Fri 09:32 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
 ;; Author:       Xin Yang
@@ -100,10 +100,11 @@
              :sources
              '( anything-c-source-buffers
                 anything-c-source-recentf
-                anything-c-source-file-cache
+                ;; anything-c-source-file-cache ;; BUG: 容易出问题
                 anything-c-source-bookmarks
                 anything-c-source-files-in-current-dir+
                 anything-c-source-locate))))
+
   ;; BUG: windows locate32 not working!, console mode chinese encoding error.
 
   ;; (global-set-key (kbd "C-<f1>")  ;; i -> info

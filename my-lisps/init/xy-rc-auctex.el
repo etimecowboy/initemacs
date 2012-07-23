@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:24 by xin on XIN-PC>
+;; Time-stamp: <2012-07-16 Mon 20:18 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-auctex.el'
 ;; Author:       Xin Yang
@@ -26,7 +26,7 @@
   (interactive)
   (load "auctex.el" nil t t)
   (load "preview-latex.el" nil t t)
-  (color-theme-solarized-light)
+  ;; (color-theme-solarized-light)
   (revert-buffer)
   (menu-bar-mode 1))
 
