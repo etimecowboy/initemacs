@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-23 Mon 16:09 by xin on p5q>
+;; Time-stamp: <2012-07-24 Tue 17:08 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
 ;; Author:       Xin Yang
@@ -93,14 +93,15 @@
 ;;      in console mode or GUI mode.
 (eval-after-load "fit-frame" '(fit-frame-settings))
 (eval-after-load "maxframe"  '(maxframe-settings))
-(require 'fit-frame)
-(add-hook 'after-make-frame-functions 'fit-frame)
-(require 'autofit-frame)
-(add-hook 'temp-buffer-show-hook
-          'fit-frame-if-one-window 'append)
-(require 'thumb-frm)
-(require 'maxframe) ;; NOTE: not stable with two or more monitors
-
+(when window-system
+  (try-require 'fit-frame)
+  (add-hook 'after-make-frame-functions 'fit-frame)
+  (try-require 'autofit-frame)
+  (add-hook 'temp-buffer-show-hook
+            'fit-frame-if-one-window 'append)
+  (try-require 'thumb-frm)
+  (try-require 'maxframe) ;; NOTE: not stable with two or more monitors
+)
 (eal-define-keys-commonly
  global-map
  `(;; `fit-frame.el'
