@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-20 Fri 09:50 by xin on p5q>
+;; Time-stamp: <2012-07-23 Mon 21:21 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
 ;; Author:       Xin Yang
@@ -70,7 +70,9 @@
  `(;;text-mode-hook ;; BUG: cause error when start emacs daemon or
                     ;;      emacs24
      org-mode-hook latex-mode-hook
-                   LaTeX-mode-hook message-mode-hook
+                   LaTeX-mode-hook
+                   org-mode-hook
+                   message-mode-hook
                    mew-draft-mode-hook)
  '(lambda ()
     (flyspell-mode 1)))

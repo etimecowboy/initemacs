@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-23 Mon 08:22 by xin on p5q>
+;; Time-stamp: <2012-07-23 Mon 20:51 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -1328,11 +1328,21 @@ The process is:
 ;;--------------------------------------------------------------------
 ;;;###autoload
 (defun xy/done ()
-  "Make Emacs frame invisible, just like the `emacs --daemon'"
+  "Make Emacs frame invisible.\
+Used for daemon mode simulation in Windows"
   (interactive)
-  (save-some-buffers) ;; Save edited buffers first!
+  (save-some-buffers)
   (server-edit)
-  (make-frame-invisible nil t))
+  (make-frame-invisible nil t)
+  (kill-this-buffer))
+
+;;--------------------------------------------------------------------
+;;;###autoload
+(defun xy/kill ()
+  "Close a buffer and kill the Emacs frame displayed."
+  (interactive)
+  (kill-this-buffer)
+  (save-buffers-kill-terminal))
 
 ;;--------------------------------------------------------------------
 ;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
