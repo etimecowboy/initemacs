@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:23 by xin on XIN-PC>
+;; Time-stamp: <2012-07-25 Wed 22:55 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-appt.el'
 ;; Author:       Xin Yang
@@ -34,12 +34,16 @@
   ;; REF: (@url :file-name "http://lists.gnu.org/archive/html/emacs-orgmode/2009-11/msg00236.html" :display "Post@emacs-orgmode")
   ;; NOTE: May do the job twice with (@file :file-name "xy-rc-org.el" :to "org-show-notification-handler" :display "`org-show-notification-handler'")
   ;; (when window-system
-    (when (try-require 'todochiku)
-      (setq appt-display-format 'window)
-      (defun xy/appt-display (min-to-app new-time msg)
-        (todochiku-message "Emacs appointment" msg
-                           (todochiku-icon 'alarm)))
-      (setq appt-disp-window-function (function xy/appt-display)))
+  (when (try-require 'todochiku)
+    (setq appt-display-format 'window)
+    (defun xy/appt-display (min-to-app new-time msg)
+      (todochiku-message "Emacs appointment" msg
+                         (todochiku-icon 'alarm))
+      ;; BUG: not working
+      ;; (xy/emms-start)
+      ;; (emms-play-file "~/emacs/mew/chimes.wav"))
+      )
+    (setq appt-disp-window-function (function xy/appt-display)))
 
   ;; turn appointment checking on
   (unless (daemonp) (appt-activate 1))

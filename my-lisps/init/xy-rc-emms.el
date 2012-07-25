@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-16 Mon 18:13 by xin on p5q>
+;; Time-stamp: <2012-07-25 Wed 22:15 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-emms.el'
 ;; Author:       Xin Yang
@@ -20,7 +20,8 @@
 (defun xy/emms-start ()
   "Initial emms"
   (interactive)
-  (require 'emms-setup))
+  (require 'emms-setup)
+  (emms-all))
 
 ;;;###autoload
 (defun xwl-emms-track-description-function (track)

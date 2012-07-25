@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:41 by xin on XIN-PC>
+;; Time-stamp: <2012-07-25 Wed 22:43 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
 ;; Author:       Xin Yang
@@ -160,8 +160,7 @@
      (emms-settings)
      (eal-define-keys
      'emms-playlist-mode-map
-      `(("<space>" emms-pause)
-        ("<double-mouse-1>" emms-pause)))))
+      `(("<double-mouse-1>" emms-pause)))))
 
 (eal-define-keys-commonly
  dired-mode-map

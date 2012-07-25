@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:32 by xin on XIN-PC>
+;; Time-stamp: <2012-07-25 Wed 21:32 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-mew.el'
 ;; Author:       Xin Yang
@@ -265,24 +265,24 @@
     )
   ;; todochiku 新邮件通知
   ;; (when window-system
-    (when (try-require 'todochiku)
-      (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
-        "Use Todochiku to pop-up a notification, if new Mail arrives"
-        (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
-               (setq mew-arrivedmail-pending arg)
-               ;; NOTE: replace sndplay with your favorite command to
-               ;; play a sound-file
-               ;; (start-process-shell-command
-               ;;  "biff-bark"
-               ;;  "*Messages*"
-               ;;  (format (concat "cscript "
-               ;;                  fj/tool-path "/newmail.vbs %d") arg))
-               (todochiku-message "emacs mew"
-                                  (format "New mail (%d) arrived." arg)
-                                  (todochiku-icon 'mail)))
-              ((= arg 0)
-               (if (> mew-arrivedmail-pending 0)
-                   (setq mew-arrivedmail-pending 0))))))
+  (when (try-require 'todochiku)
+    (defadvice mew-biff-bark (before fj/mew-biff-bark (arg) activate)
+      "Use Todochiku to pop-up a notification, if new Mail arrives"
+      (cond ((and (> arg 0) (> arg mew-arrivedmail-pending))
+             (setq mew-arrivedmail-pending arg)
+             ;; NOTE: replace sndplay with your favorite command to
+             ;; play a sound-file
+             ;; (start-process-shell-command
+             ;;  "biff-bark"
+             ;;  "*Messages*"
+             ;;  (format (concat "cscript "
+             ;;                  fj/tool-path "/newmail.vbs %d") arg))
+             (todochiku-message "emacs mew"
+                                (format "New mail (%d) arrived." arg)
+                                (todochiku-icon 'mail)))
+            ((= arg 0)
+             (if (> mew-arrivedmail-pending 0)
+                 (setq mew-arrivedmail-pending 0))))))
 
   ;; auto complete email address in various fields
   (defvar mew-field-completion-switch
