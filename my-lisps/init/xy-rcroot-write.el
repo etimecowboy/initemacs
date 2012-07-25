@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-18 Wed 16:26 by xin on p5q>
+;; Time-stamp: <2012-07-25 Wed 18:45 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
 ;; Author:       Xin Yang
@@ -24,18 +24,25 @@
 ;;* org
 (add-to-list 'auto-mode-alist
              '("\\.\\(org\\|org_archive\\)$" . org-mode))
+
 (eval-after-load "org"
   '(progn
      (org-settings)
+     ;; (org-google-agenda-maps-key-bindings)
      (eal-define-keys
       'org-mode-map
       `(("C-c C-x C-h" xy/org-html-chinese-no-extra-space)
         ("C-c o m"     org2blog/wp-mode)
         ("C-c o l"     org2blog/wp-login)
         ("C-c o t"     org2blog/wp-post-subtree)
-        ("C-c s"   org-export-as-html5presentation-and-open)))))
+        ("C-c s"   org-export-as-html5presentation-and-open)
+        ("C-c M-c" org-coordinates-google-geocode-set)
+        ("C-c M-L" org-address-google-geocode-set)
+        ("C-c M-A" org-address-google-geocode-set)
+        ("C-c M-l" org-location-google-maps)))))
 (eval-after-load "org-agenda" '(org-settings))
 (eval-after-load "org-capture" '(org-settings))
+
 (eal-define-keys-commonly
  global-map
  `(("C-c l"   org-store-link)
