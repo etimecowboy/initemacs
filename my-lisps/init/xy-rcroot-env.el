@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-23 Mon 17:25 by xin on p5q>
+;; Time-stamp: <2012-07-25 Wed 11:17 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -806,20 +806,14 @@ See `bypass-trash-in-function' for more information."
 ;;--------------------------------------------------------------------
 ;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
 ;; Windows 下使用我定义的 `xy/done' 函数也能达到类似的效果，
-;; 用 `C-x C-c' 隐藏 Emacs frame，但只能使用一个 frame。
-;; (if is-after-emacs-23
-;;   (progn
-;;     (server-force-delete)
-;;     (setq-default server-auth-dir (concat my-var-path "/server"))
-;;     (server-start)
-;;     (global-set-key (kbd "C-x C-c") 'xy/done)
-;; ))
-;; NOTE: emacsclient has not worked in Windows 7
-(Windows
- (global-set-key (kbd "C-x C-c") 'xy/done))
-(GNULinux
- (global-set-key (kbd "C-x C-c") 'xy/kill))
+;; 用 `C-x C-c' 隐藏 Emacs frame
+;; Define real exit-emacs
 (global-set-key (kbd "C-x M-c") 'save-buffers-kill-emacs)
+;; Redefine `C-x C-c'
+(global-set-key (kbd "C-x C-c") 'xy/done)
+;; Redefine the top-right `close' button of the frame.
+(when window-system
+  (define-key special-event-map [delete-frame] 'xy/done))
 
 ;;====================================================================
 ;;* Emacs key bindings
