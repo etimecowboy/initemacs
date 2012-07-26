@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:26 by xin on XIN-PC>
+;; Time-stamp: <2012-07-26 Thu 03:04 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-diff-git.el'
 ;; Author:       Xin Yang
@@ -27,7 +27,7 @@
   (require 'vc-dispatcher)
   (require 'magit)
   (diff-git-default-bindings)
-  (message "* ---[ diff-git configuration is complete ]---")
-)
+
+  (message "* ---[ diff-git configuration is complete ]---"))
 
 (provide 'xy-rc-diff-git)

@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:31 by xin on XIN-PC>
+;; Time-stamp: <2012-07-26 Thu 03:03 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-magit.el'
 ;; Author:       Xin Yang

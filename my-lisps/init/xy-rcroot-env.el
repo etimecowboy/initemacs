@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-25 Wed 11:17 by xin on XIN-PC>
+;; Time-stamp: <2012-07-26 Thu 14:18 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -602,25 +602,36 @@ Toggle keyboard command logging of whole emacs.
 ;;--------------------------------------------------------------------
 ;;** System encodings
 (set-language-environment 'UTF-8)
+(prefer-coding-system 'utf-8-unix)
+
 ;; NOTE: `default-buffer-file-coding-system' is an obsolete variable
 ;; (as of Emacs 23.2); use `buffer-file-coding-system'
 ;; instead.
-;; (setq default-buffer-file-coding-system 'utf-8-unix)
+(setq default-buffer-file-coding-system 'utf-8-unix)
 (setq-default buffer-file-coding-system 'utf-8-unix)
+
 (setq default-keyboard-coding-system 'utf-8-unix)
 (setq default-sendmail-coding-system 'utf-8-unix)
 
-;; NOTE: git would not display chinese characters properly if
-;; `default-terminal-coding-system' and
-;; `default-process-coding-system' are set to gbk
 (Windows
+
+ ;; NOTE: GBK是中文版Windows文件名，命令行和程序内码的默认编码。
+ ;; `default-terminal-coding-system'和`default-process-coding-system'
+ ;; 设置成gbk，处理utf-8编码文件的程序如`magit', `diff-git'等中文显示乱
+ ;; 码。为了和Linux下一致地使用一些GNU工具和开源软件，只好强制设置这些
+ ;; 编码为utf-8-unix。
+
+ ;; NOTE: Old coding system auto-detection
  ;; (let ((code (or file-name-coding-system default-file-name-coding-system)))
  ;;   (setq default-process-coding-system (cons code code))))
-  (setq default-file-name-coding-system 'gbk-dos)
+
+ (setq default-file-name-coding-system 'gbk-dos) ;; 文件名当然还是gbk
+
   ;; (setq default-terminal-coding-system 'gbk-dos)
   (setq default-terminal-coding-system 'utf-8-unix)
   ;; (setq default-process-coding-system '(gbk-dos . gbk-dos)))
-  (setq default-process-coding-system '(utf-8-unix . utf-8-unix)))
+  ;; `emms' wroks in Windows! Great!
+  (setq default-process-coding-system '(utf-8-unix . gbk-dos)))
 
 (GNULinux
   (setq default-file-name-coding-system 'utf-8-unix)
