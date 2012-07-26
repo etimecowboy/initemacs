@@ -1,23 +1,45 @@
-; -*-Emacs-Lisp-*-
+;;; xcscope.el --- interface to cscope
+
+;; This file is NOT a part of GNU Emacs.
+
+;; Copyright (C) 2006  Fang lungang
+
+;; Author: Darryl Okahata
+;; Modified: lungangfang 01-25-2007 15:00> "fang . lungang@gmail.com" (remove the whitespaces)
+;; Keywords:
+;; Version: 1.14.1.5
+;; Bugs: cscope-history related bugs please email to me (fang.lungang)
+
+;; Thank Darryl for bringing us such an amazing tool. However, despite
+;; much convenience it provides there are still some guys, including me
+;; :-), asking for certain new feature now and then on news groups:
+;; going back and forth the search history. I really want this feature
+;; since searching is sometimes time-consuming.
+
+;; USAGE: For basic usage refer to original comments. To view previous
+;;  search result, call cscope-history-backward ('C-c s v' or just 'v' in
+;;  cscope buffer) or cscope-history-forward ('V').
+
+;; -*-Emacs-Lisp-*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;
-; File:         xcscope.el
-; RCS:          $RCSfile: xcscope.el,v $ $Revision: 1.14 $ $Date: 2002/04/10 16:59:00 $ $Author: darrylo $
-; Description:  cscope interface for (X)Emacs
-; Author:       Darryl Okahata
-; Created:      Wed Apr 19 17:03:38 2000
-; Modified:     Thu Apr  4 17:22:22 2002 (Darryl Okahata) darrylo@soco.agilent.com
-; Language:     Emacs-Lisp
-; Package:      N/A
-; Status:       Experimental
-;
-; (C) Copyright 2000, 2001, 2002, Darryl Okahata <darrylo@sonic.net>,
-;     all rights reserved.
-; GNU Emacs enhancements (C) Copyright 2001,
-;         Triet H. Lai <thlai@mail.usyd.edu.au>
-; Fuzzy matching and navigation code (C) Copyright 2001,
-;         Steven Elliott <selliott4@austin.rr.com>
-;
+;;
+;; File:         xcscope.el
+;; RCS:          $RCSfile: xcscope.el,v $ $Revision: 1.14 $ $Date: 2002/04/10 16:59:00 $ $Author: darrylo $
+;; Description:  cscope interface for (X)Emacs
+;; Author:       Darryl Okahata
+;; Created:      Wed Apr 19 17:03:38 2000
+;; Modified:     Thu Apr  4 17:22:22 2002 (Darryl Okahata) darrylo@soco.agilent.com
+;; Language:     Emacs-Lisp
+;; Package:      N/A
+;; Status:       Experimental
+;;
+;; (C) Copyright 2000, 2001, 2002, Darryl Okahata <darrylo@sonic.net>,
+;;     all rights reserved.
+;; GNU Emacs enhancements (C) Copyright 2001,
+;;         Triet H. Lai <thlai@mail.usyd.edu.au>
+;; Fuzzy matching and navigation code (C) Copyright 2001,
+;;         Steven Elliott <selliott4@austin.rr.com>
+;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ALPHA VERSION 0.96
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -102,19 +124,19 @@
 ;;    that specifying "global-map" instead of "cscope:map" makes the
 ;;    keybindings available in all buffers:
 ;;
-;;    (define-key global-map [(control f3)]  'cscope-set-initial-directory)
-;;    (define-key global-map [(control f4)]  'cscope-unset-initial-directory)
-;;    (define-key global-map [(control f5)]  'cscope-find-this-symbol)
-;;    (define-key global-map [(control f6)]  'cscope-find-global-definition)
-;;    (define-key global-map [(control f7)]
-;;      'cscope-find-global-definition-no-prompting)
-;;    (define-key global-map [(control f8)]  'cscope-pop-mark)
-;;    (define-key global-map [(control f9)]  'cscope-next-symbol)
-;;    (define-key global-map [(control f10)] 'cscope-next-file)
-;;    (define-key global-map [(control f11)] 'cscope-prev-symbol)
-;;    (define-key global-map [(control f12)] 'cscope-prev-file)
-;;    (define-key global-map [(meta f9)]  'cscope-display-buffer)
-;;    (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
+;;	(define-key global-map [(control f3)]  'cscope-set-initial-directory)
+;;	(define-key global-map [(control f4)]  'cscope-unset-initial-directory)
+;;	(define-key global-map [(control f5)]  'cscope-find-this-symbol)
+;;	(define-key global-map [(control f6)]  'cscope-find-global-definition)
+;;	(define-key global-map [(control f7)]
+;;	  'cscope-find-global-definition-no-prompting)
+;;	(define-key global-map [(control f8)]  'cscope-pop-mark)
+;;	(define-key global-map [(control f9)]  'cscope-next-symbol)
+;;	(define-key global-map [(control f10)] 'cscope-next-file)
+;;	(define-key global-map [(control f11)] 'cscope-prev-symbol)
+;;	(define-key global-map [(control f12)] 'cscope-prev-file)
+;;      (define-key global-map [(meta f9)]  'cscope-display-buffer)
+;;      (defin-ekey global-map [(meta f10)] 'cscope-display-buffer-toggle)
 ;;
 ;; 6. Restart (X)Emacs.  That's it.
 ;;
@@ -373,121 +395,121 @@
 ;;      number of keystrokes required to navigate through the matches.
 ;;
 ;; "cscope-database-regexps"
-;;     List to force directory-to-cscope-database mappings.
-;;     This is a list of `(REGEXP DBLIST [ DBLIST ... ])', where:
+;; 	List to force directory-to-cscope-database mappings.
+;; 	This is a list of `(REGEXP DBLIST [ DBLIST ... ])', where:
 ;;
-;;     REGEXP is a regular expression matched against the current buffer's
-;;     current directory.  The current buffer is typically some source file,
-;;     and you're probably searching for some symbol in or related to this
-;;     file.  Basically, this regexp is used to relate the current directory
-;;     to a cscope database.  You need to start REGEXP with "^" if you want
-;;     to match from the beginning of the current directory.
+;; 	REGEXP is a regular expression matched against the current buffer's
+;; 	current directory.  The current buffer is typically some source file,
+;; 	and you're probably searching for some symbol in or related to this
+;; 	file.  Basically, this regexp is used to relate the current directory
+;; 	to a cscope database.  You need to start REGEXP with "^" if you want
+;; 	to match from the beginning of the current directory.
 ;;
-;;     DBLIST is a list that contains one or more of:
+;; 	DBLIST is a list that contains one or more of:
 ;;
-;;         ( DBDIR )
-;;         ( DBDIR ( OPTIONS ) )
-;;         ( t )
-;;         t
+;; 	    ( DBDIR )
+;; 	    ( DBDIR ( OPTIONS ) )
+;; 	    ( t )
+;; 	    t
 ;;
-;;     Here, DBDIR is a directory (or a file) that contains a cscope
-;;     database.  If DBDIR is a directory, then it is expected that the
-;;     cscope database, if present, has the filename given by the variable,
-;;     `cscope-database-file'; if DBDIR is a file, then DBDIR is the path
-;;     name to a cscope database file (which does not have to be the same as
-;;     that given by `cscope-database-file').  If only DBDIR is specified,
-;;     then that cscope database will be searched without any additional
-;;     cscope command-line options.  If OPTIONS is given, then OPTIONS is a
-;;     list of strings, where each string is a separate cscope command-line
-;;     option.
+;; 	Here, DBDIR is a directory (or a file) that contains a cscope
+;; 	database.  If DBDIR is a directory, then it is expected that the
+;; 	cscope database, if present, has the filename given by the variable,
+;; 	`cscope-database-file'; if DBDIR is a file, then DBDIR is the path
+;; 	name to a cscope database file (which does not have to be the same as
+;; 	that given by `cscope-database-file').  If only DBDIR is specified,
+;; 	then that cscope database will be searched without any additional
+;; 	cscope command-line options.  If OPTIONS is given, then OPTIONS is a
+;; 	list of strings, where each string is a separate cscope command-line
+;; 	option.
 ;;
-;;     In the case of "( t )", this specifies that the search is to use the
-;;     normal hierarchical database search.  This option is used to
-;;     explicitly search using the hierarchical database search either before
-;;     or after other cscope database directories.
+;; 	In the case of "( t )", this specifies that the search is to use the
+;; 	normal hierarchical database search.  This option is used to
+;; 	explicitly search using the hierarchical database search either before
+;; 	or after other cscope database directories.
 ;;
-;;     If "t" is specified (not inside a list), this tells the searching
-;;     mechanism to stop searching if a match has been found (at the point
-;;     where "t" is encountered).  This is useful for those projects that
-;;     consist of many subprojects.  You can specify the most-used
-;;     subprojects first, followed by a "t", and then followed by a master
-;;     cscope database directory that covers all subprojects.  This will
-;;     cause the most-used subprojects to be searched first (hopefully
-;;     quickly), and the search will then stop if a match was found.  If not,
-;;     the search will continue using the master cscope database directory.
+;; 	If "t" is specified (not inside a list), this tells the searching
+;; 	mechanism to stop searching if a match has been found (at the point
+;; 	where "t" is encountered).  This is useful for those projects that
+;; 	consist of many subprojects.  You can specify the most-used
+;; 	subprojects first, followed by a "t", and then followed by a master
+;; 	cscope database directory that covers all subprojects.  This will
+;; 	cause the most-used subprojects to be searched first (hopefully
+;; 	quickly), and the search will then stop if a match was found.  If not,
+;; 	the search will continue using the master cscope database directory.
 ;;
-;;     Here, `cscope-database-regexps' is generally not used, as the normal
-;;     hierarchical database search is sufficient for placing and/or locating
-;;     the cscope databases.  However, there may be cases where it makes
-;;     sense to place the cscope databases away from where the source files
-;;     are kept; in this case, this variable is used to determine the
-;;     mapping.
+;; 	Here, `cscope-database-regexps' is generally not used, as the normal
+;; 	hierarchical database search is sufficient for placing and/or locating
+;; 	the cscope databases.  However, there may be cases where it makes
+;; 	sense to place the cscope databases away from where the source files
+;; 	are kept; in this case, this variable is used to determine the
+;; 	mapping.
 ;;
-;;     This module searches for the cscope databases by first using this
-;;     variable; if a database location cannot be found using this variable,
-;;     then the current directory is searched, then the parent, then the
-;;     parent's parent, until a cscope database directory is found, or the
-;;     root directory is reached.  If the root directory is reached, the
-;;     current directory will be used.
+;; 	This module searches for the cscope databases by first using this
+;; 	variable; if a database location cannot be found using this variable,
+;; 	then the current directory is searched, then the parent, then the
+;; 	parent's parent, until a cscope database directory is found, or the
+;; 	root directory is reached.  If the root directory is reached, the
+;; 	current directory will be used.
 ;;
-;;     A cscope database directory is one in which EITHER a cscope database
-;;     file (e.g., "cscope.out") OR a cscope file list (e.g.,
-;;     "cscope.files") exists.  If only "cscope.files" exists, the
-;;     corresponding "cscope.out" will be automatically created by cscope
-;;     when a search is done.  By default, the cscope database file is called
-;;     "cscope.out", but this can be changed (on a global basis) via the
-;;     variable, `cscope-database-file'.  There is limited support for cscope
-;;     databases that are named differently than that given by
-;;     `cscope-database-file', using the variable, `cscope-database-regexps'.
+;; 	A cscope database directory is one in which EITHER a cscope database
+;; 	file (e.g., "cscope.out") OR a cscope file list (e.g.,
+;; 	"cscope.files") exists.  If only "cscope.files" exists, the
+;; 	corresponding "cscope.out" will be automatically created by cscope
+;; 	when a search is done.  By default, the cscope database file is called
+;; 	"cscope.out", but this can be changed (on a global basis) via the
+;; 	variable, `cscope-database-file'.  There is limited support for cscope
+;; 	databases that are named differently than that given by
+;; 	`cscope-database-file', using the variable, `cscope-database-regexps'.
 ;;
-;;     Here is an example of `cscope-database-regexps':
+;; 	Here is an example of `cscope-database-regexps':
 ;;
-;;        (setq cscope-database-regexps
-;;              '(
-;;            ( "^/users/jdoe/sources/proj1"
-;;              ( t )
-;;              ( "/users/jdoe/sources/proj2")
-;;              ( "/users/jdoe/sources/proj3/mycscope.out")
-;;              ( "/users/jdoe/sources/proj4")
-;;              t
-;;              ( "/some/master/directory" ("-d" "-I/usr/local/include") )
-;;              )
-;;            ( "^/users/jdoe/sources/gnome/"
-;;              ( "/master/gnome/database" ("-d") )
-;;              )
-;;            ))
+;;		(setq cscope-database-regexps
+;;		      '(
+;;			( "^/users/jdoe/sources/proj1"
+;;			  ( t )
+;;			  ( "/users/jdoe/sources/proj2")
+;;			  ( "/users/jdoe/sources/proj3/mycscope.out")
+;;			  ( "/users/jdoe/sources/proj4")
+;;			  t
+;;			  ( "/some/master/directory" ("-d" "-I/usr/local/include") )
+;;			  )
+;;			( "^/users/jdoe/sources/gnome/"
+;;			  ( "/master/gnome/database" ("-d") )
+;;			  )
+;;			))
 ;;
-;;     If the current buffer's directory matches the regexp,
-;;     "^/users/jdoe/sources/proj1", then the following search will be
-;;     done:
+;; 	If the current buffer's directory matches the regexp,
+;; 	"^/users/jdoe/sources/proj1", then the following search will be
+;; 	done:
 ;;
-;;         1. First, the normal hierarchical database search will be used to
-;;           locate a cscope database.
+;; 	    1. First, the normal hierarchical database search will be used to
+;;	       locate a cscope database.
 ;;
-;;         2. Next, searches will be done using the cscope database
-;;           directories, "/users/jdoe/sources/proj2",
-;;           "/users/jdoe/sources/proj3/mycscope.out", and
-;;           "/users/jdoe/sources/proj4".  Note that, instead of the file,
-;;           "cscope.out", the file, "mycscope.out", will be used in the
-;;           directory "/users/jdoe/sources/proj3".
+;; 	    2. Next, searches will be done using the cscope database
+;;	       directories, "/users/jdoe/sources/proj2",
+;;	       "/users/jdoe/sources/proj3/mycscope.out", and
+;;	       "/users/jdoe/sources/proj4".  Note that, instead of the file,
+;;	       "cscope.out", the file, "mycscope.out", will be used in the
+;;	       directory "/users/jdoe/sources/proj3".
 ;;
-;;         3. If a match was found, searching will stop.
+;; 	    3. If a match was found, searching will stop.
 ;;
-;;         4. If a match was not found, searching will be done using
-;;           "/some/master/directory", and the command-line options "-d"
-;;           and "-I/usr/local/include" will be passed to cscope.
+;; 	    4. If a match was not found, searching will be done using
+;;	       "/some/master/directory", and the command-line options "-d"
+;;	       and "-I/usr/local/include" will be passed to cscope.
 ;;
-;;     If the current buffer's directory matches the regexp,
-;;     "^/users/jdoe/sources/gnome", then the following search will be
-;;     done:
+;; 	If the current buffer's directory matches the regexp,
+;; 	"^/users/jdoe/sources/gnome", then the following search will be
+;; 	done:
 ;;
-;;         The search will be done only using the directory,
-;;         "/master/gnome/database".  The "-d" option will be passed to
-;;         cscope.
+;; 	    The search will be done only using the directory,
+;; 	    "/master/gnome/database".  The "-d" option will be passed to
+;; 	    cscope.
 ;;
-;;     If the current buffer's directory does not match any of the above
-;;     regexps, then only the normal hierarchical database search will be
-;;     done.
+;; 	If the current buffer's directory does not match any of the above
+;; 	regexps, then only the normal hierarchical database search will be
+;; 	done.
 ;;
 ;;
 ;; * Other notes:
@@ -534,42 +556,6 @@
 ;;    database will be created the next time a search is done.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; xcscope fixes by Fang lungang
-
-;;; xcscope.el --- interface to cscope
-
-;; This file is NOT a part of GNU Emacs.
-
-;; Copyright (C) 2006  Fang lungang
-
-;; Author: Darryl Okahata
-;; Modified: lungangfang 01-25-2007 15:00> "fang . lungang@gmail.com" (remove the whitespaces)
-;; Keywords:
-;; Version: 1.14.1.5
-;; Bugs: cscope-history related bugs please email to me (fang.lungang)
-
-;; Thank Darryl for bringing us such an amazing tool. However, despite
-;; much convenience it provides there are still some guys, including me
-;; :-), asking for certain new feature now and then on news groups:
-;; going back and forth the search history. I really want this feature
-;; since searching is sometimes time-consuming.
-
-;; USAGE: For basic usage refer to original comments. To view previous
-;;  search result, call cscope-history-backward ('C-c s v' or just 'v' in
-;;  cscope buffer) or cscope-history-forward ('V').
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Minor changes by ann7
-;;
-;; Copyright (C) 2006  Fang lungang
-;;
-;; - Fix some bugs
-;; - Add some keybindings
-;; - Align the code
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'easymenu)
 
@@ -881,7 +867,7 @@ Must end with a newline.")
 ;;;;
 
 (defcustom cscope-use-face t
-  "*Whether to use text highlighting (à la font-lock) or not."
+  "*Whether to use text highlighting or not."
   :group 'cscope
   :type '(boolean))
 
@@ -959,7 +945,7 @@ Must end with a newline.")
   (define-key cscope-list-entry-keymap "?" 'cscope-help)
   ;; The following line corresponds to be beginning of the "Cscope" menu.
   (define-key cscope-list-entry-keymap "s" 'cscope-find-this-symbol)
-  (define-key cscope-list-entry-keymap "d" 'cscope-find-this-symbol)
+  (define-key cscope-list-entry-keymap "d" 'cscope-find-global-definition)
   (define-key cscope-list-entry-keymap "g" 'cscope-find-global-definition)
   (define-key cscope-list-entry-keymap "G"
     'cscope-find-global-definition-no-prompting)
@@ -1076,10 +1062,9 @@ nil (meaning, \"no flags\").")
 ;; (defvar cscope-searched-dirs nil
 ;;   "The list of database directories already searched.")
 ;; (make-variable-buffer-local 'cscope-searched-dirs)
-(defvar cscope-searched-dirs nil
-  "The list of database directories already searched.")
-(make-variable-buffer-local 'cscope-searched-dirs)
-
+(defvar cscope-searched-databases nil
+   "The list of databases already searched.")
+(make-variable-buffer-local 'cscope-searched-databases)
 
 (defvar cscope-filter-func nil
   "Internal variable for holding the filter function to use (if any) when
@@ -1210,7 +1195,7 @@ directory should begin.")
   (define-key cscope:map "\C-csS" 'cscope-tell-user-about-directory)
   (define-key cscope:map "\C-csT" 'cscope-tell-user-about-directory)
   (define-key cscope:map "\C-csD" 'cscope-dired-directory))
-  ;; The previous line corresponds to be end of the "Cscope" menu.
+;; The previous line corresponds to be end of the "Cscope" menu.
 
 (easy-menu-define cscope:menu
   (list cscope:map cscope-list-entry-keymap)
@@ -1232,11 +1217,11 @@ directory should begin.")
     [ "Display *cscope* buffer" cscope-display-buffer t ]
     [ "Auto display *cscope* buffer toggle"
       cscope-display-buffer-toggle t ]
-    [ "Next symbol"         cscope-next-symbol t ]
-    [ "Next file"           cscope-next-file t ]
-    [ "Previous symbol"     cscope-prev-symbol t ]
-    [ "Previous file"       cscope-prev-file t ]
-    [ "Pop mark"            cscope-pop-mark t ]
+    [ "Next symbol"     	cscope-next-symbol t ]
+    [ "Next file"       	cscope-next-file t ]
+    [ "Previous symbol" 	cscope-prev-symbol t ]
+    [ "Previous file"   	cscope-prev-file t ]
+    [ "Pop mark"        	cscope-pop-mark t ]
     [ "View history backward"    cscope-history-backward t ]
     [ "View history forward"     cscope-history-forward t ]
     "-----------"
@@ -1464,7 +1449,7 @@ Push current point on mark ring and select the entry window."
     (if (windowp window)
         (progn
           (select-window window)
-          (sit-for 0)    ;; Redisplay hack to allow delete-other-windows
+          (sit-for 0) ;; Redisplay hack to allow delete-other-windows
           ;; to continue displaying the correct location.
           (delete-other-windows window)
           ))
@@ -1601,13 +1586,6 @@ Point is not saved on mark ring."
     (ring-remove cscope-history-ring))
   (setq cscope-history-ring-pos nil)
 )
-
-(defun cscope-history-delete ()
-  "Delete current history record"
-  (interactive)
-  (ring-remove cscope-history-ring cscope-history-ring-pos)
-  (ring-minus1  cscope-history-ring-pos (ring-length cscope-history-ring))
-  )
 
 (defun cscope-history-backward ()
   "View previous search result"
@@ -1822,7 +1800,7 @@ the current directory will be used."
 
       ;; Should we add any more places to look?
 
-      )        ;; end catch
+      ) ;; end catch
     (if (not info)
         (setq info (list (list top-directory))))
     info
@@ -1874,8 +1852,8 @@ using the mouse."
               (while (and cscope-process-output
                           (string-match "\\([^\n]+\n\\)\\(\\(.\\|\n\\)*\\)"
                                         cscope-process-output))
-                (setq file                nil
-                      ;; glimpse-stripped-directory    nil
+                (setq file				nil
+                      ;; glimpse-stripped-directory	nil
                       )
                 ;; Get a line
                 (setq line (substring cscope-process-output
@@ -1973,7 +1951,7 @@ using the mouse."
 
       (setq default-directory (cscope-canonicalize-directory (nth 1 cscope-history)))
 
-      (insert "====== Search History ======\n\n"
+      (insert "***Search History***\n\n"
               (car cscope-history) "\n\n"
               "Database directory: " default-directory "\n"
               "------------------------------------\n\n")
@@ -1985,8 +1963,8 @@ using the mouse."
                   (string-match "\\([^\n]+\n\\)" history-string))
         ;; string-match "\\([^\n]+\n\\)\\(\\(.\\|\n\\)*\\)" may
         ;; stack-overflow if history-string too long
-        (setq file                nil
-              ;; glimpse-stripped-directory    nil
+        (setq file				nil
+              ;; glimpse-stripped-directory	nil
               )
         ;; Get a line
         (setq line (substring history-string
@@ -2122,7 +2100,7 @@ using the mouse."
           (goto-char cscope-first-match-point))
       )
     (cond
-     ( (not done)        ;; we're not done -- do nothing for now
+     ( (not done) ;; we're not done -- do nothing for now
        (if update-window
            (if window
                (set-window-point window (point-max))
@@ -2167,24 +2145,20 @@ using the mouse."
                     (progn
                       ;; Handle the case where `cscope-directory' is really
                       ;; a full path name to a cscope database.
-                      ;; HACK2:
-                      ;; (setq base-database-file-name
+                      ;; HACK2: (setq base-database-file-name
                       (setq database-file cscope-directory
                             base-database-file-name
                             (file-name-nondirectory cscope-directory)
                             cscope-directory
                             (file-name-directory cscope-directory))
-                      ;; ))
                       )
                   ;; HACK2: Else set database-file to default name
                   (setq database-file (concat cscope-directory base-database-file-name)))
                 (setq cscope-directory
                       (file-name-as-directory cscope-directory))
-                ;; HACK2:
                 ;; (if (not (member cscope-directory cscope-searched-dirs))
                 (if (not (member database-file cscope-searched-databases))
                     (progn
-                      ;; HACK2:
                       ;; (setq cscope-searched-dirs (cons cscope-directory
                       ;;                                  cscope-searched-dirs)
                       (setq cscope-searched-databases (cons database-file
@@ -2211,7 +2185,6 @@ using the mouse."
         (if cscope-command-args
             (setq options (append options cscope-command-args)))
         (setq database-file (concat cscope-directory base-database-file-name)
-              ;; HACK2:
               ;; cscope-searched-dirs (cons cscope-directory
               ;;                            cscope-searched-dirs)
               cscope-searched-databases (cons database-file
@@ -2309,7 +2282,6 @@ SENTINEL-FUNC are optional process filter and sentinel, respectively."
       (setq default-directory directory
             cscope-start-directory nil
             cscope-search-list (cscope-find-info directory)
-            ;; HACK2:
             ;; cscope-searched-dirs nil
             cscope-searched-databases nil
             cscope-command-args args
@@ -2577,7 +2549,7 @@ file."
   (interactive (list
                 (cscope-prompt-for-symbol "Find this symbol: " nil)
                 ))
-  (let ( (cscope-adjust t) )     ;; Use fuzzy matching.
+  (let ( (cscope-adjust t) ) ;; Use fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding symbol: %s" symbol)
                  (list "-0" symbol) nil 'cscope-process-filter
@@ -2590,7 +2562,7 @@ file."
   (interactive (list
                 (cscope-prompt-for-symbol "Find this global definition: " nil)
                 ))
-  (let ( (cscope-adjust t) )     ;; Use fuzzy matching.
+  (let ( (cscope-adjust t) ) ;; Use fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding global definition: %s" symbol)
                  (list "-1" symbol) nil 'cscope-process-filter
@@ -2602,7 +2574,7 @@ file."
   "Find a symbol's global definition without prompting."
   (interactive)
   (let ( (symbol (cscope-extract-symbol-at-cursor nil))
-         (cscope-adjust t) )     ;; Use fuzzy matching.
+         (cscope-adjust t) ) ;; Use fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding global definition: %s" symbol)
                  (list "-1" symbol) nil 'cscope-process-filter
@@ -2616,7 +2588,7 @@ file."
                 (cscope-prompt-for-symbol
                  "Find functions called by this function: " nil)
                 ))
-  (let ( (cscope-adjust nil) )     ;; Disable fuzzy matching.
+  (let ( (cscope-adjust nil) ) ;; Disable fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding functions called by: %s" symbol)
                  (list "-2" symbol) nil 'cscope-process-filter
@@ -2630,7 +2602,7 @@ file."
                 (cscope-prompt-for-symbol
                  "Find functions calling this function: " nil)
                 ))
-  (let ( (cscope-adjust t) )     ;; Use fuzzy matching.
+  (let ( (cscope-adjust t) ) ;; Use fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding functions calling: %s" symbol)
                  (list "-3" symbol) nil 'cscope-process-filter
@@ -2643,7 +2615,7 @@ file."
   (interactive (list
                 (cscope-prompt-for-symbol "Find this text string: " nil)
                 ))
-  (let ( (cscope-adjust t) )     ;; Use fuzzy matching.
+  (let ( (cscope-adjust t) ) ;; Use fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding text string: %s" symbol)
                  (list "-4" symbol) nil 'cscope-process-filter
@@ -2657,7 +2629,7 @@ file."
                 (let (cscope-no-mouse-prompts)
                   (cscope-prompt-for-symbol "Find this egrep pattern: " nil))
                 ))
-  (let ( (cscope-adjust t) )     ;; Use fuzzy matching.
+  (let ( (cscope-adjust t) ) ;; Use fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding egrep pattern: %s" symbol)
                  (list "-6" symbol) nil 'cscope-process-filter
@@ -2671,7 +2643,7 @@ file."
                 (let (cscope-no-mouse-prompts)
                   (cscope-prompt-for-symbol "Find this file: " t))
                 ))
-  (let ( (cscope-adjust nil) )     ;; Disable fuzzy matching.
+  (let ( (cscope-adjust nil) ) ;; Disable fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding file: %s" symbol)
                  (list "-7" symbol) nil 'cscope-process-filter
@@ -2686,7 +2658,7 @@ file."
                   (cscope-prompt-for-symbol
                    "Find files #including this file: " t))
                 ))
-  (let ( (cscope-adjust t) )    ;; Use fuzzy matching.
+  (let ( (cscope-adjust t) ) ;; Use fuzzy matching.
     (setq cscope-symbol symbol)
     (cscope-call (format "Finding files #including file: %s" symbol)
                  (list "-8" symbol) nil 'cscope-process-filter

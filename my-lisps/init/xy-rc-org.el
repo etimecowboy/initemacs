@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-23 Mon 14:14 by xin on p5q>
+;; Time-stamp: <2012-07-26 Thu 18:27 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
 ;; Author:       Xin Yang
@@ -461,7 +461,10 @@ If html-file-name is not given, read it from minibuffer."
   ;; custom agenda commands
   ;; Custom agenda command definitions
   (setq org-agenda-custom-commands
-        '(("n" "Notes in the past 10 days" tags
+        '(
+          ("f" "Grep FIXME" occur-tree "\\<FIXME\\>")
+          ;;----------------------------------------------------------
+          ("n" "Notes in the past 10 days" tags
            "+note+TIMESTAMP_IA<\"<tomorrow>\"+TIMESTAMP_IA>=\"<-10d>\""
            ((org-agenda-overriding-header
                        "Recent notes (refile ASAP)")
@@ -881,6 +884,9 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
                ;; (org-mode-reftex-setup)
                (turn-on-reftex)
                (turn-on-org-cdlatex)
+               ;;;; change default math-symbol prefix
+               ;; (org-defkey org-cdlatex-mode-map "`" 'nil)
+               ;; (org-defkey org-cdlatex-mode-map "¬" 'cdlatex-math-symbol)
                (flyspell-mode 1)
                ;; (autopair-mode -1)
                ;; (xy/yas-start)
