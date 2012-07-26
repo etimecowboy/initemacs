@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-25 Wed 10:52 by xin on XIN-PC>
+;; Time-stamp: <2012-07-26 Thu 22:55 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -1346,7 +1346,7 @@ Improved C-x C-c."
 (defun xy/toggle-full-screen ()
   "Toggles full-screen mode for Emacs window on Win32."
   (interactive)
-  (Windows ;; NOTE: Put `emacs_fullscreen.exe'in your $PATH, such as
+  (Windows ;; NOTE: Put `emacs_fullscreen.exe' in your $PATH, such as
            ;;       your `emacs.exe' folder.
    (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe")))
 
