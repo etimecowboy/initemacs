@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-27 Fri 18:04 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 14:24 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -829,26 +829,28 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 ;;*===================================================================
 ;;* 全屏控制
 ;; fullscreen
-(GNULinux
- (defvar my-full-screen-var nil))
+(defvar xy:full-screen-flag nil)
 
+;;;###autoload
 (defun xy/toggle-fullscreen ()
   "Toggle full-screen mode."
   (interactive)
-  (if window-system
+  (when window-system
+    (progn
+      (if xy:full-screen-flag
+          (setq xy:full-screen-flag nil)
+        (setq xy:full-screen-flag t))
+
       (GNULinux
        ;; From: xiaoxuan@newsmth.net-SPAM.no (小轩)
        (if my-full-screen-var
-           (progn
-             (set-frame-parameter nil 'fullscreen 'nil)
-             (setq my-full-screen-var nil))
-         (progn
-           (set-frame-parameter nil 'fullscreen 'fullscreen)
-           (setq my-full-screen-var t))))
-    (Windows ;; NOTE: Put `emacs_fullscreen.exe' in your $PATH, such as
-             ;;       your `emacs.exe' folder.
-     ;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
-     (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe"))))
+           (set-frame-parameter nil 'fullscreen 'nil)
+         (set-frame-parameter nil 'fullscreen 'fullscreen)))
+
+      (Windows ;; NOTE: Put `emacs_fullscreen.exe' in your $PATH, such as
+       ;;       your `emacs.exe' folder.
+       ;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
+       (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe")))))
 
 ;;====================================================================
 ;;* For compatibility among different version of Emacs

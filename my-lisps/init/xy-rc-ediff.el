@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-27 Fri 18:26 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 14:25 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ediff.el'
 ;; Author:       Xin Yang
@@ -19,7 +19,11 @@
 ;;;###autoload
 (defun ediff-startup-settings ()
   "Settings of ediff startup."
-  (ediff-next-difference))
+  (ediff-next-difference)
+  (when (not xy:full-screen-flag)
+    (progn
+      (try-require 'maxframe)
+      (maximize-frame))))
 
 ;;;###autoload
 (defun ediff-variable-settings ()
@@ -28,8 +32,8 @@
 
 ;;;###autoload
 (defun xy/max-and-split-horizontally ()
+  "Maximize current frame and split the window horizontally."
   (interactive)
-  (require 'xy-rc-utils)
   (if window-system
       (if (try-require 'maxframe)
           (progn
@@ -46,7 +50,7 @@
   (add-hook 'ediff-mode-hook 'ediff-variable-settings)
   ;; 用ediff比较的时候在同一个frame中打开所有窗口
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-  ;; 全屏水平分割显示ediff结果
+  ;; 全屏水平分割显示ediff结果 BUG: NOT working
   ;; (setq ediff-split-window-function 'xy/max-and-split-horizontally)
   (setq ediff-split-window-function 'split-window-horizontally)
   ;; (require 'ediff+)

@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:41 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 15:08 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-prog.el'
 ;; Author:       Xin Yang
@@ -157,13 +157,15 @@
                 'outline-cycle)))
 
 (autoload 'outline-org-mode "outline-org-like" nil t)
-(global-set-key (kbd "<f6> o") 'outline-org-mode)
+;; NOTE: it takes a lot of time to load `org', so it is better to
+;; turn it on manually.
 ;; (am-add-hooks
 ;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
 ;;                       vhdl-mode-hook verilog-mode-hook
 ;;                       latex-mode-hook tex-mode-hook)
 ;;  '(lambda ()
-;;       (outline-org-mode 1)))
+;;       (outline-org-mode)))
+;; (global-set-key (kbd "<f6> O") 'outline-org-mode)
 
 ;;------------------------------------------------------------------
 ;;** hideshow
@@ -183,10 +185,12 @@
      ;; (define-key hs-minor-mode-map (kbd "M-<f6>") 'hs-hide-all)
      ;; (define-key hs-minor-mode-map (kbd "M-S-<f6>") 'hs-show-all)
      ))
-(am-add-hooks
- `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
-                      vhdl-mode-hook verilog-mode-hook)
- '(lambda () (hs-minor-mode 1)))
+;; BUG: start it manually, or it will conflicts with my `ediff-settings'
+;; (am-add-hooks
+;;  `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook
+;;                       vhdl-mode-hook verilog-mode-hook)
+;;  '(lambda () (hs-minor-mode)))
+(global-set-key (kbd "<f6> h") 'hs-minor-mode)
 
 ;;*** hideshow-org
 ;; The extension makes hideshow.el’s functionality behave like org-mode’s.
@@ -195,12 +199,8 @@
 ;; NOTE: the default <TAB> key conflicts with `icicles' and
 ;;       `yasnippet'
 (autoload 'hs-org/minor-mode "hideshow-org" nil t)
-;; (eval-after-load "hideshow-org" '(hideshow-org-settings))
-(add-hook 'hs-minor-mode-hook
-          (lambda ()
-              (setq tab-always-indent t)
-              ;; (indent-tabs-mode -1)
-              (hs-org/minor-mode 1)))
+(eval-after-load "hideshow-org" '(hideshow-org-settings))
+(global-set-key (kbd "<f6> H") 'hs-org/minor-mode)
 
 ;;--------------------------------------------------------------------
 ;;** orgstruct-mode
@@ -216,10 +216,10 @@
 ;;     (move-beginning-of-line nil)
 ;;     (org-cycle)))
 
-;; (global-set-key (kbd "M-[") 'org-cycle-global)
-;; (global-set-key (kbd "M-]") 'org-cycle-local)
-;; (add-hook 'emacs-lisp-mode-hook #'orgstruct-mode)
-;; (add-hook 'lisp-mode-hook #'orgstruct-mode)
+;; ;; (global-set-key (kbd "M-[") 'org-cycle-global)
+;; ;; (global-set-key (kbd "M-]") 'org-cycle-local)
+;; ;; (add-hook 'emacs-lisp-mode-hook #'orgstruct-mode)
+;; ;; (add-hook 'lisp-mode-hook #'orgstruct-mode)
 
 ;;====================================================================
 ;;* Code exploration
