@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-25 Wed 22:43 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 16:27 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
 ;; Author:       Xin Yang
@@ -228,6 +228,7 @@
 ;;* gist
 ;; Github gist service
 ;; Online code snippet for sharing and version controlling
+(eval-after-load "gist" '(gist-settings))
 ;; NOTE: Change the location of cache file (by pcache)
 (eval-after-load "pcache" '(pcache-settings))
 (global-set-key (kbd "C-x G c") 'gist-region-or-buffer)

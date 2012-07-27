@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:27 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 15:15 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-dired.el'
 ;; Author:       Xin Yang
@@ -70,7 +70,7 @@ will remain open and unsaved."
   "Settings for `dired'."
   ;; (setq truncate-lines t)
   (setq dired-kept-versions 1)
-  (setq dired-recursive-deletes 'top)  ; 可以递归的删除目录
+  (setq dired-recursive-deletes 'top)  ; 询问是否递归的删除目录
   (setq dired-recursive-copies 'always)   ; 可以递归的进行拷贝
   ;; (define-prefix-command 'dired-slash-map)
   (setq dired-dwim-target t)

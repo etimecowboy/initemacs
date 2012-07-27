@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:41 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 15:39 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-edit.el'
 ;; Author:       Xin Yang
@@ -106,9 +106,11 @@
         ("M-h" isearch-del-char)
         ;; ("M-H" ,(if is-after-emacs-23 isearch-help-map
         ;;           'isearch-mode-help))
+        ("C-o" isearch-occur)  ;; Activate occur easily inside isearch
+        ("M-Z" zap-to-isearch)
+        ("C-<return>" isearch-exit-other-end)
         ))))
-;; (define-key-list
-;;   global-map `(("C-x M-s" isearch-forward-cur-word)))
+(global-set-key (kbd "C-x M-s") 'isearch-forward-cur-word)
 
 ;;--------------------------------------------------------------------
 ;;** my own replace face

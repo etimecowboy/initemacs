@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:37 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 15:45 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-uniquify.el'
 ;; Author:       Xin Yang
@@ -20,7 +20,7 @@
 (defun uniquify-settings ()
   "Settings of `uniquify.el'."
   (setq uniquify-buffer-name-style 'forward)
-  (message "* ---[ uniquify configuration is complete ]---")
-)
+  (setq uniquify-after-kill-buffer-p t)
+  (message "* ---[ uniquify configuration is complete ]---"))
 
 (provide 'xy-rc-uniquify)

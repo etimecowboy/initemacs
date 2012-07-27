@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-25 Wed 18:21 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 17:08 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
 ;; Author:       Xin Yang
@@ -43,9 +43,7 @@
 ;; (global-set-key (kbd "C-x C-0")
 ;;                 '(lambda ()
 ;;                    ((set-frame-parameter nil 'fullscreen 'fullscreen))))
-(global-set-key (kbd "C-x C-0") 'toggle-fullscreen)
-(Windows ;; Windows
- (global-set-key (kbd "C-x C-0") 'xy/toggle-full-screen))
+(global-set-key (kbd "C-x C-0") 'xy/toggle-fullscreen)
 
 ;;--------------------------------------------------------------------
 ;;** Frame title

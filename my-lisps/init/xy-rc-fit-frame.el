@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:28 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 17:59 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-fit-frame.el'
 ;; Author:       Xin Yang
@@ -19,11 +19,11 @@
 ;;;###autoload
 (defun fit-frame-settings ()
   ;;  Add menu-bar items
-  (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
-  (define-key global-map [menu-bar frames]
-    (cons "Frames" menu-bar-frames-menu))
-  (define-key menu-bar-frames-menu [fit-frame]
-    '("Fit This Frame" . fit-frame))
+  ;; (defvar menu-bar-frames-menu (make-sparse-keymap "Frames"))
+  ;; (define-key global-map [menu-bar frames]
+  ;;   (cons "Frames" menu-bar-frames-menu))
+  ;; (define-key menu-bar-frames-menu [fit-frame]
+  ;;   '("Fit This Frame" . fit-frame))
   ;; (add-hook 'after-make-frame-functions 'fit-frame)
   ;; (add-hook 'temp-buffer-show-hook
   ;;           'fit-frame-if-one-window 'append)

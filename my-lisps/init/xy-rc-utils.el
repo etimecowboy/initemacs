@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-26 Thu 22:55 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 18:04 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -58,8 +58,6 @@
 (defvar using-laptop
   (string-match "t42" (prin1-to-string (downcase system-name))))
 ;; OS type --- are we running Microsoft Windows?
-;; (defvar running-ms-windows
-;;   (eq system-type 'windows-nt))
 (defvar running-ms-windows
   (string-match "windows" (prin1-to-string system-type)))
 (defvar running-gnu-linux
@@ -178,56 +176,6 @@
    "Preprocessor symbol files for cedet"))
 
 ;;--------------------------------------------------------------------
-;;** Jump to some directory, open some config files
-
-;; ;;;###autoload
-;; (defun goto-my-local-lisp-dir ()
-;;   "Goto `my-local-lisp-path'."
-;;   (interactive)
-;;   (dired my-local-lisp-path))
-
-;; ;;;###autoload
-;; (defun goto-my-elpa-lisp-dir ()
-;;   "Goto `my-elpa-lisp-path'."
-;;   (interactive)
-;;   (dired my-elpa-lisp-path))
-
-;; ;;;###autoload
-;; (defun goto-my-emacswiki-lisp-dir ()
-;;   "Goto `my-emacswiki-lisp-path'."
-;;   (interactive)
-;;   (dired my-emacswiki-lisp-path))
-
-;; ;;;###autoload
-;; (defun goto-my-own-lisp-dir ()
-;;   "Goto `my-own-lisp-path'."
-;;   (interactive)
-;;   (dired my-own-lisp-path))
-
-;; ;;;###autoload
-;; (defun goto-my-emacs-dir ()
-;;   "Goto `my-emacs-path'."
-;;   (interactive)
-;;   (dired my-emacs-path))
-
-;; ;;;###autoload
-;; (defun goto-my-home-dir ()
-;;   "Goto my home directory."
-;;   (interactive)
-;;   (dired "~"))
-
-;; ;;;###autoload
-;; (defun goto-my-org-source-dir ()
-;;   "Goto my org source file directory."
-;;   (interactive)
-;;   (dired my-org-source-path))
-
-;; ;;;###autoload
-;; (defun goto-my-org-latex-dir ()
-;;   "Goto my org source file directory."
-;;   (interactive)
-;;   (dired my-org-latex-path))
-
 ;;**  Reload init file
 ;; Note: when using `require' in the init.el to load other setting files,
 ;; you have to restart Emacs.
@@ -237,11 +185,11 @@
   (interactive)
   (load-file "~/.emacs.d/init.el"))
 
-;; Open init file
-;;;###autoload
-(defun open-init-dot-el-file ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
+;; ;; Open init file
+;; ;;;###autoload
+;; (defun open-init-dot-el-file ()
+;;   (interactive)
+;;   (find-file "~/.emacs.d/init.el"))
 
 ;;====================================================================
 ;;* F.Niessen's utilities in his .emacs
@@ -880,19 +828,27 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
 ;;*===================================================================
 ;;* 全屏控制
-;; From: xiaoxuan@newsmth.net-SPAM.no (小轩)
 ;; fullscreen
-(defvar my-full-screen-var nil)
-(defun toggle-fullscreen ()
+(GNULinux
+ (defvar my-full-screen-var nil))
+
+(defun xy/toggle-fullscreen ()
+  "Toggle full-screen mode."
   (interactive)
-  (if my-full-screen-var
-      (progn
-        (set-frame-parameter nil 'fullscreen 'nil)
-        (setq my-full-screen-var nil))
-    (progn
-      (set-frame-parameter nil 'fullscreen 'fullscreen)
-      (setq my-full-screen-var t))))
-;; (global-set-key [f11] 'toggle-fullscreen)
+  (if window-system
+      (GNULinux
+       ;; From: xiaoxuan@newsmth.net-SPAM.no (小轩)
+       (if my-full-screen-var
+           (progn
+             (set-frame-parameter nil 'fullscreen 'nil)
+             (setq my-full-screen-var nil))
+         (progn
+           (set-frame-parameter nil 'fullscreen 'fullscreen)
+           (setq my-full-screen-var t))))
+    (Windows ;; NOTE: Put `emacs_fullscreen.exe' in your $PATH, such as
+             ;;       your `emacs.exe' folder.
+     ;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
+     (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe"))))
 
 ;;====================================================================
 ;;* For compatibility among different version of Emacs
@@ -1339,16 +1295,6 @@ Improved C-x C-c."
      (make-frame-invisible nil t)))
   (GNULinux
      (save-buffers-kill-terminal)))
-
-;;--------------------------------------------------------------------
-;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
-;;;###autoload
-(defun xy/toggle-full-screen ()
-  "Toggles full-screen mode for Emacs window on Win32."
-  (interactive)
-  (Windows ;; NOTE: Put `emacs_fullscreen.exe' in your $PATH, such as
-           ;;       your `emacs.exe' folder.
-   (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe")))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload

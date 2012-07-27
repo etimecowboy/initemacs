@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:34 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 18:17 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-recentf.el'
 ;; Author:       Xin Yang
@@ -17,9 +17,10 @@
 (require 'xy-rc-utils)
 
 ;;;###autoload
+;; BUG: NOT working
 (defun undo-kill-buffer (arg)
   "Re-open the last buffer killed. With ARG, re-open the nth buffer."
-  (interactive "p")
+  (interactive)
   (let ((recently-killed-list (copy-sequence recentf-list))
         (buffer-files-list
          (delq nil (mapcar (lambda (buf)
@@ -43,7 +44,8 @@
                           system-configuration))
   (unless (file-exists-p recentf-save-file)
     (shell-command (concat "touch " recentf-save-file)))
-  (setq recentf-exclude '("bbdb" "gnus" "mew" "w3m" "gtd"))
+  (setq recentf-exclude '("bbdb" "gnus" "mew" "w3m" "gtd" "/temp/"
+                          "/ssh:" "loaddefs"))
   (setq recentf-menu-open-all-flag t)
   (setq recentf-max-saved-items 100)
   (setq recentf-max-menu-items 20)
@@ -54,7 +56,6 @@
     "Move current buffer to the beginning of the recent list after killed."
     (recentf-track-opened-file))
 
-  (message "* ---[ recentf configuration is complete ]---")
-)
+  (message "* ---[ recentf configuration is complete ]---"))
 
 (provide 'xy-rc-recentf)

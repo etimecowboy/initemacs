@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:30 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 15:56 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ibuffer.el'
 ;; Author:       Xin Yang
@@ -43,22 +43,23 @@
      ((> (buffer-size) 1000) (format "%7.3fk" (/ (buffer-size) 1000.0)))
      ((> (buffer-size) 1000000) (format "%7.3fM" (/ (buffer-size) 1000000.0)))
      (t (format "%8d" (buffer-size)))))
+
+  ;; Explicitly require ibuffer-vc to get its column definitions, which
+  ;; can't be autoloaded
+  (require 'ibuffer-vc)
+
   ;; Modify the default ibuffer-formats
   (setq ibuffer-formats
         '((mark modified read-only " "
-                (name 20 20 :left :elide)
+                (name 18 18 :left :elide)
                 " | "
-                (size-h 7 -1 :right)
+                (size-h 9 -1 :right)
                 " | "
-                (mode 12 12 :left :elide)
+                (mode 16 16 :left :elide)
+                " | "
+                (vc-status 16 16 :left)
                 " | "
                 (filename-and-process 30 30 :left :elide))))
-
-  ;; (setq ibuffer-formats
-  ;;     '((mark modified read-only " " (name 25 25 :left :elide) " "
-  ;;             (size 9 -1 :right) " " (mode 16 16 :left :elide) " "
-  ;;             filename-and-process)
-  ;;       (mark " " (name 16 -1) " " filename)))
 
   (setq ibuffer-saved-filter-groups
         '(("default"

@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-16 Mon 18:34 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 18:18 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-session.el'
 ;; Author:       Xin Yang
@@ -84,6 +84,7 @@
 ;;** recentf
 ;; Save recent openned files
 (eval-after-load "recentf" '(recentf-settings))
+;; (global-set-key (kbd "C-x y") 'undo-kill-buffer) ;; BUG:
 (recentf-mode 1)
 
 ;;--------------------------------------------------------------------

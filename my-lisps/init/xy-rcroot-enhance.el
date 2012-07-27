@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-23 Mon 21:21 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 16:39 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-enhance.el'
 ;; Author:       Xin Yang
@@ -21,6 +21,8 @@
 
 ;;** Enable some hidden functions
 (put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-defun 'disabled nil)
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

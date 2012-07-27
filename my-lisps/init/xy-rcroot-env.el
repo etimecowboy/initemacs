@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-26 Thu 14:18 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 18:20 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -67,7 +67,7 @@
 ;;* Emacs generated customization
 
 (setq custom-file (concat my-init-lisp-path "/xy-rcroot-auto.el"))
-;; (load "xy-rcroot-auto")
+;; (load custom-file)
 
 ;;====================================================================
 ;;* Search pathes

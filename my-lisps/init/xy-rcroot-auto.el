@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-17 Tue 16:05 by xin on p5q>
+;; Time-stamp: <2012-07-27 Fri 18:06 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-auto.el'
 ;; Author:       Xin Yang

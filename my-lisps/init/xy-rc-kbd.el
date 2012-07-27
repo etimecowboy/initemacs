@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:31 by xin on XIN-PC>
+;; Time-stamp: <2012-07-27 Fri 16:50 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-kbd.el'
 ;; Author:       Xin Yang
@@ -68,9 +68,11 @@
    ("C-<f10>"  tool-bar-mode) ;; (if (>= emacs-major-version 23)
    ;;------------------------------------
    ;; changing font size
-   ("C-+" text-scale-increase) ;; (if (
-   ("C--" text-scale-decrease)
-   ("C-0" text-scale-normal-size)
+   ("C-+"    text-scale-increase) ;; (if (
+   ("C--"    text-scale-decrease)
+   ("C-0"    text-scale-normal-size)
+   ("C-M-="  increase-default-font-height)
+   ("C-M--"  decrease-default-font-height)
    ))
 
 ;;====================================================================
@@ -149,17 +151,6 @@
  global-map
  `(("C-x B" xy/emacs-build)))
    ;; ("C-x G i" open-init-dot-el-file)))
-
-;; (eal-define-keys-commonly
-;;  global-map
-;;  `(("C-x G l" goto-my-local-lisp-dir)
-;;    ("C-x G m" goto-my-own-lisp-dir)
-;;    ("C-x G p" goto-my-elpa-lisp-dir)
-;;    ("C-x G a" goto-my-emacswiki-lisp-dir)
-;;    ("C-x G e" goto-my-emacs-dir)
-;;    ("C-x G h" goto-my-home-dir)
-;;    ("C-x G o" goto-my-org-source-dir)
-;;    ("C-x G t" goto-my-org-latex-dir)))
 
 (global-set-key (kbd "C-x K") (lambda ()
                                 (interactive)
