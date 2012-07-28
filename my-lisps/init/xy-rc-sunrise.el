@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:35 by xin on XIN-PC>
+;; Time-stamp: <2012-07-28 Sat 17:09 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-sunrise.el'
 ;; Author:       Xin Yang
@@ -19,17 +19,19 @@
 ;;;###autoload
 (defun sunrise-settings ()
   "Settings of `sunrise.el'."
+
   (setq ;; sr-avfs-root "~/"
         sr-history-length 100
         sr-show-file-attributes nil
         sr-show-hidden-files t
-        sr-windows-default-ratio 50
+        sr-windows-default-ratio 60
         sr-window-split-style (quote horizontal))
 
   (setq sr-start-hook
-   (quote (sr-tree-menu-init
-           sr-tabs-start-once
-           sr-modeline-start-once)))
+        (quote (xy/smart-maximize-frame
+                sr-tree-menu-init
+                sr-tabs-start-once
+                sr-modeline-start-once)))
 
   (try-require 'sunrise-commander)
   (try-require 'sunrise-x-buttons) ;; cannot be used with popviewer

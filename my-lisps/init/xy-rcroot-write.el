@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-25 Wed 18:45 by xin on p5q>
+;; Time-stamp: <2012-07-28 Sat 09:58 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-write.el'
 ;; Author:       Xin Yang
@@ -39,7 +39,8 @@
         ("C-c M-c" org-coordinates-google-geocode-set)
         ("C-c M-L" org-address-google-geocode-set)
         ("C-c M-A" org-address-google-geocode-set)
-        ("C-c M-l" org-location-google-maps)))))
+        ("C-c M-l" org-location-google-maps)
+        ("C-c g"   org-publish-blog)))))
 (eval-after-load "org-agenda" '(org-settings))
 (eval-after-load "org-capture" '(org-settings))
 
@@ -50,8 +51,8 @@
    ("C-c b"   org-ido-switchb)
    ("C-c c"   org-capture)
    ("C-c n"   org2blog/wp-new-entry)
-   ("C-c g"   org-publish-blog)
-   ("C-c M-w" tzz-copy-region-with-mode-property)))
+   ("C-c u e" xy/browse-my-emacs-blog)
+   ("M-W" tzz-copy-region-with-mode-property)))
 
 ;; BUG: when use this to fix org-agenda/org-mobile-push error ((error
 ;;      function `appt-make-list') in Emacs24 ((@url :file-name "http://www.mail-archive.com/emacs-orgmode@gnu.org/msg47051.html" :display "REF")) .

@@ -4,7 +4,7 @@
 
 ;; Author: Xin Yang <xin2.yang@gmail.com>
 ;; Created: 27 Nov 2011
-;; Time-stamp: <2012-07-27 Fri 16:49 by xin on p5q>
+;; Time-stamp: <2012-07-28 Sat 08:41 by xin on p5q>
 ;; Keywords: auto install lisp load-path autoloads
 ;; Compatibility: Only tested on GNU Emacs 23.2
 
@@ -21,7 +21,7 @@
 ;; REF: (@url :file-name "https://github.com/purcell/emacs.d" :display "Github Source")
 
 ;;============================================================================
-;; filename
+;; From file: `init-utils.el'
 ;;----------------------------------------------------------------------------
 ;; Handier way to add modes to auto-mode-alist
 ;;----------------------------------------------------------------------------

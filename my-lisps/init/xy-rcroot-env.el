@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-27 Fri 18:20 by xin on p5q>
+;; Time-stamp: <2012-07-28 Sat 16:58 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -56,11 +56,32 @@
 ;; Change default text in the *scratch* buffer
 
 ;; NOTE: a warnning message is nessary for emacs fans like me
-(setq initial-scratch-message
-      ";; Emacs is a work TOOL other than a computer toy!
-;; Playing with Emacs is fun, but your work in hand is MUCH MORE important!
-;; Press \"C-c a p\" now to check your tasks today.
-;; GETTING THINGS DONE from now on!
+(setq initial-scratch-message "\
+;;        Welcome to the Emacs Operating System!
+;;
+;;====================== Citations =========================
+;;
+;;* \"Show me your ~/.emacs and I'll tell you who you are.\"
+;;                                         [Bogdan Maryniuk]
+;;
+;;* \"Emacs is like a laser guided missile. It only has to
+;;   be slightly mis-configured to ruin your whole day.\"
+;;                                            [Sean McGrath]
+;;
+;;* \"While any text editor can save your files,
+;;   only Emacs can save your soul.\"
+;;                                          [Per Abrahamsen]
+;;
+;;================ 工具还是玩物，这是个问题 ================
+;;
+;;- Emacs：    “只有你想不到，没有我做不到！”
+;;- 我：       “太棒了！那就尽量多学一些吧！”
+;;- Emacs：    “那交出你全部的时间吧！”
+;;- 我：       “NO！那就只折腾我用的着的吧？”
+;;- Emacs：    “你能经得起诱惑吗？”
+;;
+;; ================ Emacs-lisp code begins =================
+;;
 ")
 
 ;;====================================================================
@@ -227,7 +248,7 @@
 ;;          (destructuring-bind (hi lo ms) (current-time)
 ;;            (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                            (second *emacs-load-start*)))))
-(add-to-list 'load-path "~/.emacs.d/auctex")
+(add-to-list 'load-path "~/.emacs.d/auctex-11.86-fixed")
 
 ;; ;; REF: (@url :file-name "https://github.com/m2ym/fuzzy-el" :display "Git Source")
 ;; ;; NOTE: MUST before `auto-complete'
@@ -387,14 +408,6 @@
 ;;      (@url :file-name "http://renard.github.com/o-blog/index.html" :display "Website")
 (xy/load-autoload (concat my-local-lisp-path "/o-blog"))
 (message "* ---[ o-blog lisps installed at %ds ]---"
-         (destructuring-bind (hi lo ms) (current-time)
-           (- (+ hi lo) (+ (first *emacs-load-start*)
-                           (second *emacs-load-start*)))))
-
-;; REF:  (@url :file-name "https://github.com/winterTTr/ace-jump-mode" :display "Git Source")
-;; A fast/direct cursor location minor mode.
-(xy/load-autoload (concat my-local-lisp-path "/ace-jump-mode"))
-(message "* ---[ ace-jump-mode lisps installed at %ds ]---"
          (destructuring-bind (hi lo ms) (current-time)
            (- (+ hi lo) (+ (first *emacs-load-start*)
                            (second *emacs-load-start*)))))

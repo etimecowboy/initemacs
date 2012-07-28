@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-27 Fri 17:08 by xin on p5q>
+;; Time-stamp: <2012-07-28 Sat 08:19 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
 ;; Author:       Xin Yang
@@ -105,7 +105,7 @@
    ("S-<f5>" fit-frame)
    ;;-----------------------------------
    ;; `maxframe.el'
-   ("M-<f5>" maximize-frame)
+   ("M-<f5>" xy/smart-maximize-frame)
    ("M-S-<f5>" restore-frame)
    ;;------------------------------------
    ;; `windresize.el'

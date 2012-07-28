@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-20 Fri 09:32 by xin on p5q>
+;; Time-stamp: <2012-07-28 Sat 10:42 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-anything.el'
 ;; Author:       Xin Yang
@@ -26,18 +26,15 @@
   (anything-other-buffer
    '(;; Buffer:
      anything-c-source-buffers
-     ;; anything-c-source-buffers+
      ;; anything-c-source-buffer-not-found
      ;; File:
      anything-c-source-file-name-history
      anything-c-source-recentf
-     ;; anything-c-source-files-in-current-dir
      anything-c-source-files-in-current-dir+
      ;; anything-c-source-file-cache
-     ;; NOTE: may cause crash to emacs in Windows
-     ;; anything-c-source-locate
      anything-c-source-ffap-line
      anything-c-source-ffap-guesser
+     ;; anything-c-source-locate  ;; BUG: 慢，还可能出问题
      ;; Bookmark:
      anything-c-source-bookmarks
      ;; Command:
@@ -92,18 +89,18 @@
   ;;       ;;  ("ack-grep -af | xargs egrep -Hin %s *.el" "~/.emacs.d/my-lisps/"))
   ;;       ))
 
-  (global-set-key (kbd "C-x b")
-          (lambda() (interactive)
-            (anything
-             :prompt "Switch to: "
-             :candidate-number-limit 10
-             :sources
-             '( anything-c-source-buffers
-                anything-c-source-recentf
-                ;; anything-c-source-file-cache ;; BUG: 容易出问题
-                anything-c-source-bookmarks
-                anything-c-source-files-in-current-dir+
-                anything-c-source-locate))))
+  ;; (global-set-key (kbd "C-x b")
+  ;;         (lambda() (interactive)
+  ;;           (anything
+  ;;            :prompt "Switch to: "
+  ;;            :candidate-number-limit 10
+  ;;            :sources
+  ;;            '( anything-c-source-buffers
+  ;;               anything-c-source-recentf
+  ;;               ;; anything-c-source-file-cache ;; BUG: 容易出问题
+  ;;               anything-c-source-bookmarks
+  ;;               anything-c-source-files-in-current-dir+
+  ;;               anything-c-source-locate))))
 
   ;; BUG: windows locate32 not working!, console mode chinese encoding error.
 

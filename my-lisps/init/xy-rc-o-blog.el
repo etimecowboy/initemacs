@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-02 Mon 20:14 by xin on XIN-PC>
+;; Time-stamp: <2012-07-28 Sat 09:56 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-o-blog.el'
 ;; Author:       Xin Yang
@@ -15,6 +15,15 @@
 
 (require 'cl)
 (require 'xy-rc-utils)
+
+;;;###autoload
+(defun xy/browse-my-emacs-blog ()
+  "Open the my Emacs blog using `browse-url'."
+  (interactive)
+  (browse-url
+   (concat "file://"
+           (expand-file-name
+            "~/emacs/org/html/blogs/o-blog-emacs/index.html"))))
 
 ;;;###autoload
 (defun o-blog-settings ()

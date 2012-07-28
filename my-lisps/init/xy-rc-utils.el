@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-27 Fri 14:24 by xin on XIN-PC>
+;; Time-stamp: <2012-07-28 Sat 16:57 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -824,7 +824,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (if window-system
       (progn
         (xy/set-font-write-big)
-        (color-theme-solarized-dark))))
+        (color-theme-solarized-dark)
+        (xy/toggle-fullscreen))))
 
 ;;*===================================================================
 ;;* 全屏控制
@@ -843,14 +844,26 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
       (GNULinux
        ;; From: xiaoxuan@newsmth.net-SPAM.no (小轩)
-       (if my-full-screen-var
-           (set-frame-parameter nil 'fullscreen 'nil)
-         (set-frame-parameter nil 'fullscreen 'fullscreen)))
+       (if xy:full-screen-flag
+           (set-frame-parameter nil 'fullscreen 'fullscreen)
+         (set-frame-parameter nil 'fullscreen nil)))
 
       (Windows ;; NOTE: Put `emacs_fullscreen.exe' in your $PATH, such as
        ;;       your `emacs.exe' folder.
        ;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
        (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe")))))
+
+;;;###autoload
+(defun xy/smart-maximize-frame ()
+  "Fix the `maxframe.el' from emacswiki.\
+If the current emacs frame is in full screen mode, then give up the
+maximize-frame command of `maxframe.el'."
+
+  (interactive)
+  (when (and window-system (not xy:full-screen-flag))
+    (progn
+      (try-require 'maxframe)
+      (maximize-frame))))
 
 ;;====================================================================
 ;;* For compatibility among different version of Emacs
@@ -1330,7 +1343,6 @@ Improved C-x C-c."
   (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
   (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.5"))
   (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/rw-hunspell-0.2"))
   ;; (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
   (xy/install-all-lisps (concat my-local-lisp-path "/emacs-w3m/shimbun"))
   (xy/install-all-lisps (concat my-local-lisp-path "/emacs-w3m"))
@@ -1341,14 +1353,13 @@ Improved C-x C-c."
   ;; (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
   (xy/install-all-lisps (concat my-local-lisp-path "/command-log-mode"))
   (xy/install-all-lisps (concat my-local-lisp-path "/o-blog"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/ace-jump-mode"))
 
   (xy/install-all-lisps "~/.emacs.d/themes")
   ;;------------------------------------------------------------------
   ;; TODO: Write lisp code to do it.
   (xy/recompile-dir my-elpa-lisp-path 'with-subdirs 'recursive)
-  (xy/recompile-dir "~/.emacs.d/auctex")
-  (xy/recompile-dir "~/.emacs.d/auctex/style")
+  (xy/recompile-dir "~/.emacs.d/auctex-11.86-fixed")
+  (xy/recompile-dir "~/.emacs.d/auctex-11.86-fixed/style")
 
   ;;------------------------------------------------------------------
   ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled

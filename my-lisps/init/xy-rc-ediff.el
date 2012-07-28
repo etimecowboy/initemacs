@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-27 Fri 14:25 by xin on XIN-PC>
+;; Time-stamp: <2012-07-28 Sat 08:18 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-ediff.el'
 ;; Author:       Xin Yang
@@ -20,10 +20,7 @@
 (defun ediff-startup-settings ()
   "Settings of ediff startup."
   (ediff-next-difference)
-  (when (not xy:full-screen-flag)
-    (progn
-      (try-require 'maxframe)
-      (maximize-frame))))
+  (xy/smart-maximize-frame))
 
 ;;;###autoload
 (defun ediff-variable-settings ()
