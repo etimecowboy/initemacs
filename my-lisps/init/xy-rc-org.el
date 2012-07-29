@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-26 Thu 18:27 by xin on p5q>
+;; Time-stamp: <2012-07-29 Sun 10:21 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
 ;; Author:       Xin Yang
@@ -745,6 +745,12 @@ If html-file-name is not given, read it from minibuffer."
         org-confirm-babel-evaluate nil
         org-export-babel-evaluate nil
         org-src-tab-acts-natively t)
+
+  ;; Delete babel temporary diretory instead of trash it.
+  ;; macro `bypass-trash-in-function(fun)' sets FUN to always use
+  ;; normal deletion, and never trash.
+  (mapc (lambda (fun) (eval `(bypass-trash-in-function ,fun)))
+        '(org-babel-remove-temporary-directory))
 
   ;;----------------------------------------------------------------
   ;; LaTeX export settings

@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-28 Sat 16:58 by xin on p5q>
+;; Time-stamp: <2012-07-29 Sun 10:43 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-env.el'
 ;; Author:       Xin Yang
@@ -653,6 +653,12 @@ Toggle keyboard command logging of whole emacs.
   ;; (setq default-terminal-coding-system 'gbk-dos)
   ;; (setq default-process-coding-system '(gbk-dos . gbk-dos)))
 
+;;** `unicad.el'
+;; File encoding auto detection
+(when (try-require 'unicad)
+  (unicad-enable)
+  (add-hook 'kill-emacs-hook 'unicad-disable)) ;; fix conflict with ido
+
 ;;--------------------------------------------------------------------
 ;;** Fonts
 ;; Use scalable fonts
@@ -728,15 +734,15 @@ Toggle keyboard command logging of whole emacs.
 ;; IBus client for GNU Emacs
 ;; REF:  (@url :file-name "http://www11.atwiki.jp/s-irie/pages/21.html" :display "Source")
 (GNULinux
- (require 'ibus)
- ;; Turn on ibus-mode automatically after loading .emacs
- (add-hook 'after-init-hook 'ibus-mode-on)
- ;; Use C-SPC for Set Mark command
- ;; (ibus-define-common-key ?\C-\s nil)
- ;; Use C-/ for Undo command
- (ibus-define-common-key ?\C-/ nil)
- ;; Change cursor color depending on IBus status
- (setq ibus-cursor-color '("purple" "red" "blue")))
+ (when (try-require 'ibus)
+   ;; Turn on ibus-mode automatically after loading .emacs
+   (add-hook 'after-init-hook 'ibus-mode-on)
+   ;; Use C-SPC for Set Mark command
+   ;; (ibus-define-common-key ?\C-\s nil)
+   ;; Use C-/ for Undo command
+   (ibus-define-common-key ?\C-/ nil)
+   ;; Change cursor color depending on IBus status
+   (setq ibus-cursor-color '("purple" "red" "blue"))))
 
 ;;====================================================================
 ;;* Emacs lisp management中文设置无问题
@@ -770,8 +776,6 @@ Toggle keyboard command logging of whole emacs.
 
 ;;====================================================================
 ;;* Emacs server
-;; Emacs可以做为一个server, 然后用emacsclient连接这个server,
-;; 无需再打开两个Emacs。
 
 ;; Emacs-21 以前的版本要用 gnuserv
 ;; (if is-before-emacs-21
@@ -785,47 +789,9 @@ Toggle keyboard command logging of whole emacs.
 ;;       (setenv "GNUSERV_SHOW_EMACS" "1")))
 
 ;;--------------------------------------------------------------------
-;; NOTE: If you want to re-load emacs configuration during the run,
-;; don't start emacs server here, instead, you can `M-x server-start'
-;; or `M-x xy/server-start' in an emacs process when you need.
-
-;; (setq-default server-auth-dir (concat my-var-path "/server"))
-;; (if (not (eq t (server-running-p server-name)))
-;;     (server-start))
-
-;; ;;;###autoload
-;; (defun xy/server-start ()
-;;   "My version of starting emacs-server"
-;;   (interactive)
-;;   (server-force-delete)
-;;   ;; (setq server-auth-dir (concat my-var-path "/server"))
-;;   (server-start))
-
-(setq-default server-auth-dir (concat my-var-path "/server"))
-
-;; NOTE: With this macro, `server-start', `server-force-delete', and
-;; `emacs --daemon' works properly even when there is an emacs server
-;; running, when you set `delete-by-moving-to-trash' to true.
-;; REF: (@url :file-name "http://superuser.com/questions/176207/emacs-daemon-not-deleting-socket" :display "Post")
-(defmacro bypass-trash-in-function (fun)
-  "Set FUN to always use normal deletion, and never trash.
-
-Specifically, the value of `delete-by-moving-to-trash' will be
-set to nil inside FUN, so any deletions that happen inside FUN or
-any functions called by it will bypass the trash."
-  `(defadvice ,fun (around no-trash activate)
-     "Ignore `delete-by-moving-to-trash' inside this function.
-
-See `bypass-trash-in-function' for more information."
-     (let (delete-by-moving-to-trash)
-       ad-do-it)))
-
-;; Any server function that may delete the server file should never
-;; move it to trash instead.
-(mapc (lambda (fun) (eval `(bypass-trash-in-function ,fun)))
-      '(server-start server-sentinel server-force-delete))
-
-(server-start)
+;; Emacs 22 or newer
+(eval-after-load "server" '(server-settings))
+(server-start-if-not-exists)
 
 ;;--------------------------------------------------------------------
 ;; Emacs 23.2 以后还提供了 `Emacs --daemon' 模式，加快启动。
@@ -841,7 +807,6 @@ See `bypass-trash-in-function' for more information."
 
 ;;====================================================================
 ;;* Emacs key bindings
-
 (require 'xy-rc-kbd)
 
 (provide 'xy-rcroot-env)

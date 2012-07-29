@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-28 Sat 16:57 by xin on p5q>
+;; Time-stamp: <2012-07-29 Sun 10:16 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -1310,6 +1310,25 @@ Improved C-x C-c."
      (make-frame-invisible nil t)))
   (GNULinux
      (save-buffers-kill-terminal)))
+
+;;--------------------------------------------------------------------
+;; NOTE: With this macro, `server-start', `server-force-delete', and
+;; `emacs --daemon' works properly even when there is an emacs server
+;; running, when you set `delete-by-moving-to-trash' to true.
+;; REF: (@url :file-name "http://superuser.com/questions/176207/emacs-daemon-not-deleting-socket" :display "Post")
+
+(defmacro bypass-trash-in-function (fun)
+  "Set FUN to always use normal deletion, and never trash.
+
+Specifically, the value of `delete-by-moving-to-trash' will be
+set to nil inside FUN, so any deletions that happen inside FUN or
+any functions called by it will bypass the trash."
+  `(defadvice ,fun (around no-trash activate)
+     "Ignore `delete-by-moving-to-trash' inside this function.
+
+See `bypass-trash-in-function' for more information."
+     (let (delete-by-moving-to-trash)
+       ad-do-it)))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload

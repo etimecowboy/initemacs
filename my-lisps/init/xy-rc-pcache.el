@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-01 Sun 23:33 by xin on XIN-PC>
+;; Time-stamp: <2012-07-29 Sun 10:27 by xin on p5q>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-pcache.el'
 ;; Author:       Xin Yang
@@ -19,7 +19,7 @@
 ;;;###autoload
 (defun pcache-settings ()
   "Settings of `pcache.el'."
-  (setq-default pcache-directory
+  (setq pcache-directory
     (let ((dir (concat my-var-path "/pcache")))
       (make-directory dir t)
       dir))
