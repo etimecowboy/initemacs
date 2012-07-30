@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-28 Sat 02:50 by xin on p5q>
+;; Time-stamp: <2012-07-30 Mon 19:54 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-package.el'
 ;; Author:       Xin Yang
@@ -158,7 +158,6 @@
   (require-package 'popup)
   (require-package 'rw-hunspell)
   (require-package 'rw-ispell)
-  (require-package 'session)
   (require-package 'smarter-compile)
   (require-package 'smex)
   (require-package 'sunrise-commander)

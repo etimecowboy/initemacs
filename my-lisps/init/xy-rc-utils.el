@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-29 Sun 10:16 by xin on p5q>
+;; Time-stamp: <2012-07-30 Mon 21:22 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -44,10 +44,7 @@
   "Name of diretory where my local man files reside.")
 (defvar my-emacs-path "~/emacs"
   "Name of directory where my working files reside.")
-(defvar my-org-source-path "~/emacs/org/source"
-  "Name of directory where my org source files reside.")
-(defvar my-org-latex-path "~/emacs/org/latex/phd")
-(defvar my-var-path "~/emacs/var"
+(defvar my-var-path "~/.emacs.d/var"
   "Name of directory where my various Emacs log/record files reside.")
 
 ;;*** Machine names --- which machine are we using?
@@ -838,32 +835,63 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (interactive)
   (when window-system
     (progn
-      (if xy:full-screen-flag
-          (setq xy:full-screen-flag nil)
-        (setq xy:full-screen-flag t))
-
       (GNULinux
        ;; From: xiaoxuan@newsmth.net-SPAM.no (小轩)
        (if xy:full-screen-flag
-           (set-frame-parameter nil 'fullscreen 'fullscreen)
-         (set-frame-parameter nil 'fullscreen nil)))
+           (progn
+             (setq xy:full-screen-flag nil)
+             (set-frame-parameter nil 'fullscreen nil))
+         (progn
+           (setq xy:full-screen-flag t)
+           (set-frame-parameter nil 'fullscreen 'fullscreen))))
 
       (Windows ;; NOTE: Put `emacs_fullscreen.exe' in your $PATH, such as
        ;;       your `emacs.exe' folder.
        ;; REF: (@url :file-name "https://bitbucket.org/alexander_manenko/emacs-fullscreen-win32/wiki/Home" :display "Source:emacs-fullscreen-win32")
-       (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe")))))
+       ;; NOTE: not works with `autofit-frame.el'
+       ;; ;; (setq autofit-frame-flag nil)
+       ;; (shell-command "%HOME%/.emacs.d/bin/win32/emacs_fullscreen.exe")))))
+       ;; Use patched fullscreen version Emacs
+       (if xy:full-screen-flag
+           (progn
+             (setq xy:full-screen-flag nil)
+             (set-frame-parameter nil 'fullscreen nil))
+         (progn
+           (setq xy:full-screen-flag t)
+           (set-frame-parameter nil 'fullscreen 'fullscreen)))))))
+
+;; maximize frame
+(defvar xy:maxframe-flag nil)
 
 ;;;###autoload
 (defun xy/smart-maximize-frame ()
-  "Fix the `maxframe.el' from emacswiki.\
-If the current emacs frame is in full screen mode, then give up the
-maximize-frame command of `maxframe.el'."
+  "Fix the `maximize-frame' function of `maxframe.el'.\
+If the current emacs frame is in full screen mode, then give up\
+the `maximize-frame command' of `maxframe.el'."
 
   (interactive)
-  (when (and window-system (not xy:full-screen-flag))
-    (progn
-      (try-require 'maxframe)
-      (maximize-frame))))
+  (when (try-require 'maxframe)
+    (when (and window-system (not xy:full-screen-flag))
+      (progn
+        (maximize-frame)
+        (setq xy:maxframe-flag t)))))
+
+;;;###autoload
+(defun xy/smart-toggle-maxframe ()
+  "Smart maximize and restore the size of the frame.\
+Also makes `maxframe.el' works with `xy/toggle-fullscreen' function."
+
+  (interactive)
+  (when (try-require 'maxframe)
+    (when (and window-system (not xy:full-screen-flag))
+      (progn
+        (if xy:maxframe-flag
+            (progn
+              (setq xy:maxframe-flag nil)
+              (restore-frame))
+          (progn
+            (setq xy:maxframe-flag t)
+            (maximize-frame)))))))
 
 ;;====================================================================
 ;;* For compatibility among different version of Emacs
@@ -1011,7 +1039,7 @@ of a match for REGEXP."
 ;;;###autoload
 (defun xy/recompile-dir
   (this-directory &optional with-subdirs recursive)
-  "Recompile all files in THIS-DIRECTORY which are newer than their
+  "Recompile all files in THIS-DIRECTORY which are newer than their \
 corresponding .elc files.
 
 Provide WITH-SUBDIRS and RECURSIVE options to allow recursive
@@ -1058,10 +1086,11 @@ directories starting with a `.'."
 ;;;###autoload
 (defun xy/update-all-autoloads
   (this-directory &optional with-subdirs recursive)
-  "Update the autoloads cache file for THIS-DIRECTORY, if there are
-newer .el files. The file name of the autoloads cache is like
-`loaddefs@!home!user!.emacs.d!lisps.el', which is built from the
-full path of the directory.
+  "Update the autoloads cache file for THIS-DIRECTORY.
+
+If there are newer .el files. The file name of the autoloads
+cache is like `loaddefs@!home!user!.emacs.d!lisps.el', which is
+built from the full path of the directory.
 
 Provide WITH-SUBDIRS and RECURSIVE options to allow recursive
 operation when you use it in non-interatively manner, but without

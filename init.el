@@ -1,7 +1,7 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
 ;;--------------------------------------------------------------------
 ;; File name:    `init.el'
-;; Time-stamp: <2012-07-27 Fri 09:15 by xin on p5q>
+;; Time-stamp: <2012-07-30 Mon 21:00 by xin on XIN-PC>
 ;; Author:       Xin Yang
 ;; Email:        xin2.yang@gmail.com
 ;; Depend on:    None
@@ -20,13 +20,13 @@
 
 (message "* ---[ Loading my Emacs init file ]---")
 
-;; measure the loading time per file.
-(defadvice load (around load-with-time-logging)
-  "display the load time for each file."
-  (let ((now (float-time)))
-    ad-do-it
-    (message "%2.3f seconds is used." (- (float-time) now))))
-(ad-activate 'load)
+;; ;; measure the loading time per file.
+;; (defadvice load (around load-with-time-logging)
+;;   "display the load time for each file."
+;;   (let ((now (float-time)))
+;;     ad-do-it
+;;     (message "%2.3f seconds is used." (- (float-time) now))))
+;; (ad-activate 'load)
 
 ;; Startup time
 (defvar *emacs-load-start* (current-time))

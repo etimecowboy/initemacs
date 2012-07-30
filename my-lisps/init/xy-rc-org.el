@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-29 Sun 10:21 by xin on p5q>
+;; Time-stamp: <2012-07-30 Mon 21:11 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-org.el'
 ;; Author:       Xin Yang
@@ -179,9 +179,8 @@ If html-file-name is not given, read it from minibuffer."
               'wl-org-column-view-uses-fixed-width-face))
 
   ;;------------------------------------------------------------------
-  ;; NOTE: Use icicles instead
   ;; (setq org-completion-use-iswitchb t)
-  ;; (setq org-completion-use-ido t)
+  (setq org-completion-use-ido t)
 
   ;; Disable ENT to follow links
   (setq org-return-follows-link nil)
@@ -888,8 +887,8 @@ colorlinks, linkcolor=RoyalBlue, urlcolor=blue" "hyperref" nil)))
                ;; BUG: org-mobile
                (turn-on-auto-fill)
                ;; (org-mode-reftex-setup)
-               (turn-on-reftex)
-               (turn-on-org-cdlatex)
+               ;; (turn-on-reftex) ;; start it manually is better.
+               ;; (turn-on-org-cdlatex) ;; start it manually is better.
                ;;;; change default math-symbol prefix
                ;; (org-defkey org-cdlatex-mode-map "`" 'nil)
                ;; (org-defkey org-cdlatex-mode-map "¬" 'cdlatex-math-symbol)
