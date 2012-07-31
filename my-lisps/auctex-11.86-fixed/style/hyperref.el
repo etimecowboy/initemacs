@@ -60,7 +60,10 @@
  "hyperref"
  (lambda ()
    ;; hyperref.sty loads url.sty
-   (TeX-run-style-hooks "url")
+   ;; HACK: rename style/url.el to style/auctex-url.el to avoid shadow
+   ;; Emacs `url.el'
+   ;; (TeX-run-style-hooks "url")
+   (TeX-run-style-hooks "auctex-url")
    (TeX-add-symbols
     '("href" "URL" "Text")
     '("nolinkurl" t)

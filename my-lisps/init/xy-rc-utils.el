@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-30 Mon 21:22 by xin on XIN-PC>
+;; Time-stamp: <2012-07-31 Tue 09:28 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rc-utils.el'
 ;; Author:       Xin Yang
@@ -1083,85 +1083,85 @@ directories starting with a `.'."
           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
-;;;###autoload
-(defun xy/update-all-autoloads
-  (this-directory &optional with-subdirs recursive)
-  "Update the autoloads cache file for THIS-DIRECTORY.
+;; ;;;###autoload
+;; (defun xy/update-all-autoloads
+;;   (this-directory &optional with-subdirs recursive)
+;;   "Update the autoloads cache file for THIS-DIRECTORY.
 
-If there are newer .el files. The file name of the autoloads
-cache is like `loaddefs@!home!user!.emacs.d!lisps.el', which is
-built from the full path of the directory.
+;; If there are newer .el files. The file name of the autoloads
+;; cache is like `loaddefs@!home!user!.emacs.d!lisps.el', which is
+;; built from the full path of the directory.
 
-Provide WITH-SUBDIRS and RECURSIVE options to allow recursive
-operation when you use it in non-interatively manner, but without
-directories starting with a `.'."
+;; Provide WITH-SUBDIRS and RECURSIVE options to allow recursive
+;; operation when you use it in non-interatively manner, but without
+;; directories starting with a `.'."
 
-  ;; (require 'autoload)
-  ;; (defvar update-flag nil)
-  (interactive (list (read-file-name "Source directory: ")))
+;;   ;; (require 'autoload)
+;;   ;; (defvar update-flag nil)
+;;   (interactive (list (read-file-name "Source directory: ")))
 
-  (when (and this-directory
-             (file-directory-p this-directory))
-    (let* ((this-directory (expand-file-name this-directory))
-           (files (directory-files this-directory t "^[^\\.]")))
+;;   (when (and this-directory
+;;              (file-directory-p this-directory))
+;;     (let* ((this-directory (expand-file-name this-directory))
+;;            (files (directory-files this-directory t "^[^\\.]")))
 
-      ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory
-                           (expand-file-name this-directory)))
-        (setq this-directory (expand-file-name this-directory)))
+;;       ;; completely canonicalize the directory name (*may not* begin with `~')
+;;       (while (not (string= this-directory
+;;                            (expand-file-name this-directory)))
+;;         (setq this-directory (expand-file-name this-directory)))
 
-      (setq generated-autoload-file
-            (concat this-directory "/loaddefs@"
-                    (subst-char-in-string ?/ ?!
-                                          (subst-char-in-string ?: ?! this-directory))
-                    ".el"))
-      (setq update-flag nil)
-      (let ((files (directory-files
-                    this-directory t "^[^.]+\\.el$" nil)))
-        (while files
-          (let ((srcfile (car files))
-                (dstfile (concat (car files) "c")))
-            (if (or (not (file-exists-p generated-autoload-file))
-                    (not (file-exists-p dstfile))
-                    (file-newer-than-file-p
-                     srcfile dstfile)
-                    (file-newer-than-file-p
-                     srcfile generated-autoload-file)
-                    (file-newer-than-file-p
-                     dstfile generated-autoload-file))
-                (setq update-flag (or update-flag t)))
-            (setq files (cdr files))))
+;;       (setq generated-autoload-file
+;;             (concat this-directory "/loaddefs@"
+;;                     (subst-char-in-string ?/ ?!
+;;                                           (subst-char-in-string ?: ?! this-directory))
+;;                     ".el"))
+;;       (setq update-flag nil)
+;;       (let ((files (directory-files
+;;                     this-directory t "^[^.]+\\.el$" nil)))
+;;         (while files
+;;           (let ((srcfile (car files))
+;;                 (dstfile (concat (car files) "c")))
+;;             (if (or (not (file-exists-p generated-autoload-file))
+;;                     (not (file-exists-p dstfile))
+;;                     (file-newer-than-file-p
+;;                      srcfile dstfile)
+;;                     (file-newer-than-file-p
+;;                      srcfile generated-autoload-file)
+;;                     (file-newer-than-file-p
+;;                      dstfile generated-autoload-file))
+;;                 (setq update-flag (or update-flag t)))
+;;             (setq files (cdr files))))
 
-        (if update-flag
-            (progn
-              (cond ((fboundp 'update-autoloads-from-directory)
-                     (update-autoloads-from-directory this-directory))
-                    ((fboundp 'update-autoloads-from-directories)
-                     (update-autoloads-from-directories this-directory))
-                    ((fboundp 'update-directory-autoloads)
-                     (update-directory-autoloads this-directory)))
-              (message "* ---[ Updating `%s'... ]---"
-                       generated-autoload-file))
-          (message "* ---[ `%s' exists and is newer. ]---"
-                   generated-autoload-file))
+;;         (if update-flag
+;;             (progn
+;;               (cond ((fboundp 'update-autoloads-from-directory)
+;;                      (update-autoloads-from-directory this-directory))
+;;                     ((fboundp 'update-autoloads-from-directories)
+;;                      (update-autoloads-from-directories this-directory))
+;;                     ((fboundp 'update-directory-autoloads)
+;;                      (update-directory-autoloads this-directory)))
+;;               (message "* ---[ Updating `%s'... ]---"
+;;                        generated-autoload-file))
+;;           (message "* ---[ `%s' exists and is newer. ]---"
+;;                    generated-autoload-file))
 
-        (load-file generated-autoload-file)
-        (message "* ---[ Loading `%s'... ]---"
-                 generated-autoload-file))
+;;         (load-file generated-autoload-file)
+;;         (message "* ---[ Loading `%s'... ]---"
+;;                  generated-autoload-file))
 
-      (when with-subdirs
-        (while files
-          (setq dir-or-file (car files))
-          (when (file-directory-p dir-or-file)
-            (if recursive
-                (xy/install-all-lisps dir-or-file
-                                      'with-subdirs 'recursive)
-              (xy/install-all-lisps dir-or-file)))
-          (setq files (cdr files)))))))
+;;       (when with-subdirs
+;;         (while files
+;;           (setq dir-or-file (car files))
+;;           (when (file-directory-p dir-or-file)
+;;             (if recursive
+;;                 (xy/install-all-lisps dir-or-file
+;;                                       'with-subdirs 'recursive)
+;;               (xy/install-all-lisps dir-or-file)))
+;;           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload
-(defun xy/install-all-lisps
+(defun xy/install-lisps
   (this-directory &optional with-subdirs recursive)
   "Install all the lisps in THIS-DIRECTORY.
 
@@ -1231,7 +1231,7 @@ directories starting with a `.'."
           (message "* ---[ `%s' exists and is newer. ]---"
                    generated-autoload-file))
 
-        (load-file generated-autoload-file)
+        (load generated-autoload-file 'noerror t t)
         (message "* ---[ Loading `%s'... ]---"
                  generated-autoload-file))
 
@@ -1240,15 +1240,55 @@ directories starting with a `.'."
           (setq dir-or-file (car files))
           (when (file-directory-p dir-or-file)
             (if recursive
-                (xy/install-all-lisps dir-or-file
-                                      'with-subdirs 'recursive)
-              (xy/install-all-lisps dir-or-file)))
+                (xy/install-lisps dir-or-file
+                                  'with-subdirs 'recursive)
+              (xy/install-lisps dir-or-file)))
           (setq files (cdr files)))))))
 
 ;;--------------------------------------------------------------------
+;; ;;;###autoload
+;; (defun xy/load-autoloads
+;;   (this-directory &optional with-subdirs recursive)
+;;   "Install all the lisps in THIS-DIRECTORY.
+
+;; The process is:
+;;   1. Add THIS-DIRECTORY to the load-path;
+;;   2. Load the autoloads cache file."
+
+;;   ;; (require 'bytecomp)
+;;   ;; (require 'autoload)
+;;   (interactive (list (read-file-name "Source directory: ")))
+
+;;   (when (and this-directory
+;;              (file-directory-p this-directory))
+;;     (let* ((this-directory (expand-file-name this-directory))
+;;            (files (directory-files this-directory t "^[^\\.]")))
+
+;;       ;; completely canonicalize the directory name (*may not* begin with `~')
+;;       (while (not (string= this-directory
+;;                            (expand-file-name this-directory)))
+;;         (setq this-directory (expand-file-name this-directory)))
+
+;;       (setq generated-autoload-file
+;;             (concat this-directory "/loaddefs@"
+;;                     (subst-char-in-string ?/ ?!
+;;                                           (subst-char-in-string ?: ?! this-directory))
+;;                     ".el"))
+;;       (if (not (file-exists-p generated-autoload-file))
+;;           (message "* ---[ Autoload file `%s' does not exist]"
+;;                    generated-autoload-file)
+;;         ;; (add-to-list 'load-path this-directory)
+;;         ;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
+;;         (load-file generated-autoload-file)
+;;         (message "* ---[ Loading `%s'... ]---"
+;;                  generated-autoload-file)))))
+
+;;--------------------------------------------------------------------
 ;;;###autoload
-(defun xy/load-autoload (this-directory)
+(defun xy/load-autoloads
+  (this-directory &optional with-subdirs recursive)
   "Install all the lisps in THIS-DIRECTORY.
+
 The process is:
   1. Add THIS-DIRECTORY to the load-path;
   2. Load the autoloads cache file."
@@ -1277,53 +1317,65 @@ The process is:
                    generated-autoload-file)
         ;; (add-to-list 'load-path this-directory)
         ;; (message "* ---[ Adding `%s' to load-path... ]---" this-directory)
-        (load-file generated-autoload-file)
+        (load generated-autoload-file 'noerror t t)
         (message "* ---[ Loading `%s'... ]---"
-                 generated-autoload-file)))))
+                 generated-autoload-file)))
+
+    ;; (when with-subdirs
+    ;;   (while files
+    ;;     (setq dir-or-file (car files))
+    ;;     (when (file-directory-p dir-or-file)
+    ;;       (if recursive
+    ;;           (xy/load-autoloads dir-or-file
+    ;;                              'with-subdirs 'recursive)
+    ;;         (xy/load-autoloads dir-or-file)))
+    ;;     (setq files (cdr files))))
+
+    ))
 
 ;;--------------------------------------------------------------------
-;;;###autoload
-(defun xy/load-all-lisps
-  (this-directory &optional with-subdirs recursive)
-  "Load all the lisps in THIS-DIRECTORY."
+;; ;;;###autoload
+;; (defun xy/load-all-lisps
+;;   (this-directory &optional with-subdirs recursive)
+;;   "Load all the lisps in THIS-DIRECTORY."
 
-  ;; (require 'bytecomp)
-  (interactive (list (read-file-name "Source directory: ")))
+;;   ;; (require 'bytecomp)
+;;   (interactive (list (read-file-name "Source directory: ")))
 
-  (when (and this-directory
-             (file-directory-p this-directory))
-    (let* ((this-directory (expand-file-name this-directory))
-           (files (directory-files this-directory t "^[^\\.]")))
+;;   (when (and this-directory
+;;              (file-directory-p this-directory))
+;;     (let* ((this-directory (expand-file-name this-directory))
+;;            (files (directory-files this-directory t "^[^\\.]")))
 
-      ;; completely canonicalize the directory name (*may not* begin with `~')
-      (while (not (string= this-directory
-                           (expand-file-name this-directory)))
-        (setq this-directory (expand-file-name this-directory)))
+;;       ;; completely canonicalize the directory name (*may not* begin with `~')
+;;       (while (not (string= this-directory
+;;                            (expand-file-name this-directory)))
+;;         (setq this-directory (expand-file-name this-directory)))
 
-      (let ((files
-             (directory-files this-directory t "^[^.]+\\.el$" nil)))
-        (while files
-          (let ((srcfile (car files))
-                (dstfile (concat (car files) "c")))
-            (if (or (not (file-exists-p dstfile))
-                    (file-newer-than-file-p srcfile dstfile))
-                (progn
-                  (byte-compile-file srcfile)
-                  (message "* ---[ Byte compiling `%s'... ]---" srcfile))
-              (message "* ---[ `%s' exists and is newer. ]---" dstfile))
-            (load-file dstfile)
-            (message "* ---[ Loading `%s'... ]---" dstfile))
-          (setq files (cdr files)))))
+;;       (let ((files
+;;              (directory-files this-directory t "^[^.]+\\.el$" nil)))
+;;         (while files
+;;           (let ((srcfile (car files))
+;;                 (dstfile (concat (car files) "c")))
+;;             (if (or (not (file-exists-p dstfile))
+;;                     (file-newer-than-file-p srcfile dstfile))
+;;                 (progn
+;;                   (byte-compile-file srcfile)
+;;                   (message "* ---[ Byte compiling `%s'... ]---" srcfile))
+;;               (message "* ---[ `%s' exists and is newer. ]---" dstfile))
+;;             (load-file dstfile)
+;;             (message "* ---[ Loading `%s'... ]---" dstfile))
+;;           (setq files (cdr files)))))
 
-    (when with-subdirs
-      (while files
-        (setq dir-or-file (car files))
-        (when (file-directory-p dir-or-file)
-          (if recursive
-              (xy/require-all-lisps dir-or-file
-                                    'with-subdirs 'recursive)
-            (xy/require-all-lisps dir-or-file)))
-        (setq files (cdr files))))))
+;;     (when with-subdirs
+;;       (while files
+;;         (setq dir-or-file (car files))
+;;         (when (file-directory-p dir-or-file)
+;;           (if recursive
+;;               (xy/require-all-lisps dir-or-file
+;;                                     'with-subdirs 'recursive)
+;;             (xy/require-all-lisps dir-or-file)))
+;;         (setq files (cdr files))))))
 
 ;;--------------------------------------------------------------------
 ;;;###autoload
@@ -1367,64 +1419,69 @@ See `bypass-trash-in-function' for more information."
   (interactive)
   (setq debug-on-error t)
   ;;------------------------------------------------------------------
-  ;; TODO: fix recursive installation
-  ;; (xy/install-all-lisps my-local-lisp-path 'recursive)
-  (xy/install-all-lisps (concat my-local-lisp-path "/dea"))
-  (xy/install-all-lisps (concat my-local-lisp-path
-                                "/anything-config"))
-  (xy/install-all-lisps (concat my-local-lisp-path
-                                "/anything-config/extensions"))
-  (xy/install-all-lisps (concat my-local-lisp-path
-                                "/anything-config/contrib"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/apel"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/popup-el"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/fuzzy-el"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/auto-complete"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/ac-math"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/cc-mode-5.32.3"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/egg"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/eim-2.4"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/flim"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/ibus-el-0.3.2"))
-  (xy/install-all-lisps (concat my-local-lisp-path
-                                "/mailcrypt-3.5.8"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/matlab-emacs"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/mew-6.5"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/org2blog"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/semi"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/emacs-w3m/shimbun"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/emacs-w3m"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/whizzytex"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/google-maps"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/weibo"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/predictive"))
-  ;; (xy/install-all-lisps (concat my-local-lisp-path "/magit"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/command-log-mode"))
-  (xy/install-all-lisps (concat my-local-lisp-path "/o-blog"))
+  ;; ;; TODO: fix recursive installation
+  ;; ;; (xy/install-lisps my-local-lisp-path 'recursive)
 
-  (xy/install-all-lisps "~/.emacs.d/themes")
-  ;;------------------------------------------------------------------
-  ;; TODO: Write lisp code to do it.
-  (xy/recompile-dir my-elpa-lisp-path 'with-subdirs 'recursive)
-  (xy/recompile-dir "~/.emacs.d/auctex-11.86-fixed")
-  (xy/recompile-dir "~/.emacs.d/auctex-11.86-fixed/style")
+  ;; (xy/install-lisps (concat my-local-lisp-path "/dea"))
+  ;; (xy/install-lisps (concat my-local-lisp-path
+  ;;                               "/anything-config"))
+  ;; (xy/install-lisps (concat my-local-lisp-path
+  ;;                               "/anything-config/extensions"))
+  ;; (xy/install-lisps (concat my-local-lisp-path
+  ;;                               "/anything-config/contrib"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/apel"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/popup-el"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/fuzzy-el"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/auto-complete"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/ac-math"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/cc-mode-5.32.3"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/egg"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/eim-2.4"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/flim"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/ibus-el-0.3.2"))
+  ;; (xy/install-lisps (concat my-local-lisp-path
+  ;;                               "/mailcrypt-3.5.8"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/matlab-emacs"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/mew-6.5"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/org2blog"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/semi"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/emacs-w3m/shimbun"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/emacs-w3m"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/whizzytex"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/google-maps"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/weibo"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/predictive"))
+  ;; ;; (xy/install-lisps (concat my-local-lisp-path "/magit"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/command-log-mode"))
+  ;; (xy/install-lisps (concat my-local-lisp-path "/o-blog"))
 
-  ;;------------------------------------------------------------------
-  ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled
-  ;; with cedet. Just activate ecb without byte-compiled lisps, then
-  ;; run `M-x ecb-byte-compile'.
-  ;; Current ECB do not support cedet version 1.0, has been hacked by
-  ;; me
-  ;; CEDET
-  ;; (load "cedet-build")
-  ;; (cedet-build)
-  ;; (xy/recompile-dir (concat my-elpa-lisp-path
-  ;; "/ecb_snap-20110605"))
-  ;;------------------------------------------------------------------
-  (xy/install-all-lisps my-emacswiki-lisp-path)
-  ;;------------------------------------------------------------------
-  (xy/install-all-lisps my-own-lisp-path 'with-subdirs 'recursive)
-  ;;------------------------------------------------------------------
-  (load-dot-emacs-file))
+  ;; (xy/install-lisps "~/.emacs.d/themes")
+  ;; ;;------------------------------------------------------------------
+  ;; ;; TODO: Write lisp code to do it.
+  ;; (xy/recompile-dir my-elpa-lisp-path 'with-subdirs 'recursive)
+  ;; (xy/recompile-dir "~/.emacs.d/auctex-11.86-fixed")
+  ;; (xy/recompile-dir "~/.emacs.d/auctex-11.86-fixed/style")
+
+  ;; ;;------------------------------------------------------------------
+  ;; ;; NOTE: ecb and cedet are closely related, ecb must be byte-compiled
+  ;; ;; with cedet. Just activate ecb without byte-compiled lisps, then
+  ;; ;; run `M-x ecb-byte-compile'.
+  ;; ;; Current ECB do not support cedet version 1.0, has been hacked by
+  ;; ;; me
+  ;; ;; CEDET
+  ;; ;; (load "cedet-build")
+  ;; ;; (cedet-build)
+  ;; ;; (xy/recompile-dir (concat my-elpa-lisp-path
+  ;; ;; "/ecb_snap-20110605"))
+  ;; ;;------------------------------------------------------------------
+  ;; (xy/install-lisps my-emacswiki-lisp-path)
+  ;; ;;------------------------------------------------------------------
+  ;; (xy/install-lisps my-own-lisp-path 'with-subdirs 'recursive)
+  ;; ;;------------------------------------------------------------------
+  ;; ;; (load-dot-emacs-file))
+
+  (xy/install-lisps my-elpa-lisp-path 'with-subdirs 'recursive)
+  (xy/install-lisps my-emacswiki-lisp-path)
+  (xy/install-lisps my-own-lisp-path 'with-subdirs 'recursive))
 
 (provide 'xy-rc-utils)

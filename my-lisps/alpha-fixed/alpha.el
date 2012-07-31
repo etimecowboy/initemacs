@@ -2,7 +2,7 @@
 ;; Version: 1.0
 ;; URL: http://www.emacswiki.org/emacs/CustomizeAquamacs
 ;; Hacked by Xin, based on ELPA alpha package
-;; Time-stamp:<2012-02-06 Mon 11:07 xin on P6T-WIN7>
+;; Time-stamp: <2012-07-31 Tue 02:24 by xin on XIN-PC>
 
 ;;;###autoload
 (defun transparency-set-initial-value ()
@@ -45,6 +45,28 @@
 ;; (global-set-key (kbd "C->") 'transparency-increase)
 ;; (global-set-key (kbd "C-<") 'transparency-decrease)
 
+
 (provide 'alpha)
 
 ;;; alpha.el ends here
+
+;;====================================================================
+;; Easily set/toggle frame transparency
+;; REF: Transparent Emacs
+;;      (@url :file-name "http://www.emacswiki.org/emacs/TransparentEmacs" :display "Source")
+
+;; ;;;###autoload
+;; (defun toggle-transparency ()
+;;   (interactive)
+;;   (if (/=
+;;        (cadr (frame-parameter nil 'alpha)) 100)
+;;       (set-frame-parameter nil 'alpha '(85 50))
+;;     (set-frame-parameter nil 'alpha '(100 100))))
+
+;; ;; A general transparency function:
+;; ;; Set transparency of emacs
+;;;###;; autoload
+;; (defun transparency (value)
+;;   "Sets the transparency of the frame window. 0=transparent/100=opaque"
+;;   (interactive "Transparency Value 0 - 100 opaque:")
+;;   (set-frame-parameter (selected-frame) 'alpha value))

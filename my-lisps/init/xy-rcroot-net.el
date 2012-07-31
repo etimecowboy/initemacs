@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-29 Sun 10:29 by xin on p5q>
+;; Time-stamp: <2012-07-31 Tue 02:40 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-net.el'
 ;; Author:       Xin Yang
@@ -57,9 +57,10 @@
    ("C-x W b"     view-w3m-bookmark)
    ("C-x W w"     switch-to-w3m)
    ("<f8> u"      browse-url)
-   ("<f8> d"      lookup-word-definition)
+   ;; ("<f8> d"      lookup-word-definition)
    ;; ("<f8> w"      lookup-wikipedia) ;; not very useful
-   ("<f8> s"      google-region)))
+   ;; ("<f8> s"      google-region)
+   ))
 
 (setq browse-url-generic-program "w3m") ;; It won't affect emacs
                                         ;; default browser

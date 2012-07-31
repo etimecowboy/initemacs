@@ -1,5 +1,5 @@
 ;;   -*- mode: emacs-lisp; coding: utf-8-unix  -*-
-;; Time-stamp: <2012-07-30 Mon 09:22 by xin on XIN-PC>
+;; Time-stamp: <2012-07-31 Tue 03:11 by xin on XIN-PC>
 ;;--------------------------------------------------------------------
 ;; File name:    `xy-rcroot-app.el'
 ;; Author:       Xin Yang
@@ -36,13 +36,6 @@
 ;;   (add-to-list 'default-frame-alist '(height . 40))
 ;;   (add-to-list 'default-frame-alist '(width . 95)))
 
-;; (Windows ;; HACK: 打了全屏补丁的Windows版Emacs，Linux下还没有试
-;;  ;; http://www.newsmth.net/bbscon.php?bid=573&id=99323
-;;  (set-frame-parameter nil 'fullscreen 'fullscreen))
-;; BUG: NOT working!
-;; (global-set-key (kbd "C-x C-0")
-;;                 '(lambda ()
-;;                    ((set-frame-parameter nil 'fullscreen 'fullscreen))))
 (global-set-key (kbd "C-x C-0") 'xy/toggle-fullscreen)
 
 ;;--------------------------------------------------------------------
